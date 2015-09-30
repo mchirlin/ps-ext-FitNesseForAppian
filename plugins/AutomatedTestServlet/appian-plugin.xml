@@ -1,0 +1,14 @@
+<appian-plugin key="com.appiancorp.ps.automatedtest.servlet.AppianAutomatedTestServlet" name="AppianAutomatedTestServlet">
+    <plugin-info>
+      <description>Servlet to enable remote automated testing in Appian</description>
+      <vendor name="Appian" url="http://www.appian.com" />
+      <version>1.0.0</version>
+      <application-version min="7.7" />
+    </plugin-info>
+    <servlet name="AppianAutomatedTestServlet" key="appianAutomatedTestServlet" class="com.appiancorp.ps.automatedtest.servlet.AppianAutomatedTestServlet">
+        <description>
+          Servlet to enable remote automated testing in Appian
+        </description>
+        <url-pattern>/appianautomatedtest</url-pattern>
+    </servlet>
+</appian-plugin>

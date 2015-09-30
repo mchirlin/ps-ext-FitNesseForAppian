@@ -9,13 +9,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoSelectField extends TempoField {
     
-    public static boolean populate(WebDriver driver, int timeOutSeconds, String fieldName, String fieldValue) {
-        WebElement fieldLayout = getFieldLayout(driver, timeOutSeconds, fieldName);
+    public static boolean populate(String fieldName, String fieldValue) {
+        WebElement fieldLayout = getFieldLayout(fieldName);
         
-        return populate(fieldLayout, timeOutSeconds, fieldValue);
+        return populate(fieldLayout, fieldValue);
     }
     
-    public static boolean populate(WebElement fieldLayout, int timeOutSeconds, String fieldValue) {
+    public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement selectField = fieldLayout.findElement(By.xpath(".//select"));
         Select select = new Select(selectField);
         select.selectByVisibleText(fieldValue);
@@ -23,7 +23,7 @@ public class TempoSelectField extends TempoField {
         return true;
     }
     
-    public static boolean waitFor(WebDriver driver, int timeOutSeconds, String fieldName) {
+    public static boolean waitFor(WebDriver driver, String fieldName) {
         try {
             (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/div/select")));
         } catch (Exception e) {

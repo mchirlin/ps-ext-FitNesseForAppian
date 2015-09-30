@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="build_no_src" name="Appian Plugin Deployer">
+	<xmlproperty file="./appian-plugin.xml"/>
+  
+  <target name="prepare">
+    <mkdir dir="${target_dir}"/>
+    <delete file="${target_dir}/${appian-plugin(key)}-${appian-plugin.plugin-info.version}.jar" />
+    <mkdir dir="./tmp"/>
+	</target>
+
+  <target name="cleanup">
+    <delete dir="./tmp"/>
+  </target>
+	
+  <target name="create_jar">
+    <copy todir="./tmp/META-INF/lib">
+       <fileset dir="./lib">
+         <include name="**/*.jar"/>
+       </fileset>
+    </copy>
+  	<jar destfile="${target_dir}/${appian-plugin(key)}-${appian-plugin.plugin-info.version}.jar">
+      <fileset dir="./bin">
+        <include name="**/*.class"/>
+        <include name="**/*.xml"/>
+        <include name="**/*.properties"/>
+      </fileset>
+      <fileset dir=".">
+        <include name="appian-plugin.xml"/>
+      </fileset>
+      <fileset dir="./src/main/resources">
+        <include name="**/*.gif"/>
+      </fileset>
+      <fileset dir="./tmp">
+        <include name="**/*.java"/>
+        <include name="**/*.jar"/>
+      </fileset>
+    </jar>
+  </target>
+
+  <target name="build_no_src" depends="prepare">
+    <antcall target="create_jar"/>
+    <antcall target="cleanup"/>
+  </target>
+
+  <target name="build_with_src" depends="prepare">
+    <mkdir dir="./tmp/src"/>
+    <copy todir="./tmp/src">
+       <fileset dir="./src/main/java">
+         <include name="**/*.java"/>
+       </fileset>
+    </copy>
+  	
+    <antcall target="create_jar"/>
+    <antcall target="cleanup"/>
+  </target>
+
+	
+</project>

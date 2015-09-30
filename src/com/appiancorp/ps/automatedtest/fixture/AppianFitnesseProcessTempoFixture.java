@@ -1,25 +1,26 @@
 package com.appiancorp.ps.automatedtest.fixture;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.fields.TempoAction;
 import com.appiancorp.ps.automatedtest.fields.TempoButton;
 import com.appiancorp.ps.automatedtest.fields.TempoDatetimeField;
-import com.appiancorp.ps.automatedtest.fields.TempoEditableGrid;
+import com.appiancorp.ps.automatedtest.fields.TempoGrid;
 import com.appiancorp.ps.automatedtest.fields.TempoField;
 import com.appiancorp.ps.automatedtest.fields.TempoIntegerField;
 import com.appiancorp.ps.automatedtest.fields.TempoLinkField;
 import com.appiancorp.ps.automatedtest.fields.TempoLogin;
-import com.appiancorp.ps.automatedtest.fields.TempoNewsItem;
+import com.appiancorp.ps.automatedtest.fields.TempoMenu;
+import com.appiancorp.ps.automatedtest.fields.TempoNews;
 import com.appiancorp.ps.automatedtest.fields.TempoParagraphField;
 import com.appiancorp.ps.automatedtest.fields.TempoRadioField;
 import com.appiancorp.ps.automatedtest.fields.TempoRecordItem;
 import com.appiancorp.ps.automatedtest.fields.TempoRecordList;
+import com.appiancorp.ps.automatedtest.fields.TempoReport;
 import com.appiancorp.ps.automatedtest.fields.TempoSelectField;
+import com.appiancorp.ps.automatedtest.fields.TempoTask;
 import com.appiancorp.ps.automatedtest.fields.TempoTextField;
 import com.appiancorp.ps.automatedtest.fields.TempoUserPickerField;
 
@@ -29,238 +30,271 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 		super();
 	}
 	
-	/** TEMPO RELATED FIXTURE COMMANDS **/
+	/** TEMPO **/
 	
 	// Tempo Menu
-	public boolean waitUntilTempoMenuIsPresent(String tempoMenu) {
-		try {
-			(new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@class, 'appian-menu-item') and contains(text(),'" + tempoMenu +"')]")));
-		} catch (Exception e) {
-			return false;
-		}
-
-		return true;
-	}
-	
 	public boolean clickOnTempoMenu(String tempoMenu) {
-		if(!waitUntilTempoMenuIsPresent(tempoMenu)) return false;
+		if(!TempoMenu.waitFor(tempoMenu)) return false;
 		
-		WebElement element = driver.findElement(By.xpath("//a[starts-with(@class, 'appian-menu-item') and contains(text(),'" + tempoMenu +"')]"));
-		element.click();
-
-		return true;
+		return TempoMenu.click(tempoMenu);
 	}
 	
-	// Record Item
-	public boolean clickOnTempoRecordItem(String itemName) {
-        if(!TempoRecordItem.waitFor(driver, timeOutSeconds, itemName)) return false;
+	// Logout
+	public boolean logoutFromTempo() {
+        if(!TempoLogin.waitForLogout()) return false;
         
-        return TempoRecordItem.click(driver, timeOutSeconds, itemName);
+        return TempoLogin.logout();
     }
 	
-	public boolean verifyTempoRecordItemIsPresent(String itemName) {
-	    return TempoRecordItem.waitFor(driver, timeOutSeconds, itemName);
-	}
-	
-	public boolean verifyTempoRecordItemIsNotPresent(String itemName) {
-        return !TempoRecordItem.waitFor(driver, timeOutSeconds, itemName);
-    }
-	
-	public boolean clickOnTempoRecordItemFacet(String facetName) {
-        if(!TempoRecordItem.waitForFacet(driver, timeOutSeconds, facetName)) return false;
-        
-        return TempoRecordItem.clickOnFacet(driver, timeOutSeconds, facetName);
-    }
-	
-	public boolean clickOnTempoRecordItemRelatedAction(String relatedActionName) {
-        if(!TempoRecordItem.waitForRelatedAction(driver, timeOutSeconds, relatedActionName)) return false;
-        
-        return TempoRecordItem.clickOnRelatedAction(driver, timeOutSeconds, relatedActionName);
-    }
-	
-	// Record List	
-    public boolean clickOnTempoRecordList(String listName) {
-        if(!TempoRecordList.waitFor(driver, timeOutSeconds, listName)) return false;
-        
-        return TempoRecordList.click(driver, timeOutSeconds, listName);
+	/** NEWS **/
+    
+    public boolean verifyNewsFeedContainingTextIsPresent(String newsText) {
+        return TempoNews.refreshAndWaitFor(newsText);
     }
     
-	public boolean clickOnTempoRecordListFacetOption(String facetName) {
-		if(!TempoRecordList.waitForFacetOption(driver, timeOutSeconds, facetName)) return false;
-		
-		return TempoRecordList.clickOnFacetOption(driver, timeOutSeconds, facetName);		
-	}
-	
-	public boolean verifyTempoRecordListFacetOptionIsPresent(String facetName) {
-        return TempoRecordList.waitForFacetOption(driver, timeOutSeconds, facetName);
+    public boolean verifyNewsFeedContainingTextIsNotPresent(String newsText) {
+        return !TempoNews.waitFor(newsText);
+    }
+    
+    public boolean toggleMoreInfoForNewsFeedContainingText(String newsText) {
+        if(!TempoNews.waitForMoreInfo(newsText)) return false;
+        
+        return TempoNews.toggleMoreInfo(newsText);
+    }
+    
+    public boolean verifyNewsFeedContainingTextAndMoreInfoWithLabelAndValueIsPresent(String newsText, String label, String value) {     
+        if (!TempoNews.refreshAndWaitFor(newsText)) return false;
+        
+        return TempoNews.waitForLabelAndValue(newsText, label, value);
+    }
+    
+    public boolean verifyNewsFeedContainingTextAndMoreInfoWithLabelsAndValuesArePresent(String newsText, String[] labels, String[] values) {        
+        return TempoNews.waitForLabelsAndValues(newsText, labels, values);
+    }
+    
+    public boolean verifyNewsFeedContainingTextTaggedWithIsPresent(String newsText, String newsTag) {
+        if (!TempoNews.refreshAndWaitFor(newsText)) return false;
+        
+        return TempoNews.waitForTag(newsText, newsTag);
+    }
+    
+    public boolean verifyNewsFeedContainingTextCommentedWithIsPresent(String newsText, String newsComment) {
+        return TempoNews.refreshAndWaitForComment(newsText, newsComment);
+    }
+    
+    /** TASKS **/
+    
+    public boolean clickOnTempoTask(String taskName) {
+       if(!TempoTask.refreshAndWaitFor(taskName)) return false;
+       
+       return TempoTask.click(taskName);
+    }
+    
+    public boolean verifyTempoTaskIsPresent(String taskName) {
+        return TempoTask.refreshAndWaitFor(taskName);
+    }
+    
+    public boolean verifyTempoTaskIsNotPresent(String taskName) {
+        return !TempoTask.waitFor(taskName);
+    }
+    
+    public boolean verifyTempoTaskHasDeadlineOf(String taskName, String deadline) {
+        if(!TempoTask.waitFor(taskName)) return false;
+        
+        return TempoTask.hasDeadlineOf(taskName, deadline);
+    }
+    
+    public boolean waitUntilTempoFormIsLoaded(String formName) {
+        try {
+            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[starts-with(@class, 'appian-form-title') and contains(text(),'"+formName+"')]")));
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    /** RECORDS **/
+    
+    // Record Item
+    public boolean clickOnTempoRecordItem(String itemName) {
+        if(!TempoRecordItem.refreshAndWaitFor(itemName)) return false;
+        
+        return TempoRecordItem.click(itemName);
+    }
+    
+    public boolean verifyTempoRecordItemIsPresent(String itemName) {
+        return TempoRecordItem.waitFor(itemName);
+    }
+    
+    public boolean verifyTempoRecordItemIsNotPresent(String itemName) {
+        return !TempoRecordItem.waitFor(itemName);
+    }
+    
+    public boolean clickOnTempoRecordItemFacet(String facetName) {
+        if(!TempoRecordItem.waitForFacet(facetName)) return false;
+        
+        return TempoRecordItem.clickOnFacet(facetName);
+    }
+    
+    public boolean clickOnTempoRecordItemRelatedAction(String relatedActionName) {
+        if(!TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName)) return false;
+        
+        return TempoRecordItem.clickOnRelatedAction(relatedActionName);
+    }
+    
+    public boolean verifyTempoRecordItemRelatedActionIsPresent(String relatedActionName) {
+        return TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName);
+    }
+    
+    public boolean verifyTempoRecordItemRelatedActionIsNotPresent(String relatedActionName) {
+        return !TempoRecordItem.waitForRelatedAction(relatedActionName);
+    }
+    
+    // Record List  
+    public boolean clickOnTempoRecordList(String listName) {
+        if(!TempoRecordList.waitFor(listName)) return false;
+        
+        return TempoRecordList.click(listName);
+    }
+    
+    public boolean clickOnTempoRecordListFacetOption(String facetName) {
+        if(!TempoRecordList.waitForFacetOption(facetName)) return false;
+        
+        return TempoRecordList.clickOnFacetOption(facetName);       
+    }
+    
+    public boolean verifyTempoRecordListFacetOptionIsPresent(String facetName) {
+        return TempoRecordList.waitForFacetOption(facetName);
+    }
+    
+    /** REPORTS **/
+    
+    public boolean clickOnTempoReport(String reportName) {
+        if(!TempoReport.waitFor(reportName)) return false;
+        
+        return TempoReport.click(reportName);
     }
 	
-	// Action
+    /** ACTIONS **/
+    
 	public boolean clickOnTempoAction(String actionName) {
-        if(!TempoAction.waitFor(driver, timeOutSeconds, actionName)) return false;
+        if(!TempoAction.waitFor(actionName)) return false;
         
-        return TempoAction.click(driver, timeOutSeconds, actionName);
+        return TempoAction.click(actionName);
     }
 	
 	public boolean verifyTempoActionCompleted() {
-	    return TempoAction.isCompleted(driver, timeOutSeconds);
+	    return TempoAction.isCompleted();
 	}
 	
-	// Form
-	public boolean waitUntilTempoFormIsLoaded(String formName) {
-		try {
-			(new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[starts-with(@class, 'appian-form-title') and contains(text(),'"+formName+"')]")));
-		} catch (Exception e) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-	/** TEMPO FIELDS **/
+	/** FIELDS **/
 	
 	// Generic Field
 	public boolean populateTempoFieldWith(String fieldName, String[] fieldValues) {
-	    if(!TempoField.waitFor(driver, timeOutSeconds, fieldName)) return false;
+	    if(!TempoField.waitFor(fieldName)) return false;
 	    
-	    return TempoField.populate(driver, timeOutSeconds, fieldName, fieldValues);
+	    TempoField.populate(fieldName, fieldValues);
+	    
+	    int attempt = 0;
+	    
+	    while(attempt < 2) {
+	        if (TempoField.contains(fieldName, fieldValues)) return true;
+	        TempoField.waitFor(fieldName);
+	        TempoField.clear(fieldName);
+	        TempoField.populate(fieldName, fieldValues);
+	        attempt++;
+	    }
+	    
+	    return false;
 	}
 	
 	public boolean clearTempoFieldOf(String fieldName, String[] fieldValues) {
-	    if(!TempoField.waitFor(driver, timeOutSeconds, fieldName)) return false;
+	    if(!TempoField.waitFor(fieldName)) return false;
         
-        return TempoField.clearOf(driver, timeOutSeconds, fieldName, fieldValues);
+        return TempoField.clearOf(fieldName, fieldValues);
 	}
 	
 	public boolean verifyTempoFieldContains(String fieldName, String[] fieldValues) {
-        if(!TempoField.waitFor(driver, timeOutSeconds, fieldName)) return false;
+        if(!TempoField.waitFor(fieldName)) return false;
         
-        return TempoField.contains(driver, timeOutSeconds, fieldName, fieldValues);
+        return TempoField.contains(fieldName, fieldValues);
     }
 	
 	// Text Field
     public boolean populateTempoTextFieldWith(String fieldName, String fieldValue) {
-        if(!TempoTextField.waitFor(driver, timeOutSeconds, fieldName)) return false;
+        if(!TempoTextField.waitFor(fieldName)) return false;
         
-        return TempoTextField.populate(driver, timeOutSeconds, fieldName, fieldValue);
+        return TempoTextField.populate(fieldName, fieldValue);
     }
     
 	// Paragraph Field
 	public boolean populateTempoParagraphFieldWith(String fieldName, String fieldValue) {
-	    if(!TempoParagraphField.waitFor(driver, timeOutSeconds, fieldName)) return false;
+	    if(!TempoParagraphField.waitFor(fieldName)) return false;
         
-        return TempoParagraphField.populate(driver, timeOutSeconds, fieldName, fieldValue);
+        return TempoParagraphField.populate(fieldName, fieldValue);
 	}
 	
 	// Integer Field
     public boolean populateTempoIntegerFieldWith(String fieldName, String fieldValue) {
-        if(!TempoIntegerField.waitFor(driver, timeOutSeconds, fieldName)) return false;
+        if(!TempoIntegerField.waitFor(fieldName)) return false;
         
-        return TempoIntegerField.populate(driver, timeOutSeconds, fieldName, fieldValue);
+        return TempoIntegerField.populate(fieldName, fieldValue);
     }
     
     // Radio Field
     public boolean populateTempoRadioFieldWith(String fieldName, String fieldValue) {
-        if(!TempoRadioField.waitFor(driver, timeOutSeconds, fieldName)) return false;
+        if(!TempoRadioField.waitFor(fieldName)) return false;
         
-        return TempoRadioField.populate(driver, timeOutSeconds, fieldName, fieldValue);  
+        return TempoRadioField.populate(fieldName, fieldValue);  
     }
     
     // Select Field
     public boolean populateTempoSelectFieldWith(String fieldName, String fieldValue) {
-        if(!TempoSelectField.waitFor(driver, timeOutSeconds, fieldName)) return false;
+        if(!TempoSelectField.waitFor(fieldName)) return false;
         
-        return TempoSelectField.populate(driver, timeOutSeconds, fieldName, fieldValue);  
+        return TempoSelectField.populate(fieldName, fieldValue);  
     }
     
     // Group Picker Field   
     public boolean populateTempoUserPickerFieldWith(String fieldName, String[] fieldValues) { 
-        if(!TempoUserPickerField.waitFor(driver, timeOutSeconds, fieldName)) return false;
+        if(!TempoUserPickerField.waitFor(fieldName)) return false;
         
-        return TempoUserPickerField.populate(driver, timeOutSeconds, fieldName, fieldValues);      
+        return TempoUserPickerField.populate(fieldName, fieldValues);      
     }
     
     // Datetime Field
-    public boolean populateTempoDatetimeFieldWithDateAndTime(String fieldName, String[] fieldValues) {
-        if(!TempoDatetimeField.waitFor(driver, timeOutSeconds, fieldName)) return false;
+    public boolean populateTempoDatetimeFieldWithDateAndTime(String fieldName, String fieldValue) {
+        if(!TempoDatetimeField.waitFor(fieldName)) return false;
         
-        return TempoDatetimeField.populate(driver, timeOutSeconds, fieldName, fieldValues);  
+        return TempoDatetimeField.populate(fieldName, fieldValue);  
     }
     
-    public boolean populateTempoDatetimeFieldWithDateAndTime(String fieldName, String dateValue, String timeValue) {
-        if(!TempoDatetimeField.waitFor(driver, timeOutSeconds, fieldName)) return false;
-        
-        return TempoDatetimeField.populate(driver, timeOutSeconds, fieldName, new String[] {dateValue, timeValue});  
-    }
-    
-    public boolean populateTempoDatetimeFieldWithNowPlusMinutes(String fieldName, String[] fieldValues) {
-        if(!TempoDatetimeField.waitFor(driver, timeOutSeconds, fieldName)) return false;
-        
-        return TempoDatetimeField.populate(driver, timeOutSeconds, fieldName, fieldValues);  
-    }
-    
-    // Editable Grid Field   
+    // Grid Field   
     public boolean populateTempoEditableGridColumnRowWith(String gridName, String columnName, String rowNum, String[] fieldValues) {
-        if(!TempoEditableGrid.waitFor(driver, timeOutSeconds, gridName, columnName, rowNum)) return false;
+        if(!TempoGrid.waitFor(gridName, columnName, rowNum)) return false;
         
-        return TempoEditableGrid.populate(driver, timeOutSeconds, gridName, columnName, rowNum, fieldValues); 
+        return TempoGrid.populate(gridName, columnName, rowNum, fieldValues); 
+    }
+    
+    public boolean verifyTempoEditableGridColumnRowContains(String gridName, String columnName, String rowNum, String[] fieldValues) {
+        if(!TempoGrid.waitFor(gridName, columnName, rowNum)) return false;
+        
+        return TempoGrid.contains(gridName, columnName, rowNum, fieldValues); 
     }
 	
     // Link
     public boolean clickOnTempoLink(String linkName) {
-        if(!TempoLinkField.waitFor(driver, timeOutSeconds, linkName)) return false;
+        if(!TempoLinkField.waitFor(linkName)) return false;
         
-        return TempoLinkField.click(driver, timeOutSeconds, linkName); 
+        return TempoLinkField.click(linkName); 
     }
     
 	// Button	
 	public boolean clickOnTempoButton(String buttonName) {
-		if (!TempoButton.waitFor(driver, timeOutSeconds, buttonName)) return false;
+		if (!TempoButton.waitFor(buttonName)) return false;
 		
-		return TempoButton.click(driver, timeOutSeconds, buttonName);
+		return TempoButton.click(buttonName);
 	}
-	
-	// News feed item 
-	public boolean verifyNewsFeedContainingTextIsPresent(String newsText) {
-	    return TempoNewsItem.refreshAndWaitFor(driver, timeOutSeconds, newsText);
-	}
-	
-	public boolean verifyNewsFeedContainingTextIsNotPresent(String newsText) {
-	    return !TempoNewsItem.waitFor(driver, timeOutSeconds, newsText);
-    }
-	
-	public boolean toggleMoreInfoForNewsFeedContainingText(String newsText) {
-        if(!TempoNewsItem.waitForMoreInfo(driver, timeOutSeconds, newsText)) return false;
-        
-        return TempoNewsItem.toggleMoreInfo(driver, timeOutSeconds, newsText);
-	}
-    
-	public boolean verifyNewsFeedContainingTextAndMoreInfoWithLabelAndValueIsPresent(String newsText, String label, String value) {	    
-	    return TempoNewsItem.waitForLabelAndValue(driver, timeOutSeconds, newsText, label, value);
-	}
-	
-    public boolean verifyNewsFeedContainingTextAndMoreInfoWithLabelsAndValuesArePresent(String newsText, String[] labels, String[] values) {        
-        return TempoNewsItem.waitForLabelsAndValues(driver, timeOutSeconds, newsText, labels, values);
-    }
-    
-    public boolean verifyNewsFeedContainingTextTaggedWithIsPresent(String newsText, String newsTag) {
-        return TempoNewsItem.waitForTag(driver, timeOutSeconds, newsText, newsTag);
-    }
-	
-	public boolean verifyNewsFeedContainingTextCommentedWithIsPresent(String newsText, String newsComment) {
-	    return TempoNewsItem.refreshAndWaitForComment(driver, timeOutSeconds, newsText, newsComment);
-	}
-	
-	public boolean refreshUntilNewsFeedContainingTextCommentedWithIsPresent(String newsText, String newsComment) {
-		return TempoNewsItem.refreshAndWaitForComment(driver, timeOutSeconds, newsText, newsComment);
-	}
-	
-
-	public boolean logoutFromTempo() {
-		if(!TempoLogin.waitForLogout(driver, timeOutSeconds)) return false;
-		
-		return TempoLogin.logout(driver, timeOutSeconds);
-	}
-	
 }
  ;

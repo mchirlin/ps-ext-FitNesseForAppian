@@ -1,22 +1,33 @@
 package com.appiancorp.ps.automatedtest.fixture;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.fields.Login;
+import com.appiancorp.ps.automatedtest.fields.TempoLogin;
+import com.appiancorp.ps.automatedtest.fields.TempoObject;
 
 import fitlibrary.DoFixture;
 
@@ -24,11 +35,16 @@ import fitlibrary.DoFixture;
  * This is the base class for Appian Fitnesse Fixture
  * This class contains fixture commands which are generic to Appian tests
  * @author henry.chandra
+ * @author michael.chirlin
  *
  */
 public class AppianFitnesseProcessBaseFixture extends DoFixture {
+    
+    private static final Logger LOG = Logger.getLogger(AppianFitnesseProcessBaseFixture.class);
+    
 	String processId = null;
 	String url = null;
+	Date startDatetime = null;
 	String dataSourceName = null;
 	String masterWindowHandle = null;
 	
@@ -40,6 +56,8 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	public AppianFitnesseProcessBaseFixture() {
 		super();
 		loadProperties();
+		
+		TempoObject.setTimeoutSeconds(timeOutSeconds);
 	}
 	
 	public boolean setupSeleniumWebDriverWithBrowser(String browser) {
@@ -56,7 +74,13 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 			driver = new PhantomJSDriver(dCaps);
 		}
 		
+        new Actions(driver).sendKeys(Keys.chord(Keys.CONTROL, "t")).perform();
+        new Actions(driver).sendKeys(Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.TAB)).perform();
 		this.masterWindowHandle = driver.getWindowHandle();
+        
+        TempoObject.setDriver(driver);
+        TempoObject.setMasterWindowHandle(this.masterWindowHandle);
+        
 	    return true;
 	}
 	
@@ -66,8 +90,17 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	
 	public boolean setAppianUrlTo(String url) {
 		this.url = url;
+		TempoObject.setUrl(this.url);
+		
 		return true;
 	}
+	
+	public boolean setStartDatetime() {
+	    this.startDatetime = new Date();
+	    TempoObject.setStartDatetime(this.startDatetime);
+        
+        return true;
+    }
 	
 	public boolean setDataSourceNameTo(String dataSourceName) {
 		this.dataSourceName = dataSourceName;
@@ -79,14 +112,36 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 		 return true;
 	}
 	
-	public boolean loginIntoWithUsernameAndPassword(String url, String userName, String password) {
-		if (!Login.waitForLogin(driver, timeOutSeconds, url)) return false;
+	public boolean takeScreenshot(String fileName) {
+	    waitForWorking();
 	    
-		return Login.login(driver, timeOutSeconds, url, userName, password);
+        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile, new File("C:\\fitnesse\\screenshots\\" + fileName + ".png"));
+        } catch (IOException e) {
+            LOG.error(e.getMessage());
+            return false;
+        }   
+        return true;
+    }
+	
+	public boolean loginIntoWithUsernameAndPassword(String url, String userName, String password) {
+		if (!TempoLogin.waitForLogin(url)) return false;
+	    
+		return TempoLogin.login(url, userName, password);
 	}
 	
-	public boolean waitForSeconds(String period) {
-		int noOfSeconds = new Integer(period);
+	public boolean waitFor(String period) {
+	    int periodNum = Integer.parseInt(period.replaceAll("[^0-9]", ""));
+	    int noOfSeconds = 0;
+	    if (period.contains("hour")) {
+            noOfSeconds = periodNum * 60 * 24;
+        } else if (period.contains("minute")) {
+            noOfSeconds = periodNum * 60;
+        } else {
+	        noOfSeconds = periodNum;
+        }
+	    
 		try {
 			int i=0;
 			while (true) {
@@ -102,6 +157,29 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public boolean waitForSeconds(String period) {
+	    return waitFor(period + " seconds");
+	}
+	
+	public boolean waitForMinutes(String period) {
+        return waitFor(period + " minutes");
+    }
+	
+	public boolean waitForHours(String period) {
+        return waitFor(period + " hours");
+    }
+	
+	public boolean waitForWorking() {
+	    try {
+	        (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'appian-indicator-message')]")));
+	        (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'appian-indicator-message')]")));
+	    } catch (Exception e) {
+	        return false;
+	    }
+	    
+	    return true;
 	}
 	
 	/** PROCESS RELATED FIXTURES **/
@@ -234,9 +312,6 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 			prop.load(inputStream);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		
+		}		
 	}
-
 }

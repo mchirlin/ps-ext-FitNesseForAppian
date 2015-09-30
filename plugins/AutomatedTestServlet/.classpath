@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="lib-compile/servlet-api-2.5.jar"/>
+	<classpathentry kind="lib" path="lib-compile/appian-common.jar"/>
+	<classpathentry kind="lib" path="lib-compile/appian-services.jar"/>
+	<classpathentry kind="lib" path="lib-compile/appian-suiteapi.jar"/>
+	<classpathentry kind="lib" path="lib-compile/appian-type.jar"/>
+	<classpathentry kind="lib" path="lib-compile/appian-process.jar"/>
+	<classpathentry kind="lib" path="lib-compile/appian-ix.jar"/>
+	<classpathentry kind="lib" path="lib/json-20090211.jar"/>
+	<classpathentry kind="lib" path="lib/json-rpc-1.0-appian-1.0.jar"/>
+	<classpathentry kind="lib" path="lib-compile/log4j-1.2.15.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
