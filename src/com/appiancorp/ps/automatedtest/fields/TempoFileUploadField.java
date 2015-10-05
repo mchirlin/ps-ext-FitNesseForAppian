@@ -6,9 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TempoRadioField extends TempoField {
+public class TempoFileUploadField extends TempoField {
 
-    private static final Logger LOG = Logger.getLogger(TempoUserPickerField.class);
+    private static final Logger LOG = Logger.getLogger(TempoFileUploadField.class);
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -17,15 +17,16 @@ public class TempoRadioField extends TempoField {
     }
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
-        WebElement radioField = fieldLayout.findElement(By.xpath(".//label[contains(text(), '"+fieldValue+"')]/preceding-sibling::input"));
-        radioField.click();
+        WebElement fileUpload = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'gwt-FileUpload')]"));
+        fileUpload.sendKeys(fieldValue);
         
+        LOG.debug("FILE UPLOAD field: " + fieldValue);
         return true;
     }
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::input")));
+            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::input")));
         } catch (Exception e) {
             return false;
         }
@@ -39,10 +40,7 @@ public class TempoRadioField extends TempoField {
             return TempoField.contains(fieldLayout, fieldValue);
         } catch (Exception e) {}
         
-        // For editable
-        String compareString = fieldLayout.findElement(By.xpath(".//label[contains(text(), '"+fieldValue+"')]/preceding-sibling::input")).getAttribute("checked");
-        LOG.debug("Field value (" + fieldValue + ") is checked (" + compareString + ")");
-        
-        return compareString.equals("true");
+        // For editable TODO
+        return true;
     }
 }

@@ -1,12 +1,16 @@
 package com.appiancorp.ps.automatedtest.fixture;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.fields.TempoAction;
 import com.appiancorp.ps.automatedtest.fields.TempoButton;
+import com.appiancorp.ps.automatedtest.fields.TempoDateField;
 import com.appiancorp.ps.automatedtest.fields.TempoDatetimeField;
+import com.appiancorp.ps.automatedtest.fields.TempoFileUploadField;
 import com.appiancorp.ps.automatedtest.fields.TempoGrid;
 import com.appiancorp.ps.automatedtest.fields.TempoField;
 import com.appiancorp.ps.automatedtest.fields.TempoIntegerField;
@@ -195,11 +199,15 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	    if(!TempoField.waitFor(fieldName)) return false;
 	    
 	    TempoField.populate(fieldName, fieldValues);
-	    
+        
 	    int attempt = 0;
 	    
 	    while(attempt < 2) {
-	        if (TempoField.contains(fieldName, fieldValues)) return true;
+	        if (TempoField.contains(fieldName, fieldValues)) {
+	            new Actions(driver).sendKeys(Keys.TAB).perform();
+	            return true;
+	        }
+	        
 	        TempoField.waitFor(fieldName);
 	        TempoField.clear(fieldName);
 	        TempoField.populate(fieldName, fieldValues);
@@ -270,11 +278,41 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoDatetimeField.populate(fieldName, fieldValue);  
     }
     
+    // Date Field
+    public boolean populateTempoDateFieldWith(String fieldName, String fieldValue) {
+        if(!TempoDateField.waitFor(fieldName)) return false;
+        
+        return TempoDateField.populate(fieldName, fieldValue);  
+    }
+    
+    // File Upload Field
+    public boolean populateTempoFileUploadFieldWith(String fieldName, String fieldValue) {
+        //if(!TempoFileUpload.waitFor(fieldName)) return false;
+        
+        return TempoFileUploadField.populate(fieldName, fieldValue);  
+    }
+    
     // Grid Field   
     public boolean populateTempoEditableGridColumnRowWith(String gridName, String columnName, String rowNum, String[] fieldValues) {
         if(!TempoGrid.waitFor(gridName, columnName, rowNum)) return false;
         
-        return TempoGrid.populate(gridName, columnName, rowNum, fieldValues); 
+        TempoGrid.populate(gridName, columnName, rowNum, fieldValues);
+        
+        int attempt = 0;
+        
+        while(attempt < 2) {
+            if (TempoGrid.contains(gridName, columnName, rowNum, fieldValues)) {
+                new Actions(driver).sendKeys(Keys.TAB).perform();
+                return true;
+            }
+            
+            TempoGrid.waitFor(gridName, columnName, rowNum);
+            TempoGrid.clear(gridName, columnName, rowNum);
+            TempoGrid.populate(gridName, columnName, rowNum, fieldValues);
+            attempt++;
+        }
+        
+        return false;
     }
     
     public boolean verifyTempoEditableGridColumnRowContains(String gridName, String columnName, String rowNum, String[] fieldValues) {

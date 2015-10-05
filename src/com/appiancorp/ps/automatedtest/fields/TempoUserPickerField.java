@@ -42,6 +42,8 @@ public class TempoUserPickerField extends TempoPickerField{
             }
         }
         
+        LOG.debug("USER PICKER field: " + fieldValues);
+        
         return true;
     }
     
@@ -64,9 +66,8 @@ public class TempoUserPickerField extends TempoPickerField{
                 continue;
             } catch (Exception e) {}
             
-            LOG.debug("Unconverted fieldValue: " + fieldValue);
             fieldValue = TempoObject.runExpression("=user(\""+fieldValue+"\", \"firstName\") & \" \" & user(\""+fieldValue+"\", \"lastName\")");
-            LOG.debug("Converted fieldValue: " + fieldValue);
+            LOG.debug("Field value (" + fieldValue + ") search");
             
             waitFor(fieldName);
             fieldLayout = getFieldLayout(fieldName);

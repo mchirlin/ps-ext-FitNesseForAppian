@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.fields;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,12 +8,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoTask extends TempoObject{
     
+    private static final Logger LOG = Logger.getLogger(TempoTask.class);
+    
     public static boolean click(String taskName) {
         WebElement element = driver.findElement(By.xpath("//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'" + taskName +"')]"));
         element.click();
-        
-        // If the task is old and throws and error wait for another task with the same name
-        if (waitForPopupError()) refreshAndWaitFor(taskName);
+
+        if(popupError()) {
+            clickPopupError();
+            refreshAndWaitFor(taskName);
+            click(taskName);
+        }
 
         return true;
     }
@@ -29,25 +35,20 @@ public class TempoTask extends TempoObject{
     
     public static boolean refreshAndWaitFor(String taskName) {
         boolean present = false;
-        try {
-            int i = 0;
-            while (!present) {
-                if (i > refreshTimes) return false;
-                
-                if (TempoTask.waitFor(taskName)) {
-                    present = true;
-                    break;
-                };        
 
-                Thread.sleep(refreshTimeOutSeconds);
-                driver.navigate().refresh();
-                i++;
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
+        int i = 0;
+        while (!present) {
+            if (i > refreshTimes) return false;
+            
+            if (TempoTask.waitFor(taskName)) {
+                present = true;
+                break;
+            };        
+
+            driver.navigate().refresh();
+            i++;
         }
-        
+
         return true;
     }
     
@@ -57,19 +58,19 @@ public class TempoTask extends TempoObject{
         return true;
     }
     
-    public static boolean waitForPopupError() {
+    public static boolean popupError() {
         try {
-            (new WebDriverWait(driver, 500)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'popupContent')]/button")));
+            LOG.debug("Looking for popup error");
+            (new WebDriverWait(driver, 1)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'popupContent')]")));
+            LOG.debug("Found popup error");
+            return true;
         } catch (Exception e) {
+            LOG.debug(e.getMessage());
             return false;
         }
-
-        return true;
     }
     
-    public static boolean clickPopupError() {
-        driver.findElement(By.xpath("//div[contains(@class, 'popupContent')]/button")).click();
-        
-        return true;
+    public static void clickPopupError() {
+        driver.findElement(By.xpath("//div[contains(@class, 'popupContent')]/descendant::button")).click();
     }
 }

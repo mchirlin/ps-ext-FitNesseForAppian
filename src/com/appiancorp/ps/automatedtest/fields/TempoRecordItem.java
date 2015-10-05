@@ -26,25 +26,20 @@ public class TempoRecordItem extends TempoObject{
     
     public static boolean refreshAndWaitFor(String itemName) {
         boolean present = false;
-        try {
-            int i = 0;
-            while (!present) {
-                if (i > refreshTimes) return false;
-                
-                if (TempoRecordItem.waitFor(itemName)) {
-                    present = true;
-                    break;
-                };        
 
-                Thread.sleep(refreshTimeOutSeconds);
-                driver.navigate().refresh();
-                i++;
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
+        int i = 0;
+        while (!present) {
+            if (i > refreshTimes) return false;
+            
+            if (TempoRecordItem.waitFor(itemName)) {
+                present = true;
+                break;
+            };        
+
+            driver.navigate().refresh();
+            i++;
         }
-        
+
         return true;
     }
     
@@ -84,25 +79,20 @@ public class TempoRecordItem extends TempoObject{
     
     public static boolean refreshAndWaitForRelatedAction(String relatedActionName) {
         boolean present = false;
-        try {
-            int i = 0;
-            while (!present) {
-                if (i > refreshTimes) return false;
-                
-                if (TempoRecordItem.waitForRelatedAction(relatedActionName)) {
-                    present = true;
-                    break;
-                };
-                                
-                Thread.sleep(refreshTimeOutSeconds);
-                driver.navigate().refresh();
-                i++;
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
+
+        int i = 0;
+        while (!present) {
+            if (i > refreshTimes) return false;
+            
+            if (TempoRecordItem.waitForRelatedAction(relatedActionName)) {
+                present = true;
+                break;
+            };
+                            
+            driver.navigate().refresh();
+            i++;
         }
-        
+
         return true;
     }
 }

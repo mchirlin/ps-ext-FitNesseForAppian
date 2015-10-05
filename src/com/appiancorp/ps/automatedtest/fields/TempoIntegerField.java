@@ -1,11 +1,14 @@
 package com.appiancorp.ps.automatedtest.fields;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoIntegerField extends TempoField {
+
+    private static final Logger LOG = Logger.getLogger(TempoIntegerField.class);
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -17,6 +20,8 @@ public class TempoIntegerField extends TempoField {
         WebElement intField = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-TextInput')]"));
         intField.clear();
         intField.sendKeys(fieldValue);
+        
+        LOG.debug("INTEGER field: " + fieldValue);
         
         return true;
     }

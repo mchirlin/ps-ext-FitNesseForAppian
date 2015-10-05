@@ -7,8 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoNewsItem {
-    
-    private static int refreshTimeOutSeconds = 2000;
 
     public static boolean waitFor(WebDriver driver, int timeOutSeconds, String newsText) {
         try {
@@ -22,26 +20,21 @@ public class TempoNewsItem {
     
     public static boolean refreshAndWaitFor(WebDriver driver, int timeOutSeconds, String newsText) {
         boolean present = false;
-        try {
-            int i=0;
-            while (!present) {
-                if (i >= 5) return false;
-                
-                driver.navigate().refresh();
-                
-                if (TempoNewsItem.waitFor(driver, timeOutSeconds, newsText)) {
-                    present = true;
-                    break;
-                };
-                                
-                Thread.sleep(refreshTimeOutSeconds);
-                i++;
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
+
+        int i=0;
+        while (!present) {
+            if (i >= 5) return false;
+            
+            driver.navigate().refresh();
+            
+            if (TempoNewsItem.waitFor(driver, timeOutSeconds, newsText)) {
+                present = true;
+                break;
+            };
+                            
+            i++;
         }
-        
+
         return true;
     }
     
@@ -107,26 +100,21 @@ public class TempoNewsItem {
     
     public static boolean refreshAndWaitForComment(WebDriver driver, int timeOutSeconds, String newsText, String newsComment) {
         boolean present = false;
-        try {
-            int i=0;
-            while (!present) {
-                if (i >= 120) return false;
-                
-                driver.navigate().refresh();
-                
-                if (TempoNewsItem.waitForComment(driver, timeOutSeconds, newsText, newsComment)) {
-                    present = true;
-                    break;
-                };
-                                
-                Thread.sleep(refreshTimeOutSeconds);
-                i++;
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
+
+        int i=0;
+        while (!present) {
+            if (i >= 120) return false;
+            
+            driver.navigate().refresh();
+            
+            if (TempoNewsItem.waitForComment(driver, timeOutSeconds, newsText, newsComment)) {
+                present = true;
+                break;
+            };
+                            
+            i++;
         }
-        
+
         return true;
     }
     

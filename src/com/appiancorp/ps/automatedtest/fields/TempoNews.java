@@ -25,23 +25,18 @@ public class TempoNews extends TempoObject{
     
     public static boolean refreshAndWaitFor(String newsText) {
         boolean present = false;
-        try {
-            int i = 0;
-            while (!present) {
-                if (i > refreshTimes) return false;
-                
-                if (TempoNews.waitFor(newsText)) {
-                    present = true;
-                    break;
-                };
-                                
-                Thread.sleep(refreshTimeOutSeconds);
-                driver.navigate().refresh();
-                i++;
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
+
+        int i = 0;
+        while (!present) {
+            if (i > refreshTimes) return false;
+            
+            if (TempoNews.waitFor(newsText)) {
+                present = true;
+                break;
+            };
+                            
+            driver.navigate().refresh();
+            i++;
         }
         
         return true;
@@ -67,13 +62,14 @@ public class TempoNews extends TempoObject{
     public static boolean waitForLabelAndValue(String newsText, String label, String value) {
         
         value = TempoObject.parseVariable(value);
-        
+        LOG.debug("Label: "+label+" and Value: " + value);
         try {
             // With label
             (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::table/descendant::td[contains(text(), '"+label+"')]")));
             // With value
             (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::table/descendant::td[contains(text(), '"+value+"')]")));
         } catch (Exception e) {
+            LOG.debug(e.getMessage());
             return false;
         }
         
@@ -82,25 +78,20 @@ public class TempoNews extends TempoObject{
     
     public static boolean refreshAndWaitForLabelAndValueBetween(String newsText, String label, String value) {
         boolean present = false;
-        try {
-            int i = 0;
-            while (!present) {
-                if (i > refreshTimes) return false;
-                
-                if (TempoNews.waitForLabelAndValue(newsText, label, value)) {
-                    present = true;
-                    break;
-                };
-                                
-                Thread.sleep(refreshTimeOutSeconds);
-                driver.navigate().refresh();
-                i++;
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
+
+        int i = 0;
+        while (!present) {
+            if (i > refreshTimes) return false;
+            
+            if (TempoNews.waitForLabelAndValue(newsText, label, value)) {
+                present = true;
+                break;
+            };
+                            
+            driver.navigate().refresh();
+            i++;
         }
-        
+
         return true;
     }
     
@@ -136,26 +127,21 @@ public class TempoNews extends TempoObject{
     
     public static boolean refreshAndWaitForComment(String newsText, String newsComment) {
         boolean present = false;
-        try {
-            int i = 0;
-            while (!present) {
-                if (i >= refreshTimes) return false;
-                
-                driver.navigate().refresh();
-                
-                if (TempoNews.waitForComment(newsText, newsComment)) {
-                    present = true;
-                    break;
-                };
-                                
-                Thread.sleep(refreshTimeOutSeconds);
-                i++;
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return false;
+
+        int i = 0;
+        while (!present) {
+            if (i >= refreshTimes) return false;
+            
+            driver.navigate().refresh();
+            
+            if (TempoNews.waitForComment(newsText, newsComment)) {
+                present = true;
+                break;
+            };
+
+            i++;
         }
-        
+       
         return true;
     }
     

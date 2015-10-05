@@ -23,13 +23,14 @@ public class TempoObject {
     protected static String url;
     protected static int timeOutSeconds;
     protected static Date startDatetime;
-    protected static int refreshTimeOutSeconds = 2000;
     protected static int refreshTimes = 10;
     
-    public static final String DATE_FORMAT_STRING = "MM/dd/yyyy";
+    public static final String DATE_FORMAT_STRING = "M/dd/yyyy";
     public static final String TIME_FORMAT_STRING = "hh:mm aaa";
     public static final String DATETIME_FORMAT_STRING = DATE_FORMAT_STRING + " " + TIME_FORMAT_STRING;
-    public static final String DATETIME_DISPLAY_FORMAT_STRING = "MMM dd, yyyy, hh:mm aaa";
+    public static final String DATE_DISPLAY_FORMAT_STRING = "MMM dd, yyyy";
+    public static final String TIME_DISPLAY_FORMAT_STRING = "h:mm aaa";
+    public static final String DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;
     
     public static boolean isDateCalculation(String dateTimeString) {
         dateTimeString = dateTimeString.replaceAll("\\s", "");
@@ -71,7 +72,7 @@ public class TempoObject {
     
     public static String runExpression(String expression) {
         try {
-            String servletUrl = url + "/suite/plugins/servlet/appianautomatedtest?operation=runExpression&expression=" + URLEncoder.encode(expression, "UTF-8");
+            String servletUrl = url + "/plugins/servlet/appianautomatedtest?operation=runExpression&expression=" + URLEncoder.encode(expression, "UTF-8");
             
             String returnVal = "";
             

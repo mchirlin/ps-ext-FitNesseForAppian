@@ -10,7 +10,6 @@ import com.appiancorp.ps.automatedtest.fields.TempoObject;
 
 public class TempoField extends TempoObject {
        
-    @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoField.class);
     
     public static WebElement getFieldLayout(String fieldName) {
@@ -30,6 +29,14 @@ public class TempoField extends TempoObject {
         
         try {
             return TempoDatetimeField.populate(fieldLayout, fieldValues[0]);
+        } catch (Exception e) {}
+        
+        try {
+            return TempoDateField.populate(fieldLayout, fieldValues[0]);
+        } catch (Exception e) {}
+        
+        try {
+            return TempoFileUploadField.populate(fieldLayout, fieldValues[0]);
         } catch (Exception e) {}
         
         try {
@@ -139,8 +146,13 @@ public class TempoField extends TempoObject {
             fieldValues[i] = TempoObject.parseVariable(fieldValues[i]);
         }
         
+        LOG.debug("Attempting to locate: " + fieldValues[0]);
         try {
             return TempoDatetimeField.contains(fieldLayout, fieldValues[0]);
+        } catch (Exception e) {}
+        
+        try {
+            return TempoDateField.contains(fieldLayout, fieldValues[0]);
         } catch (Exception e) {}
         
         try {

@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.fields;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoSelectField extends TempoField {
+    
+    private static final Logger LOG = Logger.getLogger(TempoSelectField.class);
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -20,6 +23,7 @@ public class TempoSelectField extends TempoField {
         Select select = new Select(selectField);
         select.selectByVisibleText(fieldValue);
         
+        LOG.debug("SELECT field: " + fieldValue);
         return true;
     }
     

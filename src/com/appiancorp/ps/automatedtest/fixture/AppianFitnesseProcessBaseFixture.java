@@ -7,8 +7,10 @@ import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Set;
+import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.openqa.selenium.By;
@@ -131,6 +133,12 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 		return TempoLogin.login(url, userName, password);
 	}
 	
+	public boolean loginWithUsernameAndPassword(String userName, String password) {
+        if (!TempoLogin.waitForLogin(url)) return false;
+        
+        return TempoLogin.login(url, userName, password);
+    }
+	
 	public boolean waitFor(String period) {
 	    int periodNum = Integer.parseInt(period.replaceAll("[^0-9]", ""));
 	    int noOfSeconds = 0;
@@ -178,6 +186,31 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	    } catch (Exception e) {
 	        return false;
 	    }
+	    
+	    return true;
+	}
+	
+	public boolean waitUntil(String datetime) {
+        datetime = TempoObject.calculateDate(datetime);
+        
+        try {
+            Date endDatetime = DateUtils.parseDate(datetime, TempoObject.DATETIME_DISPLAY_FORMAT_STRING);
+            Date nowDatetime = new Date();
+            
+            while (endDatetime.after(nowDatetime)) {
+                //LOG.debug("now datetime: " + nowDatetime.toString() + " end datetime: " + endDatetime.toString());
+                Thread.sleep(1000);
+                nowDatetime = new Date();
+            }
+            return true;
+        } catch (Exception e) {
+            LOG.debug(e.getMessage());
+            return false;
+        }
+	}
+	
+	public boolean refresh() {
+	    driver.navigate().refresh();
 	    
 	    return true;
 	}

@@ -1,11 +1,14 @@
 package com.appiancorp.ps.automatedtest.fields;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoTextField extends TempoField {
+    
+    private static final Logger LOG = Logger.getLogger(TempoTextField.class);
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -38,8 +41,10 @@ public class TempoTextField extends TempoField {
         } catch (Exception e) {}
         
         // For editable
-        WebElement textField = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-TextInput')]"));
-        return textField.getAttribute("value").contains(fieldValue);
+        String compareString = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-TextInput')]")).getAttribute("value");
+        LOG.debug("Field value (" + fieldValue + ") compared to Entered value (" + compareString + ")");
+        
+        return compareString.contains(fieldValue);
     }
     
     public static boolean clear(WebElement fieldLayout) {

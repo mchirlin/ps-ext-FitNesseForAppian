@@ -17,6 +17,7 @@ public class TempoButton extends TempoField {
     public static boolean waitFor(String buttonName) {
         try {
             // Always wait for a second before submitting
+            driver.findElement(By.tagName("body")).click();
             Thread.sleep(1000);
             (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), '"+buttonName+"')]")));
         } catch (Exception e) {

@@ -32,6 +32,13 @@ public class TempoGrid extends TempoField {
         return contains(cell, null, fieldValues);
     }
     
+    public static boolean clear(String gridName, String columnName, String rowNum) {
+        WebElement cell = getCell(gridName, columnName, rowNum);
+        
+        // TODO Handle group picker in a grid
+        return clear(cell, null);
+    }
+    
     public static boolean waitFor(String gridName, String columnName, String rowNum) {
         // Using a columnNum
         try {
