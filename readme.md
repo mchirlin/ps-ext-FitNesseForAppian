@@ -5,7 +5,7 @@
 1. Download [FitNesse jar](http://www.fitnesse.org/fitnesse.jar?responder=releaseDownload&release=20111026)
  1. Place in C:\fitnesse\
 1. Download [Selenium Java Web Driver](http://selenium-release.storage.googleapis.com/2.47/selenium-java-2.47.1.zip)
- 1. Place in {{C:\selenium-2.47.1\}}
+ 1. Place in ```C:\selenium-2.47.1\```
 1. Download [FitLibrary](http://sourceforge.net/projects/fitlibrary/files/latest/download)
  1. Copy FitLibrary fitnesse folder on top of C:\fitnesse folder
 1. Download [Appian servlet plug-in](https://github.com/appianps/ps-ext-AutomatedTestFramework/blob/master/plugins/AutomatedTestServlet/AppianAutomatedTestServlet.1.0.0.jar) and place in APPIAN_HOME\_admin\plugins
