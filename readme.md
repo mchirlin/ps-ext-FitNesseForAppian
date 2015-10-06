@@ -8,12 +8,15 @@
  1. Place in C:\selenium-2.47.1\
 1. Download (FitLibrary)[http://sourceforge.net/projects/fitlibrary/files/latest/download]
  1. Copy FitLibrary fitnesse folder on top of C:\fitnesse folder
+1. Download (Appian servlet plug-in)[https://github.com/appianps/ps-ext-AutomatedTestFramework/blob/master/plugins/AutomatedTestServlet/AppianAutomatedTestServlet.1.0.0.jar] and place in APPIAN_HOME\_admin\plugins
+1. Download (Appian fixtures)[https://github.com/appianps/ps-ext-AutomatedTestFramework/blob/master/appian-fixtures.jar] and place in C:\fitnesse\lib\appian
 
 ## Running Fitnesse
 
+1. Make sure Appian is currently running
 1. In command prompt navigate to C:\fitnesse
 1. Run runFitNesseDirectly.bat
-1. Navigate to localhost:8980
+1. Navigate to localhost:8980/<WikiName> to run a test
 
 ## Creating a wiki
 1. Navigate to localhost:8980/<WikiName>
