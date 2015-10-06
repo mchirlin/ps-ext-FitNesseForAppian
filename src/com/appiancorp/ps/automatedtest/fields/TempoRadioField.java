@@ -41,7 +41,7 @@ public class TempoRadioField extends TempoField {
         
         // For editable
         String compareString = fieldLayout.findElement(By.xpath(".//label[contains(text(), '"+fieldValue+"')]/preceding-sibling::input")).getAttribute("checked");
-        LOG.debug("Field value (" + fieldValue + ") is checked (" + compareString + ")");
+        LOG.debug("RADIO FIELD COMPARISON : Field value (" + fieldValue + ") is checked (" + compareString + ")");
         
         return compareString.equals("true");
     }

@@ -22,14 +22,13 @@ public class TempoSelectField extends TempoField {
         WebElement selectField = fieldLayout.findElement(By.xpath(".//select"));
         Select select = new Select(selectField);
         select.selectByVisibleText(fieldValue);
-        
-        LOG.debug("SELECT field: " + fieldValue);
+
         return true;
     }
     
     public static boolean waitFor(WebDriver driver, String fieldName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/div/select")));
+            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::div/select")));
         } catch (Exception e) {
             return false;
         }
@@ -37,4 +36,19 @@ public class TempoSelectField extends TempoField {
         return true;
     }
     
+    public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue) {
+        // For read-only
+        try {
+            return TempoField.contains(fieldLayout, fieldValue);
+        } catch (Exception e) {}
+
+        // For editable
+        WebElement selectField = driver.findElement(By.xpath("//span[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::div/select"));
+        Select select = new Select(selectField);
+        String compareString = select.getFirstSelectedOption().getText();
+        
+        LOG.debug("SELECT FIELD COMPARISON : Field value (" + fieldValue + ") compared to Entered value (" + compareString + ")");
+        
+        return compareString.contains(fieldValue);
+    }
 }

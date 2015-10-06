@@ -1,5 +1,7 @@
 package com.appiancorp.ps.automatedtest.fields;
 
+import java.nio.file.Paths;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,6 +21,11 @@ public class TempoFileUploadField extends TempoField {
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement fileUpload = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'gwt-FileUpload')]"));
         fileUpload.sendKeys(fieldValue);
+        // Wait for file to upload
+        try {
+            Thread.sleep(1000);
+            waitForWorking();
+        } catch (InterruptedException e) {}
         
         LOG.debug("FILE UPLOAD field: " + fieldValue);
         return true;
@@ -40,7 +47,17 @@ public class TempoFileUploadField extends TempoField {
             return TempoField.contains(fieldLayout, fieldValue);
         } catch (Exception e) {}
         
-        // For editable TODO
+        String compareString = fieldLayout.findElement(By.xpath(".//span[contains(@class, 'filename')]/span")).getText();
+        fieldValue = Paths.get(fieldValue).getFileName().toString();
+        LOG.debug("FILE UPLOAD FIELD COMPARISON : Field value (" + fieldValue + ") compared to Entered value (" + compareString + ")");
+        
+        return compareString.contains(fieldValue);
+    }
+    
+    public static boolean clear(WebElement fieldLayout) {
+        WebElement removeLink = fieldLayout.findElement(By.xpath(".//a[starts-with(text(), 'Remove')]"));
+        removeLink.click();
+        
         return true;
     }
 }

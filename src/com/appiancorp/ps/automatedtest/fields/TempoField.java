@@ -83,12 +83,6 @@ public class TempoField extends TempoObject {
     }
     
     public static boolean clear(WebElement fieldLayout, String fieldName) {      
-        /*
-        try {
-            return TempoDatetimeField.clear(fieldLayout);
-        } catch (Exception e) {}
-        */
-        
         try {
             return TempoTextField.clear(fieldLayout);
         } catch (Exception e) {}
@@ -101,17 +95,9 @@ public class TempoField extends TempoObject {
             return TempoIntegerField.clear(fieldLayout);
         } catch (Exception e) {}
         
-        /*
         try {
-            return TempoRadioField.clear(fieldLayout);
+            return TempoFileUploadField.clear(fieldLayout);
         } catch (Exception e) {}
-        */
-        
-        /*
-        try {
-            return TempoSelectField.clear(fieldLayout);
-        } catch (Exception e) {}
-        */
         
         try {
             return TempoUserPickerField.clear(fieldLayout);
@@ -172,7 +158,11 @@ public class TempoField extends TempoObject {
         } catch (Exception e) {}
         
         try {
-            return TempoSelectField.contains(fieldLayout, fieldValues[0]);
+            return TempoSelectField.contains(fieldLayout, fieldName, fieldValues[0]);
+        } catch (Exception e) {}
+        
+        try {
+            return TempoFileUploadField.contains(fieldLayout, fieldValues[0]);
         } catch (Exception e) {}
         
         try {

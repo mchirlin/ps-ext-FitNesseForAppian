@@ -58,7 +58,7 @@ public class TempoDatetimeField extends TempoField{
 
         try{  
             String compareString = new SimpleDateFormat(TempoObject.DATETIME_DISPLAY_FORMAT_STRING).format(DateUtils.parseDate(datetimeString, TempoObject.DATETIME_FORMAT_STRING));
-            LOG.debug("Field value (" + fieldValue + ") compared to Entered value (" + compareString + ")");
+            LOG.debug("DATETIME FIELD COMPARISON : Field value (" + fieldValue + ") compared to Entered value (" + compareString + ")");
             
             return compareString.equals(fieldValue);
         } catch (Exception e) {

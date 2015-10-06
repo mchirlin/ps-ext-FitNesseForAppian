@@ -42,7 +42,7 @@ public class TempoParagraphField extends TempoField {
         
         // For editable
         String compareString= fieldLayout.findElement(By.xpath(".//textarea[contains(@class, 'aui-TextAreaInput')]")).getAttribute("value");
-        LOG.debug("Field value (" + fieldValue + ") compared to Entered value (" + compareString + ")");
+        LOG.debug("PARAGRAPH FIELD COMPARISON : Field value (" + fieldValue + ") compared to Entered value (" + compareString + ")");
         
         return compareString.contains(fieldValue);
     }

@@ -67,7 +67,7 @@ public class TempoUserPickerField extends TempoPickerField{
             } catch (Exception e) {}
             
             fieldValue = TempoObject.runExpression("=user(\""+fieldValue+"\", \"firstName\") & \" \" & user(\""+fieldValue+"\", \"lastName\")");
-            LOG.debug("Field value (" + fieldValue + ") search");
+            LOG.debug("USER PICKER COMPARISON : Field value (" + fieldValue + ") search");
             
             waitFor(fieldName);
             fieldLayout = getFieldLayout(fieldName);

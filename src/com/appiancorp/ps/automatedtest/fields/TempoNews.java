@@ -10,7 +10,6 @@ import com.appiancorp.ps.automatedtest.fields.TempoObject;
 
 public class TempoNews extends TempoObject{
     
-    @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoNews.class);
     
     public static boolean waitFor(String newsText) {

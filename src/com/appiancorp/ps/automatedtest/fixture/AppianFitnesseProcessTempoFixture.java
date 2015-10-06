@@ -328,11 +328,19 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoLinkField.click(linkName); 
     }
     
+    public boolean clickTempoLink(String linkName) {
+        return clickOnTempoLink(linkName); 
+    }
+    
 	// Button	
 	public boolean clickOnTempoButton(String buttonName) {
 		if (!TempoButton.waitFor(buttonName)) return false;
 		
 		return TempoButton.click(buttonName);
 	}
+	
+	public boolean clickTempoButton(String buttonName) {
+        return clickTempoButton(buttonName);
+    }
 }
  ;

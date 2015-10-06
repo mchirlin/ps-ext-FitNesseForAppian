@@ -130,4 +130,16 @@ public class TempoObject {
     public static String getMasterWindowHandle() {
         return masterWindowHandle;
     }
+    
+    public static boolean waitForWorking() {
+        try {
+            LOG.debug("Waiting for working");
+            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[contains(text(), 'Working...")));
+        } catch (Exception e) {
+            return false;
+        }
+        
+        LOG.debug("Working done");
+        return true;
+    }
 }

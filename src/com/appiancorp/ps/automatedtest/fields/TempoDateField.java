@@ -1,6 +1,7 @@
 package com.appiancorp.ps.automatedtest.fields;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -58,9 +59,11 @@ public class TempoDateField extends TempoField{
         try{  
             Date compareDate = DateUtils.parseDate(dateString, TempoObject.DATE_FORMAT_STRING);
             Date fieldDate = DateUtils.parseDate(fieldValue, TempoObject.DATETIME_DISPLAY_FORMAT_STRING);
-            LOG.debug("DATE COMPARISON : Field value (" + compareDate.getDate() + ") compared to Entered value (" + fieldDate.getDate() + ")");
+            LOG.debug("DATE FIELD COMPARISON : Field value (" + compareDate.toString() + ") compared to Entered value (" + fieldDate.toString() + ")");
             
-            return compareDate.getDate() == fieldDate.getDate();
+            return compareDate.getDate() == fieldDate.getDate() &&
+                    compareDate.getMonth() == fieldDate.getMonth() &&
+                    compareDate.getYear() == fieldDate.getYear();
         } catch (Exception e) {
             LOG.error(e.getMessage());
             return false;
