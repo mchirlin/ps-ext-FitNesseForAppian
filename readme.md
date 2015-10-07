@@ -16,16 +16,16 @@
 1. Make sure Appian is currently running
 1. In command prompt navigate to ```C:\fitnesse```
 1. Run runFitNesseDirectly.bat
-1. Navigate to ```http://localhost:8980/<WikiName>``` to run a test
+1. Navigate to ```http://localhost:8980/{WikiName}``` to run a test
 
 ## Creating a wiki
-1. Navigate to ```localhost:8980/<WikiName>```
- * If the <WikiName> contains 'suite', then it will be considered a FitNesse suite
- * If the <WikiName> contains 'test', then it will be considered a FitNesse test
- * If the <WikiName> is 'SetUp', then it will be run before each test case
- * If the <WikiName> is 'TearDown', then it will be run after each test case
- * If the <WikiName> is 'SuiteSetUp', then it will be run once at the beginning of the test suite
- * If the <WikiName> is 'SuiteTearDown', then it will be run once at the end of the test suite
+1. Navigate to ```localhost:8980/{WikiName}```
+ * If the {WikiName} contains 'suite', then it will be considered a FitNesse suite
+ * If the {WikiName} contains 'test', then it will be considered a FitNesse test
+ * If the {WikiName} is 'SetUp', then it will be run before each test case
+ * If the {WikiName} is 'TearDown', then it will be run after each test case
+ * If the {WikiName} is 'SuiteSetUp', then it will be run once at the beginning of the test suite
+ * If the {WikiName} is 'SuiteTearDown', then it will be run once at the end of the test suite
 1. There are some example wikis in the wikis folder for creating a Suite, SetUp, TearDown, and a few example tests
  * These were based off a specific application, but can be modified to work with any application
  * To run any tests they will have to be started with the correct path, see wikis/CredentialsSuite.txt for an example
@@ -34,59 +34,59 @@
 ## Commands
 
 ### UTILITIES
-* | setup selenium web driver with | <browser name> | browser |
-* | set data source name to | <data source name> |
-* | set appian url to | <appian url > |
+* | setup selenium web driver with | {browser name} | browser |
+* | set data source name to | {data source name} |
+* | set appian url to | {appian url } |
 * | set start datetime | - will be used as relative datetime for date/time fields
-* | take screenshot | <file path> |
-* | login with username | <username> | with password | <password> | - uses set appian url
-* | wait for | <relative period, e.g. +1 days, +1 hours> | - waits for relative amount of time
-* | wait until | <relative period> | - waits until relative time
+* | take screenshot | {file path} |
+* | login with username | {username} | with password | {password} | - uses set appian url
+* | wait for | {relative period, e.g. +1 days, +1 hours} | - waits for relative amount of time
+* | wait until | {relative period} | - waits until relative time
 * | refresh | - refreshes screen
 * | logout from tempo |
 
 ### NAVIGATION
-* | click on tempo menu | <tempo menu name> |
+* | click on tempo menu | {tempo menu name} |
 
 ### NEWS
-* | verify news feed containing text | <news item title> | is present |
-* | verify news feed containing text | <news item title> | is not present |
-* | toggle more info for news feed containing text | <news item title> |
-* | verify news feed containing text | <news item title> | and more info with label | <label value> | and value | <value value> | is present |
-* | verify news feed containing text | <news item title> | tagged with | <tag name> | is present |
-* | verify news feed containing text | <news item title> | commented with | <comment value> | is present |
+* | verify news feed containing text | {news item title} | is present |
+* | verify news feed containing text | {news item title} | is not present |
+* | toggle more info for news feed containing text | {news item title} |
+* | verify news feed containing text | {news item title} | and more info with label | {label value} | and value | {value value} | is present |
+* | verify news feed containing text | {news item title} | tagged with | {tag name} | is present |
+* | verify news feed containing text | {news item title} | commented with | {comment value} | is present |
 
 ### TASKS
-* | click on tempo task | <task name> |
-* | verify tempo task | <task name> | is present |
-* | verify tempo task | <task name> | is not present |
-* | verify tempo task | <task name> | has a deadline of | <deadline text> |
+* | click on tempo task | {task name} |
+* | verify tempo task | {task name} | is present |
+* | verify tempo task | {task name} | is not present |
+* | verify tempo task | {task name} | has a deadline of | {deadline text} |
 
 ### Records
-* | click on tempo record list | <record list name> |
-* | click on tempo record list facet option | <facet name> |
-* | verify tempo record list facet option | <facet name> | is present |
-* | click on tempo record item | <record item name> |
-* | verify tempo record item | <record item name> | is present |
-* | verify tempo record item | <record item name> | is not present |
-* | click on tempo record item facet | <facet name> |
-* | click on tempo record item related action | <related action name> | - this is run on the related action dashboard, not as a button currently
-* | verify tempo record item related action | <related action name> | is present |
-* | verify tempo record item related action | <related action name> | is not present |
+* | click on tempo record list | {record list name} |
+* | click on tempo record list facet option | {facet name} |
+* | verify tempo record list facet option | {facet name} | is present |
+* | click on tempo record item | {record item name} |
+* | verify tempo record item | {record item name} | is present |
+* | verify tempo record item | {record item name} | is not present |
+* | click on tempo record item facet | {facet name} |
+* | click on tempo record item related action | {related action name} | - this is run on the related action dashboard, not as a button currently
+* | verify tempo record item related action | {related action name} | is present |
+* | verify tempo record item related action | {related action name} | is not present |
 
 ### Reports
-* | click on tempo report | <report name> |
+* | click on tempo report | {report name} |
 
 ### Actions
-* | click on tempo action | <action name> |
+* | click on tempo action | {action name} |
 * | verify tempo action completed |
 
 ### Forms
-* | populate tempo field | <field label> | with | <values> |
-* | clear tempo field | <field label> | of | <value to remove> | - this is for removing specific value from a picker
-* | verify tempo field | <field label> | contains | <value> |
-* | populate tempo editable grid | <grid name> | column | <column name or number> | row | <row number> | with | <value> |
-* verify editable grid | <grid name> | column | <column name or number> | row | <row number> | contains | <value> |
-* | click on tempo link | <link name> |
-* | click on tempo button | <button name> |
+* | populate tempo field | {field label} | with | {values} |
+* | clear tempo field | {field label} | of | {value to remove} | - this is for removing specific value from a picker
+* | verify tempo field | {field label} | contains | {value} |
+* | populate tempo editable grid | {grid name} | column | {column name or number} | row | {row number} | with | {value} |
+* verify editable grid | {grid name} | column | {column name or number} | row | {row number} | contains | {value} |
+* | click on tempo link | {link name} |
+* | click on tempo button | {button name} |
 
