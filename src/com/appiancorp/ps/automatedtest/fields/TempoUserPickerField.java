@@ -42,7 +42,7 @@ public class TempoUserPickerField extends TempoPickerField{
             }
         }
         
-        LOG.debug("USER PICKER field: " + fieldValues);
+        LOG.debug("USER PICKER FIELD POPULATION : " + fieldValues);
         
         return true;
     }
@@ -67,7 +67,7 @@ public class TempoUserPickerField extends TempoPickerField{
             } catch (Exception e) {}
             
             fieldValue = TempoObject.runExpression("=user(\""+fieldValue+"\", \"firstName\") & \" \" & user(\""+fieldValue+"\", \"lastName\")");
-            LOG.debug("USER PICKER COMPARISON : Field value (" + fieldValue + ") search");
+            LOG.debug("USER PICKER FIELD COMPARISON : Field value (" + fieldValue + ") search");
             
             waitFor(fieldName);
             fieldLayout = getFieldLayout(fieldName);

@@ -22,12 +22,10 @@ public class TempoFileUploadField extends TempoField {
         WebElement fileUpload = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'gwt-FileUpload')]"));
         fileUpload.sendKeys(fieldValue);
         // Wait for file to upload
-        try {
-            Thread.sleep(1000);
-            waitForWorking();
-        } catch (InterruptedException e) {}
         
-        LOG.debug("FILE UPLOAD field: " + fieldValue);
+        waitForWorking();
+        
+        LOG.debug("FILE UPLOAD FIELD POPULATION : " + fieldValue);
         return true;
     }
     

@@ -20,6 +20,8 @@ public class TempoRadioField extends TempoField {
         WebElement radioField = fieldLayout.findElement(By.xpath(".//label[contains(text(), '"+fieldValue+"')]/preceding-sibling::input"));
         radioField.click();
         
+        LOG.debug("RADIO FIELD POPULATION : " + fieldValue);
+        
         return true;
     }
     

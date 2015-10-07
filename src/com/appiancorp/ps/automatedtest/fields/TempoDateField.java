@@ -25,9 +25,7 @@ public class TempoDateField extends TempoField{
     }
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {        
-        LOG.debug("before var: " + fieldValue);
         fieldValue = parseVariable(fieldValue);
-        LOG.debug("after var: " + fieldValue);
         Date d;
         
         try{
@@ -38,7 +36,7 @@ public class TempoDateField extends TempoField{
         
         populateTempoDateFieldWithDate(fieldLayout, d);
         
-        LOG.debug("DATE field: " + fieldValue);
+        LOG.debug("DATE FIELD POPULATION : " + fieldValue);
         
         return true;
     }
@@ -57,8 +55,8 @@ public class TempoDateField extends TempoField{
         String dateString = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-TextBox')]")).getAttribute("value");
 
         try{  
-            Date compareDate = DateUtils.parseDate(dateString, TempoObject.DATE_FORMAT_STRING);
-            Date fieldDate = DateUtils.parseDate(fieldValue, TempoObject.DATETIME_DISPLAY_FORMAT_STRING);
+            Date compareDate = DateUtils.parseDate(dateString, DATE_FORMAT_STRING);
+            Date fieldDate = DateUtils.parseDate(fieldValue, DATETIME_DISPLAY_FORMAT_STRING);
             LOG.debug("DATE FIELD COMPARISON : Field value (" + compareDate.toString() + ") compared to Entered value (" + fieldDate.toString() + ")");
             
             return compareDate.getDate() == fieldDate.getDate() &&
@@ -71,7 +69,7 @@ public class TempoDateField extends TempoField{
     }
     
     private static boolean populateTempoDateFieldWithDate(WebElement fieldLayout, Date d) {
-        String dateValue = new SimpleDateFormat(TempoObject.DATE_FORMAT_STRING).format(d);
+        String dateValue = new SimpleDateFormat(DATE_FORMAT_STRING).format(d);
         
         WebElement datePlaceholder = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-Placeholder')]"));
         WebElement dateField = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-TextBox')]"));

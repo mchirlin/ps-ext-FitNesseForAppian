@@ -20,6 +20,8 @@ public class TempoParagraphField extends TempoField {
         WebElement textAreaField = fieldLayout.findElement(By.xpath(".//textarea[contains(@class, 'aui-TextAreaInput')]"));
         textAreaField.clear();
         textAreaField.sendKeys(fieldValue);
+        
+        LOG.debug("PARAGRAPH FIELD POPULATION : " + fieldValue);
 
         return true;
     }

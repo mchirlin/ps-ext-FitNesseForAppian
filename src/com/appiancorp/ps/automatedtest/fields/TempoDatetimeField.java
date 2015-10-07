@@ -57,7 +57,7 @@ public class TempoDatetimeField extends TempoField{
         String datetimeString = dateString + " " + timeString;
 
         try{  
-            String compareString = new SimpleDateFormat(TempoObject.DATETIME_DISPLAY_FORMAT_STRING).format(DateUtils.parseDate(datetimeString, TempoObject.DATETIME_FORMAT_STRING));
+            String compareString = new SimpleDateFormat(TempoObject.DATETIME_DISPLAY_FORMAT_STRING).format(DateUtils.parseDate(datetimeString, DATETIME_FORMAT_STRING));
             LOG.debug("DATETIME FIELD COMPARISON : Field value (" + fieldValue + ") compared to Entered value (" + compareString + ")");
             
             return compareString.equals(fieldValue);
@@ -68,7 +68,7 @@ public class TempoDatetimeField extends TempoField{
     }
     
     private static boolean populateTempoDatetimeFieldWithDate(WebElement fieldLayout, Date d) {
-        String dateValue = new SimpleDateFormat(TempoObject.DATE_FORMAT_STRING).format(d);
+        String dateValue = new SimpleDateFormat(DATE_FORMAT_STRING).format(d);
         
         WebElement datePlaceholder = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-Placeholder')]"));
         WebElement dateField = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-TextBox')]"));
@@ -88,7 +88,7 @@ public class TempoDatetimeField extends TempoField{
     }
     
     private static boolean populateTempoDatetimeFieldWithTime(WebElement fieldLayout, Date d) {
-        String timeValue = new SimpleDateFormat(TempoObject.TIME_FORMAT_STRING).format(d);
+        String timeValue = new SimpleDateFormat(TIME_FORMAT_STRING).format(d);
         
         WebElement timePlaceholder = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-TimeInput-Placeholder')]"));
         WebElement timeField = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-TimeInput-TextBox')]"));

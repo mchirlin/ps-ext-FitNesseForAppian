@@ -23,6 +23,8 @@ public class TempoSelectField extends TempoField {
         Select select = new Select(selectField);
         select.selectByVisibleText(fieldValue);
 
+        LOG.debug("SELECT FIELD POPULATION : " + fieldValue);
+        
         return true;
     }
     

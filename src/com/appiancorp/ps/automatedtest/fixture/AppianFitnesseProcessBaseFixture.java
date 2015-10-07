@@ -46,6 +46,8 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
     
 	String processId = null;
 	String url = null;
+	String dateFormatString = null;
+	String timeFormatString = null;
 	Date startDatetime = null;
 	String dataSourceName = null;
 	String masterWindowHandle = null;
@@ -108,6 +110,20 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 		this.dataSourceName = dataSourceName;
 		return true;
 	}
+	
+	public boolean setDateFormatStringTo(String df) {
+	    this.dateFormatString = df;
+	    TempoObject.setDateFormatString(this.dateFormatString);
+	    
+	    return true;
+	}
+
+	public boolean setTimeFormatStringTo(String tf) {
+        this.timeFormatString = tf;
+        TempoObject.setDateFormatString(this.timeFormatString);
+        
+        return true;
+    }
 	
 	public boolean open(String url) {
 		 driver.get(url);

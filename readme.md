@@ -62,7 +62,7 @@
 * | verify tempo task | {task name} | is not present |
 * | verify tempo task | {task name} | has a deadline of | {deadline text} |
 
-### Records
+### RECORDS
 * | click on tempo record list | {record list name} |
 * | click on tempo record list facet option | {facet name} |
 * | verify tempo record list facet option | {facet name} | is present |
@@ -74,14 +74,14 @@
 * | verify tempo record item related action | {related action name} | is present |
 * | verify tempo record item related action | {related action name} | is not present |
 
-### Reports
+### REPORTS
 * | click on tempo report | {report name} |
 
-### Actions
+### ACTIONS
 * | click on tempo action | {action name} |
 * | verify tempo action completed |
 
-### Forms
+### FORMS
 * | populate tempo field | {field label} | with | {values} |
 * | clear tempo field | {field label} | of | {value to remove} | - this is for removing specific value from a picker
 * | verify tempo field | {field label} | contains | {value} |

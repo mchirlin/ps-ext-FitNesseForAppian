@@ -21,6 +21,8 @@ public class TempoTextField extends TempoField {
         textField.clear();
         textField.sendKeys(fieldValue);
         
+        LOG.debug("TEXT FIELD POPULATION : " + fieldValue);
+        
         return true;
     }
     
