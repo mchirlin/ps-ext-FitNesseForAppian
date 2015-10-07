@@ -24,7 +24,7 @@
 1. Install Jenkins
  1. Update JENKINS_HOME/jenkins.xml ```--httpPort``` argument to another port, e.g. 8081
  1. Restart Jenkins service in Window services
-1. In a browser, navigate to localhost:8081
+1. In a browser, navigate to ```http://localhost:8081```
 1. Click on **Manage Jenkins**
 1. Click on **Manage Plugins**
 1. Click on **Available** tab
@@ -33,7 +33,7 @@
 1. Choose a build name, select **Freestyle project**, and click **OK**
 1. Click **Add build step** and select **Execute FitNesse test**
 1. Enter the following values
- 1. Select **Start new FitNesse instance as part of build
+ 1. Select **Start new FitNesse instance as part of build**
  1. Enter ```C:\fitnesse``` in **Java working directory**, 
  1. Enter ```C:\fitnesse\fitnesse.jar``` in **Path to fitnesse.jar**
  1. Enter ```C:\fitnesse\FitNesseRoot``` in **Path to FitNesseRoot**
@@ -44,13 +44,7 @@
  1. Enter ```C:\fitnesse\results\fitnesse-results.xml``` in **Path to fitnesse xml results file**
 1. Click **Add post-build action** and select **Publish Fitnesse results report**
 1. Click **Save**
-1. You can now run you FitNesse test by clicking **Build Now**
-
-
-
-
-
-
+1. You can now run your FitNesse test by clicking **Build Now**
 
 ## Creating a wiki
 1. Navigate to ```localhost:8980/{WikiName}```
