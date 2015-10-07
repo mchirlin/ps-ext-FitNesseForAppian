@@ -108,16 +108,6 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoTask.hasDeadlineOf(taskName, deadline);
     }
     
-    public boolean waitUntilTempoFormIsLoaded(String formName) {
-        try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[starts-with(@class, 'appian-form-title') and contains(text(),'"+formName+"')]")));
-        } catch (Exception e) {
-            return false;
-        }
-        
-        return true;
-    }
-    
     /** RECORDS **/
     
     // Record Item
