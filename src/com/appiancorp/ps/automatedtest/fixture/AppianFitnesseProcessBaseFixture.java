@@ -78,8 +78,6 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 			driver = new PhantomJSDriver(dCaps);
 		}
 		
-        new Actions(driver).sendKeys(Keys.chord(Keys.CONTROL, "t")).perform();
-        new Actions(driver).sendKeys(Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.TAB)).perform();
 		this.masterWindowHandle = driver.getWindowHandle();
         
         TempoObject.setDriver(driver);

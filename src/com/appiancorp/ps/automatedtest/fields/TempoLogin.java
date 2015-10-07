@@ -1,25 +1,27 @@
 package com.appiancorp.ps.automatedtest.fields;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class TempoLogin extends TempoObject {
     
-    public static boolean logout() {       
-        WebElement settings = driver.findElement(By.xpath("//div[contains(@class, 'settings-pull-down')]/a"));
-        settings.click();
-        
-        WebElement signOut = driver.findElement(By.xpath("//div[contains(@class, 'settings-pull-down')]/descendant::a[starts-with(text(), 'Sign Out')]"));
-        signOut.click();
+    private static final Logger LOG = Logger.getLogger(TempoLogin.class);
+    
+    public static boolean logout() {   
+        LOG.debug("Starting Logout");
+        ((JavascriptExecutor) driver).executeScript("document.evaluate(\"//div[@class='main_nav_bar']/descendant::a[contains(text(),'Sign Out')]\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click()");
+        LOG.debug("Clicked signout");
         
         return true;
     }
     
     public static boolean waitForLogout() {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class, 'settings-pull-down')]/a")));
+            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'main_nav_bar')]")));
         } catch (Exception e) {
             return false;
         }

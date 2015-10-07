@@ -4,13 +4,13 @@ import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -76,20 +76,30 @@ public class TempoObject {
             
             String returnVal = "";
             
-            // Open servlet window
-            new Actions(driver).sendKeys(Keys.chord(Keys.CONTROL, Keys.TAB)).perform();
+            // Open new tab
+            ((JavascriptExecutor)driver).executeScript("window.open('" + servletUrl + "','_blank');");
             
-            driver.get(servletUrl);
+            // Switch to tab
+            Set<String> handles = driver.getWindowHandles();
+            String popupHandle = "";
+            for (String handle : handles) {
+                if (!handle.equals(masterWindowHandle)) popupHandle = handle;
+            }
+            driver.switchTo().window(popupHandle);
+            
             (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//pre")));
             returnVal = driver.findElement(By.xpath("//pre")).getText();
             
-            // Go back to test window
-            new Actions(driver).sendKeys(Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.TAB)).perform();
+            LOG.debug("'" + expression + "' equals '" + returnVal + "'");
+            
+            // Close tab
+            driver.close();
             
             Thread.sleep(500);
+            driver.switchTo().window(masterWindowHandle);
             driver.switchTo().defaultContent();
             
-            return returnVal;        
+            return returnVal;
         } catch (Exception e) {
             LOG.error(e.getMessage());
         }

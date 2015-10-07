@@ -1,11 +1,7 @@
 package com.appiancorp.ps.automatedtest.fixture;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.appiancorp.ps.automatedtest.fields.TempoAction;
 import com.appiancorp.ps.automatedtest.fields.TempoButton;
 import com.appiancorp.ps.automatedtest.fields.TempoDateField;

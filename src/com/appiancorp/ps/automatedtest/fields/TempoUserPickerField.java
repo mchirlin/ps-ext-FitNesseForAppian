@@ -1,5 +1,7 @@
 package com.appiancorp.ps.automatedtest.fields;
 
+import java.util.Arrays;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -42,7 +44,7 @@ public class TempoUserPickerField extends TempoPickerField{
             }
         }
         
-        LOG.debug("USER PICKER FIELD POPULATION : " + fieldValues);
+        LOG.debug("USER PICKER FIELD POPULATION : " + Arrays.toString(fieldValues));
         
         return true;
     }
@@ -66,7 +68,8 @@ public class TempoUserPickerField extends TempoPickerField{
                 continue;
             } catch (Exception e) {}
             
-            fieldValue = TempoObject.runExpression("=user(\""+fieldValue+"\", \"firstName\") & \" \" & user(\""+fieldValue+"\", \"lastName\")");
+            // These expressions are always run in the context of whatever user is logged in as they are just run in another tab
+            fieldValue = runExpression("=user(\""+fieldValue+"\", \"firstName\") & \" \" & user(\""+fieldValue+"\", \"lastName\")");
             LOG.debug("USER PICKER FIELD COMPARISON : Field value (" + fieldValue + ") search");
             
             waitFor(fieldName);

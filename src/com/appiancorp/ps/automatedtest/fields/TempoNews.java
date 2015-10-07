@@ -61,7 +61,7 @@ public class TempoNews extends TempoObject{
     public static boolean waitForLabelAndValue(String newsText, String label, String value) {
         
         value = TempoObject.parseVariable(value);
-        LOG.debug("Label: "+label+" and Value: " + value);
+        LOG.debug("LABEL : ("+label+") and VALUE (" + value +")");
         try {
             // With label
             (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::table/descendant::td[contains(text(), '"+label+"')]")));
