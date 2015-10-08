@@ -132,7 +132,6 @@ public class TempoField extends TempoObject {
             fieldValues[i] = TempoObject.parseVariable(fieldValues[i]);
         }
         
-        LOG.debug("Attempting to locate: " + fieldValues[0]);
         try {
             return TempoDatetimeField.contains(fieldLayout, fieldValues[0]);
         } catch (Exception e) {}

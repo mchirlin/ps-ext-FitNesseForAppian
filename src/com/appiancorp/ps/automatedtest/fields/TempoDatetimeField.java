@@ -35,7 +35,7 @@ public class TempoDatetimeField extends TempoField{
         populateTempoDatetimeFieldWithDate(fieldLayout, d);
         populateTempoDatetimeFieldWithTime(fieldLayout, d);
         
-        LOG.debug("DATETIME field: " + fieldValue);
+        LOG.debug("DATETIME FIELD POPULTATION : " + fieldValue);
         
         return true;
     }

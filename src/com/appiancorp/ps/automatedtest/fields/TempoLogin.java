@@ -12,9 +12,7 @@ public class TempoLogin extends TempoObject {
     private static final Logger LOG = Logger.getLogger(TempoLogin.class);
     
     public static boolean logout() {   
-        LOG.debug("Starting Logout");
         ((JavascriptExecutor) driver).executeScript("document.evaluate(\"//div[@class='main_nav_bar']/descendant::a[contains(text(),'Sign Out')]\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click()");
-        LOG.debug("Clicked signout");
         
         return true;
     }

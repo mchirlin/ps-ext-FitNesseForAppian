@@ -178,19 +178,18 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	    return TempoAction.isCompleted();
 	}
 	
-	/** FIELDS **/
+	/** FORMS **/
 	
 	// Generic Field
 	public boolean populateTempoFieldWith(String fieldName, String[] fieldValues) {
 	    if(!TempoField.waitFor(fieldName)) return false;
 	    
 	    TempoField.populate(fieldName, fieldValues);
-        
 	    int attempt = 0;
 	    
 	    while(attempt < 2) {
-	        if (TempoField.contains(fieldName, fieldValues)) {
-	            new Actions(driver).sendKeys(Keys.TAB).perform();
+	        new Actions(driver).sendKeys(Keys.TAB).perform();
+	        if (TempoField.contains(fieldName, fieldValues)) {     
 	            return true;
 	        }
 	        

@@ -1,7 +1,6 @@
 package com.appiancorp.ps.automatedtest.fields;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang3.time.DateUtils;
@@ -51,6 +50,7 @@ public class TempoDateField extends TempoField{
         return true;
     }
     
+    @SuppressWarnings("deprecation")
     public static boolean contains(WebElement fieldLayout, String fieldValue) {
         String dateString = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-TextBox')]")).getAttribute("value");
 

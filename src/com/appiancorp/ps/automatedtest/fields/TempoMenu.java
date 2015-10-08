@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TempoMenu extends TempoField {
+public class TempoMenu extends TempoObject {
     
     public static boolean click(String tempoMenu) {
         WebElement element = driver.findElement(By.xpath("//a[starts-with(@class, 'appian-menu-item') and contains(text(),'" + tempoMenu +"')]"));

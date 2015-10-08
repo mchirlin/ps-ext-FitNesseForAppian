@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.fields.TempoObject;
-
 public class TempoUserPickerField extends TempoPickerField{
     private static final Logger LOG = Logger.getLogger(TempoUserPickerField.class);
     
