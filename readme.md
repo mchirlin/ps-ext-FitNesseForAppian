@@ -1,4 +1,23 @@
-# Running Selenium with Fitnesse
+# Running Selenium with Fitnesse (Beta release)
+
+## Overview
+
+Selenium with FitNesse provides an "easy" way to create user interface driven automated tests with Appian. Test cases can be used for functional testing and regression testing of the user interface and the process model functional logic.
+
+## Usage and Contributions
+
+To use Selenium and Fitnesse on your project, please follow the steps identified below for setting up the testing framework and creating/executing test cases.
+
+This is still a Beta release. We ask that whenever possible, you contribute back to the repository and the Appian PS community by 
+* adding any missing commands that you need to create for test cases
+* fixing issues and defects
+* implementing enhancements
+
+As we work and contribute to make this tool better, we will take the greatest care to ensure that the next versions are backward compatible. Rest assure that whatever changes are released in the future are NOT going to break your test cases.
+
+If your team cannot directly enhance the framework, please make sure to contact the Appian CoE on Home or over email in order to provide your feedbacks. (We can help only if we know where the problems are.)
+
+To update the repository, please create a branch from `master`, implement/push your code and create a pull request. Tag the Appian CoE or send us a notification and we will review/merge your work.
 
 ## Installation
 
