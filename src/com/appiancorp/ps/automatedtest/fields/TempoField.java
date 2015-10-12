@@ -172,7 +172,7 @@ public class TempoField extends TempoObject {
     }
     
     public static boolean contains(WebElement fieldLayout, String fieldValue) {
-        fieldLayout.findElement(By.xpath(".//p[contains(text(), '" + fieldValue + "')] | .//div[contains(text(), '" + fieldValue + "')]"));
+        fieldLayout.findElement(By.xpath(".//p[contains(text(), '" + fieldValue + "')] | .//div[contains(text(), '" + fieldValue + "') and not(contains(@class, 'textarea_print'))]"));
         
         LOG.debug("READ ONLY FIELD COMPARISON : Field value (" + fieldValue + ") found");
         

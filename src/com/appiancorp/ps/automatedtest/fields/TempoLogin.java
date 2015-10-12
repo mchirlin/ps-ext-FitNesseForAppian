@@ -11,7 +11,8 @@ public class TempoLogin extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoLogin.class);
     
-    public static boolean logout() {   
+    public static boolean logout() {
+        LOG.debug("LOGGING OUT");
         ((JavascriptExecutor) driver).executeScript("document.evaluate(\"//div[@class='main_nav_bar']/descendant::a[contains(text(),'Sign Out')]\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click()");
         
         return true;
@@ -28,6 +29,8 @@ public class TempoLogin extends TempoObject {
     }
     
     public static boolean login(String url, String userName, String password) {
+        LOG.debug("LOGGING IN WITH : " + userName);
+        
         WebElement userNameElement = driver.findElement(By.id("un"));
         userNameElement.clear();
         userNameElement.sendKeys(userName);
@@ -43,12 +46,36 @@ public class TempoLogin extends TempoObject {
         return true;
     }
     
+    public static boolean loginWithTerms(String url, String userName, String password) {
+        /* Have to be specific as there is a hidden button for accepting terms */
+        WebElement agreeButton = driver.findElement(By.cssSelector("#notification > div.button_box > div.button_box_content > div.button_box_buttons > input.btn.primary"));
+        agreeButton.click();
+        
+        waitForLogin(url);
+        login(url, userName, password);
+        
+        return true;
+    }
+    
     public static boolean waitForLogin(String url) {
         driver.get(url);
         driver.navigate().refresh();
         
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.id("un")));
+            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.id("loginForm")));
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public static boolean waitForTerms(String url) {
+        driver.get(url);
+        driver.navigate().refresh();
+        
+        try {
+            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.id("notification")));
         } catch (Exception e) {
             return false;
         }

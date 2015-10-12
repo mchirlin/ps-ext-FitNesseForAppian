@@ -18,8 +18,6 @@ public class TempoButton extends TempoField {
         
         LOG.debug("BUTTON CLICK : " + buttonName);
         
-        waitForWorking();
-        
         return true;
     }
     

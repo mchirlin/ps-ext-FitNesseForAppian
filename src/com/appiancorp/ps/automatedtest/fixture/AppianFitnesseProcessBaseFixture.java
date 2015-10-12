@@ -149,6 +149,12 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
         return TempoLogin.login(url, userName, password);
     }
 	
+	public boolean loginWithTermsWithUsernameAndPassword(String userName, String password) {
+        if (!TempoLogin.waitForTerms(url)) return false;
+        
+        return TempoLogin.loginWithTerms(url, userName, password);
+    }
+	
 	public boolean waitFor(String period) {
 	    int periodNum = Integer.parseInt(period.replaceAll("[^0-9]", ""));
 	    int noOfSeconds = 0;
