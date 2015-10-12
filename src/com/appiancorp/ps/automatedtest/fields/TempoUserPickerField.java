@@ -66,10 +66,6 @@ public class TempoUserPickerField extends TempoPickerField{
                 continue;
             } catch (Exception e) {}
             
-            // These expressions are always run in the context of whatever user is logged in as they are just run in another tab
-            fieldValue = runExpression("=user(\""+fieldValue+"\", \"firstName\") & \" \" & user(\""+fieldValue+"\", \"lastName\")");
-            LOG.debug("USER PICKER FIELD COMPARISON : Field value (" + fieldValue + ") search");
-            
             waitFor(fieldName);
             fieldLayout = getFieldLayout(fieldName);
             fieldLayout.findElement(By.xpath(".//a[contains(text(), '"+fieldValue+"')]"));
