@@ -30,7 +30,7 @@ To update the repository, please create a branch from `master`, implement/push y
 1. In a command prompt navigate to ```FITNESSE_HOME```.
 1. Run ```java -jar fitnesse.jar -p 8980```.
 
-** NOTE:** if you choose a different location for FITNESSE_HOME or SELENIUM_HOME then you must update the classpath variables in the examples to refer to the correct locations.
+**NOTE:** if you choose a different location for FITNESSE_HOME or SELENIUM_HOME then you must update the classpath variables in the examples to refer to the correct locations.
 
 ## Running Your First FitNesse Test
 
