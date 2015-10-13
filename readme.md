@@ -30,7 +30,7 @@ To update the repository, please create a branch from `master`, implement/push y
 1. In a command prompt navigate to ```FITNESSE_HOME```.
 1. Run ```java -jar fitnesse.jar -p 8980```.
 
-** NOTE:** if you choose a different location for FITNESSE_HOME or SELENIUM_HOME then you must update the classpath variables in the examples to refer to the correct locations.
+**NOTE:** if you choose a different location for FITNESSE_HOME or SELENIUM_HOME then you must update the classpath variables in the examples to refer to the correct locations.
 
 ## Running Your First FitNesse Test
 
@@ -41,6 +41,19 @@ To update the repository, please create a branch from `master`, implement/push y
 1. Navigate to ```http://localhost:8980/LoginTest```.
 1. Click **Test**.
 
+## Creating a wiki
+
+1. Navigate to ```http://localhost:8980/WIKI_NAME```.
+ * If the WIKI_NAME contains 'suite', then it will be considered a FitNesse suite.
+ * If the WIKI_NAME contains 'test', then it will be considered a FitNesse test.
+ * If the WIKI_NAME is 'SetUp', then it will be run before each test case.
+ * If the WIKI_NAME is 'TearDown', then it will be run after each test case.
+ * If the WIKI_NAME is 'SuiteSetUp', then it will be run once at the beginning of the test suite.
+ * If the WIKI_NAME is 'SuiteTearDown', then it will be run once at the end of the test suite.
+1. You can also nest wikis by navigating to subpages like ```http://localhost:8980/WIKI_SUITE_NAME/WIKI_TEST_NAME```.
+ * You can see an example of this by copying ```etc\wikis\CaseManagementSuit``` folder from github repo into ```FITNESSE_HOME\FitNesseRoot``` and navigating to ```http://localhost:8980/CaseManagementSuite```.
+ * This example has one each of the follow page types: Suite, Setup, TearDown, and Test.
+ 
 ## Setting up Jenkins with a FitNesse test
 
 1. Download [Jenkins installer](https://jenkins-ci.org/).
@@ -68,72 +81,62 @@ To update the repository, please create a branch from `master`, implement/push y
 1. Click **Add post-build action** and select **Publish Fitnesse results report**.
 1. Click **Save**.
 1. You can now run your FitNesse test by clicking **Build Now**.
-
-## Creating a wiki
-
-1. Navigate to ```localhost:8980/{WikiName}```.
- * If the {WikiName} contains 'suite', then it will be considered a FitNesse suite.
- * If the {WikiName} contains 'test', then it will be considered a FitNesse test.
- * If the {WikiName} is 'SetUp', then it will be run before each test case.
- * If the {WikiName} is 'TearDown', then it will be run after each test case.
- * If the {WikiName} is 'SuiteSetUp', then it will be run once at the beginning of the test suite.
- * If the {WikiName} is 'SuiteTearDown', then it will be run once at the end of the test suite.
  
 ## Commands
 
 ### UTILITIES
-* | setup selenium web driver with | {browser name} | browser |
-* | set data source name to | {data source name} |
-* | set appian url to | {appian url } |
+* | setup selenium web driver with | *BROWSER_NAME* | browser |
+* | set data source name to | *DATA_SOURCE_NAME* |
+* | set appian url to | *APPIAN_URL* |
 * | set start datetime | - will be used as relative datetime for date/time fields
-* | take screenshot | {file path} |
-* | login with username | {username} | with password | {password} | - uses set appian url
-* | wait for | {relative period, e.g. +1 days, +1 hours} | - waits for relative amount of time
-* | wait until | {relative period} | - waits until relative time
+* | take screenshot | *FILE_PATH* |
+* | login with username | *USERNAME* | with password | *PASSWORD* | - uses set appian url
+* | wait for | *RELATIVE_PERIOD*, e.g. +1 days, +1 hours | - waits for relative amount of time
+* | wait until | *RELATIVE_PERIOD* | - waits until relative time
 * | refresh | - refreshes screen
 * | logout from tempo |
 
 ### NAVIGATION
-* | click on tempo menu | {tempo menu name} |
+* | click on tempo menu | *TEMPO_MENU_NAME* |
 
 ### NEWS
-* | verify news feed containing text | {news item title} | is present |
-* | verify news feed containing text | {news item title} | is not present |
-* | toggle more info for news feed containing text | {news item title} |
-* | verify news feed containing text | {news item title} | and more info with label | {label value} | and value | {value value} | is present |
-* | verify news feed containing text | {news item title} | tagged with | {tag name} | is present |
-* | verify news feed containing text | {news item title} | commented with | {comment value} | is present |
+* | verify news feed containing text | *NEWS_ITEM_TITLE* | is present |
+* | verify news feed containing text | *NEWS_ITEM_TITLE* | is not present |
+* | toggle more info for news feed containing text | *NEWS_ITEM_TITLE* |
+* | verify news feed containing text | *NEWS_ITEM_TITLE* | and more info with label | *LABEL* | and value | *VALUE* | is present |
+* | verify news feed containing text | *NEWS_ITEM_TITLE* | tagged with | *TAG_NAME* | is present |
+* | verify news feed containing text | *NEWS_ITEM_TITLE* | commented with | *COMMENT* | is present |
 
 ### TASKS
-* | click on tempo task | {task name} |
-* | verify tempo task | {task name} | is present |
-* | verify tempo task | {task name} | is not present |
-* | verify tempo task | {task name} | has a deadline of | {deadline text} |
+* | click on tempo task | *TASK_NAME* |
+* | verify tempo task | *TASK_NAME* | is present |
+* | verify tempo task | *TASK_NAME* | is not present |
+* | verify tempo task | *TASK_NAME* | has a deadline of | *DEADLINE_TEXT* |
 
 ### RECORDS
-* | click on tempo record list | {record list name} |
-* | click on tempo record list facet option | {facet name} |
-* | verify tempo record list facet option | {facet name} | is present |
-* | click on tempo record item | {record item name} |
-* | verify tempo record item | {record item name} | is present |
-* | verify tempo record item | {record item name} | is not present |
-* | click on tempo record item facet | {facet name} |
-* | click on tempo record item related action | {related action name} | - this is run on the related action dashboard, not as a button currently
-* | verify tempo record item related action | {related action name} | is present |
-* | verify tempo record item related action | {related action name} | is not present |
+* | click on tempo record list | *RECORD_LIST_NAME* |
+* | click on tempo record list facet option | *FACET_NAME* |
+* | verify tempo record list facet option | *FACET_NAME* | is present |
+* | click on tempo record item | *RECORD_ITEM_NAME* |
+* | verify tempo record item | *RECORD_ITEM_NAME* | is present |
+* | verify tempo record item | *RECORD_ITEM_NAME* | is not present |
+* | click on tempo record item facet | *FACET_NAME* |
+* | click on tempo record item related action | *RELATED_ACTION_NAME* | - this is run on the related action dashboard, not as a button currently
+* | verify tempo record item related action | *RELATED_ACTION_NAME* | is present |
+* | verify tempo record item related action | *RELATED_ACTION_NAME* | is not present |
 
 ### REPORTS
-* | click on tempo report | {report name} |
+* | click on tempo report | *REPORT_NAME* |
 
 ### ACTIONS
-* | click on tempo action | {action name} |
+* | click on tempo action | *ACTION_NAME* |
 * | verify tempo action completed |
 
 ### FORMS
-* | populate tempo field | {field label} | with | {values} |
-* | clear tempo field | {field label} | of | {value to remove} | - this is for removing specific value from a picker
-* | verify tempo field | {field label} | contains | {value} |
-* | populate tempo editable grid | {grid name} | column | {column name or number} | row | {row number} | with | {value} |
-* verify editable grid | {grid name} | column | {column name or number} | row | {row number} | contains | {value} |
-* | click on tempo link | {link name} |
-* | click on tempo button | {button name} |
+* | populate tempo field | *FIELD_LABEL* | with | *VALUE(S)* |
+* | clear tempo field | *FIELD_LABEL* | of | *VALUE_TO_REMOVE* | - this is for removing specific value from a picker
+* | verify tempo field | *FIELD_LABEL* | contains | *VALUE* |
+* | populate tempo editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |
+* | verify editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
+* | click on tempo link | *LINK_NAME* |
+* | click on tempo button | *BUTTON_NAME* |
