@@ -3,11 +3,8 @@
 ----
 '''Class Path'''
 
-!path C:\fitnesse\lib\appian\*.jar
-!path C:\fitnesse\*.jar
-!path C:\fitnesse\lib\*.jar
-!path C:\selenium-2.47.1\*.jar
-!path C:\appian\appian7.10\_admin\_scripts\classpath.jar
+!path C:\fitnesse\**.jar
+!path C:\selenium\**.jar
 
 ----
 !| com.appiancorp.ps.automatedtest.fixture.AppianFitnesseProcessTempoFixture |

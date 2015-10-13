@@ -23,62 +23,61 @@ To update the repository, please create a branch from `master`, implement/push y
 
 ## Installation
 
-1. Download [FitNesse jar](http://www.fitnesse.org)
- 1. Place in ```C:\fitnesse\```
-1. Download [Selenium Java Web Driver](http://www.seleniumhq.org/download/)
- 1. Place in ```C:\selenium-2.47.1\```
-1. Download [FitLibrary](http://sourceforge.net/projects/fitlibrary/)
- 1. Copy FitLibrary fitnesse folder on top of ```C:\fitnesse folder```
-1. Download [Appian servlet plug-in](https://github.com/appianps/ps-ext-AutomatedTestFramework/blob/master/plugins/AutomatedTestServlet/AppianAutomatedTestServlet.1.0.0.jar) and place in ```APPIAN_HOME\_admin\plugins```
-1. Download [Appian fixtures](https://github.com/appianps/ps-ext-AutomatedTestFramework/blob/master/appian-fixtures.jar) and place in ```C:\fitnesse\lib\appian```
+1. Download [AutomatedTesting.zip](https://github.com/appianps/ps-ext-AutomatedTestFramework/blob/master/etc/AutomatedTesting.zip?raw=true).
+1. Unzip file into a temporary location.
+1. Move fitnesse folder to ```FITNESSE_HOME```, e.g. ```C:\fitnesse\```.
+1. Move selenium folder to ```SELENIUM_HOME```, e.g. ```C:\selenium\```.
+1. In a command prompt navigate to ```FITNESSE_HOME```.
+1. Run ```java -jar fitnesse.jar -p 8980```.
 
-## Running Fitnesse
+** NOTE:** if you choose a different location for FITNESSE_HOME or SELENIUM_HOME then you must update the classpath variables in the examples to refer to the correct locations.
 
-1. Make sure Appian is currently running
-1. In command prompt navigate to ```C:\fitnesse```
-1. Run runFitNesseDirectly.bat
-1. Navigate to ```http://localhost:8980/{WikiName}``` to run a test
+## Running Your First FitNesse Test
+
+1. Copy ```etc\wikis\LoginTest``` folder from github repo into ```FITNESSE_HOME\FitNesseRoot```.
+1. Start FitNesse if it isn't already running.
+ 1. In command prompt navigate to ```FITNESSE_HOME```.
+ 1. Run runFitNesseDirectly.bat.
+1. Navigate to ```http://localhost:8980/LoginTest```.
+1. Click **Test**.
 
 ## Setting up Jenkins with a FitNesse test
 
-1. Download [Jenkins installer](https://jenkins-ci.org/)
-1. Install Jenkins
- 1. Update JENKINS_HOME/jenkins.xml ```--httpPort``` argument to another port, e.g. 8081
- 1. Restart Jenkins service in Window services
-1. In a browser, navigate to ```http://localhost:8081```
-1. Click on **Manage Jenkins**
-1. Click on **Manage Plugins**
-1. Click on **Available** tab
-1. Filter by FitNesse check its box and click **Download now and install after restart**
-1. Navigate back to the home page and click **New Item**
-1. Choose a build name, select **Freestyle project**, and click **OK**
-1. Click **Add build step** and select **Execute FitNesse test**
-1. Enter the following values
- 1. Select **Start new FitNesse instance as part of build**
- 1. Enter ```C:\fitnesse``` in **Java working directory**, 
- 1. Enter ```C:\fitnesse\fitnesse.jar``` in **Path to fitnesse.jar**
- 1. Enter ```C:\fitnesse\FitNesseRoot``` in **Path to FitNesseRoot**
- 1. Enter ```8980``` in **Port for FitNesse instance**
- 1. Enter the page for the test suite in **Target Page**
- 1. Check **Is target a suite?** if the page is a suite
- 1. Set **HTTP Timeout** and **Test Timeout** high enough that the tests will not timeout
- 1. Enter ```C:\fitnesse\results\fitnesse-results.xml``` in **Path to fitnesse xml results file**
-1. Click **Add post-build action** and select **Publish Fitnesse results report**
-1. Click **Save**
-1. You can now run your FitNesse test by clicking **Build Now**
+1. Download [Jenkins installer](https://jenkins-ci.org/).
+1. Install Jenkins.
+ 1. Update ```JENKINS_HOME\jenkins.xml``` ```--httpPort``` argument to another port, e.g. 8081.
+ 1. Restart Jenkins service in Window services.
+1. In a browser, navigate to ```http://localhost:8081```.
+1. Click on **Manage Jenkins**.
+1. Click on **Manage Plugins**.
+1. Click on **Available** tab.
+1. Filter by FitNesse check its box and click **Download now and install after restart**.
+1. Navigate back to the home page and click **New Item**.
+1. Choose a build name, select **Freestyle project**, and click **OK**.
+1. Click **Add build step** and select **Execute FitNesse test**.
+1. Enter the following values:
+ 1. Select **Start new FitNesse instance as part of build**.
+ 1. Enter ```C:\fitnesse``` in **Java working directory**.
+ 1. Enter ```C:\fitnesse\fitnesse.jar``` in **Path to fitnesse.jar**.
+ 1. Enter ```C:\fitnesse\FitNesseRoot``` in **Path to FitNesseRoot**.
+ 1. Enter ```8980``` in **Port for FitNesse instance**.
+ 1. Enter the page for the test suite in **Target Page**.
+ 1. Check **Is target a suite?** if the page is a suite.
+ 1. Set **HTTP Timeout** and **Test Timeout** high enough that the tests will not timeout.
+ 1. Enter ```C:\fitnesse\results\fitnesse-results.xml``` in **Path to fitnesse xml results file**.
+1. Click **Add post-build action** and select **Publish Fitnesse results report**.
+1. Click **Save**.
+1. You can now run your FitNesse test by clicking **Build Now**.
 
 ## Creating a wiki
-1. Navigate to ```localhost:8980/{WikiName}```
- * If the {WikiName} contains 'suite', then it will be considered a FitNesse suite
- * If the {WikiName} contains 'test', then it will be considered a FitNesse test
- * If the {WikiName} is 'SetUp', then it will be run before each test case
- * If the {WikiName} is 'TearDown', then it will be run after each test case
- * If the {WikiName} is 'SuiteSetUp', then it will be run once at the beginning of the test suite
- * If the {WikiName} is 'SuiteTearDown', then it will be run once at the end of the test suite
-1. There are some example wikis in the wikis folder for creating a Suite, SetUp, TearDown, and a few example tests
- * These were based off a specific application, but can be modified to work with any application
- * To run any tests they will have to be started with the correct path, see wikis/CredentialsSuite.txt for an example
- * To run any DoFixture tests, the first table in the test must be a DoFixture class, see wikis/CredentialsSuite.SetUp for an example
+
+1. Navigate to ```localhost:8980/{WikiName}```.
+ * If the {WikiName} contains 'suite', then it will be considered a FitNesse suite.
+ * If the {WikiName} contains 'test', then it will be considered a FitNesse test.
+ * If the {WikiName} is 'SetUp', then it will be run before each test case.
+ * If the {WikiName} is 'TearDown', then it will be run after each test case.
+ * If the {WikiName} is 'SuiteSetUp', then it will be run once at the beginning of the test suite.
+ * If the {WikiName} is 'SuiteTearDown', then it will be run once at the end of the test suite.
  
 ## Commands
 
@@ -138,4 +137,3 @@ To update the repository, please create a branch from `master`, implement/push y
 * verify editable grid | {grid name} | column | {column name or number} | row | {row number} | contains | {value} |
 * | click on tempo link | {link name} |
 * | click on tempo button | {button name} |
-

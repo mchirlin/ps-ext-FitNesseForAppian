@@ -3,10 +3,7 @@
 '''Variables'''
 
 !define TEST_RUNNER {fitlibrary.suite.FitLibraryServer}
-!path C:\fitnesse\lib\appian\*.jar
-!path C:\fitnesse\*.jar
-!path C:\fitnesse\lib\*.jar
-!path C:\selenium-2.47.1\*.jar
-!path C:\appian\appian7.10\_admin\_scripts\classpath.jar
+!path C:\fitnesse\**.jar
+!path C:\selenium\**.jar
 
 !contents -R2 -g -p -f -h
