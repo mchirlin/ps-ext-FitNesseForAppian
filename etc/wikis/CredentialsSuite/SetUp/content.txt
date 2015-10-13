@@ -1,0 +1,7 @@
+!| com.appiancorp.ps.automatedtest.fixture.AppianFitnesseProcessTempoFixture |
+
+'''Set up Appian test'''
+| setup selenium web driver with browser | FIREFOX |
+| set appian url to | http://localhost:8080/suite |
+| set data source name to | jdbc/AppianBusinessDS |
+| set start datetime |
