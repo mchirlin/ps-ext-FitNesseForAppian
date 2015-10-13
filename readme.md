@@ -26,10 +26,10 @@ To update the repository, please create a branch from `master`, implement/push y
 1. Download [AutomatedTesting.zip](https://github.com/appianps/ps-ext-AutomatedTestFramework/blob/master/etc/AutomatedTesting.zip?raw=true).
 1. Unzip contents of AutomatedTesting.zip into TESTING_HOME, e.g. ```C:\AutomatedTesting```
 1. In a command prompt navigate to ```TESTING_HOME```.
-1. Run ```java -jar fitnesse.jar -p 8980``` to install FitNesse.
+1. Run ```start.bat``` to install FitNesse.
  * This will also start FitNesse, to stop type ctrl+C.
 
-**NOTE:** if you choose a different location for TESTING_HOME then you must update the classpath variables in the examples to refer to the correct locations.
+**NOTE:** if you choose a different location for TESTING_HOME than ```C:\AutomatedTesting``` then you must update the classpath variables in the examples to refer to the correct locations.
 
 ## Running Your First FitNesse Test
 
