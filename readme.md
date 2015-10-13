@@ -23,7 +23,7 @@ To update the repository, please create a branch from `master`, implement/push y
 
 ## Installation
 
-1. Download [AutomatedTesting.zip](https://github.com/appianps/ps-ext-AutomatedTestFramework/blob/master/etc/AutomatedTesting.zip?raw=true).
+1. Download [AutomatedTesting.zip](https://github.com/appianps/ps-ext-AutomatedTestFramework/releases/download/v0.1-beta.1/AutomatedTesting.zip).
 1. Unzip contents of AutomatedTesting.zip into TESTING_HOME, e.g. ```C:\AutomatedTesting```
 1. In a command prompt navigate to ```TESTING_HOME```.
 1. Run ```start.bat``` to install FitNesse.
