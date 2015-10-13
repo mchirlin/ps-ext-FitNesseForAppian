@@ -24,20 +24,18 @@ To update the repository, please create a branch from `master`, implement/push y
 ## Installation
 
 1. Download [AutomatedTesting.zip](https://github.com/appianps/ps-ext-AutomatedTestFramework/blob/master/etc/AutomatedTesting.zip?raw=true).
-1. Unzip file into a temporary location.
-1. Move fitnesse folder to ```FITNESSE_HOME```, e.g. ```C:\fitnesse\```.
-1. Move selenium folder to ```SELENIUM_HOME```, e.g. ```C:\selenium\```.
-1. In a command prompt navigate to ```FITNESSE_HOME```.
-1. Run ```java -jar fitnesse.jar -p 8980```.
+1. Unzip contents of AutomatedTesting.zip into TESTING_HOME, e.g. ```C:\AutomatedTesting```
+1. In a command prompt navigate to ```TESTING_HOME```.
+1. Run ```java -jar fitnesse.jar -p 8980``` to install FitNesse.
+ * This will also start FitNesse, to stop type ctrl+C.
 
-**NOTE:** if you choose a different location for FITNESSE_HOME or SELENIUM_HOME then you must update the classpath variables in the examples to refer to the correct locations.
+**NOTE:** if you choose a different location for TESTING_HOME then you must update the classpath variables in the examples to refer to the correct locations.
 
 ## Running Your First FitNesse Test
 
-1. Copy ```etc\wikis\LoginTest``` folder from github repo into ```FITNESSE_HOME\FitNesseRoot```.
-1. Start FitNesse if it isn't already running.
- 1. In command prompt navigate to ```FITNESSE_HOME```.
- 1. Run runFitNesseDirectly.bat.
+1. Start FitNesse if it isn't already running:
+ 1. In command prompt navigate to ```TESTING_HOME```.
+ 1. Run start.bat.
 1. Navigate to ```http://localhost:8980/LoginTest```.
 1. Click **Test**.
 
@@ -51,7 +49,7 @@ To update the repository, please create a branch from `master`, implement/push y
  * If the WIKI_NAME is 'SuiteSetUp', then it will be run once at the beginning of the test suite.
  * If the WIKI_NAME is 'SuiteTearDown', then it will be run once at the end of the test suite.
 1. You can also nest wikis by navigating to subpages like ```http://localhost:8980/WIKI_SUITE_NAME/WIKI_TEST_NAME```.
- * You can see an example of this by copying ```etc\wikis\CaseManagementSuit``` folder from github repo into ```FITNESSE_HOME\FitNesseRoot``` and navigating to ```http://localhost:8980/CaseManagementSuite```.
+ * You can see an example of this by copying ```etc\wikis\CaseManagementSuit``` folder from github repo into ```TESTING_HOME\FitNesseRoot``` and navigating to ```http://localhost:8980/CaseManagementSuite```.
  * This example has one each of the follow page types: Suite, Setup, TearDown, and Test.
  
 ## Setting up Jenkins with a FitNesse test
@@ -70,14 +68,14 @@ To update the repository, please create a branch from `master`, implement/push y
 1. Click **Add build step** and select **Execute FitNesse test**.
 1. Enter the following values:
  1. Select **Start new FitNesse instance as part of build**.
- 1. Enter ```C:\fitnesse``` in **Java working directory**.
- 1. Enter ```C:\fitnesse\fitnesse.jar``` in **Path to fitnesse.jar**.
- 1. Enter ```C:\fitnesse\FitNesseRoot``` in **Path to FitNesseRoot**.
+ 1. Enter ```TESTING_HOME``` in **Java working directory**.
+ 1. Enter ```TESTING_HOME\fitnesse.jar``` in **Path to fitnesse.jar**.
+ 1. Enter ```TESTING_HOME\FitNesseRoot``` in **Path to FitNesseRoot**.
  1. Enter ```8980``` in **Port for FitNesse instance**.
  1. Enter the page for the test suite in **Target Page**.
  1. Check **Is target a suite?** if the page is a suite.
  1. Set **HTTP Timeout** and **Test Timeout** high enough that the tests will not timeout.
- 1. Enter ```C:\fitnesse\results\fitnesse-results.xml``` in **Path to fitnesse xml results file**.
+ 1. Enter ```TESTING_HOME\results\fitnesse-results.xml``` in **Path to fitnesse xml results file**.
 1. Click **Add post-build action** and select **Publish Fitnesse results report**.
 1. Click **Save**.
 1. You can now run your FitNesse test by clicking **Build Now**.

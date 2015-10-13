@@ -3,8 +3,7 @@
 ----
 '''Class Path'''
 
-!path C:\fitnesse\**.jar
-!path C:\selenium\**.jar
+!path C:\AutomatedTesting\**.jar
 
 ----
 !| com.appiancorp.ps.automatedtest.fixture.AppianFitnesseProcessTempoFixture |
@@ -14,5 +13,5 @@
 | set appian url to | https://apacdemo.appiancloud.com/suite |
 
 '''Login to Tempo and submit new Service Request'''
-| login with terms username | michael.chirlin@appian.com | and password | password1 |
+| login with username | michael.chirlin@appian.com | and password | password1 |
 | click on tempo menu | Records |

@@ -3,7 +3,6 @@
 '''Variables'''
 
 !define TEST_RUNNER {fitlibrary.suite.FitLibraryServer}
-!path C:\fitnesse\**.jar
-!path C:\selenium\**.jar
+!path C:\AutomatedTesting\**.jar
 
 !contents -R2 -g -p -f -h
