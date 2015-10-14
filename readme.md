@@ -96,6 +96,7 @@ To update the repository, please create a branch from `master`, implement/push y
 * | set timeout seconds to | *TIMEOUT_SECONDS* | - used as the wait timeout in between each command
 * | take screenshot | *FILE_PATH* |
 * | login with username | *USERNAME* | with password | *PASSWORD* | - uses set appian url
+* | login with terms with username | *USERNAME* | with password | *PASSWORD* | - uses set appian url
 * | wait for | *RELATIVE_PERIOD*, e.g. +1 days, +1 hours | - waits for relative amount of time
 * | wait until | *RELATIVE_PERIOD* | - waits until relative time
 * | refresh | - refreshes screen
