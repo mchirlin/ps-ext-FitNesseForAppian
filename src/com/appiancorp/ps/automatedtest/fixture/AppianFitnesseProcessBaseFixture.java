@@ -45,6 +45,7 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	public String masterWindowHandle = null;
 	public WebDriver driver = null;
 	public int timeoutSeconds = 5;
+	public String screenshotPath = "C:\\AutomatedTesting\\screenshots";
 	    
 	Properties prop = new Properties();
 	
@@ -123,6 +124,12 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
         return true;
     }
 	
+	public boolean setScreenshotPathTo(String path) {
+	    this.screenshotPath = path;
+	    
+	    return true;
+	}
+	
 	public boolean open(String url) {
 		 driver.get(url);
 		 return true;
@@ -133,7 +140,7 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	    
         File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(srcFile, new File("C:\\fitnesse\\screenshots\\" + fileName + ".png"));
+            FileUtils.copyFile(srcFile, new File(screenshotPath + fileName + ".png"));
         } catch (IOException e) {
             LOG.error(e.getMessage());
             return false;

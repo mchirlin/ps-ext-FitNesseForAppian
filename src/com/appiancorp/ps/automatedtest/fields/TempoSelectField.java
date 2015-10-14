@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TempoSelectField extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoSelectField.class);
+    protected static final String XPATH_ABSOLUTE_LABEL = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div/select";
+    protected static final String XPATH_RELATIVE_INPUT = ".//select";
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -19,7 +21,7 @@ public class TempoSelectField extends TempoField {
     }
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
-        WebElement selectField = fieldLayout.findElement(By.xpath(".//select"));
+        WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         Select select = new Select(selectField);
         select.selectByVisibleText(fieldValue);
 
@@ -30,7 +32,9 @@ public class TempoSelectField extends TempoField {
     
     public static boolean waitFor(WebDriver driver, String fieldName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::div/select")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName);
+            scrollIntoView(fieldLayout);
         } catch (Exception e) {
             return false;
         }
@@ -45,7 +49,7 @@ public class TempoSelectField extends TempoField {
         } catch (Exception e) {}
 
         // For editable
-        WebElement selectField = driver.findElement(By.xpath("//span[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::div/select"));
+        WebElement selectField = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName)));
         Select select = new Select(selectField);
         String compareString = select.getFirstSelectedOption().getText();
         

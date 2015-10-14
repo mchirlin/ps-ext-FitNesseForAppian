@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -31,6 +32,8 @@ public class TempoObject {
     public static final String DATE_DISPLAY_FORMAT_STRING = "MMM d, yyyy";
     public static final String TIME_DISPLAY_FORMAT_STRING = "h:mm aaa";
     public static final String DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;
+    
+    private static final String XPATH_WORKING = "//span[contains(text(), 'Working...";
     
     public static boolean isDateCalculation(String dateTimeString) {
         dateTimeString = dateTimeString.replaceAll("\\s", "");
@@ -153,13 +156,18 @@ public class TempoObject {
     
     public static boolean waitForWorking() {
         try {
-            (new WebDriverWait(driver, 3)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), 'Working...")));
-            (new WebDriverWait(driver, 10)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//span[contains(text(), 'Working...")));
+            (new WebDriverWait(driver, 1)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_WORKING)));
+            (new WebDriverWait(driver, 10)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_WORKING)));
         } catch (Exception e) {
             return false;
         }
         
         LOG.debug("Working done");
         return true;
+    }
+    
+    public static void scrollIntoView(WebElement webElement) {
+        // Have to manually scroll element into view because Tempo header covers the action link for long action lists
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", webElement);
     }
 }

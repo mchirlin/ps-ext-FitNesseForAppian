@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.fields;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,21 +9,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoEditableGrid extends TempoField {
     
+    @SuppressWarnings("unused")
+    private static final Logger LOG = Logger.getLogger(TempoEditableGrid.class);
+    protected static final String XPATH_NUM_FIELD_LAYOUT = "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/tbody/tr[%s]/td[%s]/descendant::div[contains(@class, 'aui_FieldLayout')]";
+    protected static final String XPATH_NAME_FIELD_LAYOUT = "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/tbody/tr[%s]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]/descendant::div[contains(@class, 'aui_FieldLayout')]";
+    protected static final String XPATH_NUM_GRID_CELL = "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/tbody/tr[%s]/td[%s]";
+    protected static final String XPATH_NAME_GRID_CELL = "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/tbody/tr[%s]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
+    
     public static WebElement getFieldLayout(WebDriver driver, int timeOutSeconds, String gridName, String columnName, String rowNum) {
         // Using a columnNum
         try {
             int columnNum = Integer.parseInt(columnName);
-            return driver.findElement(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td["+columnNum+"]/descendant::div[contains(@class, 'aui_FieldLayout')]"));
+            return driver.findElement(By.xpath(String.format(XPATH_NUM_FIELD_LAYOUT, gridName, columnNum, rowNum)));
         } catch (Exception e) {}
         
         // Using columnName
-        return driver.findElement(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td[count(//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='"+columnName+"']/preceding-sibling::th)+1]/descendant::div[contains(@class, 'aui_FieldLayout')]"));
+        return driver.findElement(By.xpath(String.format(XPATH_NAME_FIELD_LAYOUT, gridName, rowNum, gridName, columnName)));
     }
     
     public static boolean populate(String gridName, String columnName, String rowNum, String[] fieldValues) {
         WebElement fieldLayout = getFieldLayout(driver, timeoutSeconds, gridName, columnName, rowNum);
         
-        // TODO Handle group picker in a grid
         return populate(fieldLayout, null, fieldValues);
     }
     
@@ -30,12 +37,12 @@ public class TempoEditableGrid extends TempoField {
         // Using a columnNum
         try {
             int columnNum = Integer.parseInt(columnName);
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td["+columnNum+"]")));
+            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NUM_GRID_CELL, gridName, rowNum, columnNum))));
         } catch (Exception e) {}
         
         // Using a columnName
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td[count(//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='"+columnName+"']/preceding-sibling::th)+1]")));
+            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NAME_GRID_CELL, gridName, rowNum, gridName, columnName))));
         } catch (Exception e) {
             //return false;
         }

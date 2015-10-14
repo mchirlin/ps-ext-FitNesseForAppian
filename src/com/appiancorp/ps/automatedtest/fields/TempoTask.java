@@ -9,9 +9,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TempoTask extends TempoObject{
     
     private static final Logger LOG = Logger.getLogger(TempoTask.class);
+    protected static final String XPATH_TASK = "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'%s')]";
+    protected static final String XPATH_TASK_DEADLINE = "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'%s')]/parent::span/following-sibling::div[contains(@class, 'metadata')]/descendant::span[contains(@title, 'deadline')]/span[text() = '%s']";
     
     public static boolean click(String taskName) {
-        WebElement element = driver.findElement(By.xpath("//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'" + taskName +"')]"));
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_TASK, taskName)));
         element.click();
 
         if(popupError()) {
@@ -20,12 +22,16 @@ public class TempoTask extends TempoObject{
             click(taskName);
         }
 
+        waitForWorking();
+        
         return true;
     }
     
     public static boolean waitFor(String taskName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'" + taskName +"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_TASK, taskName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_TASK, taskName)));
+            scrollIntoView(element);
         } catch (Exception e) {
             return false;
         }
@@ -53,7 +59,7 @@ public class TempoTask extends TempoObject{
     }
     
     public static boolean hasDeadlineOf(String taskName, String deadline) {
-        driver.findElement(By.xpath("//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'"+taskName+"')]/parent::span/following-sibling::div[contains(@class, 'metadata')]/descendant::span[contains(@title, 'deadline')]/span[text() = '"+deadline+"']"));
+        driver.findElement(By.xpath(String.format(XPATH_TASK_DEADLINE, taskName, deadline)));
         
         return true;
     }

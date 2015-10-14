@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.fields;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,8 +8,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoRecordItem extends TempoObject{
 
+    @SuppressWarnings("unused")
+    private static final Logger LOG = Logger.getLogger(TempoRecordItem.class);
+    private static final String XPATH_RECORD_ITEM = "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/') and contains(text(), '%s')]";
+    private static final String XPATH_RECORD_FACET = "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(text(), '%s')]";
+    private static final String XPATH_RECORD_RELATED_ACTION = "//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'%s')]";
+    
     public static boolean click(String itemName) {
-        WebElement element = driver.findElement(By.xpath("//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/') and contains(text(), '"+ itemName +"')]"));
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_ITEM, itemName)));
         element.click();
 
         return true;
@@ -16,7 +23,7 @@ public class TempoRecordItem extends TempoObject{
     
     public static boolean waitFor(String itemName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/') and contains(text(), '"+ itemName +"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_RECORD_ITEM, itemName))));
         } catch (Exception e) {
             return false;
         }
@@ -44,7 +51,7 @@ public class TempoRecordItem extends TempoObject{
     }
     
     public static boolean clickOnFacet(String facetName) {
-        WebElement element = driver.findElement(By.xpath("//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(text(), '"+ facetName +"')]"));
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_FACET, facetName)));
         element.click();
 
         return true;
@@ -52,7 +59,7 @@ public class TempoRecordItem extends TempoObject{
     
     public static boolean waitForFacet(String facetName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(text(), '"+ facetName +"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_RECORD_FACET, facetName))));
         } catch (Exception e) {
             return false;
         }
@@ -61,7 +68,7 @@ public class TempoRecordItem extends TempoObject{
     }
     
     public static boolean clickOnRelatedAction(String relatedActionName) {
-        WebElement element = driver.findElement(By.xpath("//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'"+relatedActionName+"')]"));
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_RELATED_ACTION, relatedActionName)));
         element.click();
 
         return true;
@@ -69,7 +76,7 @@ public class TempoRecordItem extends TempoObject{
     
     public static boolean waitForRelatedAction(String relatedActionName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'"+relatedActionName+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_RECORD_RELATED_ACTION, relatedActionName))));
         } catch (Exception e) {
             return false;
         }

@@ -13,9 +13,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.fields.TempoObject;
 
-public class TempoDatetimeField extends TempoField{
+public class TempoDatetimeField extends TempoDateField{
 
     private static final Logger LOG = Logger.getLogger(TempoDatetimeField.class);
+    protected static final String XPATH_ABSOLUTE_DATE_INPUT = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-DateInput-TextBox')]";
+    protected static final String XPATH_RELATIVE_DATE_PLACEHOLDER = ".//input[contains(@class, 'aui-DateInput-Placeholder')]";
+    protected static final String XPATH_RELATIVE_DATE_INPUT = ".//input[contains(@class, 'aui-DateInput-TextBox')]";
+    protected static final String XPATH_ABSOLUTE_TIME_INPUT = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-TimeInput-TextBox')]";
+    protected static final String XPATH_RELATIVE_TIME_PLACEHOLDER = ".//input[contains(@class, 'aui-TimeInput-Placeholder')]";
+    protected static final String XPATH_RELATIVE_TIME_INPUT = ".//input[contains(@class, 'aui-TimeInput-TextBox')]";
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -42,23 +48,25 @@ public class TempoDatetimeField extends TempoField{
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::input")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_DATE_INPUT, fieldName))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_TIME_INPUT, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName);
+            scrollIntoView(fieldLayout);
         } catch (Exception e) {
             return false;
         }
-        
         return true;
     }
     
     public static boolean contains(WebElement fieldLayout, String fieldValue) {
-        String dateString = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-TextBox')]")).getAttribute("value");
-        String timeString = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-TimeInput-TextBox')]")).getAttribute("value");
+        String dateString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).getAttribute("value");
+        String timeString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TIME_INPUT)).getAttribute("value");
         
         String datetimeString = dateString + " " + timeString;
 
         try{  
             String compareString = new SimpleDateFormat(TempoObject.DATETIME_DISPLAY_FORMAT_STRING).format(DateUtils.parseDate(datetimeString, DATETIME_FORMAT_STRING));
-            LOG.debug("DATETIME FIELD COMPARISON : Field value (" + fieldValue + ") compared to Entered value (" + compareString + ")");
+            LOG.debug("DATETIME FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");
             
             return compareString.equals(fieldValue);
         } catch (Exception e) {
@@ -70,8 +78,8 @@ public class TempoDatetimeField extends TempoField{
     private static boolean populateTempoDatetimeFieldWithDate(WebElement fieldLayout, Date d) {
         String dateValue = new SimpleDateFormat(DATE_FORMAT_STRING).format(d);
         
-        WebElement datePlaceholder = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-Placeholder')]"));
-        WebElement dateField = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-TextBox')]"));
+        WebElement datePlaceholder = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_PLACEHOLDER));
+        WebElement dateField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT));
         
         // Clear out existing values
         if (!isEmptyDatetimeDateField(fieldLayout)) {
@@ -87,11 +95,15 @@ public class TempoDatetimeField extends TempoField{
         return true;
     }
     
+    private static boolean isEmptyDatetimeDateField(WebElement fieldLayout) {
+        return !fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).isDisplayed();
+    }
+    
     private static boolean populateTempoDatetimeFieldWithTime(WebElement fieldLayout, Date d) {
         String timeValue = new SimpleDateFormat(TIME_FORMAT_STRING).format(d);
         
-        WebElement timePlaceholder = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-TimeInput-Placeholder')]"));
-        WebElement timeField = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-TimeInput-TextBox')]"));
+        WebElement timePlaceholder = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TIME_PLACEHOLDER));
+        WebElement timeField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TIME_INPUT));
         
         // Clear out existing values
         if (!isEmptyDatetimeTimeField(fieldLayout)) {
@@ -107,11 +119,7 @@ public class TempoDatetimeField extends TempoField{
         return true;
     }
     
-    private static boolean isEmptyDatetimeDateField(WebElement fieldLayout) {
-        return !fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-TextBox')]")).isDisplayed();
-    }
-    
     private static boolean isEmptyDatetimeTimeField(WebElement fieldLayout) {
-        return !fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-TimeInput-TextBox')]")).isDisplayed();
+        return !fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TIME_INPUT)).isDisplayed();
     }
 }

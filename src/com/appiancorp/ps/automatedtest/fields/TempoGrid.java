@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.fields;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,15 +8,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoGrid extends TempoField {
     
+    @SuppressWarnings("unused")
+    private static final Logger LOG = Logger.getLogger(TempoGrid.class);
+    protected static final String XPATH_NUM_GRID_CELL = "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/tbody/tr[%s]/td[%s]";
+    protected static final String XPATH_NAME_GRID_CELL = "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/tbody/tr[%s]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
+
     public static WebElement getCell(String gridName, String columnName, String rowNum) {
         // Using a columnNum
         try {
             int columnNum = Integer.parseInt(columnName);
-            return driver.findElement(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td["+columnNum+"]"));
+            return driver.findElement(By.xpath(String.format(XPATH_NUM_GRID_CELL, gridName, rowNum, columnNum)));
         } catch (Exception e) {}
         
         // Using columnName
-        return driver.findElement(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td[count(//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='"+columnName+"']/preceding-sibling::th)+1]"));
+        return driver.findElement(By.xpath(String.format(XPATH_NAME_GRID_CELL, gridName, rowNum, gridName, columnName)));
     }
     
     public static boolean populate(String gridName, String columnName, String rowNum, String[] fieldValues) {
@@ -43,12 +49,12 @@ public class TempoGrid extends TempoField {
         // Using a columnNum
         try {
             int columnNum = Integer.parseInt(columnName);
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td["+columnNum+"]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NUM_GRID_CELL, gridName, rowNum, columnNum))));
         } catch (Exception e) {}
         
         // Using a columnName
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td[count(//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='"+columnName+"']/preceding-sibling::th)+1]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NAME_GRID_CELL, gridName, rowNum, gridName, columnName))));
         } catch (Exception e) {
             return false;
         }

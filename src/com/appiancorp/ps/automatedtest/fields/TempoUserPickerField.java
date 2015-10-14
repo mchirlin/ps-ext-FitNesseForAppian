@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoUserPickerField extends TempoPickerField{
+    
     private static final Logger LOG = Logger.getLogger(TempoUserPickerField.class);
     
     public static boolean populate(String fieldName, String[] fieldValues) {
@@ -22,13 +23,13 @@ public class TempoUserPickerField extends TempoPickerField{
         waitFor(fieldName);
         
         for (int i = 0; i < fieldValues.length; i++) {    
-            groupPickerField = fieldLayout.findElement(By.xpath(".//input"));
+            groupPickerField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
             groupPickerField.click();
             groupPickerField.sendKeys(fieldValues[i]);
             
             // Wait until the suggestions populate
             waitForSuggestion(fieldValues[i]);
-            WebElement suggestion = driver.findElement(By.xpath("//p[contains(text(), '"+fieldValues[i]+"')]"));
+            WebElement suggestion = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_SUGGESTION, fieldValues[i])));
             suggestion.click();
             
             // If there are more values to add
@@ -36,7 +37,7 @@ public class TempoUserPickerField extends TempoPickerField{
                 // Wait until selected suggestion is added to the DOM
                 waitForSelection(fieldValues[i]);
                 // Wait until the next input box is added to the DOM
-                waitFor(fieldName);
+                waitForSuggestBox(fieldName);
                 fieldLayout = getFieldLayout(fieldName);
             }
         }
@@ -48,7 +49,9 @@ public class TempoUserPickerField extends TempoPickerField{
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::input[contains(@class, 'SuggestBox')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SUGGEST_BOX, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName);
+            scrollIntoView(fieldLayout);
         } catch (Exception e) {
             return false;
         }
@@ -60,15 +63,17 @@ public class TempoUserPickerField extends TempoPickerField{
 
         for (String fieldValue : fieldValues) {
             try {
-                fieldLayout.findElement(By.xpath(".//a[contains(text(), '"+fieldValue+"')]"));
+                fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_SELECTION, fieldValue)));
                 
                 continue;
             } catch (Exception e) {}
             
             waitFor(fieldName);
             fieldLayout = getFieldLayout(fieldName);
-            fieldLayout.findElement(By.xpath(".//a[contains(text(), '"+fieldValue+"')]"));
+            fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_SELECTION, fieldValue)));
         }
+        
+        LOG.debug("USER PICKER FIELD COMPARISON : Field values " + Arrays.toString(fieldValues) + " found");
         
         return true;
     }

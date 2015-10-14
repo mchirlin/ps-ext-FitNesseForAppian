@@ -1,17 +1,19 @@
 package com.appiancorp.ps.automatedtest.fields;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoAction extends TempoObject {
-
+    
+    @SuppressWarnings("unused")
+    private static final Logger LOG = Logger.getLogger(TempoAction.class);
+    private static final String XPATH_ELEMENT = "//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'%s')]";
+    
     public static boolean click(String actionName) {
-        WebElement element = driver.findElement(By.xpath("//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'"+actionName+"')]"));
-        // Have to manually scroll element into view because Tempo header covers the action link for long action lists
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, actionName)));
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -24,7 +26,9 @@ public class TempoAction extends TempoObject {
     
     public static boolean waitFor(String actionName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'"+actionName+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ELEMENT, actionName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, actionName)));
+            scrollIntoView(element);
         } catch (Exception e) {
             return false;
         }

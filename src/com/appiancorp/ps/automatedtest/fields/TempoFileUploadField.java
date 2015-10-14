@@ -11,6 +11,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TempoFileUploadField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoFileUploadField.class);
+    protected static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input";
+    protected static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'gwt-FileUpload')]";
+    protected static final String XPATH_RELATIVE_FILENAME = ".//span[contains(@class, 'filename')]/span";
+    protected static final String XPATH_RELATIVE_REMOVE = ".//a[starts-with(text(), 'Remove')]";
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -19,7 +23,7 @@ public class TempoFileUploadField extends TempoField {
     }
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
-        WebElement fileUpload = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'gwt-FileUpload')]"));
+        WebElement fileUpload = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         fileUpload.sendKeys(fieldValue);
         // Wait for file to upload
         
@@ -31,7 +35,9 @@ public class TempoFileUploadField extends TempoField {
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::input")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName);
+            scrollIntoView(fieldLayout);
         } catch (Exception e) {
             return false;
         }
@@ -45,15 +51,15 @@ public class TempoFileUploadField extends TempoField {
             return TempoField.contains(fieldLayout, fieldValue);
         } catch (Exception e) {}
         
-        String compareString = fieldLayout.findElement(By.xpath(".//span[contains(@class, 'filename')]/span")).getText();
+        String compareString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_FILENAME)).getText();
         fieldValue = Paths.get(fieldValue).getFileName().toString();
-        LOG.debug("FILE UPLOAD FIELD COMPARISON : Field value (" + fieldValue + ") compared to Entered value (" + compareString + ")");
+        LOG.debug("FILE UPLOAD FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");
         
         return compareString.contains(fieldValue);
     }
     
     public static boolean clear(WebElement fieldLayout) {
-        WebElement removeLink = fieldLayout.findElement(By.xpath(".//a[starts-with(text(), 'Remove')]"));
+        WebElement removeLink = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_REMOVE));
         removeLink.click();
         
         return true;

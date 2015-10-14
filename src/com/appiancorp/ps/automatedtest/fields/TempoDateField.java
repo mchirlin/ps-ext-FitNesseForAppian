@@ -16,6 +16,9 @@ import com.appiancorp.ps.automatedtest.fields.TempoObject;
 public class TempoDateField extends TempoField{
 
     private static final Logger LOG = Logger.getLogger(TempoDateField.class);
+    protected static final String XPATH_ABSOLUTE_DATE_INPUT = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-DateInput-TextBox')]";
+    protected static final String XPATH_RELATIVE_DATE_PLACEHOLDER = ".//input[contains(@class, 'aui-DateInput-Placeholder')]";
+    protected static final String XPATH_RELATIVE_DATE_INPUT = ".//input[contains(@class, 'aui-DateInput-TextBox')]";
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -42,7 +45,9 @@ public class TempoDateField extends TempoField{
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::input")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_DATE_INPUT, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName);
+            scrollIntoView(fieldLayout);
         } catch (Exception e) {
             return false;
         }
@@ -52,12 +57,12 @@ public class TempoDateField extends TempoField{
     
     @SuppressWarnings("deprecation")
     public static boolean contains(WebElement fieldLayout, String fieldValue) {
-        String dateString = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-TextBox')]")).getAttribute("value");
+        String dateString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).getAttribute("value");
 
         try{  
             Date compareDate = DateUtils.parseDate(dateString, DATE_FORMAT_STRING);
             Date fieldDate = DateUtils.parseDate(fieldValue, DATETIME_DISPLAY_FORMAT_STRING);
-            LOG.debug("DATE FIELD COMPARISON : Field value (" + compareDate.toString() + ") compared to Entered value (" + fieldDate.toString() + ")");
+            LOG.debug("DATE FIELD COMPARISON : Field value [" + compareDate.toString() + "] compared to Entered value [" + fieldDate.toString() + "]");
             
             return compareDate.getDate() == fieldDate.getDate() &&
                     compareDate.getMonth() == fieldDate.getMonth() &&
@@ -71,11 +76,11 @@ public class TempoDateField extends TempoField{
     private static boolean populateTempoDateFieldWithDate(WebElement fieldLayout, Date d) {
         String dateValue = new SimpleDateFormat(DATE_FORMAT_STRING).format(d);
         
-        WebElement datePlaceholder = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-Placeholder')]"));
-        WebElement dateField = fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-TextBox')]"));
+        WebElement datePlaceholder = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_PLACEHOLDER));
+        WebElement dateField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT));
         
         // Clear out existing values
-        if (!isEmptyDateDate(fieldLayout)) {
+        if (!isEmptyDate(fieldLayout)) {
             dateField.click();
             dateField.sendKeys(Keys.CONTROL + "a");
             dateField.sendKeys(Keys.DELETE);
@@ -88,7 +93,7 @@ public class TempoDateField extends TempoField{
         return true;
     }
     
-    private static boolean isEmptyDateDate(WebElement fieldLayout) {
-        return !fieldLayout.findElement(By.xpath(".//input[contains(@class, 'aui-DateInput-TextBox')]")).isDisplayed();
+    private static boolean isEmptyDate(WebElement fieldLayout) {
+        return !fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).isDisplayed();
     }
 }

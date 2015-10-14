@@ -10,6 +10,8 @@ import org.openqa.selenium.JavascriptExecutor;
 public class TempoLogin extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoLogin.class);
+    private static final String CSS_SUBMIT_BUTTON = "#loginForm > div.button_box > div.button_box_content > div.button_box_buttons > input.btn.primary";
+    private static final String CSS_AGREE_BUTTON = "#notification > div.button_box > div.button_box_content > div.button_box_buttons > input.btn.primary";
     
     public static boolean logout() {
         LOG.debug("LOGGING OUT");
@@ -40,14 +42,14 @@ public class TempoLogin extends TempoObject {
         passwordElement.sendKeys(password);
         
         /* Have to be specific as there is a hidden button for accepting terms */
-        WebElement submitButton = driver.findElement(By.cssSelector("#loginForm > div.button_box > div.button_box_content > div.button_box_buttons > input.btn.primary"));
+        WebElement submitButton = driver.findElement(By.cssSelector(CSS_SUBMIT_BUTTON));
         submitButton.click();
         
         return true;
     }
     
     public static boolean loginWithTerms(String url, String userName, String password) {
-        WebElement agreeButton = driver.findElement(By.cssSelector("#notification > div.button_box > div.button_box_content > div.button_box_buttons > input.btn.primary"));
+        WebElement agreeButton = driver.findElement(By.cssSelector(CSS_AGREE_BUTTON));
         agreeButton.click();
         
         waitForLogin(url);

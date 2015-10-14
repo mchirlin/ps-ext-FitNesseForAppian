@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.fixture;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
@@ -25,10 +26,11 @@ import com.appiancorp.ps.automatedtest.fields.TempoTask;
 import com.appiancorp.ps.automatedtest.fields.TempoTextField;
 import com.appiancorp.ps.automatedtest.fields.TempoUserPickerField;
 
-import fitlibrary.exception.FitLibraryException;
-
 public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBaseFixture {
-	    
+	
+    @SuppressWarnings("unused")
+    private static final Logger LOG = Logger.getLogger(AppianFitnesseProcessTempoFixture.class);
+    
 	public AppianFitnesseProcessTempoFixture() {
 		super();
 	}
@@ -216,7 +218,6 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	    if(!TempoField.waitFor(fieldName)) {
             throw new MissingObjectException("Field", fieldName);
         }
-	    
 	    TempoField.populate(fieldName, fieldValues);
 	    int attempt = 0;
 	    
@@ -306,7 +307,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
     }
     
     // Datetime Field
-    public boolean populateTempoDatetimeFieldWithDateAndTime(String fieldName, String fieldValue) {
+    public boolean populateTempoDatetimeFieldWith(String fieldName, String fieldValue) {
         if(!TempoDatetimeField.waitFor(fieldName)) {
             throw new MissingObjectException("Field", fieldName);
         }
