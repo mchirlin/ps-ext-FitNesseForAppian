@@ -3,6 +3,5 @@
 '''Set up Appian test'''
 | setup selenium web driver with browser | FIREFOX |
 | set appian url to | https://apacdemo.appiancloud.com/suite |
-| set data source name to | jdbc/AppianBusinessDS |
 | set start datetime |
-| set date format string to | dd/M/yyyy |
+| set date format string to | dd/MM/yyyy |
