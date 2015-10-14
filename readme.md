@@ -30,17 +30,17 @@ To update the repository, please create a branch from `master`, implement/push y
 ## Installation
 
 1. Download [AutomatedTesting.zip](https://github.com/appianps/ps-ext-AutomatedTestFramework/releases/download/v0.1-beta.1/AutomatedTesting.zip).
-1. Unzip contents of AutomatedTesting.zip into TESTING_HOME, e.g. ```C:\AutomatedTesting```
-1. In a command prompt navigate to ```TESTING_HOME```.
+1. Unzip contents of AutomatedTesting.zip into *TESTING_HOME*, e.g. ```C:\AutomatedTesting```
+1. In a command prompt navigate to *TESTING_HOME*.
 1. Run ```start.bat``` to install FitNesse.
  * This will also start FitNesse, to stop type ctrl+C.
 
-**NOTE:** if you choose a different location for TESTING_HOME than ```C:\AutomatedTesting``` then you must update the classpath variables in the examples to refer to the correct locations.
+**NOTE:** if you choose a different location for *TESTING_HOME* than ```C:\AutomatedTesting``` then you must update the classpath variables in the examples to refer to the correct locations.
 
 ## Running Your First FitNesse Test
 
 1. Start FitNesse if it isn't already running:
- 1. In command prompt navigate to ```TESTING_HOME```.
+ 1. In command prompt navigate to *TESTING_HOME*.
  1. Run start.bat.
 1. Navigate to ```http://localhost:8980/LoginTest```.
 1. Click **Test**.
@@ -93,6 +93,7 @@ To update the repository, please create a branch from `master`, implement/push y
 * | set data source name to | *DATA_SOURCE_NAME* |
 * | set appian url to | *APPIAN_URL* |
 * | set start datetime | - will be used as relative datetime for date/time fields
+* | set timeout seconds to | *TIMEOUT_SECONDS* |
 * | take screenshot | *FILE_PATH* |
 * | login with username | *USERNAME* | with password | *PASSWORD* | - uses set appian url
 * | wait for | *RELATIVE_PERIOD*, e.g. +1 days, +1 hours | - waits for relative amount of time
