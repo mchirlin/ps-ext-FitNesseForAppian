@@ -11,7 +11,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -21,9 +20,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.appiancorp.ps.automatedtest.fields.TempoLogin;
 import com.appiancorp.ps.automatedtest.fields.TempoObject;
 
@@ -48,7 +44,7 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	public String dataSourceName = null;
 	public String masterWindowHandle = null;
 	public WebDriver driver = null;
-	public int timeOutSeconds = 5;
+	public int timeoutSeconds = 5;
 	    
 	Properties prop = new Properties();
 	
@@ -56,7 +52,7 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 		super();
 		loadProperties();
 		
-		TempoObject.setTimeoutSeconds(timeOutSeconds);
+		TempoObject.setTimeoutSeconds(timeoutSeconds);
 		TempoObject.setStartDatetime(new Date());
 	}
 	
@@ -121,8 +117,8 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
     }
 	
 	public boolean setTimeoutSecondsTo(String ts) {
-        this.timeOutSeconds = Integer.valueOf(ts);
-        TempoObject.setTimeoutSeconds(this.timeOutSeconds);
+        this.timeoutSeconds = Integer.valueOf(ts);
+        TempoObject.setTimeoutSeconds(this.timeoutSeconds);
         
         return true;
     }
@@ -204,14 +200,7 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
     }
 	
 	public boolean waitForWorking() {
-	    try {
-	        (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'appian-indicator-message')]")));
-	        (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'appian-indicator-message')]")));
-	    } catch (Exception e) {
-	        return false;
-	    }
-	    
-	    return true;
+	    return TempoObject.waitForWorking();
 	}
 	
 	public boolean waitUntil(String datetime) {

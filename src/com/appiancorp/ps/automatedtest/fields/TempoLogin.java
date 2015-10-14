@@ -20,7 +20,7 @@ public class TempoLogin extends TempoObject {
     
     public static boolean waitForLogout() {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'main_nav_bar')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'main_nav_bar')]")));
         } catch (Exception e) {
             return false;
         }
@@ -47,7 +47,6 @@ public class TempoLogin extends TempoObject {
     }
     
     public static boolean loginWithTerms(String url, String userName, String password) {
-        /* Have to be specific as there is a hidden button for accepting terms */
         WebElement agreeButton = driver.findElement(By.cssSelector("#notification > div.button_box > div.button_box_content > div.button_box_buttons > input.btn.primary"));
         agreeButton.click();
         
@@ -62,7 +61,7 @@ public class TempoLogin extends TempoObject {
         driver.navigate().refresh();
         
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.id("loginForm")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.id("loginForm")));
         } catch (Exception e) {
             return false;
         }
@@ -75,7 +74,7 @@ public class TempoLogin extends TempoObject {
         driver.navigate().refresh();
         
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.id("notification")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.id("notification")));
         } catch (Exception e) {
             return false;
         }

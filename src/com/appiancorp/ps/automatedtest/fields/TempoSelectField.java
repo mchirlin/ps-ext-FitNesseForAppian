@@ -30,7 +30,7 @@ public class TempoSelectField extends TempoField {
     
     public static boolean waitFor(WebDriver driver, String fieldName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::div/select")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::div/select")));
         } catch (Exception e) {
             return false;
         }

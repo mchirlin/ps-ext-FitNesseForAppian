@@ -43,12 +43,12 @@ public class TempoGrid extends TempoField {
         // Using a columnNum
         try {
             int columnNum = Integer.parseInt(columnName);
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td["+columnNum+"]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td["+columnNum+"]")));
         } catch (Exception e) {}
         
         // Using a columnName
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td[count(//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='"+columnName+"']/preceding-sibling::th)+1]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/tbody/tr["+rowNum+"]/td[count(//span[contains(text(), '"+gridName+"')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='"+columnName+"']/preceding-sibling::th)+1]")));
         } catch (Exception e) {
             return false;
         }

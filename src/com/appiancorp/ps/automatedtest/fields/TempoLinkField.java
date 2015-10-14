@@ -16,7 +16,7 @@ public class TempoLinkField extends TempoField {
     
     public static boolean waitFor(String linkName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), '"+linkName+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), '"+linkName+"')]")));
         } catch (Exception e) {
             return false;
         }

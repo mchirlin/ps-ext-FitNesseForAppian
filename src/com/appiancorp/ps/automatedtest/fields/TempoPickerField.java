@@ -36,7 +36,7 @@ public class TempoPickerField extends TempoField {
     
     protected static boolean waitForSuggestion(String fieldValue) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(), '"+fieldValue+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(), '"+fieldValue+"')]")));
         } catch (Exception e) {
             return false;
         }
@@ -46,7 +46,7 @@ public class TempoPickerField extends TempoField {
     
     protected static boolean waitForSelection(String fieldValue) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), '"+fieldValue+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(), '"+fieldValue+"')]")));
         } catch (Exception e) {
             return false;
         }

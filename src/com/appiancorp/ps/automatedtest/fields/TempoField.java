@@ -68,7 +68,7 @@ public class TempoField extends TempoObject {
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'"+fieldName+"')] | //span[contains(text(), '"+fieldName+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'"+fieldName+"')] | //span[contains(text(), '"+fieldName+"')]")));
         } catch (Exception e) {
             return false;
         }

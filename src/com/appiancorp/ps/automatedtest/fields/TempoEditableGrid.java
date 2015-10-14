@@ -20,7 +20,7 @@ public class TempoEditableGrid extends TempoField {
     }
     
     public static boolean populate(String gridName, String columnName, String rowNum, String[] fieldValues) {
-        WebElement fieldLayout = getFieldLayout(driver, timeOutSeconds, gridName, columnName, rowNum);
+        WebElement fieldLayout = getFieldLayout(driver, timeoutSeconds, gridName, columnName, rowNum);
         
         // TODO Handle group picker in a grid
         return populate(fieldLayout, null, fieldValues);

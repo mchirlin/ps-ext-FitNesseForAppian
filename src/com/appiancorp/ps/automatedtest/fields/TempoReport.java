@@ -16,7 +16,7 @@ public class TempoReport extends TempoObject{
     
     public static boolean waitFor(String reportName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'" + reportName +"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'" + reportName +"')]")));
         } catch (Exception e) {
             return false;
         }

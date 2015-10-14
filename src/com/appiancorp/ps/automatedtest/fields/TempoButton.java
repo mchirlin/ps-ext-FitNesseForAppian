@@ -23,7 +23,7 @@ public class TempoButton extends TempoField {
     
     public static boolean waitFor(String buttonName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), '"+buttonName+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), '"+buttonName+"')]")));
         } catch (Exception e) {
             return false;
         }

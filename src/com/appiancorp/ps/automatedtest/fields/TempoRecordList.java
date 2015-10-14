@@ -16,7 +16,7 @@ public class TempoRecordList extends TempoObject{
     
     public static boolean waitFor(String listName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/view/all') and contains(text(), '"+ listName +"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/view/all') and contains(text(), '"+ listName +"')]")));
         } catch (Exception e) {
             return false;
         }
@@ -33,7 +33,7 @@ public class TempoRecordList extends TempoObject{
     
     public static boolean waitForFacetOption(String facetName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ol[@class='facetgroup']/descendant::a[contains(text(),'"+facetName+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ol[@class='facetgroup']/descendant::a[contains(text(),'"+facetName+"')]")));
         } catch (Exception e) {
             return false;
         }

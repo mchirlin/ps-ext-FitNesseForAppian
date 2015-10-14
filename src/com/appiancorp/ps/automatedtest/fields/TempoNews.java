@@ -14,7 +14,7 @@ public class TempoNews extends TempoObject{
     
     public static boolean waitFor(String newsText) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]")));
         } catch (Exception e) {
             return false;
         }
@@ -43,7 +43,7 @@ public class TempoNews extends TempoObject{
     
     public static boolean waitForMoreInfo(String newsText) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(), 'More Info') or contains(text(), 'Hide Info')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(), 'More Info') or contains(text(), 'Hide Info')]")));
         } catch (Exception e) {
             return false;
         }
@@ -64,9 +64,9 @@ public class TempoNews extends TempoObject{
         LOG.debug("LABEL : ("+label+") and VALUE (" + value +")");
         try {
             // With label
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::table/descendant::td[contains(text(), '"+label+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::table/descendant::td[contains(text(), '"+label+"')]")));
             // With value
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::table/descendant::td[contains(text(), '"+value+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::table/descendant::td[contains(text(), '"+value+"')]")));
         } catch (Exception e) {
             LOG.debug(e.getMessage());
             return false;
@@ -105,7 +105,7 @@ public class TempoNews extends TempoObject{
     public static boolean waitForTag(String newsText, String newsTag) {
         try {
             //Tagged with
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/parent::div/descendant::a[contains(text(), '"+newsTag+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/parent::div/descendant::a[contains(text(), '"+newsTag+"')]")));
         } catch (Exception e) {
             return false;
         }
@@ -116,7 +116,7 @@ public class TempoNews extends TempoObject{
     public static boolean waitForComment(String newsText, String newsComment) {
         try {
             //Tagged with
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/parent::div/descendant::div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsComment+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/parent::div/descendant::div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsComment+"')]")));
         } catch (Exception e) {
             return false;
         }
@@ -146,7 +146,7 @@ public class TempoNews extends TempoObject{
     
     public static boolean waitForPostedAt(String newsText, String newsPostedAt) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/parent::div/descendant::a[contains(text(), '"+newsPostedAt+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/parent::div/descendant::a[contains(text(), '"+newsPostedAt+"')]")));
         } catch (Exception e) {
             return false;
         }

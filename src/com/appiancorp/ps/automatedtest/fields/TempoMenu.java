@@ -16,7 +16,7 @@ public class TempoMenu extends TempoObject {
     
     public static boolean waitFor(String tempoMenu) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@class, 'appian-menu-item') and contains(text(),'" + tempoMenu +"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@class, 'appian-menu-item') and contains(text(),'" + tempoMenu +"')]")));
         } catch (Exception e) {
             return false;
         }

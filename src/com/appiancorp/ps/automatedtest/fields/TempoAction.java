@@ -24,7 +24,7 @@ public class TempoAction extends TempoObject {
     
     public static boolean waitFor(String actionName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'"+actionName+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'"+actionName+"')]")));
         } catch (Exception e) {
             return false;
         }
@@ -34,7 +34,7 @@ public class TempoAction extends TempoObject {
     
     public static boolean isCompleted() {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.textToBePresentInElementLocated(By.id("inlineConfirmMessage"), "Action completed successfully"));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.textToBePresentInElementLocated(By.id("inlineConfirmMessage"), "Action completed successfully"));
         } catch (Exception e) {
             return false;
         }

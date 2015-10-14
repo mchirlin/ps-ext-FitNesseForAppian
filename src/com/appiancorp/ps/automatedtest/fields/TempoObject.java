@@ -21,9 +21,9 @@ public class TempoObject {
     protected static WebDriver driver;
     protected static String masterWindowHandle;
     protected static String url;
-    protected static int timeOutSeconds;
+    protected static int timeoutSeconds;
     protected static Date startDatetime;
-    protected static int refreshTimes = 10;
+    protected static int refreshTimes = 5;
     
     public static String DATE_FORMAT_STRING = "M/d/yyyy";
     public static String TIME_FORMAT_STRING = "h:mm aaa";
@@ -87,7 +87,7 @@ public class TempoObject {
             }
             driver.switchTo().window(popupHandle);
             
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//pre")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//pre")));
             returnVal = driver.findElement(By.xpath("//pre")).getText();
             
             LOG.debug("'" + expression + "' equals '" + returnVal + "'");
@@ -131,10 +131,10 @@ public class TempoObject {
     }
     
     public static void setTimeoutSeconds(int t) {
-        timeOutSeconds = t;
+        timeoutSeconds = t;
     }
-    public static int getTimeOutSeconds() {
-        return timeOutSeconds;
+    public static int getTimeoutSeconds() {
+        return timeoutSeconds;
     }  
     
     public static void setStartDatetime(Date s) {

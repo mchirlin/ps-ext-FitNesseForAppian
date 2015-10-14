@@ -49,7 +49,7 @@ public class TempoUserPickerField extends TempoPickerField{
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::input[contains(@class, 'SuggestBox')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[contains(text(),'"+fieldName+"')]/parent::span/following-sibling::div/descendant::input[contains(@class, 'SuggestBox')]")));
         } catch (Exception e) {
             return false;
         }

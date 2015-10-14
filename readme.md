@@ -21,6 +21,12 @@ If your team cannot directly enhance the framework, please make sure to contact 
 
 To update the repository, please create a branch from `master`, implement/push your code and create a pull request. Tag the Appian CoE or send us a notification and we will review/merge your work.
 
+## Prerequisities
+
+* [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+* [Java
+
+
 ## Installation
 
 1. Download [AutomatedTesting.zip](https://github.com/appianps/ps-ext-AutomatedTestFramework/releases/download/v0.1-beta.1/AutomatedTesting.zip).

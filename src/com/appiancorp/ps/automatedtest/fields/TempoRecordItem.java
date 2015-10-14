@@ -16,7 +16,7 @@ public class TempoRecordItem extends TempoObject{
     
     public static boolean waitFor(String itemName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/') and contains(text(), '"+ itemName +"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/') and contains(text(), '"+ itemName +"')]")));
         } catch (Exception e) {
             return false;
         }
@@ -52,7 +52,7 @@ public class TempoRecordItem extends TempoObject{
     
     public static boolean waitForFacet(String facetName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(text(), '"+ facetName +"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(text(), '"+ facetName +"')]")));
         } catch (Exception e) {
             return false;
         }
@@ -69,7 +69,7 @@ public class TempoRecordItem extends TempoObject{
     
     public static boolean waitForRelatedAction(String relatedActionName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'"+relatedActionName+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'"+relatedActionName+"')]")));
         } catch (Exception e) {
             return false;
         }

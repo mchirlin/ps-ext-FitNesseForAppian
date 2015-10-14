@@ -25,7 +25,7 @@ public class TempoTask extends TempoObject{
     
     public static boolean waitFor(String taskName) {
         try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'" + taskName +"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'" + taskName +"')]")));
         } catch (Exception e) {
             return false;
         }
