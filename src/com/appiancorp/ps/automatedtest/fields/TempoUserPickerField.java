@@ -29,13 +29,12 @@ public class TempoUserPickerField extends TempoPickerField{
             // Wait until the suggestions populate
             waitForSuggestion(fieldValues[i]);
             WebElement suggestion = driver.findElement(By.xpath("//p[contains(text(), '"+fieldValues[i]+"')]"));
-            String suggestionTitle = suggestion.findElement(By.xpath("./preceding-sibling::p")).getText();
             suggestion.click();
             
             // If there are more values to add
             if (i < fieldValues.length - 1) {
                 // Wait until selected suggestion is added to the DOM
-                waitForSelection(suggestionTitle);
+                waitForSelection(fieldValues[i]);
                 // Wait until the next input box is added to the DOM
                 waitFor(fieldName);
                 fieldLayout = getFieldLayout(fieldName);

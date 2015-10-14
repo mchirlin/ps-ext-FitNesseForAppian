@@ -4,7 +4,7 @@
 | click on tempo action | Meeting |
 | populate tempo field | Subject | with | Meeting Subject |
 | populate tempo field | Description | with | Meeting Description |
-| populate tempo field | Attendee(s) | with | user.two,user.three |
+| populate tempo field | Attendee(s) | with | User Two,User Three |
 | populate tempo field | Send Meeting Reminder(s) | with | Yes |
 | populate tempo field | Start Time | with | +1 day |
 | populate tempo field | Duration (in minutes) | with | 30 |
@@ -17,14 +17,14 @@
 
 '''Tempo 1'''
 | click on tempo menu | News |
-| verify news feed containing text | Meeting Subject | is present |
-| verify news feed containing text | Meeting Subject | tagged with | Meeting Subject | is present |
+| verify tempo news feed containing text | Meeting Subject | is present |
+| verify tempo news feed containing text | Meeting Subject | tagged with | Meeting Subject | is present |
 | toggle more info for news feed containing text | Meeting Subject |
-| verify news feed containing text | Meeting Subject | and more info with label | Subject | and value | Meeting Subject | is present |
-| verify news feed containing text | Meeting Subject | and more info with label | Location | and value | Meeting Location | is present |
-| verify news feed containing text | Meeting Subject | and more info with label | Duration | and value | 15 | is present |
-| verify news feed containing text | Meeting Subject | and more info with label | Description | and value | Meeting Description | is present |
-| verify news feed containing text | Meeting Subject | and more info with label | Attendees | and value | User Two, User Three | is present |
+| verify tempo news feed containing text | Meeting Subject | and more info with label | Subject | and value | Meeting Subject | is present |
+| verify tempo news feed containing text | Meeting Subject | and more info with label | Location | and value | Meeting Location | is present |
+| verify tempo news feed containing text | Meeting Subject | and more info with label | Duration | and value | 15 | is present |
+| verify tempo news feed containing text | Meeting Subject | and more info with label | Description | and value | Meeting Description | is present |
+| verify tempo news feed containing text | Meeting Subject | and more info with label | Attendees | and value | User Two, User Three | is present |
 
 '''Record List'''
 | click on tempo menu | Records |
@@ -46,10 +46,10 @@
 '''Tempo Security 1'''
 | login with username | user.two  | and password | a |
 | click on tempo menu | News |
-| verify news feed containing text | Meeting Subject | is present |
+| verify tempo news feed containing text | Meeting Subject | is present |
 | logout from tempo |
 | login with username | user.four  | and password | a |
-| verify news feed containing text | Meeting Subject | is not present |
+| verify tempo news feed containing text | Meeting Subject | is not present |
 | logout from tempo |
 
 '''Record List Security 1'''
@@ -80,7 +80,7 @@
 | click on tempo button | Submit |
 | verify tempo action completed |
 | click on tempo record item | News | facet |
-| verify news feed containing text | Meeting Subject | commented with | Meeting Note | is present |
+| verify tempo news feed containing text | Meeting Subject | commented with | Meeting Note | is present |
 | logout from tempo |
 
 '''Edit Meeting 1'''

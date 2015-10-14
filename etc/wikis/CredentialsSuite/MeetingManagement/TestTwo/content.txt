@@ -39,9 +39,9 @@
 '''Reminders'''
 | wait until | +3 minutes |
 | login with username | user.two | and password | a |
-| verify news feed containing text | Meeting 2 Reminder | is present |
+| verify tempo news feed containing text | Meeting 2 Reminder | is present |
 | toggle more info for news feed containing text | Meeting 2 Reminder |
-| verify news feed containing text | Meeting 2 Reminder | and more info with label | Start Date/Time | and value | +5 minutes | is present |
+| verify tempo news feed containing text | Meeting 2 Reminder | and more info with label | Start Date/Time | and value | +5 minutes | is present |
 
 '''Meeting Check in 1'''
 | click on tempo menu | Tasks |
@@ -96,8 +96,8 @@
 | wait until | +10 minutes |
 | click on tempo menu | News |
 | toggle more info for news feed containing text | Meeting 2 Subject |
-| verify news feed containing text | Meeting 2 Subject | and more info with label | Checked In Attendees | and value | User Two | is present |
-| verify news feed containing text | Meeting 2 Subject | and more info with label | Not Checked In Attendees | and value | User Three | is present |
+| verify tempo news feed containing text | Meeting 2 Subject | and more info with label | Checked In Attendees | and value | User Two | is present |
+| verify tempo news feed containing text | Meeting 2 Subject | and more info with label | Not Checked In Attendees | and value | User Three | is present |
 
 '''Meeting Summary'''
 | click on tempo menu | Tasks |
@@ -106,7 +106,7 @@
 | populate tempo field | Post Meeting Summary | with | Post Meeting 2 Summary |
 | click on tempo button | Submit |
 | click on tempo menu | News |
-| verify news feed containing text | Meeting 2 Subject | commented with | Post Meeting 2 Summary | is present |
+| verify tempo news feed containing text | Meeting 2 Subject | commented with | Post Meeting 2 Summary | is present |
 | logout from tempo |
 
 '''Meeting Feedback'''
