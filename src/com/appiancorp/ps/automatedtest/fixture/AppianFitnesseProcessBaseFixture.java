@@ -40,24 +40,24 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
     
     private static final Logger LOG = Logger.getLogger(AppianFitnesseProcessBaseFixture.class);
     
-	String processId = null;
-	String url = null;
-	String dateFormatString = null;
-	String timeFormatString = null;
-	Date startDatetime = null;
-	String dataSourceName = null;
-	String masterWindowHandle = null;
-	
-	Properties prop = new Properties();
-	
+	public String processId = null;
+	public String url = null;
+	public String dateFormatString = null;
+	public String timeFormatString = null;
+	public Date startDatetime = null;
+	public String dataSourceName = null;
+	public String masterWindowHandle = null;
 	public WebDriver driver = null;
 	public int timeOutSeconds = 5;
+	    
+	Properties prop = new Properties();
 	
 	public AppianFitnesseProcessBaseFixture() {
 		super();
 		loadProperties();
 		
 		TempoObject.setTimeoutSeconds(timeOutSeconds);
+		TempoObject.setStartDatetime(new Date());
 	}
 	
 	public boolean setupSeleniumWebDriverWithBrowser(String browser) {
@@ -102,6 +102,7 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	
 	public boolean setDataSourceNameTo(String dataSourceName) {
 		this.dataSourceName = dataSourceName;
+		
 		return true;
 	}
 	
@@ -114,7 +115,14 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 
 	public boolean setTimeFormatStringTo(String tf) {
         this.timeFormatString = tf;
-        TempoObject.setDateFormatString(this.timeFormatString);
+        TempoObject.setTimeFormatString(this.timeFormatString);
+        
+        return true;
+    }
+	
+	public boolean setTimeoutSecondsTo(String ts) {
+        this.timeOutSeconds = Integer.valueOf(ts);
+        TempoObject.setTimeoutSeconds(this.timeOutSeconds);
         
         return true;
     }
