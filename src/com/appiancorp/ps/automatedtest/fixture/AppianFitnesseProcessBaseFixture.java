@@ -149,19 +149,28 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
     }
 	
 	public boolean loginIntoWithUsernameAndPassword(String url, String userName, String password) {
-		if (!TempoLogin.waitForLogin(url)) return false;
+		TempoLogin.navigateToLoginPage(url);
+	    if (!TempoLogin.waitForLogin()) {
+		    throw new MissingObjectException("Login");
+		}
 	    
 		return TempoLogin.login(url, userName, password);
 	}
 	
 	public boolean loginWithUsernameAndPassword(String userName, String password) {
-        if (!TempoLogin.waitForLogin(url)) return false;
+	    TempoLogin.navigateToLoginPage(url);
+        if (!TempoLogin.waitForLogin()) {
+            throw new MissingObjectException("Login");
+        }
         
         return TempoLogin.login(url, userName, password);
     }
 	
 	public boolean loginWithTermsWithUsernameAndPassword(String userName, String password) {
-        if (!TempoLogin.waitForTerms(url)) return false;
+	    TempoLogin.navigateToLoginPage(url);
+        if (!TempoLogin.waitForTerms()) {
+            throw new MissingObjectException("Login Terms");
+        }
         
         return TempoLogin.loginWithTerms(url, userName, password);
     }

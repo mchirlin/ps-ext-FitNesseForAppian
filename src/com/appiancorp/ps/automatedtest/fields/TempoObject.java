@@ -166,8 +166,12 @@ public class TempoObject {
         return true;
     }
     
-    public static void scrollIntoView(WebElement webElement) {
+    public static void scrollIntoView(WebElement webElement, Boolean alignToTop ) {
         // Have to manually scroll element into view because Tempo header covers the action link for long action lists
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", webElement);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView("+alignToTop.toString()+");", webElement);
+    }
+    
+    public static void scrollIntoView(WebElement webElement) {
+        scrollIntoView(webElement, false);
     }
 }

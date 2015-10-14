@@ -10,8 +10,8 @@ import org.openqa.selenium.JavascriptExecutor;
 public class TempoLogin extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoLogin.class);
-    private static final String CSS_SUBMIT_BUTTON = "#loginForm > div.button_box > div.button_box_content > div.button_box_buttons > input.btn.primary";
-    private static final String CSS_AGREE_BUTTON = "#notification > div.button_box > div.button_box_content > div.button_box_buttons > input.btn.primary";
+    private static final String XPATH_SUBMIT_BUTTON = "//form[@id = 'loginForm']/descendant::input[contains(@class, 'btn')]";
+    private static final String XPATH_AGREE_BUTTON = "//form[@id = 'notification']/descendant::input[contains(@class, 'btn')]";
     
     public static boolean logout() {
         LOG.debug("LOGGING OUT");
@@ -42,28 +42,28 @@ public class TempoLogin extends TempoObject {
         passwordElement.sendKeys(password);
         
         /* Have to be specific as there is a hidden button for accepting terms */
-        WebElement submitButton = driver.findElement(By.cssSelector(CSS_SUBMIT_BUTTON));
+        WebElement submitButton = driver.findElement(By.xpath(XPATH_SUBMIT_BUTTON));
         submitButton.click();
         
         return true;
     }
     
     public static boolean loginWithTerms(String url, String userName, String password) {
-        WebElement agreeButton = driver.findElement(By.cssSelector(CSS_AGREE_BUTTON));
+        WebElement agreeButton = driver.findElement(By.xpath(XPATH_AGREE_BUTTON));
         agreeButton.click();
         
-        waitForLogin(url);
+        waitForLogin();
         login(url, userName, password);
         
         return true;
     }
     
-    public static boolean waitForLogin(String url) {
-        driver.get(url);
-        driver.navigate().refresh();
-        
+    public static boolean waitForLogin() {        
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.id("loginForm")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_SUBMIT_BUTTON)));
+            WebElement submitButton = driver.findElement(By.xpath(XPATH_SUBMIT_BUTTON));
+            // Needs to align the button to top to prevent it by being covered by the copyright div
+            scrollIntoView(submitButton, true);
         } catch (Exception e) {
             return false;
         }
@@ -71,16 +71,20 @@ public class TempoLogin extends TempoObject {
         return true;
     }
     
-    public static boolean waitForTerms(String url) {
-        driver.get(url);
-        driver.navigate().refresh();
-        
+    public static boolean waitForTerms() {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.id("notification")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_AGREE_BUTTON)));
+            WebElement agreeButton = driver.findElement(By.xpath(XPATH_AGREE_BUTTON));
+            // Needs to align the button to top to prevent it by being covered by the copyright div
+            scrollIntoView(agreeButton, true);
         } catch (Exception e) {
             return false;
         }
         
         return true;
+    }
+    
+    public static void navigateToLoginPage(String url) {
+        driver.get(url);
     }
 }
