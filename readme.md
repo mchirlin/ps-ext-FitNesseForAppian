@@ -24,7 +24,7 @@ To update the repository, please create a branch from `master`, implement/push y
 ## Prerequisities
 
 * [Firefox](https://www.mozilla.org/en-US/firefox/new/)
-* [Java
+* Java
 
 
 ## Installation
