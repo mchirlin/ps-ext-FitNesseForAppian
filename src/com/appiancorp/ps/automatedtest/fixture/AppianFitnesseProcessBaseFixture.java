@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Set;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
@@ -20,8 +21,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import com.appiancorp.ps.automatedtest.fields.TempoLogin;
-import com.appiancorp.ps.automatedtest.fields.TempoObject;
+
+import com.appiancorp.ps.automatedtest.object.TempoLogin;
+import com.appiancorp.ps.automatedtest.object.TempoObject;
 
 import fitlibrary.DoFixture;
 

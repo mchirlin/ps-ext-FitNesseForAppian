@@ -1,4 +1,4 @@
-package com.appiancorp.ps.automatedtest.fields;
+package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -15,8 +15,6 @@ public class TempoRecordList extends TempoObject{
 
     public static boolean click(String listName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_LIST, listName)));
-        LOG.debug("Found Customers");
-        LOG.debug(element.toString());
         element.click();
 
         return true;

@@ -1,4 +1,4 @@
-package com.appiancorp.ps.automatedtest.fields;
+package com.appiancorp.ps.automatedtest.object;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.fields.TempoObject;
+import com.appiancorp.ps.automatedtest.object.TempoObject;
 
 public class TempoDatetimeField extends TempoDateField{
 

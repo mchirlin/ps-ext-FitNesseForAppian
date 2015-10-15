@@ -1,4 +1,6 @@
-package com.appiancorp.ps.automatedtest.fields;
+package com.appiancorp.ps.automatedtest.object;
+
+import java.nio.file.Paths;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -6,11 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TempoTextField extends TempoField {
-    
-    private static final Logger LOG = Logger.getLogger(TempoTextField.class);
-    protected static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/div/input";
-    protected static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'aui-TextInput')]";
+public class TempoFileUploadField extends TempoField {
+
+    private static final Logger LOG = Logger.getLogger(TempoFileUploadField.class);
+    protected static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input";
+    protected static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'gwt-FileUpload')]";
+    protected static final String XPATH_RELATIVE_FILENAME = ".//span[contains(@class, 'filename')]/span";
+    protected static final String XPATH_RELATIVE_REMOVE = ".//a[starts-with(text(), 'Remove')]";
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -19,12 +23,13 @@ public class TempoTextField extends TempoField {
     }
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
-        WebElement textField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
-        textField.clear();
-        textField.sendKeys(fieldValue);
+        WebElement fileUpload = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        fileUpload.sendKeys(fieldValue);
+        // Wait for file to upload
         
-        LOG.debug("TEXT FIELD POPULATION : " + fieldValue);
+        waitForWorking();
         
+        LOG.debug("FILE UPLOAD FIELD POPULATION : " + fieldValue);
         return true;
     }
     
@@ -46,16 +51,16 @@ public class TempoTextField extends TempoField {
             return TempoField.contains(fieldLayout, fieldValue);
         } catch (Exception e) {}
         
-        // For editable
-        String compareString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT)).getAttribute("value");
-        LOG.debug("TEXT FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");
+        String compareString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_FILENAME)).getText();
+        fieldValue = Paths.get(fieldValue).getFileName().toString();
+        LOG.debug("FILE UPLOAD FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");
         
         return compareString.contains(fieldValue);
     }
     
     public static boolean clear(WebElement fieldLayout) {
-        WebElement textField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
-        textField.clear();
+        WebElement removeLink = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_REMOVE));
+        removeLink.click();
         
         return true;
     }

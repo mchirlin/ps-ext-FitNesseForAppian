@@ -1,4 +1,4 @@
-package com.appiancorp.ps.automatedtest.fields;
+package com.appiancorp.ps.automatedtest.object;
 
 import java.util.Arrays;
 

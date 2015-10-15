@@ -1,4 +1,4 @@
-package com.appiancorp.ps.automatedtest.fields;
+package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -6,11 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TempoRadioField extends TempoField {
-
-    private static final Logger LOG = Logger.getLogger(TempoUserPickerField.class);
-    protected static final String XPATH_ABSOLUTE_LABEL = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input";
-    protected static final String XPATH_RELATIVE_INPUT = ".//label[contains(text(), '%s')]/preceding-sibling::input";
+public class TempoTextField extends TempoField {
+    
+    private static final Logger LOG = Logger.getLogger(TempoTextField.class);
+    protected static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/div/input";
+    protected static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'aui-TextInput')]";
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -19,10 +19,11 @@ public class TempoRadioField extends TempoField {
     }
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
-        WebElement radioField = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_INPUT, fieldValue)));
-        radioField.click();
+        WebElement textField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        textField.clear();
+        textField.sendKeys(fieldValue);
         
-        LOG.debug("RADIO FIELD POPULATION : " + fieldValue);
+        LOG.debug("TEXT FIELD POPULATION : " + fieldValue);
         
         return true;
     }
@@ -46,9 +47,16 @@ public class TempoRadioField extends TempoField {
         } catch (Exception e) {}
         
         // For editable
-        String compareString = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_INPUT, fieldValue))).getAttribute("checked");
-        LOG.debug("RADIO FIELD COMPARISON : Field value [" + fieldValue + "] is checked [" + compareString + "]");
+        String compareString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT)).getAttribute("value");
+        LOG.debug("TEXT FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");
         
-        return compareString.equals("true");
+        return compareString.contains(fieldValue);
+    }
+    
+    public static boolean clear(WebElement fieldLayout) {
+        WebElement textField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        textField.clear();
+        
+        return true;
     }
 }

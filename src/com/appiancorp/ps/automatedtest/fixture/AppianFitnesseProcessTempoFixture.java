@@ -4,27 +4,27 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
-import com.appiancorp.ps.automatedtest.fields.TempoAction;
-import com.appiancorp.ps.automatedtest.fields.TempoButton;
-import com.appiancorp.ps.automatedtest.fields.TempoDateField;
-import com.appiancorp.ps.automatedtest.fields.TempoDatetimeField;
-import com.appiancorp.ps.automatedtest.fields.TempoFileUploadField;
-import com.appiancorp.ps.automatedtest.fields.TempoGrid;
-import com.appiancorp.ps.automatedtest.fields.TempoField;
-import com.appiancorp.ps.automatedtest.fields.TempoIntegerField;
-import com.appiancorp.ps.automatedtest.fields.TempoLinkField;
-import com.appiancorp.ps.automatedtest.fields.TempoLogin;
-import com.appiancorp.ps.automatedtest.fields.TempoMenu;
-import com.appiancorp.ps.automatedtest.fields.TempoNews;
-import com.appiancorp.ps.automatedtest.fields.TempoParagraphField;
-import com.appiancorp.ps.automatedtest.fields.TempoRadioField;
-import com.appiancorp.ps.automatedtest.fields.TempoRecordItem;
-import com.appiancorp.ps.automatedtest.fields.TempoRecordList;
-import com.appiancorp.ps.automatedtest.fields.TempoReport;
-import com.appiancorp.ps.automatedtest.fields.TempoSelectField;
-import com.appiancorp.ps.automatedtest.fields.TempoTask;
-import com.appiancorp.ps.automatedtest.fields.TempoTextField;
-import com.appiancorp.ps.automatedtest.fields.TempoUserPickerField;
+import com.appiancorp.ps.automatedtest.object.TempoAction;
+import com.appiancorp.ps.automatedtest.object.TempoButton;
+import com.appiancorp.ps.automatedtest.object.TempoDateField;
+import com.appiancorp.ps.automatedtest.object.TempoDatetimeField;
+import com.appiancorp.ps.automatedtest.object.TempoField;
+import com.appiancorp.ps.automatedtest.object.TempoFileUploadField;
+import com.appiancorp.ps.automatedtest.object.TempoGrid;
+import com.appiancorp.ps.automatedtest.object.TempoIntegerField;
+import com.appiancorp.ps.automatedtest.object.TempoLinkField;
+import com.appiancorp.ps.automatedtest.object.TempoLogin;
+import com.appiancorp.ps.automatedtest.object.TempoMenu;
+import com.appiancorp.ps.automatedtest.object.TempoNews;
+import com.appiancorp.ps.automatedtest.object.TempoParagraphField;
+import com.appiancorp.ps.automatedtest.object.TempoRadioField;
+import com.appiancorp.ps.automatedtest.object.TempoRecordItem;
+import com.appiancorp.ps.automatedtest.object.TempoRecordList;
+import com.appiancorp.ps.automatedtest.object.TempoReport;
+import com.appiancorp.ps.automatedtest.object.TempoSelectField;
+import com.appiancorp.ps.automatedtest.object.TempoTask;
+import com.appiancorp.ps.automatedtest.object.TempoTextField;
+import com.appiancorp.ps.automatedtest.object.TempoUserPickerField;
 
 public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBaseFixture {
 	
