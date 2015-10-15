@@ -15,6 +15,8 @@ public class TempoRecordList extends TempoObject{
 
     public static boolean click(String listName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_LIST, listName)));
+        LOG.debug("Found Customers");
+        LOG.debug(element.toString());
         element.click();
 
         return true;
@@ -23,6 +25,8 @@ public class TempoRecordList extends TempoObject{
     public static boolean waitFor(String listName) {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_RECORD_LIST, listName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_LIST, listName)));
+            scrollIntoView(element, false);
         } catch (Exception e) {
             return false;
         }

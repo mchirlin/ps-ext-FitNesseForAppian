@@ -23,7 +23,7 @@ public class TempoMenu extends TempoObject {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ELEMENT, tempoMenu))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, tempoMenu)));
-            scrollIntoView(element);
+            scrollIntoView(element, true);
         } catch (Exception e) {
             return false;
         }

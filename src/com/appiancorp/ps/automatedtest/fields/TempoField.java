@@ -1,7 +1,5 @@
 package com.appiancorp.ps.automatedtest.fields;
 
-import java.util.Arrays;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

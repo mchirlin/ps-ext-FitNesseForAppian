@@ -11,10 +11,17 @@ import com.appiancorp.ps.automatedtest.fields.TempoObject;
 public class TempoNews extends TempoObject{
     
     private static final Logger LOG = Logger.getLogger(TempoNews.class);
+    private static final String XPATH_NEWS_ITEM = "//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '%s')]";
+    private static final String XPATH_NEWS_ITEM_MORE_INFO = XPATH_NEWS_ITEM + "/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(), 'More Info') or contains(text(), 'Hide Info')]";
+    private static final String XPATH_NEWS_ITEM_LABEL = XPATH_NEWS_ITEM + "/following-sibling::table/descendant::td[contains(text(), '%s')]";
+    private static final String XPATH_NEWS_ITEM_VALUE = XPATH_NEWS_ITEM + "/following-sibling::table/descendant::td[contains(text(), '%s')]";
+    private static final String XPATH_NEWS_ITEM_TAG = XPATH_NEWS_ITEM + "/parent::div/descendant::a[contains(text(), '%s')]";
+    private static final String XPATH_NEWS_ITEM_COMMENT = XPATH_NEWS_ITEM + "/parent::div/descendant::div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '%s')]";
+    private static final String XPATH_NEWS_ITEM_POSTED_AT = XPATH_NEWS_ITEM + "/parent::div/descendant::a[contains(text(), '%s')]";
     
     public static boolean waitFor(String newsText) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM, newsText))));
         } catch (Exception e) {
             return false;
         }
@@ -43,7 +50,9 @@ public class TempoNews extends TempoObject{
     
     public static boolean waitForMoreInfo(String newsText) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(), 'More Info') or contains(text(), 'Hide Info')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_MORE_INFO, newsText))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_MORE_INFO, newsText)));
+            scrollIntoView(element, false);
         } catch (Exception e) {
             return false;
         }
@@ -52,7 +61,7 @@ public class TempoNews extends TempoObject{
     }
     
     public static boolean toggleMoreInfo(String newsText) {
-        WebElement moreInfoLink = driver.findElement(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(), 'More Info') or contains(text(), 'Hide Info')]"));
+        WebElement moreInfoLink = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_MORE_INFO, newsText)));
         moreInfoLink.click();
         
         return true;
@@ -64,9 +73,9 @@ public class TempoNews extends TempoObject{
         LOG.debug("LABEL ("+label+") and VALUE (" + value +")");
         try {
             // With label
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::table/descendant::td[contains(text(), '"+label+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_LABEL, newsText, label))));
             // With value
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/following-sibling::table/descendant::td[contains(text(), '"+value+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_VALUE, newsText, value))));
         } catch (Exception e) {
             LOG.debug(e.getMessage());
             return false;
@@ -105,7 +114,7 @@ public class TempoNews extends TempoObject{
     public static boolean waitForTag(String newsText, String newsTag) {
         try {
             //Tagged with
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/parent::div/descendant::a[contains(text(), '"+newsTag+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_TAG, newsText, newsTag))));
         } catch (Exception e) {
             return false;
         }
@@ -116,7 +125,7 @@ public class TempoNews extends TempoObject{
     public static boolean waitForComment(String newsText, String newsComment) {
         try {
             //Tagged with
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/parent::div/descendant::div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsComment+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_COMMENT, newsText, newsComment))));
         } catch (Exception e) {
             return false;
         }
@@ -146,7 +155,7 @@ public class TempoNews extends TempoObject{
     
     public static boolean waitForPostedAt(String newsText, String newsPostedAt) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '"+newsText+"')]/parent::div/descendant::a[contains(text(), '"+newsPostedAt+"')]")));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_POSTED_AT, newsText, newsPostedAt))));
         } catch (Exception e) {
             return false;
         }

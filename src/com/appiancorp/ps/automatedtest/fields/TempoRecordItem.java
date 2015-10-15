@@ -23,7 +23,9 @@ public class TempoRecordItem extends TempoObject{
     
     public static boolean waitFor(String itemName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_RECORD_ITEM, itemName))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_RECORD_ITEM, itemName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_ITEM, itemName)));
+            scrollIntoView(element, false);
         } catch (Exception e) {
             return false;
         }
@@ -76,7 +78,9 @@ public class TempoRecordItem extends TempoObject{
     
     public static boolean waitForRelatedAction(String relatedActionName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_RECORD_RELATED_ACTION, relatedActionName))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_RECORD_RELATED_ACTION, relatedActionName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_RELATED_ACTION, relatedActionName)));
+            scrollIntoView(element);
         } catch (Exception e) {
             return false;
         }
