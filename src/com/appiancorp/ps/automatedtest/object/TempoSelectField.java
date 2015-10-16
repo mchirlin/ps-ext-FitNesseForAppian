@@ -11,8 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TempoSelectField extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoSelectField.class);
-    protected static final String XPATH_ABSOLUTE_LABEL = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div/select";
-    protected static final String XPATH_RELATIVE_INPUT = ".//select";
+    private static final String XPATH_ABSOLUTE_LABEL = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div/select";
+    private static final String XPATH_RELATIVE_INPUT = ".//select";
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);

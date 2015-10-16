@@ -10,7 +10,7 @@ public class TempoMenu extends TempoObject {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoMenu.class);
-    protected static final String XPATH_ELEMENT = "//a[starts-with(@class, 'appian-menu-item') and contains(text(),'%s')]";
+    private static final String XPATH_ELEMENT = "//a[starts-with(@class, 'appian-menu-item') and contains(text(),'%s')]";
     
     public static boolean click(String tempoMenu) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, tempoMenu)));

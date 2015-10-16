@@ -236,6 +236,29 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	    return false;
 	}
 	
+	public boolean populateTempoFieldNumberWith(String fieldName, String index, String[] fieldValues) {
+        if(!TempoField.waitFor(fieldName)) {
+            throw new MissingObjectException("Field", fieldName);
+        }
+        int i = Integer.parseInt(index);
+        TempoField.populateIndex(fieldName, fieldValues, i);
+        int attempt = 0;
+        
+        while(attempt < 2) {
+            new Actions(driver).sendKeys(Keys.TAB).perform();
+            if (TempoField.containsIndex(fieldName, fieldValues, i)) {     
+                return true;
+            }
+            
+            TempoField.waitFor(fieldName);
+            TempoField.clearIndex(fieldName, i);
+            TempoField.populateIndex(fieldName, fieldValues, i);
+            attempt++;
+        }
+        
+        return false;
+    }
+	
 	public boolean clearTempoFieldOf(String fieldName, String[] fieldValues) {
 	    if(!TempoField.waitFor(fieldName)) {
             throw new MissingObjectException("Field", fieldName);

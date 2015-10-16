@@ -156,7 +156,6 @@ public class TempoObject {
     
     public static boolean waitForWorking() {
         try {
-            (new WebDriverWait(driver, 1)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_WORKING)));
             (new WebDriverWait(driver, 10)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_WORKING)));
         } catch (Exception e) {
             return false;

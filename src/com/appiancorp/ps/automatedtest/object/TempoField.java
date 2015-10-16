@@ -11,7 +11,8 @@ import com.appiancorp.ps.automatedtest.object.TempoObject;
 public class TempoField extends TempoObject {
        
     private static final Logger LOG = Logger.getLogger(TempoField.class);
-    protected static final String XPATH_FIELD_LAYOUT = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout')] | //label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout')]";
+    protected static final String XPATH_FIELD_LAYOUT = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]";
+    protected static final String XPATH_FIELD_LAYOUT_INDEX = "(" + XPATH_FIELD_LAYOUT + ")[%d]";
     protected static final String XPATH_FIELD_LABEL = "//label[contains(text(),'%s')] | //span[contains(text(), '%s')]";
     protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = ".//p[contains(text(), '%s')] | .//div[contains(text(), '%s') and not(contains(@class, 'textarea_print'))]";
     
@@ -19,8 +20,19 @@ public class TempoField extends TempoObject {
         return driver.findElement(By.xpath(String.format(XPATH_FIELD_LAYOUT, fieldName, fieldName)));
     }
     
+    public static WebElement getFieldLayoutIndex(String fieldName, int index) {
+        LOG.debug(String.format(XPATH_FIELD_LAYOUT_INDEX, fieldName, fieldName, index));
+        return driver.findElement(By.xpath(String.format(XPATH_FIELD_LAYOUT_INDEX, fieldName, fieldName, index)));
+    }
+    
     public static boolean populate(String fieldName, String[] fieldValues){
         WebElement fieldLayout = getFieldLayout(fieldName);
+        
+        return populate(fieldLayout, fieldName, fieldValues);
+    }
+    
+    public static boolean populateIndex(String fieldName, String[] fieldValues, int index){
+        WebElement fieldLayout = getFieldLayoutIndex(fieldName, index);
         
         return populate(fieldLayout, fieldName, fieldValues);
     }
@@ -88,6 +100,12 @@ public class TempoField extends TempoObject {
         return clear(fieldLayout, fieldName);
     }
     
+    public static boolean clearIndex(String fieldName, int index){
+        WebElement fieldLayout = getFieldLayoutIndex(fieldName, index);
+        
+        return clear(fieldLayout, fieldName);
+    }
+    
     public static boolean clear(WebElement fieldLayout, String fieldName) {      
         try {
             return TempoTextField.clear(fieldLayout);
@@ -128,6 +146,12 @@ public class TempoField extends TempoObject {
     
     public static boolean contains(String fieldName, String[] fieldValues) {
         WebElement fieldLayout = getFieldLayout(fieldName);
+
+        return contains(fieldLayout, fieldName, fieldValues);
+    }
+    
+    public static boolean containsIndex(String fieldName, String[] fieldValues, int index) {
+        WebElement fieldLayout = getFieldLayoutIndex(fieldName, index);
 
         return contains(fieldLayout, fieldName, fieldValues);
     }

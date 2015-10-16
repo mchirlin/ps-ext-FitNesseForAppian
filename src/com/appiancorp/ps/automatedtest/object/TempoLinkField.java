@@ -10,7 +10,7 @@ public class TempoLinkField extends TempoField {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoLinkField.class);
-    protected static final String XPATH_ELEMENT = "//a[contains(text(), '%s')]";
+    private static final String XPATH_ELEMENT = "//a[contains(text(), '%s')]";
     
     public static boolean click(String linkName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, linkName)));

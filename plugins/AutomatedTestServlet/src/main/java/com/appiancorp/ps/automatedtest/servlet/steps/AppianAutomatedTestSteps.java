@@ -170,13 +170,13 @@ public class AppianAutomatedTestSteps {
 		return returnValue;
 	}
 	
-	public static String runExpression(ServiceContext sc, String expression) {
+	public static Object runExpression(ServiceContext sc, String expression) {
 	    String returnValue = "";
 	    
 	    try {
 	        expression = URLDecoder.decode(expression, "UTF-8");
 	        LOG.debug(expression);
-	        returnValue = (String)ExpressionHelper.evaluateExpression(sc, expression);
+	        returnValue = ExpressionHelper.evaluateExpression(sc, expression);
         } catch (Exception e) {
             e.printStackTrace();
             returnValue = "Exception Occurs";

@@ -9,6 +9,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -376,5 +377,9 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
+	}
+	
+	public String getRandomString(int length) {
+	    return RandomStringUtils.randomAlphanumeric(length);
 	}
 }

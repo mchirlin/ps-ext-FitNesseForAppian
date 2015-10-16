@@ -11,10 +11,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TempoFileUploadField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoFileUploadField.class);
-    protected static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input";
-    protected static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'gwt-FileUpload')]";
-    protected static final String XPATH_RELATIVE_FILENAME = ".//span[contains(@class, 'filename')]/span";
-    protected static final String XPATH_RELATIVE_REMOVE = ".//a[starts-with(text(), 'Remove')]";
+    private static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input";
+    private static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'gwt-FileUpload')]";
+    private static final String XPATH_RELATIVE_FILENAME = ".//span[contains(@class, 'filename')]/span";
+    private static final String XPATH_RELATIVE_REMOVE = ".//a[starts-with(text(), 'Remove')]";
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -26,7 +26,6 @@ public class TempoFileUploadField extends TempoField {
         WebElement fileUpload = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         fileUpload.sendKeys(fieldValue);
         // Wait for file to upload
-        
         waitForWorking();
         
         LOG.debug("FILE UPLOAD FIELD POPULATION : " + fieldValue);
