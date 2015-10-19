@@ -59,4 +59,14 @@ public class TempoParagraphField extends TempoField {
         
         return true;
     }
+    
+    public static boolean isType(WebElement fieldLayout) {
+        try {
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return true;
+    }
 }

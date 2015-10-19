@@ -11,6 +11,7 @@ public class TempoRadioField extends TempoField {
     private static final Logger LOG = Logger.getLogger(TempoUserPickerField.class);
     private static final String XPATH_ABSOLUTE_LABEL = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input";
     private static final String XPATH_RELATIVE_INPUT = ".//label[contains(text(), '%s')]/preceding-sibling::input";
+    private static final String XPATH_RELATIVE_RADIO_BUTTON_GROUP = ".//div[contains(@class, 'RadioButtonGroup')]";
     
     public static boolean populate(String fieldName, String fieldValue) {
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -50,5 +51,15 @@ public class TempoRadioField extends TempoField {
         LOG.debug("RADIO FIELD COMPARISON : Field value [" + fieldValue + "] is checked [" + compareString + "]");
         
         return compareString.equals("true");
+    }
+    
+    public static boolean isType(WebElement fieldLayout) {
+        try {
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_RADIO_BUTTON_GROUP));
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return true;
     }
 }
