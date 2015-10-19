@@ -99,6 +99,7 @@ To update the repository, please create a branch from `master`, implement/push y
 * | login with terms with username | *USERNAME* | with password | *PASSWORD* | - uses set appian url
 * | wait for | *RELATIVE_PERIOD*, e.g. +1 days, +1 hours | - waits for relative amount of time
 * | wait until | *RELATIVE_PERIOD* | - waits until relative time
+* | set | *VARIABLE_NAME* | get random string | *STRING_LENGTH* | - use @{VARIABLE_NAME} to parameterize test cases
 * | refresh | - refreshes screen
 * | logout from tempo |
 
@@ -140,6 +141,7 @@ To update the repository, please create a branch from `master`, implement/push y
 
 ### FORMS
 * | populate tempo field | *FIELD_LABEL* | with | *VALUE(S)* |
+* | populate tempo field | *FIELD_LABEL* | number | *NUMBER* | with | *VALUE(S)* | - use this to populate the 2nd, 3rd, etc field with the same label
 * | clear tempo field | *FIELD_LABEL* | of | *VALUE_TO_REMOVE* | - this is for removing specific value from a picker
 * | verify tempo field | *FIELD_LABEL* | contains | *VALUE* |
 * | populate tempo editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |

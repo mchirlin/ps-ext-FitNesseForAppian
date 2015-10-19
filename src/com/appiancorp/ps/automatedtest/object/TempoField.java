@@ -15,13 +15,13 @@ public class TempoField extends TempoObject {
     protected static final String XPATH_FIELD_LAYOUT = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]";
     protected static final String XPATH_FIELD_LAYOUT_INDEX = "(" + XPATH_FIELD_LAYOUT + ")[%d]";
     protected static final String XPATH_FIELD_LABEL = "//label[contains(text(),'%s')] | //span[contains(text(), '%s')]";
-    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = ".//p[contains(@class, 'readonly')]"; // | .//div[contains(text(), '%s') and not(contains(@class, 'textarea_print'))]
+    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = ".//p[contains(text(), '%s') and contains(@class, 'readonly')] | .//div[contains(text(), '%s') and not(contains(@class, 'textarea_print'))]";
     
     private static final String TEXT_FIELD = "textField";
     private static final String PARAGRAPH_FIELD = "paragraphField";
     private static final String INTEGER_FIELD = "integerField";
     private static final String SELECT_FIELD = "selectField";
-    private static final String RADIO_FIELD = "radiioFeld";
+    private static final String RADIO_FIELD = "radioFeld";
     private static final String DATE_FIELD = "dateField";
     private static final String DATETIME_FIELD = "datetimeField";
     private static final String FILE_UPLOAD_FIELD = "fileUploadField";
@@ -55,7 +55,7 @@ public class TempoField extends TempoObject {
             fieldValues[i] = TempoObject.parseVariable(fieldValues[i]);
         }
         
-        String fieldType = getFieldType(fieldLayout);
+        String fieldType = getFieldType(fieldLayout, fieldValues);
         
         switch (fieldType) {
         
@@ -118,7 +118,7 @@ public class TempoField extends TempoObject {
     
     public static boolean clear(WebElement fieldLayout, String fieldName) { 
         
-        String fieldType = getFieldType(fieldLayout);
+        String fieldType = getFieldType(fieldLayout, null);
         
         switch (fieldType) {
         
@@ -149,11 +149,16 @@ public class TempoField extends TempoObject {
     }
     
     public static boolean clearOf(WebElement fieldLayout, String[] fieldValues) {
-        try {
-            return TempoUserPickerField.clearOf(fieldLayout, fieldValues);
-        } catch (Exception e) {}
+        String fieldType = getFieldType(fieldLayout, fieldValues);
         
-        return false;
+        switch (fieldType) {
+        
+            case USER_PICKER_FIELD: 
+                return TempoUserPickerField.clearOf(fieldLayout, fieldValues);
+                
+            default: 
+                return false;
+        }
     }
     
     public static boolean contains(String fieldName, String[] fieldValues) {
@@ -173,7 +178,7 @@ public class TempoField extends TempoObject {
             fieldValues[i] = TempoObject.parseVariable(fieldValues[i]);
         }
         
-        String fieldType = getFieldType(fieldLayout);
+        String fieldType = getFieldType(fieldLayout, fieldValues);
         
         try {
             switch (fieldType) {
@@ -213,21 +218,22 @@ public class TempoField extends TempoObject {
             }
         } catch (StaleElementReferenceException ste) {
             // If getting a stale element, try again immediately
+            LOG.warn("Stale element reference for field: " + fieldName);
             return contains(fieldName, fieldValues);
         }
     }
     
     public static boolean contains(WebElement fieldLayout, String fieldValue) {
-        String compareString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_READ_ONLY_FIELD)).getText();
+        String compareString = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_READ_ONLY_FIELD, fieldValue, fieldValue))).getText();
         
         LOG.debug("READ ONLY FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");
         
         return compareString.contains(fieldValue);
     }
     
-    public static boolean isReadOnly(WebElement fieldLayout) {
+    public static boolean isReadOnly(WebElement fieldLayout, String[] fieldValues) {
         try {
-            fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_READ_ONLY_FIELD)));
+            fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_READ_ONLY_FIELD, fieldValues[0], fieldValues[0])));
         } catch (Exception e) {
             return false;
         }
@@ -235,8 +241,8 @@ public class TempoField extends TempoObject {
         return true;
     }
     
-    public static String getFieldType(WebElement fieldLayout) {
-        if (TempoField.isReadOnly(fieldLayout)) return READ_ONLY_FIELD;
+    public static String getFieldType(WebElement fieldLayout, String[] fieldValues) {
+        if (TempoField.isReadOnly(fieldLayout, fieldValues)) return READ_ONLY_FIELD;
         else if (TempoTextField.isType(fieldLayout)) return TEXT_FIELD;
         else if (TempoParagraphField.isType(fieldLayout)) return PARAGRAPH_FIELD;
         else if (TempoIntegerField.isType(fieldLayout)) return INTEGER_FIELD;

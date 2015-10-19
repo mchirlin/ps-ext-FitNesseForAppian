@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoRadioField extends TempoField {
 
-    private static final Logger LOG = Logger.getLogger(TempoUserPickerField.class);
+    private static final Logger LOG = Logger.getLogger(TempoRadioField.class);
     private static final String XPATH_ABSOLUTE_LABEL = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input";
     private static final String XPATH_RELATIVE_INPUT = ".//label[contains(text(), '%s')]/preceding-sibling::input";
     private static final String XPATH_RELATIVE_RADIO_BUTTON_GROUP = ".//div[contains(@class, 'RadioButtonGroup')]";
