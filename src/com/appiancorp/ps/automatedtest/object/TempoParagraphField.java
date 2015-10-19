@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoParagraphField extends TempoField {
     
-    private static final Logger LOG = Logger.getLogger(TempoTextField.class);
+    private static final Logger LOG = Logger.getLogger(TempoParagraphField.class);
     private static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/div/textarea";
     private static final String XPATH_RELATIVE_INPUT = ".//textarea[contains(@class, 'aui-TextAreaInput')]";
     
@@ -56,6 +56,16 @@ public class TempoParagraphField extends TempoField {
     public static boolean clear(WebElement fieldLayout) {
         WebElement textAreaField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         textAreaField.clear();
+        
+        return true;
+    }
+    
+    public static boolean isType(WebElement fieldLayout) {
+        try {
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        } catch (Exception e) {
+            return false;
+        }
         
         return true;
     }

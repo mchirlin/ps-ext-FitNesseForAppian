@@ -12,14 +12,15 @@ public class TempoPickerField extends TempoField {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoPickerField.class);
-    protected static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/div/input";
-    protected static final String XPATH_RELATIVE_INPUT = ".//input";
+    protected static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span";
+    protected static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'gwt-SuggestBox')]";
     protected static final String XPATH_ABSOLUTE_SUGGESTION = "//p[contains(text(), '%s')]";
     protected static final String XPATH_ABSOLUTE_SELECTION = "//a[contains(text(), '%s')]";
     protected static final String XPATH_RELATIVE_SELECTION = ".//a[contains(text(), '%s')]";
     protected static final String XPATH_RELATIVE_SELECTION_REMOVE = ".//a/following-sibling::a";
     protected static final String XPATH_RELATIVE_SPECIFIC_SELECTION_REMOVE = "//a[contains(text(), '%s')]/following-sibling::a";
-    protected static final String XPATH_ABSOLUTE_SUGGEST_BOX = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input[contains(@class, 'SuggestBox')]";
+    protected static final String XPATH_ABSOLUTE_SUGGEST_BOX = XPATH_ABSOLUTE_LABEL + "/following-sibling::div/descendant::input[contains(@class, 'SuggestBox')]";
+    protected static final String XPATH_RELATIVE_INPUT_OR_SELECTION = "(" + XPATH_RELATIVE_INPUT + " | " + XPATH_RELATIVE_SELECTION + ")";
     
     public static boolean clearOf(String fieldName, String[] fieldValues) {
         WebElement fieldLayout = getFieldLayout( fieldName);
@@ -69,6 +70,16 @@ public class TempoPickerField extends TempoField {
     protected static boolean waitForSuggestBox(String fieldValue) {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SUGGEST_BOX, fieldValue))));
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public static boolean isType(WebElement fieldLayout) {
+        try {
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT_OR_SELECTION));
         } catch (Exception e) {
             return false;
         }

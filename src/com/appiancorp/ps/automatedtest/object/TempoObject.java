@@ -27,8 +27,11 @@ public class TempoObject {
     protected static int refreshTimes = 5;
     
     public static String DATE_FORMAT_STRING = "M/d/yyyy";
+    public static String DATE_CONTAINS_FORMAT_STRING = "M/d/yyyy";
     public static String TIME_FORMAT_STRING = "h:mm aaa";
+    public static String TIME_CONTAINS_FORMAT_STRING = "h:mm aaa";
     public static String DATETIME_FORMAT_STRING = DATE_FORMAT_STRING + " " + TIME_FORMAT_STRING;
+    public static String DATETIME_CONTAINS_FORMAT_STRING = DATE_CONTAINS_FORMAT_STRING + " " + TIME_CONTAINS_FORMAT_STRING;
     public static final String DATE_DISPLAY_FORMAT_STRING = "MMM d, yyyy";
     public static final String TIME_DISPLAY_FORMAT_STRING = "h:mm aaa";
     public static final String DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;

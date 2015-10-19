@@ -60,7 +60,6 @@ public class TempoUserPickerField extends TempoPickerField{
     }  
     
     public static boolean contains(WebElement fieldLayout, String fieldName, String[] fieldValues) {
-
         for (String fieldValue : fieldValues) {
             try {
                 fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_SELECTION, fieldValue)));

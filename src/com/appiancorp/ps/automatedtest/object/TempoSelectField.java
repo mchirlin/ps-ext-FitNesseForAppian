@@ -57,4 +57,14 @@ public class TempoSelectField extends TempoField {
         
         return compareString.contains(fieldValue);
     }
+    
+    public static boolean isType(WebElement fieldLayout) {
+        try {
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return true;
+    }
 }

@@ -65,7 +65,7 @@ public class TempoDatetimeField extends TempoField{
         String datetimeString = dateString + " " + timeString;
 
         try{  
-            String compareString = new SimpleDateFormat(TempoObject.DATETIME_DISPLAY_FORMAT_STRING).format(DateUtils.parseDate(datetimeString, DATETIME_FORMAT_STRING));
+            String compareString = new SimpleDateFormat(TempoObject.DATETIME_DISPLAY_FORMAT_STRING).format(DateUtils.parseDate(datetimeString, DATETIME_CONTAINS_FORMAT_STRING));
             LOG.debug("DATETIME FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");
             
             return compareString.equals(fieldValue);
@@ -121,5 +121,16 @@ public class TempoDatetimeField extends TempoField{
     
     private static boolean isEmptyDatetimeTimeField(WebElement fieldLayout) {
         return !fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TIME_INPUT)).isDisplayed();
+    }
+    
+    public static boolean isType(WebElement fieldLayout) {
+        try {
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT));
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TIME_INPUT));
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return true;
     }
 }

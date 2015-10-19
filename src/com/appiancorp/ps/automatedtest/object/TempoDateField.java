@@ -60,7 +60,7 @@ public class TempoDateField extends TempoField{
         String dateString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).getAttribute("value");
 
         try{  
-            Date compareDate = DateUtils.parseDate(dateString, DATE_FORMAT_STRING);
+            Date compareDate = DateUtils.parseDate(dateString, DATE_CONTAINS_FORMAT_STRING);
             Date fieldDate = DateUtils.parseDate(fieldValue, DATETIME_DISPLAY_FORMAT_STRING);
             LOG.debug("DATE FIELD COMPARISON : Field value [" + compareDate.toString() + "] compared to Entered value [" + fieldDate.toString() + "]");
             
@@ -95,5 +95,15 @@ public class TempoDateField extends TempoField{
     
     private static boolean isEmptyDate(WebElement fieldLayout) {
         return !fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).isDisplayed();
+    }
+    
+    public static boolean isType(WebElement fieldLayout) {
+        try {
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT));
+        } catch (Exception e) {
+            return false;
+        }
+        
+        return true;
     }
 }
