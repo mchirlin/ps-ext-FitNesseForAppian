@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
+import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoAction;
 import com.appiancorp.ps.automatedtest.object.TempoButton;
 import com.appiancorp.ps.automatedtest.object.TempoDateField;

@@ -1,4 +1,4 @@
-package com.appiancorp.ps.automatedtest.fixture;
+package com.appiancorp.ps.automatedtest.exception;
 
 import fitlibrary.exception.FitLibraryException;
 
