@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
@@ -37,6 +39,8 @@ public class TempoObject {
     public static final String DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;
     
     private static final String XPATH_WORKING = "//span[contains(text(), 'Working...";
+    
+    private static final Pattern INDEX_PATTERN = Pattern.compile("(.*)?\\[([0-9]+)\\]");
     
     public static boolean isDateCalculation(String dateTimeString) {
         dateTimeString = dateTimeString.replaceAll("\\s", "");
@@ -175,5 +179,27 @@ public class TempoObject {
     
     public static void scrollIntoView(WebElement webElement) {
         scrollIntoView(webElement, false);
+    }
+    
+    public static boolean isFieldIndex(String fieldNameIndex) {        
+        return INDEX_PATTERN.matcher(fieldNameIndex).matches();
+    }
+    
+    public static String getFieldFromFieldIndex(String fieldNameIndex) {
+        Matcher m = INDEX_PATTERN.matcher(fieldNameIndex);
+        if (m.find()) {
+            return m.group(1);
+        } else {
+            return "";
+        }
+    }
+    
+    public static int getIndexFromFieldIndex(String fieldNameIndex) {
+        Matcher m = INDEX_PATTERN.matcher(fieldNameIndex);
+        if (m.find()) {
+            return Integer.parseInt(m.group(2));
+        } else {
+            return 1;
+        } 
     }
 }

@@ -2,6 +2,7 @@ package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -53,8 +54,13 @@ public class TempoRecordItem extends TempoObject{
     }
     
     public static boolean clickOnFacet(String facetName) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_FACET, facetName)));
-        element.click();
+        try {
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_FACET, facetName)));
+            element.click();
+        } catch (StaleElementReferenceException ste) {
+            //If getting a stale element, try again immediately
+            clickOnFacet(facetName);
+        }
 
         return true;
     }
