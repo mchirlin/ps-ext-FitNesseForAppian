@@ -2,6 +2,8 @@ package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,7 +24,7 @@ public class TempoNews extends TempoObject{
     public static boolean waitFor(String newsText) {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM, newsText))));
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
     
@@ -53,7 +55,7 @@ public class TempoNews extends TempoObject{
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_MORE_INFO, newsText))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_MORE_INFO, newsText)));
             scrollIntoView(element, false);
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
     
@@ -76,36 +78,9 @@ public class TempoNews extends TempoObject{
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_LABEL, newsText, label))));
             // With value
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_VALUE, newsText, value))));
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             LOG.debug(e.getMessage());
             return false;
-        }
-        
-        return true;
-    }
-    
-    public static boolean refreshAndWaitForLabelAndValueBetween(String newsText, String label, String value) {
-        boolean present = false;
-
-        int i = 0;
-        while (!present) {
-            if (i > refreshTimes) return false;
-            
-            if (TempoNews.waitForLabelAndValue(newsText, label, value)) {
-                present = true;
-                break;
-            };
-                            
-            driver.navigate().refresh();
-            i++;
-        }
-
-        return true;
-    }
-    
-    public static boolean waitForLabelsAndValues(String newsText, String[] labels, String[] values) {
-        for (int i = 0; i < labels.length; i ++) {            
-            if (!TempoNews.waitForLabelAndValue(newsText, labels[i], values[i])) return false;
         }
         
         return true;
@@ -115,7 +90,7 @@ public class TempoNews extends TempoObject{
         try {
             //Tagged with
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_TAG, newsText, newsTag))));
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         
@@ -126,7 +101,7 @@ public class TempoNews extends TempoObject{
         try {
             //Tagged with
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_COMMENT, newsText, newsComment))));
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         
@@ -156,7 +131,7 @@ public class TempoNews extends TempoObject{
     public static boolean waitForPostedAt(String newsText, String newsPostedAt) {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_POSTED_AT, newsText, newsPostedAt))));
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         

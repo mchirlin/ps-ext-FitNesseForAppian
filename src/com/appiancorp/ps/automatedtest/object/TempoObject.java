@@ -12,6 +12,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -164,7 +165,7 @@ public class TempoObject {
     public static boolean waitForWorking() {
         try {
             (new WebDriverWait(driver, 10)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_WORKING)));
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         
