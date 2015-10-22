@@ -2,6 +2,7 @@ package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -35,21 +36,21 @@ public class TempoSelectField extends TempoField {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName))));
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         
         return true;
     }
     
-    public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue) {
+    public static boolean contains(WebElement fieldLayout, String fieldValue) {
         // For read-only
         try {
             return TempoField.contains(fieldLayout, fieldValue);
         } catch (Exception e) {}
 
         // For editable
-        WebElement selectField = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName)));
+        WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         Select select = new Select(selectField);
         String compareString = select.getFirstSelectedOption().getText();
         

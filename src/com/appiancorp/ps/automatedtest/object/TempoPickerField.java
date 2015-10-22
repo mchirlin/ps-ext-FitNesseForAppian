@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -50,7 +51,7 @@ public class TempoPickerField extends TempoField {
     protected static boolean waitForSuggestion(String fieldValue) {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SUGGESTION, fieldValue))));
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         
@@ -60,7 +61,7 @@ public class TempoPickerField extends TempoField {
     protected static boolean waitForSelection(String fieldValue) {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SELECTION, fieldValue))));
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         
@@ -70,7 +71,7 @@ public class TempoPickerField extends TempoField {
     protected static boolean waitForSuggestBox(String fieldValue) {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SUGGEST_BOX, fieldValue))));
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         

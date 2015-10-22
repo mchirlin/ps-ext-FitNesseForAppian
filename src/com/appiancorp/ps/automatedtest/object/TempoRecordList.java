@@ -2,6 +2,7 @@ package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,7 +26,7 @@ public class TempoRecordList extends TempoObject{
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_RECORD_LIST, listName))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_LIST, listName)));
             scrollIntoView(element, false);
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         
@@ -42,7 +43,7 @@ public class TempoRecordList extends TempoObject{
     public static boolean waitForFacetOption(String facetName) {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_RECORD_LIST_FACET, facetName))));
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         

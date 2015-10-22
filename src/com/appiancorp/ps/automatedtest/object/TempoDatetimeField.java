@@ -7,6 +7,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -52,7 +53,7 @@ public class TempoDatetimeField extends TempoField{
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_TIME_INPUT, fieldName))));
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         return true;
@@ -88,7 +89,7 @@ public class TempoDatetimeField extends TempoField{
             dateField.sendKeys(Keys.DELETE);
             dateField.sendKeys(dateValue);
         } else {
-            datePlaceholder.click();    
+            if (datePlaceholder.isDisplayed()) datePlaceholder.click();    
             dateField.sendKeys(dateValue);
         }
                 
@@ -112,7 +113,7 @@ public class TempoDatetimeField extends TempoField{
             timeField.sendKeys(Keys.DELETE);
             timeField.sendKeys(timeValue);
         } else {
-            timePlaceholder.click();
+            if (timePlaceholder.isDisplayed()) timePlaceholder.click();
             timeField.sendKeys(timeValue);
         }
         

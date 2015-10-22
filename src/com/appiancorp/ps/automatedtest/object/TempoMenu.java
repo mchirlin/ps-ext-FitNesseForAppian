@@ -2,6 +2,7 @@ package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,7 +25,7 @@ public class TempoMenu extends TempoObject {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ELEMENT, tempoMenu))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, tempoMenu)));
             scrollIntoView(element, true);
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
 

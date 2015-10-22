@@ -11,7 +11,7 @@
 | populate tempo field | Location | with | Meeting Location |
 | populate tempo field | Review/Edit Reminder Before Sending | with | No |
 | click on tempo link | + Add Meeting Reminder |
-| populate tempo editable grid | When to Send Reminder(s) | column | 1 | row | 1 | with | +22 hours |
+| populate tempo editable grid | When to Send Reminder(s) | column | [1] | row | [1] | with | +22 hours |
 | click on tempo button | Submit |
 | verify tempo action completed |
 

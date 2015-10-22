@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -52,7 +54,7 @@ public class TempoUserPickerField extends TempoPickerField{
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SUGGEST_BOX, fieldName))));
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
-        } catch (Exception e) {
+        } catch (TimeoutException toe) {
             return false;
         }
         
@@ -60,16 +62,14 @@ public class TempoUserPickerField extends TempoPickerField{
     }  
     
     public static boolean contains(WebElement fieldLayout, String fieldName, String[] fieldValues) {
-        for (String fieldValue : fieldValues) {
-            try {
+        try {
+            for (String fieldValue : fieldValues) {
+                waitFor(fieldName);
+                fieldLayout = getFieldLayout(fieldName);
                 fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_SELECTION, fieldValue)));
-                
-                continue;
-            } catch (Exception e) {}
-            
-            waitFor(fieldName);
-            fieldLayout = getFieldLayout(fieldName);
-            fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_SELECTION, fieldValue)));
+            }
+        } catch (NoSuchElementException nse) {
+            return false;
         }
         
         LOG.debug("USER PICKER FIELD COMPARISON : Field values " + Arrays.toString(fieldValues) + " found");

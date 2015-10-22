@@ -2,6 +2,7 @@ package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,7 +28,7 @@ public class TempoRecordItem extends TempoObject{
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_RECORD_ITEM, itemName))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_ITEM, itemName)));
             scrollIntoView(element, false);
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         
@@ -68,7 +69,7 @@ public class TempoRecordItem extends TempoObject{
     public static boolean waitForFacet(String facetName) {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_RECORD_FACET, facetName))));
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         
@@ -87,7 +88,7 @@ public class TempoRecordItem extends TempoObject{
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_RECORD_RELATED_ACTION, relatedActionName))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_RELATED_ACTION, relatedActionName)));
             scrollIntoView(element);
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         

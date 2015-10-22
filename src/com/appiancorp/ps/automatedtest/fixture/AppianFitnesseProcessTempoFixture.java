@@ -82,10 +82,6 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoNews.waitForLabelAndValue(newsText, label, value);
     }
     
-    public boolean verifyTempoNewsFeedContainingTextAndMoreInfoWithLabelsAndValuesArePresent(String newsText, String[] labels, String[] values) {        
-        return TempoNews.waitForLabelsAndValues(newsText, labels, values);
-    }
-    
     public boolean verifyTempoNewsFeedContainingTextTaggedWithIsPresent(String newsText, String newsTag) {
         if (!TempoNews.refreshAndWaitFor(newsText)) {
             throw new MissingObjectException("News Post", newsText);

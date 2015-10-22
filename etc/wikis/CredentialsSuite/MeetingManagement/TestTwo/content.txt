@@ -11,7 +11,7 @@
 | populate tempo field | Location | with | Meeting 2 Location |
 | populate tempo field | Review/Edit Reminder Before Sending | with | Yes |
 | click on tempo link | + Add Meeting Reminder |
-| populate tempo editable grid | When to Send Reminder(s) | column | 1 | row | 1 | with | +35 minutes |
+| populate tempo editable grid | When to Send Reminder(s) | column | [1] | row | [1] | with | +35 minutes |
 | click on tempo button | Submit |
 | verify tempo action completed |
 
@@ -22,7 +22,7 @@
 | click on tempo record item | Related Actions | facet |
 | click on tempo record item | Edit Meeting | related action |
 | populate tempo field | Start Time | with | +5 minutes |
-| populate tempo editable grid | When to Send Reminder(s) | column | 1 | row | 1 | with | +3 minutes |
+| populate tempo editable grid | When to Send Reminder(s) | column | [1] | row | [1] | with | +3 minutes |
 | click on tempo button | Submit |
 | verify tempo action completed |
 
