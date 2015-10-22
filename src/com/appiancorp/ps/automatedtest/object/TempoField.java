@@ -122,7 +122,7 @@ public class TempoField extends TempoObject {
             }  
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             return false;
         }
         
