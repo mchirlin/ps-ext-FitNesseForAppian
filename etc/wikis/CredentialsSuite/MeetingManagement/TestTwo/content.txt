@@ -2,7 +2,7 @@
 | login with username | user.one | and password | a |
 | click on tempo menu | Actions |
 | click on tempo action | Meeting |
-| populate tempo field | Subject | with | Meeting 2 Subject |
+| populate tempo field | Subject | with | Meeting 2 Subject (@{rand}) |
 | populate tempo field | Description | with | Meeting 2 Description |
 | populate tempo field | Attendee(s) | with | User Two,User Three |
 | populate tempo field | Send Meeting Reminder(s) | with | Yes |
@@ -18,7 +18,7 @@
 '''Edit Meeting 3'''
 | click on tempo menu | Records |
 | click on tempo record list | Meeting Requests |
-| click on tempo record item | Meeting 2 Subject |
+| click on tempo record item | Meeting 2 Subject (@{rand}) |
 | click on tempo record item | Related Actions | facet |
 | click on tempo record item | Edit Meeting | related action |
 | populate tempo field | Start Time | with | +5 minutes |
@@ -32,16 +32,16 @@
 '''Reminder Review'''
 | click on tempo menu | Tasks |
 | click on tempo task | Review Reminder Message |
-| populate tempo field | Meeting Reminder Post | with | Meeting 2 Reminder |
+| populate tempo field | Meeting Reminder Post | with | Meeting 2 Reminder (@{rand}) |
 | click on tempo button | Submit |
 | logout from tempo |
 
 '''Reminders'''
 | wait until | +3 minutes |
 | login with username | user.two | and password | a |
-| verify tempo news feed containing text | Meeting 2 Reminder | is present |
-| toggle more info for news feed containing text | Meeting 2 Reminder |
-| verify tempo news feed containing text | Meeting 2 Reminder | and more info with label | Start Date/Time | and value | +5 minutes | is present |
+| verify tempo news feed containing text | Meeting 2 Reminder (@{rand}) | is present |
+| toggle more info for news feed containing text | Meeting 2 Reminder (@{rand}) |
+| verify tempo news feed containing text | Meeting 2 Reminder (@{rand}) | and more info with label | Start Date/Time | and value | +5 minutes | is present |
 
 '''Meeting Check in 1'''
 | click on tempo menu | Tasks |
@@ -58,21 +58,21 @@
 | login with username | user.one | and password | a |
 | click on tempo menu | Records |
 | click on tempo record list | Meeting Requests |
-| click on tempo record item | Meeting 2 Subject |
+| click on tempo record item | Meeting 2 Subject (@{rand}) |
 | verify tempo editable grid | Checked In | column | Name | row | 1 | contains | user.two |
 | verify tempo field | Not Checked In | contains | User Three |
 | logout from tempo |
 | login with username | user.two | and password | a |
 | click on tempo menu | Records |
 | click on tempo record list | Meeting Requests |
-| click on tempo record item | Meeting 2 Subject |
+| click on tempo record item | Meeting 2 Subject (@{rand}) |
 | verify tempo editable grid | Checked In | column | Name | row | 1 | contains | user.two |
 | verify tempo field | Not Checked In | contains | User Three |
 | logout from tempo |
 | login with username | user.three | and password | a |
 | click on tempo menu | Records |
 | click on tempo record list | Meeting Requests |
-| click on tempo record item | Meeting 2 Subject |
+| click on tempo record item | Meeting 2 Subject (@{rand}) |
 | verify tempo editable grid | Checked In | column | Name | row | 1 | contains | user.two |
 | verify tempo field | Not Checked In | contains | User Three |
 | logout from tempo |
@@ -81,23 +81,23 @@
 | login with username | user.one | and password | a |
 | click on tempo menu | Records |
 | click on tempo record list | Meeting Requests |
-| click on tempo record item | Meeting 2 Subject |
+| click on tempo record item | Meeting 2 Subject (@{rand}) |
 | click on tempo record item | Related Actions | facet |
 | verify tempo record item | Edit Meeting | related action is not present |
 
 '''Cancel Meeting 2'''
 | click on tempo menu | Records |
 | click on tempo record list | Meeting Requests |
-| click on tempo record item | Meeting 2 Subject |
+| click on tempo record item | Meeting 2 Subject (@{rand}) |
 | click on tempo record item | Related Actions | facet |
 | verify tempo record item | Cancel Meeting | related action is not present |
 
 '''Meeting End'''
 | wait until | +10 minutes |
 | click on tempo menu | News |
-| toggle more info for news feed containing text | Meeting 2 Subject |
-| verify tempo news feed containing text | Meeting 2 Subject | and more info with label | Checked In Attendees | and value | User Two | is present |
-| verify tempo news feed containing text | Meeting 2 Subject | and more info with label | Not Checked In Attendees | and value | User Three | is present |
+| toggle more info for news feed containing text | Meeting 2 Subject (@{rand}) |
+| verify tempo news feed containing text | Meeting 2 Subject (@{rand}) | and more info with label | Checked In Attendees | and value | User Two | is present |
+| verify tempo news feed containing text | Meeting 2 Subject (@{rand}) | and more info with label | Not Checked In Attendees | and value | User Three | is present |
 
 '''Meeting Summary'''
 | click on tempo menu | Tasks |
@@ -106,7 +106,7 @@
 | populate tempo field | Post Meeting Summary | with | Post Meeting 2 Summary |
 | click on tempo button | Submit |
 | click on tempo menu | News |
-| verify tempo news feed containing text | Meeting 2 Subject | commented with | Post Meeting 2 Summary | is present |
+| verify tempo news feed containing text | Meeting 2 Subject (@{rand}) | commented with | Post Meeting 2 Summary | is present |
 | logout from tempo |
 
 '''Meeting Feedback'''

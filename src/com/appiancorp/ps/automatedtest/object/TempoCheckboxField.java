@@ -6,30 +6,33 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TempoRadioField extends TempoField {
+public class TempoCheckboxField extends TempoField {
 
-    private static final Logger LOG = Logger.getLogger(TempoRadioField.class);
+    private static final Logger LOG = Logger.getLogger(TempoCheckboxField.class);
     private static final String XPATH_ABSOLUTE_LABEL = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input";
     private static final String XPATH_NAME_RELATIVE_INPUT = ".//label[contains(text(), '%s')]/preceding-sibling::input";
-    private static final String XPATH_NUM_RELATIVE_INPUT = "(.//input[contains(@type, 'radio')])[%d]";
-    private static final String XPATH_RELATIVE_RADIO_BUTTON_GROUP = ".//div[contains(@class, 'RadioButtonGroup')]";
+    private static final String XPATH_NUM_RELATIVE_INPUT = "(.//input[contains(@type, 'checkbox')])[%d]";
+    private static final String XPATH_RELATIVE_CHECKBOX_INPUT = ".//input[contains(@type, 'checkbox')]";
     
-    public static boolean populate(String fieldName, String fieldValue) {
+    public static boolean populate(String fieldName, String fieldValue) {        
         WebElement fieldLayout = getFieldLayout(fieldName);
         
         return populate(fieldLayout, fieldValue);
     }
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
-        WebElement radioField;
+        WebElement checkboxField;
         if (isFieldIndex(fieldValue)) {
             int index = getIndexFromFieldIndex(fieldValue);
             LOG.debug(fieldLayout.toString());
-            radioField = fieldLayout.findElement(By.xpath(String.format(XPATH_NUM_RELATIVE_INPUT, index)));
+            checkboxField = fieldLayout.findElement(By.xpath(String.format(XPATH_NUM_RELATIVE_INPUT, index)));
         } else {
-            radioField = fieldLayout.findElement(By.xpath(String.format(XPATH_NAME_RELATIVE_INPUT, fieldValue)));
+            checkboxField = fieldLayout.findElement(By.xpath(String.format(XPATH_NAME_RELATIVE_INPUT, fieldValue)));
         }
-        LOG.debug("RADIO FIELD POPULATION : " + fieldValue);
+        
+        checkboxField.click();
+        
+        LOG.debug("CHECKBOX FIELD POPULATION : " + fieldValue);
         
         return true;
     }
@@ -60,14 +63,14 @@ public class TempoRadioField extends TempoField {
         } else {
             compareString = fieldLayout.findElement(By.xpath(String.format(XPATH_NAME_RELATIVE_INPUT, fieldValue))).getAttribute("checked");
         }
-        LOG.debug("RADIO FIELD COMPARISON : Field value [" + fieldValue + "] is checked [" + compareString + "]");
+        LOG.debug("CHECKBOX FIELD COMPARISON : Field value [" + fieldValue + "] is checked [" + compareString + "]");
         
         return compareString.equals("true");
     }
     
     public static boolean isType(WebElement fieldLayout) {
         try {
-            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_RADIO_BUTTON_GROUP));
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_CHECKBOX_INPUT));
         } catch (Exception e) {
             return false;
         }

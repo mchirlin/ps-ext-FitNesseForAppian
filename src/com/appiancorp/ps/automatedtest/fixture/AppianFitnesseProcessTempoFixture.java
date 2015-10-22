@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
+import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoAction;
 import com.appiancorp.ps.automatedtest.object.TempoButton;
 import com.appiancorp.ps.automatedtest.object.TempoDateField;
@@ -236,28 +237,27 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	    return false;
 	}
 	
-	public boolean populateTempoFieldNumberWith(String fieldName, String index, String[] fieldValues) {
-        if(!TempoField.waitFor(fieldName)) {
+	public boolean populateTempoFieldInSectionWith(String fieldName, String sectionName, String[] fieldValues) {
+	    if(!TempoField.waitFor(fieldName)) {
             throw new MissingObjectException("Field", fieldName);
         }
-        int i = Integer.parseInt(index);
-        TempoField.populateIndex(fieldName, fieldValues, i);
+        TempoField.populate(fieldName, sectionName, fieldValues);
         int attempt = 0;
         
         while(attempt < 2) {
             new Actions(driver).sendKeys(Keys.TAB).perform();
-            if (TempoField.containsIndex(fieldName, fieldValues, i)) {     
+            if (TempoField.contains(fieldName, sectionName, fieldValues)) {     
                 return true;
             }
             
-            TempoField.waitFor(fieldName);
-            TempoField.clearIndex(fieldName, i);
-            TempoField.populateIndex(fieldName, fieldValues, i);
+            TempoField.waitFor(fieldName, sectionName);
+            TempoField.clear(fieldName, sectionName);
+            TempoField.populate(fieldName, sectionName, fieldValues);
             attempt++;
         }
         
         return false;
-    }
+	}
 	
 	public boolean clearTempoFieldOf(String fieldName, String[] fieldValues) {
 	    if(!TempoField.waitFor(fieldName)) {

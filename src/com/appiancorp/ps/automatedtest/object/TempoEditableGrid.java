@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.object;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,10 +19,10 @@ public class TempoEditableGrid extends TempoField {
     
     public static WebElement getFieldLayout(WebDriver driver, int timeOutSeconds, String gridName, String columnName, String rowNum) {
         // Using a columnNum
-        try {
+        if (StringUtils.isNumeric(columnName)) {
             int columnNum = Integer.parseInt(columnName);
             return driver.findElement(By.xpath(String.format(XPATH_NUM_FIELD_LAYOUT, gridName, columnNum, rowNum)));
-        } catch (Exception e) {}
+        }
         
         // Using columnName
         return driver.findElement(By.xpath(String.format(XPATH_NAME_FIELD_LAYOUT, gridName, rowNum, gridName, columnName)));
@@ -34,17 +35,15 @@ public class TempoEditableGrid extends TempoField {
     }
     
     public static boolean waitFor(WebDriver driver, int timeOutSeconds, String gridName, String columnName, String rowNum) {
-        // Using a columnNum
         try {
-            int columnNum = Integer.parseInt(columnName);
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NUM_GRID_CELL, gridName, rowNum, columnNum))));
-        } catch (Exception e) {}
-        
-        // Using a columnName
-        try {
-            (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NAME_GRID_CELL, gridName, rowNum, gridName, columnName))));
+            if (StringUtils.isNumeric(columnName)) {
+                int columnNum = Integer.parseInt(columnName);
+                (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NUM_GRID_CELL, gridName, rowNum, columnNum))));
+            } else {
+                (new WebDriverWait(driver, timeOutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NAME_GRID_CELL, gridName, rowNum, gridName, columnName))));
+            }
         } catch (Exception e) {
-            //return false;
+            return false;
         }
         
         return true;

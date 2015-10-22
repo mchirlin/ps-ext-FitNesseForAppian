@@ -5,3 +5,4 @@
 | set appian url to | http://localhost:8080/suite |
 | set data source name to | jdbc/AppianBusinessDS |
 | set start datetime |
+| set | rand | get random string | 5 |

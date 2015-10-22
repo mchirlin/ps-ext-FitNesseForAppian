@@ -1,6 +1,6 @@
 package com.appiancorp.ps.automatedtest.test;
 
-import com.appiancorp.ps.automatedtest.fixture.MissingObjectException;
+import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.fixture.AppianFitnesseProcessTempoFixture;
 
 public class TestAppianTempoFixture {
