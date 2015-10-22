@@ -2,6 +2,7 @@ package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,10 +19,11 @@ public class TempoCheckboxField extends TempoField {
     public static boolean populate(String fieldName, String fieldValue) {        
         WebElement fieldLayout = getFieldLayout(fieldName);
         
-        return populate(fieldLayout, fieldValue);
+        return populate(fieldLayout, fieldName, fieldValue);
     }
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
+ 
         WebElement checkboxField;
         if (isFieldIndex(fieldValue)) {
             int index = getIndexFromFieldIndex(fieldValue);
@@ -56,16 +58,21 @@ public class TempoCheckboxField extends TempoField {
         } catch (Exception e) {}
         
         // For editable
-        String compareString;
-        if (isFieldIndex(fieldValue)) {
-            int index = getIndexFromFieldIndex(fieldValue);
-            compareString = fieldLayout.findElement(By.xpath(String.format(XPATH_NUM_RELATIVE_INPUT, index))).getAttribute("checked");
-        } else {
-            compareString = fieldLayout.findElement(By.xpath(String.format(XPATH_NAME_RELATIVE_INPUT, fieldValue))).getAttribute("checked");
+        boolean checked = false;
+        try {
+            if (isFieldIndex(fieldValue)) {
+                int index = getIndexFromFieldIndex(fieldValue);
+                checked = fieldLayout.findElement(By.xpath(String.format(XPATH_NUM_RELATIVE_INPUT, index))).getAttribute("checked").equals("true");
+            } else {
+                checked = fieldLayout.findElement(By.xpath(String.format(XPATH_NAME_RELATIVE_INPUT, fieldValue))).getAttribute("checked").equals("true");
+            }
+        } catch (NoSuchElementException nse) {
+            return false;
         }
-        LOG.debug("CHECKBOX FIELD COMPARISON : Field value [" + fieldValue + "] is checked [" + compareString + "]");
         
-        return compareString.equals("true");
+        LOG.debug("CHECKBOX FIELD COMPARISON : Field value [" + fieldValue + "] is checked [" + checked + "]");
+        
+        return checked;
     }
     
     public static boolean isType(WebElement fieldLayout) {

@@ -13,13 +13,11 @@ import com.appiancorp.ps.automatedtest.object.TempoObject;
 public class TempoField extends TempoObject {
        
     private static final Logger LOG = Logger.getLogger(TempoField.class);
-    protected static final String XPATH_LABEL_CONTAINS = "[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]";
+    protected static final String XPATH_LABEL_CONTAINS = "[text() = '%s']/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]";
     protected static final String XPATH_FIELD_LAYOUT = "//span" + XPATH_LABEL_CONTAINS + "| //label" + XPATH_LABEL_CONTAINS;
     protected static final String XPATH_FIELD_LAYOUT_INDEX = "(" + XPATH_FIELD_LAYOUT + ")[%d]";
     protected static final String XPATH_FIELD_SECTION_LAYOUT = "//h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::span" + XPATH_LABEL_CONTAINS + "| //h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::label" + XPATH_LABEL_CONTAINS;
     protected static final String XPATH_FIELD_SECTION_LAYOUT_INDEX = "//h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')][%d]";
-    protected static final String XPATH_FIELD_LABEL = "//label[contains(text(),'%s')] | //span[contains(text(), '%s')]";
-    protected static final String XPATH_FIELD_LABEL_INDEX = "(" + XPATH_FIELD_LABEL + ")[%d]";
     protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = ".//p[contains(text(), '%s') and contains(@class, 'readonly')] | .//div[contains(text(), '%s') and not(contains(@class, 'textarea_print'))]";
     
     private static final String TEXT_FIELD = "textField";
@@ -50,63 +48,73 @@ public class TempoField extends TempoObject {
             int index = getIndexFromFieldIndex(fieldName);
             return driver.findElement(By.xpath(String.format(XPATH_FIELD_SECTION_LAYOUT_INDEX, sectionName, index)));
         } else {
-            return driver.findElement(By.xpath(String.format(XPATH_FIELD_SECTION_LAYOUT, sectionName, fieldName, fieldName)));
+            return driver.findElement(By.xpath(String.format(XPATH_FIELD_SECTION_LAYOUT, sectionName, fieldName, sectionName, fieldName)));
         }
     }
     
     public static boolean populate(String fieldName, String[] fieldValues){
-        WebElement fieldLayout = getFieldLayout(fieldName);        
+        for (String fieldValue : fieldValues) {
+            WebElement fieldLayout = getFieldLayout(fieldName);
+            if (!populate(fieldLayout, fieldName, fieldValue)) return false;
+        }
         
-        return populate(fieldLayout, fieldName, fieldValues);
+        return true;
     }
     
     public static boolean populate(String fieldName, String fieldSection, String[] fieldValues){
-        WebElement fieldLayout = getFieldLayout(fieldName, fieldSection);        
-        
-        return populate(fieldLayout, fieldName, fieldValues);
-    }
-    
-    public static boolean populate(WebElement fieldLayout, String fieldName, String[] fieldValues) {      
-        for (int i = 0; i < fieldValues.length; i++) {
-            fieldValues[i] = TempoObject.parseVariable(fieldValues[i]);
+        for (String fieldValue : fieldValues) {    
+            WebElement fieldLayout = getFieldLayout(fieldName, fieldSection);
+            if (!populate(fieldLayout, fieldName, fieldValue)) return false;
         }
         
-        String fieldType = getFieldType(fieldLayout, fieldValues);
+        return true;
+    }
+    
+    public static boolean populate(WebElement fieldLayout, String fieldName, String fieldValue) {      
+        String fieldType = getFieldType(fieldLayout, fieldValue);
         LOG.debug("POPULATION TYPE: " + fieldType);
-        switch (fieldType) {
         
-            case TEXT_FIELD: 
-                return TempoTextField.populate(fieldLayout, fieldValues[0]);
-                
-            case PARAGRAPH_FIELD:
-                return TempoParagraphField.populate(fieldLayout, fieldValues[0]);
-                
-            case INTEGER_FIELD: 
-                return TempoIntegerField.populate(fieldLayout, fieldValues[0]);
-                
-            case SELECT_FIELD:
-                return TempoSelectField.populate(fieldLayout, fieldValues[0]);
-                
-            case RADIO_FIELD: 
-                return TempoRadioField.populate(fieldLayout, fieldValues[0]);
-                
-            case CHECKBOX_FIELD: 
-                return TempoCheckboxField.populate(fieldLayout, fieldValues[0]);
+        fieldValue = TempoObject.parseVariable(fieldValue);
             
-            case FILE_UPLOAD_FIELD: 
-                return TempoFileUploadField.populate(fieldLayout, fieldValues[0]);
+        try {
+            switch (fieldType) {  
+                case TEXT_FIELD: 
+                    return TempoTextField.populate(fieldLayout, fieldValue);
+                    
+                case PARAGRAPH_FIELD:
+                    return TempoParagraphField.populate(fieldLayout, fieldValue);
+                    
+                case INTEGER_FIELD: 
+                    return TempoIntegerField.populate(fieldLayout, fieldValue);
+                    
+                case SELECT_FIELD:
+                    return TempoSelectField.populate(fieldLayout, fieldValue);
+        
+                case RADIO_FIELD: 
+                    return TempoRadioField.populate(fieldLayout, fieldValue);
+                    
+                case CHECKBOX_FIELD: 
+                    return TempoCheckboxField.populate(fieldLayout, fieldValue);
                 
-            case DATE_FIELD: 
-                return TempoDateField.populate(fieldLayout, fieldValues[0]);
+                case FILE_UPLOAD_FIELD: 
+                    return TempoFileUploadField.populate(fieldLayout, fieldValue);
+                    
+                case DATE_FIELD: 
+                    return TempoDateField.populate(fieldLayout, fieldValue);
+                    
+                case DATETIME_FIELD: 
+                    return TempoDatetimeField.populate(fieldLayout, fieldValue);
+                    
+                case USER_PICKER_FIELD:
+                    return TempoUserPickerField.populate(fieldLayout, fieldName, fieldValue);
                 
-            case DATETIME_FIELD: 
-                return TempoDatetimeField.populate(fieldLayout, fieldValues[0]);
-                
-            case USER_PICKER_FIELD:
-                return TempoUserPickerField.populate(fieldLayout, fieldName, fieldValues);
-            
-            default:
-                return false;
+                default:
+                    return false;
+            }
+        } catch (StaleElementReferenceException ste) {
+            // If getting a stale element, try again immediately
+            LOG.warn("Stale element reference for field: " + fieldName);
+            return populate(fieldName, fieldValue);
         }
     }
     
@@ -116,9 +124,9 @@ public class TempoField extends TempoObject {
             if (isFieldIndex(fieldName)) {
                 String fName = getFieldFromFieldIndex(fieldName);
                 int index = getIndexFromFieldIndex(fieldName);
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_LABEL_INDEX, fName, fName, index))));
+                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_LAYOUT_INDEX, fName, fName, index))));
             } else {
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_LABEL, fieldName, fieldName))));
+                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_LAYOUT, fieldName, fieldName))));
             }  
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
@@ -133,11 +141,10 @@ public class TempoField extends TempoObject {
         try {
             // Scroll the field layout into view
             if (isFieldIndex(fieldName)) {
-                String fName = getFieldFromFieldIndex(fieldName);
                 int index = getIndexFromFieldIndex(fieldName);
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_LABEL_INDEX, fName, fName, index))));
+                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_SECTION_LAYOUT_INDEX, sectionName, index))));
             } else {
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_LABEL, fieldName, fieldName))));
+                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_SECTION_LAYOUT, sectionName, fieldName, sectionName, fieldName))));
             }  
             WebElement fieldLayout = getFieldLayout(fieldName, sectionName);
             scrollIntoView(fieldLayout);
@@ -193,7 +200,7 @@ public class TempoField extends TempoObject {
     }
     
     public static boolean clearOf(WebElement fieldLayout, String[] fieldValues) {
-        String fieldType = getFieldType(fieldLayout, fieldValues);
+        String fieldType = getFieldType(fieldLayout, fieldValues[0]);
         
         switch (fieldType) {
         
@@ -206,59 +213,64 @@ public class TempoField extends TempoObject {
     }
     
     public static boolean contains(String fieldName, String[] fieldValues) {
-        WebElement fieldLayout = getFieldLayout(fieldName);
-
-        return contains(fieldLayout, fieldName, fieldValues);
+        for (String fieldValue : fieldValues) {
+            WebElement fieldLayout = getFieldLayout(fieldName);
+            if (!contains(fieldLayout, fieldName, fieldValue)) return false;
+        }
+        
+        return true;
     }
     
     public static boolean contains(String fieldName, String sectionName, String[] fieldValues) {
-        WebElement fieldLayout = getFieldLayout(fieldName, sectionName);
-
-        return contains(fieldLayout, fieldName, fieldValues);
-    }
-    
-    public static boolean contains(WebElement fieldLayout, String fieldName, String[] fieldValues) {
-        for (int i = 0; i < fieldValues.length; i++) {
-            fieldValues[i] = TempoObject.parseVariable(fieldValues[i]);
+        for (String fieldValue : fieldValues) {
+            WebElement fieldLayout = getFieldLayout(fieldName, sectionName);
+            if (!contains(fieldLayout, fieldName, fieldValue)) return false; 
         }
         
-        String fieldType = getFieldType(fieldLayout, fieldValues);
+        return true;
+    }
+    
+    public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue) {
+        String fieldType = getFieldType(fieldLayout, fieldValue);
         LOG.debug("CONTAINS TYPE: " + fieldType);
+        
+        fieldValue = TempoObject.parseVariable(fieldValue);
+        
         try {
             switch (fieldType) {
             
                 case READ_ONLY_FIELD: 
-                    return contains(fieldLayout, fieldValues[0]);
+                    return contains(fieldLayout, fieldValue);
             
                 case TEXT_FIELD: 
-                    return TempoTextField.contains(fieldLayout, fieldValues[0]);
+                    return TempoTextField.contains(fieldLayout, fieldValue);
                     
                 case PARAGRAPH_FIELD: 
-                    return TempoParagraphField.contains(fieldLayout, fieldValues[0]);
+                    return TempoParagraphField.contains(fieldLayout, fieldValue);
                     
                 case INTEGER_FIELD:
-                    return TempoIntegerField.contains(fieldLayout, fieldValues[0]);
+                    return TempoIntegerField.contains(fieldLayout, fieldValue);
                     
                 case SELECT_FIELD:
-                    return TempoSelectField.contains(fieldLayout, fieldValues[0]);
+                    return TempoSelectField.contains(fieldLayout, fieldValue);
                     
                 case RADIO_FIELD:
-                    return TempoRadioField.contains(fieldLayout, fieldValues[0]);
+                    return TempoRadioField.contains(fieldLayout, fieldValue);
                     
                 case CHECKBOX_FIELD: 
-                    return TempoCheckboxField.contains(fieldLayout, fieldValues[0]);
+                    return TempoCheckboxField.contains(fieldLayout, fieldValue);
                     
                 case FILE_UPLOAD_FIELD:
-                    return TempoFileUploadField.contains(fieldLayout, fieldValues[0]);
+                    return TempoFileUploadField.contains(fieldLayout, fieldValue);
                     
                 case DATE_FIELD:
-                    return TempoDateField.contains(fieldLayout, fieldValues[0]);
+                    return TempoDateField.contains(fieldLayout, fieldValue);
                     
                 case DATETIME_FIELD:
-                    return TempoDatetimeField.contains(fieldLayout, fieldValues[0]);
+                    return TempoDatetimeField.contains(fieldLayout, fieldValue);
                     
                 case USER_PICKER_FIELD: 
-                    return TempoUserPickerField.contains(fieldLayout, fieldName, fieldValues);
+                    return TempoUserPickerField.contains(fieldLayout, fieldName, fieldValue);
                     
                 default:
                    return false;
@@ -266,7 +278,7 @@ public class TempoField extends TempoObject {
         } catch (StaleElementReferenceException ste) {
             // If getting a stale element, try again immediately
             LOG.warn("Stale element reference for field: " + fieldName);
-            return contains(fieldName, fieldValues);
+            return true;
         }
     }
     
@@ -278,9 +290,9 @@ public class TempoField extends TempoObject {
         return compareString.contains(fieldValue);
     }
     
-    public static boolean isReadOnly(WebElement fieldLayout, String[] fieldValues) {
+    public static boolean isReadOnly(WebElement fieldLayout, String fieldValue) {
         try {
-            fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_READ_ONLY_FIELD, fieldValues[0], fieldValues[0])));
+            fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_READ_ONLY_FIELD, fieldValue, fieldValue)));
         } catch (Exception e) {
             return false;
         }
@@ -288,8 +300,8 @@ public class TempoField extends TempoObject {
         return true;
     }
     
-    public static String getFieldType(WebElement fieldLayout, String[] fieldValues) {
-        if (TempoField.isReadOnly(fieldLayout, fieldValues)) return READ_ONLY_FIELD;
+    public static String getFieldType(WebElement fieldLayout, String fieldValue) {
+        if (TempoField.isReadOnly(fieldLayout, fieldValue)) return READ_ONLY_FIELD;
         else if (TempoTextField.isType(fieldLayout)) return TEXT_FIELD;
         else if (TempoParagraphField.isType(fieldLayout)) return PARAGRAPH_FIELD;
         else if (TempoIntegerField.isType(fieldLayout)) return INTEGER_FIELD;

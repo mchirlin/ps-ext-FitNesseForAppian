@@ -24,12 +24,6 @@ public class TempoDatetimeField extends TempoField{
     private static final String XPATH_RELATIVE_TIME_PLACEHOLDER = ".//input[contains(@class, 'aui-TimeInput-Placeholder')]";
     private static final String XPATH_RELATIVE_TIME_INPUT = ".//input[contains(@class, 'aui-TimeInput-TextBox')]";
     
-    public static boolean populate(String fieldName, String fieldValue) {
-        WebElement fieldLayout = getFieldLayout(fieldName);
-        
-        return populate(fieldLayout, fieldValue);
-    }
-    
     public static boolean populate(WebElement fieldLayout, String fieldValue) {        
         Date d;
         
@@ -66,7 +60,7 @@ public class TempoDatetimeField extends TempoField{
         String datetimeString = dateString + " " + timeString;
 
         try{  
-            String compareString = new SimpleDateFormat(TempoObject.DATETIME_DISPLAY_FORMAT_STRING).format(DateUtils.parseDate(datetimeString, DATETIME_CONTAINS_FORMAT_STRING));
+            String compareString = new SimpleDateFormat(TempoObject.DATETIME_DISPLAY_FORMAT_STRING).format(DateUtils.parseDate(datetimeString, DATETIME_FORMAT_STRING));
             LOG.debug("DATETIME FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");
             
             return compareString.equals(fieldValue);
@@ -89,7 +83,11 @@ public class TempoDatetimeField extends TempoField{
             dateField.sendKeys(Keys.DELETE);
             dateField.sendKeys(dateValue);
         } else {
-            if (datePlaceholder.isDisplayed()) datePlaceholder.click();    
+            if (datePlaceholder.isDisplayed()) {
+                LOG.debug("trying to click placeholder");
+                datePlaceholder.click();    
+            }
+            LOG.debug("trying to send keys to date field");
             dateField.sendKeys(dateValue);
         }
                 

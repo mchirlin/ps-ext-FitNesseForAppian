@@ -21,12 +21,6 @@ public class TempoDateField extends TempoField{
     private static final String XPATH_RELATIVE_DATE_PLACEHOLDER = ".//input[contains(@class, 'aui-DateInput-Placeholder')]";
     private static final String XPATH_RELATIVE_DATE_INPUT = ".//input[contains(@class, 'aui-DateInput-TextBox')]";
     
-    public static boolean populate(String fieldName, String fieldValue) {
-        WebElement fieldLayout = getFieldLayout(fieldName);
-        
-        return populate(fieldLayout, fieldValue);
-    }
-    
     public static boolean populate(WebElement fieldLayout, String fieldValue) {        
         fieldValue = parseVariable(fieldValue);
         Date d;
@@ -61,7 +55,7 @@ public class TempoDateField extends TempoField{
         String dateString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).getAttribute("value");
 
         try{  
-            Date compareDate = DateUtils.parseDate(dateString, DATE_CONTAINS_FORMAT_STRING);
+            Date compareDate = DateUtils.parseDate(dateString, DATE_FORMAT_STRING);
             Date fieldDate = DateUtils.parseDate(fieldValue, DATETIME_DISPLAY_FORMAT_STRING);
             LOG.debug("DATE FIELD COMPARISON : Field value [" + compareDate.toString() + "] compared to Entered value [" + fieldDate.toString() + "]");
             

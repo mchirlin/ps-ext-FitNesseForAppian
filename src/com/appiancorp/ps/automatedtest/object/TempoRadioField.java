@@ -15,12 +15,6 @@ public class TempoRadioField extends TempoField {
     private static final String XPATH_NUM_RELATIVE_INPUT = "(.//input[contains(@type, 'radio')])[%d]";
     private static final String XPATH_RELATIVE_RADIO_BUTTON_GROUP = ".//div[contains(@class, 'RadioButtonGroup')]";
     
-    public static boolean populate(String fieldName, String fieldValue) {
-        WebElement fieldLayout = getFieldLayout(fieldName);
-        
-        return populate(fieldLayout, fieldValue);
-    }
-    
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement radioField;
         if (isFieldIndex(fieldValue)) {

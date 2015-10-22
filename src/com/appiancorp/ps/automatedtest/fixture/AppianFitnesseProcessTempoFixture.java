@@ -7,25 +7,16 @@ import org.openqa.selenium.interactions.Actions;
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoAction;
 import com.appiancorp.ps.automatedtest.object.TempoButton;
-import com.appiancorp.ps.automatedtest.object.TempoDateField;
-import com.appiancorp.ps.automatedtest.object.TempoDatetimeField;
 import com.appiancorp.ps.automatedtest.object.TempoField;
-import com.appiancorp.ps.automatedtest.object.TempoFileUploadField;
 import com.appiancorp.ps.automatedtest.object.TempoGrid;
-import com.appiancorp.ps.automatedtest.object.TempoIntegerField;
 import com.appiancorp.ps.automatedtest.object.TempoLinkField;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoMenu;
 import com.appiancorp.ps.automatedtest.object.TempoNews;
-import com.appiancorp.ps.automatedtest.object.TempoParagraphField;
-import com.appiancorp.ps.automatedtest.object.TempoRadioField;
 import com.appiancorp.ps.automatedtest.object.TempoRecordItem;
 import com.appiancorp.ps.automatedtest.object.TempoRecordList;
 import com.appiancorp.ps.automatedtest.object.TempoReport;
-import com.appiancorp.ps.automatedtest.object.TempoSelectField;
 import com.appiancorp.ps.automatedtest.object.TempoTask;
-import com.appiancorp.ps.automatedtest.object.TempoTextField;
-import com.appiancorp.ps.automatedtest.object.TempoUserPickerField;
 
 public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBaseFixture {
 	
@@ -39,7 +30,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	/** TEMPO **/
 	
 	// Tempo Menu
-	public boolean clickOnTempoMenu(String tempoMenu) {
+	public boolean clickOnMenu(String tempoMenu) {
 		if(!TempoMenu.waitFor(tempoMenu)) {
 		    throw new MissingObjectException("Tempo Menu", tempoMenu);
 		}
@@ -58,11 +49,11 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	
 	/** NEWS **/
     
-    public boolean verifyTempoNewsFeedContainingTextIsPresent(String newsText) {
+    public boolean verifyNewsFeedContainingTextIsPresent(String newsText) {
         return TempoNews.refreshAndWaitFor(newsText);
     }
     
-    public boolean verifyTempoNewsFeedContainingTextIsNotPresent(String newsText) {
+    public boolean verifyNewsFeedContainingTextIsNotPresent(String newsText) {
         return !TempoNews.waitFor(newsText);
     }
     
@@ -74,7 +65,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoNews.toggleMoreInfo(newsText);
     }
     
-    public boolean verifyTempoNewsFeedContainingTextAndMoreInfoWithLabelAndValueIsPresent(String newsText, String label, String value) {     
+    public boolean verifyNewsFeedContainingTextAndMoreInfoWithLabelAndValueIsPresent(String newsText, String label, String value) {     
         if (!TempoNews.refreshAndWaitFor(newsText)) {
             throw new MissingObjectException("News Post", newsText);
         }
@@ -82,7 +73,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoNews.waitForLabelAndValue(newsText, label, value);
     }
     
-    public boolean verifyTempoNewsFeedContainingTextTaggedWithIsPresent(String newsText, String newsTag) {
+    public boolean verifyNewsFeedContainingTextTaggedWithIsPresent(String newsText, String newsTag) {
         if (!TempoNews.refreshAndWaitFor(newsText)) {
             throw new MissingObjectException("News Post", newsText);
         }
@@ -90,13 +81,13 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoNews.waitForTag(newsText, newsTag);
     }
     
-    public boolean verifyTempoNewsFeedContainingTextCommentedWithIsPresent(String newsText, String newsComment) {
+    public boolean verifyNewsFeedContainingTextCommentedWithIsPresent(String newsText, String newsComment) {
         return TempoNews.refreshAndWaitForComment(newsText, newsComment);
     }
     
     /** TASKS **/
     
-    public boolean clickOnTempoTask(String taskName) {
+    public boolean clickOnTask(String taskName) {
        if(!TempoTask.refreshAndWaitFor(taskName)) {
            throw new MissingObjectException("Task", taskName);
        }
@@ -104,15 +95,15 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
        return TempoTask.click(taskName);
     }
     
-    public boolean verifyTempoTaskIsPresent(String taskName) {
+    public boolean verifyTaskIsPresent(String taskName) {
         return TempoTask.refreshAndWaitFor(taskName);
     }
     
-    public boolean verifyTempoTaskIsNotPresent(String taskName) {
+    public boolean verifyTaskIsNotPresent(String taskName) {
         return !TempoTask.waitFor(taskName);
     }
     
-    public boolean verifyTempoTaskHasDeadlineOf(String taskName, String deadline) {
+    public boolean verifyTaskHasDeadlineOf(String taskName, String deadline) {
         if(!TempoTask.waitFor(taskName)) {
             throw new MissingObjectException("Task", taskName);
         }
@@ -123,7 +114,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
     /** RECORDS **/
     
     // Record Item
-    public boolean clickOnTempoRecordItem(String itemName) {
+    public boolean clickOnRecordItem(String itemName) {
         if(!TempoRecordItem.refreshAndWaitFor(itemName)) {
             throw new MissingObjectException("Tempo Record Item", itemName);
         }
@@ -131,15 +122,15 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoRecordItem.click(itemName);
     }
     
-    public boolean verifyTempoRecordItemIsPresent(String itemName) {
+    public boolean verifyRecordItemIsPresent(String itemName) {
         return TempoRecordItem.waitFor(itemName);
     }
     
-    public boolean verifyTempoRecordItemIsNotPresent(String itemName) {
+    public boolean verifyRecordItemIsNotPresent(String itemName) {
         return !TempoRecordItem.waitFor(itemName);
     }
     
-    public boolean clickOnTempoRecordItemFacet(String facetName) {
+    public boolean clickOnRecordItemFacet(String facetName) {
         if(!TempoRecordItem.waitForFacet(facetName)) {
             throw new MissingObjectException("Record Item Facet", facetName);
         }
@@ -147,7 +138,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoRecordItem.clickOnFacet(facetName);
     }
     
-    public boolean clickOnTempoRecordItemRelatedAction(String relatedActionName) {
+    public boolean clickOnRecordItemRelatedAction(String relatedActionName) {
         if(!TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName)) {
             throw new MissingObjectException("Related Action", relatedActionName);
         }
@@ -155,16 +146,16 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoRecordItem.clickOnRelatedAction(relatedActionName);
     }
     
-    public boolean verifyTempoRecordItemRelatedActionIsPresent(String relatedActionName) {
+    public boolean verifyRecordItemRelatedActionIsPresent(String relatedActionName) {
         return TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName);
     }
     
-    public boolean verifyTempoRecordItemRelatedActionIsNotPresent(String relatedActionName) {
+    public boolean verifyRecordItemRelatedActionIsNotPresent(String relatedActionName) {
         return !TempoRecordItem.waitForRelatedAction(relatedActionName);
     }
     
     // Record List  
-    public boolean clickOnTempoRecordList(String listName) {
+    public boolean clickOnRecordList(String listName) {
         if(!TempoRecordList.waitFor(listName)) {
             throw new MissingObjectException("Record List", listName);
         }
@@ -172,7 +163,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoRecordList.click(listName);
     }
     
-    public boolean clickOnTempoRecordListFacetOption(String facetName) {
+    public boolean clickOnRecordListFacetOption(String facetName) {
         if(!TempoRecordList.waitForFacetOption(facetName)) {
             throw new MissingObjectException("Record List Facet", facetName);
         }
@@ -180,13 +171,13 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoRecordList.clickOnFacetOption(facetName);       
     }
     
-    public boolean verifyTempoRecordListFacetOptionIsPresent(String facetName) {
+    public boolean verifyRecordListFacetOptionIsPresent(String facetName) {
         return TempoRecordList.waitForFacetOption(facetName);
     }
     
     /** REPORTS **/
     
-    public boolean clickOnTempoReport(String reportName) {
+    public boolean clickOnReport(String reportName) {
         if(!TempoReport.waitFor(reportName)) {
             throw new MissingObjectException("Report", reportName);
         }
@@ -196,7 +187,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	
     /** ACTIONS **/
     
-	public boolean clickOnTempoAction(String actionName) {
+	public boolean clickOnAction(String actionName) {
         if(!TempoAction.waitFor(actionName)) {
             throw new MissingObjectException("Action", actionName);
         }
@@ -204,14 +195,14 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoAction.click(actionName);
     }
 	
-	public boolean verifyTempoActionCompleted() {
+	public boolean verifyActionCompleted() {
 	    return TempoAction.isCompleted();
 	}
 	
 	/** FORMS **/
-	
+
 	// Generic Field
-	public boolean populateTempoFieldWith(String fieldName, String[] fieldValues) {
+	public boolean populateFieldWith(String fieldName, String[] fieldValues) {
 	    if(!TempoField.waitFor(fieldName)) {
             throw new MissingObjectException("Field", fieldName);
         }
@@ -233,9 +224,9 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	    return false;
 	}
 	
-	public boolean populateTempoFieldInSectionWith(String fieldName, String sectionName, String[] fieldValues) {
-	    if(!TempoField.waitFor(fieldName)) {
-            throw new MissingObjectException("Field", fieldName);
+	public boolean populateFieldInSectionWith(String fieldName, String sectionName, String[] fieldValues) {
+	    if(!TempoField.waitFor(fieldName, sectionName)) {
+            throw new MissingObjectException("Field", sectionName + fieldName);
         }
         TempoField.populate(fieldName, sectionName, fieldValues);
         int attempt = 0;
@@ -255,7 +246,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return false;
 	}
 	
-	public boolean clearTempoFieldOf(String fieldName, String[] fieldValues) {
+	public boolean clearFieldOf(String fieldName, String[] fieldValues) {
 	    if(!TempoField.waitFor(fieldName)) {
             throw new MissingObjectException("Field", fieldName);
         }
@@ -263,7 +254,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoField.clearOf(fieldName, fieldValues);
 	}
 	
-	public boolean verifyTempoFieldContains(String fieldName, String[] fieldValues) {
+	public boolean verifyFieldContains(String fieldName, String[] fieldValues) {
         if(!TempoField.waitFor(fieldName)) {
             throw new MissingObjectException("Field", fieldName);
         }
@@ -271,89 +262,8 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoField.contains(fieldName, fieldValues);
     }
 	
-	// Text Field
-    public boolean populateTempoTextFieldWith(String fieldName, String fieldValue) {
-        if(!TempoTextField.waitFor(fieldName)) {
-            throw new MissingObjectException("Field", fieldName);
-        }
-        
-        return TempoTextField.populate(fieldName, fieldValue);
-    }
-    
-	// Paragraph Field
-	public boolean populateTempoParagraphFieldWith(String fieldName, String fieldValue) {
-	    if(!TempoParagraphField.waitFor(fieldName)) {
-            throw new MissingObjectException("Field", fieldName);
-        }
-        
-        return TempoParagraphField.populate(fieldName, fieldValue);
-	}
-	
-	// Integer Field
-    public boolean populateTempoIntegerFieldWith(String fieldName, String fieldValue) {
-        if(!TempoIntegerField.waitFor(fieldName)) {
-            throw new MissingObjectException("Field", fieldName);
-        }
-        
-        return TempoIntegerField.populate(fieldName, fieldValue);
-    }
-    
-    // Radio Field
-    public boolean populateTempoRadioFieldWith(String fieldName, String fieldValue) {
-        if(!TempoRadioField.waitFor(fieldName)) {
-            throw new MissingObjectException("Field", fieldName);
-        }
-        
-        return TempoRadioField.populate(fieldName, fieldValue);  
-    }
-    
-    // Select Field
-    public boolean populateTempoSelectFieldWith(String fieldName, String fieldValue) {
-        if(!TempoSelectField.waitFor(fieldName)) {
-            throw new MissingObjectException("Field", fieldName);
-        }
-        
-        return TempoSelectField.populate(fieldName, fieldValue);  
-    }
-    
-    // Group Picker Field   
-    public boolean populateTempoUserPickerFieldWith(String fieldName, String[] fieldValues) { 
-        if(!TempoUserPickerField.waitFor(fieldName)) {
-            throw new MissingObjectException("Field", fieldName);
-        }
-        
-        return TempoUserPickerField.populate(fieldName, fieldValues);      
-    }
-    
-    // Datetime Field
-    public boolean populateTempoDatetimeFieldWith(String fieldName, String fieldValue) {
-        if(!TempoDatetimeField.waitFor(fieldName)) {
-            throw new MissingObjectException("Field", fieldName);
-        }
-        
-        return TempoDatetimeField.populate(fieldName, fieldValue);  
-    }
-    
-    // Date Field
-    public boolean populateTempoDateFieldWith(String fieldName, String fieldValue) {
-        if(!TempoDateField.waitFor(fieldName)) {
-            throw new MissingObjectException("Field", fieldName);
-        }
-        
-        return TempoDateField.populate(fieldName, fieldValue);  
-    }
-    
-    // File Upload Field
-    public boolean populateTempoFileUploadFieldWith(String fieldName, String fieldValue) {
-        if(!TempoFileUploadField.waitFor(fieldName)) {
-            throw new MissingObjectException("Field", fieldName);
-        }
-        
-        return TempoFileUploadField.populate(fieldName, fieldValue);  
-    }
-    
     // Grid Field   
-    public boolean populateTempoEditableGridColumnRowWith(String gridName, String columnName, String rowNum, String[] fieldValues) {
+    public boolean populateEditableGridColumnRowWith(String gridName, String columnName, String rowNum, String[] fieldValues) {
         if(!TempoGrid.waitFor(gridName, columnName, rowNum)) {
             throw new MissingObjectException("Grid", gridName);
         }
@@ -377,7 +287,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return false;
     }
     
-    public boolean verifyTempoEditableGridColumnRowContains(String gridName, String columnName, String rowNum, String[] fieldValues) {
+    public boolean verifyEditableGridColumnRowContains(String gridName, String columnName, String rowNum, String[] fieldValues) {
         if(!TempoGrid.waitFor(gridName, columnName, rowNum)) {
             throw new MissingObjectException("Grid", gridName);
         }
@@ -386,7 +296,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
     }
 	
     // Link
-    public boolean clickOnTempoLink(String linkName) {
+    public boolean clickOnLink(String linkName) {
         if(!TempoLinkField.waitFor(linkName)) {
             throw new MissingObjectException("Link", linkName);
         }
@@ -394,12 +304,12 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoLinkField.click(linkName); 
     }
     
-    public boolean clickTempoLink(String linkName) {
-        return clickOnTempoLink(linkName); 
+    public boolean clickLink(String linkName) {
+        return clickOnLink(linkName); 
     }
     
 	// Button	
-	public boolean clickOnTempoButton(String buttonName) {
+	public boolean clickOnButton(String buttonName) {
 		if (!TempoButton.waitFor(buttonName)) {
             throw new MissingObjectException("Button", buttonName);
         }
@@ -407,8 +317,8 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 		return TempoButton.click(buttonName);
 	}
 	
-	public boolean clickTempoButton(String buttonName) {
-        return clickTempoButton(buttonName);
+	public boolean clickButton(String buttonName) {
+        return clickOnButton(buttonName);
     }
 }
  ;

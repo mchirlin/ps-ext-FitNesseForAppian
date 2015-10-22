@@ -13,12 +13,6 @@ public class TempoIntegerField extends TempoField {
     private static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/div/input";
     private static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'aui-TextInput')]";
     
-    public static boolean populate(String fieldName, String fieldValue) {
-        WebElement fieldLayout = getFieldLayout(fieldName);
-        
-        return populate(fieldLayout, fieldValue);
-    }
-    
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement intField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         intField.clear();
