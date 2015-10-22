@@ -86,7 +86,7 @@ public class TempoDateField extends TempoField{
             dateField.sendKeys(Keys.DELETE);
             dateField.sendKeys(dateValue);
         } else {
-            datePlaceholder.click();    
+            if (datePlaceholder.isDisplayed()) datePlaceholder.click();
             dateField.sendKeys(dateValue);
         }
                 

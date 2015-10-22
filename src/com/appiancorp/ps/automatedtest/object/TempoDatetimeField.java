@@ -88,7 +88,7 @@ public class TempoDatetimeField extends TempoField{
             dateField.sendKeys(Keys.DELETE);
             dateField.sendKeys(dateValue);
         } else {
-            datePlaceholder.click();    
+            if (datePlaceholder.isDisplayed()) datePlaceholder.click();    
             dateField.sendKeys(dateValue);
         }
                 
@@ -112,7 +112,7 @@ public class TempoDatetimeField extends TempoField{
             timeField.sendKeys(Keys.DELETE);
             timeField.sendKeys(timeValue);
         } else {
-            timePlaceholder.click();
+            if (timePlaceholder.isDisplayed()) timePlaceholder.click();
             timeField.sendKeys(timeValue);
         }
         

@@ -24,7 +24,6 @@ public class TempoCheckboxField extends TempoField {
         WebElement checkboxField;
         if (isFieldIndex(fieldValue)) {
             int index = getIndexFromFieldIndex(fieldValue);
-            LOG.debug(fieldLayout.toString());
             checkboxField = fieldLayout.findElement(By.xpath(String.format(XPATH_NUM_RELATIVE_INPUT, index)));
         } else {
             checkboxField = fieldLayout.findElement(By.xpath(String.format(XPATH_NAME_RELATIVE_INPUT, fieldValue)));

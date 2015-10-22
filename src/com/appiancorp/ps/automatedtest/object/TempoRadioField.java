@@ -29,6 +29,7 @@ public class TempoRadioField extends TempoField {
         } else {
             radioField = fieldLayout.findElement(By.xpath(String.format(XPATH_NAME_RELATIVE_INPUT, fieldValue)));
         }
+        radioField.click();
         LOG.debug("RADIO FIELD POPULATION : " + fieldValue);
         
         return true;

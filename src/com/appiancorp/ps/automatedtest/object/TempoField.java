@@ -239,7 +239,7 @@ public class TempoField extends TempoObject {
                     return TempoIntegerField.contains(fieldLayout, fieldValues[0]);
                     
                 case SELECT_FIELD:
-                    return TempoSelectField.contains(fieldLayout, fieldName, fieldValues[0]);
+                    return TempoSelectField.contains(fieldLayout, fieldValues[0]);
                     
                 case RADIO_FIELD:
                     return TempoRadioField.contains(fieldLayout, fieldValues[0]);

@@ -42,14 +42,14 @@ public class TempoSelectField extends TempoField {
         return true;
     }
     
-    public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue) {
+    public static boolean contains(WebElement fieldLayout, String fieldValue) {
         // For read-only
         try {
             return TempoField.contains(fieldLayout, fieldValue);
         } catch (Exception e) {}
 
         // For editable
-        WebElement selectField = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName)));
+        WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         Select select = new Select(selectField);
         String compareString = select.getFirstSelectedOption().getText();
         
