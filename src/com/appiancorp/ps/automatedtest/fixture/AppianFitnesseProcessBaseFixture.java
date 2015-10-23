@@ -49,6 +49,7 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	public String masterWindowHandle = null;
 	public WebDriver driver = null;
 	public int timeoutSeconds = 5;
+	public int attemptTimes = 3;
 	public String screenshotPath = "C:\\AutomatedTesting\\screenshots";
 	    
 	Properties prop = new Properties();

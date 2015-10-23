@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoGrid extends TempoField {
     
-    @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoGrid.class);
     private static final String XPATH_ABSOLUTE_GRID = "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table";
     private static final String XPATH_ABSOLUTE_GRID_INDEX = "(" + XPATH_ABSOLUTE_GRID + ")[%d]";
@@ -52,8 +51,13 @@ public class TempoGrid extends TempoField {
     public static boolean populate(String gridName, String columnName, String rowNum, String[] fieldValues) {
         // TODO Handle group picker in a grid
         for (String fieldValue : fieldValues) {
-            WebElement cell = getCell(gridName, columnName, rowNum);
-            if (!populate(cell, null, fieldValue)) return false;
+            try {
+                WebElement cell = getCell(gridName, columnName, rowNum);
+                if (!populate(cell, null, fieldValue)) return false;
+            } catch (Exception e) {
+                LOG.warn("GRID POPULATION for " + gridName + "|" + columnName + "|" + rowNum +": " + e.getClass());
+                return false;
+            }
         }
         
         return true;
@@ -61,23 +65,21 @@ public class TempoGrid extends TempoField {
     
     public static boolean contains(String gridName, String columnName, String rowNum, String[] fieldValues) {
         for (String fieldValue : fieldValues) {
-            if (!contains(gridName, columnName, rowNum, fieldValue)) return false;
+            try {
+                WebElement cell = getCell(gridName, columnName, rowNum);
+                if (!contains(cell, null, fieldValue)) return false;
+            } catch (Exception e) {
+                LOG.warn("GRID CONTAINS for " + gridName + "|" + columnName + "|" + rowNum +": " + e.getClass());
+                return false;
+            }
         }
         
         return true;
     }
     
-    public static boolean contains(String gridName, String columnName, String rowNum, String fieldValue) {
-        WebElement cell = getCell(gridName, columnName, rowNum);
-        
-        // TODO Handle group picker in a grid
-        return contains(cell, null, fieldValue);
-    }
-    
     public static boolean clear(String gridName, String columnName, String rowNum) {
         WebElement cell = getCell(gridName, columnName, rowNum);
         
-        // TODO Handle group picker in a grid
         return clear(cell, null);
     }
     
@@ -109,13 +111,22 @@ public class TempoGrid extends TempoField {
                     (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_CELL, gridName, rNum, gridName, columnName))));
                 }
             }
-            WebElement grid = getGrid(gridName);
-            scrollIntoView(grid);
+            
+            // Attempt to scroll into view
+            int attempt = 0;
+            while (attempt < attemptTimes) {
+                try {
+                    WebElement grid = getGrid(gridName);
+                    scrollIntoView(grid);
+                    return true;
+                } catch (Exception e) {
+                    attempt++;
+                }
+            }
         } catch (TimeoutException nse) {
             return false;
         }
-        
-        return true;
+        return false;
     }
     
 }

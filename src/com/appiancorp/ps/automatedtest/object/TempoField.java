@@ -3,7 +3,6 @@ package com.appiancorp.ps.automatedtest.object;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -29,7 +28,7 @@ public class TempoField extends TempoObject {
     private static final String DATE_FIELD = "dateField";
     private static final String DATETIME_FIELD = "datetimeField";
     private static final String FILE_UPLOAD_FIELD = "fileUploadField";
-    private static final String USER_PICKER_FIELD = "userPickerField";
+    private static final String PICKER_FIELD = "pickerField";
     private static final String UNKNOWN_FIELD = "unknownField";
     private static final String READ_ONLY_FIELD = "readOnlyField";
     
@@ -72,8 +71,6 @@ public class TempoField extends TempoObject {
     
     public static boolean populate(WebElement fieldLayout, String fieldName, String fieldValue) {      
         String fieldType = getFieldType(fieldLayout, fieldValue);
-        LOG.debug("POPULATION TYPE: " + fieldType);
-        
         fieldValue = TempoObject.parseVariable(fieldValue);
             
         try {
@@ -105,16 +102,15 @@ public class TempoField extends TempoObject {
                 case DATETIME_FIELD: 
                     return TempoDatetimeField.populate(fieldLayout, fieldValue);
                     
-                case USER_PICKER_FIELD:
-                    return TempoUserPickerField.populate(fieldLayout, fieldName, fieldValue);
+                case PICKER_FIELD:
+                    return TempoPickerField.populate(fieldLayout, fieldName, fieldValue);
                 
                 default:
                     return false;
             }
-        } catch (StaleElementReferenceException ste) {
-            // If getting a stale element, try again immediately
-            LOG.warn("Stale element reference for field: " + fieldName);
-            return populate(fieldName, fieldValue);
+        } catch (Exception e) {
+            LOG.warn("POPULATION for " + fieldName + ": " + e.getClass());
+            return false;
         }
     }
     
@@ -146,13 +142,22 @@ public class TempoField extends TempoObject {
             } else {
                 (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_SECTION_LAYOUT, sectionName, fieldName, sectionName, fieldName))));
             }  
-            WebElement fieldLayout = getFieldLayout(fieldName, sectionName);
-            scrollIntoView(fieldLayout);
+            // Attempt to scroll into view
+            int attempt = 0;
+            while (attempt < attemptTimes) {
+                try {
+                    WebElement fieldLayout = getFieldLayout(fieldName, sectionName);
+                    scrollIntoView(fieldLayout);
+                    return true;
+                } catch (Exception e) {
+                    attempt++;
+                }
+            }        
         } catch (TimeoutException e) {
             return false;
         }
         
-        return true;
+        return false;
     }
     
     public static boolean clear(String fieldName){
@@ -171,25 +176,29 @@ public class TempoField extends TempoObject {
         
         String fieldType = getFieldType(fieldLayout, null);
         
-        switch (fieldType) {
-        
-            case TEXT_FIELD: 
-                return TempoTextField.clear(fieldLayout);
+        try {
+            switch (fieldType) {
+                case TEXT_FIELD: 
+                    return TempoTextField.clear(fieldLayout);
+                    
+                case PARAGRAPH_FIELD:
+                    return TempoParagraphField.clear(fieldLayout);
+                    
+                case INTEGER_FIELD:
+                    return TempoIntegerField.clear(fieldLayout);
+                    
+                case FILE_UPLOAD_FIELD:
+                    return TempoFileUploadField.clear(fieldLayout);
+                    
+                case PICKER_FIELD:
+                    return TempoPickerField.clear(fieldLayout);
                 
-            case PARAGRAPH_FIELD:
-                return TempoParagraphField.clear(fieldLayout);
-                
-            case INTEGER_FIELD:
-                return TempoIntegerField.clear(fieldLayout);
-                
-            case FILE_UPLOAD_FIELD:
-                return TempoFileUploadField.clear(fieldLayout);
-                
-            case USER_PICKER_FIELD:
-                return TempoUserPickerField.clear(fieldLayout);
-            
-            default:
-                return false;
+                default:
+                    return false;
+            }
+        } catch (Exception e) {
+            LOG.warn("CLEAR for " + fieldName + ": " + e.getClass());
+            return false;
         }
     }
     
@@ -204,8 +213,8 @@ public class TempoField extends TempoObject {
         
         switch (fieldType) {
         
-            case USER_PICKER_FIELD: 
-                return TempoUserPickerField.clearOf(fieldLayout, fieldValues);
+            case PICKER_FIELD: 
+                return TempoPickerField.clearOf(fieldLayout, fieldValues);
                 
             default: 
                 return false;
@@ -232,8 +241,6 @@ public class TempoField extends TempoObject {
     
     public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue) {
         String fieldType = getFieldType(fieldLayout, fieldValue);
-        LOG.debug("CONTAINS TYPE: " + fieldType);
-        
         fieldValue = TempoObject.parseVariable(fieldValue);
         
         try {
@@ -269,16 +276,15 @@ public class TempoField extends TempoObject {
                 case DATETIME_FIELD:
                     return TempoDatetimeField.contains(fieldLayout, fieldValue);
                     
-                case USER_PICKER_FIELD: 
-                    return TempoUserPickerField.contains(fieldLayout, fieldName, fieldValue);
+                case PICKER_FIELD: 
+                    return TempoPickerField.contains(fieldLayout, fieldName, fieldValue);
                     
                 default:
                    return false;
             }
-        } catch (StaleElementReferenceException ste) {
-            // If getting a stale element, try again immediately
-            LOG.warn("Stale element reference for field: " + fieldName);
-            return true;
+        } catch (Exception e) {
+            LOG.warn("CONTAINS for " + fieldName + ": " + e.getClass());
+            return false;
         }
     }
     
@@ -312,7 +318,7 @@ public class TempoField extends TempoObject {
         // Datetime must be before Date
         else if (TempoDatetimeField.isType(fieldLayout)) return DATETIME_FIELD;
         else if (TempoDateField.isType(fieldLayout)) return DATE_FIELD;
-        else if (TempoUserPickerField.isType(fieldLayout)) return USER_PICKER_FIELD;
+        else if (TempoPickerField.isType(fieldLayout)) return PICKER_FIELD;
         else return UNKNOWN_FIELD;
     }
 }

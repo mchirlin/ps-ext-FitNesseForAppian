@@ -13,6 +13,7 @@ import com.appiancorp.ps.automatedtest.object.TempoLinkField;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoMenu;
 import com.appiancorp.ps.automatedtest.object.TempoNews;
+import com.appiancorp.ps.automatedtest.object.TempoRadioButtonOption;
 import com.appiancorp.ps.automatedtest.object.TempoRecordItem;
 import com.appiancorp.ps.automatedtest.object.TempoRecordList;
 import com.appiancorp.ps.automatedtest.object.TempoReport;
@@ -29,7 +30,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	
 	/** TEMPO **/
 	
-	// Tempo Menu
+	// Tempo Menu	
 	public boolean clickOnMenu(String tempoMenu) {
 		if(!TempoMenu.waitFor(tempoMenu)) {
 		    throw new MissingObjectException("Tempo Menu", tempoMenu);
@@ -206,21 +207,25 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	    if(!TempoField.waitFor(fieldName)) {
             throw new MissingObjectException("Field", fieldName);
         }
-	    TempoField.populate(fieldName, fieldValues);
-	    int attempt = 0;
 	    
-	    while(attempt < 2) {
-	        new Actions(driver).sendKeys(Keys.TAB).perform();
-	        if (TempoField.contains(fieldName, fieldValues)) {     
+	    // Populate the field
+	    int attempt = 0;
+	    while (attempt < attemptTimes) {
+	        if (TempoField.populate(fieldName, fieldValues)) {
+	            new Actions(driver).sendKeys(Keys.TAB).perform();
 	            return true;
 	        }
-	        
-	        TempoField.waitFor(fieldName);
-	        TempoField.clear(fieldName);
-	        TempoField.populate(fieldName, fieldValues);
 	        attempt++;
 	    }
-	    
+
+	    /*
+	    // Verify population worked
+	    attempt = 0;
+	    while(attempt < attemptTimes) {
+	        if (TempoField.contains(fieldName, fieldValues)) return true;
+	        attempt++;
+	    }
+	    */
 	    return false;
 	}
 	
@@ -228,21 +233,24 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	    if(!TempoField.waitFor(fieldName, sectionName)) {
             throw new MissingObjectException("Field", sectionName + fieldName);
         }
-        TempoField.populate(fieldName, sectionName, fieldValues);
-        int attempt = 0;
         
-        while(attempt < 2) {
-            new Actions(driver).sendKeys(Keys.TAB).perform();
-            if (TempoField.contains(fieldName, sectionName, fieldValues)) {     
+	    int attempt = 0;
+        while (attempt < attemptTimes) {
+            if (TempoField.populate(fieldName, sectionName, fieldValues)) {
+                new Actions(driver).sendKeys(Keys.TAB).perform();
                 return true;
             }
-            
-            TempoField.waitFor(fieldName, sectionName);
-            TempoField.clear(fieldName, sectionName);
-            TempoField.populate(fieldName, sectionName, fieldValues);
             attempt++;
         }
-        
+
+        /*
+        // Verify population worked
+        attempt = 0;
+        while(attempt < attemptTimes) {
+            if (TempoField.contains(fieldName, sectionName, fieldValues)) return true;
+            attempt++;
+        }
+        */
         return false;
 	}
 	
@@ -268,21 +276,23 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
             throw new MissingObjectException("Grid", gridName);
         }
         
-        TempoGrid.populate(gridName, columnName, rowNum, fieldValues);
-        
         int attempt = 0;
-        
-        while(attempt < 2) {
-            if (TempoGrid.contains(gridName, columnName, rowNum, fieldValues)) {
+        while (attempt < attemptTimes) {
+            if (TempoGrid.populate(gridName, columnName, rowNum, fieldValues)) {
                 new Actions(driver).sendKeys(Keys.TAB).perform();
                 return true;
             }
-            
-            TempoGrid.waitFor(gridName, columnName, rowNum);
-            TempoGrid.clear(gridName, columnName, rowNum);
-            TempoGrid.populate(gridName, columnName, rowNum, fieldValues);
             attempt++;
         }
+
+        /*
+        // Verify population worked
+        attempt = 0;
+        while(attempt < attemptTimes) {
+            if (TempoGrid.contains(gridName, columnName, rowNum, fieldValues)) return true;
+            attempt++;
+        }
+        */
         
         return false;
     }
@@ -303,11 +313,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         
         return TempoLinkField.click(linkName); 
     }
-    
-    public boolean clickLink(String linkName) {
-        return clickOnLink(linkName); 
-    }
-    
+
 	// Button	
 	public boolean clickOnButton(String buttonName) {
 		if (!TempoButton.waitFor(buttonName)) {
@@ -317,8 +323,12 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 		return TempoButton.click(buttonName);
 	}
 	
-	public boolean clickButton(String buttonName) {
-        return clickOnButton(buttonName);
+	// Button  
+    public boolean clickOnRadioButton(String optionName) {
+        if (!TempoRadioButtonOption.waitFor(optionName)) {
+            throw new MissingObjectException("Radio Button Option", optionName);
+        }
+        
+        return TempoRadioButtonOption.click(optionName);
     }
 }
- ;

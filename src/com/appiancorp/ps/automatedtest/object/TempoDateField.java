@@ -75,21 +75,18 @@ public class TempoDateField extends TempoField{
         WebElement dateField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT));
         
         // Clear out existing values
-        if (!isEmptyDate(fieldLayout)) {
+        if (dateField.isDisplayed()) {
             dateField.click();
             dateField.sendKeys(Keys.CONTROL + "a");
             dateField.sendKeys(Keys.DELETE);
             dateField.sendKeys(dateValue);
         } else {
-            if (datePlaceholder.isDisplayed()) datePlaceholder.click();
+            datePlaceholder.click();
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOf(dateField));
             dateField.sendKeys(dateValue);
         }
                 
         return true;
-    }
-    
-    private static boolean isEmptyDate(WebElement fieldLayout) {
-        return !fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).isDisplayed();
     }
     
     public static boolean isType(WebElement fieldLayout) {

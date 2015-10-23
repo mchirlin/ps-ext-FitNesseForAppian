@@ -77,25 +77,18 @@ public class TempoDatetimeField extends TempoField{
         WebElement dateField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT));
         
         // Clear out existing values
-        if (!isEmptyDatetimeDateField(fieldLayout)) {
+        if (dateField.isDisplayed()) {
             dateField.click();
             dateField.sendKeys(Keys.CONTROL + "a");
             dateField.sendKeys(Keys.DELETE);
             dateField.sendKeys(dateValue);
         } else {
-            if (datePlaceholder.isDisplayed()) {
-                LOG.debug("trying to click placeholder");
-                datePlaceholder.click();    
-            }
-            LOG.debug("trying to send keys to date field");
+            datePlaceholder.click();
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOf(dateField));
             dateField.sendKeys(dateValue);
         }
                 
         return true;
-    }
-    
-    private static boolean isEmptyDatetimeDateField(WebElement fieldLayout) {
-        return !fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).isDisplayed();
     }
     
     private static boolean populateTempoDatetimeFieldWithTime(WebElement fieldLayout, Date d) {
@@ -105,21 +98,18 @@ public class TempoDatetimeField extends TempoField{
         WebElement timeField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TIME_INPUT));
         
         // Clear out existing values
-        if (!isEmptyDatetimeTimeField(fieldLayout)) {
+        if (timeField.isDisplayed()) {
             timeField.click();
             timeField.sendKeys(Keys.CONTROL + "a");
             timeField.sendKeys(Keys.DELETE);
             timeField.sendKeys(timeValue);
         } else {
-            if (timePlaceholder.isDisplayed()) timePlaceholder.click();
+            timePlaceholder.click();
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOf(timeField));
             timeField.sendKeys(timeValue);
         }
         
         return true;
-    }
-    
-    private static boolean isEmptyDatetimeTimeField(WebElement fieldLayout) {
-        return !fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TIME_INPUT)).isDisplayed();
     }
     
     public static boolean isType(WebElement fieldLayout) {

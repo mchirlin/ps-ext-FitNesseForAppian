@@ -28,6 +28,7 @@ public class TempoObject {
     protected static int timeoutSeconds;
     protected static Date startDatetime;
     protected static int refreshTimes = 5;
+    protected static int attemptTimes = 3;
     
     public static String DATE_FORMAT_STRING = "M/d/yyyy";
     public static String TIME_FORMAT_STRING = "h:mm aaa";
@@ -199,5 +200,16 @@ public class TempoObject {
         } else {
             return 1;
         } 
+    }
+    
+    public static String getXpathLocator(WebElement element) {
+        Pattern p = Pattern.compile(".*xpath: (.*)");
+        Matcher m = p.matcher(element.toString());
+        
+        if (m.find()) {
+            return m.group(1).substring(0, m.group(1).length() - 1);
+        } else {
+            return null;
+        }        
     }
 }
