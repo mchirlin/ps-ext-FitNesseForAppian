@@ -150,3 +150,4 @@ To update the repository, please create a branch from `master`, implement/push y
 * | verify editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
 * | click on link | *LINK_NAME* |
 * | click on button | *BUTTON_NAME* |
+* | click on radio button | *BUTTON_OPTION* |
