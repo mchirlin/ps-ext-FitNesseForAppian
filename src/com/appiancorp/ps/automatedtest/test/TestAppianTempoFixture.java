@@ -17,7 +17,7 @@ public class TestAppianTempoFixture {
 		fixture.setDataSourceNameTo("jdbc/AppianBusinessDS");
 		
 		fixture.loginIntoWithUsernameAndPassword("http://localhost:8080/suite/tempo/", "mchirlin", "a");
-		fixture.clickOnTempoMenu("Records");
+		fixture.clickOnMenu("Records");
 		fixture.logoutFromTempo();
 		
 		fixture.tearDownSeleniumWebDriver();

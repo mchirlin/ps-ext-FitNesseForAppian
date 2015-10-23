@@ -1,19 +1,19 @@
 '''Login'''
 | login with username | michael.chirlin@appian.com | and password | password1 |
-| click on tempo menu | Actions |
-| click on tempo action | Create New Product |
-| populate tempo field | Product Name | with | ABC123 |
-| populate tempo field | Description | with | Description |
-| populate tempo field | SKU | with | SKUBEDOBEDO |
-| populate tempo field | Upload Product Image | with | C:\Users\michael.chirlin\Documents\Low Risk.jpg |
-| populate tempo field | Release Date | with | +10 days |
-| populate tempo field | Price | with | 1.23 |
-| populate tempo field | Quantity | with | 5 |
-| populate tempo field | Category | with | Office Electronics |
-| populate tempo field | Manufacturer | with | Manu |
-| populate tempo field | Shipping Weight | with | 12 |
-| populate tempo field | Shipping Height | with | 16 |
-| populate tempo field | Shipping Width | with | 11 |
-| populate tempo field | Shipping Depth | with | 18 |
-| click on tempo button | Submit |
-| verify tempo action completed |
+| click on menu | Actions |
+| click on action | Create New Product |
+| populate field | Product Name | with | ABC123 |
+| populate field | Description | with | Description |
+| populate field | SKU | with | SKUBEDOBEDO |
+| populate field | Upload Product Image | with | C:\Users\michael.chirlin\Documents\Low Risk.jpg |
+| populate field | Release Date | with | +10 days |
+| populate field | Price | with | 1.23 |
+| populate field | Quantity | with | 5 |
+| populate field | Category | with | Office Electronics |
+| populate field | Manufacturer | with | Manu |
+| populate field | Shipping Weight | with | 12 |
+| populate field | Shipping Height | with | 16 |
+| populate field | Shipping Width | with | 11 |
+| populate field | Shipping Depth | with | 18 |
+| click on button | Submit |
+| verify action completed |

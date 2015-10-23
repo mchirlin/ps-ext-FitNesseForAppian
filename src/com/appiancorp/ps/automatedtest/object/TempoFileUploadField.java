@@ -16,13 +16,7 @@ public class TempoFileUploadField extends TempoField {
     private static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'gwt-FileUpload')]";
     private static final String XPATH_RELATIVE_FILENAME = ".//span[contains(@class, 'filename')]/span[contains(text(), '%s')]";
     private static final String XPATH_RELATIVE_REMOVE = ".//a[starts-with(text(), 'Remove')]";
-    
-    public static boolean populate(String fieldName, String fieldValue) {
-        WebElement fieldLayout = getFieldLayout(fieldName);
-        
-        return populate(fieldLayout, fieldValue);
-    }
-    
+   
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement fileUpload = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         fileUpload.sendKeys(fieldValue);

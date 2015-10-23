@@ -104,7 +104,7 @@ To update the repository, please create a branch from `master`, implement/push y
 * | logout from tempo |
 
 ### NAVIGATION
-* | click on tempo menu | *TEMPO_MENU_NAME* |
+* | click on menu | *TEMPO_MENU_NAME* |
 
 ### NEWS
 * | verify news feed containing text | *NEWS_ITEM_TITLE* | is present |
@@ -115,38 +115,38 @@ To update the repository, please create a branch from `master`, implement/push y
 * | verify news feed containing text | *NEWS_ITEM_TITLE* | commented with | *COMMENT* | is present |
 
 ### TASKS
-* | click on tempo task | *TASK_NAME* |
-* | verify tempo task | *TASK_NAME* | is present |
-* | verify tempo task | *TASK_NAME* | is not present |
-* | verify tempo task | *TASK_NAME* | has a deadline of | *DEADLINE_TEXT* |
+* | click on task | *TASK_NAME* |
+* | verify task | *TASK_NAME* | is present |
+* | verify task | *TASK_NAME* | is not present |
+* | verify task | *TASK_NAME* | has a deadline of | *DEADLINE_TEXT* |
 
 ### RECORDS
-* | click on tempo record list | *RECORD_LIST_NAME* |
-* | click on tempo record list facet option | *FACET_NAME* |
-* | verify tempo record list facet option | *FACET_NAME* | is present |
-* | click on tempo record item | *RECORD_ITEM_NAME* |
-* | verify tempo record item | *RECORD_ITEM_NAME* | is present |
-* | verify tempo record item | *RECORD_ITEM_NAME* | is not present |
-* | click on tempo record item facet | *FACET_NAME* |
-* | click on tempo record item related action | *RELATED_ACTION_NAME* | - this is run on the related action dashboard, not as a button currently
-* | verify tempo record item related action | *RELATED_ACTION_NAME* | is present |
-* | verify tempo record item related action | *RELATED_ACTION_NAME* | is not present |
+* | click on record list | *RECORD_LIST_NAME* |
+* | click on record list facet option | *FACET_NAME* |
+* | verify record list facet option | *FACET_NAME* | is present |
+* | click on record item | *RECORD_ITEM_NAME* |
+* | verify record item | *RECORD_ITEM_NAME* | is present |
+* | verify record item | *RECORD_ITEM_NAME* | is not present |
+* | click on record item facet | *FACET_NAME* |
+* | click on record item related action | *RELATED_ACTION_NAME* | - this is run on the related action dashboard, not as a button currently
+* | verify record item related action | *RELATED_ACTION_NAME* | is present |
+* | verify record item related action | *RELATED_ACTION_NAME* | is not present |
 
 ### REPORTS
-* | click on tempo report | *REPORT_NAME* |
+* | click on report | *REPORT_NAME* |
 
 ### ACTIONS
-* | click on tempo action | *ACTION_NAME* |
-* | verify tempo action completed |
+* | click on action | *ACTION_NAME* |
+* | verify action completed |
 
 ### FORMS
-* | populate tempo field | *FIELD_LABEL* | with | *VALUE(S)* |
-* | populate tempo field | *FIELD_INDEX[FIELD_INDEX]* | with | *VALUE(S)* | - use this to populate the 2nd, 3rd, etc field with the same label
-* | populate tempo field | [*FIELD_INDEX*] | in section | *SECTION_NAME* | with | *VALUE(S)* | - populate a field in a section with no label
-* | clear tempo field | *FIELD_LABEL* | of | *VALUE_TO_REMOVE* | - this is for removing specific value from a picker
-* | verify tempo field | *FIELD_LABEL* | contains | *VALUE* |
-* | verify tempo field | *FIELD_LABEL[FIELD_INDEX]* | contains | *VALUE* |
-* | populate tempo editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |
+* | populate field | *FIELD_LABEL* | with | *VALUE(S)* |
+* | populate field | *FIELD_INDEX[FIELD_INDEX]* | with | *VALUE(S)* | - use this to populate the 2nd, 3rd, etc field with the same label
+* | populate field | [*FIELD_INDEX*] | in section | *SECTION_NAME* | with | *VALUE(S)* | - populate a field in a section with no label
+* | clear field | *FIELD_LABEL* | of | *VALUE_TO_REMOVE* | - this is for removing specific value from a picker
+* | verify field | *FIELD_LABEL* | contains | *VALUE* |
+* | verify field | *FIELD_LABEL[FIELD_INDEX]* | contains | *VALUE* |
+* | populate editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |
 * | verify editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
-* | click on tempo link | *LINK_NAME* |
-* | click on tempo button | *BUTTON_NAME* |
+* | click on link | *LINK_NAME* |
+* | click on button | *BUTTON_NAME* |

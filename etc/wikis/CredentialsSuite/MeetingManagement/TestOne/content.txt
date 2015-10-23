@@ -1,145 +1,145 @@
 '''Scheduling a Meeting 1'''
 | login with username | user.one | and password | a |
-| click on tempo menu | Actions |
-| click on tempo action | Meeting |
-| populate tempo field | Subject | with | Meeting Subject - @{rand} |
-| populate tempo field | Description | with | Meeting Description |
-| populate tempo field | Attendee(s) | with | User Two,User Three |
-| populate tempo field | Send Meeting Reminder(s) | with | Yes |
-| populate tempo field | Start Time | with | +1 day |
-| populate tempo field | Duration (in minutes) | with | 30 |
-| populate tempo field | Location | with | Meeting Location |
-| populate tempo field | Review/Edit Reminder Before Sending | with | No |
-| click on tempo link | + Add Meeting Reminder |
-| populate tempo editable grid | When to Send Reminder(s) | column | [1] | row | [1] | with | +22 hours |
-| click on tempo button | Submit |
-| verify tempo action completed |
+| click on menu | Actions |
+| click on action | Meeting |
+| populate field | Subject | with | Meeting Subject - @{rand} |
+| populate field | Description | with | Meeting Description |
+| populate field | Attendee(s) | with | User Two,User Three |
+| populate field | Send Meeting Reminder(s) | with | Yes |
+| populate field | Start Time | with | +1 day |
+| populate field | Duration (in minutes) | with | 30 |
+| populate field | Location | with | Meeting Location |
+| populate field | Review/Edit Reminder Before Sending | with | No |
+| click on link | + Add Meeting Reminder |
+| populate editable grid | When to Send Reminder(s) | column | [1] | row | [1] | with | +22 hours |
+| click on button | Submit |
+| verify action completed |
 
 '''Tempo 1'''
-| click on tempo menu | News |
-| verify tempo news feed containing text | Meeting Subject - @{rand} | is present |
-| verify tempo news feed containing text | Meeting Subject - @{rand} | tagged with | Meeting Subject - @{rand} | is present |
+| click on menu | News |
+| verify news feed containing text | Meeting Subject - @{rand} | is present |
+| verify news feed containing text | Meeting Subject - @{rand} | tagged with | Meeting Subject - @{rand} | is present |
 | toggle more info for news feed containing text | Meeting Subject - @{rand} |
-| verify tempo news feed containing text | Meeting Subject - @{rand} | and more info with label | Subject | and value | Meeting Subject - @{rand} | is present |
-| verify tempo news feed containing text | Meeting Subject - @{rand} | and more info with label | Location | and value | Meeting Location | is present |
-| verify tempo news feed containing text | Meeting Subject - @{rand} | and more info with label | Duration | and value | 15 | is present |
-| verify tempo news feed containing text | Meeting Subject - @{rand} | and more info with label | Description | and value | Meeting Description | is present |
-| verify tempo news feed containing text | Meeting Subject - @{rand} | and more info with label | Attendees | and value | User Two, User Three | is present |
+| verify news feed containing text | Meeting Subject - @{rand} | and more info with label | Subject | and value | Meeting Subject - @{rand} | is present |
+| verify news feed containing text | Meeting Subject - @{rand} | and more info with label | Location | and value | Meeting Location | is present |
+| verify news feed containing text | Meeting Subject - @{rand} | and more info with label | Duration | and value | 15 | is present |
+| verify news feed containing text | Meeting Subject - @{rand} | and more info with label | Description | and value | Meeting Description | is present |
+| verify news feed containing text | Meeting Subject - @{rand} | and more info with label | Attendees | and value | User Two, User Three | is present |
 
 '''Record List'''
-| click on tempo menu | Records |
-| click on tempo record list | Meeting Requests |
-| verify tempo record list facet option | Owner | is present |
-| verify tempo record list facet option | Attendee | is present |
-| verify tempo record item | Meeting Subject - @{rand} | is present |
+| click on menu | Records |
+| click on record list | Meeting Requests |
+| verify record list facet option | Owner | is present |
+| verify record list facet option | Attendee | is present |
+| verify record item | Meeting Subject - @{rand} | is present |
 
 '''Meeting Dashboard 1'''
-| click on tempo record item | Meeting Subject - @{rand} |
-| verify tempo field | Subject | contains | Meeting Subject - @{rand} |
-| verify tempo field | Description | contains | Meeting Description |
-| verify tempo field | Meeting Owner | contains | User One |
-| verify tempo field | Duration (in minutes) | contains | 30 |
-| verify tempo field | Location | contains | Meeting Location |
-| verify tempo field | Invited Attendees | contains | User Two,User Three |
-| logout from tempo |
+| click on record item | Meeting Subject - @{rand} |
+| verify field | Subject | contains | Meeting Subject - @{rand} |
+| verify field | Description | contains | Meeting Description |
+| verify field | Meeting Owner | contains | User One |
+| verify field | Duration (in minutes) | contains | 30 |
+| verify field | Location | contains | Meeting Location |
+| verify field | Invited Attendees | contains | User Two,User Three |
+| logout from |
 
 '''Tempo Security 1'''
 | login with username | user.two  | and password | a |
-| click on tempo menu | News |
-| verify tempo news feed containing text | Meeting Subject - @{rand} | is present |
-| logout from tempo |
+| click on menu | News |
+| verify news feed containing text | Meeting Subject - @{rand} | is present |
+| logout from |
 | login with username | user.four  | and password | a |
-| verify tempo news feed containing text | Meeting Subject - @{rand} | is not present |
-| logout from tempo |
+| verify news feed containing text | Meeting Subject - @{rand} | is not present |
+| logout from |
 
 '''Record List Security 1'''
 | login with username | user.two  | and password | a |
-| click on tempo menu | Records |
-| click on tempo record list | Meeting Requests |
-| verify tempo record item | Meeting Subject - @{rand} | is present |
-| logout from tempo |
+| click on menu | Records |
+| click on record list | Meeting Requests |
+| verify record item | Meeting Subject - @{rand} | is present |
+| logout from |
 | login with username | user.four | and password | a |
-| click on tempo menu | Records |
-| click on tempo record list | Meeting Requests |
-| verify tempo record item | Meeting Subject - @{rand} | is not present |
-| logout from tempo |
+| click on menu | Records |
+| click on record list | Meeting Requests |
+| verify record item | Meeting Subject - @{rand} | is not present |
+| logout from |
 | login with username | admin.one | and password | a |
-| click on tempo menu | Records |
-| click on tempo record list | Meeting Requests |
-| verify tempo record item | Meeting Subject - @{rand} | is present |
-| logout from tempo |
+| click on menu | Records |
+| click on record list | Meeting Requests |
+| verify record item | Meeting Subject - @{rand} | is present |
+| logout from |
 
 '''Add a note'''
 | login with username | user.two  | and password | a |
-| click on tempo menu | Records |
-| click on tempo record list | Meeting Requests |
-| click on tempo record item | Meeting Subject - @{rand} |
-| click on tempo record item | Related Actions | facet |
-| click on tempo record item | Add Meeting Note | related action |
-| populate tempo field | Meeting Note | with | Meeting Note |
-| click on tempo button | Submit |
-| verify tempo action completed |
-| click on tempo record item | News | facet |
-| verify tempo news feed containing text | Meeting Subject - @{rand} | commented with | Meeting Note | is present |
-| logout from tempo |
+| click on menu | Records |
+| click on record list | Meeting Requests |
+| click on record item | Meeting Subject - @{rand} |
+| click on record item | Related Actions | facet |
+| click on record item | Add Meeting Note | related action |
+| populate field | Meeting Note | with | Meeting Note |
+| click on button | Submit |
+| verify action completed |
+| click on record item | News | facet |
+| verify news feed containing text | Meeting Subject - @{rand} | commented with | Meeting Note | is present |
+| logout from |
 
 '''Edit Meeting 1'''
 | login with username | user.one  | and password | a |
-| click on tempo menu | Records |
-| click on tempo record list | Meeting Requests |
-| click on tempo record item | Meeting Subject - @{rand} |
-| click on tempo record item | Related Actions | facet |
-| click on tempo record item | Edit Meeting | related action |
-| verify tempo field | Subject | contains | Meeting Subject - @{rand} |
-| verify tempo field | Description | contains | Meeting Description |
-| populate tempo field | Location | with | New Location |
-| populate tempo field | Duration | with | 45 |
-| click on tempo button | Submit |
-| verify tempo action completed |
+| click on menu | Records |
+| click on record list | Meeting Requests |
+| click on record item | Meeting Subject - @{rand} |
+| click on record item | Related Actions | facet |
+| click on record item | Edit Meeting | related action |
+| verify field | Subject | contains | Meeting Subject - @{rand} |
+| verify field | Description | contains | Meeting Description |
+| populate field | Location | with | New Location |
+| populate field | Duration | with | 45 |
+| click on button | Submit |
+| verify action completed |
 
 '''Wait for processing'''
 | wait for | 10 | seconds |
 
 '''Edit Meeting 2'''
-| click on tempo menu | Records |
-| click on tempo record list | Meeting Requests |
-| click on tempo record item | Meeting Subject - @{rand} |
-| click on tempo record item | Related Actions | facet |
-| click on tempo record item | Edit Meeting | related action |
-| clear tempo field | Attendee(s) | of | User Two |
-| populate tempo field | Attendee(s) | with | User Four |
-| click on tempo button | Submit |
-| verify tempo action completed |
-| logout from tempo |
+| click on menu | Records |
+| click on record list | Meeting Requests |
+| click on record item | Meeting Subject - @{rand} |
+| click on record item | Related Actions | facet |
+| click on record item | Edit Meeting | related action |
+| clear field | Attendee(s) | of | User Two |
+| populate field | Attendee(s) | with | User Four |
+| click on button | Submit |
+| verify action completed |
+| logout from |
 
 '''Wait for processing'''
 | wait for | 10 | seconds |
 
 '''Record List Security 2'''
 | login with username | user.two | and password | a |
-| click on tempo menu | Records |
-| click on tempo record list | Meeting Requests |
-| verify tempo record item | Meeting Subject - @{rand} | is not present |
-| logout from tempo |
+| click on menu | Records |
+| click on record list | Meeting Requests |
+| verify record item | Meeting Subject - @{rand} | is not present |
+| logout from |
 | login with username | user.four | and password | a |
-| click on tempo menu | Records |
-| click on tempo record list | Meeting Requests |
-| verify tempo record item | Meeting Subject - @{rand} | is present |
-| logout from tempo |
+| click on menu | Records |
+| click on record list | Meeting Requests |
+| verify record item | Meeting Subject - @{rand} | is present |
+| logout from |
 
 '''Cancel Meeting 1'''
 | login with username | user.one | and password | a |
-| click on tempo menu | Records |
-| click on tempo record list | Meeting Requests |
-| click on tempo record item | Meeting Subject - @{rand} |
-| click on tempo record item | Related Actions | facet |
-| click on tempo record item | Cancel Meeting | related action |
-| populate tempo field | Cancellation Comment | with | Cancellation Reason |
-| click on tempo button | Cancel Meeting |
-| click on tempo button | Yes |
-| verify tempo action completed |
+| click on menu | Records |
+| click on record list | Meeting Requests |
+| click on record item | Meeting Subject - @{rand} |
+| click on record item | Related Actions | facet |
+| click on record item | Cancel Meeting | related action |
+| populate field | Cancellation Comment | with | Cancellation Reason |
+| click on button | Cancel Meeting |
+| click on button | Yes |
+| verify action completed |
 | wait for | 10 | seconds |
-| click on tempo menu | Records |
-| click on tempo record list | Meeting Requests |
-| verify tempo record item | Meeting Subject - @{rand} | is not present |
-| logout from tempo |
+| click on menu | Records |
+| click on record list | Meeting Requests |
+| verify record item | Meeting Subject - @{rand} | is not present |
+| logout from |

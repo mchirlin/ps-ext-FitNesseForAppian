@@ -21,12 +21,6 @@ public class TempoDateField extends TempoField{
     private static final String XPATH_RELATIVE_DATE_PLACEHOLDER = ".//input[contains(@class, 'aui-DateInput-Placeholder')]";
     private static final String XPATH_RELATIVE_DATE_INPUT = ".//input[contains(@class, 'aui-DateInput-TextBox')]";
     
-    public static boolean populate(String fieldName, String fieldValue) {
-        WebElement fieldLayout = getFieldLayout(fieldName);
-        
-        return populate(fieldLayout, fieldValue);
-    }
-    
     public static boolean populate(WebElement fieldLayout, String fieldValue) {        
         fieldValue = parseVariable(fieldValue);
         Date d;
@@ -61,7 +55,7 @@ public class TempoDateField extends TempoField{
         String dateString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).getAttribute("value");
 
         try{  
-            Date compareDate = DateUtils.parseDate(dateString, DATE_CONTAINS_FORMAT_STRING);
+            Date compareDate = DateUtils.parseDate(dateString, DATE_FORMAT_STRING);
             Date fieldDate = DateUtils.parseDate(fieldValue, DATETIME_DISPLAY_FORMAT_STRING);
             LOG.debug("DATE FIELD COMPARISON : Field value [" + compareDate.toString() + "] compared to Entered value [" + fieldDate.toString() + "]");
             
@@ -81,21 +75,18 @@ public class TempoDateField extends TempoField{
         WebElement dateField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT));
         
         // Clear out existing values
-        if (!isEmptyDate(fieldLayout)) {
+        if (dateField.isDisplayed()) {
             dateField.click();
             dateField.sendKeys(Keys.CONTROL + "a");
             dateField.sendKeys(Keys.DELETE);
             dateField.sendKeys(dateValue);
         } else {
-            if (datePlaceholder.isDisplayed()) datePlaceholder.click();
+            datePlaceholder.click();
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOf(dateField));
             dateField.sendKeys(dateValue);
         }
                 
         return true;
-    }
-    
-    private static boolean isEmptyDate(WebElement fieldLayout) {
-        return !fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).isDisplayed();
     }
     
     public static boolean isType(WebElement fieldLayout) {
