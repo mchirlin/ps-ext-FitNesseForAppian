@@ -41,33 +41,33 @@
 | verify field | Duration (in minutes) | contains | 30 |
 | verify field | Location | contains | Meeting Location |
 | verify field | Invited Attendees | contains | User Two,User Three |
-| logout from |
+| logout |
 
 '''Tempo Security 1'''
 | login with username | user.two  | and password | a |
 | click on menu | News |
 | verify news feed containing text | Meeting Subject - @{rand} | is present |
-| logout from |
+| logout |
 | login with username | user.four  | and password | a |
 | verify news feed containing text | Meeting Subject - @{rand} | is not present |
-| logout from |
+| logout |
 
 '''Record List Security 1'''
 | login with username | user.two  | and password | a |
 | click on menu | Records |
 | click on record list | Meeting Requests |
 | verify record item | Meeting Subject - @{rand} | is present |
-| logout from |
+| logout |
 | login with username | user.four | and password | a |
 | click on menu | Records |
 | click on record list | Meeting Requests |
 | verify record item | Meeting Subject - @{rand} | is not present |
-| logout from |
+| logout |
 | login with username | admin.one | and password | a |
 | click on menu | Records |
 | click on record list | Meeting Requests |
 | verify record item | Meeting Subject - @{rand} | is present |
-| logout from |
+| logout |
 
 '''Add a note'''
 | login with username | user.two  | and password | a |
@@ -81,7 +81,7 @@
 | verify action completed |
 | click on record item | News | facet |
 | verify news feed containing text | Meeting Subject - @{rand} | commented with | Meeting Note | is present |
-| logout from |
+| logout |
 
 '''Edit Meeting 1'''
 | login with username | user.one  | and password | a |
@@ -110,7 +110,7 @@
 | populate field | Attendee(s) | with | User Four |
 | click on button | Submit |
 | verify action completed |
-| logout from |
+| logout |
 
 '''Wait for processing'''
 | wait for | 10 | seconds |
@@ -120,12 +120,12 @@
 | click on menu | Records |
 | click on record list | Meeting Requests |
 | verify record item | Meeting Subject - @{rand} | is not present |
-| logout from |
+| logout |
 | login with username | user.four | and password | a |
 | click on menu | Records |
 | click on record list | Meeting Requests |
 | verify record item | Meeting Subject - @{rand} | is present |
-| logout from |
+| logout |
 
 '''Cancel Meeting 1'''
 | login with username | user.one | and password | a |
@@ -142,4 +142,4 @@
 | click on menu | Records |
 | click on record list | Meeting Requests |
 | verify record item | Meeting Subject - @{rand} | is not present |
-| logout from |
+| logout |

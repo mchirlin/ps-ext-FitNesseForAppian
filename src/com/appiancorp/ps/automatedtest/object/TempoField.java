@@ -12,7 +12,7 @@ import com.appiancorp.ps.automatedtest.object.TempoObject;
 public class TempoField extends TempoObject {
        
     private static final Logger LOG = Logger.getLogger(TempoField.class);
-    protected static final String XPATH_LABEL_CONTAINS = "[text() = '%s']/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]";
+    protected static final String XPATH_LABEL_CONTAINS = "[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]";
     protected static final String XPATH_FIELD_LAYOUT = "//span" + XPATH_LABEL_CONTAINS + "| //label" + XPATH_LABEL_CONTAINS;
     protected static final String XPATH_FIELD_LAYOUT_INDEX = "(" + XPATH_FIELD_LAYOUT + ")[%d]";
     protected static final String XPATH_FIELD_SECTION_LAYOUT = "//h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::span" + XPATH_LABEL_CONTAINS + "| //h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::label" + XPATH_LABEL_CONTAINS;

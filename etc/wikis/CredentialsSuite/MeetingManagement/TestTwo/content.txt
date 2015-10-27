@@ -34,7 +34,7 @@
 | click on task | Review Reminder Message |
 | populate field | Meeting Reminder Post | with | Meeting 2 Reminder (@{rand}) |
 | click on button | Submit |
-| logout from |
+| logout |
 
 '''Reminders'''
 | wait until | +3 minutes |
@@ -47,12 +47,12 @@
 | click on menu | Tasks |
 | click on task | Meeting Check In |
 | click on button | Check In for Meeting |
-| logout from |
+| logout |
 | wait until | +10 minutes |
 | login with username | user.three | and password | a |
 | click on menu | Tasks |
 | verify task | Meeting Check In | is not present |
-| logout from |
+| logout |
 
 '''Meeting Start'''
 | login with username | user.one | and password | a |
@@ -61,21 +61,21 @@
 | click on record item | Meeting 2 Subject (@{rand}) |
 | verify editable grid | Checked In | column | Name | row | 1 | contains | user.two |
 | verify field | Not Checked In | contains | User Three |
-| logout from |
+| logout |
 | login with username | user.two | and password | a |
 | click on menu | Records |
 | click on record list | Meeting Requests |
 | click on record item | Meeting 2 Subject (@{rand}) |
 | verify editable grid | Checked In | column | Name | row | 1 | contains | user.two |
 | verify field | Not Checked In | contains | User Three |
-| logout from |
+| logout |
 | login with username | user.three | and password | a |
 | click on menu | Records |
 | click on record list | Meeting Requests |
 | click on record item | Meeting 2 Subject (@{rand}) |
 | verify editable grid | Checked In | column | Name | row | 1 | contains | user.two |
 | verify field | Not Checked In | contains | User Three |
-| logout from |
+| logout |
 
 '''Edit Meeting 4'''
 | login with username | user.one | and password | a |
@@ -107,7 +107,7 @@
 | click on button | Submit |
 | click on menu | News |
 | verify news feed containing text | Meeting 2 Subject (@{rand}) | commented with | Post Meeting 2 Summary | is present |
-| logout from |
+| logout |
 
 '''Meeting Feedback'''
 | login with username | user.two | and password | a |
@@ -117,7 +117,7 @@
 | populate field | Rank Meeting Usefulness | with | 3 |
 | populate field | Post Meeting Feedback | with | Meeting 2 Feedback |
 | click on button | Submit |
-| logout from |
+| logout |
 
 '''Report 1'''
 | login with username | exec.one | and password | a |
@@ -129,4 +129,4 @@
 | click on menu | Reports |
 | click on report | Average Meeting Usefulness |
 | take screenshot | tempo_report_2 |
-| logout from |
+| logout |

@@ -101,7 +101,7 @@ To update the repository, please create a branch from `master`, implement/push y
 * | wait until | *RELATIVE_PERIOD* | - waits until relative time
 * | set | *VARIABLE_NAME* | get random string | *STRING_LENGTH* | - use @{VARIABLE_NAME} to parameterize test cases
 * | refresh | - refreshes screen
-* | logout from tempo |
+* | logout |
 
 ### NAVIGATION
 * | click on menu | *TEMPO_MENU_NAME* |

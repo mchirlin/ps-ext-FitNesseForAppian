@@ -25,18 +25,15 @@ public class TempoPickerField extends TempoField {
     public static boolean populate(WebElement fieldLayout, String fieldName, String fieldValue) {
         WebElement groupPickerField;
          
-        LOG.debug("waiting for suggest box");
         waitForSuggestBox(fieldLayout, fieldName);
         groupPickerField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         groupPickerField.click();
         groupPickerField.sendKeys(fieldValue);
         
-        LOG.debug("waiting for suggestion");
         // Wait until the suggestions populate
         waitForSuggestion(fieldValue);
         WebElement suggestion = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_SUGGESTION, fieldValue, fieldValue)));
         suggestion.click();
-        LOG.debug("waiting for selection");
         waitForSelection(fieldLayout, fieldValue);
         
         LOG.debug("PICKER FIELD POPULATION : " + fieldValue);

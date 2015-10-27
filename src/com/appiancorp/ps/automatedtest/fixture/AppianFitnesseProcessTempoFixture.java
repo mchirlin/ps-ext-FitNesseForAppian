@@ -40,7 +40,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	}
 	
 	// Logout
-	public boolean logoutFromTempo() {
+	public boolean logout() {
         if(!TempoLogin.waitForLogout()) {
             throw new MissingObjectException("Logout Menu");
         }

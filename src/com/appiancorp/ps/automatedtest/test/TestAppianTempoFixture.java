@@ -18,7 +18,7 @@ public class TestAppianTempoFixture {
 		
 		fixture.loginIntoWithUsernameAndPassword("http://localhost:8080/suite/tempo/", "mchirlin", "a");
 		fixture.clickOnMenu("Records");
-		fixture.logoutFromTempo();
+		fixture.logout();
 		
 		fixture.tearDownSeleniumWebDriver();
 	}
