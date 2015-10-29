@@ -107,12 +107,14 @@ To update the repository, please create a branch from `master`, implement/push y
 * | click on menu | *TEMPO_MENU_NAME* |
 
 ### NEWS
-* | verify news feed containing text | *NEWS_ITEM_TITLE* | is present |
-* | verify news feed containing text | *NEWS_ITEM_TITLE* | is not present |
-* | toggle more info for news feed containing text | *NEWS_ITEM_TITLE* |
-* | verify news feed containing text | *NEWS_ITEM_TITLE* | and more info with label | *LABEL* | and value | *VALUE* | is present |
-* | verify news feed containing text | *NEWS_ITEM_TITLE* | tagged with | *TAG_NAME* | is present |
-* | verify news feed containing text | *NEWS_ITEM_TITLE* | commented with | *COMMENT* | is present |
+* | verify news feed containing text | *NEWS_TEXT* | is present |
+* | verify news feed containing text | *NEWS_TEXT* | is not present |
+* | toggle more info for news feed containing text | *NEWS_TEXT* |
+* | verify news feed containing text | *NEWS_TEXT* | and more info with label | *LABEL* | and value | *VALUE* | is present |
+* | verify news feed containing text | *NEWS_TEXT* | tagged with | *TAG_NAME* | is present |
+* | verify news feed containing text | *NEWS_TEXT* | commented with | *COMMENT* | is present |
+* | set | *VARIABLE_NAME* | get regex | *REGEX* | from news feed containing text | *NEWS_TEXT* | - use Java Regular Expression to return data from news as a variable
+* | set | *VARIABLE_NAME* | get regex | *REGEX* | from news feed containing text | *NEWS_TEXT* | commented with | *COMMENT* |
 
 ### TASKS
 * | click on task | *TASK_NAME* |
@@ -134,6 +136,8 @@ To update the repository, please create a branch from `master`, implement/push y
 
 ### REPORTS
 * | click on report | *REPORT_NAME* |
+* | verify report | *REPORT_NAME* | is present |
+* | verify report | *REPORT_NAME* | is not present |
 
 ### ACTIONS
 * | click on action | *ACTION_NAME* |
@@ -146,8 +150,11 @@ To update the repository, please create a branch from `master`, implement/push y
 * | clear field | *FIELD_LABEL* | of | *VALUE_TO_REMOVE* | - this is for removing specific value from a picker
 * | verify field | *FIELD_LABEL* | contains | *VALUE* |
 * | verify field | *FIELD_LABEL[FIELD_INDEX]* | contains | *VALUE* |
+* | verify field | *FIELD_LABEL* | is present |
+* | verify field | *FIELD_LABEL* | is not present |
 * | populate editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |
 * | verify editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
 * | click on link | *LINK_NAME* |
 * | click on button | *BUTTON_NAME* |
-* | click on radio button | *BUTTON_OPTION* |
+* | click on radio option | *RADIO_OPTION* |
+* | click on checkbox option | *CHECKBOX_OPTION* |

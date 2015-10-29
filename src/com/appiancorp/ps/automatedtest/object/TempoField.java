@@ -42,27 +42,11 @@ public class TempoField extends TempoObject {
         }        
     }
     
-    public static WebElement getFieldLayout(String fieldName, String sectionName) {
-        if (isFieldIndex(fieldName)) {
-            int index = getIndexFromFieldIndex(fieldName);
-            return driver.findElement(By.xpath(String.format(XPATH_FIELD_SECTION_LAYOUT_INDEX, sectionName, index)));
-        } else {
-            return driver.findElement(By.xpath(String.format(XPATH_FIELD_SECTION_LAYOUT, sectionName, fieldName, sectionName, fieldName)));
-        }
-    }
+
     
     public static boolean populate(String fieldName, String[] fieldValues){
         for (String fieldValue : fieldValues) {
             WebElement fieldLayout = getFieldLayout(fieldName);
-            if (!populate(fieldLayout, fieldName, fieldValue)) return false;
-        }
-        
-        return true;
-    }
-    
-    public static boolean populate(String fieldName, String fieldSection, String[] fieldValues){
-        for (String fieldValue : fieldValues) {    
-            WebElement fieldLayout = getFieldLayout(fieldName, fieldSection);
             if (!populate(fieldLayout, fieldName, fieldValue)) return false;
         }
         
@@ -133,45 +117,12 @@ public class TempoField extends TempoObject {
         return true;
     }
     
-    public static boolean waitFor(String fieldName, String sectionName) {
-        try {
-            // Scroll the field layout into view
-            if (isFieldIndex(fieldName)) {
-                int index = getIndexFromFieldIndex(fieldName);
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_SECTION_LAYOUT_INDEX, sectionName, index))));
-            } else {
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_SECTION_LAYOUT, sectionName, fieldName, sectionName, fieldName))));
-            }  
-            // Attempt to scroll into view
-            int attempt = 0;
-            while (attempt < attemptTimes) {
-                try {
-                    WebElement fieldLayout = getFieldLayout(fieldName, sectionName);
-                    scrollIntoView(fieldLayout);
-                    return true;
-                } catch (Exception e) {
-                    attempt++;
-                }
-            }        
-        } catch (TimeoutException e) {
-            return false;
-        }
-        
-        return false;
-    }
-    
     public static boolean clear(String fieldName){
         WebElement fieldLayout = getFieldLayout(fieldName);
         
         return clear(fieldLayout, fieldName);
     }
-    
-    public static boolean clear(String fieldName, String sectionName){
-        WebElement fieldLayout = getFieldLayout(fieldName, sectionName);
-        
-        return clear(fieldLayout, fieldName);
-    }
-    
+
     public static boolean clear(WebElement fieldLayout, String fieldName) { 
         
         String fieldType = getFieldType(fieldLayout, null);
@@ -229,16 +180,7 @@ public class TempoField extends TempoObject {
         
         return true;
     }
-    
-    public static boolean contains(String fieldName, String sectionName, String[] fieldValues) {
-        for (String fieldValue : fieldValues) {
-            WebElement fieldLayout = getFieldLayout(fieldName, sectionName);
-            if (!contains(fieldLayout, fieldName, fieldValue)) return false; 
-        }
-        
-        return true;
-    }
-    
+       
     public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue) {
         String fieldType = getFieldType(fieldLayout, fieldValue);
         fieldValue = TempoObject.parseVariable(fieldValue);
@@ -321,4 +263,9 @@ public class TempoField extends TempoObject {
         else if (TempoPickerField.isType(fieldLayout)) return PICKER_FIELD;
         else return UNKNOWN_FIELD;
     }
+    /*
+    public static boolean waitForError(WebElement fieldLayout, String error) {
+        
+    }
+    */
 }

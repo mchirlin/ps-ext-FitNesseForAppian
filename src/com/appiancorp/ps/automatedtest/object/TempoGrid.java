@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.object;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -10,13 +11,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TempoGrid extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoGrid.class);
-    private static final String XPATH_ABSOLUTE_GRID = "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table";
-    private static final String XPATH_ABSOLUTE_GRID_INDEX = "(" + XPATH_ABSOLUTE_GRID + ")[%d]";
+    private static final String XPATH_ABSOLUTE_GRID_INDEX = "(//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%d]";
+    private static final String XPATH_ABSOLUTE_GRID_LABEL = "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table";
+    private static final String XPATH_ABSOLUTE_GRID_LABEL_INDEX = "(" + XPATH_ABSOLUTE_GRID_LABEL + ")[%d]";
     
-    private static final String XPATH_ABSOLUTE_GRID_CELL = XPATH_ABSOLUTE_GRID + "/tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
-    private static final String XPATH_ABSOLUTE_GRID_CELL_INDEX = XPATH_ABSOLUTE_GRID + "/tbody/tr[%d]/td[%d]";
+    private static final String XPATH_ABSOLUTE_GRID_CELL = XPATH_ABSOLUTE_GRID_LABEL + "/tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
+    private static final String XPATH_ABSOLUTE_GRID_CELL_INDEX = XPATH_ABSOLUTE_GRID_LABEL + "/tbody/tr[%d]/td[%d]";
     private static final String XPATH_ABSOLUTE_GRID_INDEX_CELL = XPATH_ABSOLUTE_GRID_INDEX + "/tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
     private static final String XPATH_ABSOLUTE_GRID_INDEX_CELL_INDEX = XPATH_ABSOLUTE_GRID_INDEX + "/tbody/tr[%d]/td[%d]";
+    private static final String XPATH_ABSOLUTE_GRID_LABEL_INDEX_CELL = XPATH_ABSOLUTE_GRID_LABEL_INDEX + "/tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
+    private static final String XPATH_ABSOLUTE_GRID_LABEL_INDEX_CELL_INDEX = XPATH_ABSOLUTE_GRID_LABEL_INDEX + "/tbody/tr[%d]/td[%d]";
     
     private static final String XPATH_RELATIVE_GRID_CELL = ".//tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
     private static final String XPATH_RELATIVE_GRID_CELL_INDEX = ".//tbody/tr[%d]/td[%d]";
@@ -25,10 +29,13 @@ public class TempoGrid extends TempoField {
         if (isFieldIndex(gridName)) {
             int gNum = getIndexFromFieldIndex(gridName);
             String gName = getFieldFromFieldIndex(gridName);
-            
-            return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_INDEX, gName, gNum)));
+            if(StringUtils.isBlank(gName)) {
+                return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_INDEX, gNum)));
+            } else {
+                return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_LABEL_INDEX, gName, gNum)));
+            }
         } else {
-            return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID, gridName)));
+            return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_LABEL, gridName)));
         }
     }
     
@@ -91,14 +98,25 @@ public class TempoGrid extends TempoField {
                 int gNum = getIndexFromFieldIndex(gridName);
                 String gName = getFieldFromFieldIndex(gridName);
                 
-                if (isFieldIndex(columnName)) {
-                    // Using a columnNum
-                    int cNum = getIndexFromFieldIndex(columnName);
-                    (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_INDEX_CELL_INDEX, gName, gNum, rNum, cNum))));
-                    
+                if(StringUtils.isBlank(gName)) {
+                    if (isFieldIndex(columnName)) {
+                        // Using a columnNum
+                        int cNum = getIndexFromFieldIndex(columnName);
+                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_INDEX_CELL_INDEX, gNum, rNum, cNum))));   
+                    } else {
+                        // Using a columnName
+                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_INDEX_CELL, gNum, rNum, gridName, columnName))));
+                    }
                 } else {
-                    // Using a columnName
-                    (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_INDEX_CELL, gName, gNum, rNum, gridName, columnName))));
+                    if (isFieldIndex(columnName)) {
+                        // Using a columnNum
+                        int cNum = getIndexFromFieldIndex(columnName);
+                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_LABEL_INDEX_CELL_INDEX, gName, gNum, rNum, cNum))));
+                        
+                    } else {
+                        // Using a columnName
+                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_LABEL_INDEX_CELL, gName, gNum, rNum, gridName, columnName))));
+                    }
                 }
             } else {
                 if (isFieldIndex(columnName)) {

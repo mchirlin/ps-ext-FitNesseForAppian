@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoAction;
 import com.appiancorp.ps.automatedtest.object.TempoButton;
+import com.appiancorp.ps.automatedtest.object.TempoCheckboxField;
 import com.appiancorp.ps.automatedtest.object.TempoField;
 import com.appiancorp.ps.automatedtest.object.TempoGrid;
 import com.appiancorp.ps.automatedtest.object.TempoLinkField;
@@ -14,9 +15,11 @@ import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoMenu;
 import com.appiancorp.ps.automatedtest.object.TempoNews;
 import com.appiancorp.ps.automatedtest.object.TempoRadioButtonOption;
+import com.appiancorp.ps.automatedtest.object.TempoRadioField;
 import com.appiancorp.ps.automatedtest.object.TempoRecordItem;
 import com.appiancorp.ps.automatedtest.object.TempoRecordList;
 import com.appiancorp.ps.automatedtest.object.TempoReport;
+import com.appiancorp.ps.automatedtest.object.TempoSection;
 import com.appiancorp.ps.automatedtest.object.TempoTask;
 
 public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBaseFixture {
@@ -84,6 +87,22 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
     
     public boolean verifyNewsFeedContainingTextCommentedWithIsPresent(String newsText, String newsComment) {
         return TempoNews.refreshAndWaitForComment(newsText, newsComment);
+    }
+    
+    public String getRegexFromNewsFeedContainingText(String regex, String newsText) {
+        if (!TempoNews.refreshAndWaitFor(newsText)) {
+            throw new MissingObjectException("News Post", newsText);
+        }
+        
+        return TempoNews.getRegexForNewsPost(regex, newsText);
+    }
+    
+    public String getRegexFromNewsFeedContainingTextCommentedWith(String regex, String newsText, String newsComment) {
+        if (!TempoNews.refreshAndWaitForComment(newsText, newsComment)) {
+            throw new MissingObjectException("News Post", newsText);
+        }
+        
+        return TempoNews.getRegexForNewsPostComment(regex, newsText, newsComment);
     }
     
     /** TASKS **/
@@ -185,6 +204,14 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         
         return TempoReport.click(reportName);
     }
+    
+    public boolean verifyReportIsPresent(String reportName) {
+        return TempoReport.waitFor(reportName);
+    }
+    
+    public boolean verifyReportIsNotPresent(String reportName) {
+        return !TempoReport.waitFor(reportName);
+    }
 	
     /** ACTIONS **/
     
@@ -218,39 +245,23 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	        attempt++;
 	    }
 
-	    /*
-	    // Verify population worked
-	    attempt = 0;
-	    while(attempt < attemptTimes) {
-	        if (TempoField.contains(fieldName, fieldValues)) return true;
-	        attempt++;
-	    }
-	    */
 	    return false;
 	}
 	
 	public boolean populateFieldInSectionWith(String fieldName, String sectionName, String[] fieldValues) {
-	    if(!TempoField.waitFor(fieldName, sectionName)) {
+	    if(!TempoSection.waitFor(fieldName, sectionName)) {
             throw new MissingObjectException("Field", sectionName + fieldName);
         }
         
 	    int attempt = 0;
         while (attempt < attemptTimes) {
-            if (TempoField.populate(fieldName, sectionName, fieldValues)) {
+            if (TempoSection.populate(fieldName, sectionName, fieldValues)) {
                 new Actions(driver).sendKeys(Keys.TAB).perform();
                 return true;
             }
             attempt++;
         }
 
-        /*
-        // Verify population worked
-        attempt = 0;
-        while(attempt < attemptTimes) {
-            if (TempoField.contains(fieldName, sectionName, fieldValues)) return true;
-            attempt++;
-        }
-        */
         return false;
 	}
 	
@@ -268,6 +279,14 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         }
         
         return TempoField.contains(fieldName, fieldValues);
+    }
+	
+	public boolean verifyFieldIsPresent(String fieldName) {
+	    return TempoField.waitFor(fieldName);
+	}
+	
+	public boolean verifyFieldIsNotPresent(String fieldName) {
+        return !TempoField.waitFor(fieldName);
     }
 	
     // Grid Field   
@@ -323,12 +342,26 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 		return TempoButton.click(buttonName);
 	}
 	
-	// Button  
-    public boolean clickOnRadioButton(String optionName) {
-        if (!TempoRadioButtonOption.waitFor(optionName)) {
+	// Radio button option  
+    public boolean clickOnRadioOption(String optionName) {
+        if (!TempoRadioField.waitForOption(optionName)) {
             throw new MissingObjectException("Radio Button Option", optionName);
         }
         
-        return TempoRadioButtonOption.click(optionName);
+        return TempoRadioField.clickOption(optionName);
+    }
+    
+    // Checkbox option  
+    public boolean clickOnCheckboxOption(String optionName) {
+        if (!TempoCheckboxField.waitForOption(optionName)) {
+            throw new MissingObjectException("Checkbox Option", optionName);
+        }
+        
+        return TempoCheckboxField.clickOption(optionName);
+    }
+    
+    // Section Error
+    public boolean verifySectionContainingErrorIsPresent(String sectionName, String error) {
+        return TempoSection.waitForError(sectionName, error);
     }
 }

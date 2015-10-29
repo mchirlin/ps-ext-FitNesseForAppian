@@ -24,6 +24,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
+import com.appiancorp.ps.automatedtest.object.TempoError;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
@@ -137,7 +138,8 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	
 	public boolean open(String url) {
 		 driver.get(url);
-		 return true;
+		 
+		 return !TempoError.waitFor();
 	}
 	
 	public boolean takeScreenshot(String fileName) {

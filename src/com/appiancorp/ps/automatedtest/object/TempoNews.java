@@ -23,6 +23,8 @@ public class TempoNews extends TempoObject{
     public static boolean waitFor(String newsText) {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM, newsText))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM, newsText)));
+            scrollIntoView(element, false);
         } catch (TimeoutException e) {
             return false;
         }
@@ -77,6 +79,8 @@ public class TempoNews extends TempoObject{
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_LABEL, newsText, label))));
             // With value
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_VALUE, newsText, value))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_LABEL, newsText, label)));
+            scrollIntoView(element, false);
         } catch (TimeoutException e) {
             LOG.debug(e.getMessage());
             return false;
@@ -89,6 +93,8 @@ public class TempoNews extends TempoObject{
         try {
             //Tagged with
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_TAG, newsText, newsTag))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_TAG, newsText)));
+            scrollIntoView(element, false);
         } catch (TimeoutException e) {
             return false;
         }
@@ -100,6 +106,8 @@ public class TempoNews extends TempoObject{
         try {
             //Tagged with
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_COMMENT, newsText, newsComment))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_COMMENT, newsText, newsComment)));
+            scrollIntoView(element, false);
         } catch (TimeoutException e) {
             return false;
         }
@@ -130,10 +138,24 @@ public class TempoNews extends TempoObject{
     public static boolean waitForPostedAt(String newsText, String newsPostedAt) {
         try {
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_POSTED_AT, newsText, newsPostedAt))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_POSTED_AT, newsText, newsPostedAt)));
+            scrollIntoView(element, false);
         } catch (TimeoutException e) {
             return false;
         }
         
         return true;
+    }
+    
+    public static String getRegexForNewsPost(String regex, String newsText) {
+        String text = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM, newsText))).getText();
+        LOG.debug("NEWS POST TEXT: " + text);
+        return getRegexResults(regex, text);
+    }
+    
+    public static String getRegexForNewsPostComment(String regex, String newsText, String newsComment) {
+        String text = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_COMMENT, newsText, newsComment))).getText();
+        LOG.debug("NEWS POST TEXT: " + text);
+        return getRegexResults(regex, text);
     }
 }
