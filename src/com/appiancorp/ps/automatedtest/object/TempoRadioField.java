@@ -14,6 +14,7 @@ public class TempoRadioField extends TempoField {
     private static final String XPATH_NAME_RELATIVE_INPUT = ".//label[contains(text(), '%s')]/preceding-sibling::input";
     private static final String XPATH_NUM_RELATIVE_INPUT = "(.//input[contains(@type, 'radio')])[%d]";
     private static final String XPATH_RELATIVE_RADIO_BUTTON_GROUP = ".//div[contains(@class, 'RadioButtonGroup')]";
+    private static final String XPATH_OPTION = "//label[contains(text(), '%s')]/preceding-sibling::input[@type = 'radio']";
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement radioField;
@@ -65,6 +66,27 @@ public class TempoRadioField extends TempoField {
         try {
             fieldLayout.findElement(By.xpath(XPATH_RELATIVE_RADIO_BUTTON_GROUP));
         } catch (Exception e) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public static boolean clickOption(String optionName) {
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_OPTION, optionName)));
+        element.click();
+        
+        LOG.debug("RADIO BUTTON OPTION CLICK : " + optionName);
+        
+        return true;
+    }
+    
+    public static boolean waitForOption(String optionName) {
+        try {
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_OPTION, optionName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_OPTION, optionName)));
+            scrollIntoView(element);
+        } catch (TimeoutException e) {
             return false;
         }
         

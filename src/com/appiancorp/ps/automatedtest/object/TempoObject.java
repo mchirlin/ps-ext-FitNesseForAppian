@@ -37,7 +37,7 @@ public class TempoObject {
     public static final String TIME_DISPLAY_FORMAT_STRING = "h:mm aaa";
     public static final String DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;
     
-    private static final String XPATH_WORKING = "//span[contains(text(), 'Working...";
+    private static final String XPATH_WORKING = "//div[@class = 'appian-indicator-message']";
     
     private static final Pattern INDEX_PATTERN = Pattern.compile("(.*)?\\[([0-9]+)\\]");
     
@@ -162,6 +162,11 @@ public class TempoObject {
     
     public static boolean waitForWorking() {
         try {
+            WebElement e = driver.findElement(By.xpath(XPATH_WORKING));
+            LOG.debug("Working Displayed " + e.isDisplayed());
+            LOG.debug("Working Enabled " + e.isEnabled());
+            LOG.debug("Working Selected " + e.isSelected());
+            (new WebDriverWait(driver, 1)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_WORKING)));
             (new WebDriverWait(driver, 10)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_WORKING)));
         } catch (TimeoutException e) {
             return false;
@@ -211,5 +216,17 @@ public class TempoObject {
         } else {
             return null;
         }        
+    }
+    
+    public static String getRegexResults(String regex, String text) {
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(text.toString());
+        
+        if (m.find()) {
+            LOG.debug("Regex results: " + m.group(0));
+            return m.group(0);
+        } else {
+            return "";
+        } 
     }
 }
