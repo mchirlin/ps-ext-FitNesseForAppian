@@ -11,8 +11,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TempoGrid extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoGrid.class);
-    private static final String XPATH_ABSOLUTE_GRID_INDEX = "//div[contains(@class, 'DataGrid-Table')]/descendant::table";
-    private static final String XPATH_ABSOLUTE_GRID_LABEL = "(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table)[%d]";
+    private static final String XPATH_ABSOLUTE_GRID_INDEX = "(//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%d]";
+    private static final String XPATH_ABSOLUTE_GRID_LABEL = "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table";
     private static final String XPATH_ABSOLUTE_GRID_LABEL_INDEX = "(" + XPATH_ABSOLUTE_GRID_LABEL + ")[%d]";
     
     private static final String XPATH_ABSOLUTE_GRID_CELL = XPATH_ABSOLUTE_GRID_LABEL + "/tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
