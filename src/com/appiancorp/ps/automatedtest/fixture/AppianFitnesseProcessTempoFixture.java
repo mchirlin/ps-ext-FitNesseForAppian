@@ -281,6 +281,14 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return TempoField.contains(fieldName, fieldValues);
     }
 	
+	public boolean verifyFieldInSectionContains(String fieldName, String sectionName, String[] fieldValues) {
+        if(!TempoSection.waitFor(fieldName, sectionName)) {
+            throw new MissingObjectException("Field", fieldName);
+        }
+        
+        return TempoSection.contains(fieldName, sectionName, fieldValues);
+    }
+	
 	public boolean verifyFieldIsPresent(String fieldName) {
 	    return TempoField.waitFor(fieldName);
 	}
@@ -303,15 +311,6 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
             }
             attempt++;
         }
-
-        /*
-        // Verify population worked
-        attempt = 0;
-        while(attempt < attemptTimes) {
-            if (TempoGrid.contains(gridName, columnName, rowNum, fieldValues)) return true;
-            attempt++;
-        }
-        */
         
         return false;
     }
