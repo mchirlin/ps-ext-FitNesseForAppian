@@ -42,8 +42,6 @@ public class TempoField extends TempoObject {
         }        
     }
     
-
-    
     public static boolean populate(String fieldName, String[] fieldValues){
         for (String fieldValue : fieldValues) {
             WebElement fieldLayout = getFieldLayout(fieldName);
@@ -219,7 +217,7 @@ public class TempoField extends TempoObject {
                     return TempoDatetimeField.contains(fieldLayout, fieldValue);
                     
                 case PICKER_FIELD: 
-                    return TempoPickerField.contains(fieldLayout, fieldName, fieldValue);
+                    return TempoPickerField.contains(fieldLayout, fieldValue);
                     
                 default:
                    return false;
@@ -263,9 +261,4 @@ public class TempoField extends TempoObject {
         else if (TempoPickerField.isType(fieldLayout)) return PICKER_FIELD;
         else return UNKNOWN_FIELD;
     }
-    /*
-    public static boolean waitForError(WebElement fieldLayout, String error) {
-        
-    }
-    */
 }

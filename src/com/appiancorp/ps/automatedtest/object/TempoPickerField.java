@@ -41,10 +41,8 @@ public class TempoPickerField extends TempoField {
         return true;
     }
     
-    public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue) {
+    public static boolean contains(WebElement fieldLayout, String fieldValue) {
         try {
-            waitFor(fieldName);
-            fieldLayout = getFieldLayout(fieldName);
             fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_SELECTION, fieldValue)));
         } catch (NoSuchElementException nse) {
             return false;
