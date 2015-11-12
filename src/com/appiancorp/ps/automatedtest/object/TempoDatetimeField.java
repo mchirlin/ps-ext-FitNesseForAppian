@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.object;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,8 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.object.TempoObject;
-
 public class TempoDatetimeField extends TempoField{
 
     private static final Logger LOG = Logger.getLogger(TempoDatetimeField.class);
@@ -24,14 +23,8 @@ public class TempoDatetimeField extends TempoField{
     private static final String XPATH_RELATIVE_TIME_PLACEHOLDER = ".//input[contains(@class, 'aui-TimeInput-Placeholder')]";
     private static final String XPATH_RELATIVE_TIME_INPUT = ".//input[contains(@class, 'aui-TimeInput-TextBox')]";
     
-    public static boolean populate(WebElement fieldLayout, String fieldValue) {        
-        Date d;
-        
-        try{
-            d = DateUtils.parseDate(fieldValue, TempoObject.DATETIME_DISPLAY_FORMAT_STRING);
-        } catch (Exception E) {
-            d = new Date();
-        }
+    public static boolean populate(WebElement fieldLayout, String fieldValue) throws ParseException {        
+        Date d = parseDate(fieldValue);
         
         populateTempoDatetimeFieldWithDate(fieldLayout, d);
         populateTempoDatetimeFieldWithTime(fieldLayout, d);
@@ -60,10 +53,11 @@ public class TempoDatetimeField extends TempoField{
         String datetimeString = dateString + " " + timeString;
 
         try{  
-            String compareString = new SimpleDateFormat(TempoObject.DATETIME_DISPLAY_FORMAT_STRING).format(DateUtils.parseDate(datetimeString, DATETIME_FORMAT_STRING));
-            LOG.debug("DATETIME FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");
+            Date compareDate = parseDate(datetimeString);
+            Date fieldDate = parseDate(fieldValue);
+            LOG.debug("DATETIME FIELD COMPARISON : Field value [" + fieldDate.toString() + "] compared to Entered value [" + fieldDate.toString() + "]");
             
-            return compareString.equals(fieldValue);
+            return DateUtils.isSameInstant(compareDate, fieldDate);
         } catch (Exception e) {
             LOG.error(e.getMessage());
             return false;

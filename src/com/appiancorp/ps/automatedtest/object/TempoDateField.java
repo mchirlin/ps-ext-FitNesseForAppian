@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.object;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,8 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.object.TempoObject;
-
 public class TempoDateField extends TempoField{
 
     private static final Logger LOG = Logger.getLogger(TempoDateField.class);
@@ -21,15 +20,9 @@ public class TempoDateField extends TempoField{
     private static final String XPATH_RELATIVE_DATE_PLACEHOLDER = ".//input[contains(@class, 'aui-DateInput-Placeholder')]";
     private static final String XPATH_RELATIVE_DATE_INPUT = ".//input[contains(@class, 'aui-DateInput-TextBox')]";
     
-    public static boolean populate(WebElement fieldLayout, String fieldValue) {        
+    public static boolean populate(WebElement fieldLayout, String fieldValue) throws ParseException {        
         fieldValue = parseVariable(fieldValue);
-        Date d;
-        
-        try{
-            d = DateUtils.parseDate(fieldValue, TempoObject.DATETIME_DISPLAY_FORMAT_STRING);
-        } catch (Exception E) {
-            d = new Date();
-        }
+        Date d = parseDate(fieldValue);
         
         populateTempoDateFieldWithDate(fieldLayout, d);
         
@@ -50,18 +43,15 @@ public class TempoDateField extends TempoField{
         return true;
     }
     
-    @SuppressWarnings("deprecation")
     public static boolean contains(WebElement fieldLayout, String fieldValue) {
         String dateString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_INPUT)).getAttribute("value");
 
         try{  
-            Date compareDate = DateUtils.parseDate(dateString, DATE_FORMAT_STRING);
-            Date fieldDate = DateUtils.parseDate(fieldValue, DATETIME_DISPLAY_FORMAT_STRING);
+            Date compareDate = parseDate(dateString);
+            Date fieldDate = parseDate(fieldValue);
             LOG.debug("DATE FIELD COMPARISON : Field value [" + compareDate.toString() + "] compared to Entered value [" + fieldDate.toString() + "]");
             
-            return compareDate.getDate() == fieldDate.getDate() &&
-                    compareDate.getMonth() == fieldDate.getMonth() &&
-                    compareDate.getYear() == fieldDate.getYear();
+            return DateUtils.isSameDay(compareDate, fieldDate);
         } catch (Exception e) {
             LOG.error(e.getMessage());
             return false;

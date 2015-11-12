@@ -73,6 +73,15 @@ public class TempoObject {
         return new SimpleDateFormat(DATETIME_DISPLAY_FORMAT_STRING).format(d);
     }
     
+    public static Date parseDate(String datetimeString) throws ParseException {
+        return DateUtils.parseDateStrictly(datetimeString, new String[] {
+                DATETIME_DISPLAY_FORMAT_STRING,
+                DATE_DISPLAY_FORMAT_STRING,
+                DATETIME_FORMAT_STRING,
+                DATE_FORMAT_STRING
+        });
+    }
+    
     public static String parseVariable(String variable) {
         if (isDateCalculation(variable)) variable = calculateDate(variable);
         
@@ -162,10 +171,6 @@ public class TempoObject {
     
     public static boolean waitForWorking() {
         try {
-            WebElement e = driver.findElement(By.xpath(XPATH_WORKING));
-            LOG.debug("Working Displayed " + e.isDisplayed());
-            LOG.debug("Working Enabled " + e.isEnabled());
-            LOG.debug("Working Selected " + e.isSelected());
             (new WebDriverWait(driver, 1)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_WORKING)));
             (new WebDriverWait(driver, 10)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_WORKING)));
         } catch (TimeoutException e) {

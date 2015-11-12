@@ -2,7 +2,6 @@ package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -59,17 +58,15 @@ public class TempoCheckboxField extends TempoField {
         } catch (Exception e) {}
         
         // For editable
-        boolean checked = false;
-        try {
-            if (isFieldIndex(fieldValue)) {
-                int index = getIndexFromFieldIndex(fieldValue);
-                checked = fieldLayout.findElement(By.xpath(String.format(XPATH_NUM_RELATIVE_INPUT, index))).getAttribute("checked").equals("true");
-            } else {
-                checked = fieldLayout.findElement(By.xpath(String.format(XPATH_NAME_RELATIVE_INPUT, fieldValue))).getAttribute("checked").equals("true");
-            }
-        } catch (NoSuchElementException nse) {
-            return false;
+        boolean checked;
+        WebElement field;
+        if (isFieldIndex(fieldValue)) {
+            int index = getIndexFromFieldIndex(fieldValue);
+            field = fieldLayout.findElement(By.xpath(String.format(XPATH_NUM_RELATIVE_INPUT, index)));
+        } else {
+            field = fieldLayout.findElement(By.xpath(String.format(XPATH_NAME_RELATIVE_INPUT, fieldValue)));
         }
+        checked = field.getAttribute("checked") == null ? false : true;
         
         LOG.debug("CHECKBOX FIELD COMPARISON : Field value [" + fieldValue + "] is checked [" + checked + "]");
         
