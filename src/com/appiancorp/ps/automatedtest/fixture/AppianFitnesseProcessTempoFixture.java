@@ -14,7 +14,6 @@ import com.appiancorp.ps.automatedtest.object.TempoLinkField;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoMenu;
 import com.appiancorp.ps.automatedtest.object.TempoNews;
-import com.appiancorp.ps.automatedtest.object.TempoRadioButtonOption;
 import com.appiancorp.ps.automatedtest.object.TempoRadioField;
 import com.appiancorp.ps.automatedtest.object.TempoRecordItem;
 import com.appiancorp.ps.automatedtest.object.TempoRecordList;
@@ -248,6 +247,14 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
 	    return false;
 	}
 	
+	public boolean populateFieldWithValue(String fieldName, String fieldValue) {
+	  return populateFieldWith(fieldName, new String[]{fieldValue});
+	}
+	
+	public boolean populateFieldWithValues(String fieldName, String[] fieldValues) {
+	  return populateFieldWith(fieldName, fieldValues);
+	}
+	
 	public boolean populateFieldInSectionWith(String fieldName, String sectionName, String[] fieldValues) {
 	    if(!TempoSection.waitFor(fieldName, sectionName)) {
             throw new MissingObjectException("Field", sectionName + fieldName);
@@ -279,6 +286,14 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         }
         
         return TempoField.contains(fieldName, fieldValues);
+    }
+	
+	public boolean verifyFieldContainsValue(String fieldName, String fieldValue) {
+	    return verifyFieldContains(fieldName, new String[]{fieldValue});
+	}
+	
+	public boolean verifyFieldContainsValues(String fieldName, String[] fieldValues) {
+        return verifyFieldContains(fieldName, fieldValues);
     }
 	
 	public boolean verifyFieldInSectionContains(String fieldName, String sectionName, String[] fieldValues) {

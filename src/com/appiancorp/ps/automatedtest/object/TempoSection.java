@@ -11,6 +11,7 @@ import com.appiancorp.ps.automatedtest.object.TempoObject;
 
 public class TempoSection extends TempoObject {
        
+    @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoSection.class);
     protected static final String XPATH_LABEL_CONTAINS = "[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]";
     protected static final String XPATH_FIELD_SECTION_LAYOUT = "//h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::span" + XPATH_LABEL_CONTAINS + "| //h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::label" + XPATH_LABEL_CONTAINS;

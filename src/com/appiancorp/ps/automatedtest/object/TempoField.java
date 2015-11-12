@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.object.TempoObject;
+import com.google.common.base.Throwables;
 
 public class TempoField extends TempoObject {
        
@@ -50,7 +51,7 @@ public class TempoField extends TempoObject {
         
         return true;
     }
-    
+        
     public static boolean populate(WebElement fieldLayout, String fieldName, String fieldValue) {      
         String fieldType = getFieldType(fieldLayout, fieldValue);
         fieldValue = TempoObject.parseVariable(fieldValue);
@@ -91,7 +92,7 @@ public class TempoField extends TempoObject {
                     return false;
             }
         } catch (Exception e) {
-            LOG.warn("POPULATION for " + fieldName + ": " + e.getClass());
+            LOG.warn("POPULATION for " + fieldName + "\n" + Throwables.getStackTraceAsString(e));
             return false;
         }
     }
@@ -146,7 +147,7 @@ public class TempoField extends TempoObject {
                     return false;
             }
         } catch (Exception e) {
-            LOG.warn("CLEAR for " + fieldName + ": " + e.getClass());
+            LOG.warn("CLEAR for " + fieldName + "\n" + Throwables.getStackTraceAsString(e));
             return false;
         }
     }
@@ -182,6 +183,8 @@ public class TempoField extends TempoObject {
     public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue) {
         String fieldType = getFieldType(fieldLayout, fieldValue);
         fieldValue = TempoObject.parseVariable(fieldValue);
+        
+        LOG.debug("Field Type: " + fieldType);
         
         try {
             switch (fieldType) {
@@ -223,7 +226,7 @@ public class TempoField extends TempoObject {
                    return false;
             }
         } catch (Exception e) {
-            LOG.warn("CONTAINS for " + fieldName + ": " + e.getClass());
+            LOG.warn("CONTAINS for " + fieldName + "\n" + Throwables.getStackTraceAsString(e));
             return false;
         }
     }
