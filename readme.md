@@ -93,8 +93,10 @@ To update the repository, please create a branch from `master`, implement/push y
 * | set data source name to | *DATA_SOURCE_NAME* |
 * | set appian url to | *APPIAN_URL* |
 * | set start datetime | - will be used as relative datetime for date/time fields
-* | set timeout seconds to | *TIMEOUT_SECONDS* | - used as the wait timeout in between each command
-* | take screenshot | *FILE_PATH* |
+* | set timeout seconds to | *TIMEOUT_SECONDS* | - Used as the wait timeout in between each command
+* | set screenshot path to | *SCREENSHOT_PATH* | - Set the folder where screenshots will be saved. This will create new folders if necessary. Terminate path with "/" to ensure folder creation. (Default C:\AutomatedTesting\screenshots\)
+* | set take error screenshots to | *SCREENSHOT_BOOLEAN* | - If true, screenshots will be taken for every failed test case. (Default true)
+* | take screenshot | *FILE_NAME* | - take a screenshot with the name (do not include the extension)
 * | login with username | *USERNAME* | with password | *PASSWORD* | - uses set appian url
 * | login with terms with username | *USERNAME* | with password | *PASSWORD* | - uses set appian url
 * | wait for | *RELATIVE_PERIOD*, e.g. +1 days, +1 hours | - waits for relative amount of time
