@@ -40,6 +40,7 @@ import fitlibrary.DoFixture;
 public class AppianFitnesseProcessBaseFixture extends DoFixture {
     
     private static final Logger LOG = Logger.getLogger(AppianFitnesseProcessBaseFixture.class);
+    private static Integer errorNum = 1;
     
 	public String processId = null;
 	public String url = null;
@@ -52,6 +53,7 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	public int timeoutSeconds = 5;
 	public int attemptTimes = 3;
 	public String screenshotPath = "C:\\AutomatedTesting\\screenshots";
+	public Boolean takeErrorScreenshots = false;
 	    
 	Properties prop = new Properties();
 	
@@ -136,6 +138,12 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	    return true;
 	}
 	
+	public boolean setTakeErrorScreenshotsTo(String bool) {
+	    this.takeErrorScreenshots = Boolean.valueOf(bool);
+	    
+	    return true;
+	}
+	
 	public boolean open(String url) {
 		 driver.get(url);
 		 
@@ -152,6 +160,7 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
             LOG.error(e.getMessage());
             return false;
         }   
+	    
         return true;
     }
 	
@@ -385,5 +394,14 @@ public class AppianFitnesseProcessBaseFixture extends DoFixture {
 	
 	public String getRandomString(int length) {
 	    return RandomStringUtils.randomAlphanumeric(length);
+	}
+	
+	protected boolean returnHandler(boolean val) {
+	    if (!val && takeErrorScreenshots) {
+	        takeScreenshot(String.format("%3d", errorNum));
+	        errorNum += 1;
+	    }
+	    
+	    return val;
 	}
 }
