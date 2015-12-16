@@ -75,7 +75,7 @@ To update the repository, please create a branch from `master`, implement/push y
 1. Enter the following values:
  1. Select **Start new FitNesse instance as part of build**.
  1. Enter ```TESTING_HOME``` in **Java working directory**.
- 1. Enter ```TESTING_HOME\fitnesse.jar``` in **Path to fitnesse.jar**.
+ 1. Enter ```TESTING_HOME\fitnesse-standalone.jar``` in **Path to fitnesse.jar**.
  1. Enter ```TESTING_HOME\FitNesseRoot``` in **Path to FitNesseRoot**.
  1. Enter ```8980``` in **Port for FitNesse instance**.
  1. Enter the page for the test suite in **Target Page**.
