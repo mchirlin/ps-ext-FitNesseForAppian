@@ -147,7 +147,7 @@ To update the repository, please create a branch from `master`, implement/push y
 
 ### FORMS
 * | populate field | *FIELD_LABEL* | with | *VALUE(S)* |
-* | populate field | *FIELD_INDEX[FIELD_INDEX]* | with | *VALUE(S)* | - use this to populate the 2nd, 3rd, etc field with the same label
+* | populate field | *FIELD_LABEL[FIELD_INDEX]* | with | *VALUE(S)* | - use this to populate the 2nd, 3rd, etc field with the same label
 * | populate field | [*FIELD_INDEX*] | in section | *SECTION_NAME* | with | *VALUE(S)* | - populate a field in a section with no label
 * | clear field | *FIELD_LABEL* | of | *VALUE_TO_REMOVE* | - this is for removing specific value from a picker
 * | verify field | *FIELD_LABEL* | contains | *VALUE* |
