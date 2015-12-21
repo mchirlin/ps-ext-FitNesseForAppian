@@ -154,8 +154,9 @@ To update the repository, please create a branch from `master`, implement/push y
 * | verify field | *FIELD_LABEL[FIELD_INDEX]* | contains | *VALUE* |
 * | verify field | *FIELD_LABEL* | is present |
 * | verify field | *FIELD_LABEL* | is not present |
-* | populate editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |
-* | verify editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
+* | populate grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |
+* | verify grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
+* | select grid | *GRID_NAME* | row | *ROW_NUMBER* |
 * | click on link | *LINK_NAME* |
 * | click on button | *BUTTON_NAME* |
 * | click on radio option | *RADIO_OPTION* |

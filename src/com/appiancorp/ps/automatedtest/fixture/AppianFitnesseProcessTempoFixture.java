@@ -313,7 +313,7 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
     }
 	
     // Grid Field   
-    public boolean populateEditableGridColumnRowWith(String gridName, String columnName, String rowNum, String[] fieldValues) {
+    public boolean populateGridColumnRowWith(String gridName, String columnName, String rowNum, String[] fieldValues) {
         if(!TempoGrid.waitFor(gridName, columnName, rowNum)) {
             throw new MissingObjectException("Grid", gridName);
         }
@@ -330,12 +330,20 @@ public class AppianFitnesseProcessTempoFixture extends AppianFitnesseProcessBase
         return returnHandler(false);
     }
     
-    public boolean verifyEditableGridColumnRowContains(String gridName, String columnName, String rowNum, String[] fieldValues) {
+    public boolean verifyGridColumnRowContains(String gridName, String columnName, String rowNum, String[] fieldValues) {
         if(!TempoGrid.waitFor(gridName, columnName, rowNum)) {
             throw new MissingObjectException("Grid", gridName);
         }
         
         return returnHandler(TempoGrid.contains(gridName, columnName, rowNum, fieldValues)); 
+    }
+    
+    public boolean selectGridRow(String gridName, String rowNum) {
+        if(!TempoGrid.waitFor(gridName, rowNum)) {
+            throw new MissingObjectException("Grid", gridName);
+        }
+        
+        return returnHandler(TempoGrid.selectRow(gridName, rowNum)); 
     }
 	
     // Link

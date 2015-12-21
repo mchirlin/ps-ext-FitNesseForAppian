@@ -24,6 +24,8 @@ public class TempoGrid extends TempoField {
     
     private static final String XPATH_RELATIVE_GRID_CELL = ".//tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
     private static final String XPATH_RELATIVE_GRID_CELL_INDEX = ".//tbody/tr[%d]/td[%d]";
+    
+    private static final String XPATH_RELATIVE_CHECKBOX = ".//input[@type = 'checkbox']";
 
     public static WebElement getGrid(String gridName) {
         if (isFieldIndex(gridName)) {
@@ -70,6 +72,19 @@ public class TempoGrid extends TempoField {
         return true;
     }
     
+    public static boolean selectRow(String gridName, String rowNum) {
+        try {
+            WebElement cell = getCell(gridName, "[1]", rowNum);
+            WebElement checkbox = cell.findElement(By.xpath(XPATH_RELATIVE_CHECKBOX));
+            checkbox.click();
+        } catch (Exception e) {
+            LOG.warn("GRID ROW SELECTION for " + gridName + "|" + rowNum +": " + e.getClass());
+            return false;
+        }
+        
+        return true;
+    }
+    
     public static boolean contains(String gridName, String columnName, String rowNum, String[] fieldValues) {
         for (String fieldValue : fieldValues) {
             try {
@@ -88,6 +103,10 @@ public class TempoGrid extends TempoField {
         WebElement cell = getCell(gridName, columnName, rowNum);
         
         return clear(cell, null);
+    }
+    
+    public static boolean waitFor(String gridName, String rowNum) {
+        return waitFor(gridName, "[1]", rowNum);
     }
     
     public static boolean waitFor(String gridName, String columnName, String rowNum) {
