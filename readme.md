@@ -75,7 +75,7 @@ To update the repository, please create a branch from `master`, implement/push y
 1. Enter the following values:
  1. Select **Start new FitNesse instance as part of build**.
  1. Enter ```TESTING_HOME``` in **Java working directory**.
- 1. Enter ```TESTING_HOME\fitnesse.jar``` in **Path to fitnesse.jar**.
+ 1. Enter ```TESTING_HOME\fitnesse-standalone.jar``` in **Path to fitnesse.jar**.
  1. Enter ```TESTING_HOME\FitNesseRoot``` in **Path to FitNesseRoot**.
  1. Enter ```8980``` in **Port for FitNesse instance**.
  1. Enter the page for the test suite in **Target Page**.
@@ -147,15 +147,16 @@ To update the repository, please create a branch from `master`, implement/push y
 
 ### FORMS
 * | populate field | *FIELD_LABEL* | with | *VALUE(S)* |
-* | populate field | *FIELD_INDEX[FIELD_INDEX]* | with | *VALUE(S)* | - use this to populate the 2nd, 3rd, etc field with the same label
+* | populate field | *FIELD_LABEL[FIELD_INDEX]* | with | *VALUE(S)* | - use this to populate the 2nd, 3rd, etc field with the same label
 * | populate field | [*FIELD_INDEX*] | in section | *SECTION_NAME* | with | *VALUE(S)* | - populate a field in a section with no label
 * | clear field | *FIELD_LABEL* | of | *VALUE_TO_REMOVE* | - this is for removing specific value from a picker
 * | verify field | *FIELD_LABEL* | contains | *VALUE* |
 * | verify field | *FIELD_LABEL[FIELD_INDEX]* | contains | *VALUE* |
 * | verify field | *FIELD_LABEL* | is present |
 * | verify field | *FIELD_LABEL* | is not present |
-* | populate editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |
-* | verify editable grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
+* | populate grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |
+* | verify grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
+* | select grid | *GRID_NAME* | row | *ROW_NUMBER* |
 * | click on link | *LINK_NAME* |
 * | click on button | *BUTTON_NAME* |
 * | click on radio option | *RADIO_OPTION* |
