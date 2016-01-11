@@ -87,6 +87,7 @@ To update the repository, please create a branch from `master`, implement/push y
 1. You can now run your FitNesse test by clicking **Build Now**.
  
 ## Commands
+For additional information, view the javadocs: /doc/index.html
 
 ### UTILITIES
 * | setup selenium web driver with | *BROWSER_NAME* | browser |
@@ -145,9 +146,10 @@ To update the repository, please create a branch from `master`, implement/push y
 * | click on action | *ACTION_NAME* |
 * | verify action completed |
 
-### FORMS
+### INTERFACES
 * | populate field | *FIELD_LABEL_OR_INDEX* | with | *VALUE(S)* |
 * | populate field | *FIELD_LABEL[FIELD_INDEX]* | with | *VALUE(S)* | - use this to populate the 2nd, 3rd, etc field with the same label
+* | popultate field | *FIELD_LABEL | with value | VALUE | - use this to populate a field with a value that contains a comma
 * | populate field | [*FIELD_INDEX*] | in section | *SECTION_NAME* | with | *VALUE(S)* | - populate a field in a section with no label
 * | clear field | *FIELD_LABEL* | of | *VALUE_TO_REMOVE* | - this is for removing specific value from a picker
 * | get form title | - use with FitNesse keyword **check** to verify title, e.g. | check | get form title | *Expected Title* |
@@ -156,6 +158,7 @@ To update the repository, please create a branch from `master`, implement/push y
 * | get field | *FIELD_LABEL_OR_INDEX* | in section | *SECTION_NAME* | value | - use with FitNesse key words **check** or **set** to verify values or populate runtime variables
 * | verify field | *FIELD_LABEL_OR_INDEX* | contains | *VALUE* |
 * | verify field | *FIELD_LABEL[FIELD_INDEX]* | contains | *VALUE* |
+* | verify field | *FIELD_LABEL* | contains value | *VALUE* | - use this to verify a field that contains a comma
 * | verify field | *FIELD_LABEL_OR_INDEX* | in section | *SECTION_NAME* | contains | *VALUE* |
 * | verify field | *FIELD_LABEL_OR_INDEX* | is present |
 * | verify field | *FIELD_LABEL_OR_INDEX* | is not present |
