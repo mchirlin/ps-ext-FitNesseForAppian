@@ -1,8 +1,0 @@
-!2 '''This Test Page using Selenium Web Driver to run an Appian test process, inputs data and verifies the result'''
-----
-'''Variables'''
-
-!define TEST_RUNNER {fitlibrary.suite.FitLibraryServer}
-!path C:\AutomatedTesting\**.jar
-
-!contents -R2 -g -p -f -h
