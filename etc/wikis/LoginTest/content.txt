@@ -6,7 +6,7 @@
 !path C:\AutomatedTesting\**.jar
 
 ----
-!| com.appiancorp.ps.automatedtest.fixture.AppianFitnesseProcessTempoFixture |
+!| com.appiancorp.ps.automatedtest.fixture.TempoFixture |
 
 '''Set up Appian test'''
 | setup selenium web driver with browser | FIREFOX |
