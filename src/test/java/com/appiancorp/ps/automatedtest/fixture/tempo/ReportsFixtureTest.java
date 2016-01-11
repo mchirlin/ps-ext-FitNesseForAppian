@@ -6,17 +6,15 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.appiancorp.ps.automatedtest.fixture.tempo.TempoFixture;
+import com.appiancorp.ps.automatedtest.fixture.TempoFixture;
 
 public class ReportsFixtureTest {    
     
     private static TempoFixture tFixture;
-    private static ReportsFixture rFixture;
-    
+
     @BeforeClass
     public static void setUp() throws Exception {
       tFixture = new TempoFixture();
-      rFixture = new ReportsFixture();
       
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
@@ -29,11 +27,11 @@ public class ReportsFixtureTest {
     public void testReportsFixture() throws Exception {
         tFixture.clickOnMenu("Reports");
         
-        assertTrue(rFixture.verifyReportIsPresent("Orders Dashboard"));
+        assertTrue(tFixture.verifyReportIsPresent("Orders Dashboard"));
         
-        assertTrue(rFixture.verifyReportIsNotPresent("Not Orders Dashboard"));
+        assertTrue(tFixture.verifyReportIsNotPresent("Not Orders Dashboard"));
 
-        assertTrue(rFixture.clickOnReport("Orders Dashboard"));
+        assertTrue(tFixture.clickOnReport("Orders Dashboard"));
     }
     
     @AfterClass

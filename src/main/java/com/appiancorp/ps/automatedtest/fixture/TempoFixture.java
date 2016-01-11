@@ -1,19 +1,496 @@
-package com.appiancorp.ps.automatedtest.fixture.tempo;
+package com.appiancorp.ps.automatedtest.fixture;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
+import com.appiancorp.ps.automatedtest.object.TempoAction;
 import com.appiancorp.ps.automatedtest.object.TempoButton;
 import com.appiancorp.ps.automatedtest.object.TempoCheckboxField;
 import com.appiancorp.ps.automatedtest.object.TempoField;
 import com.appiancorp.ps.automatedtest.object.TempoForm;
 import com.appiancorp.ps.automatedtest.object.TempoGrid;
 import com.appiancorp.ps.automatedtest.object.TempoLinkField;
+import com.appiancorp.ps.automatedtest.object.TempoLogin;
+import com.appiancorp.ps.automatedtest.object.TempoMenu;
+import com.appiancorp.ps.automatedtest.object.TempoNews;
 import com.appiancorp.ps.automatedtest.object.TempoRadioField;
+import com.appiancorp.ps.automatedtest.object.TempoRecordItem;
+import com.appiancorp.ps.automatedtest.object.TempoRecordList;
+import com.appiancorp.ps.automatedtest.object.TempoReport;
 import com.appiancorp.ps.automatedtest.object.TempoSection;
+import com.appiancorp.ps.automatedtest.object.TempoTask;
 
-public class InterfaceFixture extends TempoFixture {
+public class TempoFixture extends BaseFixture {
+	
+    @SuppressWarnings("unused")
+    private static final Logger LOG = Logger.getLogger(TempoFixture.class);
+    
+	public TempoFixture() {
+		super();
+	}
+
+	/**
+     * Clicks on the associated tempo menu.<br>
+     * <br>
+     * Example: <code>| click on menu | MENU_NAME |</code>
+     * 
+     * @param tempoMenu Name of tempo menu, e.g. Records, Tasks, News
+     * @return True if action completed
+     */
+	public boolean clickOnMenu(String tempoMenu) {
+		if(!TempoMenu.waitFor(tempoMenu)) {
+		    throw new MissingObjectException("Tempo Menu", tempoMenu);
+		}
+		
+		return returnHandler(TempoMenu.click(tempoMenu));
+	}
+	
+	/**
+    * Logs out of Appian
+    * <br>
+    * Example: <code>| logout |</code>
+    * 
+    * @return True if action completed
+    */
+	public boolean logout() {
+        if(!TempoLogin.waitForLogout()) {
+            throw new MissingObjectException("Logout Menu");
+        }
+        
+        return returnHandler(TempoLogin.logout());
+    }
+	
+	/*
+	 * News
+	 */
+	
+	/** 
+     * Verifies there is a news post containing specific text. 
+     * The method will wait for the timeout period and refresh up to the configured number of refresh times before failing.<br>
+     * <br>
+     * FitNesse Example: <code>| verify news feed containing text | NEWS_TITLE | is present |</code>
+     * 
+     * @param newsText Text to search for in the news feed
+     * @return True, if text is located in the news feed
+     */
+    public boolean verifyNewsFeedContainingTextIsPresent(String newsText) {
+        return returnHandler(TempoNews.refreshAndWaitFor(newsText));
+    }
+    
+    /**
+     * Verifies there is not a news post containing specific text.<br>
+     * <br>
+     * FitNesse Example: <code>| verify news feed containing text | NEWS_TITLE | is present |</code><br>
+     * <br>
+     * The reason to use than <code>| reject | verify news feed containing text | NEWS_TEXT | is present |</code> is that this method will not refresh and wait. 
+     * 
+     * @param newsText Text to search for in the news feed
+     * @return True, if no post is located with specific text
+     */
+    public boolean verifyNewsFeedContainingTextIsNotPresent(String newsText) {
+        return returnHandler(!TempoNews.waitFor(newsText));
+    }
+    
+    /**
+     * Toggles the more info on a news feed post containing specific text.<br>
+     * <br>
+     * FitNesse Example: <code>| toggle more info for news feed containing text | NEWS_TEXT |</code>
+     * 
+     * @param newsText Text to search for in the news feed
+     * @return True, if completed successfully
+     */
+    public boolean toggleMoreInfoForNewsFeedContainingText(String newsText) {
+        if(!TempoNews.waitForMoreInfo(newsText)) {
+            throw new MissingObjectException("News Post with More Info", newsText);
+        }
+        
+        return returnHandler(TempoNews.toggleMoreInfo(newsText));
+    }
+    
+    /**
+     * Verifies there is a news post containing specific text with a specific label and value is present.<br>
+     * <br>
+     * FitNesse Example: <code>| verify news feed containing text | NEWS_TEXT | and more info with label | LABEL | and value | VALUE | is present |</code>
+     * 
+     * @param newsText Text to search for in the news feed
+     * @param label Label to search for in the more info
+     * @param value Value to search for in the more info
+     * @return True, if a news post with the specific text, label, and value is located
+     */
+    public boolean verifyNewsFeedContainingTextAndMoreInfoWithLabelAndValueIsPresent(String newsText, String label, String value) {     
+        if (!TempoNews.refreshAndWaitFor(newsText)) {
+            throw new MissingObjectException("News Post", newsText);
+        }
+        
+        return returnHandler(TempoNews.waitForLabelAndValue(newsText, label, value));
+    }
+    
+    /**
+     * Verifies there is a news post containing specific text with a specific tag is present.<br>
+     * <br>
+     * FitNesse Example: <code>| verify news feed containing text | NEWS_TEXT | tagged with | RECORD_TAG | is present |</code>
+     * 
+     * @param newsText Text to search for in the news feed
+     * @param newsTag Tag to search for on the news post
+     * @return True, if a news post with the specific text and tag is located
+     */
+    public boolean verifyNewsFeedContainingTextTaggedWithIsPresent(String newsText, String newsTag) {
+        if (!TempoNews.refreshAndWaitFor(newsText)) {
+            throw new MissingObjectException("News Post", newsText);
+        }
+        
+        return returnHandler(TempoNews.waitForTag(newsText, newsTag));
+    }
+    
+    /**
+     * Verifies there is a news post containing specific text with a specific comment is present.<br>
+     * <br>
+     * FitNesse Example: <code>| verify news feed containing text | NEWS_TEXT | commented with | COMMENT | is present |</code>
+     * 
+     * @param newsText Text to search for in the news feed
+     * @param newsComment Text to search for in the comments
+     * @return True, if a news post with the specific text and comment is located
+     */
+    public boolean verifyNewsFeedContainingTextCommentedWithIsPresent(String newsText, String newsComment) {
+        return returnHandler(TempoNews.refreshAndWaitForComment(newsText, newsComment));
+    }
+    
+    /**
+     * Returns a string that matches the regex, this could be useful in extracting a system generated value from the news feed.<br>
+     * <br>
+     * FitNesse Example: <code>| get regex | [A-z]{3}-[0-9]{4} | from news feed containing text | NEWS_TEXT |</code>
+     * 
+     * @param regex Regular expression string to search for within the news text
+     * @param newsText Text to search for in the news feed
+     * @return String that matches the regular expression
+     */
+    public String getRegexFromNewsFeedContainingText(String regex, String newsText) {
+        if (!TempoNews.refreshAndWaitFor(newsText)) {
+            throw new MissingObjectException("News Post", newsText);
+        }
+        
+        return TempoNews.getRegexForNewsPost(regex, newsText);
+    }
+    
+    /**
+     * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.<br>
+     * <br> 
+     * FitNesse Example: <code>| get regex | [A-z]{3}-[0-9]{4} | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |</code>
+     * 
+     * @param regex Regular expression string to search for within the news text
+     * @param newsText Text to search for in the news feed
+     * @param newsComment Text to search for in the comments
+     * @return String that matches the regular expression
+     */
+    public String getRegexFromNewsFeedContainingTextCommentedWith(String regex, String newsText, String newsComment) {
+        if (!TempoNews.refreshAndWaitForComment(newsText, newsComment)) {
+            throw new MissingObjectException("News Post", newsText);
+        }
+        
+        return TempoNews.getRegexForNewsPostComment(regex, newsText, newsComment);
+    }
+    
+    /*
+     * Tasks
+     */
+    
+    /**
+     * Clicks on the associated task.<br>
+     * <br>
+     * FitNesse Example: <code>| click on task | TASK_NAME |</code>
+     * 
+     * @param taskName Name of task to click (partial names are acceptable)
+     * If multiple task contain the same name the first will be selected
+     * @return True if action completed
+     */
+    public boolean clickOnTask(String taskName) {
+        if(!TempoTask.refreshAndWaitFor(taskName)) {
+            throw new MissingObjectException("Task", taskName);
+        }
+        
+        return returnHandler(TempoTask.click(taskName));
+     }
+     
+    /** 
+     * Verifies if task is present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify task | TASK_NAME | is present |</code>
+     * 
+     * @param taskName Name of the task
+     * @return True, if task is located
+     */
+    public boolean verifyTaskIsPresent(String taskName) {
+        return returnHandler(TempoTask.refreshAndWaitFor(taskName));
+    }
+     
+    /** 
+     * Verifies if task is not present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify report | TASK_NAME | is not present |</code><br>
+     * <br>
+     * Use this rather than <code>| reject | verify task | TASK_NAME | is present |</code> as it will not refresh and wait.
+     * 
+     * @param taskName Name of the task
+     * @return True, if task is located
+     */
+    public boolean verifyTaskIsNotPresent(String taskName) {
+        return returnHandler(!TempoTask.waitFor(taskName));
+    }
+    
+    /**
+     * Verify a task with a specific name has a specific deadline<br>
+     * <br>
+     * FitNesse Example: <code>| verify task | TASK_NAME | has deadline of | DEADLINE |</code>
+     * 
+     * @param taskName Name of the task
+     * @param deadline Deadline matching the Appian interface, e.g. 8d
+     * @return True, if task with particular deadline is located
+     */
+    public boolean verifyTaskHasDeadlineOf(String taskName, String deadline) {
+        if(!TempoTask.waitFor(taskName)) {
+            throw new MissingObjectException("Task", taskName);
+        }
+        
+        return returnHandler(TempoTask.hasDeadlineOf(taskName, deadline));
+    }
+    
+    /*
+     * Records
+     */
+    
+    /**
+     * Clicks on the record item list.<br>
+     * <br>
+     * FitNesse Example: <code>| click on record list | RECORD_LIST |</code>
+     * 
+     * @param listName Name of record list to click (partial names are acceptable)
+     * If multiple record lists contain the same name, then the first will be selected
+     * @return True, if completed successfully
+     */
+    public boolean clickOnRecordList(String listName) {
+        if(!TempoRecordList.waitFor(listName)) {
+            throw new MissingObjectException("Record List", listName);
+        }
+        
+        return returnHandler(TempoRecordList.click(listName));
+    }
+    
+    /**
+     * Clicks on the record list facet option.<br>
+     * <br>
+     * FitNesse Example: <code>| click on record list facet option | FACET_OPTION |</code>
+     * 
+     * @param facetOption Facet option to click (partial names are acceptable)
+     * If multiple facet options contain the same name, then the first will be selected
+     * @return True, if completed successfully
+     */
+    public boolean clickOnRecordListFacetOption(String facetOption) {
+        if(!TempoRecordList.waitForFacetOption(facetOption)) {
+            throw new MissingObjectException("Record List Facet", facetOption);
+        }
+        
+        return returnHandler(TempoRecordList.clickOnFacetOption(facetOption));       
+    }
+    
+    /** 
+     * Verifies if facet option is present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify record list facet option | FACET_OPTION | is present |</code>
+     * 
+     * @param facetOption Name of facet option
+     * @return True, if facet option is located
+     */
+    public boolean verifyRecordListFacetOptionIsPresent(String facetOption) {
+        return returnHandler(TempoRecordList.waitForFacetOption(facetOption));
+    }
+    
+    /**
+     * Clicks on the associated record item.<br>
+     * <br>
+     * FitNesse Example: <code>| click on record item | REPORT_ITEM_NAME |</code>
+     * 
+     * @param itemName Name of record item to click (partial names are acceptable)
+     * If multiple record items contain the same name, then the first will be selected
+     * @return True, if completed successfully
+     */
+    public boolean clickOnRecordItem(String itemName) {
+        if(!TempoRecordItem.refreshAndWaitFor(itemName)) {
+            throw new MissingObjectException("Tempo Record Item", itemName);
+        }
+        
+        return returnHandler(TempoRecordItem.click(itemName));
+    }
+    
+    /** 
+     * Verifies if record item is present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify record item | RECORD_ITEM_NAME | is present |</code>
+     * 
+     * @param itemName Name of record item
+     * @return True, if record item is located
+     */
+    public boolean verifyRecordItemIsPresent(String itemName) {
+        return returnHandler(TempoRecordItem.waitFor(itemName));
+    }
+    
+    /** 
+     * Verifies if record item is not present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify record item | RECORD_ITEM_NAME | is not present |</code><br>
+     * <br>
+     * Use this rather than <code>| reject | verify record item | RECORD_ITEM_NAME | is present |</code> as it will not refresh and wait.
+     * 
+     * @param itemName Name of record item
+     * @return True, if record item is not located
+     */
+    public boolean verifyRecordItemIsNotPresent(String itemName) {
+        return returnHandler(!TempoRecordItem.waitFor(itemName));
+    }
+     
+    /**
+     * Clicks on the associated record item facet.<br>
+     * <br>
+     * FitNesse Example: <code>| click on record item facet | FACET_NAME |</code>
+     * 
+     * @param facetName Name of facet to click (partial names are acceptable)
+     * If multiple facet items contain the same name, then the first will be selected
+     * @return True, if completed successfully
+     */
+    public boolean clickOnRecordItemFacet(String facetName) {
+        if(!TempoRecordItem.waitForFacet(facetName)) {
+            throw new MissingObjectException("Record Item Facet", facetName);
+        }
+        
+        return returnHandler(TempoRecordItem.clickOnFacet(facetName));
+    }
+     
+    /**
+     * Clicks on the associated related action.<br>
+     * <br>
+     * FitNesse Example: <code>| click on record item related action | RELATED_ACTION_NAME |</code>
+     * 
+     * @param relatedActionName Name of related action to click (partial names are acceptable)
+     * If multiple related actions contain the same name, then the first will be selected
+     * @return True, if completed successfully
+     */
+    public boolean clickOnRecordItemRelatedAction(String relatedActionName) {
+        if(!TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName)) {
+            throw new MissingObjectException("Related Action", relatedActionName);
+        }
+        
+        return returnHandler(TempoRecordItem.clickOnRelatedAction(relatedActionName));
+    }
+     
+    /** 
+     * Verifies if record item related action is present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify record item related action | RELATED_ACTION_NAME | is present |</code>
+     * 
+     * @param relatedActionName Name of the related action
+     * @return True, if related action is located
+     */
+    public boolean verifyRecordItemRelatedActionIsPresent(String relatedActionName) {
+        return returnHandler(TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName));
+    }
+     
+    /** 
+     * Verifies if record item related action is not present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify record item related action | RELATED_ACTION_NAME | is not present |</code><br>
+     * <br>
+     * Use this rather than <code>| reject | verify record item related action | RELATED_ACTION_NAME | is present |</code> as it will not refresh and wait.
+     * 
+     * @param relatedActionName Name of related action
+     * @return True, if related action is not located
+     */
+    public boolean verifyRecordItemRelatedActionIsNotPresent(String relatedActionName) {
+        return returnHandler(!TempoRecordItem.waitForRelatedAction(relatedActionName));
+    }
+	
+    /*
+     * Reports
+     */
+    
+    /**
+     * Clicks on the associated report.<br>
+     * <br>
+     * FitNesse Example: <code>| click on report | REPORT_NAME |</code>
+     * 
+     * @param reportName Name of report to click (partial names are acceptable)
+     * If multiple reports contain the same name the first will be selected
+     * @return True, if completed successfully
+     */
+    public boolean clickOnReport(String reportName) {
+        if(!TempoReport.waitFor(reportName)) {
+            throw new MissingObjectException("Report", reportName);
+        }
+        
+        return returnHandler(TempoReport.click(reportName));
+    }
+    
+    /** 
+     * Verifies if report is present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify report | REPORT_NAME | is present |</code>
+     * 
+     * @param reportName Name of the report
+     * @return True, if report is located
+     */
+    public boolean verifyReportIsPresent(String reportName) {
+        return returnHandler(TempoReport.waitFor(reportName));
+    }
+    
+    /** 
+     * Verifies if report is not present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify report | REPORT_NAME | is not present |</code><br>
+     * <br>
+     * Use this rather than <code>| reject | verify report | REPORT_NAME | is present |</code> as it will not refresh and wait.
+     * 
+     * @param reportName Name of the report
+     * @return True, if report is not located
+     */
+    public boolean verifyReportIsNotPresent(String reportName) {
+        return returnHandler(!TempoReport.waitFor(reportName));
+    }
+    
+    /* 
+     * Actions
+     */
+    
+    /**
+     * Clicks on the associated action.<br>
+     * <br>
+     * FitNesse Example: <code>| click on action | ACTION_NAME |</code>
+     * 
+     * @param actionName Name of action to click (partial names are acceptable)
+     * If multiple actions contain the same name the first will be selected
+     * @return True if action completed
+     */
+    public boolean clickOnAction(String actionName) {
+        if(!TempoAction.waitFor(actionName)) {
+            throw new MissingObjectException("Action", actionName);
+        }
+        
+        return returnHandler(TempoAction.click(actionName));
+    }
+    
+    /**
+     * Returns true if the 'Action Completed successfully' is currently being displayed in the interface.<br>
+     * <br>
+     * FitNesse Example: <code>| verify action completed |</code>
+     * 
+     * @return True if the 'Action Completed successfully' is currently being displayed in the interface.
+     */
+    public boolean verifyActionCompleted() {
+        return returnHandler(TempoAction.isCompleted());
+    }
+    
+    /*
+     * Interfaces
+     */
     
     /**
      * Returns the title of the form.<br>

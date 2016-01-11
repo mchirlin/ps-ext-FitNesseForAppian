@@ -6,18 +6,16 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.appiancorp.ps.automatedtest.fixture.tempo.TempoFixture;
+import com.appiancorp.ps.automatedtest.fixture.TempoFixture;
 
 public class RecordsFixtureTest {    
     
     private static TempoFixture tFixture;
-    private static RecordsFixture rFixture;
     
     @BeforeClass
     public static void setUp() throws Exception {
       tFixture = new TempoFixture();
-      rFixture = new RecordsFixture();
-      
+
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
       tFixture.setTimeoutSecondsTo("10");
@@ -29,23 +27,23 @@ public class RecordsFixtureTest {
     public void testRecordsFixture() throws Exception {
         tFixture.clickOnMenu("Records");
         
-        assertTrue(rFixture.clickOnRecordList("Users"));
+        assertTrue(tFixture.clickOnRecordList("Users"));
         
-        assertTrue(rFixture.verifyRecordListFacetOptionIsPresent("Active"));
+        assertTrue(tFixture.verifyRecordListFacetOptionIsPresent("Active"));
         
-        assertTrue(rFixture.clickOnRecordListFacetOption("Active"));
+        assertTrue(tFixture.clickOnRecordListFacetOption("Active"));
         
-        assertTrue(rFixture.verifyRecordItemIsPresent("Michael Chirlin"));
+        assertTrue(tFixture.verifyRecordItemIsPresent("Michael Chirlin"));
 
-        assertTrue(rFixture.verifyRecordItemIsNotPresent("Michael Churlish"));
+        assertTrue(tFixture.verifyRecordItemIsNotPresent("Michael Churlish"));
         
-        assertTrue(rFixture.clickOnRecordItem("Michael Chirlin"));
+        assertTrue(tFixture.clickOnRecordItem("Michael Chirlin"));
         
-        assertTrue(rFixture.clickOnRecordItemFacet("Related Actions"));
+        assertTrue(tFixture.clickOnRecordItemFacet("Related Actions"));
         
         //TODO Add verifyRecordItemRelatedActionIsPresent
         
-        assertTrue(rFixture.verifyRecordItemRelatedActionIsNotPresent("Not a related action"));
+        assertTrue(tFixture.verifyRecordItemRelatedActionIsNotPresent("Not a related action"));
     }
     
     @AfterClass

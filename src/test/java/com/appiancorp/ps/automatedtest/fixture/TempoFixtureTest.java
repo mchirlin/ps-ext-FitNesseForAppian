@@ -1,12 +1,10 @@
-package com.appiancorp.ps.automatedtest.fixture.tempo;
+package com.appiancorp.ps.automatedtest.fixture;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.appiancorp.ps.automatedtest.fixture.tempo.TempoFixture;;
 
 public class TempoFixtureTest {
 
