@@ -146,14 +146,19 @@ To update the repository, please create a branch from `master`, implement/push y
 * | verify action completed |
 
 ### FORMS
-* | populate field | *FIELD_LABEL* | with | *VALUE(S)* |
+* | populate field | *FIELD_LABEL_OR_INDEX* | with | *VALUE(S)* |
 * | populate field | *FIELD_LABEL[FIELD_INDEX]* | with | *VALUE(S)* | - use this to populate the 2nd, 3rd, etc field with the same label
 * | populate field | [*FIELD_INDEX*] | in section | *SECTION_NAME* | with | *VALUE(S)* | - populate a field in a section with no label
 * | clear field | *FIELD_LABEL* | of | *VALUE_TO_REMOVE* | - this is for removing specific value from a picker
-* | verify field | *FIELD_LABEL* | contains | *VALUE* |
+* | get form title | - use with FitNesse keyword **check** to verify title, e.g. | check | get form title | *Expected Title* |
+* | get form instructions | - use with FitNesse keyword **check** to verify title, e.g. | check | get form title | *Expected Instructions* |
+* | get field | *FIELD_LABEL_OR_INDEX* | value | - use with FitNesse key words **check** or **set** to verify values or populate runtime variables
+* | get field | *FIELD_LABEL_OR_INDEX* | in section | *SECTION_NAME* | value | - use with FitNesse key words **check** or **set** to verify values or populate runtime variables
+* | verify field | *FIELD_LABEL_OR_INDEX* | contains | *VALUE* |
 * | verify field | *FIELD_LABEL[FIELD_INDEX]* | contains | *VALUE* |
-* | verify field | *FIELD_LABEL* | is present |
-* | verify field | *FIELD_LABEL* | is not present |
+* | verify field | *FIELD_LABEL_OR_INDEX* | in section | *SECTION_NAME* | contains | *VALUE* |
+* | verify field | *FIELD_LABEL_OR_INDEX* | is present |
+* | verify field | *FIELD_LABEL_OR_INDEX* | is not present |
 * | populate grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |
 * | verify grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
 * | select grid | *GRID_NAME* | row | *ROW_NUMBER* |
