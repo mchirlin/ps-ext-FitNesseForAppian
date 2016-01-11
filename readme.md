@@ -86,6 +86,22 @@ To update the repository, please create a branch from `master`, implement/push y
 1. Click **Save**.
 1. You can now run your FitNesse test by clicking **Build Now**.
  
+## Creating a new method
+All methods that are callable in FitNesse are derived from the appian-fixture.jar found in *C:\AutomatedTesting\lib\appian*. To create or modify an existing method, you must do the following:
+
+1. Download the github repository for ps-ext-AutomatedTestFramework.
+1. Modify class **com.appiancorp.ps.automatedtest.fixture.[BaseFixture|TempoFixture|PortalFixture]** to add new methods for the corresponding environment.
+ 1. Most methods written for these classes will simply call methods of an object in the **com.appiancorp.ps.automatest.object** package, e.g. *verifyNewsFeedContainingTextIsNotPresent(newsText)* calls *TempoNews.waitFor(newsText)*.
+ 1. Make sure to annotate the class for javadocs generation.
+1. Add and test corresponding junit test cases in *\src\test\java\com\appiancorp\ps\automatedtest\fixture*.
+1. Run **Project > Generate Javadoc...** and select the **com.appiancorp.ps.automatedtest.fixture** package (we don't need javadocs for the objects).
+1. Run Maven **package** build to generate a new jar in the /target/ directory.
+1. Copy new jar to *C:\AutomatedTesting\lib\appian\\* and delete the old.
+1. To push back to the remote repository:
+	1. Create new branch for changes: ```git branch BRANCH_NAME``` then ```git checkout BRANCH_NAME```.
+	1. Publish new branch: ```git push```.
+	1. Create pull request back to master, create this on github.com.
+
 ## Commands
 For additional information, view the javadocs: /doc/index.html
 
