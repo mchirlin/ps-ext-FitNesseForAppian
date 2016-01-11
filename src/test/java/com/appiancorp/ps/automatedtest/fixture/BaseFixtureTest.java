@@ -12,10 +12,12 @@ import com.appiancorp.ps.automatedtest.object.TempoObject;
 public class BaseFixtureTest {
 
     private static BaseFixture bFixture;
+    private static TempoFixture tFixture;
     
     @BeforeClass
     public static void setUp() throws Exception {
       bFixture = new BaseFixture();
+      tFixture = new TempoFixture();
       
       bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
     }
@@ -40,7 +42,7 @@ public class BaseFixtureTest {
     @Test
     public void testSetTimeFormatStringTo() throws Exception {
         assertTrue(bFixture.setTimeFormatStringTo("HH:mm"));
-        assertEquals(TempoObject.DATE_FORMAT_STRING, "HH:mm");
+        assertEquals(TempoObject.TIME_FORMAT_STRING, "HH:mm");
     }
     
     @Test
@@ -60,14 +62,16 @@ public class BaseFixtureTest {
     }
     
     @Test
-    public void testLoginIntoWithUsernameAndPassword() throws Exception {
+    public void testLoginIntoWithUsernameAndPassword() throws Exception {        
         assertTrue(bFixture.loginIntoWithUsernameAndPassword("https://apacdemo.appiancloud.com", "michael.chirlin@appian.com", "password1"));
+        assertTrue(tFixture.logout());
     }
     
     @Test
     public void testLoginWithUsernameAndPassword() throws Exception {
         assertTrue(bFixture.setAppianUrlTo("https://apacdemo.appiancloud.com"));
         assertTrue(bFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com","password1"));
+        assertTrue(tFixture.logout());
     }
     
     @Test
