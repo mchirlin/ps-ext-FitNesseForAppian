@@ -185,6 +185,7 @@ For additional information, view the javadocs: /doc/index.html
 * | populate grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |
 * | verify grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
 * | select grid | *GRID_NAME* | row | *ROW_NUMBER* |
+* | verify grid | *GRID_NAME* | row | *ROW_NUMBER* | is selected |
 * | click on link | *LINK_NAME* |
 * | click on button | *BUTTON_NAME* |
 * | click on radio option | *RADIO_OPTION* |
