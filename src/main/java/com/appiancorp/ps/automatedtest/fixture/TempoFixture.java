@@ -817,6 +817,22 @@ public class TempoFixture extends BaseFixture {
     }
     
     /**
+     * Verifies if a grid row is selected<br>
+     * <br>
+     * FitNesse Example: <code>| verify grid | GRID_NAME | row | ROW_NUMBER | is selected |</code>
+     * @param gridName Name or name and index of grid
+     * @param rowNum Row number
+     * @return True, if row is selected
+     */
+    public boolean verifyGridRowIsSelected(String gridName, String rowNum) {
+        if(!TempoGrid.waitFor(gridName, rowNum)) {
+            throw new MissingObjectException("Grid", gridName);
+        }
+        
+        return returnHandler(TempoGrid.verifyGridRowIsSelected(gridName, rowNum)); 
+    }
+    
+    /**
      * Clicks on the first link that matches the linkName.<br>
      * <br>
      * FitNesse Example: <code>| click on link | LINK_NAME |</code>

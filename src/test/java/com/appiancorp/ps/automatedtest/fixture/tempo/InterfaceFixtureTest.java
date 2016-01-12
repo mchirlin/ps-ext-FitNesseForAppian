@@ -1,6 +1,7 @@
 package com.appiancorp.ps.automatedtest.fixture.tempo;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.text.SimpleDateFormat;
@@ -252,8 +253,10 @@ public class InterfaceFixtureTest {
     }
     
     @Test
-    public void testSelectGridRow() throws Exception {
+    public void testSelectGridRowVerifyGridRowIsSelected() throws Exception {
+        assertFalse(tFixture.verifyGridRowIsSelected("EditableGrid", "[1]"));
         assertTrue(tFixture.selectGridRow("EditableGrid", "[1]"));
+        assertTrue(tFixture.verifyGridRowIsSelected("EditableGrid", "[1]"));
         assertTrue(tFixture.selectGridRow("PagingGrid", "[4]"));
     }
     
