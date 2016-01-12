@@ -22,6 +22,12 @@ import com.appiancorp.ps.automatedtest.object.TempoReport;
 import com.appiancorp.ps.automatedtest.object.TempoSection;
 import com.appiancorp.ps.automatedtest.object.TempoTask;
 
+/** 
+ * This is the tempo class for integrating Appian and Fitnesse.
+ * This class contains fixture commands which are specific to the Tempo interface
+ * @author michael.chirlin
+ *
+ */
 public class TempoFixture extends BaseFixture {
 	
     @SuppressWarnings("unused")
@@ -627,7 +633,7 @@ public class TempoFixture extends BaseFixture {
      * <br>
      * FitNesse Examples:<br>
      * <code>| get field | FIELD_NAME | value |</code> - Simply returns a string<br>
-     * <code>| set | get field | FIELD_NAME | value | fieldValue |</code> - Stores the field value in fieldValue, which can later be accessed using @{fieldValue}
+     * <code>| set | get field | FIELD_NAME | value | fieldValue |</code> - Stores the field value in fieldValue, which can later be accessed using @{fieldValue}<br>
      * <code>| check | get field | FIELD_NAME | FIELD_VALUE |</code> - Returns true if the field value title matches the FIELD_VALUE input. For file upload fields, do not include the full path. This will not work for relative date and datetime fields.
      * @param fieldName Name of name and index of the field
      * @return The field value
@@ -645,7 +651,7 @@ public class TempoFixture extends BaseFixture {
      * <br>
      * FitNesse Examples:<br>
      * <code>| get field | FIELD_NAME | in section | SECTION_ NAME | value |</code> - Simply returns a string<br>
-     * <code>| set | get field | FIELD_NAME | in section | SECTION_NAME | value | fieldValue |</code> - Stores the field value in fieldValue, which can later be accessed using @{fieldValue}
+     * <code>| set | get field | FIELD_NAME | in section | SECTION_NAME | value | fieldValue |</code> - Stores the field value in fieldValue, which can later be accessed using @{fieldValue}<br>
      * <code>| check | get field | FIELD_NAME | in section | SECTION_NAME | value | FIELD_VALUE |</code> - Returns true if the field value title matches the FIELD_VALUE input. For file upload fields, do not include the full path. This will not work for relative date and datetime fields.
      * @param fieldName Field label or label and index
      * @param sectionName Section label or label and index
@@ -693,7 +699,7 @@ public class TempoFixture extends BaseFixture {
      * Verifies a field contains a specific value.<br>
      * <br>
      * FitNesse Examples:<br>
-     * <code>| verify field | FIELD_NAME | in section | SECTION_NAME | contains | VALUES |</code>
+     * <code>| verify field | FIELD_NAME | in section | SECTION_NAME | contains | VALUES |</code><br>
      * <code>| verify field | FIELD_NAME | in section | SECTION_NAME | contains | +4 hours |</code> - For date and datetime fields, relative times can be entered such as +1 minute, +2 hours, +3 days.  To use these relative times, the startDatetime must be initialized: see {@link com.appiancorp.ps.automatedtest.fixture.BaseFixture#setStartDatetime()}
      * @param fieldName Can either be a field label or a label and index, e.g. 'Text Field' or 'Text Field[2]'
      * @param sectionName Can either be a section label or a label and index, e.g. 'Section Name' or 'Section Name[2]'
@@ -765,7 +771,7 @@ public class TempoFixture extends BaseFixture {
      * <br>
      * FitNesse Examples:<br>
      * <code>| get grid | GRID_NAME | column | COLUMN_NAME | row | ROW_INDEX| value |</code> - Simply returns a string<br>
-     * <code>| set | get grid | GRID_NAME | column | COLUMN_NAME | row | ROW_INDEX| value | fieldValue |</code> - Stores the field value in fieldValue, which can later be accessed using @{fieldValue}
+     * <code>| set | get grid | GRID_NAME | column | COLUMN_NAME | row | ROW_INDEX| value | fieldValue |</code> - Stores the field value in fieldValue, which can later be accessed using @{fieldValue}<br>
      * <code>| check | get grid | GRID_NAME | column | COLUMN_NAME | row | ROW_INDEX| value | FIELD_VALUE |</code> - Returns true if the field value title matches the FIELD_VALUE input. For file upload fields, do not include the full path. This will not work for relative date and datetime fields.
      * @param gridName Name of the grid
      * @param columnName Name or index of the column

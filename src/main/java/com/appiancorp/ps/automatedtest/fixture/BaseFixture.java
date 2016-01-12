@@ -31,8 +31,8 @@ import com.appiancorp.ps.automatedtest.object.TempoObject;
 import fitlibrary.DoFixture;
 
 /**
- * This is the base class for Appian Fitnesse Fixture
- * This class contains fixture commands which are generic to Appian tests
+ * This is the base class for integrating Appian and Fitnesse.
+ * This class contains fixture commands which are generic to Appian tests.
  * @author henry.chandra
  * @author michael.chirlin
  *
