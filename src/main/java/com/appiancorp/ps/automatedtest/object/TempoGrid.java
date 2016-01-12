@@ -104,6 +104,14 @@ public class TempoGrid extends TempoField {
         return true;
     }
     
+    public static boolean verifyGridRowIsSelected(String gridName, String rowNum) {
+        WebElement cell = getCell(gridName, "[1]", rowNum);
+        
+        WebElement checkbox = cell.findElement(By.xpath(XPATH_RELATIVE_CHECKBOX));
+        
+        return checkbox.isSelected();
+    }
+    
     public static boolean clear(String gridName, String columnName, String rowNum) {
         WebElement cell = getCell(gridName, columnName, rowNum);
         
