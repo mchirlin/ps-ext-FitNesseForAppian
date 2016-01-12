@@ -8,6 +8,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/** 
+ * This is the portal class integrating Appian and Fitnesse
+ * This class contains fixture commands which are specific to the Portal interface
+ * @author henry.chandra
+ *
+ */
+@Deprecated
 public class PortalFixture extends BaseFixture {
 	
 	String processId = null;
