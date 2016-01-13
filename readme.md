@@ -90,6 +90,10 @@ To update the repository, please create a branch from `master`, implement/push y
 All methods that are callable in FitNesse are derived from the appian-fixture.jar found in *C:\AutomatedTesting\lib\appian*. To create or modify an existing method, you must do the following:
 
 1. Download the github repository for ps-ext-AutomatedTestFramework.
+1. Setup eclipse (you will need maven installed)
+	1. In repo directory, run ```mvn install -DskipTests=true```
+	1. In repo directory, run ```mvn eclipse:eclipse```, this will create the eclipse project.
+	1. Import project into eclipse, use the *Import > Existing Projects into Workspace* option.
 1. Modify class **com.appiancorp.ps.automatedtest.fixture.[BaseFixture|TempoFixture|PortalFixture]** to add new methods for the corresponding environment.
  1. Most methods written for these classes will simply call methods of an object in the **com.appiancorp.ps.automatest.object** package, e.g. *verifyNewsFeedContainingTextIsNotPresent(newsText)* calls *TempoNews.waitFor(newsText)*.
  1. Make sure to annotate the class for javadocs generation.

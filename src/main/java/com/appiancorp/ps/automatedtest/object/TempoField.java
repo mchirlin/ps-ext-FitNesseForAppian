@@ -18,21 +18,20 @@ public class TempoField extends TempoObject {
     protected static final String XPATH_FIELD_LAYOUT_INDEX = "(" + XPATH_FIELD_LAYOUT + ")[%d]";
     protected static final String XPATH_FIELD_SECTION_LAYOUT = "//h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::span" + XPATH_LABEL_STARTS_WITH + "| //h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::label" + XPATH_LABEL_STARTS_WITH;
     protected static final String XPATH_FIELD_SECTION_LAYOUT_INDEX = "//h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')][%d]";
-    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD_VALUE = ".//p[contains(text(), '%s') and contains(@class, 'readonly')] | .//div[contains(text(), '%s') and not(contains(@class, 'textarea_print'))]";
-    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = ".//p[contains(@class, 'readonly')";
+    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = ".//p[contains(@class, 'readonly')]";
     
-    private static final String TEXT_FIELD = "textField";
-    private static final String PARAGRAPH_FIELD = "paragraphField";
-    private static final String INTEGER_FIELD = "integerField";
-    private static final String SELECT_FIELD = "selectField";
-    private static final String RADIO_FIELD = "radioField";
-    private static final String CHECKBOX_FIELD = "checkboxField";
-    private static final String DATE_FIELD = "dateField";
-    private static final String DATETIME_FIELD = "datetimeField";
-    private static final String FILE_UPLOAD_FIELD = "fileUploadField";
-    private static final String PICKER_FIELD = "pickerField";
-    private static final String UNKNOWN_FIELD = "unknownField";
-    private static final String READ_ONLY_FIELD = "readOnlyField";
+    protected static final String TEXT_FIELD = "textField";
+    protected static final String PARAGRAPH_FIELD = "paragraphField";
+    protected static final String INTEGER_FIELD = "integerField";
+    protected static final String SELECT_FIELD = "selectField";
+    protected static final String RADIO_FIELD = "radioField";
+    protected static final String CHECKBOX_FIELD = "checkboxField";
+    protected static final String DATE_FIELD = "dateField";
+    protected static final String DATETIME_FIELD = "datetimeField";
+    protected static final String FILE_UPLOAD_FIELD = "fileUploadField";
+    protected static final String PICKER_FIELD = "pickerField";
+    protected static final String UNKNOWN_FIELD = "unknownField";
+    protected static final String READ_ONLY_FIELD = "readOnlyField";
     
     public static WebElement getFieldLayout(String fieldName) {
         if (isFieldIndex(fieldName)) {
@@ -54,7 +53,7 @@ public class TempoField extends TempoObject {
     }
         
     public static boolean populate(WebElement fieldLayout, String fieldName, String fieldValue) {      
-        String fieldType = getFieldType(fieldLayout, fieldValue);
+        String fieldType = getFieldType(fieldLayout);
         fieldValue = TempoObject.parseVariable(fieldValue);
             
         try {
@@ -125,7 +124,7 @@ public class TempoField extends TempoObject {
 
     public static boolean clear(WebElement fieldLayout, String fieldName) { 
         
-        String fieldType = getFieldType(fieldLayout, null);
+        String fieldType = getFieldType(fieldLayout);
         
         try {
             switch (fieldType) {
@@ -160,7 +159,7 @@ public class TempoField extends TempoObject {
     }
     
     public static boolean clearOf(WebElement fieldLayout, String[] fieldValues) {
-        String fieldType = getFieldType(fieldLayout, fieldValues[0]);
+        String fieldType = getFieldType(fieldLayout);
         
         switch (fieldType) {
         
@@ -179,7 +178,7 @@ public class TempoField extends TempoObject {
     }
     
     public static String getValue(WebElement fieldLayout, String fieldName) {
-        String fieldType = getFieldType(fieldLayout, null);
+        String fieldType = getFieldType(fieldLayout);
         
         LOG.debug("Field Type: " + fieldType);
         
@@ -238,7 +237,8 @@ public class TempoField extends TempoObject {
     }
     
     public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue) {
-        String fieldType = getFieldType(fieldLayout, fieldValue);
+        String fieldType = getFieldType(fieldLayout);
+        
         fieldValue = TempoObject.parseVariable(fieldValue);
         
         LOG.debug("Field Type: " + fieldType);
@@ -289,11 +289,12 @@ public class TempoField extends TempoObject {
     }
     
     public static boolean contains(WebElement fieldLayout, String fieldValue) {
-        String compareString = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_READ_ONLY_FIELD, fieldValue, fieldValue))).getText();
+        String compareString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_READ_ONLY_FIELD)).getText();
         
         LOG.debug("READ ONLY FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");
         
-        return compareString.contains(fieldValue);
+        // Necessary to compare both to handle readOnly date fields that are compared to datetimes
+        return compareString.contains(fieldValue) || fieldValue.contains(compareString);
     }
     
     public static String getValue(WebElement fieldLayout) {
@@ -304,9 +305,9 @@ public class TempoField extends TempoObject {
         return value;
     }
     
-    public static boolean isReadOnly(WebElement fieldLayout, String fieldValue) {
+    public static boolean isReadOnly(WebElement fieldLayout) {
         try {
-            fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_READ_ONLY_FIELD_VALUE, fieldValue, fieldValue)));
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_READ_ONLY_FIELD));
         } catch (Exception e) {
             return false;
         }
@@ -314,8 +315,8 @@ public class TempoField extends TempoObject {
         return true;
     }
     
-    public static String getFieldType(WebElement fieldLayout, String fieldValue) {
-        if (TempoField.isReadOnly(fieldLayout, fieldValue)) return READ_ONLY_FIELD;
+    public static String getFieldType(WebElement fieldLayout) {
+        if (TempoField.isReadOnly(fieldLayout)) return READ_ONLY_FIELD;
         else if (TempoTextField.isType(fieldLayout)) return TEXT_FIELD;
         else if (TempoParagraphField.isType(fieldLayout)) return PARAGRAPH_FIELD;
         else if (TempoIntegerField.isType(fieldLayout)) return INTEGER_FIELD;

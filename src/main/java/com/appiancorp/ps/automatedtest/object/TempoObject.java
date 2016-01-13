@@ -33,9 +33,9 @@ public class TempoObject {
     public static String DATE_FORMAT_STRING = "M/d/yyyy";
     public static String TIME_FORMAT_STRING = "h:mm aaa";
     public static String DATETIME_FORMAT_STRING = DATE_FORMAT_STRING + " " + TIME_FORMAT_STRING;
-    public static final String DATE_DISPLAY_FORMAT_STRING = "MMM d, yyyy";
-    public static final String TIME_DISPLAY_FORMAT_STRING = "h:mm aaa";
-    public static final String DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;
+    public static String DATE_DISPLAY_FORMAT_STRING = "MMM d, yyyy";
+    public static String TIME_DISPLAY_FORMAT_STRING = "h:mm aaa";
+    public static String DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;
     
     private static final String XPATH_WORKING = "//div[@class = 'appian-indicator-message']";
     
@@ -146,6 +146,16 @@ public class TempoObject {
     public static void setTimeFormatString(String tf) {
         TIME_FORMAT_STRING = tf;
         DATETIME_FORMAT_STRING = DATE_FORMAT_STRING + " " + TIME_FORMAT_STRING;
+    }
+    
+    public static void setDateDisplayFormatString(String df) {
+        DATE_DISPLAY_FORMAT_STRING = df;
+        DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + " " + TIME_DISPLAY_FORMAT_STRING;
+    }
+    
+    public static void setTimeDisplayFormatString(String tf) {
+        TIME_DISPLAY_FORMAT_STRING = tf;
+        DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + " " + TIME_DISPLAY_FORMAT_STRING;
     }
     
     public static void setTimeoutSeconds(int t) {

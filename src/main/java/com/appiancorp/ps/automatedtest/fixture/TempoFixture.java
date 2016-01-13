@@ -557,6 +557,7 @@ public class TempoFixture extends BaseFixture {
         while (attempt < attemptTimes) {
             if (TempoField.populate(fieldName, fieldValues)) {
                 new Actions(getDriver()).sendKeys(Keys.TAB).perform();
+                waitForWorking();
                 return true;
             }
             attempt++;

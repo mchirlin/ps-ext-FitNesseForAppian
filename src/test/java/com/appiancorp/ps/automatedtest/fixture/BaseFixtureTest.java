@@ -46,6 +46,18 @@ public class BaseFixtureTest {
     }
     
     @Test
+    public void testSetDateDisplayFormatStringTo() throws Exception {
+        assertTrue(bFixture.setDateDisplayFormatStringTo("d MM yyyy"));
+        assertEquals(TempoObject.DATE_DISPLAY_FORMAT_STRING, "d MM yyyy");
+    }
+    
+    @Test
+    public void testSetTimeDisplayFormatStringTo() throws Exception {
+        assertTrue(bFixture.setTimeDisplayFormatStringTo("HH:mm"));
+        assertEquals(TempoObject.TIME_DISPLAY_FORMAT_STRING, "HH:mm");
+    }
+    
+    @Test
     public void testSetTimeoutSecondsTo() throws Exception {
         assertTrue(bFixture.setTimeoutSecondsTo("10"));
         assertEquals(TempoObject.getTimeoutSeconds(), 10);
