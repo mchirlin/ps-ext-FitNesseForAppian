@@ -18,10 +18,10 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+/*import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.DesiredCapabilities;*/
 
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoError;
@@ -46,6 +46,8 @@ public class BaseFixture extends DoFixture {
 	public String url = null;
 	public String dateFormatString = null;
 	public String timeFormatString = null;
+	public String dateDisplayFormatString = null;
+	public String timeDisplayFormatString = null;
 	public Date startDatetime = null;
 	public String dataSourceName = null;
 	public String masterWindowHandle = null;
@@ -75,7 +77,7 @@ public class BaseFixture extends DoFixture {
 	public boolean setupSeleniumWebDriverWithBrowser(String browser) {
 		if (browser.equals("FIREFOX")) {
 			driver = new FirefoxDriver();
-		} else if (browser.equals("IE")) {
+		} /*else if (browser.equals("IE")) {
 			System.setProperty("webdriver.ie.driver", prop.getProperty("webdriver.ie.driver"));
 			driver = new InternetExplorerDriver();
 		} else if (browser.equals("PHANTOM")) {
@@ -84,7 +86,7 @@ public class BaseFixture extends DoFixture {
 			dCaps.setCapability("takesScreenshot", true);
 			dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, prop.getProperty("phantomjs.binary.path"));
 			driver = new PhantomJSDriver(dCaps);
-		}
+		} */
 		
 		this.masterWindowHandle = driver.getWindowHandle();
         
@@ -154,13 +156,41 @@ public class BaseFixture extends DoFixture {
 	/**
      * Sets the time format string. This is useful so that test cases will work in different geographic regions that format date and time differently.  This format string must match Appian, e.g. in Australia the time string is HH:mm.<br>
      * <br>
-     * FitNesse Example: <code>| set date format string to | HH:mm |</code>
+     * FitNesse Example: <code>| set time format string to | HH:mm |</code>
      * @param tf Time format string
      * @return True
      */
 	public boolean setTimeFormatStringTo(String tf) {
         this.timeFormatString = tf;
         TempoObject.setTimeFormatString(this.timeFormatString);
+        
+        return true;
+    }
+	
+	/**
+     * Sets the date display format string. This is useful so that test cases will work in different geographic regions that format date and time differently.  This format string must match Appian, e.g. in Australia the date string is dd/MM/yyyy.<br>
+     * <br>
+     * FitNesse Example: <code>| set date display format string to | d MMM yyyy |</code>
+     * @param df Date display format string
+     * @return True
+     */
+    public boolean setDateDisplayFormatStringTo(String df) {
+        this.dateDisplayFormatString = df;
+        TempoObject.setDateDisplayFormatString(this.dateDisplayFormatString);
+        
+        return true;
+    }
+
+    /**
+     * Sets the time display format string. This is useful so that test cases will work in different geographic regions that format date and time differently.  This format string must match Appian, e.g. in Australia the time string is HH:mm.<br>
+     * <br>
+     * FitNesse Example: <code>| set time display format string to | HH:mm |</code>
+     * @param tf Time display format string
+     * @return True
+     */
+    public boolean setTimeDisplayFormatStringTo(String tf) {
+        this.timeDisplayFormatString = tf;
+        TempoObject.setTimeDisplayFormatString(this.timeDisplayFormatString);
         
         return true;
     }
