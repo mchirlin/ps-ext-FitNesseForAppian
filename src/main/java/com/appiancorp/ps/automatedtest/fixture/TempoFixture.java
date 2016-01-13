@@ -740,8 +740,9 @@ public class TempoFixture extends BaseFixture {
      * Populates fields in a grid. This method is useful for populating the following types of fields: Text, Paragraph, EncryptedText, Integer, Decimal, Date, Datetime, Select, MultipleSelect, Radio, Checkbox, FileUpload, UserPicker, GroupPicker, UserGroupPicker, DocumentPicker, FolderPicker, DocumentFolderPicker, CustomPicker.<br>
      * <br>
      * FitNesse Examples:<br>
-     * <code>| populate grid | GRID_NAME | column | COLUMN_NAME | row | ROW_INDEX | with | VALUE |</code><br>
-     * <code>| populate grid | GRID_NAME | column | COLUMN_INDEX | row | ROW_INDEX | with | VALUE |</code> - The column index can be used if the columns do not have titles. As with Appian indexing starts with [1] and if the table has checkboxes, they are considered to be in the first column.<br>
+     * <code>| populate grid | GRID_NAME_OR_INDEX | column | COLUMN_NAME_OR_INDEX | row | ROW_INDEX | with | VALUE |</code><br>
+     * <code>| populate grid | [1] | column | COLUMN_NAME_OR_INDEX | row | ROW_INDEX | with | VALUE |</code> - If the grid does not have a title, an index can be used to select the grid, e.g. [1] would be the first grid in the interface.<br>
+     * <code>| populate grid | GRID_NAME | column | [2] | row | ROW_INDEX | with | VALUE |</code> - The column index can be used if the columns do not have titles. As with Appian indexing starts with [1] and if the table has checkboxes, they are considered to be in the first column.<br>
      * <code>| populate grid | GRID_NAME[3] | column | COLUMN_NAME | row | ROW_INDEX | with | VALUE |</code> - If there are multiple grids with the same name then use an index, e.g. 'Grid Name[3]' with select the third grid with the name of 'Grid Name' in the interface
      * @param gridName Name of grid
      * @param columnName Name or index of the column
@@ -770,9 +771,9 @@ public class TempoFixture extends BaseFixture {
      * Returns the value of a field.<br>
      * <br>
      * FitNesse Examples:<br>
-     * <code>| get grid | GRID_NAME | column | COLUMN_NAME | row | ROW_INDEX| value |</code> - Simply returns a string<br>
-     * <code>| set | get grid | GRID_NAME | column | COLUMN_NAME | row | ROW_INDEX| value | fieldValue |</code> - Stores the field value in fieldValue, which can later be accessed using @{fieldValue}<br>
-     * <code>| check | get grid | GRID_NAME | column | COLUMN_NAME | row | ROW_INDEX| value | FIELD_VALUE |</code> - Returns true if the field value title matches the FIELD_VALUE input. For file upload fields, do not include the full path. This will not work for relative date and datetime fields.
+     * <code>| get grid | GRID_NAME_OR_INDEX | column | COLUMN_NAME_OR_INDEX | row | ROW_INDEX | value |</code> - Simply returns a string<br>
+     * <code>| set | get grid | GRID_NAME_OR_INDEX | column | COLUMN_NAME_OR_INDEX | row | ROW_INDEX | value | fieldValue |</code> - Stores the field value in fieldValue, which can later be accessed using @{fieldValue}<br>
+     * <code>| check | get grid | GRID_NAME_OR_INDEX | column | COLUMN_NAME_OR_INDEX | row | ROW_INDEX | value | FIELD_VALUE |</code> - Returns true if the field value title matches the FIELD_VALUE input. For file upload fields, do not include the full path. This will not work for relative date and datetime fields.
      * @param gridName Name of the grid
      * @param columnName Name or index of the column
      * @param rowNum Index of the row
@@ -789,7 +790,7 @@ public class TempoFixture extends BaseFixture {
     /** 
      * Verifies a field contains a specific value.<br>
      * <br>
-     * FitNesse Example: <code>| verify grid | GRID_NAME | column | COLUMN_NAME | row | ROW_INDEX | contains | VALUES |</code>
+     * FitNesse Example: <code>| verify grid | GRID_NAME_OR_INDEX | column | COLUMN_NAME_OR_INDEX | row | ROW_INDEX | contains | VALUES |</code>
      * @param gridName Name of the grid
      * @param columnName Name or index of the column
      * @param rowNum Index of the row
@@ -808,7 +809,7 @@ public class TempoFixture extends BaseFixture {
      * Selects a row in an editable or paging grid.<br>
      * <br>
      * FitNesse Examples:<br>
-     * <code>| select grid | GRID_NAME | row | [1] |</code><br>
+     * <code>| select grid | GRID_NAME_OR_INDEX | row | [1] |</code><br>
      * <code>| select grid | GRID_NAME[2] | row | [2] |</code> - If there are multiple grids with the same name, use the index to select the correct one. As with Appian, indexing starts with [1].
      * @param gridName Can either be the grid name or grid name with index, e.g. 'Grid Name' or 'Grid Name[2]'
      * @param rowNum Index of row to select, e.g. [2]
@@ -825,7 +826,7 @@ public class TempoFixture extends BaseFixture {
     /**
      * Verifies if a grid row is selected<br>
      * <br>
-     * FitNesse Example: <code>| verify grid | GRID_NAME | row | ROW_NUMBER | is selected |</code>
+     * FitNesse Example: <code>| verify grid | GRID_NAME_OR_INDEX | row | ROW_NUMBER | is selected |</code>
      * @param gridName Name or name and index of grid
      * @param rowNum Row number
      * @return True, if row is selected

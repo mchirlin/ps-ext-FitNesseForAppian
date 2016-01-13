@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
-public class TempoError extends TempoObject{
+public class TempoError extends TempoObject {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoError.class);

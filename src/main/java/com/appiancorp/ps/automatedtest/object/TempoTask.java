@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TempoTask extends TempoObject{
+public class TempoTask extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoTask.class);
     private static final String XPATH_TASK = "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'%s')]";

@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class TempoDatetimeField extends TempoField{
+public class TempoDatetimeField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoDatetimeField.class);
     private static final String XPATH_ABSOLUTE_DATE_INPUT = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-DateInput-TextBox')]";

@@ -257,7 +257,10 @@ public class InterfaceFixtureTest {
         assertFalse(tFixture.verifyGridRowIsSelected("EditableGrid", "[1]"));
         assertTrue(tFixture.selectGridRow("EditableGrid", "[1]"));
         assertTrue(tFixture.verifyGridRowIsSelected("EditableGrid", "[1]"));
+        
+        assertFalse(tFixture.verifyGridRowIsSelected("PagingGrid", "[4]"));
         assertTrue(tFixture.selectGridRow("PagingGrid", "[4]"));
+        assertTrue(tFixture.verifyGridRowIsSelected("PagingGrid", "[4]"));
     }
     
     @AfterClass
