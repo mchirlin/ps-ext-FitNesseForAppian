@@ -50,6 +50,7 @@ public class InterfaceFixtureTest {
     @Test
     public void testPopulateFieldWithGetFieldValueVerifyFieldContains() throws Exception {
         // Section 1
+        
         assertTrue(tFixture.populateFieldWith("TextField", new String[]{"text"}));
         assertTrue(tFixture.populateFieldWith("ParagraphField", new String[]{"paragraph"}));
         assertTrue(tFixture.populateFieldWith("EncryptedTextField", new String[]{"encrypted"}));
@@ -74,6 +75,12 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.verifyFieldContains("CheckboxField", new String[]{"Option 1","Option 2"}));
         assertTrue(tFixture.verifyFieldContains("FileUploadField", new String[]{"C:\\Users\\michael.chirlin\\Documents\\Low Risk.jpg"}));
         
+        assertTrue(tFixture.verifyFieldContains("ROTextField", new String[]{"text"}));
+        assertTrue(tFixture.verifyFieldContains("ROParagraphField", new String[]{"paragraph"}));
+        assertTrue(tFixture.verifyFieldContains("ROEncryptedTextField", new String[]{"encrypted"}));
+        assertTrue(tFixture.verifyFieldContains("ROIntegerField", new String[]{"1"}));
+        assertTrue(tFixture.verifyFieldContains("RODecimalField", new String[]{"2.2"}));
+        
         assertEquals(tFixture.getFieldValue("TextField"), "text");
         assertEquals(tFixture.getFieldValue("ParagraphField"), "paragraph");
         assertEquals(tFixture.getFieldValue("EncryptedTextField"), "encrypted");
@@ -85,6 +92,12 @@ public class InterfaceFixtureTest {
         assertEquals(tFixture.getFieldValue("RadioField"), "Option 1");
         assertEquals(tFixture.getFieldValue("CheckboxField"), "Option 1,Option 2");
         assertEquals(tFixture.getFieldValue("FileUploadField"), "Low Risk.jpg"); // Notice this doesn't include the entire path
+        
+        assertEquals(tFixture.getFieldValue("ROTextField"), "text");
+        assertEquals(tFixture.getFieldValue("ROParagraphField"), "paragraph");
+        assertEquals(tFixture.getFieldValue("ROEncryptedTextField"), "encrypted");
+        assertEquals(tFixture.getFieldValue("ROIntegerField"), "1");
+        assertEquals(tFixture.getFieldValue("RODecimalField"), "2.2");
         
         // Section 1.5
         assertTrue(tFixture.populateFieldWith("DateField[2]", new String[]{"15/11/2015"}));
@@ -185,12 +198,24 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.verifyGridColumnRowContains("[1]", "DecimalField", "[1]", new String[]{"2.2"}));
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid", "[7]", "[1]", new String[]{"+1 day"}));
         
+        assertTrue(tFixture.verifyGridColumnRowContains("[1]", "TextField", "[2]", new String[]{"gridText"}));
+        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid", "[3]", "[2]", new String[]{"gridParagraph"}));
+        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid", "EncryptedTextField", "[2]", new String[]{"gridEncrypted"}));
+        assertTrue(tFixture.verifyGridColumnRowContains("[1]", "[5]", "[2]", new String[]{"1"}));
+        assertTrue(tFixture.verifyGridColumnRowContains("[1]", "DecimalField", "[2]", new String[]{"2.2"}));
+        
         assertEquals(tFixture.getGridColumnRowValue("[1]", "TextField", "[1]"), "gridText");
         assertEquals(tFixture.getGridColumnRowValue("EditableGrid", "[3]", "[1]"), "gridParagraph");
         assertEquals(tFixture.getGridColumnRowValue("EditableGrid", "EncryptedTextField", "[1]"), "gridEncrypted");
         assertEquals(tFixture.getGridColumnRowValue("[1]", "[5]", "[1]"), "1");
         assertEquals(tFixture.getGridColumnRowValue("[1]", "DecimalField", "[1]"), "2.2");
         assertEquals(tFixture.getGridColumnRowValue("EditableGrid", "[7]", "[1]"), new SimpleDateFormat(TempoObject.DATE_FORMAT_STRING).format(DateUtils.addDays(TempoObject.getStartDatetime(), 1)));
+        
+        assertEquals(tFixture.getGridColumnRowValue("[1]", "TextField", "[2]"), "gridText");
+        assertEquals(tFixture.getGridColumnRowValue("EditableGrid", "[3]", "[2]"), "gridParagraph");
+        assertEquals(tFixture.getGridColumnRowValue("EditableGrid", "EncryptedTextField", "[2]"), "gridEncrypted");
+        assertEquals(tFixture.getGridColumnRowValue("[1]", "[5]", "[2]"), "1");
+        assertEquals(tFixture.getGridColumnRowValue("[1]", "DecimalField", "[2]"), "2.2");
         
         // EditableGrid[2]
         assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[2]", "DatetimeField", "[1]", new String[]{"+1 hour"}));
@@ -257,7 +282,10 @@ public class InterfaceFixtureTest {
         assertFalse(tFixture.verifyGridRowIsSelected("EditableGrid", "[1]"));
         assertTrue(tFixture.selectGridRow("EditableGrid", "[1]"));
         assertTrue(tFixture.verifyGridRowIsSelected("EditableGrid", "[1]"));
+        
+        assertFalse(tFixture.verifyGridRowIsSelected("PagingGrid", "[4]"));
         assertTrue(tFixture.selectGridRow("PagingGrid", "[4]"));
+        assertTrue(tFixture.verifyGridRowIsSelected("PagingGrid", "[4]"));
     }
     
     @AfterClass

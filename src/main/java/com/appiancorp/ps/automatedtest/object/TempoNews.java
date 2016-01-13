@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
-public class TempoNews extends TempoObject{
+public class TempoNews extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoNews.class);
     private static final String XPATH_NEWS_ITEM = "//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '%s')]";
