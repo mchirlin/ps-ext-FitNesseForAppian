@@ -18,7 +18,7 @@ public class TempoField extends TempoObject {
     protected static final String XPATH_FIELD_LAYOUT_INDEX = "(" + XPATH_FIELD_LAYOUT + ")[%d]";
     protected static final String XPATH_FIELD_SECTION_LAYOUT = "//h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::span" + XPATH_LABEL_STARTS_WITH + "| //h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::label" + XPATH_LABEL_STARTS_WITH;
     protected static final String XPATH_FIELD_SECTION_LAYOUT_INDEX = "//h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')][%d]";
-    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = ".//p[contains(@class, 'readonly')]";
+    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = ".//p[contains(@class, 'readonly')] | div[ancestor::div[contains(@class, 'DataGrid-Table')]]"; // Handles readOnly fields and paging grids
     
     protected static final String TEXT_FIELD = "textField";
     protected static final String PARAGRAPH_FIELD = "paragraphField";
