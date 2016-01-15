@@ -366,6 +366,11 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.verifyGridRowIsSelected("PagingGrid", "[4]"));
     }
     
+    @Test
+    public void testPagingGrid() throws Exception {
+        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "[2]","[1]", new String[] {"Value 1"}));
+    }
+    
     @AfterClass
     public static void tearDown() throws Exception {
         tFixture.clickOnButton("Cancel");
