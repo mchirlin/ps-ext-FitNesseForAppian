@@ -33,20 +33,18 @@ public class NewsFixtureTest {
         tFixture.clickOnMenu("News");
         
         assertTrue(tFixture.verifyNewsFeedContainingTextIsPresent("A timesheet"));
-
         assertTrue(tFixture.verifyNewsFeedContainingTextIsNotPresent("Not present"));
-        
         assertTrue(tFixture.toggleMoreInfoForNewsFeedContainingText("A timesheet"));
-        
         assertTrue(tFixture.verifyNewsFeedContainingTextAndMoreInfoWithLabelAndValueIsPresent("A timesheet", "Total Hours", "42.0"));
-         
         assertTrue(tFixture.verifyNewsFeedContainingTextTaggedWithIsPresent("A New Investigation", "536877593"));
-        
         assertTrue(tFixture.verifyNewsFeedContainingTextCommentedWithIsPresent("A New Investigation", "Planning completed."));
-        
         assertEquals(tFixture.getRegexFromNewsFeedContainingText("[0-9]{2}/[0-9]{2}/[0-9]{4}", "A timesheet"), "09/01/2016");
-        
-        assertEquals(tFixture.getRegexFromNewsFeedContainingTextCommentedWith("assigned to [A-z ]+", "A New Investigation", "Planning completed."), "assigned to Ray Croxon");
+        assertEquals(tFixture.getRegexFromNewsFeedContainingTextCommentedWith("assigned to [A-z ]+", "A New Investigation", "Planning completed."), "assigned to Ray Croxon"); 
+    }
+    
+    @Test 
+    public void testClickOnRecordTag() throws Exception {
+        assertTrue(tFixture.clickOnNewsFeedRecordTag("A New Investigation", "5750"));
     }
     
     @AfterClass

@@ -147,6 +147,13 @@ public class TempoNews extends TempoObject {
         return true;
     }
     
+    public static boolean clickOnRecordTag(String newsText, String recordTag) {
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_TAG, newsText, recordTag)));
+        element.click();
+        
+        return true;
+    }
+    
     public static String getRegexForNewsPost(String regex, String newsText) {
         String text = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM, newsText))).getText();
         LOG.debug("NEWS POST TEXT: " + text);
