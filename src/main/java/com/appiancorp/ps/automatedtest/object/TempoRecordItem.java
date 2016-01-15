@@ -14,7 +14,7 @@ public class TempoRecordItem extends TempoObject {
     private static final Logger LOG = Logger.getLogger(TempoRecordItem.class);
     private static final String XPATH_RECORD_ITEM = "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/') and contains(text(), '%s')]";
     private static final String XPATH_RECORD_FACET = "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(text(), '%s')]";
-    private static final String XPATH_RECORD_RELATED_ACTION = "//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'%s')]";
+    private static final String XPATH_RECORD_RELATED_ACTION = "//a[(starts-with(@class, 'aui-ActionLink') or starts-with(@class, 'gwt-Anchor')) and contains(text(),'%s')]";
     
     public static boolean click(String itemName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_ITEM, itemName)));
