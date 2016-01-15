@@ -198,6 +198,22 @@ public class TempoFixture extends BaseFixture {
         return TempoNews.getRegexForNewsPostComment(regex, newsText, newsComment);
     }
     
+    /**
+     * Clicks on a record tag to navigate to a record summary dashboard<br>
+     * <br>
+     * FitNesse Example: <code>| click on news feed | NEWS_TEXT | record tag | RECORD_TAG |</code>
+     * @param newsText Text to search for in the news feed
+     * @param recordTag Record tag text
+     * @return True, if action completed successfully
+     */
+    public boolean clickOnNewsFeedRecordTag(String newsText, String recordTag) {
+        if (!TempoNews.waitForTag(newsText, recordTag)) {
+            throw new MissingObjectException("Record Tag", recordTag);
+        }
+        
+        return returnHandler(TempoNews.clickOnRecordTag(newsText, recordTag));
+    }
+    
     /*
      * Tasks
      */
@@ -260,6 +276,21 @@ public class TempoFixture extends BaseFixture {
         }
         
         return returnHandler(TempoTask.hasDeadlineOf(taskName, deadline));
+    }
+    
+    /**
+     * Click on a task report<br>
+     * <br>
+     * FitNesse Example: <code>| click on task report | TASK_REPORT |</code>
+     * @param taskReport Name of task report
+     * @return True, if action completed successfully
+     */
+    public boolean clickOnTaskReport(String taskReport) {
+        if(!TempoTask.waitForTaskReport(taskReport)) {
+            throw new MissingObjectException("Task Report", taskReport);
+        }
+        
+        return returnHandler(TempoTask.clickOnTaskReport(taskReport));
     }
     
     /*
