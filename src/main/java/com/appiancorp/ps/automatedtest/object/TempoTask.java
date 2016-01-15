@@ -12,6 +12,7 @@ public class TempoTask extends TempoObject {
     private static final Logger LOG = Logger.getLogger(TempoTask.class);
     private static final String XPATH_TASK = "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'%s')]";
     private static final String XPATH_TASK_DEADLINE = "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'%s')]/parent::span/following-sibling::div[contains(@class, 'metadata')]/descendant::span[contains(@title, 'deadline')]/span[text() = '%s']";
+    private static final String XPATH_TASK_REPORT = "//a[span[contains(text(), '%s')]]";
     
     public static boolean click(String taskName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_TASK, taskName)));
@@ -59,8 +60,26 @@ public class TempoTask extends TempoObject {
         return true;
     }
     
+    public static boolean waitForTaskReport(String taskReport) {
+        try {
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_TASK_REPORT, taskReport))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_TASK_REPORT, taskReport)));
+            scrollIntoView(element);
+        } catch (TimeoutException e) {
+            return false;
+        }
+
+        return true;
+    }
+    
     public static boolean hasDeadlineOf(String taskName, String deadline) {
         driver.findElement(By.xpath(String.format(XPATH_TASK_DEADLINE, taskName, deadline)));
+        
+        return true;
+    }
+    
+    public static boolean clickOnTaskReport(String taskReport) {
+        driver.findElement(By.xpath(String.format(XPATH_TASK_REPORT, taskReport))).click();
         
         return true;
     }
