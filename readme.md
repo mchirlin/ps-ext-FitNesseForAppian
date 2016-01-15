@@ -136,11 +136,13 @@ For additional information, view the javadocs: /doc/index.html
 * | verify news feed containing text | *NEWS_TEXT* | and more info with label | *LABEL* | and value | *VALUE* | is present |
 * | verify news feed containing text | *NEWS_TEXT* | tagged with | *TAG_NAME* | is present |
 * | verify news feed containing text | *NEWS_TEXT* | commented with | *COMMENT* | is present |
+* | click on news feed | *NEWS_TEXT* | record tag | *RECORD_TAG* |
 * | set | *VARIABLE_NAME* | get regex | *REGEX* | from news feed containing text | *NEWS_TEXT* | - use Java Regular Expression to return data from news as a variable
 * | set | *VARIABLE_NAME* | get regex | *REGEX* | from news feed containing text | *NEWS_TEXT* | commented with | *COMMENT* |
 
 ### TASKS
 * | click on task | *TASK_NAME* |
+* | click on task report | *TASK_REPORT_NAME* |
 * | verify task | *TASK_NAME* | is present |
 * | verify task | *TASK_NAME* | is not present |
 * | verify task | *TASK_NAME* | has a deadline of | *DEADLINE_TEXT* |
