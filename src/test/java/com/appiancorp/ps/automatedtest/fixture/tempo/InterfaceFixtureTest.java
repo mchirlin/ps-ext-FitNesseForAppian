@@ -24,7 +24,7 @@ public class InterfaceFixtureTest {
       
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
-      tFixture.setTimeoutSecondsTo("10");
+      tFixture.setTimeoutSecondsTo("15");
       tFixture.setStartDatetime();
       tFixture.setDateFormatStringTo("dd/MM/yyyy");
       tFixture.setTimeFormatStringTo("HH:mm");
