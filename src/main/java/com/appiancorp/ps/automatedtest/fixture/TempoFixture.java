@@ -784,7 +784,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean populateGridColumnRowWith(String gridName, String columnName, String rowNum, String[] fieldValues) {
         if(!TempoGrid.waitFor(gridName, columnName, rowNum)) {
-            throw new MissingObjectException("Grid", gridName);
+            throw new MissingObjectException("Grid/Column/Row", gridName+"/"+columnName+"/"+rowNum);
         }
         
         int attempt = 0;
@@ -813,7 +813,7 @@ public class TempoFixture extends BaseFixture {
      */
     public String getGridColumnRowValue(String gridName, String columnName, String rowNum) {
         if(!TempoGrid.waitFor(gridName, columnName, rowNum)) {
-            throw new MissingObjectException("Grid", gridName);
+            throw new MissingObjectException("Grid/Column/Row", gridName+"/"+columnName+"/"+rowNum);
         }
         
         return TempoGrid.getValue(gridName, columnName, rowNum);
@@ -831,7 +831,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean verifyGridColumnRowContains(String gridName, String columnName, String rowNum, String[] fieldValues) {
         if(!TempoGrid.waitFor(gridName, columnName, rowNum)) {
-            throw new MissingObjectException("Grid", gridName);
+            throw new MissingObjectException("Grid/Column/Row", gridName+"/"+columnName+"/"+rowNum);
         }
         
         return returnHandler(TempoGrid.contains(gridName, columnName, rowNum, fieldValues)); 
@@ -849,7 +849,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean selectGridRow(String gridName, String rowNum) {
         if(!TempoGrid.waitFor(gridName, rowNum)) {
-            throw new MissingObjectException("Grid", gridName);
+            throw new MissingObjectException("Grid/Row", gridName+"/"+rowNum);
         }
         
         return returnHandler(TempoGrid.selectRow(gridName, rowNum)); 
@@ -865,7 +865,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean verifyGridRowIsSelected(String gridName, String rowNum) {
         if(!TempoGrid.waitFor(gridName, rowNum)) {
-            throw new MissingObjectException("Grid", gridName);
+            throw new MissingObjectException("Grid/Row", gridName+"/"+rowNum);
         }
         
         return returnHandler(TempoGrid.verifyGridRowIsSelected(gridName, rowNum)); 
