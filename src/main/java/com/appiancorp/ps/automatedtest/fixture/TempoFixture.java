@@ -1,9 +1,6 @@
 package com.appiancorp.ps.automatedtest.fixture;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.interactions.Actions;
-
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoAction;
 import com.appiancorp.ps.automatedtest.object.TempoButton;
@@ -539,6 +536,7 @@ public class TempoFixture extends BaseFixture {
      * @return The title string
      */
     public String getTitle() {
+        waitForWorking();
         if(!TempoForm.waitForTitle()) {
             throw new MissingObjectException("Title");
         }
@@ -556,6 +554,7 @@ public class TempoFixture extends BaseFixture {
      * @return The instructions string
      */
     public String getInstructions() {
+        waitForWorking();
         if(!TempoForm.waitForInstructions()) {
             throw new MissingObjectException("Instructions");
         }
@@ -586,11 +585,7 @@ public class TempoFixture extends BaseFixture {
         // Populate the field
         int attempt = 0;
         while (attempt < attemptTimes) {
-            if (TempoField.populate(fieldName, fieldValues)) {
-                new Actions(getDriver()).sendKeys(Keys.TAB).perform();
-                waitForWorking();
-                return true;
-            }
+            if (TempoField.populate(fieldName, fieldValues)) return true;
             attempt++;
         }
 
@@ -632,10 +627,7 @@ public class TempoFixture extends BaseFixture {
         
         int attempt = 0;
         while (attempt < attemptTimes) {
-            if (TempoSection.populate(fieldName, sectionName, fieldValues)) {
-                new Actions(getDriver()).sendKeys(Keys.TAB).perform();
-                return true;
-            }
+            if (TempoSection.populate(fieldName, sectionName, fieldValues)) return true;
             attempt++;
         }
 
@@ -789,10 +781,7 @@ public class TempoFixture extends BaseFixture {
         
         int attempt = 0;
         while (attempt < attemptTimes) {
-            if (TempoGrid.populate(gridName, columnName, rowNum, fieldValues)) {
-                new Actions(getDriver()).sendKeys(Keys.TAB).perform();
-                return true;
-            }
+            if (TempoGrid.populate(gridName, columnName, rowNum, fieldValues)) return true;
             attempt++;
         }
         

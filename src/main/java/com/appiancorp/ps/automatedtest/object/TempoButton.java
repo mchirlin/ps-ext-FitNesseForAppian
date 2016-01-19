@@ -10,16 +10,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class TempoButton extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoButton.class);
-    private static final String XPATH_ELEMENT= "//button[contains(text(), '%s')]";
+    private static final String XPATH_ELEMENT= "//button[contains(text(), '%s') and not(contains(@class, 'button-disabled'))]";
     
-    public static boolean click(String buttonName) {
-        waitForWorking();
-        
+    public static boolean click(String buttonName) {        
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, buttonName)));
         element.click();
         
         LOG.debug("BUTTON CLICK : " + buttonName);
         
+        waitForWorking();
         return true;
     }
     
