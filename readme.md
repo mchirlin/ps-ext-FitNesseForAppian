@@ -26,7 +26,6 @@ To update the repository, please create a branch from `master`, implement/push y
 * [Firefox](https://www.mozilla.org/en-US/firefox/new/)
 * Java
 
-
 ## Installation
 
 1. Download the newest release of [AutomatedTesting.zip](https://github.com/appianps/ps-ext-AutomatedTestFramework/releases).
@@ -41,9 +40,15 @@ To update the repository, please create a branch from `master`, implement/push y
 
 1. Start FitNesse if it isn't already running:
  1. In a command prompt navigate to *TESTING_HOME*.
- 1. Run ```start.bat```.
+ 1. Run ```start.bat```.<br />
 1. Navigate to ```http://localhost:8980/LoginTest```.
 1. Click **Test**.
+
+## Running FitNesse using Tests from a Repository
+1. Open ```TESTING_HOME\fitnesse.properties``` in a text editor.
+1. Update **FitNesseRootDir** to refer to the repository containing the *FitNesseRoot* folder.
+1. Update **FitNesseRoot** to refer to the folder name containing the wikis.
+1. Next time you use ```TESTING_HOME\start.bat``` the wikis will be pulled directly from the repo folders.
 
 ## Creating a wiki
 
@@ -55,36 +60,53 @@ To update the repository, please create a branch from `master`, implement/push y
  * If the WIKI_NAME is 'SuiteSetUp', then it will be run once at the beginning of the test suite.
  * If the WIKI_NAME is 'SuiteTearDown', then it will be run once at the end of the test suite.
 1. You can also nest wikis by navigating to subpages like ```http://localhost:8980/WIKI_SUITE_NAME/WIKI_TEST_NAME```.
- * You can see an example of this by copying ```etc\wikis\CaseManagementSuit``` folder from github repo into ```TESTING_HOME\FitNesseRoot``` and navigating to ```http://localhost:8980/CaseManagementSuite```.
- * This example has one each of the follow page types: Suite, Setup, TearDown, and Test.
- 
-## Setting up Jenkins with a FitNesse test
+
+## Setting up Jenkins with a Github Repo of FitNesse tests
 
 1. Download [Jenkins installer](https://jenkins-ci.org/).
 1. Install Jenkins.
  1. Update ```JENKINS_HOME\jenkins.xml``` ```--httpPort``` argument to another port, e.g. 8081.
  1. Restart Jenkins service in Window services.
 1. In a browser, navigate to ```http://localhost:8081```.
-1. Click on **Manage Jenkins**.
-1. Click on **Manage Plugins**.
-1. Click on **Available** tab.
-1. Filter by FitNesse check its box and click **Download now and install after restart**.
+1. Add relevant plugins (FitNesse and Git):
+ 1. Click on **Manage Jenkins**.
+ 1. Click on **Manage Plugins**.
+ 1. Click on **Available** tab.
+ 1. Filter by FitNesse check its box and click **Download now and install after restart**.
+ 1. Repeat, but filter by Git check its box and click **Download now and install after restart**.
+1. Once restarted, set up your Github credentials:
+ 1. Click on **Credentials**.
+ 1. Click on **Global credentials**.
+ 1. Click on **Add Credentials** and enter the following:<br>
+ **Kind**: Username with password<br>
+ **Username**: *Github username*<br>
+ **Password**: *Github password*<br>
+ **Description**: Github Credentials
+1. Setup git.exe
+ 1. Click on **Manage Jenkins**.
+ 1. Click on **Configure System**.
+ 1. In the **Git** section, populate your **Path to Git executable**, e.g. if you have github for windows installed it will be something like: ```C:/Users/USERNAME/AppData/Local/GitHub/PortableGit_c7e0cbde92ba565cb218a521411d0e854079a28c/cmd/git.exe```
 1. Navigate back to the home page and click **New Item**.
 1. Choose a build name, select **Freestyle project**, and click **OK**.
+1. Setup SCM:
+ 1. Under **Source Code Management** click **Git**.
+ 1. Enter the **Repository URL** for your github repository containing the fitnesse tests.
+ 1. For **Credentials** select your previously enter gihub credentials. 
 1. Click **Add build step** and select **Execute FitNesse test**.
 1. Enter the following values:
  1. Select **Start new FitNesse instance as part of build**.
  1. Enter ```TESTING_HOME``` in **Java working directory**.
  1. Enter ```TESTING_HOME\fitnesse-standalone.jar``` in **Path to fitnesse.jar**.
- 1. Enter ```TESTING_HOME\FitNesseRoot``` in **Path to FitNesseRoot**.
+ 1. Enter the folder in your repository containing the FitNesse wikis in **Path to FitNesseRoot**, this can be subfolders.
  1. Enter ```8980``` in **Port for FitNesse instance**.
- 1. Enter the page for the test suite in **Target Page**.
+ 1. Enter the page for the test/suite in **Target Page**.
  1. Check **Is target a suite?** if the page is a suite.
  1. Set **HTTP Timeout** and **Test Timeout** high enough that the tests will not timeout.
- 1. Enter ```TESTING_HOME\results\fitnesse-results.xml``` in **Path to fitnesse xml results file**.
+ 1. Enter ```fitnesse-results.xml``` in **Path to fitnesse xml results file**.
 1. Click **Add post-build action** and select **Publish Fitnesse results report**.
+ 1. Enter ```fitnesse-results.xml``` in **Path to fitnesse xml results file**.
 1. Click **Save**.
-1. You can now run your FitNesse test by clicking **Build Now**.
+1. You can now run your FitNesse test by clicking **Build Now**. This will download the newest version of the FitNesse tests from the github repository and run them locally.
  
 ## Creating a new method
 All methods that are callable in FitNesse are derived from the appian-fixture.jar found in *C:\AutomatedTesting\lib\appian*. To create or modify an existing method, you must do the following:
@@ -92,6 +114,7 @@ All methods that are callable in FitNesse are derived from the appian-fixture.ja
 1. Download the github repository for ps-ext-AutomatedTestFramework.
 1. Setup eclipse (you will need maven installed)
 	1. In repo directory, run ```mvn install -DskipTests=true```
+	1. In repo directory, run ```mvn install:install-file -Dfile=TESTING_HOME\fitlibrary-2.0.jar -DgroupId=fitlibrary -DartifactId=fitlibrary -Dversion=2.0 -Dpackaging=jar```
 	1. In repo directory, run ```mvn eclipse:eclipse```, this will create the eclipse project.
 	1. Import project into eclipse, use the *Import > Existing Projects into Workspace* option.
 1. Modify class **com.appiancorp.ps.automatedtest.fixture.[BaseFixture|TempoFixture|PortalFixture]** to add new methods for the corresponding environment.
@@ -100,14 +123,14 @@ All methods that are callable in FitNesse are derived from the appian-fixture.ja
 1. Add and test corresponding junit test cases in *\src\test\java\com\appiancorp\ps\automatedtest\fixture*.
 1. Run **Project > Generate Javadoc...** and select the **com.appiancorp.ps.automatedtest.fixture** package (we don't need javadocs for the objects).
 1. Run Maven **package** build to generate a new jar in the /target/ directory.
-1. Copy new jar to *C:\AutomatedTesting\lib\appian\\* and delete the old.
+1. Copy new jar to ```TESTING_HOME\lib\appian\``` and delete the old.
 1. To push back to the remote repository:
 	1. Create new branch for changes: ```git branch BRANCH_NAME``` then ```git checkout BRANCH_NAME```.
 	1. Publish new branch: ```git push```.
 	1. Create pull request back to master, create this on github.com.
 
-## Commands
-For additional information, view the javadocs: /doc/index.html
+## Usage
+For additional API information, view the <a href="http://appianps.github.io/ps-ext-AutomatedTestFramework/docs/">JavaDocs</a>.
 
 ### UTILITIES
 * | setup selenium web driver with | *BROWSER_NAME* | browser |
@@ -166,6 +189,8 @@ For additional information, view the javadocs: /doc/index.html
 
 ### ACTIONS
 * | click on action | *ACTION_NAME* |
+* | verify report | *ACTION_NAME* | is present |
+* | verify report | *ACTION_NAME* | is not present |
 * | verify action completed |
 
 ### INTERFACES

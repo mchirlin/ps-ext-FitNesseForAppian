@@ -1,0 +1,6 @@
+| click on menu | Actions |
+| verify action | All Fields| is present |
+| verify action | Not All Fields| is not present |
+| click on action | All Fields |
+| click on button | Cancel |
+| verify action completed|

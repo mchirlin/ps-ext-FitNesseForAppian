@@ -46,6 +46,8 @@ public class TempoLogin extends TempoObject {
         WebElement submitButton = driver.findElement(By.xpath(XPATH_SUBMIT_BUTTON));
         submitButton.click();
         
+        waitForLogout();
+        
         return true;
     }
     
