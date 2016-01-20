@@ -175,6 +175,7 @@ public class TempoObject {
     public static void setMasterWindowHandle(String w) {
         masterWindowHandle = w;
     }
+    
     public static String getMasterWindowHandle() {
         return masterWindowHandle;
     }
