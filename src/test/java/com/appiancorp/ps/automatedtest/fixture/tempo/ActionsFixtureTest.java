@@ -27,6 +27,10 @@ public class ActionsFixtureTest {
     public void testActionsFixture() throws Exception {
         tFixture.clickOnMenu("Actions");
         
+        assertTrue(tFixture.verifyActionIsPresent("Automated Testing"));
+
+        assertTrue(tFixture.verifyActionIsNotPresent("Not Automated Testing"));
+        
         assertTrue(tFixture.clickOnAction("Automated Testing"));
         
         tFixture.clickOnButton("Cancel");
