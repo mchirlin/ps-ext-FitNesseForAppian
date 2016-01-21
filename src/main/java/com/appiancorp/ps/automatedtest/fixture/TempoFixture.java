@@ -522,6 +522,32 @@ public class TempoFixture extends BaseFixture {
         return returnHandler(TempoAction.isCompleted());
     }
     
+    /** 
+     * Verifies if action is present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify action | ACTION_NAME | is present |</code>
+     * 
+     * @param actionName Name of the action
+     * @return True, if action is located
+     */
+    public boolean verifyActionIsPresent(String actionName) {
+        return returnHandler(TempoAction.waitFor(actionName));
+    }
+    
+    /** 
+     * Verifies if action is not present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify action | ACTION_NAME | is not present |</code><br>
+     * <br>
+     * Use this rather than <code>| reject | verify action | ACTION_NAME | is present |</code> as it will not refresh and wait.
+     * 
+     * @param actionName Name of the action
+     * @return True, if action is not located
+     */
+    public boolean verifyActionIsNotPresent(String actionName) {
+        return returnHandler(!TempoAction.waitFor(actionName));
+    }
+    
     /*
      * Interfaces
      */

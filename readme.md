@@ -166,6 +166,8 @@ For additional information, view the javadocs: /doc/index.html
 
 ### ACTIONS
 * | click on action | *ACTION_NAME* |
+* | verify report | *ACTION_NAME* | is present |
+* | verify report | *ACTION_NAME* | is not present |
 * | verify action completed |
 
 ### INTERFACES
