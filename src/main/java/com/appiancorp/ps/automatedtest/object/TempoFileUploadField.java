@@ -24,8 +24,7 @@ public class TempoFileUploadField extends TempoField {
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement fileUpload = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         fileUpload.sendKeys(fieldValue);
-        // Wait for file to upload
-        waitForWorking();
+        unfocus();
         
         LOG.debug("FILE UPLOAD FIELD POPULATION : " + fieldValue);
         return true;

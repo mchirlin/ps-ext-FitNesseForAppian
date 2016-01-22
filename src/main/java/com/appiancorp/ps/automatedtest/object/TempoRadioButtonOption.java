@@ -15,6 +15,7 @@ public class TempoRadioButtonOption extends TempoField {
     public static boolean click(String optionName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, optionName)));
         element.click();
+        unfocus();
         
         LOG.debug("RADIO BUTTON OPTION CLICK : " + optionName);
         

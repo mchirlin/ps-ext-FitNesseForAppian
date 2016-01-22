@@ -22,7 +22,8 @@ public class TempoSelectField extends TempoField {
         WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         Select select = new Select(selectField);
         select.selectByVisibleText(fieldValue);
-
+        unfocus();
+        
         LOG.debug("SELECT FIELD POPULATION : " + fieldValue);
         
         return true;

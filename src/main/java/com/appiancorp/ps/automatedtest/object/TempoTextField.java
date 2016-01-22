@@ -17,6 +17,7 @@ public class TempoTextField extends TempoField {
         WebElement textField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         textField.clear();
         textField.sendKeys(fieldValue);
+        unfocus();
         
         LOG.debug("TEXT FIELD POPULATION : " + fieldValue);
         

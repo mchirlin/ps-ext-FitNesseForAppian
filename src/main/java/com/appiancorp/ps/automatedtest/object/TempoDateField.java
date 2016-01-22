@@ -23,8 +23,9 @@ public class TempoDateField extends TempoField {
     public static boolean populate(WebElement fieldLayout, String fieldValue) throws ParseException {        
         fieldValue = parseVariable(fieldValue);
         Date d = parseDate(fieldValue);
-        
+
         populateTempoDateFieldWithDate(fieldLayout, d);
+        unfocus();
         
         LOG.debug("DATE FIELD POPULATION : " + fieldValue);
         

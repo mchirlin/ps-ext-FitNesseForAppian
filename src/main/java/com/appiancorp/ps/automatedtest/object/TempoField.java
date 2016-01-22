@@ -2,10 +2,8 @@ package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -36,9 +34,6 @@ public class TempoField extends TempoObject {
         for (String fieldValue : fieldValues) {
             WebElement fieldLayout = getFieldLayout(fieldName);
             if (!populate(fieldLayout, fieldName, fieldValue)) return false;
-            
-            // Make sure Appian saves the newly entered value
-            new Actions(getDriver()).sendKeys(Keys.TAB).perform();
         }
         
         return true;
