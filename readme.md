@@ -40,7 +40,7 @@ To update the repository, please create a branch from `master`, implement/push y
 
 1. Start FitNesse if it isn't already running:
  1. In a command prompt navigate to *TESTING_HOME*.
- 1. Run ```start.bat```.<br />
+ 1. Run ```start.bat```.
 1. Navigate to ```http://localhost:8980/LoginTest```.
 1. Click **Test**.
 
@@ -121,7 +121,12 @@ All methods that are callable in FitNesse are derived from the appian-fixture.ja
  1. Most methods written for these classes will simply call methods of an object in the **com.appiancorp.ps.automatest.object** package, e.g. *verifyNewsFeedContainingTextIsNotPresent(newsText)* calls *TempoNews.waitFor(newsText)*.
  1. Make sure to annotate the class for javadocs generation.
 1. Add and test corresponding junit test cases in *\src\test\java\com\appiancorp\ps\automatedtest\fixture*.
-1. Run **Project > Generate Javadoc...** and select the **com.appiancorp.ps.automatedtest.fixture** package (we don't need javadocs for the objects).
+1. Update the public javadocs:
+ 1. Run **Project > Generate Javadoc...** and select the **com.appiancorp.ps.automatedtest.fixture** package (we don't need javadocs for the objects).
+ 1. Copy the resulting docs folder onto your desktop.
+ 1. Switch to the **gh-pages** branch of the repository.
+ 1. Copy the docs folder into this branch and overwrite the existing docs.
+ 1. Push the new branch.
 1. Run Maven **package** build to generate a new jar in the /target/ directory.
 1. Copy new jar to ```TESTING_HOME\lib\appian\``` and delete the old.
 1. To push back to the remote repository:
