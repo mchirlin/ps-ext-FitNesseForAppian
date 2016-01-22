@@ -17,6 +17,12 @@ public class TempoParagraphField extends TempoField {
         WebElement textAreaField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         textAreaField.clear();
         textAreaField.sendKeys(fieldValue);
+        // For some reason paragraph fields have trouble when moving quickly
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {}
+        
+        unfocus();
         
         LOG.debug("PARAGRAPH FIELD POPULATION : " + fieldValue);
 

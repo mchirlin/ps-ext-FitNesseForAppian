@@ -36,7 +36,8 @@ public class TempoPickerField extends TempoField {
         waitForSuggestion(fieldValue);
         WebElement suggestion = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_SUGGESTION, fieldValue, fieldValue)));
         suggestion.click();
-        waitForSelection(fieldLayout, fieldValue);
+        waitForSelection(fieldLayout, fieldValue);   
+        unfocus();
         
         LOG.debug("PICKER FIELD POPULATION : " + fieldValue);
         

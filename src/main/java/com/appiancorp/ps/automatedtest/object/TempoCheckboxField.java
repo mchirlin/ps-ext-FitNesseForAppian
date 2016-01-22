@@ -37,6 +37,7 @@ public class TempoCheckboxField extends TempoField {
         }
         
         checkboxField.click();
+        unfocus();
         
         LOG.debug("CHECKBOX FIELD POPULATION : " + fieldValue);
         
