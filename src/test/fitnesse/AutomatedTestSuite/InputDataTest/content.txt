@@ -1,0 +1,63 @@
+!*** Open Actions
+| click on menu | Actions | 
+| click on action | Automated Testing Input |
+| verify action completed |
+***!
+
+!*** Select task
+| click on menu | Tasks| 
+| verify task | Input Automated Test Data  | is present |
+| click on task | Input Automated Test Data |
+**!
+
+!*** Verify Page Title
+| check | get title | Automated Testing Data Input | 
+***!
+
+!*** Create random variable
+| set | randString | get random string | 5 |
+***!
+
+!*** Input Data
+!| populate field | Text Field Test | with | Test Text @{randString} |
+| populate field | Integer Field Test | with | 5 | 
+| populate field | Decimal Field Test | with | 123.45 |
+| populate field | Date and Time Test | with | 11/15/2016 10:00 AM|
+***!
+
+!*** Check/Verify Input Data
+!| verify field | Text Field Test | contains | Test Text @{randString} |
+| verify field | Integer Field Test | contains | 5 | 
+| verify field | Decimal Field Test | contains | 123.45 |
+| verify field | Date and Time Test | contains | 11/15/2016 10:00 AM|
+
+!| check | get field | Text Field Test | value | Test Text @{randString} |
+| check | get field | Integer Field Test | value | 5 | 
+| check | get field | Decimal Field Test | value | 123.45 |
+| check | get field | Date and Time Test | value | 11/15/2016 10:00 AM |
+***!
+
+!*** Submit form
+| click on button | Submit | 
+#| wait for working |
+***!
+
+!*** Check News 
+!| click on menu | News | 
+| verify news feed containing text | @{randString} | is present |
+| verify news feed containing text | @{randString} | tagged with |Test Text @{randString} | is present | 
+***!
+
+!*** Check Record
+!| click on news feed | @{randString} | record tag | Test Text @{randString} |
+| check | get field | Text Field Test | value | Test Text @{randString} |
+| check | get field | Integer Field Test | value | 5 | 
+| check | get field | Decimal Field Test | value | 123.45 |
+| check | get field | Date and Time Test | value | Nov 15, 2016, 10:00 AM |
+
+!| verify field | Text Field Test | contains | Test Text @{randString} |
+| verify field | Integer Field Test | contains | 5 | 
+| verify field | Decimal Field Test | contains | 123.45 |
+| verify field | Date and Time Test | contains | Nov 15, 2016, 10:00 AM|
+***!
+

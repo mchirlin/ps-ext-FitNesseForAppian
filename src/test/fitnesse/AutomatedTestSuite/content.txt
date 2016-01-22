@@ -1,0 +1,15 @@
+!1 Example Automated Test Suite for an exmample Appian Application
+!2 Steps run the example test suite
+
+!4 1) Create users test.user (test user) and user.test (user test) into your Appian Instance.
+!4 2) Import application provided zip file into your Appian instance (ensure that you configure the data store)
+!4 3) Update the Appian URL, Username, and Password in the setup test case below.
+!4 4) Click on the Suite link above.
+
+
+'''Variables'''
+
+!define TEST_RUNNER {fitlibrary.suite.FitLibraryServer}
+!path C:\AutomatedTesting\**.jar
+
+!contents -R2 -g -p -f -h

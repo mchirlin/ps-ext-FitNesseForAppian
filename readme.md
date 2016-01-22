@@ -127,7 +127,6 @@ All methods that are callable in FitNesse are derived from the appian-fixture.ja
  1. Switch to the **gh-pages** branch of the repository.
  1. Copy the docs folder into this branch and overwrite the existing docs.
  1. Push the new branch.
-
 1. Run Maven **package** build to generate a new jar in the /target/ directory.
 1. Copy new jar to ```TESTING_HOME\lib\appian\``` and delete the old.
 1. To push back to the remote repository:
