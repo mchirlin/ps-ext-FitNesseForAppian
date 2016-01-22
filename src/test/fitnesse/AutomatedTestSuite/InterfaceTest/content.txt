@@ -33,9 +33,9 @@
 |click on radio option   |Click Me!                                     |
 |click on checkbox option|Click Me Too!                                 |
 ----
-!| populate field|UserPicker          |with|test.user, user.test    |
+!| populate field|UserPicker          |with|test user, user test    |
 |populate field  |GroupPicker         |with|AUT All Users           |
-|populate field  |UserGroupPicker     |with|test.user, AUT All Users|
+|populate field  |UserGroupPicker     |with|test user, AUT All Users|
 |populate field  |DocumentPicker      |with|All Process Models      |
 |populate field  |FolderPicker        |with|Automated Testing       |
 |populate field  |DocumentFolderPicker|with|Automated Testing       |
@@ -129,7 +129,7 @@
 !| check|get field|[1]         |in section|Section 2|value|noLabel|
 |check  |get field|TextField[2]|value     |text2                  |
 ----
-!| verify field|UserPicker          |contains|test user              |
+!| verify field|UserPicker          |contains|test user,user test    |
 |verify field  |GroupPicker         |contains|AUT All Users          |
 |verify field  |UserGroupPicker     |contains|test user,AUT All Users|
 |verify field  |DocumentPicker      |contains|All Process Models.arf |
