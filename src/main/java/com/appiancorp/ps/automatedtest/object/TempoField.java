@@ -39,7 +39,6 @@ public class TempoField extends TempoObject {
             
             // Make sure Appian saves the newly entered value
             new Actions(getDriver()).sendKeys(Keys.TAB).perform();
-            waitForWorking();
         }
         
         return true;

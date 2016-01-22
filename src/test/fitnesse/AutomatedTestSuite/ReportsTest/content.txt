@@ -1,0 +1,5 @@
+| click on menu | Reports |
+| verify report | Automated Test Report | is present | 
+| click on report | Automated Test Report | 
+| check | get title | Automated Test Report | 
+

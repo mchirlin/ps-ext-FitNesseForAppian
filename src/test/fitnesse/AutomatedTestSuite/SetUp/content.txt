@@ -1,0 +1,18 @@
+!** Setup
+!| com.appiancorp.ps.automatedtest.fixture.TempoFixture |
+| setup selenium web driver with browser | FIREFOX |
+| set appian url to | https://automatedtest.appianci.net/suite/ |
+| set timeout seconds to | 20 |
+| set start datetime |
+| set date format string to | MM/dd/yyyy |
+#| set time format string to | HH:mm aaa|
+| set date display format string to | MMM d yyyy |
+#| set time display format string to | HH:mm aaa|
+| set | rand | get random string | 4 |
+| set take error screenshots to | true |
+| set screenshot path to | C:\AutomatedTesting\screenshots\@{rand}\ |
+**!
+
+!*** Login
+| login with username | dan.austria | and password | 1 |
+***!
