@@ -19,7 +19,7 @@ public class TempoFileUploadField extends TempoField {
     private static final String XPATH_RELATIVE_FILE = ".//span[contains(@class, 'filename')]";
     private static final String XPATH_RELATIVE_FILENAME = XPATH_RELATIVE_FILE + "/span[contains(text(), '%s')]";
     private static final String XPATH_RELATIVE_REMOVE = ".//a[starts-with(text(), 'Remove')]";
-    private static final Pattern FILENAME_PATTERN = Pattern.compile("(.*) \\([0-9.]+ [A-Z]{2}\\)");
+    private static final Pattern FILENAME_PATTERN = Pattern.compile("(.*) \\(.*\\)");
    
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement fileUpload = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
