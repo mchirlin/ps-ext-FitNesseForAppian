@@ -12,7 +12,6 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -185,8 +184,9 @@ public class TempoObject {
     public static boolean waitForWorking() {
         try {
             (new WebDriverWait(driver, 1)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_WORKING)));
-            (new WebDriverWait(driver, 10)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_WORKING)));
-        } catch (TimeoutException e) {
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_WORKING)));
+            Thread.sleep(200);
+        } catch (Exception e) {
             return false;
         }
         
@@ -197,6 +197,7 @@ public class TempoObject {
     public static void scrollIntoView(WebElement webElement, Boolean alignToTop ) {
         // Have to manually scroll element into view because Tempo header covers the action link for long action lists
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView("+alignToTop.toString()+");", webElement);
+        waitForWorking();
     }
     
     public static void scrollIntoView(WebElement webElement) {
