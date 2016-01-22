@@ -28,6 +28,7 @@ public class TempoDatetimeField extends TempoField {
         
         populateTempoDatetimeFieldWithDate(fieldLayout, d);
         populateTempoDatetimeFieldWithTime(fieldLayout, d);
+        unfocus();
         
         LOG.debug("DATETIME FIELD POPULTATION : " + fieldValue);
         

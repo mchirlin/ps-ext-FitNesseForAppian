@@ -17,6 +17,7 @@ public class TempoIntegerField extends TempoTextField {
         WebElement intField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
         intField.clear();
         intField.sendKeys(fieldValue);
+        unfocus();
         
         LOG.debug("INTEGER field: " + fieldValue);
         

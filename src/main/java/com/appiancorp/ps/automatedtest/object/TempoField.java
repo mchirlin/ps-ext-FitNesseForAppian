@@ -2,10 +2,8 @@ package com.appiancorp.ps.automatedtest.object;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -22,19 +20,6 @@ public class TempoField extends TempoObject {
     protected static final String XPATH_FIELD_SECTION_LAYOUT_INDEX = "//h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')][%d]";
     protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = ".//p[contains(@class, 'readonly')] | div[ancestor::table[contains(@class, 'DataGrid-Table')]]"; // Handles readOnly fields and paging grids
     
-    protected static final String TEXT_FIELD = "textField";
-    protected static final String PARAGRAPH_FIELD = "paragraphField";
-    protected static final String INTEGER_FIELD = "integerField";
-    protected static final String SELECT_FIELD = "selectField";
-    protected static final String RADIO_FIELD = "radioField";
-    protected static final String CHECKBOX_FIELD = "checkboxField";
-    protected static final String DATE_FIELD = "dateField";
-    protected static final String DATETIME_FIELD = "datetimeField";
-    protected static final String FILE_UPLOAD_FIELD = "fileUploadField";
-    protected static final String PICKER_FIELD = "pickerField";
-    protected static final String UNKNOWN_FIELD = "unknownField";
-    protected static final String READ_ONLY_FIELD = "readOnlyField";
-    
     public static WebElement getFieldLayout(String fieldName) {
         if (isFieldIndex(fieldName)) {
             String fName = getFieldFromFieldIndex(fieldName);
@@ -49,48 +34,45 @@ public class TempoField extends TempoObject {
         for (String fieldValue : fieldValues) {
             WebElement fieldLayout = getFieldLayout(fieldName);
             if (!populate(fieldLayout, fieldName, fieldValue)) return false;
-            
-            // Make sure Appian saves the newly entered value
-            new Actions(getDriver()).sendKeys(Keys.TAB).perform();
         }
         
         return true;
     }
         
     public static boolean populate(WebElement fieldLayout, String fieldName, String fieldValue) {      
-        String fieldType = getFieldType(fieldLayout);
+        TempoFieldType fieldType = getFieldType(fieldLayout);
         fieldValue = TempoObject.parseVariable(fieldValue);
             
         try {
             switch (fieldType) {  
-                case TEXT_FIELD: 
+                case TEXT: 
                     return TempoTextField.populate(fieldLayout, fieldValue);
                     
-                case PARAGRAPH_FIELD:
+                case PARAGRAPH:
                     return TempoParagraphField.populate(fieldLayout, fieldValue);
                     
-                case INTEGER_FIELD: 
+                case INTEGER: 
                     return TempoIntegerField.populate(fieldLayout, fieldValue);
                     
-                case SELECT_FIELD:
+                case SELECT:
                     return TempoSelectField.populate(fieldLayout, fieldValue);
         
-                case RADIO_FIELD: 
+                case RADIO: 
                     return TempoRadioField.populate(fieldLayout, fieldValue);
                     
-                case CHECKBOX_FIELD: 
+                case CHECKBOX: 
                     return TempoCheckboxField.populate(fieldLayout, fieldValue);
                 
-                case FILE_UPLOAD_FIELD: 
+                case FILE_UPLOAD: 
                     return TempoFileUploadField.populate(fieldLayout, fieldValue);
                     
-                case DATE_FIELD: 
+                case DATE: 
                     return TempoDateField.populate(fieldLayout, fieldValue);
                     
-                case DATETIME_FIELD: 
+                case DATETIME: 
                     return TempoDatetimeField.populate(fieldLayout, fieldValue);
                     
-                case PICKER_FIELD:
+                case PICKER:
                     return TempoPickerField.populate(fieldLayout, fieldName, fieldValue);
                 
                 default:
@@ -129,23 +111,23 @@ public class TempoField extends TempoObject {
 
     public static boolean clear(WebElement fieldLayout, String fieldName) { 
         
-        String fieldType = getFieldType(fieldLayout);
+        TempoFieldType fieldType = getFieldType(fieldLayout);
         
         try {
             switch (fieldType) {
-                case TEXT_FIELD: 
+                case TEXT: 
                     return TempoTextField.clear(fieldLayout);
                     
-                case PARAGRAPH_FIELD:
+                case PARAGRAPH:
                     return TempoParagraphField.clear(fieldLayout);
                     
-                case INTEGER_FIELD:
+                case INTEGER:
                     return TempoIntegerField.clear(fieldLayout);
                     
-                case FILE_UPLOAD_FIELD:
+                case FILE_UPLOAD:
                     return TempoFileUploadField.clear(fieldLayout);
                     
-                case PICKER_FIELD:
+                case PICKER:
                     return TempoPickerField.clear(fieldLayout);
                 
                 default:
@@ -164,11 +146,11 @@ public class TempoField extends TempoObject {
     }
     
     public static boolean clearOf(WebElement fieldLayout, String[] fieldValues) {
-        String fieldType = getFieldType(fieldLayout);
+        TempoFieldType fieldType = getFieldType(fieldLayout);
         
         switch (fieldType) {
         
-            case PICKER_FIELD: 
+            case PICKER: 
                 return TempoPickerField.clearOf(fieldLayout, fieldValues);
                 
             default: 
@@ -183,44 +165,44 @@ public class TempoField extends TempoObject {
     }
     
     public static String getValue(WebElement fieldLayout, String fieldName) {
-        String fieldType = getFieldType(fieldLayout);
+        TempoFieldType fieldType = getFieldType(fieldLayout);
         
         LOG.debug("Field Type: " + fieldType);
         
         try {
             switch (fieldType) {
             
-                case READ_ONLY_FIELD: 
+                case READ_ONLY: 
                     return getValue(fieldLayout);
                 
-                case TEXT_FIELD: 
+                case TEXT: 
                     return TempoTextField.getValue(fieldLayout);
                     
-                case PARAGRAPH_FIELD: 
+                case PARAGRAPH: 
                     return TempoParagraphField.getValue(fieldLayout);
                     
-                case INTEGER_FIELD:
+                case INTEGER:
                     return TempoIntegerField.getValue(fieldLayout);
                     
-                case SELECT_FIELD:
+                case SELECT:
                     return TempoSelectField.getValue(fieldLayout);
                 
-                case RADIO_FIELD:
+                case RADIO:
                     return TempoRadioField.getValue(fieldLayout);
                          
-                case CHECKBOX_FIELD: 
+                case CHECKBOX: 
                     return TempoCheckboxField.getValue(fieldLayout);
                 
-                case FILE_UPLOAD_FIELD:
+                case FILE_UPLOAD:
                     return TempoFileUploadField.getValue(fieldLayout);
                     
-                case DATE_FIELD:
+                case DATE:
                     return TempoDateField.getValue(fieldLayout);
                     
-                case DATETIME_FIELD:
+                case DATETIME:
                     return TempoDatetimeField.getValue(fieldLayout);
                     
-                case PICKER_FIELD: 
+                case PICKER: 
                     return TempoPickerField.getValue(fieldLayout);
                     
                 default:
@@ -242,7 +224,7 @@ public class TempoField extends TempoObject {
     }
     
     public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue) {
-        String fieldType = getFieldType(fieldLayout);
+        TempoFieldType fieldType = getFieldType(fieldLayout);
         
         fieldValue = TempoObject.parseVariable(fieldValue);
         
@@ -251,37 +233,37 @@ public class TempoField extends TempoObject {
         try {
             switch (fieldType) {
             
-                case READ_ONLY_FIELD: 
+                case READ_ONLY: 
                     return contains(fieldLayout, fieldValue);
             
-                case TEXT_FIELD: 
+                case TEXT: 
                     return TempoTextField.contains(fieldLayout, fieldValue);
                     
-                case PARAGRAPH_FIELD: 
+                case PARAGRAPH: 
                     return TempoParagraphField.contains(fieldLayout, fieldValue);
                     
-                case INTEGER_FIELD:
+                case INTEGER:
                     return TempoIntegerField.contains(fieldLayout, fieldValue);
                     
-                case SELECT_FIELD:
+                case SELECT:
                     return TempoSelectField.contains(fieldLayout, fieldValue);
                     
-                case RADIO_FIELD:
+                case RADIO:
                     return TempoRadioField.contains(fieldLayout, fieldValue);
                     
-                case CHECKBOX_FIELD: 
+                case CHECKBOX: 
                     return TempoCheckboxField.contains(fieldLayout, fieldValue);
                     
-                case FILE_UPLOAD_FIELD:
+                case FILE_UPLOAD:
                     return TempoFileUploadField.contains(fieldLayout, fieldValue);
                     
-                case DATE_FIELD:
+                case DATE:
                     return TempoDateField.contains(fieldLayout, fieldValue);
                     
-                case DATETIME_FIELD:
+                case DATETIME:
                     return TempoDatetimeField.contains(fieldLayout, fieldValue);
                     
-                case PICKER_FIELD: 
+                case PICKER: 
                     return TempoPickerField.contains(fieldLayout, fieldValue);
                     
                 default:
@@ -320,19 +302,19 @@ public class TempoField extends TempoObject {
         return true;
     }
     
-    public static String getFieldType(WebElement fieldLayout) {
-        if (TempoField.isReadOnly(fieldLayout)) return READ_ONLY_FIELD;
-        else if (TempoTextField.isType(fieldLayout)) return TEXT_FIELD;
-        else if (TempoParagraphField.isType(fieldLayout)) return PARAGRAPH_FIELD;
-        else if (TempoIntegerField.isType(fieldLayout)) return INTEGER_FIELD;
-        else if (TempoSelectField.isType(fieldLayout)) return SELECT_FIELD;
-        else if (TempoRadioField.isType(fieldLayout)) return RADIO_FIELD;
-        else if (TempoCheckboxField.isType(fieldLayout)) return CHECKBOX_FIELD;
-        else if (TempoFileUploadField.isType(fieldLayout)) return FILE_UPLOAD_FIELD;
+    public static TempoFieldType getFieldType(WebElement fieldLayout) {
+        if (TempoField.isReadOnly(fieldLayout)) return TempoFieldType.READ_ONLY;
+        else if (TempoTextField.isType(fieldLayout)) return TempoFieldType.TEXT;
+        else if (TempoParagraphField.isType(fieldLayout)) return TempoFieldType.PARAGRAPH;
+        else if (TempoIntegerField.isType(fieldLayout)) return TempoFieldType.INTEGER;
+        else if (TempoSelectField.isType(fieldLayout)) return TempoFieldType.SELECT;
+        else if (TempoRadioField.isType(fieldLayout)) return TempoFieldType.RADIO;
+        else if (TempoCheckboxField.isType(fieldLayout)) return TempoFieldType.CHECKBOX;
+        else if (TempoFileUploadField.isType(fieldLayout)) return TempoFieldType.FILE_UPLOAD;
         // Datetime must be before Date
-        else if (TempoDatetimeField.isType(fieldLayout)) return DATETIME_FIELD;
-        else if (TempoDateField.isType(fieldLayout)) return DATE_FIELD;
-        else if (TempoPickerField.isType(fieldLayout)) return PICKER_FIELD;
-        else return UNKNOWN_FIELD;
+        else if (TempoDatetimeField.isType(fieldLayout)) return TempoFieldType.DATETIME;
+        else if (TempoDateField.isType(fieldLayout)) return TempoFieldType.DATE;
+        else if (TempoPickerField.isType(fieldLayout)) return TempoFieldType.PICKER;
+        else return TempoFieldType.UNKNOWN;
     }
 }
