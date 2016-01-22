@@ -201,8 +201,9 @@ For additional API information, view the <a href="http://appianps.github.io/ps-e
 ### INTERFACES
 * | populate field | *FIELD_LABEL_OR_INDEX* | with | *VALUE(S)* |
 * | populate field | *FIELD_LABEL[FIELD_INDEX]* | with | *VALUE(S)* | - use this to populate the 2nd, 3rd, etc field with the same label
-* | popultate field | *FIELD_LABEL | with value | VALUE | - use this to populate a field with a value that contains a comma
-* | populate field | [*FIELD_INDEX*] | in section | *SECTION_NAME* | with | *VALUE(S)* | - populate a field in a section with no label
+* | populate field | *FIELD_LABEL | with value | VALUE | - use this to populate a field with a value that contains a comma
+* | populate field | [*FIELD_INDEX*] | in section | *SECTION_NAME* | with | *VALUE(S)* | - populate a field in a section with no label<br/>
+**NOTE**: When populating a picker field with a username, make sure to use the display value instead of the username
 * | clear field | *FIELD_LABEL* | of | *VALUE_TO_REMOVE* | - this is for removing specific value from a picker
 * | get form title | - use with FitNesse keyword **check** to verify title, e.g. | check | get form title | *Expected Title* |
 * | get form instructions | - use with FitNesse keyword **check** to verify title, e.g. | check | get form title | *Expected Instructions* |

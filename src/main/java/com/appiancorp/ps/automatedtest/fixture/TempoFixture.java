@@ -592,7 +592,8 @@ public class TempoFixture extends BaseFixture {
      * Populates a field with specific values.<br>
      * <br>
      * This method can populate the following types of fields: Text, Paragraph, EncryptedText, Integer, Decimal, Date, Datetime, Select, MultipleSelect, Radio, Checkbox, FileUpload, UserPicker, GroupPicker, UserGroupPicker, DocumentPicker, FolderPicker, DocumentFolderPicker, CustomPicker. The only fields that support population of multiple items are Checkbox, MultipleSelect, and all Pickers.
-     * The method will attempt to fill the field the number of attemptTimes (default 3) and if failing all three times will return false.<br> 
+     * The method will attempt to fill the field the number of attemptTimes (default 3) and if failing all three times will return false.<br>
+     * When populating a username, use the display value rather than the username itself.<br>
      * <br>
      * FitNesse Examples:<br>
      * <code>| populate field | FIELD_NAME | with | FIELD_VALUE |</code><br>
@@ -619,7 +620,8 @@ public class TempoFixture extends BaseFixture {
     }
     
     /**
-     * Populates a field with a single value that may contain a comma. This is useful is selecting an option that contains a comma.<br>
+     * Populates a field with a single value that may contain a comma. This is useful is selecting an option that contains a comma.<br><br>
+     * When populating a username, use the display value rather than the username itself.<br>
      * <br>
      * FitNesse Example: <code>| populate field | FIELD_NAME | with value | VALUE |</code>
      * @param fieldName Field label or label and index
@@ -634,7 +636,8 @@ public class TempoFixture extends BaseFixture {
      * Populates a field in a section with specific values.<br>
      * <br>
      * This method is useful for populating fields without labels and can populate the following types of fields: Text, Paragraph, EncryptedText, Integer, Decimal, Date, Datetime, Select, MultipleSelect, Radio, Checkbox, FileUpload, UserPicker, GroupPicker, UserGroupPicker, DocumentPicker, FolderPicker, DocumentFolderPicker, CustomPicker.<br>
-     * The method will attempt to fill the field the number of attemptTimes (default 3) and if failing all three times will return false.<br> 
+     * The method will attempt to fill the field the number of attemptTimes (default 3) and if failing all three times will return false.<br>
+     * When populating a username, use the display value rather than the username itself.<br>
      * <br>
      * FitNesse Examples:<br>
      * <code>| populate field | FIELD_NAME | in section | SECTION_NAME | with | FIELD_VALUE |</code><br>
