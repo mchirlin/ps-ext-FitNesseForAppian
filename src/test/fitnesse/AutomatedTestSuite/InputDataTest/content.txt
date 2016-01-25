@@ -1,7 +1,6 @@
 !*** Open Actions
 | click on menu | Actions | 
 | click on action | Automated Testing Input |
-| verify action completed |
 ***!
 
 !*** Select task
@@ -59,5 +58,26 @@
 | verify field | Integer Field Test | contains | 5 | 
 | verify field | Decimal Field Test | contains | 123.45 |
 | verify field | Date and Time Test | contains | Nov 15, 2016, 10:00 AM|
+
+!| click on record item related action | AUT Data Input Test |
+| click on button | Cancel | 
+
+!| click on record item facet | Related Actions |
+| verify record item related action | AUT Data Input Test | is present |
+| click on record item related action | AUT Data Input Test |
+| populate field | Integer Field Test | with | 6 |
+| click on button | Submit | 
+
+| click on record item facet | Summary |
+| check | get field | Text Field Test | value | Test Text @{randString} |
+| check | get field | Integer Field Test | value | 6 | 
+| check | get field | Decimal Field Test | value | 123.45 |
+| check | get field | Date and Time Test | value | Nov 15, 2016, 10:00 AM |
+
+!| verify field | Text Field Test | contains | Test Text @{randString} |
+| verify field | Integer Field Test | contains | 6 | 
+| verify field | Decimal Field Test | contains | 123.45 |
+| verify field | Date and Time Test | contains | Nov 15, 2016, 10:00 AM|
+
 ***!
 
