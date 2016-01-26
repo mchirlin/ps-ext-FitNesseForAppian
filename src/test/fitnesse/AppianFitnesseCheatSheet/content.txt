@@ -1,0 +1,89 @@
+!3 UTILITIES
+* | setup selenium web driver with | *BROWSER_NAME* | browser |
+* | set data source name to | *DATA_SOURCE_NAME* |
+* | set appian url to | *APPIAN_URL* |
+* | set start datetime | - will be used as relative datetime for date/time fields
+* | set timeout seconds to | *TIMEOUT_SECONDS* | - Used as the wait timeout in between each command
+* | set screenshot path to | *SCREENSHOT_PATH* | - Set the folder where screenshots will be saved. This will create new folders if necessary. Terminate path with "/" to ensure folder creation. (Default C:\AutomatedTesting\screenshots\)
+* | set take error screenshots to | *SCREENSHOT_BOOLEAN* | - If true, screenshots will be taken for every failed test case. (Default true)
+* | take screenshot | *FILE_NAME* | - take a screenshot with the name (do not include the extension)
+* | login with username | *USERNAME* | with password | *PASSWORD* | - uses set appian url
+* | login with terms with username | *USERNAME* | with password | *PASSWORD* | - uses set appian url
+* | wait for | *RELATIVE_PERIOD*, e.g. +1 days, +1 hours | - waits for relative amount of time
+* | wait until | *RELATIVE_PERIOD* | - waits until relative time
+* | set | *VARIABLE_NAME* | get random string | *STRING_LENGTH* | - use @{VARIABLE_NAME} to parameterize test cases
+* | refresh | - refreshes screen
+* | logout |
+
+!3 NAVIGATION
+* | click on menu | *TEMPO_MENU_NAME* |
+
+!3 NEWS
+* | verify news feed containing text | *NEWS_TEXT* | is present |
+* | verify news feed containing text | *NEWS_TEXT* | is not present |
+* | toggle more info for news feed containing text | *NEWS_TEXT* |
+* | verify news feed containing text | *NEWS_TEXT* | and more info with label | *LABEL* | and value | *VALUE* | is present |
+* | verify news feed containing text | *NEWS_TEXT* | tagged with | *TAG_NAME* | is present |
+* | verify news feed containing text | *NEWS_TEXT* | commented with | *COMMENT* | is present |
+* | click on news feed | *NEWS_TEXT* | record tag | *RECORD_TAG* |
+* | set | *VARIABLE_NAME* | get regex | *REGEX* | from news feed containing text | *NEWS_TEXT* | - use Java Regular Expression to return data from news as a variable
+* | set | *VARIABLE_NAME* | get regex | *REGEX* | from news feed containing text | *NEWS_TEXT* | commented with | *COMMENT* |
+
+!3 TASKS
+* | click on task | *TASK_NAME* |
+* | click on task report | *TASK_REPORT_NAME* |
+* | verify task | *TASK_NAME* | is present |
+* | verify task | *TASK_NAME* | is not present |
+* | verify task | *TASK_NAME* | has a deadline of | *DEADLINE_TEXT* |
+
+!3 RECORDS
+* | click on record list | *RECORD_LIST_NAME* |
+* | click on record list facet option | *FACET_NAME* |
+* | verify record list facet option | *FACET_NAME* | is present |
+* | click on record item | *RECORD_ITEM_NAME* |
+* | verify record item | *RECORD_ITEM_NAME* | is present |
+* | verify record item | *RECORD_ITEM_NAME* | is not present |
+* | click on record item facet | *FACET_NAME* |
+* | click on record item related action | *RELATED_ACTION_NAME* | - this is run on the related action dashboard, not as a button currently
+* | verify record item related action | *RELATED_ACTION_NAME* | is present |
+* | verify record item related action | *RELATED_ACTION_NAME* | is not present |
+
+!3 REPORTS
+* | click on report | *REPORT_NAME* |
+* | verify report | *REPORT_NAME* | is present |
+* | verify report | *REPORT_NAME* | is not present |
+
+!3 ACTIONS
+* | click on action | *ACTION_NAME* |
+* | verify report | *ACTION_NAME* | is present |
+* | verify report | *ACTION_NAME* | is not present |
+* | verify action completed |
+
+!3 INTERFACES
+* | populate field | *FIELD_LABEL_OR_INDEX* | with | *VALUE(S)* |
+* | populate field | *FIELD_LABEL[FIELD_INDEX]* | with | *VALUE(S)* | - use this to populate the 2nd, 3rd, etc field with the same label
+* | populate field | *FIELD_LABEL | with value | VALUE | - use this to populate a field with a value that contains a comma
+* | populate field | [*FIELD_INDEX*] | in section | *SECTION_NAME* | with | *VALUE(S)* | - populate a field in a section with no label<br/>
+!4 **NOTE**: When populating a picker field with a username, make sure to use the display value instead of the username
+* | clear field | *FIELD_LABEL* | of | *VALUE_TO_REMOVE* | - this is for removing specific value from a picker
+* | get form title | - use with FitNesse keyword **check** to verify title, e.g. | check | get form title | *Expected Title* |
+* | get form instructions | - use with FitNesse keyword **check** to verify title, e.g. | check | get form title | *Expected Instructions* |
+* | get field | *FIELD_LABEL_OR_INDEX* | value | - use with FitNesse key words **check** or **set** to verify values or populate runtime variables
+* | get field | *FIELD_LABEL_OR_INDEX* | in section | *SECTION_NAME* | value | - use with FitNesse key words **check** or **set** to verify values or populate runtime variables
+* | verify field | *FIELD_LABEL_OR_INDEX* | contains | *VALUE* |
+* | verify field | *FIELD_LABEL[FIELD_INDEX]* | contains | *VALUE* |
+* | verify field | *FIELD_LABEL* | contains value | *VALUE* | - use this to verify a field that contains a comma
+* | verify field | *FIELD_LABEL_OR_INDEX* | in section | *SECTION_NAME* | contains | *VALUE* |
+* | verify field | *FIELD_LABEL_OR_INDEX* | is present |
+* | verify field | *FIELD_LABEL_OR_INDEX* | is not present |
+* | populate grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | with | *VALUE(S)* |
+* | verify grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
+* | select grid | *GRID_NAME* | row | *ROW_NUMBER* |
+* | verify grid | *GRID_NAME* | row | *ROW_NUMBER* | is selected |
+* | click on link | *LINK_NAME* |
+* | click on button | *BUTTON_NAME* |
+* | click on radio option | *RADIO_OPTION* |
+* | click on checkbox option | *CHECKBOX_OPTION* |
+
+
+!contents -R2 -g -p -f -h

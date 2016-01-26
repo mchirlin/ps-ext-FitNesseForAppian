@@ -2,10 +2,12 @@
 |click on menu  |Actions   |
 |click on action|All Fields|
 ***!
-!*** Fill Out Test Form
+!*** Check Forms Title and instrcutions 
 |check|get title       |Form        |
 |check|get instructions|Instructions|
+***!
 ----
+!*** Populate fields in Section 1 - Common field types
 !| populate field|TextField         |with|text     |
 |populate field  |ParagraphField    |with|paragraph|
 |populate field  |EncryptedTextField|with|encrypted|
@@ -19,7 +21,9 @@
 |populate field  |RadioField         |with      |Option 1                                  |
 |populate field  |CheckboxField      |with      |Option 1,Option 2                         |
 |populate field  |FileUploadField    |with      |C:\AutomatedTesting\documents\Low Risk.jpg|
+***!
 ----
+!*** Populate fields in Section 1.5 Dates and Date Times
 !| populate field|DateField (date)          |with|11/15/2015        |
 |populate field  |DateField (+5 days)       |with|+5 days           |
 |populate field  |DatetimeField (date)      |with|11/15/2015        |
@@ -27,12 +31,16 @@
 |populate field  |DatetimeField (+5 minutes)|with|+5 minutes        |
 |populate field  |DatetimeField (+5 hours)  |with|+5 hours          |
 |populate field  |DatetimeField (+5 days)   |with|+5 days           |
+***!
 ----
+!*** Populate Field in Section 2 Fields without labels, by reference, and radio/checkbox fields
 !| populate field        |[1]         |in section|Section 2|with|noLabel|
 |populate field          |TextField[2]|with      |text2                 |
 |click on radio option   |Click Me!                                     |
 |click on checkbox option|Click Me Too!                                 |
+***!
 ----
+!*** Populate Section 2.5 using Pickers
 !| populate field|UserPicker          |with|test user, user test    |
 |populate field  |GroupPicker         |with|AUT All Users           |
 |populate field  |UserGroupPicker     |with|test user, AUT All Users|
@@ -40,7 +48,9 @@
 |populate field  |FolderPicker        |with|Automated Testing       |
 |populate field  |DocumentFolderPicker|with|Automated Testing       |
 |populate field  |CustomPicker        |with|5                       |
+***!
 ----
+!*** Section 3 Populating an editable grid by reference number as well as name for grid and column names
 !| select grid|EditableGrid|row   |[1]                                          |
 |populate grid|[1]         |column|TextField         |row|[1]|with|gridText     |
 |populate grid|EditableGrid|column|[3]               |row|[1]|with|gridParagraph|
@@ -49,7 +59,9 @@
 |populate grid|EditableGrid|column|DecimalField      |row|[1]|with|2.2          |
 |populate grid|EditableGrid|column|[7]               |row|[1]|with|+1 day       |
 |click on link|Add Data to Paging Grid                                          |
+***!
 ----
+!*** Section 3 Populating an editable grid by Name and reference number for date time, radio, checkbox, and file upload fields by column name and reference 
 !| populate grid|EditableGrid[2]|column|DatetimeField  |row|[1]|with|+1 hour                                      |
 |populate grid  |EditableGrid[2]|column|DatetimeField  |row|[2]|with|+1 minute                                    |
 |populate grid  |EditableGrid[2]|column|[2]            |row|[1]|with|Option 1                                     |
@@ -60,7 +72,9 @@
 |populate grid  |EditableGrid[2]|column|[4]            |row|[2]|with|Option 2                                     |
 |populate grid  |EditableGrid[2]|column|FileUploadField|row|[1]|with|C:\AutomatedTesting\documents\Medium Risk.jpg|
 |populate grid  |EditableGrid[2]|column|FileUploadField|row|[2]|with|C:\AutomatedTesting\documents\High Risk.jpg  |
+***!
 ----
+!*** Section 3 Populating an editable grid by Name and Reference number for picker fields by column reference number
 !| populate grid|EditableGrid[3]|column|[1]|row|[1]|with|test.user               |
 |populate grid  |EditableGrid[3]|column|[2]|row|[1]|with|AUT All Users           |
 |populate grid  |EditableGrid[3]|column|[3]|row|[1]|with|test.user, AUT All Users|
@@ -68,11 +82,13 @@
 |populate grid  |EditableGrid[3]|column|[1]|row|[2]|with|Automated Testing       |
 |populate grid  |EditableGrid[3]|column|[2]|row|[2]|with|Automated Testing       |
 |populate grid  |EditableGrid[3]|column|[3]|row|[2]|with|10                      |
-----
-!| select grid|PagingGrid|row|[4]|
-
 ***!
-!*** Verify Fields Contain Values
+----
+!*** Select a grid row
+!| select grid|PagingGrid|row|[4]|
+***!
+----
+!*** Verify/Check Fields Contain Values for Section 1
 !| verify field|TextField         |contains|text     |
 |verify field  |ParagraphField    |contains|paragraph|
 |verify field  |EncryptedTextField|contains|encrypted|
@@ -110,7 +126,9 @@
 |check  |get field|RadioField         |value|Option 1         |
 |check  |get field|CheckboxField      |value|Option 1,Option 2|
 |check  |get field|FileUploadField    |value|Low Risk.jpg     |
+***!
 ----
+!*** Verify/Check Fields Contain Values for Section 1.5
 !| verify field|DateField (date)          |contains|11/15/2015        |
 |verify field  |DateField (+5 days)       |contains|+5 days           |
 |verify field  |DatetimeField (date)      |contains|11/15/2015        |
@@ -122,13 +140,18 @@
 !| check|get field|DateField (date)        |value|11/15/2015         |
 |check  |get field|DatetimeField (date)    |value|11/15/2015 12:00 AM|
 |check  |get field|DatetimeField (datetime)|value|11/15/2015 2:00 PM |
+***!
 ----
+!*** Verify/Check Fields Contain Values for Section 2
+
 !| verify field|[1]         |in section|Section 2|contains|noLabel|
 |verify field  |TextField[2]|contains  |text2                     |
 
 !| check|get field|[1]         |in section|Section 2|value|noLabel|
 |check  |get field|TextField[2]|value     |text2                  |
+***!
 ----
+!*** Verify/Check Fields Contain Values for Section 2.5
 !| verify field|UserPicker          |contains|test user,user test    |
 |verify field  |GroupPicker         |contains|AUT All Users          |
 |verify field  |UserGroupPicker     |contains|test user,AUT All Users|
@@ -144,7 +167,9 @@
 |check  |get field|FolderPicker        |value|Automated Testing      |
 |check  |get field|DocumentFolderPicker|value|Automated Testing      |
 |check  |get field|CustomPicker        |value|5                      |
+***! 
 ----
+!*** Verify/Check Editable Grid fields 
 !| verify grid|EditableGrid|row   |[1]               |is selected                   |
 |verify grid  |[1]         |column|TextField         |row|[1]|contains|gridText     |
 |verify grid  |EditableGrid|column|[3]               |row|[1]|contains|gridParagraph|
@@ -194,16 +219,20 @@
 |check  |get grid|EditableGrid[3]|column|[1]|row|[2]|value|Automated Testing      |
 |check  |get grid|EditableGrid[3]|column|[2]|row|[2]|value|Automated Testing      |
 |check  |get grid|EditableGrid[3]|column|[3]|row|[2]|value|10                     |
+***! 
 ----
+!*** Verify/Check Paging Grid readonly fields 
 !| verify grid|PagingGrid|row   |[4]           |is selected                 |
 |verify grid  |PagingGrid|column|[2]           |row|[1]|contains|Value 1    |
 |verify grid  |PagingGrid|column|Column Label 2|row|[1]|contains|Value 1 Two|
 |verify grid  |PagingGrid|column|Column Label  |row|[2]|contains|Value 2    |
-
+----
 !| check|get grid|PagingGrid|column|[2]           |row|[3]|value|Value 3    |
 |check  |get grid|PagingGrid|column|Column Label 2|row|[1]|value|Value 1 Two|
 |check  |get grid|PagingGrid|column|Column Label  |row|[2]|value|Value 2    |
 ***!
+
+-----
 !*** Close Form
 |click on button |Submit|
 |verify action completed|

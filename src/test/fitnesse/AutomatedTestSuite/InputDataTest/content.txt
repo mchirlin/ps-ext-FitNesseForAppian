@@ -47,7 +47,7 @@
 | verify news feed containing text | @{randString} | tagged with |Test Text @{randString} | is present | 
 ***!
 
-!*** Check Record
+!*** Check/Verify Record Contents
 !| click on news feed | @{randString} | record tag | Test Text @{randString} |
 | check | get field | Text Field Test | value | Test Text @{randString} |
 | check | get field | Integer Field Test | value | 5 | 
@@ -58,13 +58,20 @@
 | verify field | Integer Field Test | contains | 5 | 
 | verify field | Decimal Field Test | contains | 123.45 |
 | verify field | Date and Time Test | contains | Nov 15, 2016, 10:00 AM|
+***!
 
+!*** Access related action link from record
 !| click on record item related action | AUT Data Input Test |
 | click on button | Cancel | 
+***!
 
+!*** Access related action link from Related Actions Menu
 !| click on record item facet | Related Actions |
 | verify record item related action | AUT Data Input Test | is present |
 | click on record item related action | AUT Data Input Test |
+***!
+
+!*** Edit Record and verify record has updated
 | populate field | Integer Field Test | with | 6 |
 | click on button | Submit | 
 
