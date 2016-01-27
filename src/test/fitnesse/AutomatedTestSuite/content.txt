@@ -1,10 +1,11 @@
 !1 Example Automated Test Suite for an example Appian Application
 !2 Steps run the example test suite
 
-!4 1) Create users test.user (test user) and user.test (user test) into your Appian Instance.
-!4 2) Import example application from the provided zip file into your Appian instance (ensure that you configure the data store)
-!4 3) Update the Appian URL, Username, and Password in the setup test case below.
-!4 4) Click on the Suite link above.
+1) Create users test.user (test user) and user.test (user test) into your Appian Instance and login to update password.
+2) Import example application from the provided zip file into your Appian instance (ensure that you configure the data store)
+3) Verify test user and user test are in the AUT all viewers group.
+4) Update the Appian URL, Username, and Password in the [[Setup][AutomatedTestSuite.SetUp]] test case below.  (You can use test.user or user.test)
+5) Click on the Suite link above.
 
 !4 WARNING - Do not touch the Firefox Browser that opens while running, this may cause some issues with the test suite.
 
