@@ -293,7 +293,7 @@ public class TempoFixture extends BaseFixture {
     /*
      * Records
      */
-    
+  //old
     /**
      * Clicks on the record item list.<br>
      * <br>
@@ -303,14 +303,27 @@ public class TempoFixture extends BaseFixture {
      * If multiple record lists contain the same name, then the first will be selected
      * @return True, if completed successfully
      */
-    public boolean clickOnRecordList(String listName) {
+    public boolean clickOnRecordList(String listName) { 
         if(!TempoRecordList.waitFor(listName)) {
             throw new MissingObjectException("Record List", listName);
         }
         
         return returnHandler(TempoRecordList.click(listName));
     }
-    
+    //01272016
+    /**
+     * Clicks on the record type.<br>
+     * <br>
+     * FitNesse Example: <code>| click on record type | RECORD_TYPE |</code>
+     * 
+     * @param typeName Name of record type to click (partial names are acceptable)
+     * If multiple record types contain the same name, then the first will be selected
+     * @return True, if completed successfully
+     */
+    public boolean clickOnRecordType(String typeName) {
+       return clickOnRecordList(typeName);
+    }
+    //old
     /**
      * Clicks on the record list facet option.<br>
      * <br>
@@ -328,6 +341,22 @@ public class TempoFixture extends BaseFixture {
         return returnHandler(TempoRecordList.clickOnFacetOption(facetOption));       
     }
     
+    //01272016
+    /**
+     * Clicks on the record type user filter.<br>
+     * <br>
+     * FitNesse Example: <code>| click on record type user filter | USER_FILTER |</code>
+     * 
+     * @param userFilter User Filter to click (partial names are acceptable)
+     * If multiple user filters contain the same name, then the first will be selected
+     * @return True, if completed successfully
+     */
+    public boolean clickOnRecordTypeUserFilter(String userFilter) {
+        return  clickOnRecordListFacetOption(userFilter);     
+    }
+    
+    
+    //old
     /** 
      * Verifies if facet option is present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -339,11 +368,23 @@ public class TempoFixture extends BaseFixture {
     public boolean verifyRecordListFacetOptionIsPresent(String facetOption) {
         return returnHandler(TempoRecordList.waitForFacetOption(facetOption));
     }
-    
+    //01272016
+    /** 
+     * Verifies if user filter is present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify record type user filter | USER_FILTER | is present |</code>
+     * 
+     * @param userFilter Name of user filter
+     * @return True, if user filter is located
+     */
+    public boolean verifyRecordTypeUserFilterIsPresent(String userFilter) {
+        return returnHandler(TempoRecordList.waitForFacetOption(userFilter));
+    }
+    //old 
     /**
      * Clicks on the associated record item.<br>
      * <br>
-     * FitNesse Example: <code>| click on record item | REPORT_ITEM_NAME |</code>
+     * FitNesse Example: <code>| click on record item | RECORD_ITEM_NAME |</code>
      * 
      * @param itemName Name of record item to click (partial names are acceptable)
      * If multiple record items contain the same name, then the first will be selected
@@ -356,7 +397,21 @@ public class TempoFixture extends BaseFixture {
         
         return returnHandler(TempoRecordItem.click(itemName));
     }
+    //01272016
+    /**
+     * Clicks on the associated record.<br>
+     * <br>
+     * FitNesse Example: <code>| click on record | RECORD_NAME |</code>
+     * 
+     * @param recordName Name of record to click (partial names are acceptable)
+     * If multiple records contain the same name, then the first will be selected
+     * @return True, if completed successfully
+     */
+    public boolean clickOnRecord(String recordName) {
+        return clickOnRecordItem(recordName);
+    }
     
+    //old
     /** 
      * Verifies if record item is present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -369,6 +424,20 @@ public class TempoFixture extends BaseFixture {
         return returnHandler(TempoRecordItem.waitFor(itemName));
     }
     
+    //01272016
+    /** 
+     * Verifies if record is present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify record | RECORD_NAME | is present |</code>
+     * 
+     * @param recordName Name of record 
+     * @return True, if record is located
+     */
+    public boolean verifyRecordIsPresent(String recordName) {
+        return returnHandler(TempoRecordItem.waitFor(recordName));
+    }
+    
+    //old
     /** 
      * Verifies if record item is not present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -382,7 +451,23 @@ public class TempoFixture extends BaseFixture {
     public boolean verifyRecordItemIsNotPresent(String itemName) {
         return returnHandler(!TempoRecordItem.waitFor(itemName));
     }
-     
+  
+    //01272016
+    /** 
+     * Verifies if record is not present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify record | RECORD_NAME | is not present |</code><br>
+     * <br>
+     * Use this rather than <code>| reject | verify record | RECORD_NAME | is present |</code> as it will not refresh and wait.
+     * 
+     * @param recordName Name of record
+     * @return True, if record is not located
+     */
+    public boolean verifyRecordIsNotPresent(String recordName) {
+        return returnHandler(!TempoRecordItem.waitFor(recordName));
+    }
+    
+    //old 
     /**
      * Clicks on the associated record item facet.<br>
      * <br>
@@ -399,7 +484,22 @@ public class TempoFixture extends BaseFixture {
         
         return returnHandler(TempoRecordItem.clickOnFacet(facetName));
     }
-     
+    
+    //01272016
+    /**
+     * Clicks on the associated record view.<br>
+     * <br>
+     * FitNesse Example: <code>| click on record view | VIEW_NAME |</code>
+     * 
+     * @param viewName Name of view (e.g. Summary, News, Related Actions, etc.) to click (partial names are acceptable)
+     * If multiple views contain the same name, then the first will be selected
+     * @return True, if completed successfully
+     */
+    public boolean clickOnRecordView(String viewName) {
+        return clickOnRecordItemFacet(viewName);
+    }
+    
+    //old
     /**
      * Clicks on the associated related action.<br>
      * <br>
@@ -416,7 +516,22 @@ public class TempoFixture extends BaseFixture {
         
         return returnHandler(TempoRecordItem.clickOnRelatedAction(relatedActionName));
     }
-     
+    
+    //01272016
+    /**
+     * Clicks on the associated related action.<br>
+     * <br>
+     * FitNesse Example: <code>| click on record related action | RELATED_ACTION_NAME |</code>
+     * 
+     * @param relatedActionName Name of related action to click (partial names are acceptable)
+     * If multiple related actions contain the same name, then the first will be selected
+     * @return True, if completed successfully
+     */
+    public boolean clickOnRecordRelatedAction(String relatedActionName) {
+        return clickOnRecordItemRelatedAction(relatedActionName);
+    }
+    
+    //old
     /** 
      * Verifies if record item related action is present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -428,7 +543,21 @@ public class TempoFixture extends BaseFixture {
     public boolean verifyRecordItemRelatedActionIsPresent(String relatedActionName) {
         return returnHandler(TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName));
     }
+    
+    //01272016
+    /** 
+     * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is present |</code>
+     * 
+     * @param relatedActionName Name of the related action
+     * @return True, if related action is located
+     */
+    public boolean verifyRecordRelatedActionIsPresent(String relatedActionName) {
+        return returnHandler(TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName));
+    }
      
+    //old
     /** 
      * Verifies if record item related action is not present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -442,7 +571,20 @@ public class TempoFixture extends BaseFixture {
     public boolean verifyRecordItemRelatedActionIsNotPresent(String relatedActionName) {
         return returnHandler(!TempoRecordItem.waitForRelatedAction(relatedActionName));
     }
-	
+    //01272016
+    /** 
+     * Verifies if record related action is not present in the user interface. This is useful for determining if security is applied correctly.<br>
+     * <br>
+     * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is not present |</code><br>
+     * <br>
+     * Use this rather than <code>| reject | verify record related action | RELATED_ACTION_NAME | is present |</code> as it will not refresh and wait.
+     * 
+     * @param relatedActionName Name of related action
+     * @return True, if related action is not located
+     */
+    public boolean verifyRecordRelatedActionIsNotPresent(String relatedActionName) {
+        return returnHandler(!TempoRecordItem.waitForRelatedAction(relatedActionName));
+    }
     /*
      * Reports
      */
