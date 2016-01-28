@@ -61,21 +61,21 @@
 ***!
 
 !*** Access related action link from record
-!| click on record item related action | AUT Data Input Test |
+!| click on record related action | AUT Data Input Test |
 | click on button | Cancel | 
 ***!
 
 !*** Access related action link from Related Actions Menu
-!| click on record item facet | Related Actions |
-| verify record item related action | AUT Data Input Test | is present |
-| click on record item related action | AUT Data Input Test |
+!| click on record view | Related Actions |
+| verify record related action | AUT Data Input Test | is present |
+| click on record related action | AUT Data Input Test |
 ***!
 
 !*** Edit Record and verify record has updated
 | populate field | Integer Field Test | with | 6 |
 | click on button | Submit | 
 
-| click on record item facet | Summary |
+| click on record view | Summary |
 | check | get field | Text Field Test | value | Test Text @{randString} |
 | check | get field | Integer Field Test | value | 6 | 
 | check | get field | Decimal Field Test | value | 123.45 |
