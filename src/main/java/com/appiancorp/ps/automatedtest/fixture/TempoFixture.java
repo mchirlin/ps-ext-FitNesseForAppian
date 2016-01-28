@@ -293,7 +293,7 @@ public class TempoFixture extends BaseFixture {
     /*
      * Records
      */
-  //old
+    @Deprecated
     /**
      * Clicks on the record item list.<br>
      * <br>
@@ -310,7 +310,7 @@ public class TempoFixture extends BaseFixture {
         
         return returnHandler(TempoRecordList.click(listName));
     }
-    //01272016
+
     /**
      * Clicks on the record type.<br>
      * <br>
@@ -323,7 +323,7 @@ public class TempoFixture extends BaseFixture {
     public boolean clickOnRecordType(String typeName) {
        return clickOnRecordList(typeName);
     }
-    //old
+    @Deprecated
     /**
      * Clicks on the record list facet option.<br>
      * <br>
@@ -341,7 +341,7 @@ public class TempoFixture extends BaseFixture {
         return returnHandler(TempoRecordList.clickOnFacetOption(facetOption));       
     }
     
-    //01272016
+    
     /**
      * Clicks on the record type user filter.<br>
      * <br>
@@ -356,7 +356,7 @@ public class TempoFixture extends BaseFixture {
     }
     
     
-    //old
+    @Deprecated
     /** 
      * Verifies if facet option is present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -365,10 +365,11 @@ public class TempoFixture extends BaseFixture {
      * @param facetOption Name of facet option
      * @return True, if facet option is located
      */
+   
     public boolean verifyRecordListFacetOptionIsPresent(String facetOption) {
         return returnHandler(TempoRecordList.waitForFacetOption(facetOption));
     }
-    //01272016
+    
     /** 
      * Verifies if user filter is present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -380,7 +381,7 @@ public class TempoFixture extends BaseFixture {
     public boolean verifyRecordTypeUserFilterIsPresent(String userFilter) {
         return returnHandler(TempoRecordList.waitForFacetOption(userFilter));
     }
-    //old 
+    @Deprecated
     /**
      * Clicks on the associated record item.<br>
      * <br>
@@ -390,6 +391,7 @@ public class TempoFixture extends BaseFixture {
      * If multiple record items contain the same name, then the first will be selected
      * @return True, if completed successfully
      */
+
     public boolean clickOnRecordItem(String itemName) {
         if(!TempoRecordItem.refreshAndWaitFor(itemName)) {
             throw new MissingObjectException("Tempo Record Item", itemName);
@@ -397,7 +399,7 @@ public class TempoFixture extends BaseFixture {
         
         return returnHandler(TempoRecordItem.click(itemName));
     }
-    //01272016
+
     /**
      * Clicks on the associated record.<br>
      * <br>
@@ -410,8 +412,7 @@ public class TempoFixture extends BaseFixture {
     public boolean clickOnRecord(String recordName) {
         return clickOnRecordItem(recordName);
     }
-    
-    //old
+    @Deprecated
     /** 
      * Verifies if record item is present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -420,11 +421,11 @@ public class TempoFixture extends BaseFixture {
      * @param itemName Name of record item
      * @return True, if record item is located
      */
+    
     public boolean verifyRecordItemIsPresent(String itemName) {
         return returnHandler(TempoRecordItem.waitFor(itemName));
     }
     
-    //01272016
     /** 
      * Verifies if record is present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -437,7 +438,7 @@ public class TempoFixture extends BaseFixture {
         return returnHandler(TempoRecordItem.waitFor(recordName));
     }
     
-    //old
+    @Deprecated
     /** 
      * Verifies if record item is not present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -452,7 +453,6 @@ public class TempoFixture extends BaseFixture {
         return returnHandler(!TempoRecordItem.waitFor(itemName));
     }
   
-    //01272016
     /** 
      * Verifies if record is not present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -467,7 +467,7 @@ public class TempoFixture extends BaseFixture {
         return returnHandler(!TempoRecordItem.waitFor(recordName));
     }
     
-    //old 
+    @Deprecated 
     /**
      * Clicks on the associated record item facet.<br>
      * <br>
@@ -485,7 +485,7 @@ public class TempoFixture extends BaseFixture {
         return returnHandler(TempoRecordItem.clickOnFacet(facetName));
     }
     
-    //01272016
+    
     /**
      * Clicks on the associated record view.<br>
      * <br>
@@ -499,7 +499,7 @@ public class TempoFixture extends BaseFixture {
         return clickOnRecordItemFacet(viewName);
     }
     
-    //old
+    @Deprecated
     /**
      * Clicks on the associated related action.<br>
      * <br>
@@ -517,7 +517,6 @@ public class TempoFixture extends BaseFixture {
         return returnHandler(TempoRecordItem.clickOnRelatedAction(relatedActionName));
     }
     
-    //01272016
     /**
      * Clicks on the associated related action.<br>
      * <br>
@@ -531,7 +530,7 @@ public class TempoFixture extends BaseFixture {
         return clickOnRecordItemRelatedAction(relatedActionName);
     }
     
-    //old
+    @Deprecated
     /** 
      * Verifies if record item related action is present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -544,7 +543,7 @@ public class TempoFixture extends BaseFixture {
         return returnHandler(TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName));
     }
     
-    //01272016
+    
     /** 
      * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -557,7 +556,7 @@ public class TempoFixture extends BaseFixture {
         return returnHandler(TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName));
     }
      
-    //old
+    @Deprecated
     /** 
      * Verifies if record item related action is not present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>
@@ -571,7 +570,7 @@ public class TempoFixture extends BaseFixture {
     public boolean verifyRecordItemRelatedActionIsNotPresent(String relatedActionName) {
         return returnHandler(!TempoRecordItem.waitForRelatedAction(relatedActionName));
     }
-    //01272016
+    
     /** 
      * Verifies if record related action is not present in the user interface. This is useful for determining if security is applied correctly.<br>
      * <br>

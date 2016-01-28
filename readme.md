@@ -176,13 +176,13 @@ For additional API information, view the <a href="http://appianps.github.io/ps-e
 * | verify task | *TASK_NAME* | has a deadline of | *DEADLINE_TEXT* |
 
 ### RECORDS
-* | click on record type | *RECORD_LIST_NAME* |
-* | click on record type user filter | *FACET_NAME* |
-* | verify record type user filter | *FACET_NAME* | is present |
-* | click on record | *RECORD_ITEM_NAME* |
-* | verify record | *RECORD_ITEM_NAME* | is present |
-* | verify record| *RECORD_ITEM_NAME* | is not present |
-* | click on record view | *FACET_NAME* |
+* | click on record type | *RECORD_TYPE_NAME* |
+* | click on record type user filter | *USER_FILTER_NAME* |
+* | verify record type user filter | *USER_FILTER_NAME* | is present |
+* | click on record | *RECORD_NAME* |
+* | verify record | *RECORD_NAME* | is present |
+* | verify record| *RECORD_NAME* | is not present |
+* | click on record view | *VIEW_NAME* |
 * | click on record related action | *RELATED_ACTION_NAME* | - this is run on the related action dashboard, not as a button currently
 * | verify record related action | *RELATED_ACTION_NAME* | is present |
 * | verify record related action | *RELATED_ACTION_NAME* | is not present |
