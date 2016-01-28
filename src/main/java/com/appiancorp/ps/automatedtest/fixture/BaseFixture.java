@@ -571,7 +571,7 @@ public class BaseFixture extends DoFixture {
 	/**
 	 * Returns a random string of a specific length<br>
 	 * <br>
-	 * FitNesse example: <code>| set | get random string | 5 | rand | </code> - This will set the variable <i>rand</i> to a random string which can later be accessed using ${rand}. 
+	 * FitNesse example: <code>| set | rand | get random string | 5 | </code> - This will set the variable <i>rand</i> to a random string which can later be accessed using ${rand}. 
 	 * @param length Length of random string
 	 * @return Random alphanumeric string
 	 */
