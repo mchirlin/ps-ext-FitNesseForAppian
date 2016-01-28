@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <properties>
+<AddChild/>
 <Edit/>
 <Files/>
-<Help>Tests various types of fields that an interface may use in Appian and how to access them in Fitnesse</Help>
 <Properties/>
+<Prune/>
 <RecentChanges/>
-<Refactor/>
 <Search/>
-<Test/>
+<Static/>
 <Versions/>
 <WhereUsed/>
 </properties>

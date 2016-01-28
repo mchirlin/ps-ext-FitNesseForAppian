@@ -52,6 +52,36 @@ public class RecordsFixtureTest {
         tFixture.waitForSeconds("1");
     }
     
+    @Test
+    public void testRecordsFixtureUpdate() throws Exception {
+        tFixture.clickOnMenu("Records");
+        
+        assertTrue(tFixture.clickOnRecordType("Orders"));
+        assertTrue(tFixture.verifyRecordTypeUserFilterIsPresent("Open"));
+        assertTrue(tFixture.clickOnRecordTypeUserFilter("Open"));
+        assertTrue(tFixture.verifyRecordIsPresent("Tarkin Construction"));
+        assertTrue(tFixture.verifyRecordIsNotPresent("Markin Construction"));
+        assertTrue(tFixture.clickOnRecord("Tarkin Construction"));
+        assertTrue(tFixture.clickOnRecordView("Related Actions"));
+        assertTrue(tFixture.verifyRecordRelatedActionIsPresent("Update Order Status"));
+        assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not a related action"));
+        
+        tFixture.waitForSeconds("1");
+    }
+    
+    @Test
+    public void testClickOnRecordItemRelatedActionShortcutUpdated() throws Exception {
+        tFixture.clickOnMenu("Records");
+        
+        assertTrue(tFixture.clickOnRecordType("Orders"));
+        assertTrue(tFixture.clickOnRecordTypeUserFilter("Open"));
+        assertTrue(tFixture.clickOnRecord("Tarkin Construction"));
+        assertTrue(tFixture.clickOnRecordRelatedAction("Update Order Status"));
+        
+        tFixture.waitForSeconds("1");
+    }
+    
+    
     @AfterClass
     public static void tearDown() throws Exception {
         tFixture.logout();

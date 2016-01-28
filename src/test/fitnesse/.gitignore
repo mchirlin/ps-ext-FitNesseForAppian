@@ -8,8 +8,6 @@ files/testProgress/*
 .svn
 .DS_Store
 desktop.ini
-FrontPage/*
-PageFooter/*
 PageHeader/*
 TemplateLibrary/*
 RecentChanges/*

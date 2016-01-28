@@ -35,6 +35,7 @@ public class TempoRecordList extends TempoObject{
     
     public static boolean clickOnFacetOption(String facetName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_RECORD_LIST_FACET, facetName)));
+        scrollIntoView(element, false);
         element.click();
 
         return true;

@@ -1,0 +1,20 @@
+!2 '''This Test Page using Selenium Web Driver to run an Appian test process, inputs data and verifies the result'''
+
+!3 Update the Appian URL (REPLACE_APPIAN_URL), Username (REPLACE_USERNAME), and Password (REPLACE_PASSWORD) below.
+
+!define TEST_RUNNER {fitlibrary.suite.FitLibraryServer}
+----
+'''Class Path'''
+
+!path C:\AutomatedTesting\**.jar
+
+----
+!| com.appiancorp.ps.automatedtest.fixture.TempoFixture |
+
+'''Set up Appian test'''
+| setup selenium web driver with browser | FIREFOX |
+| set appian url to | REPLACE_APPIAN_URL |
+
+'''Login to Tempo and go to Records'''
+| login with username | REPLACE_USERNAME | and password | REPLACE_PASSWORD |
+| click on menu | Records |
