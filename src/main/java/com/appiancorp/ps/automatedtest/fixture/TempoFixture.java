@@ -13,8 +13,8 @@ import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoMenu;
 import com.appiancorp.ps.automatedtest.object.TempoNews;
 import com.appiancorp.ps.automatedtest.object.TempoRadioField;
-import com.appiancorp.ps.automatedtest.object.TempoRecordItem;
-import com.appiancorp.ps.automatedtest.object.TempoRecordList;
+import com.appiancorp.ps.automatedtest.object.TempoRecord;
+import com.appiancorp.ps.automatedtest.object.TempoRecordType;
 import com.appiancorp.ps.automatedtest.object.TempoReport;
 import com.appiancorp.ps.automatedtest.object.TempoSection;
 import com.appiancorp.ps.automatedtest.object.TempoTask;
@@ -295,21 +295,11 @@ public class TempoFixture extends BaseFixture {
      */
     
     /**
-     * Clicks on the record item list.<br>
-     * <br>
-     * FitNesse Example: <code>| click on record list | RECORD_LIST |</code>
-     * 
-     * @param listName Name of record list to click (partial names are acceptable)
-     * If multiple record lists contain the same name, then the first will be selected
-     * @return True, if completed successfully
+     * @deprecated Replaced by {@link #clickOnRecordType(String)}
      */
     @Deprecated
     public boolean clickOnRecordList(String listName) { 
-        if(!TempoRecordList.waitFor(listName)) {
-            throw new MissingObjectException("Record List", listName);
-        }
-        
-        return returnHandler(TempoRecordList.click(listName));
+        return clickOnRecordType(listName); 
     }
 
     /**
@@ -322,27 +312,20 @@ public class TempoFixture extends BaseFixture {
      * @return True, if completed successfully
      */
     public boolean clickOnRecordType(String typeName) {
-       return clickOnRecordList(typeName);
+       if(!TempoRecordType.waitFor(typeName)) {
+           throw new MissingObjectException("Record Type", typeName);
+       }
+       
+       return returnHandler(TempoRecordType.click(typeName));
     }
     
     /**
-     * Clicks on the record list facet option.<br>
-     * <br>
-     * FitNesse Example: <code>| click on record list facet option | FACET_OPTION |</code>
-     * 
-     * @param facetOption Facet option to click (partial names are acceptable)
-     * If multiple facet options contain the same name, then the first will be selected
-     * @return True, if completed successfully
+     * @deprecated Replaced by {@link #clickOnRecordTypeUserFilter(String)}
      */
     @Deprecated
     public boolean clickOnRecordListFacetOption(String facetOption) {
-        if(!TempoRecordList.waitForFacetOption(facetOption)) {
-            throw new MissingObjectException("Record List Facet", facetOption);
-        }
-        
-        return returnHandler(TempoRecordList.clickOnFacetOption(facetOption));       
+        return  clickOnRecordTypeUserFilter(facetOption);
     }
-    
     
     /**
      * Clicks on the record type user filter.<br>
@@ -354,22 +337,19 @@ public class TempoFixture extends BaseFixture {
      * @return True, if completed successfully
      */
     public boolean clickOnRecordTypeUserFilter(String userFilter) {
-        return  clickOnRecordListFacetOption(userFilter);     
+        if(!TempoRecordType.waitForUserFilter(userFilter)) {
+            throw new MissingObjectException("Record User Filter", userFilter);
+        }
+        
+        return returnHandler(TempoRecordType.clickOnUserFilter(userFilter)); 
     }
     
-    
-    
     /** 
-     * Verifies if facet option is present in the user interface. This is useful for determining if security is applied correctly.<br>
-     * <br>
-     * FitNesse Example: <code>| verify record list facet option | FACET_OPTION | is present |</code>
-     * 
-     * @param facetOption Name of facet option
-     * @return True, if facet option is located
+     * @deprecated Replaced by {@link #verifyRecordTypeUserFilterIsPresent(String)}
      */
     @Deprecated
     public boolean verifyRecordListFacetOptionIsPresent(String facetOption) {
-        return returnHandler(TempoRecordList.waitForFacetOption(facetOption));
+        return verifyRecordTypeUserFilterIsPresent(facetOption);
     }
     
     /** 
@@ -381,25 +361,15 @@ public class TempoFixture extends BaseFixture {
      * @return True, if user filter is located
      */
     public boolean verifyRecordTypeUserFilterIsPresent(String userFilter) {
-        return returnHandler(TempoRecordList.waitForFacetOption(userFilter));
+        return returnHandler(TempoRecordType.waitForUserFilter(userFilter));
     }
     
     /**
-     * Clicks on the associated record item.<br>
-     * <br>
-     * FitNesse Example: <code>| click on record item | RECORD_ITEM_NAME |</code>
-     * 
-     * @param itemName Name of record item to click (partial names are acceptable)
-     * If multiple record items contain the same name, then the first will be selected
-     * @return True, if completed successfully
+     * @deprecated Replaced by {@link #clickOnRecord(String)}
      */
     @Deprecated
     public boolean clickOnRecordItem(String itemName) {
-        if(!TempoRecordItem.refreshAndWaitFor(itemName)) {
-            throw new MissingObjectException("Tempo Record Item", itemName);
-        }
-        
-        return returnHandler(TempoRecordItem.click(itemName));
+        return clickOnRecord(itemName);
     }
 
     /**
@@ -411,21 +381,20 @@ public class TempoFixture extends BaseFixture {
      * If multiple records contain the same name, then the first will be selected
      * @return True, if completed successfully
      */
-    public boolean clickOnRecord(String recordName) {
-        return clickOnRecordItem(recordName);
+    public boolean clickOnRecord(String record) {
+        if(!TempoRecord.refreshAndWaitFor(record)) {
+            throw new MissingObjectException("Record", record);
+        }
+        
+        return returnHandler(TempoRecord.click(record));
     }
     
     /** 
-     * Verifies if record item is present in the user interface. This is useful for determining if security is applied correctly.<br>
-     * <br>
-     * FitNesse Example: <code>| verify record item | RECORD_ITEM_NAME | is present |</code>
-     * 
-     * @param itemName Name of record item
-     * @return True, if record item is located
+     * @deprecated Replaced by {@link #verifyRecordIsPresent(String)}
      */
     @Deprecated
     public boolean verifyRecordItemIsPresent(String itemName) {
-        return returnHandler(TempoRecordItem.waitFor(itemName));
+        return verifyRecordIsPresent(itemName);
     }
     
     /** 
@@ -437,23 +406,15 @@ public class TempoFixture extends BaseFixture {
      * @return True, if record is located
      */
     public boolean verifyRecordIsPresent(String recordName) {
-        return returnHandler(TempoRecordItem.waitFor(recordName));
+        return returnHandler(TempoRecord.waitFor(recordName));
     }
-    
    
     /** 
-     * Verifies if record item is not present in the user interface. This is useful for determining if security is applied correctly.<br>
-     * <br>
-     * FitNesse Example: <code>| verify record item | RECORD_ITEM_NAME | is not present |</code><br>
-     * <br>
-     * Use this rather than <code>| reject | verify record item | RECORD_ITEM_NAME | is present |</code> as it will not refresh and wait.
-     * 
-     * @param itemName Name of record item
-     * @return True, if record item is not located
+     * @deprecated Replaced by {@link #verifyRecordIsNotPresent(String)}
      */
     @Deprecated
     public boolean verifyRecordItemIsNotPresent(String itemName) {
-        return returnHandler(!TempoRecordItem.waitFor(itemName));
+        return verifyRecordIsNotPresent(itemName);
     }
   
     /** 
@@ -467,27 +428,16 @@ public class TempoFixture extends BaseFixture {
      * @return True, if record is not located
      */
     public boolean verifyRecordIsNotPresent(String recordName) {
-        return returnHandler(!TempoRecordItem.waitFor(recordName));
+        return returnHandler(!TempoRecord.waitFor(recordName));
     }
-    
-    @Deprecated 
+ 
     /**
-     * Clicks on the associated record item facet.<br>
-     * <br>
-     * FitNesse Example: <code>| click on record item facet | FACET_NAME |</code>
-     * 
-     * @param facetName Name of facet to click (partial names are acceptable)
-     * If multiple facet items contain the same name, then the first will be selected
-     * @return True, if completed successfully
+     * @deprecated Replaced by {@link #clickOnRecordView(String)}
      */
+    @Deprecated
     public boolean clickOnRecordItemFacet(String facetName) {
-        if(!TempoRecordItem.waitForFacet(facetName)) {
-            throw new MissingObjectException("Record Item Facet", facetName);
-        }
-        
-        return returnHandler(TempoRecordItem.clickOnFacet(facetName));
+        return clickOnRecordView(facetName);
     }
-    
     
     /**
      * Clicks on the associated record view.<br>
@@ -499,26 +449,19 @@ public class TempoFixture extends BaseFixture {
      * @return True, if completed successfully
      */
     public boolean clickOnRecordView(String viewName) {
-        return clickOnRecordItemFacet(viewName);
+        if(!TempoRecord.waitForView(viewName)) {
+            throw new MissingObjectException("Record Item Facet", viewName);
+        }
+        
+        return returnHandler(TempoRecord.clickOnView(viewName));
     }
     
-   
     /**
-     * Clicks on the associated related action.<br>
-     * <br>
-     * FitNesse Example: <code>| click on record item related action | RELATED_ACTION_NAME |</code>
-     * 
-     * @param relatedActionName Name of related action to click (partial names are acceptable)
-     * If multiple related actions contain the same name, then the first will be selected
-     * @return True, if completed successfully
+     * @deprecated Replaced by {@link #clickOnRelatedAction(String)}
      */
     @Deprecated
     public boolean clickOnRecordItemRelatedAction(String relatedActionName) {
-        if(!TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName)) {
-            throw new MissingObjectException("Related Action", relatedActionName);
-        }
-        
-        return returnHandler(TempoRecordItem.clickOnRelatedAction(relatedActionName));
+        return clickOnRecordRelatedAction(relatedActionName);
     }
     
     /**
@@ -531,23 +474,21 @@ public class TempoFixture extends BaseFixture {
      * @return True, if completed successfully
      */
     public boolean clickOnRecordRelatedAction(String relatedActionName) {
-        return clickOnRecordItemRelatedAction(relatedActionName);
+        if(!TempoRecord.refreshAndWaitForRelatedAction(relatedActionName)) {
+            throw new MissingObjectException("Related Action", relatedActionName);
+        }
+        
+        return returnHandler(TempoRecord.clickOnRelatedAction(relatedActionName));
     }
     
    
     /** 
-     * Verifies if record item related action is present in the user interface. This is useful for determining if security is applied correctly.<br>
-     * <br>
-     * FitNesse Example: <code>| verify record item related action | RELATED_ACTION_NAME | is present |</code>
-     * 
-     * @param relatedActionName Name of the related action
-     * @return True, if related action is located
+     * @deprecated Replaced by {@link #verifyRecordRelatedActionIsPresent(String)}
      */
     @Deprecated
     public boolean verifyRecordItemRelatedActionIsPresent(String relatedActionName) {
-        return returnHandler(TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName));
+        return verifyRecordRelatedActionIsPresent(relatedActionName);
     }
-    
     
     /** 
      * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.<br>
@@ -558,23 +499,15 @@ public class TempoFixture extends BaseFixture {
      * @return True, if related action is located
      */
     public boolean verifyRecordRelatedActionIsPresent(String relatedActionName) {
-        return returnHandler(TempoRecordItem.refreshAndWaitForRelatedAction(relatedActionName));
+        return returnHandler(TempoRecord.refreshAndWaitForRelatedAction(relatedActionName));
     }
-     
    
     /** 
-     * Verifies if record item related action is not present in the user interface. This is useful for determining if security is applied correctly.<br>
-     * <br>
-     * FitNesse Example: <code>| verify record item related action | RELATED_ACTION_NAME | is not present |</code><br>
-     * <br>
-     * Use this rather than <code>| reject | verify record item related action | RELATED_ACTION_NAME | is present |</code> as it will not refresh and wait.
-     * 
-     * @param relatedActionName Name of related action
-     * @return True, if related action is not located
+     * @deprecated Replaced by {@link #verifyRecordRelatedActionIsNotPresent(String)}
      */
     @Deprecated
     public boolean verifyRecordItemRelatedActionIsNotPresent(String relatedActionName) {
-        return returnHandler(!TempoRecordItem.waitForRelatedAction(relatedActionName));
+        return verifyRecordRelatedActionIsNotPresent(relatedActionName);
     }
     
     /** 
@@ -588,8 +521,9 @@ public class TempoFixture extends BaseFixture {
      * @return True, if related action is not located
      */
     public boolean verifyRecordRelatedActionIsNotPresent(String relatedActionName) {
-        return returnHandler(!TempoRecordItem.waitForRelatedAction(relatedActionName));
+        return returnHandler(!TempoRecord.waitForRelatedAction(relatedActionName));
     }
+    
     /*
      * Reports
      */
