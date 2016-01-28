@@ -381,12 +381,12 @@ public class TempoFixture extends BaseFixture {
      * If multiple records contain the same name, then the first will be selected
      * @return True, if completed successfully
      */
-    public boolean clickOnRecord(String record) {
-        if(!TempoRecord.refreshAndWaitFor(record)) {
-            throw new MissingObjectException("Record", record);
+    public boolean clickOnRecord(String recordName) {
+        if(!TempoRecord.refreshAndWaitFor(recordName)) {
+            throw new MissingObjectException("Record", recordName);
         }
         
-        return returnHandler(TempoRecord.click(record));
+        return returnHandler(TempoRecord.click(recordName));
     }
     
     /** 
@@ -457,7 +457,7 @@ public class TempoFixture extends BaseFixture {
     }
     
     /**
-     * @deprecated Replaced by {@link #clickOnRelatedAction(String)}
+     * @deprecated Replaced by {@link #clickOnRecordRelatedAction(String)}
      */
     @Deprecated
     public boolean clickOnRecordItemRelatedAction(String relatedActionName) {
