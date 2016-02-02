@@ -104,8 +104,25 @@ public class BaseFixtureTest {
     
     @Test
     public void testGetRandomString(){
-        //TODO Create test case
+        assertTrue(bFixture.getRandomString(7).length() == 7);
     }
+    @Test
+    public void testGetRandomIntFromTo(){
+        int randomInt = bFixture.getRandomIntegerFromTo(0, 10);
+        assertTrue((randomInt<10) && (randomInt>=0));
+    }
+    @Test
+    public void testGetRandomDecimalFromTo(){
+        double randomDec = bFixture.getRandomDecimalFromTo(0, 10);
+        assertTrue((randomDec<10) && (randomDec>=0));
+    }
+
+    @Test
+    public void testGetRandomDecimalFromToWith(){
+        double randomDec = bFixture.getRandomDecimalFromToWith(0.1, 10.01, 6);
+        assertTrue((randomDec<10.01) && (randomDec>=0.1));
+    }
+    
     
     @AfterClass
     public static void tearDown() throws Exception {
