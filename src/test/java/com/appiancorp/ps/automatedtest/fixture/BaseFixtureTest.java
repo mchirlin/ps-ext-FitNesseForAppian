@@ -18,8 +18,6 @@ public class BaseFixtureTest {
     public static void setUp() throws Exception {
       bFixture = new BaseFixture();
       tFixture = new TempoFixture();
-      
-      bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
     }
     
     @Test
@@ -70,17 +68,20 @@ public class BaseFixtureTest {
     
     @Test
     public void testOpen() throws Exception {
+        bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
         assertTrue(bFixture.open("http://google.com"));
     }
     
     @Test
     public void testLoginIntoWithUsernameAndPassword() throws Exception {        
+        bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
         assertTrue(bFixture.loginIntoWithUsernameAndPassword("https://apacdemo.appiancloud.com", "michael.chirlin@appian.com", "password1"));
         assertTrue(tFixture.logout());
     }
     
     @Test
     public void testLoginWithUsernameAndPassword() throws Exception {
+        bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
         assertTrue(bFixture.setAppianUrlTo("https://apacdemo.appiancloud.com"));
         assertTrue(bFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com","password1"));
         assertTrue(tFixture.logout());
