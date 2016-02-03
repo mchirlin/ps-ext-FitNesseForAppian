@@ -3,8 +3,8 @@
 |click on action|All Fields|
 ***!
 !*** Check Forms Title and instrcutions 
-|check|get title       |Form        |
-|check|get instructions|Instructions|
+|check|get form title       |Form        |
+|check|get form instructions|Instructions|
 ***!
 ----
 !*** Populate fields in Section 1 - Common field types
@@ -42,12 +42,12 @@
 ----
 !*** Populate Section 2.5 using Pickers
 !| populate field|UserPicker          |with|test user, user test    |
-|populate field  |GroupPicker         |with|AUT All Users           |
-|populate field  |UserGroupPicker     |with|test user, AUT All Users|
-|populate field  |DocumentPicker      |with|All Process Models      |
-|populate field  |FolderPicker        |with|Automated Testing       |
-|populate field  |DocumentFolderPicker|with|Automated Testing       |
-|populate field  |CustomPicker        |with|5                       |
+#|populate field  |GroupPicker         |with|AUT All Users           |
+#|populate field  |UserGroupPicker     |with|test user, AUT All Users|
+#|populate field  |DocumentPicker      |with|All Process Models      |
+#|populate field  |FolderPicker        |with|Automated Testing       |
+#|populate field  |DocumentFolderPicker|with|Automated Testing       |
+#|populate field  |CustomPicker        |with|5                       |
 ***!
 ----
 !*** Section 3 Populating an editable grid by reference number as well as name for grid and column names
@@ -76,12 +76,12 @@
 ----
 !*** Section 3 Populating an editable grid by Name and Reference number for picker fields by column reference number
 !| populate grid|EditableGrid[3]|column|[1]|row|[1]|with|test.user               |
-|populate grid  |EditableGrid[3]|column|[2]|row|[1]|with|AUT All Users           |
-|populate grid  |EditableGrid[3]|column|[3]|row|[1]|with|test.user, AUT All Users|
-|populate grid  |EditableGrid[3]|column|[4]|row|[1]|with|All Process Models      |
-|populate grid  |EditableGrid[3]|column|[1]|row|[2]|with|Automated Testing       |
-|populate grid  |EditableGrid[3]|column|[2]|row|[2]|with|Automated Testing       |
-|populate grid  |EditableGrid[3]|column|[3]|row|[2]|with|10                      |
+#|populate grid  |EditableGrid[3]|column|[2]|row|[1]|with|AUT All Users           |
+#|populate grid  |EditableGrid[3]|column|[3]|row|[1]|with|test.user, AUT All Users|
+#|populate grid  |EditableGrid[3]|column|[4]|row|[1]|with|All Process Models      |
+#|populate grid  |EditableGrid[3]|column|[1]|row|[2]|with|Automated Testing       |
+#|populate grid  |EditableGrid[3]|column|[2]|row|[2]|with|Automated Testing       |
+#|populate grid  |EditableGrid[3]|column|[3]|row|[2]|with|10                      |
 ***!
 ----
 !*** Select a grid row
