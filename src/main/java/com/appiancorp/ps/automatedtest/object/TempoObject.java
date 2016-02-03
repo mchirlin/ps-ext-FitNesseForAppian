@@ -19,6 +19,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.Version;
+
 public class TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoObject.class);
@@ -26,7 +28,7 @@ public class TempoObject {
     protected static WebDriver driver;
     protected static String masterWindowHandle;
     protected static String url;
-    protected static String version;
+    protected static Version version = new Version("7.10");
     protected static int timeoutSeconds;
     protected static Date startDatetime;
     protected static int refreshTimes = 5;
@@ -141,9 +143,9 @@ public class TempoObject {
     }
     
     public static void setVersion(String v) {
-        version = v;
+        version = new Version(v);
     }
-    public static String getVersion() {
+    public static Version getVersion() {
         return version;
     }
     

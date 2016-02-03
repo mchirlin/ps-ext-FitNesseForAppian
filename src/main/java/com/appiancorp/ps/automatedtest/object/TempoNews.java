@@ -7,23 +7,24 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
 public class TempoNews extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoNews.class);
-    private static final String XPATH_NEWS_ITEM = "//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '%s')]";
-    private static final String XPATH_NEWS_ITEM_MORE_INFO = XPATH_NEWS_ITEM + "/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(), 'More Info') or contains(text(), 'Hide Info')]";
-    private static final String XPATH_NEWS_ITEM_LABEL = XPATH_NEWS_ITEM + "/following-sibling::table/descendant::td[contains(text(), '%s')]";
-    private static final String XPATH_NEWS_ITEM_VALUE = XPATH_NEWS_ITEM + "/following-sibling::table/descendant::td[contains(text(), '%s')]";
-    private static final String XPATH_NEWS_ITEM_TAG = XPATH_NEWS_ITEM + "/parent::div/descendant::a[contains(text(), '%s')]";
-    private static final String XPATH_NEWS_ITEM_COMMENT = XPATH_NEWS_ITEM + "/parent::div/descendant::div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '%s')]";
-    private static final String XPATH_NEWS_ITEM_POSTED_AT = XPATH_NEWS_ITEM + "/parent::div/descendant::a[contains(text(), '%s')]";
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM = AppianVersions.getByConstant("xpathAbsoluteNewsItem");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LINK = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemMoreInfoLink");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LABEL = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemMoreInfoLabel");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_VALUE = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemMoreInfoValue");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemRecordTag");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_COMMENT = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemComment");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_POSTED_AT = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemPostedAt");
     
     public static boolean waitFor(String newsText) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM, newsText))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM, newsText)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM, newsText))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM, newsText)));
             scrollIntoView(element, false);
         } catch (TimeoutException e) {
             return false;
@@ -53,8 +54,8 @@ public class TempoNews extends TempoObject {
     
     public static boolean waitForMoreInfo(String newsText) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_MORE_INFO, newsText))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_MORE_INFO, newsText)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LINK, newsText))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LINK, newsText)));
             scrollIntoView(element, false);
         } catch (TimeoutException e) {
             return false;
@@ -64,7 +65,7 @@ public class TempoNews extends TempoObject {
     }
     
     public static boolean toggleMoreInfo(String newsText) {
-        WebElement moreInfoLink = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_MORE_INFO, newsText)));
+        WebElement moreInfoLink = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LINK, newsText)));
         moreInfoLink.click();
         
         return true;
@@ -76,10 +77,10 @@ public class TempoNews extends TempoObject {
         LOG.debug("LABEL ("+label+") and VALUE (" + value +")");
         try {
             // With label
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_LABEL, newsText, label))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LABEL, newsText, label))));
             // With value
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_VALUE, newsText, value))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_LABEL, newsText, label)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_VALUE, newsText, value))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LABEL, newsText, label)));
             scrollIntoView(element, false);
         } catch (TimeoutException e) {
             LOG.debug(e.getMessage());
@@ -92,8 +93,8 @@ public class TempoNews extends TempoObject {
     public static boolean waitForTag(String newsText, String newsTag) {
         try {
             //Tagged with
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_TAG, newsText, newsTag))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_TAG, newsText, newsTag)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG, newsText, newsTag))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG, newsText, newsTag)));
             scrollIntoView(element, false);
         } catch (TimeoutException e) {
             return false;
@@ -105,8 +106,8 @@ public class TempoNews extends TempoObject {
     public static boolean waitForComment(String newsText, String newsComment) {
         try {
             //Tagged with
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_COMMENT, newsText, newsComment))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_COMMENT, newsText, newsComment)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_COMMENT, newsText, newsComment))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_COMMENT, newsText, newsComment)));
             scrollIntoView(element, false);
         } catch (TimeoutException e) {
             return false;
@@ -137,8 +138,8 @@ public class TempoNews extends TempoObject {
     
     public static boolean waitForPostedAt(String newsText, String newsPostedAt) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_NEWS_ITEM_POSTED_AT, newsText, newsPostedAt))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_POSTED_AT, newsText, newsPostedAt)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_POSTED_AT, newsText, newsPostedAt))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_POSTED_AT, newsText, newsPostedAt)));
             scrollIntoView(element, false);
         } catch (TimeoutException e) {
             return false;
@@ -148,20 +149,20 @@ public class TempoNews extends TempoObject {
     }
     
     public static boolean clickOnRecordTag(String newsText, String recordTag) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_TAG, newsText, recordTag)));
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG, newsText, recordTag)));
         element.click();
         
         return true;
     }
     
     public static String getRegexForNewsPost(String regex, String newsText) {
-        String text = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM, newsText))).getText();
+        String text = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM, newsText))).getText();
         LOG.debug("NEWS POST TEXT: " + text);
         return getRegexResults(regex, text);
     }
     
     public static String getRegexForNewsPostComment(String regex, String newsText, String newsComment) {
-        String text = driver.findElement(By.xpath(String.format(XPATH_NEWS_ITEM_COMMENT, newsText, newsComment))).getText();
+        String text = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_COMMENT, newsText, newsComment))).getText();
         LOG.debug("NEWS POST TEXT: " + text);
         return getRegexResults(regex, text);
     }

@@ -8,36 +8,38 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
+
 public class TempoGrid extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoGrid.class);
-    private static final String XPATH_ABSOLUTE_GRID_INDEX = "(//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%d]";
-    private static final String XPATH_ABSOLUTE_GRID_LABEL = "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table";
-    private static final String XPATH_ABSOLUTE_GRID_LABEL_INDEX = "(" + XPATH_ABSOLUTE_GRID_LABEL + ")[%d]";
+    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX = AppianVersions.getByConstant("xpathAbsoluteGridByIndex");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL = AppianVersions.getByConstant("xpathAbsoluteGridByLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX = "(" + XPATH_ABSOLUTE_GRID_BY_LABEL + ")[%d]";
     
-    private static final String XPATH_ABSOLUTE_GRID_CELL = XPATH_ABSOLUTE_GRID_LABEL + "/tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
-    private static final String XPATH_ABSOLUTE_GRID_CELL_INDEX = XPATH_ABSOLUTE_GRID_LABEL + "/tbody/tr[%d]/td[%d]";
-    private static final String XPATH_ABSOLUTE_GRID_INDEX_CELL = XPATH_ABSOLUTE_GRID_INDEX + "/tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
-    private static final String XPATH_ABSOLUTE_GRID_INDEX_CELL_INDEX = XPATH_ABSOLUTE_GRID_INDEX + "/tbody/tr[%d]/td[%d]";
-    private static final String XPATH_ABSOLUTE_GRID_LABEL_INDEX_CELL = XPATH_ABSOLUTE_GRID_LABEL_INDEX + "/tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
-    private static final String XPATH_ABSOLUTE_GRID_LABEL_INDEX_CELL_INDEX = XPATH_ABSOLUTE_GRID_LABEL_INDEX + "/tbody/tr[%d]/td[%d]";
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_LABEL + AppianVersions.getByConstant("xpathConcatCellByColumnLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_LABEL + AppianVersions.getByConstant("xpathConcatCellByColumnIndex");
+    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_INDEX + AppianVersions.getByConstant("xpathConcatCellByColumnLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_INDEX + AppianVersions.getByConstant("xpathConcatCellByColumnIndex");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX + AppianVersions.getByConstant("xpathConcatCellByColumnLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX + AppianVersions.getByConstant("xpathConcatCellByColumnIndex");
     
-    private static final String XPATH_RELATIVE_GRID_CELL = ".//tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]";
-    private static final String XPATH_RELATIVE_GRID_CELL_INDEX = ".//tbody/tr[%d]/td[%d]";
+    private static final String XPATH_RELATIVE_GRID_CELL_BY_COLUMN_LABEL = AppianVersions.getByConstant("xpathRelativeGridCellByColumnLabel");
+    private static final String XPATH_RELATIVE_GRID_CELL_BY_COLUMN_INDEX = AppianVersions.getByConstant("xpathRelativeGridCellByColumnIndex");
     
-    private static final String XPATH_RELATIVE_CHECKBOX = ".//input[@type = 'checkbox']";
+    private static final String XPATH_RELATIVE_GRID_CHECKBOX = AppianVersions.getByConstant("xpathRelativeGridCheckbox");
 
     public static WebElement getGrid(String gridName) {
         if (isFieldIndex(gridName)) {
             int gNum = getIndexFromFieldIndex(gridName);
             String gName = getFieldFromFieldIndex(gridName);
             if(StringUtils.isBlank(gName)) {
-                return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_INDEX, gNum)));
+                return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX, gNum)));
             } else {
-                return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_LABEL_INDEX, gName, gNum)));
+                return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX, gName, gNum)));
             }
         } else {
-            return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_LABEL, gridName)));
+            return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL, gridName)));
         }
     }
     
@@ -47,14 +49,14 @@ public class TempoGrid extends TempoField {
         // Using a columnNum
         if (isFieldIndex(columnName)) {
             int cNum = getIndexFromFieldIndex(columnName);
-            return grid.findElement(By.xpath(String.format(XPATH_RELATIVE_GRID_CELL_INDEX, rNum, cNum)));
+            return grid.findElement(By.xpath(String.format(XPATH_RELATIVE_GRID_CELL_BY_COLUMN_INDEX, rNum, cNum)));
         }
         
         // Using columnName
         if (isFieldIndex(gridName)) {
             gridName = getFieldFromFieldIndex(gridName);
         }
-        return grid.findElement(By.xpath(String.format(XPATH_RELATIVE_GRID_CELL, rNum, gridName, columnName)));
+        return grid.findElement(By.xpath(String.format(XPATH_RELATIVE_GRID_CELL_BY_COLUMN_LABEL, rNum, gridName, columnName)));
     }
     
     public static boolean populate(String gridName, String columnName, String rowNum, String[] fieldValues) {
@@ -74,7 +76,7 @@ public class TempoGrid extends TempoField {
     public static boolean selectRow(String gridName, String rowNum) {
         try {
             WebElement cell = getCell(gridName, "[1]", rowNum);
-            WebElement checkbox = cell.findElement(By.xpath(XPATH_RELATIVE_CHECKBOX));
+            WebElement checkbox = cell.findElement(By.xpath(XPATH_RELATIVE_GRID_CHECKBOX));
             checkbox.click();
         } catch (Exception e) {
             LOG.warn("GRID ROW SELECTION for " + gridName + "|" + rowNum +": " + e.getClass());
@@ -107,7 +109,7 @@ public class TempoGrid extends TempoField {
     public static boolean verifyGridRowIsSelected(String gridName, String rowNum) {
         WebElement cell = getCell(gridName, "[1]", rowNum);
         
-        WebElement checkbox = cell.findElement(By.xpath(XPATH_RELATIVE_CHECKBOX));
+        WebElement checkbox = cell.findElement(By.xpath(XPATH_RELATIVE_GRID_CHECKBOX));
         
         return checkbox.isSelected();
     }
@@ -134,31 +136,31 @@ public class TempoGrid extends TempoField {
                     if (isFieldIndex(columnName)) {
                         // Using a columnNum
                         int cNum = getIndexFromFieldIndex(columnName);
-                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_INDEX_CELL_INDEX, gNum, rNum, cNum))));   
+                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_INDEX, gNum, rNum, cNum))));   
                     } else {
                         // Using a columnName
-                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_INDEX_CELL, gNum, rNum, gridName, columnName))));
+                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_LABEL, gNum, rNum, gridName, columnName))));
                     }
                 } else {
                     if (isFieldIndex(columnName)) {
                         // Using a columnNum
                         int cNum = getIndexFromFieldIndex(columnName);
-                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_LABEL_INDEX_CELL_INDEX, gName, gNum, rNum, cNum))));
+                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_INDEX, gName, gNum, rNum, cNum))));
                         
                     } else {
                         // Using a columnName
-                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_LABEL_INDEX_CELL, gName, gNum, rNum, gridName, columnName))));
+                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_LABEL, gName, gNum, rNum, gridName, columnName))));
                     }
                 }
             } else {
                 if (isFieldIndex(columnName)) {
                     // Using a columnNum
                     int cNum = getIndexFromFieldIndex(columnName);
-                    (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_CELL_INDEX, gridName, rNum, cNum))));
+                    (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_INDEX, gridName, rNum, cNum))));
                     
                 } else {
                     // Using a columnName
-                    (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_CELL, gridName, rNum, gridName, columnName))));
+                    (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_LABEL, gridName, rNum, gridName, columnName))));
                 }
             }
             

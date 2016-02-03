@@ -8,13 +8,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
+
 public class TempoMenu extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoMenu.class);
-    private static final String XPATH_ELEMENT = "//a[starts-with(@class, 'appian-menu-item') and contains(text(),'%s')]";
+    private static final String XPATH_ABSOLUTE_MENU_LINK = AppianVersions.getByConstant("xpathAbsoluteMenuLink");
     
     public static boolean click(String tempoMenu) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, tempoMenu)));
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu)));
         element.click();
 
         try {
@@ -31,8 +33,8 @@ public class TempoMenu extends TempoObject {
     
     public static boolean waitFor(String tempoMenu) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ELEMENT, tempoMenu))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, tempoMenu)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu)));
             scrollIntoView(element, true);
         } catch (TimeoutException e) {
             return false;

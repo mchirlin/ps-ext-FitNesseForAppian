@@ -7,23 +7,25 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
+
 public class TempoForm extends TempoObject {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoForm.class);
-    private static final String XPATH_TITLE = "//h2";
-    private static final String XPATH_INSTRUCTIONS = "//h2/following-sibling::p";
+    private static final String XPATH_ABSOLUTE_FORM_TITLE = AppianVersions.getByConstant("xpathAbsoluteFormTitle");
+    private static final String XPATH_ABSOLUTE_FORM_INSTRUCTIONS = AppianVersions.getByConstant("xpathAbsoluteFormInstructions");
     
-    public static String getTitle() {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_TITLE)));
+    public static String getFormTitle() {
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE)));
         
         return element.getText();
     }
     
     public static boolean waitForTitle() {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_TITLE))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_TITLE)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE)));
             scrollIntoView(element, true);
         } catch (TimeoutException e) {
             return false;
@@ -32,16 +34,16 @@ public class TempoForm extends TempoObject {
         return true;
     }
     
-    public static String getInstructions() {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_INSTRUCTIONS)));
+    public static String getFormInstructions() {
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS)));
         
         return element.getText();
     }
     
     public static boolean waitForInstructions() {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_INSTRUCTIONS))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_INSTRUCTIONS)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS)));
             scrollIntoView(element, true);
         } catch (TimeoutException e) {
             return false;

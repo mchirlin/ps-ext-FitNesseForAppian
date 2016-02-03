@@ -7,14 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
+
 public class TempoParagraphField extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoParagraphField.class);
-    private static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/div/textarea";
-    private static final String XPATH_RELATIVE_INPUT = ".//textarea[contains(@class, 'aui-TextAreaInput')]";
+    private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL = AppianVersions.getByConstant("xpathAbsoluteParagraphFieldLabel");
+    private static final String XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT = AppianVersions.getByConstant("xpathRelativeParagraphFieldInput");
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
-        WebElement textAreaField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        WebElement textAreaField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT));
         textAreaField.clear();
         textAreaField.sendKeys(fieldValue);
         // For some reason paragraph fields have trouble when moving quickly
@@ -31,7 +33,7 @@ public class TempoParagraphField extends TempoField {
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL, fieldName))));
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
         } catch (TimeoutException e) {
@@ -42,7 +44,7 @@ public class TempoParagraphField extends TempoField {
     }
     
     public static String getValue(WebElement fieldLayout) {
-        String value = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT)).getAttribute("value");
+        String value = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT)).getAttribute("value");
         LOG.debug("PARAGRAPH FIELD VALUE : " + value);
         
         return value;
@@ -62,7 +64,7 @@ public class TempoParagraphField extends TempoField {
     }
     
     public static boolean clear(WebElement fieldLayout) {
-        WebElement textAreaField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        WebElement textAreaField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT));
         textAreaField.clear();
         
         return true;
@@ -70,7 +72,7 @@ public class TempoParagraphField extends TempoField {
     
     public static boolean isType(WebElement fieldLayout) {
         try {
-            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT));
         } catch (Exception e) {
             return false;
         }

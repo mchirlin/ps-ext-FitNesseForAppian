@@ -11,6 +11,7 @@ import com.appiancorp.ps.automatedtest.fixture.TempoFixture;
 public class RecordsFixtureTest {    
     
     private static TempoFixture tFixture;
+    private static String randString;
     
     @BeforeClass
     public static void setUp() throws Exception {
@@ -19,23 +20,40 @@ public class RecordsFixtureTest {
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
       tFixture.setTimeoutSecondsTo("15");
+      tFixture.setAppianVersionTo("16.1");
+      
+      tFixture.setDateFormatStringTo("dd/MM/yyyy");
+      tFixture.setTimeFormatStringTo("HH:mm");
+      tFixture.setDateDisplayFormatStringTo("MMM d yyyy");
+      tFixture.setTimeDisplayFormatStringTo("HH:mm");
       
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
+      
+      tFixture.clickOnMenu("Actions");
+      tFixture.clickOnAction("Automated Testing Input");
+      
+      randString = tFixture.getRandomString(5);
+      tFixture.populateFieldWith("Text Field Test", new String[]{randString});
+      tFixture.populateFieldWith("Integer Field Test", new String[]{"5"});
+      tFixture.populateFieldWith("Decimal Field Test", new String[]{"123.45"});
+      tFixture.populateFieldWith("Date and Time Test", new String[]{"04/02/2016 02:00"});
+      
+      tFixture.clickOnButton("Submit");
     }
     
     @Test
     public void testRecordsFixture() throws Exception {
         tFixture.clickOnMenu("Records");
         
-        assertTrue(tFixture.clickOnRecordList("Orders"));
-        assertTrue(tFixture.verifyRecordListFacetOptionIsPresent("Open"));
-        assertTrue(tFixture.clickOnRecordListFacetOption("Open"));
-        assertTrue(tFixture.verifyRecordItemIsPresent("Tarkin Construction"));
-        assertTrue(tFixture.verifyRecordItemIsNotPresent("Markin Construction"));
-        assertTrue(tFixture.clickOnRecordItem("Tarkin Construction"));
-        assertTrue(tFixture.clickOnRecordItemFacet("Related Actions"));
-        assertTrue(tFixture.verifyRecordItemRelatedActionIsPresent("Update Order Status"));
-        assertTrue(tFixture.verifyRecordItemRelatedActionIsNotPresent("Not a related action"));
+        assertTrue(tFixture.clickOnRecordType("Automated Testing Records"));
+        //TODO assertTrue(tFixture.verifyRecordTypeUserFilterIsPresent("Open"));
+        //TODO assertTrue(tFixture.clickOnRecordTypeUserFilter("Open"));
+        assertTrue(tFixture.verifyRecordIsPresent(randString));
+        assertTrue(tFixture.verifyRecordIsNotPresent("Not present"));
+        assertTrue(tFixture.clickOnRecord(randString));
+        assertTrue(tFixture.clickOnRecordView("Related Actions"));
+        assertTrue(tFixture.verifyRecordRelatedActionIsPresent("AUT Data Input Test"));
+        assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not present"));
         
         tFixture.waitForSeconds("1");
     }
@@ -44,43 +62,13 @@ public class RecordsFixtureTest {
     public void testClickOnRecordItemRelatedActionShortcut() throws Exception {
         tFixture.clickOnMenu("Records");
         
-        assertTrue(tFixture.clickOnRecordList("Orders"));
-        assertTrue(tFixture.clickOnRecordListFacetOption("Open"));
-        assertTrue(tFixture.clickOnRecordItem("Tarkin Construction"));
-        assertTrue(tFixture.clickOnRecordItemRelatedAction("Update Order Status"));
+        assertTrue(tFixture.clickOnRecordType("Automated Testing Records"));
+        assertTrue(tFixture.clickOnRecordTypeUserFilter("Past"));
+        assertTrue(tFixture.clickOnRecord(randString));
+        assertTrue(tFixture.clickOnRecordRelatedAction("AUT Data Input Test"));
         
         tFixture.waitForSeconds("1");
-    }
-    
-    @Test
-    public void testRecordsFixtureUpdate() throws Exception {
-        tFixture.clickOnMenu("Records");
-        
-        assertTrue(tFixture.clickOnRecordType("Orders"));
-        assertTrue(tFixture.verifyRecordTypeUserFilterIsPresent("Open"));
-        assertTrue(tFixture.clickOnRecordTypeUserFilter("Open"));
-        assertTrue(tFixture.verifyRecordIsPresent("Tarkin Construction"));
-        assertTrue(tFixture.verifyRecordIsNotPresent("Markin Construction"));
-        assertTrue(tFixture.clickOnRecord("Tarkin Construction"));
-        assertTrue(tFixture.clickOnRecordView("Related Actions"));
-        assertTrue(tFixture.verifyRecordRelatedActionIsPresent("Update Order Status"));
-        assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not a related action"));
-        
-        tFixture.waitForSeconds("1");
-    }
-    
-    @Test
-    public void testClickOnRecordItemRelatedActionShortcutUpdated() throws Exception {
-        tFixture.clickOnMenu("Records");
-        
-        assertTrue(tFixture.clickOnRecordType("Orders"));
-        assertTrue(tFixture.clickOnRecordTypeUserFilter("Open"));
-        assertTrue(tFixture.clickOnRecord("Tarkin Construction"));
-        assertTrue(tFixture.clickOnRecordRelatedAction("Update Order Status"));
-        
-        tFixture.waitForSeconds("1");
-    }
-    
+    }    
     
     @AfterClass
     public static void tearDown() throws Exception {

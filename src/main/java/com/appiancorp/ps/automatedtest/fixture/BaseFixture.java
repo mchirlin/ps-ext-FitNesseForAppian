@@ -24,7 +24,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;*/
 
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoError;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
@@ -46,7 +46,7 @@ public class BaseFixture extends DoFixture {
     
 	public String processId = null;
 	public String url = null;
-	public String version = "7.10";
+	public String version = null;
 	public String dateFormatString = null;
 	public String timeFormatString = null;
 	public String dateDisplayFormatString = null;
@@ -573,15 +573,16 @@ public class BaseFixture extends DoFixture {
 	}
 	
    private void loadProperties() {
-        String propFile = "appianautomatedtest.properties";
+        String propFile = "/appianautomatedtest.properties";
         try {
-            InputStream inputStream = BaseFixture.class.getResourceAsStream(propFile);
-            
+            InputStream inputStream = BaseFixture.class.getResource(propFile).openStream();
             prop.load(inputStream);
+            
+            AppianVersions.initialize();
         } catch (Exception e) {
             e.printStackTrace();
         }
         
-        Metadata.initialize();
+        
    }
 }

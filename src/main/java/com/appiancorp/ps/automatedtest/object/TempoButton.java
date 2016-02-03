@@ -7,13 +7,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
+
 public class TempoButton extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoButton.class);
-    private static final String XPATH_ELEMENT= "//button[contains(text(), '%s') and not(contains(@class, 'button-disabled'))]";
+    private static final String XPATH_ABSOLUTE_BUTTON = AppianVersions.getByConstant("xpathAbsoluteButton");
     
     public static boolean click(String buttonName) {        
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, buttonName)));
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName)));
         element.click();
         
         LOG.debug("BUTTON CLICK : " + buttonName);
@@ -24,8 +26,8 @@ public class TempoButton extends TempoField {
     
     public static boolean waitFor(String buttonName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ELEMENT, buttonName))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, buttonName)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName)));
             scrollIntoView(element);
         } catch (TimeoutException e) {
             return false;

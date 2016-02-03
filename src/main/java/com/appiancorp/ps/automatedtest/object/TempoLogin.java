@@ -8,15 +8,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
+
 public class TempoLogin extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoLogin.class);
-    private static final String XPATH_SUBMIT_BUTTON = "//form[@id = 'loginForm']/descendant::input[contains(@class, 'btn')]";
-    private static final String XPATH_AGREE_BUTTON = "//form[@id = 'notification']/descendant::input[contains(@class, 'btn')]";
+    private static final String XPATH_ABSOLUTE_LOGIN_SUBMIT_BUTTON = AppianVersions.getByConstant("xpathAbsoluteLoginSubmitButton");
+    private static final String XPATH_ABSOLUTE_LOGIN_AGREE_BUTTON = AppianVersions.getByConstant("xpathAbsoluteLoginAgreeButton");
+    private static final String XPATH_ABSOLUTE_LOGOUT_LINK = AppianVersions.getByConstant("xpathAbsoluteLogoutLink");
     
     public static boolean logout() {
         LOG.debug("LOGGING OUT");
-        ((JavascriptExecutor) driver).executeScript("document.evaluate(\"//div[@class='main_nav_bar']/descendant::a[contains(text(),'Sign Out')]\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click()");
+        ((JavascriptExecutor) driver).executeScript("document.evaluate(\"" + XPATH_ABSOLUTE_LOGOUT_LINK + "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click()");
         
         return true;
     }
@@ -43,7 +46,7 @@ public class TempoLogin extends TempoObject {
         passwordElement.sendKeys(password);
         
         /* Have to be specific as there is a hidden button for accepting terms */
-        WebElement submitButton = driver.findElement(By.xpath(XPATH_SUBMIT_BUTTON));
+        WebElement submitButton = driver.findElement(By.xpath(XPATH_ABSOLUTE_LOGIN_SUBMIT_BUTTON));
         submitButton.click();
         
         waitForLogout();
@@ -52,7 +55,7 @@ public class TempoLogin extends TempoObject {
     }
     
     public static boolean loginWithTerms(String url, String userName, String password) {
-        WebElement agreeButton = driver.findElement(By.xpath(XPATH_AGREE_BUTTON));
+        WebElement agreeButton = driver.findElement(By.xpath(XPATH_ABSOLUTE_LOGIN_AGREE_BUTTON));
         agreeButton.click();
         
         waitForLogin();
@@ -63,8 +66,8 @@ public class TempoLogin extends TempoObject {
     
     public static boolean waitForLogin() {        
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_SUBMIT_BUTTON)));
-            WebElement submitButton = driver.findElement(By.xpath(XPATH_SUBMIT_BUTTON));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_ABSOLUTE_LOGIN_SUBMIT_BUTTON)));
+            WebElement submitButton = driver.findElement(By.xpath(XPATH_ABSOLUTE_LOGIN_SUBMIT_BUTTON));
             // Needs to align the button to top to prevent it by being covered by the copyright div
             scrollIntoView(submitButton, true);
         } catch (Exception e) {
@@ -76,8 +79,8 @@ public class TempoLogin extends TempoObject {
     
     public static boolean waitForTerms() {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_AGREE_BUTTON)));
-            WebElement agreeButton = driver.findElement(By.xpath(XPATH_AGREE_BUTTON));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_ABSOLUTE_LOGIN_AGREE_BUTTON)));
+            WebElement agreeButton = driver.findElement(By.xpath(XPATH_ABSOLUTE_LOGIN_AGREE_BUTTON));
             // Needs to align the button to top to prevent it by being covered by the copyright div
             scrollIntoView(agreeButton, true);
         } catch (Exception e) {

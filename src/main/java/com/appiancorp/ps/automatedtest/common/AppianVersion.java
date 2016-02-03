@@ -1,7 +1,5 @@
 package com.appiancorp.ps.automatedtest.common;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -14,7 +12,7 @@ public class AppianVersion{
   @JsonCreator
   public AppianVersion(
     @JsonProperty("version") Version version,
-    @JsonProperty("hotfixes") List<ByConstant> byConstants) {
+    @JsonProperty("byConstants") List<ByConstant> byConstants) {
     this.version = version;
     this.byConstants = byConstants;
   }
@@ -23,7 +21,13 @@ public class AppianVersion{
       return this.version;
   }
   
-  public List<ByConstant> getByConstants() {
-    return this.byConstants;
+  public String getByConstant(String name) {
+      for (ByConstant by : this.byConstants) {
+          if (by.getName().equals(name)) {
+              return by.getBy();
+          }
+      }
+      
+      return null;
   }
 }

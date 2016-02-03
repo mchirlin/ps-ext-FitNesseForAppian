@@ -7,14 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
+
 public class TempoAction extends TempoObject {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoAction.class);
-    private static final String XPATH_ELEMENT = "//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'%s')]";
+    private static final String XPATH_ABSOLUTE_ACTION_LINK = AppianVersions.getByConstant("xpathAbsoluteActionLink");
     
     public static boolean click(String actionName) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, actionName)));
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, actionName)));
         element.click();
     
         return true;
@@ -22,8 +24,8 @@ public class TempoAction extends TempoObject {
     
     public static boolean waitFor(String actionName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ELEMENT, actionName))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, actionName)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, actionName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, actionName)));
             scrollIntoView(element);
         } catch (TimeoutException e) {
             return false;

@@ -7,14 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
+
 public class TempoTextField extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoTextField.class);
-    private static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input";
-    private static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'aui-TextInput')]";
+    private static final String XPATH_ABSOLUTE_TEXT_FIELD_LABEL = AppianVersions.getByConstant("xpathAbsoluteTextFieldLabel");
+    private static final String XPATH_RELATIVE_TEXT_FIELD_INPUT = AppianVersions.getByConstant("xpathRelativeTextFieldInput");
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
-        WebElement textField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        WebElement textField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TEXT_FIELD_INPUT));
         textField.clear();
         textField.sendKeys(fieldValue);
         unfocus();
@@ -26,7 +28,7 @@ public class TempoTextField extends TempoField {
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_TEXT_FIELD_LABEL, fieldName))));
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
         } catch (TimeoutException e) {
@@ -37,7 +39,7 @@ public class TempoTextField extends TempoField {
     }
     
     public static String getValue(WebElement fieldLayout) {
-        String value = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT)).getAttribute("value");
+        String value = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TEXT_FIELD_INPUT)).getAttribute("value");
         LOG.debug("TEXT FIELD VALUE : " + value);
         
         return value;
@@ -57,7 +59,7 @@ public class TempoTextField extends TempoField {
     }
     
     public static boolean clear(WebElement fieldLayout) {
-        WebElement textField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        WebElement textField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TEXT_FIELD_INPUT));
         textField.clear();
         
         return true;
@@ -65,7 +67,7 @@ public class TempoTextField extends TempoField {
     
     public static boolean isType(WebElement fieldLayout) {
         try {
-            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TEXT_FIELD_INPUT));
         } catch (Exception e) {
             return false;
         }

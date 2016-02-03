@@ -20,6 +20,11 @@ public class ReportsFixtureTest {
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
       tFixture.setTimeoutSecondsTo("10");
       
+      tFixture.setDateFormatStringTo("dd/MM/yyyy");
+      tFixture.setTimeFormatStringTo("HH:mm");
+      tFixture.setDateDisplayFormatStringTo("MMM d yyyy");
+      tFixture.setTimeDisplayFormatStringTo("HH:mm");
+      
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
     }
     

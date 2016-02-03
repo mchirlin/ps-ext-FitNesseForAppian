@@ -648,7 +648,7 @@ public class TempoFixture extends BaseFixture {
             throw new MissingObjectException("Title");
         }
         
-        return TempoForm.getTitle();
+        return TempoForm.getFormTitle();
     }
     
     /**
@@ -666,7 +666,7 @@ public class TempoFixture extends BaseFixture {
             throw new MissingObjectException("Instructions");
         }
         
-        return TempoForm.getInstructions();
+        return TempoForm.getFormInstructions();
     }
 
     /**

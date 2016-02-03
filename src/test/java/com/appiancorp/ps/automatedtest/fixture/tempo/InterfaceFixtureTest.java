@@ -25,19 +25,29 @@ public class InterfaceFixtureTest {
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
       tFixture.setTimeoutSecondsTo("15");
-      tFixture.setStartDatetime();
+      tFixture.setAppianVersionTo("16.1");
+      
       tFixture.setDateFormatStringTo("dd/MM/yyyy");
       tFixture.setTimeFormatStringTo("HH:mm");
+      tFixture.setDateDisplayFormatStringTo("MMM d yyyy");
+      tFixture.setTimeDisplayFormatStringTo("HH:mm");
+      
+      tFixture.setStartDatetime();
       
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
       
       tFixture.clickOnMenu("Actions");
-      tFixture.clickOnAction("Automated Testing");
+      tFixture.clickOnAction("All Fields");
     }
     
     @Test
-    public void testGetTitleGetInstructions() throws Exception {
+    public void testGetFormTitle() throws Exception {
         assertEquals(tFixture.getTitle(), "Form");
+        
+    }
+    
+    @Test
+    public void testGetFormInstructions() throws Exception {
         assertEquals(tFixture.getInstructions(), "Instructions");
     }
         
@@ -271,6 +281,7 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.verifyFieldContains("UserPicker", new String[]{"Michael Chirlin", "Ray Croxon"}));
         assertEquals("Michael Chirlin,Ray Croxon", tFixture.getFieldValue("UserPicker"));
         
+        /*
         assertTrue(tFixture.populateFieldWith("GroupPicker", new String[]{"AcqDemo"}));
         assertTrue(tFixture.verifyFieldContains("GroupPicker", new String[]{"AcqDemo"}));
         assertEquals("AcqDemo", tFixture.getFieldValue("GroupPicker"));
@@ -294,12 +305,14 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.populateFieldWith("CustomPicker", new String[]{"5"}));
         assertTrue(tFixture.verifyFieldContains("CustomPicker", new String[]{"5"}));
         assertEquals("5", tFixture.getFieldValue("CustomPicker"));
+        */
         
         // Grid
         assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[1]", "[1]", new String[]{"Michael Chirlin","Ray Croxon"}));
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[1]", "[1]", new String[]{"Michael Chirlin","Ray Croxon"}));
         assertEquals("Michael Chirlin,Ray Croxon", tFixture.getGridColumnRowValue("EditableGrid[3]", "[1]", "[1]"));
         
+        /*
         assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[2]", "[1]", new String[]{"AcqDemo"}));
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[2]", "[1]", new String[]{"AcqDemo"}));
         assertEquals("AcqDemo", tFixture.getGridColumnRowValue("EditableGrid[3]", "[2]", "[1]"));
@@ -323,6 +336,7 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[3]", "[2]", new String[]{"10"}));
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[3]", "[2]", new String[]{"10"}));
         assertEquals("10", tFixture.getGridColumnRowValue("EditableGrid[3]", "[3]", "[2]"));
+        */
     }
         
 

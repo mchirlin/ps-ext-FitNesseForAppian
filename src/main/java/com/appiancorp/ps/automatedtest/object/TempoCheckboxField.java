@@ -10,15 +10,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
+
 public class TempoCheckboxField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoCheckboxField.class);
-    private static final String XPATH_ABSOLUTE_LABEL = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input";
-    private static final String XPATH_NAME_RELATIVE_INPUT = ".//label[contains(text(), '%s')]/preceding-sibling::input";
-    private static final String XPATH_NUM_RELATIVE_INPUT = "(.//input[contains(@type, 'checkbox')])[%d]";
-    private static final String XPATH_RELATIVE_CHECKBOX_INPUT = ".//input[contains(@type, 'checkbox')]";
-    private static final String XPATH_RELATIVE_INPUT_SPAN = ".//span[input[contains(@type, 'checkbox')]]";
-    private static final String XPATH_OPTION = "//label[contains(text(), '%s')]/preceding-sibling::input[@type = 'checkbox']";
+    private static final String XPATH_ABSOLUTE_CHECKBOX_FIELD_LABEL = AppianVersions.getByConstant("xpathAbsoluteCheckboxFieldLabel");
+    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_CHOICE_LABEL = AppianVersions.getByConstant("xpathRelativeCheckboxFieldChoiceLabel");
+    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_CHOICE_INDEX = AppianVersions.getByConstant("xpathRelativeCheckboxFieldChoiceIndex");
+    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_INPUT = AppianVersions.getByConstant("xpathRelativeCheckboxFieldInput");
+    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_INPUT_SPAN = AppianVersions.getByConstant("xpathRelativeCheckboxFieldInputSpan");
+    private static final String XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION = AppianVersions.getByConstant("xpathAbsoluteCheckboxFieldOption");
     
     public static boolean populate(String fieldName, String fieldValue) {        
         WebElement fieldLayout = getFieldLayout(fieldName);
@@ -31,9 +33,9 @@ public class TempoCheckboxField extends TempoField {
         WebElement checkboxField;
         if (isFieldIndex(fieldValue)) {
             int index = getIndexFromFieldIndex(fieldValue);
-            checkboxField = fieldLayout.findElement(By.xpath(String.format(XPATH_NUM_RELATIVE_INPUT, index)));
+            checkboxField = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_CHECKBOX_FIELD_CHOICE_INDEX, index)));
         } else {
-            checkboxField = fieldLayout.findElement(By.xpath(String.format(XPATH_NAME_RELATIVE_INPUT, fieldValue)));
+            checkboxField = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_CHECKBOX_FIELD_CHOICE_LABEL, fieldValue)));
         }
         
         checkboxField.click();
@@ -46,7 +48,7 @@ public class TempoCheckboxField extends TempoField {
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_CHECKBOX_FIELD_LABEL, fieldName))));
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
         } catch (TimeoutException e) {
@@ -59,7 +61,7 @@ public class TempoCheckboxField extends TempoField {
     public static String getValue(WebElement fieldLayout) {
         List<String> values = new ArrayList<String>();
   
-        for (WebElement span : fieldLayout.findElements(By.xpath(XPATH_RELATIVE_INPUT_SPAN))) {
+        for (WebElement span : fieldLayout.findElements(By.xpath(XPATH_RELATIVE_CHECKBOX_FIELD_INPUT_SPAN))) {
             if (span.findElement(By.tagName("input")).isSelected()) {
                 values.add(span.findElement(By.tagName("label")).getText());
             }
@@ -81,9 +83,9 @@ public class TempoCheckboxField extends TempoField {
         WebElement field;
         if (isFieldIndex(fieldValue)) {
             int index = getIndexFromFieldIndex(fieldValue);
-            field = fieldLayout.findElement(By.xpath(String.format(XPATH_NUM_RELATIVE_INPUT, index)));
+            field = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_CHECKBOX_FIELD_CHOICE_INDEX, index)));
         } else {
-            field = fieldLayout.findElement(By.xpath(String.format(XPATH_NAME_RELATIVE_INPUT, fieldValue)));
+            field = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_CHECKBOX_FIELD_CHOICE_LABEL, fieldValue)));
         }
         checked = field.getAttribute("checked") == null ? false : true;
         
@@ -94,7 +96,7 @@ public class TempoCheckboxField extends TempoField {
     
     public static boolean isType(WebElement fieldLayout) {
         try {
-            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_CHECKBOX_INPUT));
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_CHECKBOX_FIELD_INPUT));
         } catch (Exception e) {
             return false;
         }
@@ -103,7 +105,7 @@ public class TempoCheckboxField extends TempoField {
     }
     
     public static boolean clickOption(String optionName) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_OPTION, optionName)));
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION, optionName)));
         element.click();
         
         LOG.debug("CHECKBOX OPTION CLICK : " + optionName);
@@ -113,8 +115,8 @@ public class TempoCheckboxField extends TempoField {
     
     public static boolean waitForOption(String optionName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_OPTION, optionName))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_OPTION, optionName)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION, optionName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION, optionName)));
             scrollIntoView(element);
         } catch (TimeoutException e) {
             return false;

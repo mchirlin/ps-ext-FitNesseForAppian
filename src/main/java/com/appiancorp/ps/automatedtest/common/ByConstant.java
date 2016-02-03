@@ -22,4 +22,9 @@ public class ByConstant {
     public String getBy() {
         return this.by;
     }
+    
+    @Override
+    public String toString() {
+        return "{name: \"" + this.name +  "\", by: \"" + this.by + "\"}";
+    }
 }

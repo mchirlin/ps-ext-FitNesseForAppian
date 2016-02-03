@@ -21,13 +21,16 @@ public class TasksFixtureTest {
       tFixture.setTimeoutSecondsTo("10");
       
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
+      
+      tFixture.clickOnMenu("Actions");
+      tFixture.clickOnAction("Automated Testing Input");
     }
     
     @Test
     public void testClickOnTask() throws Exception {
         tFixture.clickOnMenu("Tasks");
         
-        assertTrue(tFixture.clickOnTask("Associate Receipts"));
+        assertTrue(tFixture.clickOnTask("Input Automated Test Data"));
     }
     
     @Test
@@ -41,8 +44,8 @@ public class TasksFixtureTest {
     public void testVerifyTaskIsPresent() throws Exception {
         tFixture.clickOnMenu("Tasks");
         
-        assertTrue(tFixture.verifyTaskIsPresent("Associate Receipts"));
-        assertTrue(tFixture.verifyTaskIsNotPresent("Not a task"));
+        assertTrue(tFixture.verifyTaskIsPresent("Input Automated Test Data"));
+        assertTrue(tFixture.verifyTaskIsNotPresent("Not present"));
     }
     
     @Test

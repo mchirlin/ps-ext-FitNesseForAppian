@@ -12,14 +12,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
+
 public class TempoSelectField extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoSelectField.class);
-    private static final String XPATH_ABSOLUTE_LABEL = "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div/select";
-    private static final String XPATH_RELATIVE_INPUT = ".//select";
+    private static final String XPATH_ABSOLUTE_SELECT_FIELD_LABEL = AppianVersions.getByConstant("xpathAbsoluteSelectFieldLabel");
+    private static final String XPATH_RELATIVE_SELECT_FIELD_INPUT = AppianVersions.getByConstant("xpathRelativeSelectFieldInput");
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
-        WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_SELECT_FIELD_INPUT));
         Select select = new Select(selectField);
         select.selectByVisibleText(fieldValue);
         unfocus();
@@ -31,7 +33,7 @@ public class TempoSelectField extends TempoField {
     
     public static boolean waitFor(WebDriver driver, String fieldName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SELECT_FIELD_LABEL, fieldName))));
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
         } catch (TimeoutException e) {
@@ -43,7 +45,7 @@ public class TempoSelectField extends TempoField {
     
     public static String getValue(WebElement fieldLayout) {
         List<String> values = new ArrayList<String>();
-        WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_SELECT_FIELD_INPUT));
         Select select = new Select(selectField);
         List<WebElement> selects = select.getAllSelectedOptions();
         for (WebElement s : selects) {
@@ -63,7 +65,7 @@ public class TempoSelectField extends TempoField {
 
         // For editable
         boolean selected = false;
-        WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_SELECT_FIELD_INPUT));
         Select select = new Select(selectField);
         List<WebElement> selects = select.getAllSelectedOptions();
         for (WebElement s : selects) {
@@ -80,7 +82,7 @@ public class TempoSelectField extends TempoField {
     
     public static boolean isType(WebElement fieldLayout) {
         try {
-            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_SELECT_FIELD_INPUT));
         } catch (Exception e) {
             return false;
         }

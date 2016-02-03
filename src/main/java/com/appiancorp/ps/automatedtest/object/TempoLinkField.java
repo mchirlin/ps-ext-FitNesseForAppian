@@ -7,14 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianVersions;
+
 public class TempoLinkField extends TempoField {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoLinkField.class);
-    private static final String XPATH_ELEMENT = "//a[contains(text(), '%s')]";
+    private static final String XPATH_ABSOLUTE_LINK_FIELD = AppianVersions.getByConstant("xpathAbsoluteLinkField");
     
     public static boolean click(String linkName) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, linkName)));
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD, linkName)));
         element.click();
         
         return true;
@@ -22,8 +24,8 @@ public class TempoLinkField extends TempoField {
     
     public static boolean waitFor(String linkName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ELEMENT, linkName))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ELEMENT, linkName)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD, linkName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD, linkName)));
             scrollIntoView(element);
         } catch (TimeoutException e) {
             return false;
