@@ -5,8 +5,8 @@
 
 !*** Select task
 | click on menu | Tasks| 
-| verify task | Input Automated Test Data  | is present |
-| click on task | Input Automated Test Data |
+| verify task | Input test data | is present |
+| click on task | Input test data  |
 **!
 
 !*** Verify Page Title
