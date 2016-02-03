@@ -23,6 +23,8 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;*/
 
+
+import com.appiancorp.ps.automatedtest.common.Metadata;
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoError;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
@@ -44,6 +46,7 @@ public class BaseFixture extends DoFixture {
     
 	public String processId = null;
 	public String url = null;
+	public String version = "7.10";
 	public String dateFormatString = null;
 	public String timeFormatString = null;
 	public String dateDisplayFormatString = null;
@@ -72,9 +75,8 @@ public class BaseFixture extends DoFixture {
 	 * <br>
 	 * FitNesse Example: <code>| setup selenium web driver with | FIREFOX | browser |</code>
 	 * @param browser Browser to test with, currently only supports FIREFOX
-	 * @return True once browser has completed setup
 	 */
-	public boolean setupSeleniumWebDriverWithBrowser(String browser) {
+	public void setupSeleniumWebDriverWithBrowser(String browser) {
 		if (browser.equals("FIREFOX")) {
 			driver = new FirefoxDriver();
 		} /*else if (browser.equals("IE")) {
@@ -92,8 +94,6 @@ public class BaseFixture extends DoFixture {
         
         TempoObject.setDriver(driver);
         TempoObject.setMasterWindowHandle(this.masterWindowHandle);
-        
-	    return true;
 	}
 	
 	protected WebDriver getDriver() {
@@ -107,12 +107,22 @@ public class BaseFixture extends DoFixture {
 	 * @param url Url for Appian site, e.g. https://forum.appian.com/suite
 	 * @return True
 	 */
-	public boolean setAppianUrlTo(String url) {
+	public void setAppianUrlTo(String url) {
 		this.url = url;
 		TempoObject.setUrl(this.url);
-		
-		return true;
 	}
+	
+	/**
+     * Sets the default appian version.<br>
+     * <br>
+     * FitNesse Example: <code>| set appian version to | APPIAN_VERSION |</code>
+     * @param version Version for Appian site, e.g. 16.1
+     * @return True
+     */
+    public void setAppianVersionTo(String version) {
+        this.version = version;
+        TempoObject.setVersion(this.version);
+    }
 	
 	/**
 	 * Sets the start datetime with which all of the relative dates and datetimes will be calculated.<br>
@@ -120,23 +130,18 @@ public class BaseFixture extends DoFixture {
 	 * FitNesse Example: <code>| set start datetime |</code>
 	 * @return True
 	 */
-	public boolean setStartDatetime() {
+	public void setStartDatetime() {
 	    this.startDatetime = new Date();
 	    TempoObject.setStartDatetime(this.startDatetime);
-        
-        return true;
     }
 	
 	/**
 	 * Sets the datasource name<br>
 	 * @param dataSourceName Name of the data source
-	 * @return True
 	 */
 	@Deprecated
-	public boolean setDataSourceNameTo(String dataSourceName) {
+	public void setDataSourceNameTo(String dataSourceName) {
 		this.dataSourceName = dataSourceName;
-		
-		return true;
 	}
 	
 	/**
@@ -144,13 +149,10 @@ public class BaseFixture extends DoFixture {
 	 * <br>
 	 * FitNesse Example: <code>| set date format string to | dd/MM/yyyy |</code>
 	 * @param df Date format string
-	 * @return True
 	 */
-	public boolean setDateFormatStringTo(String df) {
+	public void setDateFormatStringTo(String df) {
 	    this.dateFormatString = df;
 	    TempoObject.setDateFormatString(this.dateFormatString);
-	    
-	    return true;
 	}
 
 	/**
@@ -158,13 +160,10 @@ public class BaseFixture extends DoFixture {
      * <br>
      * FitNesse Example: <code>| set time format string to | HH:mm |</code>
      * @param tf Time format string
-     * @return True
      */
-	public boolean setTimeFormatStringTo(String tf) {
+	public void setTimeFormatStringTo(String tf) {
         this.timeFormatString = tf;
         TempoObject.setTimeFormatString(this.timeFormatString);
-        
-        return true;
     }
 	
 	/**
@@ -172,13 +171,10 @@ public class BaseFixture extends DoFixture {
      * <br>
      * FitNesse Example: <code>| set date display format string to | d MMM yyyy |</code>
      * @param df Date display format string
-     * @return True
      */
-    public boolean setDateDisplayFormatStringTo(String df) {
+    public void setDateDisplayFormatStringTo(String df) {
         this.dateDisplayFormatString = df;
         TempoObject.setDateDisplayFormatString(this.dateDisplayFormatString);
-        
-        return true;
     }
 
     /**
@@ -186,13 +182,10 @@ public class BaseFixture extends DoFixture {
      * <br>
      * FitNesse Example: <code>| set time display format string to | HH:mm |</code>
      * @param tf Time display format string
-     * @return True
      */
-    public boolean setTimeDisplayFormatStringTo(String tf) {
+    public void setTimeDisplayFormatStringTo(String tf) {
         this.timeDisplayFormatString = tf;
         TempoObject.setTimeDisplayFormatString(this.timeDisplayFormatString);
-        
-        return true;
     }
 	
 	/**
@@ -200,13 +193,10 @@ public class BaseFixture extends DoFixture {
 	 * <br>
 	 * FitNesse Example: <code>| set timeout seconds to | 10 |</code>
 	 * @param ts Timeout seconds
-	 * @return True
 	 */
-	public boolean setTimeoutSecondsTo(String ts) {
+	public void setTimeoutSecondsTo(String ts) {
         this.timeoutSeconds = Integer.valueOf(ts);
         TempoObject.setTimeoutSeconds(this.timeoutSeconds);
-        
-        return true;
     }
 	
 	/** 
@@ -214,12 +204,9 @@ public class BaseFixture extends DoFixture {
 	 * <br>
 	 * FitNesse Example: <code>| set screenshot path to | C:\AutomatedTesting\screenshots\ |</code>
 	 * @param path Path to save screen shots
-	 * @return True
 	 */
-	public boolean setScreenshotPathTo(String path) {
+	public void setScreenshotPathTo(String path) {
 	    this.screenshotPath = path;
-	    
-	    return true;
 	}
 	
 	/**
@@ -227,12 +214,9 @@ public class BaseFixture extends DoFixture {
 	 * <br>
 	 * FitNesse Example: <code>| set take error screenshots to | true |</code>
 	 * @param bool true or false
-	 * @return True
 	 */
-	public boolean setTakeErrorScreenshotsTo(String bool) {
+	public void setTakeErrorScreenshotsTo(String bool) {
 	    this.takeErrorScreenshots = Boolean.valueOf(bool);
-	    
-	    return true;
 	}
 	
 	/**
@@ -596,6 +580,8 @@ public class BaseFixture extends DoFixture {
             prop.load(inputStream);
         } catch (Exception e) {
             e.printStackTrace();
-        }       
-    }
+        }
+        
+        Metadata.initialize();
+   }
 }

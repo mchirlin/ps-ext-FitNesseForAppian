@@ -26,6 +26,7 @@ public class TempoObject {
     protected static WebDriver driver;
     protected static String masterWindowHandle;
     protected static String url;
+    protected static String version;
     protected static int timeoutSeconds;
     protected static Date startDatetime;
     protected static int refreshTimes = 5;
@@ -137,6 +138,13 @@ public class TempoObject {
     }
     public static String getUrl() {
         return url;
+    }
+    
+    public static void setVersion(String v) {
+        version = v;
+    }
+    public static String getVersion() {
+        return version;
     }
     
     public static void setDateFormatString(String df) {

@@ -4,15 +4,15 @@
   <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
   <classpathentry kind="src" path="src/main/resources" excluding="**/*.java|**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
-  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.16/log4j-1.2.16.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.16/log4j-1.2.16.jar" sourcepath="M2_REPO/log4j/log4j/1.2.16/log4j-1.2.16-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/seleniumhq/selenium/selenium-java/2.48.2/selenium-java-2.48.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/seleniumhq/selenium/selenium-chrome-driver/2.48.2/selenium-chrome-driver-2.48.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/seleniumhq/selenium/selenium-remote-driver/2.48.2/selenium-remote-driver-2.48.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/cglib/cglib-nodep/2.1_3/cglib-nodep-2.1_3.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.3.1/gson-2.3.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/seleniumhq/selenium/selenium-api/2.48.2/selenium-api-2.48.2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/18.0/guava-18.0.jar" sourcepath="M2_REPO/com/google/guava/guava/18.0/guava-18.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/18.0/guava-18.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpcore/4.4.3/httpcore-4.4.3.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"/>
@@ -21,7 +21,11 @@
   <classpathentry kind="var" path="M2_REPO/net/java/dev/jna/jna/4.1.0/jna-4.1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/java/dev/jna/jna-platform/4.1.0/jna-platform-4.1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/seleniumhq/selenium/selenium-edge-driver/2.48.2/selenium-edge-driver-2.48.2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/commons-io/commons-io/2.4/commons-io-2.4.jar" sourcepath="M2_REPO/commons-io/commons-io/2.4/commons-io-2.4-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-io/commons-io/2.4/commons-io-2.4.jar" sourcepath="M2_REPO/commons-io/commons-io/2.4/commons-io-2.4-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/michael.chirlin/.m2/repository/commons-io/commons-io/2.4/commons-io-2.4-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/org/seleniumhq/selenium/selenium-htmlunit-driver/2.48.2/selenium-htmlunit-driver-2.48.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/seleniumhq/selenium/selenium-support/2.48.2/selenium-support-2.48.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sourceforge/htmlunit/htmlunit/2.18/htmlunit-2.18.jar"/>
@@ -47,8 +51,27 @@
   <classpathentry kind="var" path="M2_REPO/org/webbitserver/webbit/0.4.14/webbit-0.4.14.jar"/>
   <classpathentry kind="var" path="M2_REPO/io/netty/netty/3.5.2.Final/netty-3.5.2.Final.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/seleniumhq/selenium/selenium-leg-rc/2.48.2/selenium-leg-rc-2.48.2.jar"/>
-  <classpathentry kind="var" path="M2_REPO/fitLibrary/fitLibrary/2.0/fitlibrary-2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/fitlibrary/fitlibrary/2.0/fitlibrary-2.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/json/json/20151123/json-20151123.jar"/>
-  <classpathentry kind="var" path="M2_REPO/junit/junit/4.12/junit-4.12.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.12/junit-4.12.jar" sourcepath="M2_REPO/junit/junit/4.12/junit-4.12-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/michael.chirlin/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.4.1.3/jackson-databind-2.4.1.3.jar" sourcepath="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.4.1.3/jackson-databind-2.4.1.3-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/michael.chirlin/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.4.1.3/jackson-databind-2.4.1.3-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.4.0/jackson-annotations-2.4.0.jar" sourcepath="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.4.0/jackson-annotations-2.4.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/michael.chirlin/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.4.0/jackson-annotations-2.4.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.4.1.1/jackson-core-2.4.1.1.jar" sourcepath="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.4.1.1/jackson-core-2.4.1.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/michael.chirlin/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.4.1.1/jackson-core-2.4.1.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
 </classpath>

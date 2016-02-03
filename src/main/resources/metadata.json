@@ -1,0 +1,13 @@
+{
+  "appianVersions": [
+  	"version": "7.10",
+  	"byConstants" : [
+      {"name": "xpathAbsoluteActionLink", "by": "//a[starts-with(@class, 'aui-ActionLink') and contains(text(),'%s')]"},
+      {"name": "xpathAbsoluteButton", "by": "//button[contains(text(), '%s') and not(contains(@class, 'button-disabled'))]"},
+      {"name": "xpathAbsoluteTextFieldLabel", "by": "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input"},
+      {"name": "xpathRelativeTextFieldInput", "by": ".//input[contains(@class, 'aui-TextInput')]"},
+      {"name": "xpathAbsoluteParagraphFieldLabel", "by": "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::textarea"},
+      {"name": "xpathRelativeParagraphFieldInput", "by": ".//textarea[contains(@class, 'aui-TextAreaInput')]"}
+    }
+  ]
+}
