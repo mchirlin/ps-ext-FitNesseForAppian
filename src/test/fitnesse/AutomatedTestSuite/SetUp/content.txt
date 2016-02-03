@@ -11,8 +11,10 @@ Setup how long test will wait before failing
 
 Set start date and format how dates are used in the application
 | set start datetime |
-| set date format string to | MM/dd/yyyy |
+| set date format string to | d/M/yyyy |
+| set time format string to | HH:mm |
 | set date display format string to | MMM d yyyy |
+| set time display format string to | HH:mm |
 
 Create a random string and new folder to take screensshots for errors
 | set | rand | get random string | 4 |
