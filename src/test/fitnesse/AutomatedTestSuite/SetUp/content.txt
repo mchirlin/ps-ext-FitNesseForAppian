@@ -4,7 +4,7 @@
 Need these before each test case
 !| com.appiancorp.ps.automatedtest.fixture.TempoFixture |
 | setup selenium web driver with browser | FIREFOX |
-| set appian url to | REPLACE_APPIAN_URL |
+| set appian url to | https://apacdemo.appiancloud.com/ |
 
 Setup how long test will wait before failing 
 | set timeout seconds to | 20 |
@@ -21,5 +21,5 @@ Create a random string and new folder to take screensshots for errors
 **!
 
 !*** Login information 
-| login with username |REPLACE_USERNAME | and password | REPLACE_PASSWORD |
+| login with username | michael.chirlin@appian.com | and password | password1 |
 ***!
