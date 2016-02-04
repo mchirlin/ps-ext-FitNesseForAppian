@@ -18,8 +18,6 @@ public class BaseFixtureTest {
     public static void setUp() throws Exception {
       bFixture = new BaseFixture();
       tFixture = new TempoFixture();
-      
-      bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
     }
     
     @Test
@@ -70,17 +68,20 @@ public class BaseFixtureTest {
     
     @Test
     public void testOpen() throws Exception {
+        bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
         assertTrue(bFixture.open("http://google.com"));
     }
     
     @Test
     public void testLoginIntoWithUsernameAndPassword() throws Exception {        
+        bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
         assertTrue(bFixture.loginIntoWithUsernameAndPassword("https://apacdemo.appiancloud.com", "michael.chirlin@appian.com", "password1"));
         assertTrue(tFixture.logout());
     }
     
     @Test
     public void testLoginWithUsernameAndPassword() throws Exception {
+        bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
         assertTrue(bFixture.setAppianUrlTo("https://apacdemo.appiancloud.com"));
         assertTrue(bFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com","password1"));
         assertTrue(tFixture.logout());
@@ -104,8 +105,25 @@ public class BaseFixtureTest {
     
     @Test
     public void testGetRandomString(){
-        //TODO Create test case
+        assertTrue(bFixture.getRandomString(7).length() == 7);
     }
+    @Test
+    public void testGetRandomIntFromTo(){
+        int randomInt = bFixture.getRandomIntegerFromTo(0, 10);
+        assertTrue((randomInt<10) && (randomInt>=0));
+    }
+    @Test
+    public void testGetRandomDecimalFromTo(){
+        double randomDec = bFixture.getRandomDecimalFromTo(0, 10);
+        assertTrue((randomDec<10) && (randomDec>=0));
+    }
+
+    @Test
+    public void testGetRandomDecimalFromToWith(){
+        double randomDec = bFixture.getRandomDecimalFromToWith(0.1, 10.01, 6);
+        assertTrue((randomDec<10.01) && (randomDec>=0.1));
+    }
+    
     
     @AfterClass
     public static void tearDown() throws Exception {

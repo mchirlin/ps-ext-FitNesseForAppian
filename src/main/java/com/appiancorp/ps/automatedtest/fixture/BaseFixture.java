@@ -3,10 +3,13 @@ package com.appiancorp.ps.automatedtest.fixture;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Set;
+import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -598,4 +601,61 @@ public class BaseFixture extends DoFixture {
             e.printStackTrace();
         }       
     }
+   /**
+    * Returns a random integer of a specific length<br>
+    * <br>
+    * FitNesse example: <code>| set | randInt | get random integer from | INT_MIN | to | INT_MAX | </code> - This will set the variable <i>randInt</i> to a random integer between two numbers which can later be accessed using ${randInt}. 
+    * @param min Minimum of random integer
+    * @param max Maximum of random integer
+    * @return Random integer between the min and max
+    */
+   public int getRandomIntegerFromTo(int min, int max) {
+       if (min > max){
+          throw new IllegalArgumentException("Min cannot exceed the Max");
+       }
+       Random random = new Random();
+       long range = (long)max - (long)min;
+       long fraction = (long) (range * random.nextDouble());
+       return (int)(fraction + min);
+   }
+   
+   /**
+    * Returns a random integer of a specific length<br>
+    * <br>
+    * FitNesse example: <code>| set | randDecimal | get random decimal from | DOUBLE_MIN |to | DOUBLE_MAX|</code> - This will set the variable <i>randDecimal</i> to a random decimal between two numbers which can later be accessed using ${randDecimal}. 
+    * @param min Minimum of random decimal
+    * @param max Maximum of random decimal
+    * @return Random decimal between the min and max 
+    */
+   public double getRandomDecimalFromTo(double min, double max) {
+       if (min > max){
+           throw new IllegalArgumentException("Min cannot exceed the Max");
+        }
+       Random random = new Random();
+       double range = max - min;
+       double fraction = (range * random.nextDouble());
+       return (fraction + min);
+   }
+   
+   /**
+    * Returns a random integer of a specific length<br>
+    * <br>
+    * FitNesse example: <code>| set | randDecimal | get random decimal from | DOUBLE_MIN |to | DOUBLE_MAX| with | DECIMAL_PLACES |</code> - This will set the variable <i>randDecimal</i> to a random decimal between two numbers which can later be accessed using ${randDecimal}. 
+    * @param min Minimum of random decimal
+    * @param max Maximum of random decimal
+    * @param decimalPlaces Number of integers after the decimal places to display
+    * @return Random decimal between the min and max with a certain number of decimal places
+    */
+   public double getRandomDecimalFromToWith(double min, double max, int decimalPlaces) {
+       if (min > max){
+           throw new IllegalArgumentException("Min cannot exceed the Max");
+        }
+       Random random = new Random();
+       double range = max - min;
+       double fraction = (range * random.nextDouble());
+       BigDecimal total = new BigDecimal (fraction + min);
+       BigDecimal trimmed = total.setScale(decimalPlaces,RoundingMode.HALF_DOWN);
+       return trimmed.doubleValue();
+   }
+ 
 }
