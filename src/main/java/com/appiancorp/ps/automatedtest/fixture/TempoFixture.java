@@ -637,12 +637,12 @@ public class TempoFixture extends BaseFixture {
      * Returns the title of the form.<br>
      * <br>
      * FitNesse Examples:<br>
-     * <code>| get title |</code> - Simply returns a string<br>
-     * <code>| set | titleVariable | get title | </code> - Stores the title in titleVariable, which can later be accessed using @{titleVariable}<br>
-     * <code>| check | get title | FORM_TITLE |</code> - Returns true if form title matches FORM_TITLE input
+     * <code>| get form title |</code> - Simply returns a string<br>
+     * <code>| set | titleVariable | get form title | </code> - Stores the title in titleVariable, which can later be accessed using @{titleVariable}<br>
+     * <code>| check | get form title | FORM_TITLE |</code> - Returns true if form title matches FORM_TITLE input
      * @return The title string
      */
-    public String getTitle() {
+    public String getFormTitle() {
         waitForWorking();
         if(!TempoForm.waitForTitle()) {
             throw new MissingObjectException("Title");
@@ -655,12 +655,12 @@ public class TempoFixture extends BaseFixture {
      * Returns the instructions of the form.<br>
      * <br>
      * FitNesse Examples:<br>
-     * <code>| get instructions |</code> - Simply returns a string<br>
-     * <code>| set | instructionsVariable | get instructions | </code> - Stores the title in instructionsVariable, which can later be accessed using @{instructionsVariable}<br>
-     * <code>| check | get instructions | FORM_INSTRUCTIONS |</code> - Returns true if form instructions matches FORM_INSTRUCTIONS input
+     * <code>| get form instructions |</code> - Simply returns a string<br>
+     * <code>| set | instructionsVariable | get form instructions | </code> - Stores the title in instructionsVariable, which can later be accessed using @{instructionsVariable}<br>
+     * <code>| check | get form instructions | FORM_INSTRUCTIONS |</code> - Returns true if form instructions matches FORM_INSTRUCTIONS input
      * @return The instructions string
      */
-    public String getInstructions() {
+    public String getFormInstructions() {
         waitForWorking();
         if(!TempoForm.waitForInstructions()) {
             throw new MissingObjectException("Instructions");
