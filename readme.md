@@ -151,6 +151,9 @@ For additional API information, view the <a href="http://appianps.github.io/ps-e
 * | wait for | *RELATIVE_PERIOD*, e.g. +1 days, +1 hours | - waits for relative amount of time
 * | wait until | *RELATIVE_PERIOD* | - waits until relative time
 * | set | *VARIABLE_NAME* | get random string | *STRING_LENGTH* | - use @{VARIABLE_NAME} to parameterize test cases
+* | set | *VARIABLE_NAME* | get random integer from | *MIN_INT* | to | *MAX_INT* | - - use @{VARIABLE_NAME} to create a random integer value
+* | set | *VARIABLE_NAME* | get random decimal from | *MIN_DECIMAL* | to | *MAX_DECIMAL* | - use @{VARIABLE_NAME} to create a random decimal value
+* | set | *VARIABLE_NAME* | get random decimal from | *MIN_DECIMAL* | to | *MAX_DECIMAL* | with | *DECIMAL_PLACES* |- use @{VARIABLE_NAME} to create a random decimal value with a certain number of decimals places 
 * | refresh | - refreshes screen
 * | logout |
 

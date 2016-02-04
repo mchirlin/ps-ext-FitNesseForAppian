@@ -161,12 +161,12 @@ public class TempoObject {
     
     public static void setDateDisplayFormatString(String df) {
         DATE_DISPLAY_FORMAT_STRING = df;
-        DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + " " + TIME_DISPLAY_FORMAT_STRING;
+        DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;
     }
     
     public static void setTimeDisplayFormatString(String tf) {
         TIME_DISPLAY_FORMAT_STRING = tf;
-        DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + " " + TIME_DISPLAY_FORMAT_STRING;
+        DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;
     }
     
     public static void setTimeoutSeconds(int t) {
