@@ -16,6 +16,7 @@ import com.appiancorp.ps.automatedtest.object.TempoRadioField;
 import com.appiancorp.ps.automatedtest.object.TempoRecord;
 import com.appiancorp.ps.automatedtest.object.TempoRecordType;
 import com.appiancorp.ps.automatedtest.object.TempoReport;
+import com.appiancorp.ps.automatedtest.object.TempoSearch;
 import com.appiancorp.ps.automatedtest.object.TempoSection;
 import com.appiancorp.ps.automatedtest.object.TempoTask;
 
@@ -49,6 +50,29 @@ public class TempoFixture extends BaseFixture {
 		
 		return returnHandler(TempoMenu.click(tempoMenu));
 	}
+	   /**
+     * Populates search fields in News, Reports, and Records. <br>
+     * <br>
+     * Example: <code>| populate search with | SEARCH_TERM |</code>
+     * 
+     * @param searchTerm The term to search for News, Reports, and Records
+     * @return True if action completed
+     */
+	public boolean populateSearchWith(String searchTerm){
+	    //TODO 
+        if(!TempoSearch.waitFor(searchTerm)) {
+            throw new MissingObjectException("Field", searchTerm);
+        }
+        
+        // Populate the field
+        int attempt = 0;
+        while (attempt < attemptTimes) {
+            if (TempoSearch.populateSearch(searchTerm)) return true;
+            attempt++;
+        }
+
+        return returnHandler(false);
+    }
 	
 	/**
     * Logs out of Appian
