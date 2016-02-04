@@ -104,7 +104,8 @@
 	    {"label": "xpathConcatNewsItemPostedAt", "value": "/parent::div/descendant::a[contains(text(), '%s')]"},
 	    {"label": "xpathAbsoluteFieldLayout", "value": "//span[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //label[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
 	    {"label": "xpathRelativeReadOnlyField", "value": ".//p[contains(@class, 'readonly')] | div[ancestor::table[contains(@class, 'DataGrid-Table')]]"},
-	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input"}
+	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input"},
+	    {"label": "xpathRelativeGridAddRowLink", "value": "./tfoot//a"}
 	  ]
 	},
 	{ "version": "7.11", "byConstants": [] },

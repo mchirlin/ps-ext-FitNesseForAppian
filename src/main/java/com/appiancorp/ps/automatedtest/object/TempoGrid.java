@@ -28,6 +28,7 @@ public class TempoGrid extends TempoField {
     private static final String XPATH_RELATIVE_GRID_CELL_BY_COLUMN_INDEX = Metadata.getByConstant("xpathRelativeGridCellByColumnIndex");
     
     private static final String XPATH_RELATIVE_GRID_CHECKBOX = Metadata.getByConstant("xpathRelativeGridCheckbox");
+    private static final String XPATH_RELATIVE_GRID_ADD_ROW_LINK = Metadata.getByConstant("xpathRelativeGridAddRowLink") ;
 
     public static WebElement getGrid(String gridName) {
         if (isFieldIndex(gridName)) {
@@ -108,7 +109,6 @@ public class TempoGrid extends TempoField {
     
     public static boolean verifyGridRowIsSelected(String gridName, String rowNum) {
         WebElement cell = getCell(gridName, "[1]", rowNum);
-        
         WebElement checkbox = cell.findElement(By.xpath(XPATH_RELATIVE_GRID_CHECKBOX));
         
         return checkbox.isSelected();
@@ -118,6 +118,39 @@ public class TempoGrid extends TempoField {
         WebElement cell = getCell(gridName, columnName, rowNum);
         
         return clear(cell, null);
+    }
+
+    public static boolean waitFor(String gridName) {
+       try { 
+           if (isFieldIndex(gridName)) {
+               int gNum = getIndexFromFieldIndex(gridName);
+               String gName = getFieldFromFieldIndex(gridName);
+
+               if(StringUtils.isBlank(gName)) {
+                   (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX, gNum))));
+               } else {
+                   (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX, gName, gNum))));
+               }
+           } else {
+               (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL, gridName))));
+           }
+           // Attempt to scroll into view
+           int attempt = 0;
+           while (attempt < attemptTimes) {
+               try {
+                   WebElement grid = getGrid(gridName);
+                   scrollIntoView(grid);
+                   return true;
+               } catch (Exception e) {
+                   attempt++;
+               }
+           }
+       }
+       catch (TimeoutException nse) {
+           return false;
+           
+       }
+        return true;
     }
     
     public static boolean waitFor(String gridName, String rowNum) {
@@ -181,4 +214,17 @@ public class TempoGrid extends TempoField {
         return false;
     }
     
+    public static boolean clickOnAddRowLink(String gridName){
+        
+        try {
+            WebElement grid = getGrid(gridName);
+            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_ADD_ROW_LINK));
+            link.click();
+        } catch (Exception e) {
+            LOG.warn("GRID ADD LINK for " + gridName + e.getClass());
+            return false;
+        }
+        
+        return true;
+    }
 }

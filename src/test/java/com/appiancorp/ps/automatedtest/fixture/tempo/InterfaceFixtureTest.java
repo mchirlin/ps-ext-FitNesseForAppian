@@ -385,6 +385,19 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "[2]","[1]", new String[] {"Value 1"}));
     }
     
+    @Test 
+    public void testGridAddRowLink() throws Exception {
+        assertTrue(tFixture.clickOnGridAddRowLink("[1]"));
+        assertTrue(tFixture.clickOnGridAddRowLink("EditableGrid"));
+        assertTrue(tFixture.clickOnGridAddRowLink("EditableGrid[1]"));
+    }
+    
+    @Test 
+    public void testClickLink() throws Exception {
+        assertTrue(tFixture.clickOnLink("Add Data to Paging Grid"));
+        assertTrue(tFixture.clickOnLink("Add Data to Paging Grid[1]"));
+    }
+    
     @AfterClass
     public static void tearDown() throws Exception {
         tFixture.clickOnButton("Cancel");
