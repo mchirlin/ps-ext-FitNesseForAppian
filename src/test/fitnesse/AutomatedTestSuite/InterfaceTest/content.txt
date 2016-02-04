@@ -119,13 +119,13 @@
 |verify field  |MultipleSelectField|contains      |Option 1,Option 2|
 |verify field  |RadioField         |contains      |Option 1         |
 |verify field  |CheckboxField      |contains      |Option 1,Option 2|
-|verify field  |FileUploadField    |contains      |Low Risk.jpg     |
+|verify field  |FileUploadField    |contains      |Low.jpg     |
 
 !| check|get field|SelectField        |value|Option, 1        |
 |check  |get field|MultipleSelectField|value|Option 1,Option 2|
 |check  |get field|RadioField         |value|Option 1         |
 |check  |get field|CheckboxField      |value|Option 1,Option 2|
-|check  |get field|FileUploadField    |value|Low Risk.jpg     |
+|check  |get field|FileUploadField    |value|Low.jpg     |
 ***!
 ----
 !*** Verify/Check Fields Contain Values for Section 2

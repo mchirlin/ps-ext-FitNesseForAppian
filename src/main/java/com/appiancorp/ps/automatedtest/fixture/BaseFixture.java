@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URLEncoder;
 import java.util.Date;
-import java.util.Properties;
 import java.util.Set;
 import java.util.Random;
 
@@ -25,7 +24,6 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;*/
 
-
 import com.appiancorp.ps.automatedtest.common.Metadata;
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoError;
@@ -33,6 +31,7 @@ import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
 import fitlibrary.DoFixture;
+import fitlibrary.exception.AbandonException;
 
 /**
  * This is the base class for integrating Appian and Fitnesse.
@@ -58,8 +57,7 @@ public class BaseFixture extends DoFixture {
 	public int attemptTimes = 3;
 	public String screenshotPath = "C:\\AutomatedTesting\\screenshots";
 	public Boolean takeErrorScreenshots = false;
-	    
-	Properties prop = new Properties();
+	public Boolean stopOnError = false;
 	
 	public BaseFixture() {
 		super();
@@ -219,14 +217,24 @@ public class BaseFixture extends DoFixture {
 	    this.screenshotPath = path;
 	}
 	
+	/** 
+     * Set the flag to take screenshots on errors. If true, the FitNesse will quit on the first failed test.<br>
+     * <br>
+     * FitNesse Example: <code>| set screenshot path to | C:\AutomatedTesting\screenshots\ |</code>
+     * @param path Path to save screen shots
+     */
+    public void setStopOnErrorTo(Boolean bool) {
+        this.setStopOnError(bool);
+    }
+	
 	/**
 	 * Set the flag to take screenshots on errors. If true, every error in an automated test will trigger a screenshot to be placed in {@link #setScreenshotPathTo(String)}.<br>
 	 * <br>
 	 * FitNesse Example: <code>| set take error screenshots to | true |</code>
 	 * @param bool true or false
 	 */
-	public void setTakeErrorScreenshotsTo(String bool) {
-	    this.takeErrorScreenshots = Boolean.valueOf(bool);
+	public void setTakeErrorScreenshotsTo(Boolean bool) {
+	    this.takeErrorScreenshots = bool;
 	}
 	
 	/**
@@ -575,9 +583,9 @@ public class BaseFixture extends DoFixture {
 	
 	protected boolean returnHandler(boolean val) {
 	    if (!val && takeErrorScreenshots) {
-	        takeScreenshot(String.format("%3d", errorNum));
-	        errorNum += 1;
-	    }
+            takeScreenshot(String.format("%3d", errorNum));
+            errorNum += 1;
+        }
 	    
 	    return val;
 	}
