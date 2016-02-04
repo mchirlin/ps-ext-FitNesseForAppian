@@ -32,7 +32,7 @@ public class InterfaceFixtureTest {
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
       
       tFixture.clickOnMenu("Actions");
-      tFixture.clickOnAction("Automated Testing");
+      tFixture.clickOnAction("All Fields");
     }
     
     @Test
@@ -369,6 +369,20 @@ public class InterfaceFixtureTest {
     @Test
     public void testPagingGrid() throws Exception {
         assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "[2]","[1]", new String[] {"Value 1"}));
+    }
+    
+    @Test 
+    public void testGridAddRowLink() throws Exception {
+        assertTrue(tFixture.clickOnGridAddLink("[1]"));
+        assertTrue(tFixture.clickOnGridAddLink("EditableGrid"));
+        assertTrue(tFixture.clickOnGridAddLink("EditableGrid[1]"));
+
+    }
+    
+    @Test 
+    public void testClickLink() throws Exception {
+        assertTrue(tFixture.clickOnLink("Add Data to Paging Grid"));
+        assertTrue(tFixture.clickOnLink("Add Data to Paging Grid[1]"));
     }
     
     @AfterClass

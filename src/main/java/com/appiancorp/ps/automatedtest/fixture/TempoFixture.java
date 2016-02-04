@@ -942,6 +942,7 @@ public class TempoFixture extends BaseFixture {
         return TempoGrid.getValue(gridName, columnName, rowNum);
     }
     
+    
     /** 
      * Verifies a field contains a specific value.<br>
      * <br>
@@ -992,6 +993,23 @@ public class TempoFixture extends BaseFixture {
         }
         
         return returnHandler(TempoGrid.verifyGridRowIsSelected(gridName, rowNum)); 
+    }
+    
+    /**
+     * Clicks on the add row link for a grid<br>
+     * <br>
+     * FitNesse Example: <code>| click on grid | GRID_NAME_OR_INDEX | add link |</code>
+     * @param gridName Name or name and index of grid
+     * @return True, if row is selected
+     */
+
+    public boolean clickOnGridAddLink(String gridName){
+        if(!TempoGrid.waitFor(gridName)) {
+            throw new MissingObjectException("Grid", gridName);
+        }
+        
+        return returnHandler(TempoGrid.clickOnAddLink(gridName)); 
+    
     }
     
     /**

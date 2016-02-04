@@ -84,8 +84,9 @@
 * | verify grid | *GRID_NAME* | column | *COLUMN_NAME_OR_NUMBER* | row | *ROW_NUMBER* | contains | *VALUE(S)* |
 * | select grid | *GRID_NAME* | row | *ROW_NUMBER* |
 * | verify grid | *GRID_NAME* | row | *ROW_NUMBER* | is selected |
-* | click on link | *LINK_NAME* |
-* | click on button | *BUTTON_NAME* |
+* | click on grid | *GRID_NAME* | add link | - can use gridName, gridIndex, or gridName[index] 
+* | click on link | *LINK_NAME* | - can use linkName or linkName[index]
+* * | click on button | *BUTTON_NAME* |
 * | click on radio option | *RADIO_OPTION* |
 * | click on checkbox option | *CHECKBOX_OPTION* |
 
