@@ -387,6 +387,7 @@ public class InterfaceFixtureTest {
     
     @Test 
     public void testGridAddRowLink() throws Exception {
+        //TODO Make this button do something
         assertTrue(tFixture.clickOnGridAddRowLink("[1]"));
         assertTrue(tFixture.clickOnGridAddRowLink("EditableGrid"));
         assertTrue(tFixture.clickOnGridAddRowLink("EditableGrid[1]"));

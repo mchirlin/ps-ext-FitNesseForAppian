@@ -46,7 +46,7 @@
 	   	{"label": "xpathAbsoluteSelectFieldLabel", "value": "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::div/select"},
 	   	{"label": "xpathRelativeSelectFieldInput", "value": ".//select"},
 	    {"label": "xpathAbsoluteDateFieldInput", "value": "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-DateInput-TextBox')]"},
-	    {"label": "xpathRelativeDateFieldPlaceholder", "value": ".//input[contains(@class, 'aui-DateInput-Placeholder')]"},
+	    {"label": "xpathRelativeDateFieldPlaceholder", "value": ".//div[contains(@class, 'aui-DateInput')]"},
 	    {"label": "xpathRelativeDateFieldInput", "value": ".//input[contains(@class, 'aui-DateInput-TextBox')]"},
 	    {"label": "xpathAbsoluteDatetimeFieldDateInput", "value": "//span[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-DateInput-TextBox')]"},
 	    {"label": "xpathRelativeDatetimeFieldDatePlaceholder", "value": ".//div[contains(@class, 'aui-DateInput')]"},
@@ -112,6 +112,9 @@
 	{
       "version": "16.1",
       "byConstants" : [
+        {"label": "xpathRelativeDateFieldPlaceholder", "value": ".//input[contains(@class, 'aui-DateInput-Placeholder')]"},
+      	{"label": "xpathRelativeDatetimeFieldDatePlaceholder", "value": ".//input[contains(@class, 'aui-DateInput-Placeholder')]"},
+      	{"label": "xpathRelativeDatetimeFieldTimePlaceholder", "value": ".//input[contains(@class, 'aui-TimeInput-Placeholder')]"},
 	    {"label": "xpathAbsoluteRecordLink", "value": "//a[contains(@href, '/suite/tempo/records/item/') and contains(@href, '/view/summary') and contains(text(), '%s')]"},
 	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input | //div[contains(@class, 'filters')]/descendant::input[@type = 'text']"}
 	  ]

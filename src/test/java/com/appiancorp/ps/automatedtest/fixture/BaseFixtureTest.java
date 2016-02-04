@@ -35,11 +35,11 @@ public class BaseFixtureTest {
     public void testSetAppianLocaleTo() throws Exception {
         bFixture.setAppianLocaleTo("en_GB");
         assertEquals(TempoObject.getDateFormat(), "dd/MM/yyyy");
-        assertEquals(TempoObject.getDateDisplayFormat(), "dd MMM yyyy");
+        assertEquals(TempoObject.getDateDisplayFormat(), "d MMM yyyy");
         assertEquals(TempoObject.getTimeFormat(), "HH:mm");
         assertEquals(TempoObject.getTimeDisplayFormat(), "HH:mm");
         assertEquals(TempoObject.getDatetimeFormat(), "dd/MM/yyyy HH:mm");
-        assertEquals(TempoObject.getDatetimeDisplayFormat(), "dd MMM yyyy HH:mm");
+        assertEquals(TempoObject.getDatetimeDisplayFormat(), "d MMM yyyy HH:mm");
         
         bFixture.setAppianLocaleTo("en_US");
         assertEquals(TempoObject.getDateFormat(), "M/d/yyyy");
