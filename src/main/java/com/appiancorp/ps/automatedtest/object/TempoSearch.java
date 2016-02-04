@@ -10,9 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TempoSearch extends TempoObject{
 
-    @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoRecordType.class);
-    private static final String XPATH_TEMPO_SEARCH = "//*[@id='gwt-uid-44']"; //this works for 7.11
+    private static final String XPATH_TEMPO_SEARCH = "//div[contains(@class, 'appian-tempo-search')]/descendant::input"; //this works for 7.11
     
     public static boolean populateSearch(String searchValue){
         WebElement fieldLayout = driver.findElement(By.xpath(XPATH_TEMPO_SEARCH));
@@ -20,7 +19,7 @@ public class TempoSearch extends TempoObject{
         fieldLayout.sendKeys(searchValue);
         fieldLayout.sendKeys(Keys.ENTER);
         
-        LOG.debug("TEXT FIELD POPULATION : " + searchValue);
+        LOG.debug("TEXT FIELD POPULATION ERROR: " + searchValue);
 
         return true;
     }

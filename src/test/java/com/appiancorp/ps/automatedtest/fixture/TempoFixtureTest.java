@@ -24,6 +24,12 @@ public class TempoFixtureTest {
     @Test
     public void testTempoFixture() throws Exception {
         assertTrue(tFixture.clickOnMenu("News"));
+        assertTrue(tFixture.populateSearchWith("Test Text"));
+        assertTrue(tFixture.clickOnMenu("Reports"));
+        assertTrue(tFixture.populateSearchWith("dashboard"));
+        assertTrue(tFixture.clickOnMenu("Records"));
+        //TODO create a test case for populating search for record with a search term.  Unable to test b/c apacdemo is on 16.1
+        assertTrue(tFixture.clickOnMenu("Tasks"));
     }
     
     @AfterClass
