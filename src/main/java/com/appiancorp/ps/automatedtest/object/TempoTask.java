@@ -7,14 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoTask extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoTask.class);
-    private static final String XPATH_ABSOLUTE_TASK_LINK = AppianVersions.getByConstant("xpathAbsoluteTaskLink");
-    private static final String XPATH_ABSOLUTE_TASK_DEADLINE = AppianVersions.getByConstant("xpathAbsoluteTaskDeadline");
-    private static final String XPATH_ABSOLUTE_TASK_REPORT_LINK = AppianVersions.getByConstant("xpathAbsoluteTaskReportLink");
+    private static final String XPATH_ABSOLUTE_TASK_LINK = Metadata.getByConstant("xpathAbsoluteTaskLink");
+    private static final String XPATH_ABSOLUTE_TASK_DEADLINE = Metadata.getByConstant("xpathAbsoluteTaskDeadline");
+    private static final String XPATH_ABSOLUTE_TASK_REPORT_LINK = Metadata.getByConstant("xpathAbsoluteTaskReportLink");
     
     public static boolean click(String taskName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName)));

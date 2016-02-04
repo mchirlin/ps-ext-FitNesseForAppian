@@ -12,15 +12,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class AppianVersions {
-    private static final Logger LOG = Logger.getLogger(AppianVersions.class);
+public class Metadata {
+    private static final Logger LOG = Logger.getLogger(Metadata.class);
     private static List<AppianVersion> appianVersions;
     private static List<Version> allVersions;
+    private static List<AppianLocale> appianLocales;
 
     @JsonCreator
-    public AppianVersions(
-          @JsonProperty("appianVersions") List<AppianVersion> appianVersions) {
-        AppianVersions.appianVersions = appianVersions;
+    public Metadata(
+          @JsonProperty("appianVersions") List<AppianVersion> appianVersions,
+          @JsonProperty("appianLocales") List<AppianLocale> appianLocales) {
+        Metadata.appianVersions = appianVersions;
+        Metadata.appianLocales = appianLocales;
         allVersions = new ArrayList<Version>();
         for (AppianVersion av : appianVersions) {
             allVersions.add(av.getVersion());
@@ -29,6 +32,10 @@ public class AppianVersions {
 
     public static List<AppianVersion> getAppianVersions() {
         return appianVersions;
+    }
+    
+    public static List<AppianLocale> getAppianLocales() {
+        return appianLocales;
     }
 
     public static String getByConstant(String constant) {
@@ -53,8 +60,8 @@ public class AppianVersions {
     public static void initialize() {
         InputStream in = null;
         try {
-            in = AppianVersions.class.getResource("/versions.json").openStream();
-            new ObjectMapper().readValue(in, AppianVersions.class);
+            in = Metadata.class.getResource("/metadata.json").openStream();
+            new ObjectMapper().readValue(in, Metadata.class);
         } catch (Exception e) {
             LOG.error("Error processing metadata.json resource", e);
         } finally {

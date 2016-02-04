@@ -7,13 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoLinkField extends TempoField {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoLinkField.class);
-    private static final String XPATH_ABSOLUTE_LINK_FIELD = AppianVersions.getByConstant("xpathAbsoluteLinkField");
+    private static final String XPATH_ABSOLUTE_LINK_FIELD = Metadata.getByConstant("xpathAbsoluteLinkField");
     
     public static boolean click(String linkName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD, linkName)));

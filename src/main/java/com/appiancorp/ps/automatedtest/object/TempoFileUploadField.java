@@ -11,16 +11,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoFileUploadField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoFileUploadField.class);
-    private static final String XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL = AppianVersions.getByConstant("xpathAbsoluteFileUploadFieldLabel");
-    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT = AppianVersions.getByConstant("xpathRelativeFileUploadFieldInput");
-    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE = AppianVersions.getByConstant("xpathRelativeFileUploadFieldFile");
-    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILENAME = XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE + AppianVersions.getByConstant("xpathConcatFileUploadFieldFilename");
-    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_REMOVE_LINK = AppianVersions.getByConstant("xpathRelativeFileUploadFieldRemoveLink");
+    private static final String XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteFileUploadFieldLabel");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT = Metadata.getByConstant("xpathRelativeFileUploadFieldInput");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE = Metadata.getByConstant("xpathRelativeFileUploadFieldFile");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILENAME = XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE + Metadata.getByConstant("xpathConcatFileUploadFieldFilename");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_REMOVE_LINK = Metadata.getByConstant("xpathRelativeFileUploadFieldRemoveLink");
     private static final Pattern FILENAME_PATTERN = Pattern.compile("(.*) \\(.*\\)");
    
     public static boolean populate(WebElement fieldLayout, String fieldValue) {

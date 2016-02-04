@@ -7,16 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 import com.google.common.base.Throwables;
 
 public class TempoField extends TempoObject {
        
     private static final Logger LOG = Logger.getLogger(TempoField.class);
-    protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT = AppianVersions.getByConstant("xpathAbsoluteFieldLayout");
+    protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT = Metadata.getByConstant("xpathAbsoluteFieldLayout");
     protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX = "(" + XPATH_ABSOLUTE_FIELD_LAYOUT + ")[%d]";
-    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = AppianVersions.getByConstant("xpathRelativeReadOnlyField"); // Handles readOnly fields and paging grids
+    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = Metadata.getByConstant("xpathRelativeReadOnlyField"); // Handles readOnly fields and paging grids
     
     public static WebElement getFieldLayout(String fieldName) {
         if (isFieldIndex(fieldName)) {

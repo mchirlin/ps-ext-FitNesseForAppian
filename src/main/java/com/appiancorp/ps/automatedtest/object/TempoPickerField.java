@@ -11,19 +11,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoPickerField extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoPickerField.class);
-    protected static final String XPATH_ABSOLUTE_PICKER_LABEL = AppianVersions.getByConstant("xpathAbsolutePickerLabel");
-    protected static final String XPATH_RELATIVE_PICKER_INPUT = AppianVersions.getByConstant("xpathRelativePickerInput");
-    protected static final String XPATH_ABSOLUTE_PICKER_SUGGESTION = AppianVersions.getByConstant("xpathAbsolutePickerSuggestion");
-    protected static final String XPATH_RELATIVE_PICKER_SELECTION = AppianVersions.getByConstant("xpathRelativePickerSelection");
-    protected static final String XPATH_RELATIVE_PICKER_SPECIFIC_SELECTION = AppianVersions.getByConstant("xpathRelativePickerSpecificSelection");
-    protected static final String XPATH_RELATIVE_PICKER_SELECTION_REMOVE_LINK = AppianVersions.getByConstant("xpathRelativePickerSelectionRemoveLink");
-    protected static final String XPATH_RELATIVE_PICKER_SPECIFIC_SELECTION_REMOVE_LINK = AppianVersions.getByConstant("xpathRelativePickerSpecificSelectionRemoveLink");
-    protected static final String XPATH_RELATIVE_PICKER_SUGGEST_BOX = AppianVersions.getByConstant("xpathRelativePickerSuggestBox");
+    protected static final String XPATH_ABSOLUTE_PICKER_LABEL = Metadata.getByConstant("xpathAbsolutePickerLabel");
+    protected static final String XPATH_RELATIVE_PICKER_INPUT = Metadata.getByConstant("xpathRelativePickerInput");
+    protected static final String XPATH_ABSOLUTE_PICKER_SUGGESTION = Metadata.getByConstant("xpathAbsolutePickerSuggestion");
+    protected static final String XPATH_RELATIVE_PICKER_SELECTION = Metadata.getByConstant("xpathRelativePickerSelection");
+    protected static final String XPATH_RELATIVE_PICKER_SPECIFIC_SELECTION = Metadata.getByConstant("xpathRelativePickerSpecificSelection");
+    protected static final String XPATH_RELATIVE_PICKER_SELECTION_REMOVE_LINK = Metadata.getByConstant("xpathRelativePickerSelectionRemoveLink");
+    protected static final String XPATH_RELATIVE_PICKER_SPECIFIC_SELECTION_REMOVE_LINK = Metadata.getByConstant("xpathRelativePickerSpecificSelectionRemoveLink");
+    protected static final String XPATH_RELATIVE_PICKER_SUGGEST_BOX = Metadata.getByConstant("xpathRelativePickerSuggestBox");
     protected static final String XPATH_RELATIVE_INPUT_OR_SELECTION = "(" + XPATH_RELATIVE_PICKER_INPUT + " | " + XPATH_RELATIVE_PICKER_SELECTION + ")";
     
     public static boolean populate(WebElement fieldLayout, String fieldName, String fieldValue) {
@@ -119,7 +119,7 @@ public class TempoPickerField extends TempoField {
     protected static boolean waitForSuggestBox(WebElement fieldLayout, String fieldValue) {
         try {
             String xpathLocator = getXpathLocator(fieldLayout);
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(" + xpathLocator + ")" + String.format(XPATH_RELATIVE_PICKER_SPECIFIC_SELECTION, fieldValue))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(" + xpathLocator + ")" + String.format(XPATH_RELATIVE_PICKER_SUGGEST_BOX, fieldValue))));
         } catch (TimeoutException e) {
             return false;
         }

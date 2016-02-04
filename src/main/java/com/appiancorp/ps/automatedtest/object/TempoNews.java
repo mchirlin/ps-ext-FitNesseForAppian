@@ -7,19 +7,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
 public class TempoNews extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoNews.class);
-    private static final String XPATH_ABSOLUTE_NEWS_ITEM = AppianVersions.getByConstant("xpathAbsoluteNewsItem");
-    private static final String XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LINK = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemMoreInfoLink");
-    private static final String XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LABEL = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemMoreInfoLabel");
-    private static final String XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_VALUE = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemMoreInfoValue");
-    private static final String XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemRecordTag");
-    private static final String XPATH_ABSOLUTE_NEWS_ITEM_COMMENT = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemComment");
-    private static final String XPATH_ABSOLUTE_NEWS_ITEM_POSTED_AT = XPATH_ABSOLUTE_NEWS_ITEM + AppianVersions.getByConstant("xpathConcatNewsItemPostedAt");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM = Metadata.getByConstant("xpathAbsoluteNewsItem");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LINK = XPATH_ABSOLUTE_NEWS_ITEM + Metadata.getByConstant("xpathConcatNewsItemMoreInfoLink");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LABEL = XPATH_ABSOLUTE_NEWS_ITEM + Metadata.getByConstant("xpathConcatNewsItemMoreInfoLabel");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_VALUE = XPATH_ABSOLUTE_NEWS_ITEM + Metadata.getByConstant("xpathConcatNewsItemMoreInfoValue");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG = XPATH_ABSOLUTE_NEWS_ITEM + Metadata.getByConstant("xpathConcatNewsItemRecordTag");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_COMMENT = XPATH_ABSOLUTE_NEWS_ITEM + Metadata.getByConstant("xpathConcatNewsItemComment");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_POSTED_AT = XPATH_ABSOLUTE_NEWS_ITEM + Metadata.getByConstant("xpathConcatNewsItemPostedAt");
     
     public static boolean waitFor(String newsText) {
         try {

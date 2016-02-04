@@ -7,13 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoParagraphField extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoParagraphField.class);
-    private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL = AppianVersions.getByConstant("xpathAbsoluteParagraphFieldLabel");
-    private static final String XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT = AppianVersions.getByConstant("xpathRelativeParagraphFieldInput");
+    private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteParagraphFieldLabel");
+    private static final String XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT = Metadata.getByConstant("xpathRelativeParagraphFieldInput");
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement textAreaField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT));

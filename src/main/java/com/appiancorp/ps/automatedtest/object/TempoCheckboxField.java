@@ -10,17 +10,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoCheckboxField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoCheckboxField.class);
-    private static final String XPATH_ABSOLUTE_CHECKBOX_FIELD_LABEL = AppianVersions.getByConstant("xpathAbsoluteCheckboxFieldLabel");
-    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_CHOICE_LABEL = AppianVersions.getByConstant("xpathRelativeCheckboxFieldChoiceLabel");
-    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_CHOICE_INDEX = AppianVersions.getByConstant("xpathRelativeCheckboxFieldChoiceIndex");
-    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_INPUT = AppianVersions.getByConstant("xpathRelativeCheckboxFieldInput");
-    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_INPUT_SPAN = AppianVersions.getByConstant("xpathRelativeCheckboxFieldInputSpan");
-    private static final String XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION = AppianVersions.getByConstant("xpathAbsoluteCheckboxFieldOption");
+    private static final String XPATH_ABSOLUTE_CHECKBOX_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteCheckboxFieldLabel");
+    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_CHOICE_LABEL = Metadata.getByConstant("xpathRelativeCheckboxFieldChoiceLabel");
+    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_CHOICE_INDEX = Metadata.getByConstant("xpathRelativeCheckboxFieldChoiceIndex");
+    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_INPUT = Metadata.getByConstant("xpathRelativeCheckboxFieldInput");
+    private static final String XPATH_RELATIVE_CHECKBOX_FIELD_INPUT_SPAN = Metadata.getByConstant("xpathRelativeCheckboxFieldInputSpan");
+    private static final String XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION = Metadata.getByConstant("xpathAbsoluteCheckboxFieldOption");
     
     public static boolean populate(String fieldName, String fieldValue) {        
         WebElement fieldLayout = getFieldLayout(fieldName);

@@ -2,7 +2,6 @@ package com.appiancorp.ps.automatedtest.fixture;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URLEncoder;
@@ -27,7 +26,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;*/
 
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoError;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
@@ -50,10 +49,7 @@ public class BaseFixture extends DoFixture {
 	public String processId = null;
 	public String url = null;
 	public String version = null;
-	public String dateFormatString = null;
-	public String timeFormatString = null;
-	public String dateDisplayFormatString = null;
-	public String timeDisplayFormatString = null;
+	public String locale = null;
 	public Date startDatetime = null;
 	public String dataSourceName = null;
 	public String masterWindowHandle = null;
@@ -67,7 +63,7 @@ public class BaseFixture extends DoFixture {
 	
 	public BaseFixture() {
 		super();
-		loadProperties();
+		Metadata.initialize();
 		
 		TempoObject.setTimeoutSeconds(timeoutSeconds);
 		TempoObject.setStartDatetime(new Date());
@@ -126,7 +122,18 @@ public class BaseFixture extends DoFixture {
         this.version = version;
         TempoObject.setVersion(this.version);
     }
-	
+    
+    /**
+     * Sets the time display format string. This is useful so that test cases will work in different geographic regions that format date and time differently.  This format string must match Appian, e.g. in Australia the time string is HH:mm.<br>
+     * <br>
+     * FitNesse Example: <code>| set time display format string to | HH:mm |</code>
+     * @param tf Time display format string
+     */
+    public void setAppianLocaleTo(String locale) {
+        this.locale = locale;
+        TempoObject.setLocale(this.locale);
+    }
+    
 	/**
 	 * Sets the start datetime with which all of the relative dates and datetimes will be calculated.<br>
 	 * <br>
@@ -153,9 +160,9 @@ public class BaseFixture extends DoFixture {
 	 * FitNesse Example: <code>| set date format string to | dd/MM/yyyy |</code>
 	 * @param df Date format string
 	 */
-	public void setDateFormatStringTo(String df) {
-	    this.dateFormatString = df;
-	    TempoObject.setDateFormatString(this.dateFormatString);
+	@Deprecated
+	public void setDateFormatTo(String df) {
+	    TempoObject.setDateFormat(df);
 	}
 
 	/**
@@ -164,9 +171,9 @@ public class BaseFixture extends DoFixture {
      * FitNesse Example: <code>| set time format string to | HH:mm |</code>
      * @param tf Time format string
      */
-	public void setTimeFormatStringTo(String tf) {
-        this.timeFormatString = tf;
-        TempoObject.setTimeFormatString(this.timeFormatString);
+	@Deprecated
+	public void setTimeFormatTo(String tf) {
+        TempoObject.setTimeFormat(tf);
     }
 	
 	/**
@@ -175,9 +182,9 @@ public class BaseFixture extends DoFixture {
      * FitNesse Example: <code>| set date display format string to | d MMM yyyy |</code>
      * @param df Date display format string
      */
-    public void setDateDisplayFormatStringTo(String df) {
-        this.dateDisplayFormatString = df;
-        TempoObject.setDateDisplayFormatString(this.dateDisplayFormatString);
+	@Deprecated
+    public void setDateDisplayFormatTo(String df) {
+        TempoObject.setDateDisplayFormat(df);
     }
 
     /**
@@ -186,9 +193,9 @@ public class BaseFixture extends DoFixture {
      * FitNesse Example: <code>| set time display format string to | HH:mm |</code>
      * @param tf Time display format string
      */
-    public void setTimeDisplayFormatStringTo(String tf) {
-        this.timeDisplayFormatString = tf;
-        TempoObject.setTimeDisplayFormatString(this.timeDisplayFormatString);
+	@Deprecated
+    public void setTimeDisplayFormatTo(String tf) {
+        TempoObject.setTimeDisplayFormat(tf);
     }
 	
 	/**
@@ -394,14 +401,14 @@ public class BaseFixture extends DoFixture {
 	 * <br>
 	 * FitNesse Examples:<br>
 	 * <code>| wait until | 01/11/2016 12:31 PM |</code> - Test will halt until that particular time
-	 * @param datetime Datetime string must match {@link #setDateFormatStringTo(String)} and {@link #setTimeFormatStringTo(String)}
+	 * @param datetime Datetime string must match {@link #setDateFormatTo(String)} and {@link #setTimeFormatTo(String)}
 	 * @return True, when time is reached
 	 */
 	public boolean waitUntil(String datetime) {
         datetime = TempoObject.calculateDate(datetime);
         
         try {
-            Date endDatetime = DateUtils.parseDate(datetime, TempoObject.DATETIME_DISPLAY_FORMAT_STRING);
+            Date endDatetime = DateUtils.parseDate(datetime, TempoObject.getDatetimeDisplayFormat());
             Date nowDatetime = new Date();
             
             while (endDatetime.after(nowDatetime)) {
@@ -575,18 +582,6 @@ public class BaseFixture extends DoFixture {
 	    return val;
 	}
 	
-   private void loadProperties() {
-        String propFile = "/appianautomatedtest.properties";
-        try {
-            InputStream inputStream = BaseFixture.class.getResource(propFile).openStream();
-            prop.load(inputStream);
-            
-            AppianVersions.initialize();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }       
-    }
-   
    /**
     * Returns a random integer of a specific length<br>
     * <br>

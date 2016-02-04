@@ -8,14 +8,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoLogin extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoLogin.class);
-    private static final String XPATH_ABSOLUTE_LOGIN_SUBMIT_BUTTON = AppianVersions.getByConstant("xpathAbsoluteLoginSubmitButton");
-    private static final String XPATH_ABSOLUTE_LOGIN_AGREE_BUTTON = AppianVersions.getByConstant("xpathAbsoluteLoginAgreeButton");
-    private static final String XPATH_ABSOLUTE_LOGOUT_LINK = AppianVersions.getByConstant("xpathAbsoluteLogoutLink");
+    private static final String XPATH_ABSOLUTE_LOGIN_SUBMIT_BUTTON = Metadata.getByConstant("xpathAbsoluteLoginSubmitButton");
+    private static final String XPATH_ABSOLUTE_LOGIN_AGREE_BUTTON = Metadata.getByConstant("xpathAbsoluteLoginAgreeButton");
+    private static final String XPATH_ABSOLUTE_LOGOUT_LINK = Metadata.getByConstant("xpathAbsoluteLogoutLink");
     
     public static boolean logout() {
         LOG.debug("LOGGING OUT");

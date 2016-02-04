@@ -12,13 +12,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoSelectField extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoSelectField.class);
-    private static final String XPATH_ABSOLUTE_SELECT_FIELD_LABEL = AppianVersions.getByConstant("xpathAbsoluteSelectFieldLabel");
-    private static final String XPATH_RELATIVE_SELECT_FIELD_INPUT = AppianVersions.getByConstant("xpathRelativeSelectFieldInput");
+    private static final String XPATH_ABSOLUTE_SELECT_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteSelectFieldLabel");
+    private static final String XPATH_RELATIVE_SELECT_FIELD_INPUT = Metadata.getByConstant("xpathRelativeSelectFieldInput");
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_SELECT_FIELD_INPUT));

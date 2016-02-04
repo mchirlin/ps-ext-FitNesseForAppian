@@ -7,13 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoReport extends TempoObject {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoReport.class);
-    private static final String XPATH_ABSOLUTE_REPORT_LINK = AppianVersions.getByConstant("xpathAbsoluteReportLink");
+    private static final String XPATH_ABSOLUTE_REPORT_LINK = Metadata.getByConstant("xpathAbsoluteReportLink");
     
     public static boolean click(String reportName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName)));

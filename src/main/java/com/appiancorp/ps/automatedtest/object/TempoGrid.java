@@ -8,26 +8,26 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoGrid extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoGrid.class);
-    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX = AppianVersions.getByConstant("xpathAbsoluteGridByIndex");
-    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL = AppianVersions.getByConstant("xpathAbsoluteGridByLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX = Metadata.getByConstant("xpathAbsoluteGridByIndex");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL = Metadata.getByConstant("xpathAbsoluteGridByLabel");
     private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX = "(" + XPATH_ABSOLUTE_GRID_BY_LABEL + ")[%d]";
     
-    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_LABEL + AppianVersions.getByConstant("xpathConcatCellByColumnLabel");
-    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_LABEL + AppianVersions.getByConstant("xpathConcatCellByColumnIndex");
-    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_INDEX + AppianVersions.getByConstant("xpathConcatCellByColumnLabel");
-    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_INDEX + AppianVersions.getByConstant("xpathConcatCellByColumnIndex");
-    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX + AppianVersions.getByConstant("xpathConcatCellByColumnLabel");
-    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX + AppianVersions.getByConstant("xpathConcatCellByColumnIndex");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_LABEL + Metadata.getByConstant("xpathConcatCellByColumnLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_LABEL + Metadata.getByConstant("xpathConcatCellByColumnIndex");
+    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_INDEX + Metadata.getByConstant("xpathConcatCellByColumnLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_INDEX + Metadata.getByConstant("xpathConcatCellByColumnIndex");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX + Metadata.getByConstant("xpathConcatCellByColumnLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX + Metadata.getByConstant("xpathConcatCellByColumnIndex");
     
-    private static final String XPATH_RELATIVE_GRID_CELL_BY_COLUMN_LABEL = AppianVersions.getByConstant("xpathRelativeGridCellByColumnLabel");
-    private static final String XPATH_RELATIVE_GRID_CELL_BY_COLUMN_INDEX = AppianVersions.getByConstant("xpathRelativeGridCellByColumnIndex");
+    private static final String XPATH_RELATIVE_GRID_CELL_BY_COLUMN_LABEL = Metadata.getByConstant("xpathRelativeGridCellByColumnLabel");
+    private static final String XPATH_RELATIVE_GRID_CELL_BY_COLUMN_INDEX = Metadata.getByConstant("xpathRelativeGridCellByColumnIndex");
     
-    private static final String XPATH_RELATIVE_GRID_CHECKBOX = AppianVersions.getByConstant("xpathRelativeGridCheckbox");
+    private static final String XPATH_RELATIVE_GRID_CHECKBOX = Metadata.getByConstant("xpathRelativeGridCheckbox");
 
     public static WebElement getGrid(String gridName) {
         if (isFieldIndex(gridName)) {

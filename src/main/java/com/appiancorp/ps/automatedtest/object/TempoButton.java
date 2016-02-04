@@ -7,12 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoButton extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoButton.class);
-    private static final String XPATH_ABSOLUTE_BUTTON = AppianVersions.getByConstant("xpathAbsoluteButton");
+    private static final String XPATH_ABSOLUTE_BUTTON = Metadata.getByConstant("xpathAbsoluteButton");
     
     public static boolean click(String buttonName) {        
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName)));

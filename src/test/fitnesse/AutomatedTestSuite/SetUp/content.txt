@@ -1,6 +1,6 @@
 !3 Update the Appian URL (REPLACE_APPIAN_URL), Username (REPLACE_USERNAME), and Password (REPLACE_PASSWORD) below.
 
-!** Setup
+!*** Setup
 Need these before each test case
 !| com.appiancorp.ps.automatedtest.fixture.TempoFixture |
 | setup selenium web driver with browser | FIREFOX |
@@ -11,17 +11,15 @@ Setup how long test will wait before failing
 
 Set start date and format how dates are used in the application
 | set start datetime |
-| set date format string to | d/M/yyyy |
-| set time format string to | HH:mm |
-| set date display format string to | MMM d yyyy |
-| set time display format string to | HH:mm |
+| set appian version to | 16.1 |
+| set appian locale to | en_GB |
 
 Create a random string and new folder to take screensshots for errors
 | set | rand | get random string | 4 |
 | set take error screenshots to | true |
 | set screenshot path to | C:\AutomatedTesting\screenshots\@{rand}\ |
-**!
+***!
 
-!*** Login information 
+!*** Login
 | login with username | michael.chirlin@appian.com | and password | password1 |
 ***!

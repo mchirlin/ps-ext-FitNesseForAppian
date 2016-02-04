@@ -8,15 +8,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoRecord extends TempoObject {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoRecord.class);
-    private static final String XPATH_ABSOLUTE_RECORD_LINK = AppianVersions.getByConstant("xpathAbsoluteRecordLink");
-    private static final String XPATH_ABSOLUTE_RECORD_VIEW_LINK = AppianVersions.getByConstant("xpathAbsoluteRecordViewLink");
-    private static final String XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK = AppianVersions.getByConstant("xpathAbsoluteRecordRelatedActionLink");
+    private static final String XPATH_ABSOLUTE_RECORD_LINK = Metadata.getByConstant("xpathAbsoluteRecordLink");
+    private static final String XPATH_ABSOLUTE_RECORD_VIEW_LINK = Metadata.getByConstant("xpathAbsoluteRecordViewLink");
+    private static final String XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK = Metadata.getByConstant("xpathAbsoluteRecordRelatedActionLink");
     
     public static boolean click(String itemName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName)));

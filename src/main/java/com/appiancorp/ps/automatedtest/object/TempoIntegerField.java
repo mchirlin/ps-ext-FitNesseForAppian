@@ -7,13 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoIntegerField extends TempoTextField {
 
     private static final Logger LOG = Logger.getLogger(TempoIntegerField.class);
-    private static final String XPATH_ABSOLUTE_INTEGER_FIELD_LABEL = AppianVersions.getByConstant("xpathAbsoluteIntegerFieldLabel");
-    private static final String XPATH_RELATIVE_INTEGER_FIELD_INPUT = AppianVersions.getByConstant("xpathRelativeIntegerFieldInput");
+    private static final String XPATH_ABSOLUTE_INTEGER_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteIntegerFieldLabel");
+    private static final String XPATH_RELATIVE_INTEGER_FIELD_INPUT = Metadata.getByConstant("xpathRelativeIntegerFieldInput");
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement intField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INTEGER_FIELD_INPUT));

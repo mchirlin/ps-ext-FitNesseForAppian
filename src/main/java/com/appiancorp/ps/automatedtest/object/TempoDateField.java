@@ -13,14 +13,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoDateField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoDateField.class);
-    private static final String XPATH_ABSOLUTE_DATE_FIELD_INPUT = AppianVersions.getByConstant("xpathAbsoluteDateFieldInput");
-    private static final String XPATH_RELATIVE_DATE_FIELD_PLACEHOLDER = AppianVersions.getByConstant("xpathRelativeDateFieldPlaceholder");
-    private static final String XPATH_RELATIVE_DATE_FIELD_INPUT = AppianVersions.getByConstant("xpathRelativeDateFieldInput");
+    private static final String XPATH_ABSOLUTE_DATE_FIELD_INPUT = Metadata.getByConstant("xpathAbsoluteDateFieldInput");
+    private static final String XPATH_RELATIVE_DATE_FIELD_PLACEHOLDER = Metadata.getByConstant("xpathRelativeDateFieldPlaceholder");
+    private static final String XPATH_RELATIVE_DATE_FIELD_INPUT = Metadata.getByConstant("xpathRelativeDateFieldInput");
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) throws ParseException {        
         fieldValue = parseVariable(fieldValue);
@@ -69,7 +69,7 @@ public class TempoDateField extends TempoField {
     }
     
     private static boolean populateTempoDateFieldWithDate(WebElement fieldLayout, Date d) {
-        String dateValue = new SimpleDateFormat(DATE_FORMAT_STRING).format(d);
+        String dateValue = new SimpleDateFormat(dateFormat).format(d);
         
         WebElement datePlaceholder = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_FIELD_PLACEHOLDER));
         WebElement dateField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_FIELD_INPUT));

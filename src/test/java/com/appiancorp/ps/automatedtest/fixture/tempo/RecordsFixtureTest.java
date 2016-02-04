@@ -21,11 +21,7 @@ public class RecordsFixtureTest {
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
       tFixture.setTimeoutSecondsTo("15");
       tFixture.setAppianVersionTo("16.1");
-      
-      tFixture.setDateFormatStringTo("dd/MM/yyyy");
-      tFixture.setTimeFormatStringTo("HH:mm");
-      tFixture.setDateDisplayFormatStringTo("MMM d yyyy");
-      tFixture.setTimeDisplayFormatStringTo("HH:mm");
+      tFixture.setAppianLocaleTo("en_GB");;
       
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
       
@@ -36,7 +32,7 @@ public class RecordsFixtureTest {
       tFixture.populateFieldWith("Text Field Test", new String[]{randString});
       tFixture.populateFieldWith("Integer Field Test", new String[]{"5"});
       tFixture.populateFieldWith("Decimal Field Test", new String[]{"123.45"});
-      tFixture.populateFieldWith("Date and Time Test", new String[]{"04/02/2016 02:00"});
+      tFixture.populateFieldWith("Date and Time Test", new String[]{"2010-01-01 02:00"});
       
       tFixture.clickOnButton("Submit");
     }
@@ -46,8 +42,8 @@ public class RecordsFixtureTest {
         tFixture.clickOnMenu("Records");
         
         assertTrue(tFixture.clickOnRecordType("Automated Testing Records"));
-        //TODO assertTrue(tFixture.verifyRecordTypeUserFilterIsPresent("Open"));
-        //TODO assertTrue(tFixture.clickOnRecordTypeUserFilter("Open"));
+        assertTrue(tFixture.verifyRecordTypeUserFilterIsPresent("Past"));
+        assertTrue(tFixture.clickOnRecordTypeUserFilter("Past"));
         assertTrue(tFixture.verifyRecordIsPresent(randString));
         assertTrue(tFixture.verifyRecordIsNotPresent("Not present"));
         assertTrue(tFixture.clickOnRecord(randString));

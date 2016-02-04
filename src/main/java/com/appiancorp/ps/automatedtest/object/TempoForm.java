@@ -7,14 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoForm extends TempoObject {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoForm.class);
-    private static final String XPATH_ABSOLUTE_FORM_TITLE = AppianVersions.getByConstant("xpathAbsoluteFormTitle");
-    private static final String XPATH_ABSOLUTE_FORM_INSTRUCTIONS = AppianVersions.getByConstant("xpathAbsoluteFormInstructions");
+    private static final String XPATH_ABSOLUTE_FORM_TITLE = Metadata.getByConstant("xpathAbsoluteFormTitle");
+    private static final String XPATH_ABSOLUTE_FORM_INSTRUCTIONS = Metadata.getByConstant("xpathAbsoluteFormInstructions");
     
     public static String getFormTitle() {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE)));

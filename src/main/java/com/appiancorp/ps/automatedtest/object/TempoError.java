@@ -6,14 +6,14 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
 public class TempoError extends TempoObject {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoError.class);
-    private static final String XPATH_ERROR = AppianVersions.getByConstant("xpathAbsoluteError");
+    private static final String XPATH_ERROR = Metadata.getByConstant("xpathAbsoluteError");
     
     public static boolean waitFor() {
         try {

@@ -8,12 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoMenu extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoMenu.class);
-    private static final String XPATH_ABSOLUTE_MENU_LINK = AppianVersions.getByConstant("xpathAbsoluteMenuLink");
+    private static final String XPATH_ABSOLUTE_MENU_LINK = Metadata.getByConstant("xpathAbsoluteMenuLink");
     
     public static boolean click(String tempoMenu) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu)));

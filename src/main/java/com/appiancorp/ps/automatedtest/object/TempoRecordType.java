@@ -7,14 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoRecordType extends TempoObject{
 
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoRecordType.class);
-    private static final String XPATH_ABSOLUTE_RECORD_TYPE_LINK = AppianVersions.getByConstant("xpathAbsoluteRecordTypeLink");
-    private static final String XPATH_ABSOLUTE_RECORD_TYPE_USER_FILTER_LINK = AppianVersions.getByConstant("xpathAbsoluteRecordTypeUserFilterLink");
+    private static final String XPATH_ABSOLUTE_RECORD_TYPE_LINK = Metadata.getByConstant("xpathAbsoluteRecordTypeLink");
+    private static final String XPATH_ABSOLUTE_RECORD_TYPE_USER_FILTER_LINK = Metadata.getByConstant("xpathAbsoluteRecordTypeUserFilterLink");
 
     public static boolean click(String type) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_LINK, type)));

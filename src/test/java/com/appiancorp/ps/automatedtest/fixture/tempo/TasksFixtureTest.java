@@ -19,6 +19,8 @@ public class TasksFixtureTest {
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
       tFixture.setTimeoutSecondsTo("10");
+      tFixture.setAppianVersionTo("16.1");
+      tFixture.setAppianLocaleTo("en_GB");;
       
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
       
@@ -52,7 +54,7 @@ public class TasksFixtureTest {
     public void testVerifyTaskHasDeadlineOf() throws Exception {
         tFixture.clickOnMenu("Tasks");
         
-        // TODO Create task with deadline
+        assertTrue(tFixture.verifyTaskHasDeadlineOf("Input Automated Test Data", "1h"));
     }
     
     @AfterClass

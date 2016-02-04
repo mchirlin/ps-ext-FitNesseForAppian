@@ -7,16 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
 public class TempoSection extends TempoObject {
        
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoSection.class);
-    protected static final String XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT = AppianVersions.getByConstant("xpathAbsoluteSectionFieldLayout");
-    protected static final String XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT_INDEX = AppianVersions.getByConstant("xpathAbsoluteSectionFieldLayoutIndex");
-    protected static final String XPATH_ABSOLUTE_SECTION_ERROR = AppianVersions.getByConstant("xpathAbsoluteSectionError");
+    protected static final String XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT = Metadata.getByConstant("xpathAbsoluteSectionFieldLayout");
+    protected static final String XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT_INDEX = Metadata.getByConstant("xpathAbsoluteSectionFieldLayoutIndex");
+    protected static final String XPATH_ABSOLUTE_SECTION_ERROR = Metadata.getByConstant("xpathAbsoluteSectionError");
     
     public static WebElement getFieldLayout(String fieldName, String sectionName) {
         if (isFieldIndex(fieldName)) {

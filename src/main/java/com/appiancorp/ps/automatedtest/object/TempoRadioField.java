@@ -10,17 +10,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.AppianVersions;
+import com.appiancorp.ps.automatedtest.common.Metadata;
 
 public class TempoRadioField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoRadioField.class);
-    private static final String XPATH_ABSOLUTE_RADIO_FIELD_LABEL = AppianVersions.getByConstant("xpathAbsoluteRadioFieldLabel");
-    private static final String XPATH_RELATIVE_RADIO_FIELD_CHOICE_LABEL = AppianVersions.getByConstant("xpathRelativeRadioFieldChoiceLabel");
-    private static final String XPATH_RELATIVE_RADIO_FIELD_CHOICE_INDEX = AppianVersions.getByConstant("xpathRelativeRadioFieldChoiceIndex");
-    private static final String XPATH_RELATIVE_RADIO_BUTTON_GROUP = AppianVersions.getByConstant("xpathRelativeRadioButtonGroup");
-    private static final String XPATH_RELATIVE_RADIO_FIELD_INPUT_SPAN = AppianVersions.getByConstant("xpathRelativeRadioFieldInputSpan");
-    private static final String XPATH_ABSOLUTE_RADIO_FIELD_OPTION = AppianVersions.getByConstant("xpathAbsoluteRadioFieldOption");
+    private static final String XPATH_ABSOLUTE_RADIO_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteRadioFieldLabel");
+    private static final String XPATH_RELATIVE_RADIO_FIELD_CHOICE_LABEL = Metadata.getByConstant("xpathRelativeRadioFieldChoiceLabel");
+    private static final String XPATH_RELATIVE_RADIO_FIELD_CHOICE_INDEX = Metadata.getByConstant("xpathRelativeRadioFieldChoiceIndex");
+    private static final String XPATH_RELATIVE_RADIO_BUTTON_GROUP = Metadata.getByConstant("xpathRelativeRadioButtonGroup");
+    private static final String XPATH_RELATIVE_RADIO_FIELD_INPUT_SPAN = Metadata.getByConstant("xpathRelativeRadioFieldInputSpan");
+    private static final String XPATH_ABSOLUTE_RADIO_FIELD_OPTION = Metadata.getByConstant("xpathAbsoluteRadioFieldOption");
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
         WebElement radioField;
