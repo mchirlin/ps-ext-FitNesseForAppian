@@ -20,7 +20,7 @@
 
 !3 NAVIGATION
 * | click on menu | *TEMPO_MENU_NAME* |
-* | populate search with | *SEARCH_TERM* |
+* | search for | *SEARCH_TERM* |
 
 !3 NEWS
 * | verify news feed containing text | *NEWS_TEXT* | is present |

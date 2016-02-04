@@ -103,14 +103,16 @@
 	    {"label": "xpathConcatNewsItemComment", "value": "/parent::div/descendant::div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '%s')]"},
 	    {"label": "xpathConcatNewsItemPostedAt", "value": "/parent::div/descendant::a[contains(text(), '%s')]"},
 	    {"label": "xpathAbsoluteFieldLayout", "value": "//span[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //label[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
-	    {"label": "xpathRelativeReadOnlyField", "value": ".//p[contains(@class, 'readonly')] | div[ancestor::table[contains(@class, 'DataGrid-Table')]]"}
+	    {"label": "xpathRelativeReadOnlyField", "value": ".//p[contains(@class, 'readonly')] | div[ancestor::table[contains(@class, 'DataGrid-Table')]]"},
+	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input"}
 	  ]
 	},
 	{ "version": "7.11", "byConstants": [] },
 	{
       "version": "16.1",
       "byConstants" : [
-	    {"label": "xpathAbsoluteRecordLink", "value": "//a[contains(@href, '/suite/tempo/records/item/') and contains(@href, '/view/summary') and contains(text(), '%s')]"}
+	    {"label": "xpathAbsoluteRecordLink", "value": "//a[contains(@href, '/suite/tempo/records/item/') and contains(@href, '/view/summary') and contains(text(), '%s')]"},
+	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input | //div[contains(@class, 'filters')]/descendant::input[@type = 'text']"}
 	  ]
 	}
   ]

@@ -53,25 +53,17 @@ public class TempoFixture extends BaseFixture {
 	   /**
      * Populates search fields in News, Reports, and Records. <br>
      * <br>
-     * Example: <code>| populate search with | SEARCH_TERM |</code>
+     * Example: <code>| search for | SEARCH_TERM |</code>
      * 
      * @param searchTerm The term to search for News, Reports, and Records
      * @return True if action completed
      */
-	public boolean populateSearchWith(String searchTerm){
-	    //TODO 
+	public boolean searchFor(String searchTerm){
         if(!TempoSearch.waitFor(searchTerm)) {
             throw new MissingObjectException("Field", searchTerm);
         }
         
-        // Populate the field
-        int attempt = 0;
-        while (attempt < attemptTimes) {
-            if (TempoSearch.populateSearch(searchTerm)) return true;
-            attempt++;
-        }
-
-        return returnHandler(false);
+        return returnHandler(TempoSearch.searchFor(searchTerm));
     }
 	
 	/**
