@@ -366,8 +366,7 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.clickOnRadioOption("Click Me!"));
         assertTrue(tFixture.clickOnCheckboxOption("Click Me Too!"));
     }
-    
-    /* 
+     
     @Test
     public void testSelectGridRow() throws Exception {
         assertFalse(tFixture.verifyGridRowIsSelected("EditableGrid", "[1]"));
@@ -386,6 +385,7 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "[2]","[1]", new String[] {"Value 1"}));
     }
     
+    /*
     @Test 
     public void testGridAddRowLink() throws Exception {
         assertTrue(tFixture.clickOnGridAddRowLink("[1]"));
