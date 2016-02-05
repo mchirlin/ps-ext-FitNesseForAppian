@@ -2,7 +2,7 @@
 |click on menu  |Actions   |
 |click on action|All Fields|
 ***!
-!*** Check Forms Title and instrcutions 
+!*** Check Forms Title and instructions 
 |check|get form title       |Form        |
 |check|get form instructions|Instructions|
 ***!
@@ -144,10 +144,10 @@
 ----
 !*** Verify/Check Fields Contain Values for Section 3
 
-!| verify field|[1]         |in section|Section 2|contains|noLabel|
+!| verify field|[1]         |in section|Section 3|contains|noLabel|
 |verify field  |TextField[2]|contains  |text2                     |
 
-!| check|get field|[1]         |in section|Section 2|value|noLabel|
+!| check|get field|[1]         |in section|Section 3|value|noLabel|
 |check  |get field|TextField[2]|value     |text2                  |
 ***!
 ----
