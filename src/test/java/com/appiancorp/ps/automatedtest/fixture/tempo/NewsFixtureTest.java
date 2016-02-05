@@ -13,6 +13,7 @@ public class NewsFixtureTest {
     
     private static TempoFixture tFixture;
     private static String randString;
+    private static Integer randInt;
     
     @BeforeClass
     public static void setUp() throws Exception {
@@ -30,39 +31,53 @@ public class NewsFixtureTest {
       tFixture.clickOnAction("Automated Testing Input");
       
       randString = tFixture.getRandomString(5);
+      randInt = tFixture.getRandomIntegerFromTo(0, 9);
       tFixture.populateFieldWith("Text Field Test", new String[]{randString});
-      tFixture.populateFieldWith("Integer Field Test", new String[]{"5"});
+      tFixture.populateFieldWith("Integer Field Test", new String[]{randInt.toString()});
       tFixture.populateFieldWith("Decimal Field Test", new String[]{"123.45"});
-      tFixture.populateFieldWith("Date and Time Test", new String[]{"04/02/2016 02:00"});
+      tFixture.populateFieldWith("Date and Time Test", new String[]{"2016-02-04 02:00"});
       
       tFixture.clickOnButton("Submit");
-    }
-    
-    /** 
-     * Whether or not these tests work is highly dependent on the current news feed status in the test site.
-     * @throws Exception
-     */
-    @Test
-    public void testNewsFixture() throws Exception {
-        tFixture.clickOnMenu("News");        
-        assertTrue(tFixture.verifyNewsFeedContainingTextIsPresent("Automated test message: " + randString));
-        assertTrue(tFixture.verifyNewsFeedContainingTextIsNotPresent("Not present"));
-        //TODO assertTrue(tFixture.toggleMoreInfoForNewsFeedContainingText("A test message: " + randString"));
-        //TODO assertTrue(tFixture.verifyNewsFeedContainingTextAndMoreInfoWithLabelAndValueIsPresent("A test message: " + randString, "Total Hours", "42.0"));
-        //TODO assertTrue(tFixture.verifyNewsFeedContainingTextTaggedWithIsPresent("A test message: " + randString, "536877593"));
-        //TODO assertTrue(tFixture.verifyNewsFeedContainingTextCommentedWithIsPresent(A test message" + randString, randString));
-        assertEquals(tFixture.getRegexFromNewsFeedContainingText(": [a-zA-Z0-9]{5}", "Automated test message: " + randString), ": " + randString);
-        //TODO assertEquals(tFixture.getRegexFromNewsFeedContainingTextCommentedWith("", "", ""), "");
     }
     
     @Test 
     public void testClickOnRecordTag() throws Exception {
         tFixture.clickOnMenu("News");
-        assertTrue(tFixture.clickOnNewsFeedRecordTag("Automated test message: " + randString, randString));
+        assertTrue(tFixture.verifyNewsFeedContainingTextTaggedWithIsPresent(randString, randString));
+        assertTrue(tFixture.clickOnNewsFeedRecordTag(randString, randString));
+    }
+    
+    @Test
+    public void testVerifyFeed() {
+        tFixture.clickOnMenu("News");        
+        assertTrue(tFixture.verifyNewsFeedContainingTextIsPresent(randString));
+        assertTrue(tFixture.verifyNewsFeedContainingTextIsNotPresent("Not present"));
+    }
+    
+    @Test
+    public void testNewsItemComments() {
+        tFixture.clickOnMenu("News");        
+        assertTrue(tFixture.verifyNewsFeedContainingTextCommentedWithIsPresent(randString, "Comment"));
+    }
+    
+    @Test
+    public void testMoreInfo() {
+        tFixture.clickOnMenu("News");   
+        assertTrue(tFixture.toggleMoreInfoForNewsFeedContainingText(randString));
+        assertTrue(tFixture.verifyNewsFeedContainingTextAndMoreInfoWithLabelAndValueIsPresent(randString, "Label", "Value"));
+    }
+    
+    @Test
+    public void testRegex() throws Exception {
+        tFixture.clickOnMenu("News");   
+        assertEquals(tFixture.getRegexFromNewsFeedContainingText("\\[[a-zA-Z0-9]{5}\\]", randString), "[" + randString + "]");
+        assertEquals(tFixture.getRegexFromNewsFeedContainingTextCommentedWith("\\[[0-9]\\]", randString, "Comment"), "[" + randInt + "]");
     }
     
     @AfterClass
     public static void tearDown() throws Exception {
+        tFixture.clickOnMenu("News");
+        tFixture.deleteNewsPost(randString);
         tFixture.logout();
         tFixture.tearDownSeleniumWebDriver();
     }

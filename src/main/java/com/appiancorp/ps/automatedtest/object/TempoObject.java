@@ -12,10 +12,8 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -270,7 +268,7 @@ public class TempoObject {
     }
     
     public static void unfocus() {
-        new Actions(getDriver()).sendKeys(Keys.TAB).perform();
+        driver.findElement(By.xpath("//html")).click();
         waitForWorking();
     }
     

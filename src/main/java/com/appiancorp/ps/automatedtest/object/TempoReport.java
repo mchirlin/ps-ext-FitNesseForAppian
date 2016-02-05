@@ -22,9 +22,9 @@ public class TempoReport extends TempoObject {
         return true;
     }
     
-    public static boolean waitFor(String reportName) {
+    public static boolean waitFor(String reportName, Integer timeout) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName))));
+            (new WebDriverWait(driver, timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName)));
             scrollIntoView(element);
         } catch (TimeoutException e) {
@@ -32,5 +32,9 @@ public class TempoReport extends TempoObject {
         }
 
         return true;
+    }
+    
+    public static boolean waitFor(String reportName) {
+        return waitFor(reportName, timeoutSeconds);
     }
 }

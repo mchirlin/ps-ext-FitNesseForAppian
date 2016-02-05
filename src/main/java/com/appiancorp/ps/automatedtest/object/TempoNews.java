@@ -20,10 +20,11 @@ public class TempoNews extends TempoObject {
     private static final String XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG = XPATH_ABSOLUTE_NEWS_ITEM + Metadata.getByConstant("xpathConcatNewsItemRecordTag");
     private static final String XPATH_ABSOLUTE_NEWS_ITEM_COMMENT = XPATH_ABSOLUTE_NEWS_ITEM + Metadata.getByConstant("xpathConcatNewsItemComment");
     private static final String XPATH_ABSOLUTE_NEWS_ITEM_POSTED_AT = XPATH_ABSOLUTE_NEWS_ITEM + Metadata.getByConstant("xpathConcatNewsItemPostedAt");
+    private static final String XPATH_ABSOLUTE_NEWS_ITEM_DELETE_LINK = XPATH_ABSOLUTE_NEWS_ITEM + Metadata.getByConstant("xpathConcatNewsItemDeleteLink");
     
-    public static boolean waitFor(String newsText) {
+    public static boolean waitFor(String newsText, Integer timeout) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM, newsText))));
+            (new WebDriverWait(driver, timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM, newsText))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM, newsText)));
             scrollIntoView(element, false);
         } catch (TimeoutException e) {
@@ -31,6 +32,10 @@ public class TempoNews extends TempoObject {
         }
     
         return true;
+    }
+    
+    public static boolean waitFor(String newsText) {
+        return waitFor(newsText, timeoutSeconds);
     }
     
     public static boolean refreshAndWaitFor(String newsText) {
@@ -87,6 +92,26 @@ public class TempoNews extends TempoObject {
             return false;
         }
         
+        return true;
+    }
+    
+    public static boolean refreshAndWaitForTag(String newsText, String newsTag) {
+        boolean present = false;
+
+        int i = 0;
+        while (!present) {
+            if (i >= refreshTimes) return false;
+            
+            driver.navigate().refresh();
+            
+            if (TempoNews.waitForTag(newsText, newsTag)) {
+                present = true;
+                break;
+            };
+
+            i++;
+        }
+       
         return true;
     }
     
@@ -151,6 +176,15 @@ public class TempoNews extends TempoObject {
     public static boolean clickOnRecordTag(String newsText, String recordTag) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG, newsText, recordTag)));
         element.click();
+        
+        return true;
+    }
+    
+    public static boolean deleteNewsPost(String newsText) {
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_DELETE_LINK, newsText)));
+        element.click();
+        
+        TempoButton.click("Yes");
         
         return true;
     }

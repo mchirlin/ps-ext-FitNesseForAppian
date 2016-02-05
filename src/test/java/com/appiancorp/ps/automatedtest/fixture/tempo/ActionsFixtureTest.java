@@ -30,13 +30,11 @@ public class ActionsFixtureTest {
         tFixture.clickOnMenu("Actions");
         
         assertTrue(tFixture.verifyActionIsPresent("Automated Testing"));
-
         assertTrue(tFixture.verifyActionIsNotPresent("Not Automated Testing"));
-        
         assertTrue(tFixture.clickOnAction("Automated Testing"));
         
         tFixture.clickOnButton("Cancel");
-        
+
         assertTrue(tFixture.verifyActionCompleted());
     }
     

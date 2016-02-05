@@ -19,6 +19,7 @@ public class ReportsFixtureTest {
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
       tFixture.setTimeoutSecondsTo("10");
+      tFixture.setAppianVersionTo("16.1");
       tFixture.setAppianLocaleTo("en_GB");
       
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
@@ -29,9 +30,7 @@ public class ReportsFixtureTest {
         tFixture.clickOnMenu("Reports");
         
         assertTrue(tFixture.verifyReportIsPresent("Orders Dashboard"));
-        
         assertTrue(tFixture.verifyReportIsNotPresent("Not Orders Dashboard"));
-
         assertTrue(tFixture.clickOnReport("Orders Dashboard"));
     }
     

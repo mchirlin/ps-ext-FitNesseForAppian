@@ -25,9 +25,9 @@ public class TempoRecord extends TempoObject {
         return true;
     }
     
-    public static boolean waitFor(String itemName) {
+    public static boolean waitFor(String itemName, Integer timeout) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName))));
+            (new WebDriverWait(driver, timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName)));
             scrollIntoView(element, false);
         } catch (TimeoutException e) {
@@ -35,6 +35,10 @@ public class TempoRecord extends TempoObject {
         }
         
         return true;
+    }
+    
+    public static boolean waitFor(String itemName) {
+        return waitFor(itemName, timeoutSeconds);
     }
     
     public static boolean refreshAndWaitFor(String itemName) {
@@ -85,9 +89,9 @@ public class TempoRecord extends TempoObject {
         return true;
     }
     
-    public static boolean waitForRelatedAction(String relatedAction) {
+    public static boolean waitForRelatedAction(String relatedAction, Integer timeout) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction))));
+            (new WebDriverWait(driver, timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction)));
             scrollIntoView(element);
         } catch (TimeoutException e) {
@@ -95,6 +99,10 @@ public class TempoRecord extends TempoObject {
         }
         
         return true;
+    }
+    
+    public static boolean waitForRelatedAction(String relatedAction) {
+        return waitForRelatedAction(relatedAction, timeoutSeconds);
     }
     
     public static boolean refreshAndWaitForRelatedAction(String relatedAction) {

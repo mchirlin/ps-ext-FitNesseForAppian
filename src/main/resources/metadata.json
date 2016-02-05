@@ -102,6 +102,7 @@
 	    {"label": "xpathConcatNewsItemRecordTag", "value": "/parent::div/descendant::a[contains(text(), '%s')]"},
 	    {"label": "xpathConcatNewsItemComment", "value": "/parent::div/descendant::div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '%s')]"},
 	    {"label": "xpathConcatNewsItemPostedAt", "value": "/parent::div/descendant::a[contains(text(), '%s')]"},
+	    {"label": "xpathConcatNewsItemDeleteLink", "value": "/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(), 'Delete')]"},
 	    {"label": "xpathAbsoluteFieldLayout", "value": "//span[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //label[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
 	    {"label": "xpathRelativeReadOnlyField", "value": ".//p[contains(@class, 'readonly')] | div[ancestor::table[contains(@class, 'DataGrid-Table')]]"},
 	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input"},

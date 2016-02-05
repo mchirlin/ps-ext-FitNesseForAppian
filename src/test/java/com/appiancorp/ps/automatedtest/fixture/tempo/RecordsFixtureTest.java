@@ -50,8 +50,6 @@ public class RecordsFixtureTest {
         assertTrue(tFixture.clickOnRecordView("Related Actions"));
         assertTrue(tFixture.verifyRecordRelatedActionIsPresent("AUT Data Input Test"));
         assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not present"));
-        
-        tFixture.waitForSeconds("1");
     }
     
     @Test
@@ -63,11 +61,13 @@ public class RecordsFixtureTest {
         assertTrue(tFixture.clickOnRecord(randString));
         assertTrue(tFixture.clickOnRecordRelatedAction("AUT Data Input Test"));
         
-        tFixture.waitForSeconds("1");
+        tFixture.clickOnButton("Cancel");
     }    
     
     @AfterClass
     public static void tearDown() throws Exception {
+        tFixture.clickOnMenu("News");
+        tFixture.deleteNewsPost(randString);
         tFixture.logout();
         tFixture.tearDownSeleniumWebDriver();
     }

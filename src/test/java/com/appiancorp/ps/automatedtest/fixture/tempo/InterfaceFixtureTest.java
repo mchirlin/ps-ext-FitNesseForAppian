@@ -219,27 +219,12 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "SelectField", "[2]", new String[]{"Option 2"}));
         assertEquals("Option 2", tFixture.getGridColumnRowValue("EditableGrid[2]", "SelectField", "[2]"));
     }
+    
     @Test
     public void testMultipleSelectField() throws Exception {
         assertTrue(tFixture.populateFieldWith("MultipleSelectField", new String[]{"Option 1", "Option 2"}));
         assertTrue(tFixture.verifyFieldContains("MultipleSelectField", new String[]{"Option 1","Option 2"}));
         assertEquals("Option 1,Option 2", tFixture.getFieldValue("MultipleSelectField"));
-    }
-    
-    @Test
-    public void testRadioField() throws Exception {
-        assertTrue(tFixture.populateFieldWith("RadioField", new String[]{"Option 1"}));
-        assertTrue(tFixture.verifyFieldContains("RadioField", new String[]{"Option 1"}));
-        assertEquals("Option 1", tFixture.getFieldValue("RadioField"));
-        
-        // Grid
-        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[2]", "RadioField", "[1]", new String[]{"Option 1"}));
-        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "RadioField", "[1]", new String[]{"Option 1"}));
-        assertEquals("Option 1", tFixture.getGridColumnRowValue("EditableGrid[2]", "RadioField", "[1]"));
-        
-        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[2]", "[3]", "[2]", new String[]{"Option 2"}));
-        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "[3]", "[2]", new String[]{"Option 2"}));
-        assertEquals("Option 2", tFixture.getGridColumnRowValue("EditableGrid[2]", "[3]", "[2]"));
     }
     
     @Test
@@ -259,6 +244,22 @@ public class InterfaceFixtureTest {
     }
     
     @Test
+    public void testRadioField() throws Exception {
+        assertTrue(tFixture.populateFieldWith("RadioField", new String[]{"Option 1"}));
+        assertTrue(tFixture.verifyFieldContains("RadioField", new String[]{"Option 1"}));
+        assertEquals("Option 1", tFixture.getFieldValue("RadioField"));
+        
+        // Grid
+        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[2]", "RadioField", "[1]", new String[]{"Option 1"}));
+        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "RadioField", "[1]", new String[]{"Option 1"}));
+        assertEquals("Option 1", tFixture.getGridColumnRowValue("EditableGrid[2]", "RadioField", "[1]"));
+        
+        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[2]", "[3]", "[2]", new String[]{"Option 2"}));
+        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "[3]", "[2]", new String[]{"Option 2"}));
+        assertEquals("Option 2", tFixture.getGridColumnRowValue("EditableGrid[2]", "[3]", "[2]"));
+    }
+    
+    @Test
     public void testFileUploadField() throws Exception {
         assertTrue(tFixture.populateFieldWith("FileUploadField", new String[]{"C:\\Users\\michael.chirlin\\Documents\\Low Risk.jpg"}));
         assertTrue(tFixture.verifyFieldContains("FileUploadField", new String[]{"C:\\Users\\michael.chirlin\\Documents\\Low Risk.jpg"}));
@@ -274,72 +275,71 @@ public class InterfaceFixtureTest {
         assertEquals("High Risk.jpg", tFixture.getGridColumnRowValue("EditableGrid[2]", "[5]", "[2]"));
     }
     
+    /*    
     @Test
     public void testPickerFields() throws Exception {
-        //TODO Add readonly test
-        
         assertTrue(tFixture.populateFieldWith("UserPicker", new String[]{"Michael Chirlin", "Ray Croxon"}));
         assertTrue(tFixture.verifyFieldContains("UserPicker", new String[]{"Michael Chirlin", "Ray Croxon"}));
         assertEquals("Michael Chirlin,Ray Croxon", tFixture.getFieldValue("UserPicker"));
         
-        /*
-        assertTrue(tFixture.populateFieldWith("GroupPicker", new String[]{"AcqDemo"}));
-        assertTrue(tFixture.verifyFieldContains("GroupPicker", new String[]{"AcqDemo"}));
-        assertEquals("AcqDemo", tFixture.getFieldValue("GroupPicker"));
+        assertTrue(tFixture.verifyFieldContains("ROUserPicker", new String[]{"Michael Chirlin", "Ray Croxon"}));
+        assertEquals("Michael Chirlin,Ray Croxon", tFixture.getFieldValue("ROUserPicker"));
         
-        assertTrue(tFixture.populateFieldWith("UserGroupPicker", new String[]{"Michael Chirlin"}));
-        assertTrue(tFixture.verifyFieldContains("UserGroupPicker", new String[]{"Michael Chirlin"}));
-        assertEquals("Michael Chirlin", tFixture.getFieldValue("UserGroupPicker"));
+        // assertTrue(tFixture.populateFieldWith("GroupPicker", new String[]{"AcqDemo"}));
+        // assertTrue(tFixture.verifyFieldContains("GroupPicker", new String[]{"AcqDemo"}));
+        // assertEquals("AcqDemo", tFixture.getFieldValue("GroupPicker"));
         
-        assertTrue(tFixture.populateFieldWith("DocumentPicker", new String[]{"Jellyfish"}));
-        assertTrue(tFixture.verifyFieldContains("DocumentPicker", new String[]{"Jellyfish.jpg"}));
-        assertEquals("Jellyfish.jpg", tFixture.getFieldValue("DocumentPicker")); // Note I need the extension here
+        // assertTrue(tFixture.populateFieldWith("UserGroupPicker", new String[]{"Michael Chirlin"}));
+        // assertTrue(tFixture.verifyFieldContains("UserGroupPicker", new String[]{"Michael Chirlin"}));
+        // assertEquals("Michael Chirlin", tFixture.getFieldValue("UserGroupPicker"));
         
-        assertTrue(tFixture.populateFieldWith("FolderPicker", new String[]{"Acceptance Letters"}));
-        assertTrue(tFixture.verifyFieldContains("FolderPicker", new String[]{"Acceptance Letters"}));
-        assertEquals("Acceptance Letters", tFixture.getFieldValue("FolderPicker"));
+        // assertTrue(tFixture.populateFieldWith("DocumentPicker", new String[]{"Jellyfish"}));
+        // assertTrue(tFixture.verifyFieldContains("DocumentPicker", new String[]{"Jellyfish.jpg"}));
+        // assertEquals("Jellyfish.jpg", tFixture.getFieldValue("DocumentPicker")); // Note I need the extension here
         
-        assertTrue(tFixture.populateFieldWith("DocumentFolderPicker", new String[]{"Jellyfish"}));
-        assertTrue(tFixture.verifyFieldContains("DocumentFolderPicker", new String[]{"Jellyfish"}));
-        assertEquals("Jellyfish.jpg", tFixture.getFieldValue("DocumentFolderPicker"));
+        // assertTrue(tFixture.populateFieldWith("FolderPicker", new String[]{"Acceptance Letters"}));
+        // assertTrue(tFixture.verifyFieldContains("FolderPicker", new String[]{"Acceptance Letters"}));
+        // assertEquals("Acceptance Letters", tFixture.getFieldValue("FolderPicker"));
         
-        assertTrue(tFixture.populateFieldWith("CustomPicker", new String[]{"5"}));
-        assertTrue(tFixture.verifyFieldContains("CustomPicker", new String[]{"5"}));
-        assertEquals("5", tFixture.getFieldValue("CustomPicker"));
-        */
+        // assertTrue(tFixture.populateFieldWith("DocumentFolderPicker", new String[]{"Jellyfish"}));
+        // assertTrue(tFixture.verifyFieldContains("DocumentFolderPicker", new String[]{"Jellyfish"}));
+        // assertEquals("Jellyfish.jpg", tFixture.getFieldValue("DocumentFolderPicker"));
+        
+        // assertTrue(tFixture.populateFieldWith("CustomPicker", new String[]{"5"}));
+        // assertTrue(tFixture.verifyFieldContains("CustomPicker", new String[]{"5"}));
+        // assertEquals("5", tFixture.getFieldValue("CustomPicker"));
         
         // Grid
         assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[1]", "[1]", new String[]{"Michael Chirlin","Ray Croxon"}));
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[1]", "[1]", new String[]{"Michael Chirlin","Ray Croxon"}));
         assertEquals("Michael Chirlin,Ray Croxon", tFixture.getGridColumnRowValue("EditableGrid[3]", "[1]", "[1]"));
         
-        /*
-        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[2]", "[1]", new String[]{"AcqDemo"}));
-        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[2]", "[1]", new String[]{"AcqDemo"}));
-        assertEquals("AcqDemo", tFixture.getGridColumnRowValue("EditableGrid[3]", "[2]", "[1]"));
+        // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[2]", "[1]", new String[]{"AcqDemo"}));
+        // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[2]", "[1]", new String[]{"AcqDemo"}));
+        // assertEquals("AcqDemo", tFixture.getGridColumnRowValue("EditableGrid[3]", "[2]", "[1]"));
         
-        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[3]", "[1]", new String[]{"Michael Chirlin"}));
-        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[3]", "[1]", new String[]{"Michael Chirlin"}));
-        assertEquals("Michael Chirlin", tFixture.getGridColumnRowValue("EditableGrid[3]", "[3]", "[1]"));
+        // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[3]", "[1]", new String[]{"Michael Chirlin"}));
+        // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[3]", "[1]", new String[]{"Michael Chirlin"}));
+        // assertEquals("Michael Chirlin", tFixture.getGridColumnRowValue("EditableGrid[3]", "[3]", "[1]"));
         
-        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[4]", "[1]", new String[]{"Jellyfish"}));
-        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[4]", "[1]", new String[]{"Jellyfish"}));
-        assertEquals("Jellyfish.jpg", tFixture.getGridColumnRowValue("EditableGrid[3]", "[4]", "[1]"));
+        // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[4]", "[1]", new String[]{"Jellyfish"}));
+        // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[4]", "[1]", new String[]{"Jellyfish"}));
+        // assertEquals("Jellyfish.jpg", tFixture.getGridColumnRowValue("EditableGrid[3]", "[4]", "[1]"));
         
-        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[1]", "[2]", new String[]{"Acceptance Letters"}));
-        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[1]", "[2]", new String[]{"Acceptance Letters"}));
-        assertEquals("Acceptance Letters", tFixture.getGridColumnRowValue("EditableGrid[3]", "[1]", "[2]"));
+        // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[1]", "[2]", new String[]{"Acceptance Letters"}));
+        // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[1]", "[2]", new String[]{"Acceptance Letters"}));
+        // assertEquals("Acceptance Letters", tFixture.getGridColumnRowValue("EditableGrid[3]", "[1]", "[2]"));
         
-        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[2]", "[2]", new String[]{"Jellyfish"}));
-        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[2]", "[2]", new String[]{"Jellyfish"}));
-        assertEquals("Jellyfish.jpg", tFixture.getGridColumnRowValue("EditableGrid[3]", "[2]", "[2]"));
+        // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[2]", "[2]", new String[]{"Jellyfish"}));
+        // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[2]", "[2]", new String[]{"Jellyfish"}));
+        // assertEquals("Jellyfish.jpg", tFixture.getGridColumnRowValue("EditableGrid[3]", "[2]", "[2]"));
         
-        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[3]", "[2]", new String[]{"10"}));
-        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[3]", "[2]", new String[]{"10"}));
-        assertEquals("10", tFixture.getGridColumnRowValue("EditableGrid[3]", "[3]", "[2]"));
-        */
-    }   
-
+        // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[3]", "[2]", new String[]{"10"}));
+        // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[3]", "[2]", new String[]{"10"}));
+        // assertEquals("10", tFixture.getGridColumnRowValue("EditableGrid[3]", "[3]", "[2]"));
+    }
+    */
+    
     @Test
     public void testFieldIndex() throws Exception {
         assertTrue(tFixture.populateFieldWith("TextField[2]", new String[]{"text2"}));
@@ -387,7 +387,6 @@ public class InterfaceFixtureTest {
     
     @Test 
     public void testGridAddRowLink() throws Exception {
-        //TODO Make this button do something
         assertTrue(tFixture.clickOnGridAddRowLink("[1]"));
         assertTrue(tFixture.clickOnGridAddRowLink("EditableGrid"));
         assertTrue(tFixture.clickOnGridAddRowLink("EditableGrid[1]"));
@@ -396,7 +395,8 @@ public class InterfaceFixtureTest {
     @Test 
     public void testClickLink() throws Exception {
         assertTrue(tFixture.clickOnLink("Add Data to Paging Grid"));
-        assertTrue(tFixture.clickOnLink("Add Data to Paging Grid[1]"));
+        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid", "[1]", "[2]", new String[]{"Row 2"}));
+        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid", "[1]", "[2]", new String[]{"Row 2"}));
     }
     
     @AfterClass

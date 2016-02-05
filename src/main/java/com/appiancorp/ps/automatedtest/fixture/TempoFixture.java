@@ -109,7 +109,7 @@ public class TempoFixture extends BaseFixture {
      * @return True, if no post is located with specific text
      */
     public boolean verifyNewsFeedContainingTextIsNotPresent(String newsText) {
-        return returnHandler(!TempoNews.waitFor(newsText));
+        return returnHandler(!TempoNews.waitFor(newsText, notPresentTimeoutSeconds));
     }
     
     /**
@@ -126,6 +126,22 @@ public class TempoFixture extends BaseFixture {
         }
         
         return returnHandler(TempoNews.toggleMoreInfo(newsText));
+    }
+    
+    /**
+     * Deletes a news post.<br>
+     * <br>
+     * FitNesse Example: <code>| delete news post | NEWS_TEXT |</code>
+     * 
+     * @param newsText Text to search for in the news feed
+     * @return True, if completed successfully
+     */
+    public boolean deleteNewsPost(String newsText) {
+        if(!TempoNews.waitFor(newsText)) {
+            throw new MissingObjectException("News Post", newsText);
+        }
+        
+        return returnHandler(TempoNews.deleteNewsPost(newsText));
     }
     
     /**
@@ -220,7 +236,7 @@ public class TempoFixture extends BaseFixture {
      * @return True, if action completed successfully
      */
     public boolean clickOnNewsFeedRecordTag(String newsText, String recordTag) {
-        if (!TempoNews.waitForTag(newsText, recordTag)) {
+        if (!TempoNews.refreshAndWaitForTag(newsText, recordTag)) {
             throw new MissingObjectException("Record Tag", recordTag);
         }
         
@@ -271,7 +287,7 @@ public class TempoFixture extends BaseFixture {
      * @return True, if task is located
      */
     public boolean verifyTaskIsNotPresent(String taskName) {
-        return returnHandler(!TempoTask.waitFor(taskName));
+        return returnHandler(!TempoTask.waitFor(taskName, notPresentTimeoutSeconds));
     }
     
     /**
@@ -444,7 +460,7 @@ public class TempoFixture extends BaseFixture {
      * @return True, if record is not located
      */
     public boolean verifyRecordIsNotPresent(String recordName) {
-        return returnHandler(!TempoRecord.waitFor(recordName));
+        return returnHandler(!TempoRecord.waitFor(recordName, notPresentTimeoutSeconds));
     }
  
     /**
@@ -537,7 +553,7 @@ public class TempoFixture extends BaseFixture {
      * @return True, if related action is not located
      */
     public boolean verifyRecordRelatedActionIsNotPresent(String relatedActionName) {
-        return returnHandler(!TempoRecord.waitForRelatedAction(relatedActionName));
+        return returnHandler(!TempoRecord.waitForRelatedAction(relatedActionName, notPresentTimeoutSeconds));
     }
     
     /*
@@ -584,7 +600,7 @@ public class TempoFixture extends BaseFixture {
      * @return True, if report is not located
      */
     public boolean verifyReportIsNotPresent(String reportName) {
-        return returnHandler(!TempoReport.waitFor(reportName));
+        return returnHandler(!TempoReport.waitFor(reportName, notPresentTimeoutSeconds));
     }
     
     /* 
@@ -642,7 +658,7 @@ public class TempoFixture extends BaseFixture {
      * @return True, if action is not located
      */
     public boolean verifyActionIsNotPresent(String actionName) {
-        return returnHandler(!TempoAction.waitFor(actionName));
+        return returnHandler(!TempoAction.waitFor(actionName, notPresentTimeoutSeconds));
     }
     
     /*
@@ -883,7 +899,7 @@ public class TempoFixture extends BaseFixture {
      * @return True, if field is not located in the interface
      */
     public boolean verifyFieldIsNotPresent(String fieldName) {
-        return returnHandler(!TempoField.waitFor(fieldName));
+        return returnHandler(!TempoField.waitFor(fieldName, notPresentTimeoutSeconds));
     }
     
     /**
@@ -1001,7 +1017,6 @@ public class TempoFixture extends BaseFixture {
         }
         
         return returnHandler(TempoGrid.clickOnAddRowLink(gridName)); 
-    
     }
     
     /**

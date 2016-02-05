@@ -31,9 +31,9 @@ public class TempoTask extends TempoObject {
         return true;
     }
     
-    public static boolean waitFor(String taskName) {
+    public static boolean waitFor(String taskName, Integer timeout) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName))));
+            (new WebDriverWait(driver, timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName)));
             scrollIntoView(element);
         } catch (TimeoutException e) {
@@ -41,6 +41,10 @@ public class TempoTask extends TempoObject {
         }
 
         return true;
+    }
+    
+    public static boolean waitFor(String taskName) {
+        return waitFor(taskName, timeoutSeconds);
     }
     
     public static boolean refreshAndWaitFor(String taskName) {

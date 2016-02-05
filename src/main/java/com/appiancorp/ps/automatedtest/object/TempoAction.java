@@ -22,9 +22,9 @@ public class TempoAction extends TempoObject {
         return true;
     }
     
-    public static boolean waitFor(String actionName) {
+    public static boolean waitFor(String actionName, Integer timeout) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, actionName))));
+            (new WebDriverWait(driver, timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, actionName))));
             WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, actionName)));
             scrollIntoView(element);
         } catch (TimeoutException e) {
@@ -32,6 +32,10 @@ public class TempoAction extends TempoObject {
         }
         
         return true;
+    }
+    
+    public static boolean waitFor(String actionName) {
+        return waitFor(actionName, timeoutSeconds);
     }
     
     public static boolean isCompleted() {

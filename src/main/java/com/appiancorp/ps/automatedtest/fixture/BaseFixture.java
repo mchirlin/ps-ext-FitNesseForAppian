@@ -31,7 +31,6 @@ import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
 import fitlibrary.DoFixture;
-import fitlibrary.exception.AbandonException;
 
 /**
  * This is the base class for integrating Appian and Fitnesse.
@@ -53,7 +52,8 @@ public class BaseFixture extends DoFixture {
 	public String dataSourceName = null;
 	public String masterWindowHandle = null;
 	public WebDriver driver = null;
-	public int timeoutSeconds = 5;
+	public int timeoutSeconds = 10;
+	public int notPresentTimeoutSeconds = 1;
 	public int attemptTimes = 3;
 	public String screenshotPath = "C:\\AutomatedTesting\\screenshots";
 	public Boolean takeErrorScreenshots = false;

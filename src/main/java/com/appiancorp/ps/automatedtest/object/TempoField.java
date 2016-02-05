@@ -82,15 +82,15 @@ public class TempoField extends TempoObject {
         }
     }
     
-    public static boolean waitFor(String fieldName) {
+    public static boolean waitFor(String fieldName, Integer timeout) {
         try {
             // Scroll the field layout into view
             if (isFieldIndex(fieldName)) {
                 String fName = getFieldFromFieldIndex(fieldName);
                 int index = getIndexFromFieldIndex(fieldName);
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index))));
+                (new WebDriverWait(driver, timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index))));
             } else {
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName))));
+                (new WebDriverWait(driver, timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName))));
             }  
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
@@ -99,6 +99,10 @@ public class TempoField extends TempoObject {
         }
         
         return true;
+    }
+    
+    public static boolean waitFor(String fieldName) {
+        return waitFor(fieldName, timeoutSeconds);
     }
     
     public static boolean clear(String fieldName){

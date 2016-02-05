@@ -20,7 +20,7 @@ public class TasksFixtureTest {
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
       tFixture.setTimeoutSecondsTo("10");
       tFixture.setAppianVersionTo("16.1");
-      tFixture.setAppianLocaleTo("en_GB");;
+      tFixture.setAppianLocaleTo("en_GB");
       
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
       
@@ -59,6 +59,9 @@ public class TasksFixtureTest {
     
     @AfterClass
     public static void tearDown() throws Exception {
+        tFixture.clickOnMenu("Tasks");
+        tFixture.clickOnTask("Input Automated Test Data");
+        tFixture.clickOnButton("Cancel");
         tFixture.logout();
         tFixture.tearDownSeleniumWebDriver();
     }
