@@ -220,6 +220,7 @@ public class TempoGrid extends TempoField {
             WebElement grid = getGrid(gridName);
             WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_ADD_ROW_LINK));
             link.click();
+            waitForWorking();
         } catch (Exception e) {
             LOG.warn("GRID ADD LINK for " + gridName + e.getClass());
             return false;
