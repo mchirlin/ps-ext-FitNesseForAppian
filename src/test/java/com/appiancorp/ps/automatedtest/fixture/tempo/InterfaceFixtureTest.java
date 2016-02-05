@@ -385,7 +385,6 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "[2]","[1]", new String[] {"Value 1"}));
     }
     
-    /*
     @Test 
     public void testGridAddRowLink() throws Exception {
         assertTrue(tFixture.clickOnGridAddRowLink("[1]"));
@@ -401,7 +400,6 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.clickOnLink("Click link"));
         assertTrue(tFixture.verifyFieldContains("Link Clicked", new String[]{"Clicked again"}));
     }
-    */
     
     @AfterClass
     public static void tearDown() throws Exception {
