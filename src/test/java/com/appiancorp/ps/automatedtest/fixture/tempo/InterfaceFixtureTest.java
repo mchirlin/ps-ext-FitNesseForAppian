@@ -388,15 +388,17 @@ public class InterfaceFixtureTest {
     @Test 
     public void testGridAddRowLink() throws Exception {
         assertTrue(tFixture.clickOnGridAddRowLink("[1]"));
-        assertTrue(tFixture.clickOnGridAddRowLink("EditableGrid"));
-        assertTrue(tFixture.clickOnGridAddRowLink("EditableGrid[1]"));
+        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid", "[1]", "[2]", new String[]{"Row 2"}));
+        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid", "[1]", "[2]", new String[]{"Row 2"}));
     }
     
     @Test 
     public void testClickLink() throws Exception {
-        assertTrue(tFixture.clickOnLink("Add Data to Paging Grid"));
-        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid", "[1]", "[2]", new String[]{"Row 2"}));
-        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid", "[1]", "[2]", new String[]{"Row 2"}));
+        assertTrue(tFixture.clickOnLink("Click link"));
+        assertTrue(tFixture.verifyFieldContains("Link Clicked", new String[]{"Clicked"}));
+        
+        assertTrue(tFixture.clickOnLink("Click link"));
+        assertTrue(tFixture.verifyFieldContains("Link Clicked", new String[]{"Clicked again"}));
     }
     
     @AfterClass
