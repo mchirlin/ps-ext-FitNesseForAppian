@@ -7,14 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.Metadata;
+
 public class TempoIntegerField extends TempoTextField {
 
     private static final Logger LOG = Logger.getLogger(TempoIntegerField.class);
-    private static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/div/input";
-    private static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'aui-TextInput')]";
+    private static final String XPATH_ABSOLUTE_INTEGER_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteIntegerFieldLabel");
+    private static final String XPATH_RELATIVE_INTEGER_FIELD_INPUT = Metadata.getByConstant("xpathRelativeIntegerFieldInput");
     
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
-        WebElement intField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        WebElement intField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INTEGER_FIELD_INPUT));
         intField.clear();
         intField.sendKeys(fieldValue);
         unfocus();
@@ -26,7 +28,7 @@ public class TempoIntegerField extends TempoTextField {
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_INTEGER_FIELD_LABEL, fieldName))));
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
         } catch (TimeoutException e) {
@@ -37,7 +39,7 @@ public class TempoIntegerField extends TempoTextField {
     }
     
     public static boolean clear(WebElement fieldLayout) {
-        WebElement intField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        WebElement intField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INTEGER_FIELD_INPUT));
         intField.clear();
         
         return true;
@@ -45,7 +47,7 @@ public class TempoIntegerField extends TempoTextField {
     
     public static boolean isType(WebElement fieldLayout) {
         try {
-            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INTEGER_FIELD_INPUT));
         } catch (Exception e) {
             return false;
         }

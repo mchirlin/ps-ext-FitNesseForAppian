@@ -53,25 +53,17 @@ public class TempoFixture extends BaseFixture {
 	   /**
      * Populates search fields in News, Reports, and Records. <br>
      * <br>
-     * Example: <code>| populate search with | SEARCH_TERM |</code>
+     * Example: <code>| search for | SEARCH_TERM |</code>
      * 
      * @param searchTerm The term to search for News, Reports, and Records
      * @return True if action completed
      */
-	public boolean populateSearchWith(String searchTerm){
-	    //TODO 
+	public boolean searchFor(String searchTerm){
         if(!TempoSearch.waitFor(searchTerm)) {
             throw new MissingObjectException("Field", searchTerm);
         }
         
-        // Populate the field
-        int attempt = 0;
-        while (attempt < attemptTimes) {
-            if (TempoSearch.populateSearch(searchTerm)) return true;
-            attempt++;
-        }
-
-        return returnHandler(false);
+        return returnHandler(TempoSearch.searchFor(searchTerm));
     }
 	
 	/**
@@ -661,36 +653,36 @@ public class TempoFixture extends BaseFixture {
      * Returns the title of the form.<br>
      * <br>
      * FitNesse Examples:<br>
-     * <code>| get title |</code> - Simply returns a string<br>
-     * <code>| set | titleVariable | get title | </code> - Stores the title in titleVariable, which can later be accessed using @{titleVariable}<br>
-     * <code>| check | get title | FORM_TITLE |</code> - Returns true if form title matches FORM_TITLE input
+     * <code>| get form title |</code> - Simply returns a string<br>
+     * <code>| set | titleVariable | get form title | </code> - Stores the title in titleVariable, which can later be accessed using @{titleVariable}<br>
+     * <code>| check | get form title | FORM_TITLE |</code> - Returns true if form title matches FORM_TITLE input
      * @return The title string
      */
-    public String getTitle() {
+    public String getFormTitle() {
         waitForWorking();
         if(!TempoForm.waitForTitle()) {
             throw new MissingObjectException("Title");
         }
         
-        return TempoForm.getTitle();
+        return TempoForm.getFormTitle();
     }
     
     /**
      * Returns the instructions of the form.<br>
      * <br>
      * FitNesse Examples:<br>
-     * <code>| get instructions |</code> - Simply returns a string<br>
-     * <code>| set | instructionsVariable | get instructions | </code> - Stores the title in instructionsVariable, which can later be accessed using @{instructionsVariable}<br>
-     * <code>| check | get instructions | FORM_INSTRUCTIONS |</code> - Returns true if form instructions matches FORM_INSTRUCTIONS input
+     * <code>| get form instructions |</code> - Simply returns a string<br>
+     * <code>| set | instructionsVariable | get form instructions | </code> - Stores the title in instructionsVariable, which can later be accessed using @{instructionsVariable}<br>
+     * <code>| check | get form instructions | FORM_INSTRUCTIONS |</code> - Returns true if form instructions matches FORM_INSTRUCTIONS input
      * @return The instructions string
      */
-    public String getInstructions() {
+    public String getFormInstructions() {
         waitForWorking();
         if(!TempoForm.waitForInstructions()) {
             throw new MissingObjectException("Instructions");
         }
         
-        return TempoForm.getInstructions();
+        return TempoForm.getFormInstructions();
     }
 
     /**
@@ -998,17 +990,17 @@ public class TempoFixture extends BaseFixture {
     /**
      * Clicks on the add row link for a grid<br>
      * <br>
-     * FitNesse Example: <code>| click on grid | GRID_NAME_OR_INDEX | add link |</code>
+     * FitNesse Example: <code>| click on grid | GRID_NAME_OR_INDEX | add row link |</code>
      * @param gridName Name or name and index of grid
      * @return True, if row is selected
      */
 
-    public boolean clickOnGridAddLink(String gridName){
+    public boolean clickOnGridAddRowLink(String gridName){
         if(!TempoGrid.waitFor(gridName)) {
             throw new MissingObjectException("Grid", gridName);
         }
         
-        return returnHandler(TempoGrid.clickOnAddLink(gridName)); 
+        return returnHandler(TempoGrid.clickOnAddRowLink(gridName)); 
     
     }
     

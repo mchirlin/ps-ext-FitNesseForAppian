@@ -7,15 +7,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.Metadata;
+
 public class TempoTask extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoTask.class);
-    private static final String XPATH_TASK = "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'%s')]";
-    private static final String XPATH_TASK_DEADLINE = "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'%s')]/parent::span/following-sibling::div[contains(@class, 'metadata')]/descendant::span[contains(@title, 'deadline')]/span[text() = '%s']";
-    private static final String XPATH_TASK_REPORT = "//a[span[contains(text(), '%s')]]";
+    private static final String XPATH_ABSOLUTE_TASK_LINK = Metadata.getByConstant("xpathAbsoluteTaskLink");
+    private static final String XPATH_ABSOLUTE_TASK_DEADLINE = Metadata.getByConstant("xpathAbsoluteTaskDeadline");
+    private static final String XPATH_ABSOLUTE_TASK_REPORT_LINK = Metadata.getByConstant("xpathAbsoluteTaskReportLink");
     
     public static boolean click(String taskName) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_TASK, taskName)));
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName)));
         element.click();
 
         if(popupError()) {
@@ -31,8 +33,8 @@ public class TempoTask extends TempoObject {
     
     public static boolean waitFor(String taskName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_TASK, taskName))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_TASK, taskName)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName)));
             scrollIntoView(element);
         } catch (TimeoutException e) {
             return false;
@@ -62,8 +64,8 @@ public class TempoTask extends TempoObject {
     
     public static boolean waitForTaskReport(String taskReport) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_TASK_REPORT, taskReport))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_TASK_REPORT, taskReport)));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport)));
             scrollIntoView(element);
         } catch (TimeoutException e) {
             return false;
@@ -73,13 +75,13 @@ public class TempoTask extends TempoObject {
     }
     
     public static boolean hasDeadlineOf(String taskName, String deadline) {
-        driver.findElement(By.xpath(String.format(XPATH_TASK_DEADLINE, taskName, deadline)));
+        driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_DEADLINE, taskName, deadline)));
         
         return true;
     }
     
     public static boolean clickOnTaskReport(String taskReport) {
-        driver.findElement(By.xpath(String.format(XPATH_TASK_REPORT, taskReport))).click();
+        driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport))).click();
         
         return true;
     }

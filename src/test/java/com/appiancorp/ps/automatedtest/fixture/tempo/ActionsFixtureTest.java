@@ -19,7 +19,9 @@ public class ActionsFixtureTest {
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
       tFixture.setTimeoutSecondsTo("10");
-      
+      tFixture.setAppianVersionTo("16.1");
+      tFixture.setAppianLocaleTo("en_GB");
+
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
     }
     

@@ -19,15 +19,20 @@ public class TasksFixtureTest {
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
       tFixture.setTimeoutSecondsTo("10");
+      tFixture.setAppianVersionTo("16.1");
+      tFixture.setAppianLocaleTo("en_GB");;
       
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
+      
+      tFixture.clickOnMenu("Actions");
+      tFixture.clickOnAction("Automated Testing Input");
     }
     
     @Test
     public void testClickOnTask() throws Exception {
         tFixture.clickOnMenu("Tasks");
         
-        assertTrue(tFixture.clickOnTask("Associate Receipts"));
+        assertTrue(tFixture.clickOnTask("Input Automated Test Data"));
     }
     
     @Test
@@ -41,15 +46,15 @@ public class TasksFixtureTest {
     public void testVerifyTaskIsPresent() throws Exception {
         tFixture.clickOnMenu("Tasks");
         
-        assertTrue(tFixture.verifyTaskIsPresent("Associate Receipts"));
-        assertTrue(tFixture.verifyTaskIsNotPresent("Not a task"));
+        assertTrue(tFixture.verifyTaskIsPresent("Input Automated Test Data"));
+        assertTrue(tFixture.verifyTaskIsNotPresent("Not present"));
     }
     
     @Test
     public void testVerifyTaskHasDeadlineOf() throws Exception {
         tFixture.clickOnMenu("Tasks");
         
-        // TODO Create task with deadline
+        assertTrue(tFixture.verifyTaskHasDeadlineOf("Input Automated Test Data", "1h"));
     }
     
     @AfterClass

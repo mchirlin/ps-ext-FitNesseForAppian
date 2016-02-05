@@ -17,6 +17,8 @@ public class TempoFixtureTest {
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
       tFixture.setTimeoutSecondsTo("10");
+      tFixture.setAppianVersionTo("16.1");
+      tFixture.setAppianLocaleTo("en_GB");
       
       tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
     }
@@ -24,11 +26,12 @@ public class TempoFixtureTest {
     @Test
     public void testTempoFixture() throws Exception {
         assertTrue(tFixture.clickOnMenu("News"));
-        assertTrue(tFixture.populateSearchWith("Test Text"));
+        assertTrue(tFixture.searchFor("News Search"));
         assertTrue(tFixture.clickOnMenu("Reports"));
-        assertTrue(tFixture.populateSearchWith("dashboard"));
+        assertTrue(tFixture.searchFor("Report Search"));
         assertTrue(tFixture.clickOnMenu("Records"));
-        //TODO create a test case for populating search for record with a search term.  Unable to test b/c apacdemo is on 16.1
+        assertTrue(tFixture.clickOnRecordType("Automated Testing Records"));
+        assertTrue(tFixture.searchFor("Records Search"));
         assertTrue(tFixture.clickOnMenu("Tasks"));
     }
     

@@ -7,26 +7,24 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.Metadata;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 import com.google.common.base.Throwables;
 
 public class TempoField extends TempoObject {
        
     private static final Logger LOG = Logger.getLogger(TempoField.class);
-    protected static final String XPATH_LABEL_STARTS_WITH = "[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]";
-    protected static final String XPATH_FIELD_LAYOUT = "//span" + XPATH_LABEL_STARTS_WITH + "| //label" + XPATH_LABEL_STARTS_WITH;
-    protected static final String XPATH_FIELD_LAYOUT_INDEX = "(" + XPATH_FIELD_LAYOUT + ")[%d]";
-    protected static final String XPATH_FIELD_SECTION_LAYOUT = "//h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::span" + XPATH_LABEL_STARTS_WITH + "| //h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::label" + XPATH_LABEL_STARTS_WITH;
-    protected static final String XPATH_FIELD_SECTION_LAYOUT_INDEX = "//h3[contains(text(),'%s')]/parent::div/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')][%d]";
-    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = ".//p[contains(@class, 'readonly')] | div[ancestor::table[contains(@class, 'DataGrid-Table')]]"; // Handles readOnly fields and paging grids
+    protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT = Metadata.getByConstant("xpathAbsoluteFieldLayout");
+    protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX = "(" + XPATH_ABSOLUTE_FIELD_LAYOUT + ")[%d]";
+    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = Metadata.getByConstant("xpathRelativeReadOnlyField"); // Handles readOnly fields and paging grids
     
     public static WebElement getFieldLayout(String fieldName) {
         if (isFieldIndex(fieldName)) {
             String fName = getFieldFromFieldIndex(fieldName);
             int index = getIndexFromFieldIndex(fieldName);
-            return driver.findElement(By.xpath(String.format(XPATH_FIELD_LAYOUT_INDEX, fName, fName, index)));
+            return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index)));
         } else {
-            return driver.findElement(By.xpath(String.format(XPATH_FIELD_LAYOUT, fieldName, fieldName)));
+            return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName)));
         }        
     }
     
@@ -90,9 +88,9 @@ public class TempoField extends TempoObject {
             if (isFieldIndex(fieldName)) {
                 String fName = getFieldFromFieldIndex(fieldName);
                 int index = getIndexFromFieldIndex(fieldName);
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_LAYOUT_INDEX, fName, fName, index))));
+                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index))));
             } else {
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_FIELD_LAYOUT, fieldName, fieldName))));
+                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName))));
             }  
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);

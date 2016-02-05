@@ -19,6 +19,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.AppianLocale;
+import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Version;
+
 public class TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoObject.class);
@@ -26,17 +30,22 @@ public class TempoObject {
     protected static WebDriver driver;
     protected static String masterWindowHandle;
     protected static String url;
+    protected static Version version = new Version("7.10");
+    protected static String locale;
     protected static int timeoutSeconds;
     protected static Date startDatetime;
     protected static int refreshTimes = 5;
     protected static int attemptTimes = 3;
     
-    public static String DATE_FORMAT_STRING = "M/d/yyyy";
-    public static String TIME_FORMAT_STRING = "h:mm aaa";
-    public static String DATETIME_FORMAT_STRING = DATE_FORMAT_STRING + " " + TIME_FORMAT_STRING;
-    public static String DATE_DISPLAY_FORMAT_STRING = "MMM d, yyyy";
-    public static String TIME_DISPLAY_FORMAT_STRING = "h:mm aaa";
-    public static String DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;
+    public static final String DATE_ENTRY_FORMAT = "yyyy-MM-dd";
+    public static final String TIME_ENTRY_FORMAT = "HH:mm";
+    public static final String DATETIME_ENTRY_FORMAT = DATE_ENTRY_FORMAT + " " + TIME_ENTRY_FORMAT;
+    protected static String dateFormat = "M/d/yyyy";
+    protected static String dateDisplayFormat = "MMM d, yyyy";
+    protected static String timeFormat = "h:mm aa";
+    protected static String timeDisplayFormat = "h:mm aa";
+    protected static String datetimeFormat = "M/d/yyyy h:mm aa";
+    protected static String datetimeDisplayFormat = "MMM d, yyyy, h:mm aa";
     
     private static final String XPATH_WORKING = "//div[@class = 'appian-indicator-message']";
     
@@ -54,7 +63,7 @@ public class TempoObject {
         
         if (plusLocation > 0 ) {
             try {
-                d = DateUtils.parseDate(dateTimeString.substring(0, plusLocation).trim(), DATETIME_FORMAT_STRING);
+                d = DateUtils.parseDate(dateTimeString.substring(0, plusLocation).trim(), DATETIME_ENTRY_FORMAT);
             } catch (ParseException e) {
                 d = startDatetime;
             }
@@ -71,15 +80,17 @@ public class TempoObject {
             d = DateUtils.addDays(d, addValue);
         }
         
-        return new SimpleDateFormat(DATETIME_DISPLAY_FORMAT_STRING).format(d);
+        return new SimpleDateFormat(getDatetimeDisplayFormat()).format(d);
     }
     
     public static Date parseDate(String datetimeString) throws ParseException {
         return DateUtils.parseDateStrictly(datetimeString, new String[] {
-                DATETIME_DISPLAY_FORMAT_STRING,
-                DATE_DISPLAY_FORMAT_STRING,
-                DATETIME_FORMAT_STRING,
-                DATE_FORMAT_STRING
+                DATE_ENTRY_FORMAT,
+                DATETIME_ENTRY_FORMAT,
+                dateFormat,
+                dateDisplayFormat,
+                datetimeFormat,
+                datetimeDisplayFormat
         });
     }
     
@@ -139,24 +150,78 @@ public class TempoObject {
         return url;
     }
     
-    public static void setDateFormatString(String df) {
-        DATE_FORMAT_STRING = df;
-        DATETIME_FORMAT_STRING = DATE_FORMAT_STRING + " " + TIME_FORMAT_STRING;
+    public static void setVersion(String v) {
+        version = new Version(v);
     }
     
-    public static void setTimeFormatString(String tf) {
-        TIME_FORMAT_STRING = tf;
-        DATETIME_FORMAT_STRING = DATE_FORMAT_STRING + " " + TIME_FORMAT_STRING;
+    public static Version getVersion() {
+        return version;
     }
     
-    public static void setDateDisplayFormatString(String df) {
-        DATE_DISPLAY_FORMAT_STRING = df;
-        DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;
+    public static void setLocale(String l) {
+        locale = l;
+        for (AppianLocale al : Metadata.getAppianLocales()) {
+            if (al.getLocale().equals(l)) {
+                setDateFormat(al.getDateFormat());
+                setDateDisplayFormat(al.getDateDisplayFormat());
+                setTimeFormat(al.getTimeFormat());
+                setTimeDisplayFormat(al.getTimeDisplayFormat());
+                setDatetimeFormat(al.getDatetimeFormat());
+                setDatetimeDisplayFormat(al.getDatetimeDisplayFormat());
+            }
+        }
     }
     
-    public static void setTimeDisplayFormatString(String tf) {
-        TIME_DISPLAY_FORMAT_STRING = tf;
-        DATETIME_DISPLAY_FORMAT_STRING = DATE_DISPLAY_FORMAT_STRING + ", " + TIME_DISPLAY_FORMAT_STRING;
+    public static String getLocale() {
+        return locale;
+    }
+    
+    public static void setDateFormat(String df) {
+        dateFormat = df;
+    }
+   
+    public static String getDateFormat() {
+        return dateFormat;
+    }
+    
+    public static void setDateDisplayFormat(String df) {
+        dateDisplayFormat = df;
+    }
+    
+    public static String getDateDisplayFormat() {
+        return dateDisplayFormat;
+    }
+    
+    public static void setTimeFormat(String tf) {
+        timeFormat = tf;
+    }
+    
+    public static String getTimeFormat() {
+        return timeFormat;
+    }
+    
+    public static void setTimeDisplayFormat(String tf) {
+        timeDisplayFormat = tf;
+    }
+    
+    public static String getTimeDisplayFormat() {
+        return timeDisplayFormat;
+    }
+    
+    public static void setDatetimeFormat (String dtf) {
+        datetimeFormat = dtf;
+    }
+    
+    public static String getDatetimeFormat() {
+        return datetimeFormat;
+    }
+    
+    public static void setDatetimeDisplayFormat (String dtf) {
+        datetimeDisplayFormat = dtf;
+    }
+    
+    public static String getDatetimeDisplayFormat() {
+        return datetimeDisplayFormat;
     }
     
     public static void setTimeoutSeconds(int t) {
@@ -183,7 +248,7 @@ public class TempoObject {
     
     public static boolean waitForWorking() {
         try {
-            (new WebDriverWait(driver, 1)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_WORKING)));
+            Thread.sleep(100);
             (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_WORKING)));
             Thread.sleep(200);
         } catch (Exception e) {

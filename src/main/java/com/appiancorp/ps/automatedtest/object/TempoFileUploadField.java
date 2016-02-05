@@ -11,18 +11,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.appiancorp.ps.automatedtest.common.Metadata;
+
 public class TempoFileUploadField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoFileUploadField.class);
-    private static final String XPATH_ABSOLUTE_LABEL = "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input";
-    private static final String XPATH_RELATIVE_INPUT = ".//input[contains(@class, 'gwt-FileUpload')]";
-    private static final String XPATH_RELATIVE_FILE = ".//span[contains(@class, 'filename')]";
-    private static final String XPATH_RELATIVE_FILENAME = XPATH_RELATIVE_FILE + "/span[contains(text(), '%s')]";
-    private static final String XPATH_RELATIVE_REMOVE = ".//a[starts-with(text(), 'Remove')]";
+    private static final String XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteFileUploadFieldLabel");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT = Metadata.getByConstant("xpathRelativeFileUploadFieldInput");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE = Metadata.getByConstant("xpathRelativeFileUploadFieldFile");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILENAME = XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE + Metadata.getByConstant("xpathConcatFileUploadFieldFilename");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_REMOVE_LINK = Metadata.getByConstant("xpathRelativeFileUploadFieldRemoveLink");
     private static final Pattern FILENAME_PATTERN = Pattern.compile("(.*) \\(.*\\)");
    
     public static boolean populate(WebElement fieldLayout, String fieldValue) {
-        WebElement fileUpload = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+        WebElement fileUpload = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT));
         fileUpload.sendKeys(fieldValue);
         unfocus();
         
@@ -32,7 +34,7 @@ public class TempoFileUploadField extends TempoField {
     
     public static boolean waitFor(String fieldName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_LABEL, fieldName))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL, fieldName))));
             WebElement fieldLayout = getFieldLayout(fieldName);
             scrollIntoView(fieldLayout);
         } catch (TimeoutException e) {
@@ -44,7 +46,7 @@ public class TempoFileUploadField extends TempoField {
     
     public static boolean waitForFileName(WebElement fieldLayout, String fileName) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_RELATIVE_FILENAME, fileName))));
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILENAME, fileName))));
         } catch (Exception e) {
             return false;
         }
@@ -53,7 +55,7 @@ public class TempoFileUploadField extends TempoField {
     }
     
     public static String getValue(WebElement fieldLayout) {
-        String value = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_FILE))).getText();
+        String value = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE))).getText();
         
         Matcher m = FILENAME_PATTERN.matcher(value);
         
@@ -82,7 +84,7 @@ public class TempoFileUploadField extends TempoField {
     }
     
     public static boolean clear(WebElement fieldLayout) {
-        WebElement removeLink = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_REMOVE));
+        WebElement removeLink = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_FILE_UPLOAD_FIELD_REMOVE_LINK));
         removeLink.click();
         
         return true;
@@ -90,7 +92,7 @@ public class TempoFileUploadField extends TempoField {
     
     public static boolean isType(WebElement fieldLayout) {
         try {
-            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INPUT));
+            fieldLayout.findElement(By.xpath(XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT));
         } catch (Exception e) {
             return false;
         }

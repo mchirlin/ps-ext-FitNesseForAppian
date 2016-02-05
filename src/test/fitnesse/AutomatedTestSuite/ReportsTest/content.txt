@@ -5,5 +5,5 @@
 | verify report | Automated Test Report | is present | 
 | verify report | Not Automated Test Report | is not present | 
 | click on report | Automated Test Report | 
-| check | get title | Automated Test Report | 
+| check | get form title | Automated Test Report | 
 **!

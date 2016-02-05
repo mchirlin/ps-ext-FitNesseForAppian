@@ -5,12 +5,12 @@
 
 !*** Select task
 | click on menu | Tasks| 
-| verify task | Input Automated Test Data  | is present |
-| click on task | Input Automated Test Data |
+| verify task | Input Automated Test Data | is present |
+| click on task | Input Automated Test Data  |
 **!
 
 !*** Verify Page Title
-| check | get title | Automated Testing Data Input | 
+| check | get form title | Automated Testing Data Input | 
 ***!
 
 !*** Create random variable
@@ -21,19 +21,19 @@
 !| populate field | Text Field Test | with | Test Text @{randString} |
 | populate field | Integer Field Test | with | 5 | 
 | populate field | Decimal Field Test | with | 123.45 |
-| populate field | Date and Time Test | with | 11/15/2016 10:00 AM|
+| populate field | Date and Time Test | with | 2016-11-15 10:00 |
 ***!
 
 !*** Check/Verify Input Data
 !| verify field | Text Field Test | contains | Test Text @{randString} |
 | verify field | Integer Field Test | contains | 5 | 
 | verify field | Decimal Field Test | contains | 123.45 |
-| verify field | Date and Time Test | contains | 11/15/2016 10:00 AM|
+| verify field | Date and Time Test | contains | 2016-11-15 10:00 |
 
 !| check | get field | Text Field Test | value | Test Text @{randString} |
 | check | get field | Integer Field Test | value | 5 | 
 | check | get field | Decimal Field Test | value | 123.45 |
-| check | get field | Date and Time Test | value | 11/15/2016 10:00 AM |
+| check | get field | Date and Time Test | value | 15/11/2016 10:00 |
 ***!
 
 !*** Submit form
@@ -52,12 +52,12 @@
 | check | get field | Text Field Test | value | Test Text @{randString} |
 | check | get field | Integer Field Test | value | 5 | 
 | check | get field | Decimal Field Test | value | 123.45 |
-| check | get field | Date and Time Test | value | Nov 15, 2016, 10:00 AM |
+| check | get field | Date and Time Test | value | 15 Nov 2016 10:00 |
 
 !| verify field | Text Field Test | contains | Test Text @{randString} |
 | verify field | Integer Field Test | contains | 5 | 
 | verify field | Decimal Field Test | contains | 123.45 |
-| verify field | Date and Time Test | contains | Nov 15, 2016, 10:00 AM|
+| verify field | Date and Time Test | contains | 15 Nov 2016 10:00 |
 ***!
 
 !*** Access related action link from record
@@ -92,7 +92,6 @@
 | verify field | Integer Field Test | contains | @{randomInt} | 
 | verify field | Decimal Field Test | contains | @{randomDec} |
 | verify field | Date and Time Test | contains | +@{randomDate} days|
-
 
 ***!
 
