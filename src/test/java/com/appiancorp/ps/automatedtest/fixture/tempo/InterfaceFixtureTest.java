@@ -274,8 +274,7 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "[5]", "[2]", new String[]{"C:\\AutomatedTesting\\documents\\High.jpg"}));
         assertEquals("High.jpg", tFixture.getGridColumnRowValue("EditableGrid[2]", "[5]", "[2]"));
     }
-    
-    /*    
+      
     @Test
     public void testPickerFields() throws Exception {
         assertTrue(tFixture.populateFieldWith("UserPicker", new String[]{"Michael Chirlin", "Ray Croxon"}));
@@ -338,7 +337,6 @@ public class InterfaceFixtureTest {
         // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[3]", "[2]", new String[]{"10"}));
         // assertEquals("10", tFixture.getGridColumnRowValue("EditableGrid[3]", "[3]", "[2]"));
     }
-    */
     
     @Test
     public void testFieldIndex() throws Exception {
