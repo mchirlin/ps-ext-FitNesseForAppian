@@ -356,9 +356,9 @@ public class InterfaceFixtureTest {
     
     @Test
     public void testPopulateFieldInSectionWith() throws Exception {
-        assertTrue(tFixture.populateFieldInSectionWith("[1]", "Section 2", new String[]{"noLabel"}));
-        assertTrue(tFixture.verifyFieldInSectionContains("[1]", "Section 2", new String[]{"noLabel"}));
-        assertEquals("noLabel", tFixture.getFieldInSectionValue("[1]", "Section 2"));
+        assertTrue(tFixture.populateFieldInSectionWith("[1]", "Section 3", new String[]{"noLabel"}));
+        assertTrue(tFixture.verifyFieldInSectionContains("[1]", "Section 3", new String[]{"noLabel"}));
+        assertEquals("noLabel", tFixture.getFieldInSectionValue("[1]", "Section 3"));
     }
     
     @Test

@@ -34,7 +34,7 @@
 ***!
 ----
 !*** Populate Field in Section 3 Fields without labels, by reference, and radio/checkbox fields
-!| populate field        |[1]         |in section|Section 2|with|noLabel|
+!| populate field        |[1]         |in section|Section 3|with|noLabel|
 |populate field          |TextField[2]|with      |text2                 |
 |click on radio option   |Click Me!                                     |
 |click on checkbox option|Click Me Too!                                 |
