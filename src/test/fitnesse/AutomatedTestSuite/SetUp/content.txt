@@ -13,6 +13,7 @@ Set start date and format how dates are used in the application
 | set start datetime |
 | set appian version to | 16.1 |
 | set appian locale to | en_GB |
+| set stop on error to | true |
 
 Create a random string and new folder to take screensshots for errors
 | set | rand | get random string | 4 |
