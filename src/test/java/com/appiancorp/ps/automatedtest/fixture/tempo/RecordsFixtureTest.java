@@ -19,7 +19,7 @@ public class RecordsFixtureTest {
 
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
-      tFixture.setTimeoutSecondsTo("15");
+      tFixture.setTimeoutSecondsTo(15);
       tFixture.setAppianVersionTo("16.1");
       tFixture.setAppianLocaleTo("en_GB");;
       

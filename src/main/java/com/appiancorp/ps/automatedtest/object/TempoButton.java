@@ -7,28 +7,28 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoButton extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoButton.class);
-    private static final String XPATH_ABSOLUTE_BUTTON = Metadata.getByConstant("xpathAbsoluteButton");
+    private static final String XPATH_ABSOLUTE_BUTTON = Settings.getByConstant("xpathAbsoluteButton");
     
-    public static boolean click(String buttonName) {        
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName)));
+    public static boolean click(String buttonName, Settings s) {        
+        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName)));
         element.click();
         
         LOG.debug("BUTTON CLICK : " + buttonName);
         
-        waitForWorking();
+        waitForWorking(s);
         return true;
     }
     
-    public static boolean waitFor(String buttonName) {
+    public static boolean waitFor(String buttonName, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName)));
-            scrollIntoView(element);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName))));
+            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName)));
+            scrollIntoView(element, s);
         } catch (TimeoutException e) {
             return false;
         }

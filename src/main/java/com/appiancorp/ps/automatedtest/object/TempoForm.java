@@ -7,26 +7,26 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoForm extends TempoObject {
     
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoForm.class);
-    private static final String XPATH_ABSOLUTE_FORM_TITLE = Metadata.getByConstant("xpathAbsoluteFormTitle");
-    private static final String XPATH_ABSOLUTE_FORM_INSTRUCTIONS = Metadata.getByConstant("xpathAbsoluteFormInstructions");
+    private static final String XPATH_ABSOLUTE_FORM_TITLE = Settings.getByConstant("xpathAbsoluteFormTitle");
+    private static final String XPATH_ABSOLUTE_FORM_INSTRUCTIONS = Settings.getByConstant("xpathAbsoluteFormInstructions");
     
-    public static String getFormTitle() {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE)));
+    public static String getFormTitle(Settings s) {
+        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE)));
         
         return element.getText();
     }
     
-    public static boolean waitForTitle() {
+    public static boolean waitForTitle(Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE)));
-            scrollIntoView(element, true);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE))));
+            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE)));
+            scrollIntoView(element, true, s);
         } catch (TimeoutException e) {
             return false;
         }
@@ -34,17 +34,17 @@ public class TempoForm extends TempoObject {
         return true;
     }
     
-    public static String getFormInstructions() {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS)));
+    public static String getFormInstructions(Settings s) {
+        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS)));
         
         return element.getText();
     }
     
-    public static boolean waitForInstructions() {
+    public static boolean waitForInstructions(Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS)));
-            scrollIntoView(element, true);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS))));
+            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS)));
+            scrollIntoView(element, true, s);
         } catch (TimeoutException e) {
             return false;
         }

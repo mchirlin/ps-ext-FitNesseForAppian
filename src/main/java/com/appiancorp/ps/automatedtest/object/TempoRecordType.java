@@ -7,28 +7,28 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoRecordType extends TempoObject{
 
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoRecordType.class);
-    private static final String XPATH_ABSOLUTE_RECORD_TYPE_LINK = Metadata.getByConstant("xpathAbsoluteRecordTypeLink");
-    private static final String XPATH_ABSOLUTE_RECORD_TYPE_USER_FILTER_LINK = Metadata.getByConstant("xpathAbsoluteRecordTypeUserFilterLink");
+    private static final String XPATH_ABSOLUTE_RECORD_TYPE_LINK = Settings.getByConstant("xpathAbsoluteRecordTypeLink");
+    private static final String XPATH_ABSOLUTE_RECORD_TYPE_USER_FILTER_LINK = Settings.getByConstant("xpathAbsoluteRecordTypeUserFilterLink");
 
-    public static boolean click(String type) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_LINK, type)));
+    public static boolean click(String type, Settings s) {
+        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_LINK, type)));
         element.click();
-        waitForWorking();
+        waitForWorking(s);
         
         return true;
     }
     
-    public static boolean waitFor(String type) {
+    public static boolean waitFor(String type, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_LINK, type))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_LINK, type)));
-            scrollIntoView(element, false);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_LINK, type))));
+            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_LINK, type)));
+            scrollIntoView(element, false, s);
         } catch (TimeoutException e) {
             return false;
         }
@@ -36,18 +36,18 @@ public class TempoRecordType extends TempoObject{
         return true;
     }
     
-    public static boolean clickOnUserFilter(String userFilter) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_USER_FILTER_LINK, userFilter)));
-        scrollIntoView(element, false);
+    public static boolean clickOnUserFilter(String userFilter, Settings s) {
+        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_USER_FILTER_LINK, userFilter)));
+        scrollIntoView(element, false, s);
         element.click();
-        waitForWorking();
+        waitForWorking(s);
 
         return true;
     }
     
-    public static boolean waitForUserFilter(String userFilter) {
+    public static boolean waitForUserFilter(String userFilter, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_USER_FILTER_LINK, userFilter))));
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_USER_FILTER_LINK, userFilter))));
         } catch (TimeoutException e) {
             return false;
         }

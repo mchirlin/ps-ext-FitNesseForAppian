@@ -7,30 +7,30 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoTextField extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoTextField.class);
-    private static final String XPATH_ABSOLUTE_TEXT_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteTextFieldLabel");
-    private static final String XPATH_RELATIVE_TEXT_FIELD_INPUT = Metadata.getByConstant("xpathRelativeTextFieldInput");
+    private static final String XPATH_ABSOLUTE_TEXT_FIELD_LABEL = Settings.getByConstant("xpathAbsoluteTextFieldLabel");
+    private static final String XPATH_RELATIVE_TEXT_FIELD_INPUT = Settings.getByConstant("xpathRelativeTextFieldInput");
     
-    public static boolean populate(WebElement fieldLayout, String fieldValue) {
+    public static boolean populate(WebElement fieldLayout, String fieldValue, Settings s) {
         WebElement textField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TEXT_FIELD_INPUT));
         textField.clear();
         textField.sendKeys(fieldValue);
-        unfocus();
+        unfocus(s);
         
         LOG.debug("TEXT FIELD POPULATION : " + fieldValue);
         
         return true;
     }
     
-    public static boolean waitFor(String fieldName) {
+    public static boolean waitFor(String fieldName, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_TEXT_FIELD_LABEL, fieldName))));
-            WebElement fieldLayout = getFieldLayout(fieldName);
-            scrollIntoView(fieldLayout);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_TEXT_FIELD_LABEL, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName, s);
+            scrollIntoView(fieldLayout, s);
         } catch (TimeoutException e) {
             return false;
         }

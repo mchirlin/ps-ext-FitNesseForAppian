@@ -11,32 +11,32 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoFileUploadField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoFileUploadField.class);
-    private static final String XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteFileUploadFieldLabel");
-    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT = Metadata.getByConstant("xpathRelativeFileUploadFieldInput");
-    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE = Metadata.getByConstant("xpathRelativeFileUploadFieldFile");
-    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILENAME = XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE + Metadata.getByConstant("xpathConcatFileUploadFieldFilename");
-    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_REMOVE_LINK = Metadata.getByConstant("xpathRelativeFileUploadFieldRemoveLink");
+    private static final String XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL = Settings.getByConstant("xpathAbsoluteFileUploadFieldLabel");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT = Settings.getByConstant("xpathRelativeFileUploadFieldInput");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE = Settings.getByConstant("xpathRelativeFileUploadFieldFile");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILENAME = XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE + Settings.getByConstant("xpathConcatFileUploadFieldFilename");
+    private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_REMOVE_LINK = Settings.getByConstant("xpathRelativeFileUploadFieldRemoveLink");
     private static final Pattern FILENAME_PATTERN = Pattern.compile("(.*) \\(.*\\)");
    
-    public static boolean populate(WebElement fieldLayout, String fieldValue) {
+    public static boolean populate(WebElement fieldLayout, String fieldValue, Settings s) {
         WebElement fileUpload = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT));
         fileUpload.sendKeys(fieldValue);
-        unfocus();
+        unfocus(s);
         
         LOG.debug("FILE UPLOAD FIELD POPULATION : " + fieldValue);
         return true;
     }
     
-    public static boolean waitFor(String fieldName) {
+    public static boolean waitFor(String fieldName, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL, fieldName))));
-            WebElement fieldLayout = getFieldLayout(fieldName);
-            scrollIntoView(fieldLayout);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName, s);
+            scrollIntoView(fieldLayout, s);
         } catch (TimeoutException e) {
             return false;
         }
@@ -44,9 +44,9 @@ public class TempoFileUploadField extends TempoField {
         return true;
     }
     
-    public static boolean waitForFileName(WebElement fieldLayout, String fileName) {
+    public static boolean waitForFileName(WebElement fieldLayout, String fileName, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILENAME, fileName))));
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILENAME, fileName))));
         } catch (Exception e) {
             return false;
         }
@@ -68,14 +68,14 @@ public class TempoFileUploadField extends TempoField {
         return value;
     }
     
-    public static boolean contains(WebElement fieldLayout, String fieldValue) {
+    public static boolean contains(WebElement fieldLayout, String fieldValue, Settings s) {
         // For read-only
         try {
             return TempoField.contains(fieldLayout, fieldValue);
         } catch (Exception e) {}
         
         fieldValue = Paths.get(fieldValue).getFileName().toString();
-        waitForFileName(fieldLayout, fieldValue);
+        waitForFileName(fieldLayout, fieldValue, s);
         String compareString = getValue(fieldLayout);
         
         LOG.debug("FILE UPLOAD FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");

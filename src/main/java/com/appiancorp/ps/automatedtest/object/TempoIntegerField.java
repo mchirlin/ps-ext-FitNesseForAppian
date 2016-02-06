@@ -7,30 +7,30 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoIntegerField extends TempoTextField {
 
     private static final Logger LOG = Logger.getLogger(TempoIntegerField.class);
-    private static final String XPATH_ABSOLUTE_INTEGER_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteIntegerFieldLabel");
-    private static final String XPATH_RELATIVE_INTEGER_FIELD_INPUT = Metadata.getByConstant("xpathRelativeIntegerFieldInput");
+    private static final String XPATH_ABSOLUTE_INTEGER_FIELD_LABEL = Settings.getByConstant("xpathAbsoluteIntegerFieldLabel");
+    private static final String XPATH_RELATIVE_INTEGER_FIELD_INPUT = Settings.getByConstant("xpathRelativeIntegerFieldInput");
     
-    public static boolean populate(WebElement fieldLayout, String fieldValue) {
+    public static boolean populate(WebElement fieldLayout, String fieldValue, Settings s) {
         WebElement intField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_INTEGER_FIELD_INPUT));
         intField.clear();
         intField.sendKeys(fieldValue);
-        unfocus();
+        unfocus(s);
         
         LOG.debug("INTEGER field: " + fieldValue);
         
         return true;
     }
     
-    public static boolean waitFor(String fieldName) {
+    public static boolean waitFor(String fieldName, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_INTEGER_FIELD_LABEL, fieldName))));
-            WebElement fieldLayout = getFieldLayout(fieldName);
-            scrollIntoView(fieldLayout);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_INTEGER_FIELD_LABEL, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName, s);
+            scrollIntoView(fieldLayout, s);
         } catch (TimeoutException e) {
             return false;
         }

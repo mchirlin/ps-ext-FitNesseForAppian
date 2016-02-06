@@ -7,23 +7,19 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.appiancorp.ps.automatedtest.object.TempoObject;
-
 public class BaseFixtureTest {
 
     private static BaseFixture bFixture;
-    private static TempoFixture tFixture;
     
     @BeforeClass
     public static void setUp() throws Exception {
-      bFixture = new BaseFixture();
-      tFixture = new TempoFixture();
+      bFixture = new TempoFixture();
     }
     
     @Test
     public void testSetAppianUrlTo() throws Exception {
         bFixture.setAppianUrlTo("https://apacdemo.appiancloud.com");
-        assertEquals(TempoObject.getUrl(), "https://apacdemo.appiancloud.com");
+        assertEquals(bFixture.getSettings().getUrl(), "https://apacdemo.appiancloud.com");
     }
     
     @Test
@@ -34,26 +30,26 @@ public class BaseFixtureTest {
     @Test
     public void testSetAppianLocaleTo() throws Exception {
         bFixture.setAppianLocaleTo("en_GB");
-        assertEquals(TempoObject.getDateFormat(), "dd/MM/yyyy");
-        assertEquals(TempoObject.getDateDisplayFormat(), "d MMM yyyy");
-        assertEquals(TempoObject.getTimeFormat(), "HH:mm");
-        assertEquals(TempoObject.getTimeDisplayFormat(), "HH:mm");
-        assertEquals(TempoObject.getDatetimeFormat(), "dd/MM/yyyy HH:mm");
-        assertEquals(TempoObject.getDatetimeDisplayFormat(), "d MMM yyyy HH:mm");
+        assertEquals(bFixture.getSettings().getDateFormat(), "dd/MM/yyyy");
+        assertEquals(bFixture.getSettings().getDateDisplayFormat(), "d MMM yyyy");
+        assertEquals(bFixture.getSettings().getTimeFormat(), "HH:mm");
+        assertEquals(bFixture.getSettings().getTimeDisplayFormat(), "HH:mm");
+        assertEquals(bFixture.getSettings().getDatetimeFormat(), "dd/MM/yyyy HH:mm");
+        assertEquals(bFixture.getSettings().getDatetimeDisplayFormat(), "d MMM yyyy HH:mm");
         
         bFixture.setAppianLocaleTo("en_US");
-        assertEquals(TempoObject.getDateFormat(), "M/d/yyyy");
-        assertEquals(TempoObject.getDateDisplayFormat(), "MMM d, yyyy");
-        assertEquals(TempoObject.getTimeFormat(), "h:mm aa");
-        assertEquals(TempoObject.getTimeDisplayFormat(), "h:mm aa");
-        assertEquals(TempoObject.getDatetimeFormat(), "M/d/yyyy h:mm aa");
-        assertEquals(TempoObject.getDatetimeDisplayFormat(), "MMM d, yyyy, h:mm aa");
+        assertEquals(bFixture.getSettings().getDateFormat(), "M/d/yyyy");
+        assertEquals(bFixture.getSettings().getDateDisplayFormat(), "MMM d, yyyy");
+        assertEquals(bFixture.getSettings().getTimeFormat(), "h:mm aa");
+        assertEquals(bFixture.getSettings().getTimeDisplayFormat(), "h:mm aa");
+        assertEquals(bFixture.getSettings().getDatetimeFormat(), "M/d/yyyy h:mm aa");
+        assertEquals(bFixture.getSettings().getDatetimeDisplayFormat(), "MMM d, yyyy, h:mm aa");
     }
     
     @Test
     public void testSetTimeoutSecondsTo() throws Exception {
-        bFixture.setTimeoutSecondsTo("10");
-        assertEquals(TempoObject.getTimeoutSeconds(), 10);
+        bFixture.setTimeoutSecondsTo(10);
+        assertEquals(bFixture.getSettings().getTimeoutSeconds(), 10);
     }
     
     @Test
@@ -72,7 +68,6 @@ public class BaseFixtureTest {
     public void testLoginIntoWithUsernameAndPassword() throws Exception {        
         bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
         assertTrue(bFixture.loginIntoWithUsernameAndPassword("https://apacdemo.appiancloud.com", "michael.chirlin@appian.com", "password1"));
-        assertTrue(tFixture.logout());
         bFixture.tearDownSeleniumWebDriver();
     }
     
@@ -81,7 +76,6 @@ public class BaseFixtureTest {
         bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
         bFixture.setAppianUrlTo("https://apacdemo.appiancloud.com");
         assertTrue(bFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com","password1"));
-        assertTrue(tFixture.logout());
         bFixture.tearDownSeleniumWebDriver();
     }
     

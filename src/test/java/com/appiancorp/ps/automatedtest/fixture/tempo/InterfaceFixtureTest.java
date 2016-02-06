@@ -24,7 +24,7 @@ public class InterfaceFixtureTest {
       
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
       tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
-      tFixture.setTimeoutSecondsTo("15");
+      tFixture.setTimeoutSecondsTo(15);
       tFixture.setAppianVersionTo("16.1");
       tFixture.setAppianLocaleTo("en_GB");
       
@@ -138,70 +138,70 @@ public class InterfaceFixtureTest {
     
     @Test
     public void testDateField() throws Exception {    
-        SimpleDateFormat df = new SimpleDateFormat(TempoObject.getDateFormat());
-        SimpleDateFormat ddf = new SimpleDateFormat(TempoObject.getDateDisplayFormat());
+        SimpleDateFormat df = new SimpleDateFormat(tFixture.getSettings().getDateFormat());
+        SimpleDateFormat ddf = new SimpleDateFormat(tFixture.getSettings().getDateDisplayFormat());
         
         assertTrue(tFixture.populateFieldWith("DateField", new String[]{"+1 day"}));
         assertTrue(tFixture.verifyFieldContains("DateField", new String[]{"+1 day"}));
-        assertEquals(df.format(DateUtils.addDays(TempoObject.getStartDatetime(), 1)), tFixture.getFieldValue("DateField"));
+        assertEquals(df.format(DateUtils.addDays(tFixture.getSettings().getStartDatetime(), 1)), tFixture.getFieldValue("DateField"));
         
         assertTrue(tFixture.verifyFieldContains("RODateField", new String[]{"+1 day"}));
-        assertEquals(ddf.format(DateUtils.addDays(TempoObject.getStartDatetime(), 1)), tFixture.getFieldValue("RODateField"));
+        assertEquals(ddf.format(DateUtils.addDays(tFixture.getSettings().getStartDatetime(), 1)), tFixture.getFieldValue("RODateField"));
         
         assertTrue(tFixture.populateFieldWith("DateField[2]", new String[]{"2015-11-15"}));
         assertTrue(tFixture.verifyFieldContains("DateField[2]", new String[]{"2015-11-15"}));
-        assertEquals(df.format(TempoObject.parseDate("2015-11-15")), tFixture.getFieldValue("DateField[2]"));
+        assertEquals(df.format(TempoObject.parseDate("2015-11-15", tFixture.getSettings())), tFixture.getFieldValue("DateField[2]"));
         
         assertTrue(tFixture.populateFieldWith("DateField[3]", new String[]{"+5 days"}));
         assertTrue(tFixture.verifyFieldContains("DateField[3]", new String[]{"+5 days"}));
-        assertEquals(df.format(DateUtils.addDays(TempoObject.getStartDatetime(), 5)), tFixture.getFieldValue("DateField[3]"));
+        assertEquals(df.format(DateUtils.addDays(tFixture.getSettings().getStartDatetime(), 5)), tFixture.getFieldValue("DateField[3]"));
         
         // Grid
         assertTrue(tFixture.populateGridColumnRowWith("EditableGrid", "[7]", "[1]", new String[]{"+1 day"}));
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid", "[7]", "[1]", new String[]{"+1 day"}));
-        assertEquals(df.format(DateUtils.addDays(TempoObject.getStartDatetime(), 1)), tFixture.getGridColumnRowValue("EditableGrid", "[7]", "[1]"));
+        assertEquals(df.format(DateUtils.addDays(tFixture.getSettings().getStartDatetime(), 1)), tFixture.getGridColumnRowValue("EditableGrid", "[7]", "[1]"));
     }
     
     @Test
     public void testDatetimeField() throws Exception {
-        SimpleDateFormat dtf = new SimpleDateFormat(TempoObject.getDatetimeFormat());
-        SimpleDateFormat ddtf = new SimpleDateFormat(TempoObject.getDatetimeDisplayFormat());
+        SimpleDateFormat dtf = new SimpleDateFormat(tFixture.getSettings().getDatetimeFormat());
+        SimpleDateFormat ddtf = new SimpleDateFormat(tFixture.getSettings().getDatetimeDisplayFormat());
         
         assertTrue(tFixture.populateFieldWith("DatetimeField", new String[]{"+1 hour"}));
         assertTrue(tFixture.verifyFieldContains("DatetimeField", new String[]{"+1 hour"}));
-        assertEquals(dtf.format(DateUtils.addHours(TempoObject.getStartDatetime(), 1)), tFixture.getFieldValue("DatetimeField"));
+        assertEquals(dtf.format(DateUtils.addHours(tFixture.getSettings().getStartDatetime(), 1)), tFixture.getFieldValue("DatetimeField"));
         
         assertTrue(tFixture.verifyFieldContains("RODatetimeField", new String[]{"+1 hour"}));
-        assertEquals(ddtf.format(DateUtils.addHours(TempoObject.getStartDatetime(), 1)), tFixture.getFieldValue("RODatetimeField"));
+        assertEquals(ddtf.format(DateUtils.addHours(tFixture.getSettings().getStartDatetime(), 1)), tFixture.getFieldValue("RODatetimeField"));
         
         assertTrue(tFixture.populateFieldWith("DatetimeField[2]", new String[]{"2015-11-15"}));
         assertTrue(tFixture.verifyFieldContains("DatetimeField[2]", new String[]{"2015-11-15"}));
-        assertEquals(dtf.format(TempoObject.parseDate("2015-11-15")), tFixture.getFieldValue("DatetimeField[2]"));
+        assertEquals(dtf.format(TempoObject.parseDate("2015-11-15", tFixture.getSettings())), tFixture.getFieldValue("DatetimeField[2]"));
         
         assertTrue(tFixture.populateFieldWith("DatetimeField[3]", new String[]{"2015-11-15 14:00"}));
         assertTrue(tFixture.verifyFieldContains("DatetimeField[3]", new String[]{"2015-11-15 14:00"}));
-        assertEquals(dtf.format(TempoObject.parseDate("2015-11-15 14:00")), tFixture.getFieldValue("DatetimeField[3]"));
+        assertEquals(dtf.format(TempoObject.parseDate("2015-11-15 14:00", tFixture.getSettings())), tFixture.getFieldValue("DatetimeField[3]"));
         
         assertTrue(tFixture.populateFieldWith("DatetimeField[4]", new String[]{"+5 minutes"}));
         assertTrue(tFixture.verifyFieldContains("DatetimeField[4]", new String[]{"+5 minutes"}));
-        assertEquals(dtf.format(DateUtils.addMinutes(TempoObject.getStartDatetime(), 5)), tFixture.getFieldValue("DatetimeField[4]"));
+        assertEquals(dtf.format(DateUtils.addMinutes(tFixture.getSettings().getStartDatetime(), 5)), tFixture.getFieldValue("DatetimeField[4]"));
         
         assertTrue(tFixture.populateFieldWith("DatetimeField[5]", new String[]{"+5 hours"}));
         assertTrue(tFixture.verifyFieldContains("DatetimeField[5]", new String[]{"+5 hours"}));
-        assertEquals(dtf.format(DateUtils.addHours(TempoObject.getStartDatetime(), 5)), tFixture.getFieldValue("DatetimeField[5]"));
+        assertEquals(dtf.format(DateUtils.addHours(tFixture.getSettings().getStartDatetime(), 5)), tFixture.getFieldValue("DatetimeField[5]"));
         
         assertTrue(tFixture.populateFieldWith("DatetimeField[6]", new String[]{"+5 days"}));
         assertTrue(tFixture.verifyFieldContains("DatetimeField[6]", new String[]{"+5 days"}));
-        assertEquals(dtf.format(DateUtils.addDays(TempoObject.getStartDatetime(), 5)), tFixture.getFieldValue("DatetimeField[6]"));
+        assertEquals(dtf.format(DateUtils.addDays(tFixture.getSettings().getStartDatetime(), 5)), tFixture.getFieldValue("DatetimeField[6]"));
         
         // Grid
         assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[2]", "DatetimeField", "[1]", new String[]{"+1 hour"}));
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "DatetimeField", "[1]", new String[]{"+1 hour"}));
-        assertEquals(dtf.format(DateUtils.addHours(TempoObject.getStartDatetime(), 1)), tFixture.getGridColumnRowValue("EditableGrid[2]", "DatetimeField", "[1]"));
+        assertEquals(dtf.format(DateUtils.addHours(tFixture.getSettings().getStartDatetime(), 1)), tFixture.getGridColumnRowValue("EditableGrid[2]", "DatetimeField", "[1]"));
 
         assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[2]", "[1]", "[2]", new String[]{"+1 minute"}));
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "[1]", "[2]", new String[]{"+1 minute"}));
-        assertEquals(dtf.format(DateUtils.addMinutes(TempoObject.getStartDatetime(), 1)), tFixture.getGridColumnRowValue("EditableGrid[2]", "[1]", "[2]"));
+        assertEquals(dtf.format(DateUtils.addMinutes(tFixture.getSettings().getStartDatetime(), 1)), tFixture.getGridColumnRowValue("EditableGrid[2]", "[1]", "[2]"));
     }
     
     @Test

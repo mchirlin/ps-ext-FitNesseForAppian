@@ -106,7 +106,8 @@
 	    {"label": "xpathAbsoluteFieldLayout", "value": "//span[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //label[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
 	    {"label": "xpathRelativeReadOnlyField", "value": ".//p[contains(@class, 'readonly')] | div[ancestor::table[contains(@class, 'DataGrid-Table')]]"},
 	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input"},
-	    {"label": "xpathRelativeGridAddRowLink", "value": "./tfoot//a"}
+	    {"label": "xpathRelativeGridAddRowLink", "value": "./tfoot//a"},
+	    {"label": "xpathAbsoluteWorking", "value": "//div[@class = 'appian-indicator-message']"}
 	  ]
 	},
 	{ "version": "7.11", "byConstants": [] },

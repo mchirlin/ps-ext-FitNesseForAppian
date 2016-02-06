@@ -7,71 +7,71 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 import com.google.common.base.Throwables;
 
 public class TempoField extends TempoObject {
        
     private static final Logger LOG = Logger.getLogger(TempoField.class);
-    protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT = Metadata.getByConstant("xpathAbsoluteFieldLayout");
+    protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT = Settings.getByConstant("xpathAbsoluteFieldLayout");
     protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX = "(" + XPATH_ABSOLUTE_FIELD_LAYOUT + ")[%d]";
-    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = Metadata.getByConstant("xpathRelativeReadOnlyField"); // Handles readOnly fields and paging grids
+    protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = Settings.getByConstant("xpathRelativeReadOnlyField"); // Handles readOnly fields and paging grids
     
-    public static WebElement getFieldLayout(String fieldName) {
+    public static WebElement getFieldLayout(String fieldName, Settings s) {
         if (isFieldIndex(fieldName)) {
             String fName = getFieldFromFieldIndex(fieldName);
             int index = getIndexFromFieldIndex(fieldName);
-            return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index)));
+            return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index)));
         } else {
-            return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName)));
+            return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName)));
         }        
     }
     
-    public static boolean populate(String fieldName, String[] fieldValues){
+    public static boolean populate(String fieldName, String[] fieldValues, Settings s){
         for (String fieldValue : fieldValues) {
-            WebElement fieldLayout = getFieldLayout(fieldName);
-            if (!populate(fieldLayout, fieldName, fieldValue)) return false;
+            WebElement fieldLayout = getFieldLayout(fieldName, s);
+            if (!populate(fieldLayout, fieldName, fieldValue, s)) return false;
         }
         
         return true;
     }
         
-    public static boolean populate(WebElement fieldLayout, String fieldName, String fieldValue) {      
+    public static boolean populate(WebElement fieldLayout, String fieldName, String fieldValue, Settings s) {      
         TempoFieldType fieldType = getFieldType(fieldLayout);
-        fieldValue = TempoObject.parseVariable(fieldValue);
+        fieldValue = TempoObject.parseVariable(fieldValue, s);
             
         try {
             switch (fieldType) {  
                 case TEXT: 
-                    return TempoTextField.populate(fieldLayout, fieldValue);
+                    return TempoTextField.populate(fieldLayout, fieldValue, s);
                     
                 case PARAGRAPH:
-                    return TempoParagraphField.populate(fieldLayout, fieldValue);
+                    return TempoParagraphField.populate(fieldLayout, fieldValue, s);
                     
                 case INTEGER: 
-                    return TempoIntegerField.populate(fieldLayout, fieldValue);
+                    return TempoIntegerField.populate(fieldLayout, fieldValue, s);
                     
                 case SELECT:
-                    return TempoSelectField.populate(fieldLayout, fieldValue);
+                    return TempoSelectField.populate(fieldLayout, fieldValue, s);
         
                 case RADIO: 
-                    return TempoRadioField.populate(fieldLayout, fieldValue);
+                    return TempoRadioField.populate(fieldLayout, fieldValue, s);
                     
                 case CHECKBOX: 
-                    return TempoCheckboxField.populate(fieldLayout, fieldValue);
+                    return TempoCheckboxField.populate(fieldLayout, fieldValue, s);
                 
                 case FILE_UPLOAD: 
-                    return TempoFileUploadField.populate(fieldLayout, fieldValue);
+                    return TempoFileUploadField.populate(fieldLayout, fieldValue, s);
                     
                 case DATE: 
-                    return TempoDateField.populate(fieldLayout, fieldValue);
+                    return TempoDateField.populate(fieldLayout, fieldValue, s);
                     
                 case DATETIME: 
-                    return TempoDatetimeField.populate(fieldLayout, fieldValue);
+                    return TempoDatetimeField.populate(fieldLayout, fieldValue, s);
                     
                 case PICKER:
-                    return TempoPickerField.populate(fieldLayout, fieldName, fieldValue);
+                    return TempoPickerField.populate(fieldLayout, fieldName, fieldValue, s);
                 
                 default:
                     return false;
@@ -82,18 +82,18 @@ public class TempoField extends TempoObject {
         }
     }
     
-    public static boolean waitFor(String fieldName, Integer timeout) {
+    public static boolean waitFor(String fieldName, Integer timeout, Settings s) {
         try {
             // Scroll the field layout into view
             if (isFieldIndex(fieldName)) {
                 String fName = getFieldFromFieldIndex(fieldName);
                 int index = getIndexFromFieldIndex(fieldName);
-                (new WebDriverWait(driver, timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index))));
+                (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index))));
             } else {
-                (new WebDriverWait(driver, timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName))));
+                (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName))));
             }  
-            WebElement fieldLayout = getFieldLayout(fieldName);
-            scrollIntoView(fieldLayout);
+            WebElement fieldLayout = getFieldLayout(fieldName, s);
+            scrollIntoView(fieldLayout, s);
         } catch (TimeoutException e) {
             return false;
         }
@@ -101,17 +101,17 @@ public class TempoField extends TempoObject {
         return true;
     }
     
-    public static boolean waitFor(String fieldName) {
-        return waitFor(fieldName, timeoutSeconds);
+    public static boolean waitFor(String fieldName, Settings s) {
+        return waitFor(fieldName, s.getTimeoutSeconds(), s);
     }
     
-    public static boolean clear(String fieldName){
-        WebElement fieldLayout = getFieldLayout(fieldName);
+    public static boolean clear(String fieldName, Settings s){
+        WebElement fieldLayout = getFieldLayout(fieldName, s);
         
-        return clear(fieldLayout, fieldName);
+        return clear(fieldLayout, fieldName, s);
     }
 
-    public static boolean clear(WebElement fieldLayout, String fieldName) { 
+    public static boolean clear(WebElement fieldLayout, String fieldName, Settings s) { 
         
         TempoFieldType fieldType = getFieldType(fieldLayout);
         
@@ -141,13 +141,13 @@ public class TempoField extends TempoObject {
         }
     }
     
-    public static boolean clearOf(String fieldName, String[] fieldValues){
-        WebElement fieldLayout = getFieldLayout(fieldName);
+    public static boolean clearOf(String fieldName, String[] fieldValues, Settings s){
+        WebElement fieldLayout = getFieldLayout(fieldName, s);
         
-        return clearOf(fieldLayout, fieldValues);
+        return clearOf(fieldLayout, fieldValues, s);
     }
     
-    public static boolean clearOf(WebElement fieldLayout, String[] fieldValues) {
+    public static boolean clearOf(WebElement fieldLayout, String[] fieldValues, Settings s) {
         TempoFieldType fieldType = getFieldType(fieldLayout);
         
         switch (fieldType) {
@@ -160,8 +160,8 @@ public class TempoField extends TempoObject {
         }
     }
     
-    public static String getValue(String fieldName) {
-        WebElement fieldLayout = getFieldLayout(fieldName);
+    public static String getValue(String fieldName, Settings s) {
+        WebElement fieldLayout = getFieldLayout(fieldName, s);
         
         return getValue(fieldLayout, fieldName);
     }
@@ -216,19 +216,19 @@ public class TempoField extends TempoObject {
         }
     }
     
-    public static boolean contains(String fieldName, String[] fieldValues) {
+    public static boolean contains(String fieldName, String[] fieldValues, Settings s) {
         for (String fieldValue : fieldValues) {
-            WebElement fieldLayout = getFieldLayout(fieldName);
-            if (!contains(fieldLayout, fieldName, fieldValue)) return false;
+            WebElement fieldLayout = getFieldLayout(fieldName, s);
+            if (!contains(fieldLayout, fieldName, fieldValue, s)) return false;
         }
         
         return true;
     }
     
-    public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue) {
+    public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue, Settings s) {
         TempoFieldType fieldType = getFieldType(fieldLayout);
         
-        fieldValue = TempoObject.parseVariable(fieldValue);
+        fieldValue = TempoObject.parseVariable(fieldValue, s);
         
         LOG.debug("Field Type: " + fieldType);
         

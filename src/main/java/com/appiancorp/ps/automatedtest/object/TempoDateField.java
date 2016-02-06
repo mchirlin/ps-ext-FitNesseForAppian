@@ -13,32 +13,32 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoDateField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoDateField.class);
-    private static final String XPATH_ABSOLUTE_DATE_FIELD_INPUT = Metadata.getByConstant("xpathAbsoluteDateFieldInput");
-    private static final String XPATH_RELATIVE_DATE_FIELD_PLACEHOLDER = Metadata.getByConstant("xpathRelativeDateFieldPlaceholder");
-    private static final String XPATH_RELATIVE_DATE_FIELD_INPUT = Metadata.getByConstant("xpathRelativeDateFieldInput");
+    private static final String XPATH_ABSOLUTE_DATE_FIELD_INPUT = Settings.getByConstant("xpathAbsoluteDateFieldInput");
+    private static final String XPATH_RELATIVE_DATE_FIELD_PLACEHOLDER = Settings.getByConstant("xpathRelativeDateFieldPlaceholder");
+    private static final String XPATH_RELATIVE_DATE_FIELD_INPUT = Settings.getByConstant("xpathRelativeDateFieldInput");
     
-    public static boolean populate(WebElement fieldLayout, String fieldValue) throws ParseException {        
-        fieldValue = parseVariable(fieldValue);
-        Date d = parseDate(fieldValue);
+    public static boolean populate(WebElement fieldLayout, String fieldValue, Settings s) throws ParseException {        
+        fieldValue = parseVariable(fieldValue, s);
+        Date d = parseDate(fieldValue, s);
 
-        populateTempoDateFieldWithDate(fieldLayout, d);
-        unfocus();
+        populateTempoDateFieldWithDate(fieldLayout, d, s);
+        unfocus(s);
         
         LOG.debug("DATE FIELD POPULATION : " + fieldValue);
         
         return true;
     }
     
-    public static boolean waitFor(String fieldName) {
+    public static boolean waitFor(String fieldName, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_DATE_FIELD_INPUT, fieldName))));
-            WebElement fieldLayout = getFieldLayout(fieldName);
-            scrollIntoView(fieldLayout);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_DATE_FIELD_INPUT, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName, s);
+            scrollIntoView(fieldLayout, s);
         } catch (TimeoutException e) {
             return false;
         }
@@ -53,12 +53,12 @@ public class TempoDateField extends TempoField {
         return value;
     }
     
-    public static boolean contains(WebElement fieldLayout, String fieldValue) {
+    public static boolean contains(WebElement fieldLayout, String fieldValue, Settings s) {
         String dateString = getValue(fieldLayout);
 
         try{  
-            Date compareDate = parseDate(dateString);
-            Date fieldDate = parseDate(fieldValue);
+            Date compareDate = parseDate(dateString, s);
+            Date fieldDate = parseDate(fieldValue, s);
             LOG.debug("DATE FIELD COMPARISON : Field value [" + compareDate.toString() + "] compared to Entered value [" + fieldDate.toString() + "]");
             
             return DateUtils.isSameDay(compareDate, fieldDate);
@@ -68,8 +68,8 @@ public class TempoDateField extends TempoField {
         }        
     }
     
-    private static boolean populateTempoDateFieldWithDate(WebElement fieldLayout, Date d) {
-        String dateValue = new SimpleDateFormat(dateFormat).format(d);
+    private static boolean populateTempoDateFieldWithDate(WebElement fieldLayout, Date d, Settings s) {
+        String dateValue = new SimpleDateFormat(s.getDateFormat()).format(d);
         
         WebElement datePlaceholder = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_FIELD_PLACEHOLDER));
         WebElement dateField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATE_FIELD_INPUT));
@@ -82,7 +82,7 @@ public class TempoDateField extends TempoField {
             dateField.sendKeys(dateValue);
         } else {
             datePlaceholder.click();
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOf(dateField));
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOf(dateField));
             dateField.sendKeys(dateValue);
         }
                 
