@@ -47,7 +47,7 @@
 !*** Check News 
 !| click on menu | News | 
 | verify news feed containing text | @{randString} | is present |
-| verify news feed containing text | @{randString} | tagged with |Test Text @{randString} | is present |
+| verify news feed containing text | @{randString} | tagged with |@{randString} | is present |
 ***!
 
 !*** Check/Verify Record Contents
