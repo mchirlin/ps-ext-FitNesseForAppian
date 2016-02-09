@@ -399,6 +399,30 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.clickOnLink("Add Data to Paging Grid[1]"));
     }
     
+    @Test
+    public void testGridPagingLink() throws Exception{
+        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "next"));
+        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "first"));
+        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "last"));
+        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "previous"));
+        assertTrue(tFixture.clickOnGridPageLink("[4]", "next"));
+        assertTrue(tFixture.clickOnGridPageLink("[4]", "first"));
+        assertTrue(tFixture.clickOnGridPageLink("[4]", "last"));
+        assertTrue(tFixture.clickOnGridPageLink("[4]", "previous"));
+        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "NEXT"));
+        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "FIRST"));
+        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "LAST"));
+        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "PREVIOUS"));
+    }
+    
+    @Test
+    public void testSortGridbyColumn() throws Exception{
+        assertTrue(tFixture.sortGridbyColumn("PagingGrid", "Column Label 2"));
+        tFixture.clickOnButton("OK");
+        assertTrue(tFixture.sortGridbyColumn("[4]", "Column Label"));
+        tFixture.clickOnButton("OK");
+    }
+    
     @AfterClass
     public static void tearDown() throws Exception {
         tFixture.clickOnButton("Cancel");
