@@ -55,13 +55,15 @@
 | click on record type | RECORD_TYPE_NAME | :
 | click on record type user filter | USER_FILTER_NAME | :
 | verify record type user filter | USER_FILTER_NAME | is present | :
-| click on record | RECORD_NAME | :
-| verify record | RECORD_NAME | is present | :
+| click on record | RECORD_NAME | : Works for both record list view and record grid view
+| verify record | RECORD_NAME | is present | : 
 | verify record | RECORD_NAME | is not present | :
 | click on record view | VIEW_NAME | :
 | click on record related action | RELATED_ACTION_NAME | : This is run on the related action dashboard, not as a button currently
 | verify record related action | RELATED_ACTION_NAME | is present | :
 | verify record related action | RELATED_ACTION_NAME | is not present | :
+| sort record grid view by column | COLUMN_NAME | :
+| click on record grid navigation | NAVIGATION_OPTION | : Options include "First", "Previous", "Next", or "Last"
 ]!
 
 !3 REPORTS

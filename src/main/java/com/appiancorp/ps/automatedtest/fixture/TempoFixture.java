@@ -539,6 +539,37 @@ public class TempoFixture extends BaseFixture {
     public boolean verifyRecordRelatedActionIsNotPresent(String relatedActionName) {
         return returnHandler(!TempoRecord.waitForRelatedAction(relatedActionName));
     }
+
+    /** 
+     * Sorts Record Grid view by a specific column <br>
+     * <br>
+     * FitNesse Example: <code>| sort record grid by column | COLUMN_NAME |</code><br>
+     * 
+     * @param columnName Name of column
+     * @return True, if the column is found and clicked
+     */
+    
+    public boolean sortRecordGridByColumn(String columnName){
+        if(!TempoRecord.waitForRecordGridColumn(columnName)) {
+            throw new MissingObjectException("Record Grid Column", columnName);
+        }
+        return returnHandler(TempoRecord.clickOnRecordGridColumn(columnName));
+    }
+    
+    /** 
+     * Pages through the Records grid view <br>
+     * <br>
+     * FitNesse Example: <code>| click on record grid view navigation | NAVIGATION_OPTION |</code> Navigation option can only be "First", "Previous", "Next", or "Last"<br>
+     * @param columnName Name of column
+     * @return True, if the column is found and clicked
+     */
+
+    public boolean clickOnRecordGridNaviation(String navOption){
+        if(!TempoRecord.waitForRecordGridNavigation(navOption)){
+            throw new MissingObjectException("Navigation option", navOption);
+        }
+        return returnHandler(TempoRecord.clickOnRecordGridNavigation(navOption));
+    }
     
     /*
      * Reports
