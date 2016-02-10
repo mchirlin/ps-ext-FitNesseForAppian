@@ -1067,18 +1067,8 @@ public class TempoFixture extends BaseFixture {
         }
         navOption = navOption.toLowerCase();
         
-        switch (navOption) {  
-            case "first": 
-                return TempoGrid.clickOnFirstPageLink(gridName, settings);
-            case "previous":
-                return TempoGrid.clickOnPreviousPageLink(gridName, settings);
-            case "next": 
-                return TempoGrid.clickOnNextPageLink(gridName, settings);
-            case "last":
-                return TempoGrid.clickOnLastPageLink(gridName, settings);
-            default:
-                return false;    
-        }
+        return TempoGrid.clickOnNavigationOption(gridName, navOption, settings);
+      
     }
     /**
      * Sort a grid by a column<br>

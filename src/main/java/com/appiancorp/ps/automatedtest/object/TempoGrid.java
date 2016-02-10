@@ -236,46 +236,30 @@ public class TempoGrid extends TempoField {
         return true;
     }
     
-    public static boolean clickOnFirstPageLink(String gridName, Settings s){
+    public static boolean clickOnNavigationOption(String gridName, String navOption, Settings s){
+        WebElement grid = getGrid(gridName, s);
+        WebElement link = null;
+        
         try {
-            WebElement grid = getGrid(gridName, s);
-            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_FIRST_PAGE_LINK));
+            switch (navOption) {
+                case "first":
+                    link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_FIRST_PAGE_LINK));
+                    break;
+                case "next":
+                    link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_NEXT_PAGE_LINK));
+                   break;
+                case "previous":
+                    link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_PREVIOUS_PAGE_LINK));
+                    break;
+                case "last":
+                    link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_LAST_PAGE_LINK));
+                    break;
+            }
+            
             link.click();
+            waitForWorking(s);
         } catch (Exception e) {
-            LOG.warn("GRID FIRST PAGE LINK for " + gridName + e.getClass());
-            return false;
-        }
-        return true;
-    }
-    public static boolean clickOnPreviousPageLink(String gridName, Settings s){
-        try {
-            WebElement grid = getGrid(gridName, s);
-            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_PREVIOUS_PAGE_LINK));
-            link.click();
-        } catch (Exception e) {
-            LOG.warn("GRID LAST PAGE LINK for " + gridName + e.getClass());
-            return false;
-        }
-        return true;
-    }
-    public static boolean clickOnNextPageLink(String gridName, Settings s){
-        try {
-            WebElement grid = getGrid(gridName, s);
-            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_NEXT_PAGE_LINK));
-            link.click();
-        } catch (Exception e) {
-            LOG.warn("GRID NEXT PAGE LINK for " + gridName + e.getClass());
-            return false;
-        }
-        return true;
-    }
-    public static boolean clickOnLastPageLink(String gridName, Settings s){
-        try {
-            WebElement grid = getGrid(gridName, s);
-            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_LAST_PAGE_LINK));
-            link.click();
-        } catch (Exception e) {
-            LOG.warn("GRID LAST PAGE LINK for " + gridName + e.getClass());
+            LOG.warn("GRID " + navOption.toUpperCase() + " PAGE LINK for " + gridName + e.getClass());
             return false;
         }
         return true;
