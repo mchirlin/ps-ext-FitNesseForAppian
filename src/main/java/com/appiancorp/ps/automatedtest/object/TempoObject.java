@@ -136,7 +136,7 @@ public class TempoObject {
     
     public static boolean waitForWorking(Settings s) {
         try {
-            Thread.sleep(100);
+            Thread.sleep(550);
             (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_WORKING)));
             Thread.sleep(200);
         } catch (Exception e) {
