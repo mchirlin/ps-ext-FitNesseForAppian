@@ -121,7 +121,10 @@
       	{"label": "xpathRelativeDatetimeFieldDatePlaceholder", "value": ".//input[contains(@class, 'aui-DateInput-Placeholder')]"},
       	{"label": "xpathRelativeDatetimeFieldTimePlaceholder", "value": ".//input[contains(@class, 'aui-TimeInput-Placeholder')]"},
 	    {"label": "xpathAbsoluteRecordLink", "value": "//a[contains(@href, '/suite/tempo/records/item/') and contains(@href, '/view/summary') and contains(text(), '%s')]"},
-	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input | //div[contains(@class, 'filters')]/descendant::input[@type = 'text']"}
+	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input | //div[contains(@class, 'filters')]/descendant::input[@type = 'text']"},
+	    {"label": "xpathAbsoluteRecordGridColumnSortLink", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/thead//a[text()='%s']"},
+	    {"label": "xpathAbsoluteRecordGridNavigationPreviousNext", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[text()='%s']"},
+	    {"label": "xpathAbsoluteRecordGridNavigationFirstLast", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[@title='%s']"}
 	  ]
 	}
   ]

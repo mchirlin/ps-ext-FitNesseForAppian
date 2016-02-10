@@ -17,6 +17,9 @@ public class TempoRecord extends TempoObject {
     private static final String XPATH_ABSOLUTE_RECORD_LINK = Metadata.getByConstant("xpathAbsoluteRecordLink");
     private static final String XPATH_ABSOLUTE_RECORD_VIEW_LINK = Metadata.getByConstant("xpathAbsoluteRecordViewLink");
     private static final String XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK = Metadata.getByConstant("xpathAbsoluteRecordRelatedActionLink");
+    private static final String XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK = Metadata.getByConstant("xpathAbsoluteRecordGridColumnSortLink");
+    private static final String XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT = Metadata.getByConstant("xpathAbsoluteRecordGridNavigationPreviousNext");
+    private static final String XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST = Metadata.getByConstant("xpathAbsoluteRecordGridNavigationFirstLast");
     
     public static boolean click(String itemName) {
         WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName)));
@@ -115,4 +118,64 @@ public class TempoRecord extends TempoObject {
 
         return true;
     }
+
+    public static boolean waitForRecordGridColumn(String columnName){
+        try {
+            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName))));
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName)));
+            scrollIntoView(element);
+        } catch (TimeoutException e) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public static boolean clickOnRecordGridColumn(String columnName){
+        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName)));
+        element.click();
+                
+        return true;
+    }
+    
+    public static boolean waitForRecordGridNavigation(String navOption){
+        //navOption can only be First, Last, Previous, Next
+        try{
+            switch(navOption){
+            case "First": case "Last": 
+                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST, navOption))));
+                WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST, navOption)));
+                scrollIntoView(element);
+                return true;
+            case "Previous": case "Next":
+                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT, navOption))));
+                WebElement element2 = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT, navOption)));
+                scrollIntoView(element2);
+                return true;
+            default:
+                return false;
+            }
+        }
+        catch (TimeoutException e){
+            return false;
+        }
+        
+    }
+    
+    public static boolean clickOnRecordGridNavigation(String navOption){
+      //navOption can only be First, Last, Previous, Next
+        switch(navOption){
+        case "First": case "Last":
+            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST, navOption)));
+            element.click();
+            return true;
+        case "Next": case "Previous":
+            WebElement element2 = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT, navOption)));
+            element2.click();
+            return true;
+        default: 
+            return false;
+        }
+    }
+
 }
