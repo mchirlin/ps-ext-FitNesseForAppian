@@ -270,6 +270,7 @@ public class TempoGrid extends TempoField {
             WebElement grid = getGrid(gridName, s);
             WebElement column = grid.findElement(By.xpath(String.format(XPATH_RELATIVE_GRID_COLUMN_LINK, columnName)));
             column.click();
+            waitForWorking(s);
         }
         catch (Exception e){
             LOG.warn("GRID " + gridName + " and COLUMN " +columnName + e.getClass());
