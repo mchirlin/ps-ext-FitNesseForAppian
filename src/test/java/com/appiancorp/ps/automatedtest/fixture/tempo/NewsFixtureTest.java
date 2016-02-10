@@ -15,7 +15,7 @@ public class NewsFixtureTest extends TempoFixtureTest {
     private static Integer randInt;
     
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUpNews() throws Exception {
       tFixture.clickOnMenu("Actions");
       tFixture.clickOnAction("Automated Testing Input");
       
@@ -71,7 +71,7 @@ public class NewsFixtureTest extends TempoFixtureTest {
     }
     
     @AfterClass
-    public static void tearDown() throws Exception {
+    public static void tearDownNews() throws Exception {
         tFixture.clickOnMenu("News");
         tFixture.deleteNewsPost(randString);
     }

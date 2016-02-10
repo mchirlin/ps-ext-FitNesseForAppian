@@ -11,7 +11,7 @@ import com.appiancorp.ps.automatedtest.fixture.TempoFixtureTest;
 public class TasksFixtureTest extends TempoFixtureTest {    
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUpTasks() throws Exception {
       tFixture.clickOnMenu("Actions");
       tFixture.clickOnAction("Automated Testing Input");
     }
@@ -46,7 +46,7 @@ public class TasksFixtureTest extends TempoFixtureTest {
     }
     
     @AfterClass
-    public static void tearDown() throws Exception {
+    public static void tearDownTasks() throws Exception {
         tFixture.clickOnMenu("Tasks");
         tFixture.clickOnTask("Input Automated Test Data");
         tFixture.clickOnButton("Cancel");

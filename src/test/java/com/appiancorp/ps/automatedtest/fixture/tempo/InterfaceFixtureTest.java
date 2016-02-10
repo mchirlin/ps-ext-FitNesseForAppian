@@ -17,7 +17,7 @@ import com.appiancorp.ps.automatedtest.object.TempoObject;
 public class InterfaceFixtureTest extends TempoFixtureTest {    
     
     @BeforeClass
-    public static void setUp() throws Exception {      
+    public static void setUpInterface() throws Exception {      
       tFixture.clickOnMenu("Actions");
       tFixture.clickOnAction("All Fields");
     }
@@ -395,7 +395,7 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
     }
     
     @AfterClass
-    public static void tearDown() throws Exception {
+    public static void tearDownInterface() throws Exception {
         tFixture.clickOnButton("Cancel");
     }
 }

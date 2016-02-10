@@ -13,7 +13,7 @@ public class RecordsFixtureTest extends TempoFixtureTest{
     private static String randString;
     
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUpRecords() throws Exception {
       tFixture.clickOnMenu("Actions");
       tFixture.clickOnAction("Automated Testing Input");
       
@@ -62,7 +62,7 @@ public class RecordsFixtureTest extends TempoFixtureTest{
     }
     
     @AfterClass
-    public static void tearDown() throws Exception {
+    public static void tearDownRecords() throws Exception {
         tFixture.clickOnMenu("News");
         tFixture.deleteNewsPost(randString);
         tFixture.logout();
