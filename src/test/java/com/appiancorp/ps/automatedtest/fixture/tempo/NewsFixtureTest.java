@@ -74,6 +74,13 @@ public class NewsFixtureTest {
         assertEquals(tFixture.getRegexFromNewsFeedContainingTextCommentedWith("\\[[0-9]\\]", randString, "Comment"), "[" + randInt + "]");
     }
     
+    @Test
+    public void testSearch() throws Exception {
+        assertTrue(tFixture.clickOnMenu("News"));
+        assertTrue(tFixture.searchFor(randString));
+        assertTrue(tFixture.verifyNewsFeedContainingTextIsPresent(randString));
+    }
+    
     @AfterClass
     public static void tearDown() throws Exception {
         tFixture.clickOnMenu("News");

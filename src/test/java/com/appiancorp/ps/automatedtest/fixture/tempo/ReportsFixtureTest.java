@@ -29,9 +29,16 @@ public class ReportsFixtureTest {
     public void testReportsFixture() throws Exception {
         tFixture.clickOnMenu("Reports");
         
-        assertTrue(tFixture.verifyReportIsPresent("Orders Dashboard"));
-        assertTrue(tFixture.verifyReportIsNotPresent("Not Orders Dashboard"));
-        assertTrue(tFixture.clickOnReport("Orders Dashboard"));
+        assertTrue(tFixture.verifyReportIsPresent("Automated Test Report"));
+        assertTrue(tFixture.verifyReportIsNotPresent("Not Report"));
+        assertTrue(tFixture.clickOnReport("Automated Test Report"));
+    }
+    
+    @Test
+    public void testSearch() throws Exception {
+        assertTrue(tFixture.clickOnMenu("Reports"));
+        assertTrue(tFixture.searchFor("Automated Test Report"));
+        assertTrue(tFixture.verifyReportIsPresent("Automated Test Report"));
     }
     
     @AfterClass

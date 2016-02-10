@@ -62,7 +62,15 @@ public class RecordsFixtureTest {
         assertTrue(tFixture.clickOnRecordRelatedAction("AUT Data Input Test"));
         
         tFixture.clickOnButton("Cancel");
-    }    
+    }
+    
+    @Test
+    public void testSearch() throws Exception {
+        assertTrue(tFixture.clickOnMenu("Records"));
+        assertTrue(tFixture.clickOnRecordType("Automated Testing Records"));
+        assertTrue(tFixture.searchFor(randString));
+        assertTrue(tFixture.verifyRecordIsPresent(randString));   
+    }
     
     @AfterClass
     public static void tearDown() throws Exception {

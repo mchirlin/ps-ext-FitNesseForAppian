@@ -26,13 +26,6 @@ public class TempoFixtureTest {
     @Test
     public void testTempoFixture() throws Exception {
         assertTrue(tFixture.clickOnMenu("News"));
-        assertTrue(tFixture.searchFor("News Search"));
-        assertTrue(tFixture.clickOnMenu("Reports"));
-        assertTrue(tFixture.searchFor("Report Search"));
-        assertTrue(tFixture.clickOnMenu("Records"));
-        assertTrue(tFixture.clickOnRecordType("Automated Testing Records"));
-        assertTrue(tFixture.searchFor("Records Search"));
-        assertTrue(tFixture.clickOnMenu("Tasks"));
     }
     
     @AfterClass
