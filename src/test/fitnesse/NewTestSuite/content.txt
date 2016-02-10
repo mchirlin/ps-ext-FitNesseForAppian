@@ -1,0 +1,8 @@
+!3 Update Classpath if you unziped into a different folder and update [[setup][.newtestsuite.setup?edit]] with site specific information.
+
+
+'''Variables'''
+!define TEST_RUNNER {fitlibrary.suite.FitLibraryServer}
+!path C:\AutomatedTesting\**.jar
+
+!contents -R2 -g -p -f -h
