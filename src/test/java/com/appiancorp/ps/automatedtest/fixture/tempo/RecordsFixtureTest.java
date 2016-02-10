@@ -62,6 +62,27 @@ public class RecordsFixtureTest extends TempoFixtureTest{
         assertTrue(tFixture.verifyRecordIsPresent(randString));   
     }
     
+    @Test
+    public void testRecordGridList() throws Exception {
+        tFixture.clickOnMenu("Records");
+        tFixture.clickOnRecordType("Automated Test Grid");
+        
+        assertTrue(tFixture.sortRecordGridByColumn("Test Text"));
+        assertTrue(tFixture.sortRecordGridByColumn("Test Int"));
+        assertTrue(tFixture.sortRecordGridByColumn("Test Decimal"));
+        assertTrue(tFixture.sortRecordGridByColumn("Test Date Time"));
+        
+        assertTrue(tFixture.clickOnRecordGridNaviation("Next"));
+        assertTrue(tFixture.clickOnRecordGridNaviation("Previous"));
+        assertTrue(tFixture.clickOnRecordGridNaviation("Last"));
+        assertTrue(tFixture.clickOnRecordGridNaviation("First"));
+        
+        assertTrue(tFixture.searchFor(randString));
+        assertTrue(tFixture.verifyRecordIsPresent(randString));
+        assertTrue(tFixture.verifyRecordIsNotPresent("not "+ randString));
+        assertTrue(tFixture.clickOnRecord(randString));
+    }
+    
     @AfterClass
     public static void tearDownRecords() throws Exception {
         tFixture.clickOnMenu("News");

@@ -557,6 +557,37 @@ public class TempoFixture extends BaseFixture {
     public boolean verifyRecordRelatedActionIsNotPresent(String relatedActionName) {
         return returnHandler(!TempoRecord.waitForRelatedAction(relatedActionName, settings.getNotPresentTimeoutSeconds(), settings));
     }
+
+    /** 
+     * Sorts Record Grid view by a specific column <br>
+     * <br>
+     * FitNesse Example: <code>| sort record grid by column | COLUMN_NAME |</code><br>
+     * 
+     * @param columnName Name of column
+     * @return True, if the column is found and clicked
+     */
+    
+    public boolean sortRecordGridByColumn(String columnName){
+        if(!TempoRecord.waitForRecordGridColumn(columnName, settings)) {
+            throw new MissingObjectException("Record Grid Column", columnName);
+        }
+        return returnHandler(TempoRecord.clickOnRecordGridColumn(columnName, settings));
+    }
+    
+    /** 
+     * Pages through the Records grid view <br>
+     * <br>
+     * FitNesse Example: <code>| click on record grid view navigation | NAVIGATION_OPTION |</code> Navigation option can only be "First", "Previous", "Next", or "Last"<br>
+     * @param columnName Name of column
+     * @return True, if the column is found and clicked
+     */
+
+    public boolean clickOnRecordGridNaviation(String navOption){
+        if(!TempoRecord.waitForRecordGridNavigation(navOption, settings)){
+            throw new MissingObjectException("Navigation option", navOption);
+        }
+        return returnHandler(TempoRecord.clickOnRecordGridNavigation(navOption, settings));
+    }
     
     /*
      * Reports
@@ -1010,7 +1041,7 @@ public class TempoFixture extends BaseFixture {
      * <br>
      * FitNesse Example: <code>| click on grid | GRID_NAME_OR_INDEX | add row link |</code>
      * @param gridName Name or name and index of grid
-     * @return True, if row is selected
+     * @return True, if link is clicked
      */
 
     public boolean clickOnGridAddRowLink(String gridName){
@@ -1019,6 +1050,50 @@ public class TempoFixture extends BaseFixture {
         }
         
         return returnHandler(TempoGrid.clickOnAddRowLink(gridName, settings)); 
+    }
+   
+    /**
+     * Clicks on the page link below a paging grid<br>
+     * <br>
+     * FitNesse Example: <code>| click on grid | GRID_NAME_OR_INDEX | navigation | NAV_REFERENCE |</code> - nav reference only takes "first", previous, next, or "last"
+     * @param gridName Name or name and index of grid
+     * @param navOption "first", previous, next, or "last"
+     * @return True, if grid page link is clicked
+     */
+
+    public boolean clickOnGridNavigation(String gridName, String navOption){
+        if(!TempoGrid.waitFor(gridName, settings)){
+            throw new MissingObjectException("Grid", gridName);
+        }
+        navOption = navOption.toLowerCase();
+        
+        switch (navOption) {  
+            case "first": 
+                return TempoGrid.clickOnFirstPageLink(gridName, settings);
+            case "previous":
+                return TempoGrid.clickOnPreviousPageLink(gridName, settings);
+            case "next": 
+                return TempoGrid.clickOnNextPageLink(gridName, settings);
+            case "last":
+                return TempoGrid.clickOnLastPageLink(gridName, settings);
+            default:
+                return false;    
+        }
+    }
+    /**
+     * Sort a grid by a column<br>
+     * <br>
+     * FitNesse Example: <code>| sort grid | GRID_NAME_OR_INDEX | by column | COLUMN_NAME_OR_INDEX |</code> - 
+     * @param gridName Name or name and index of grid
+     * @param columnName Name or index of column
+     * @return True, if column name is clicked
+     */    
+    public boolean sortGridByColumn(String gridName, String columnName){
+        if(!TempoGrid.waitFor(gridName, settings)){
+            throw new MissingObjectException("Grid", gridName);
+        }        
+        
+        return returnHandler(TempoGrid.sortByColumn(gridName, columnName, settings));
     }
     
     /**

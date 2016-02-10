@@ -33,7 +33,7 @@
 | verify news feed containing text | NEWS_TEXT | is present | :
 | verify news feed containing text | NEWS_TEXT | is not present | :
 | toggle more info for news feed containing text | NEWS_TEXT | :
-| verify news feed containing text | NEWS_TEXT | and more info with label | LABEL | and value                     |*VALUE* | is present | :
+| verify news feed containing text | NEWS_TEXT | and more info with label | LABEL | and value |*VALUE* | is present | :
 | verify news feed containing text | NEWS_TEXT | tagged with | TAG_NAME | is present | :
 | verify news feed containing text | NEWS_TEXT | commented with | COMMENT | is present | :
 | click on news feed | NEWS_TEXT | record tag | RECORD_TAG | :
@@ -55,13 +55,15 @@
 | click on record type | RECORD_TYPE_NAME | :
 | click on record type user filter | USER_FILTER_NAME | :
 | verify record type user filter | USER_FILTER_NAME | is present | :
-| click on record | RECORD_NAME | :
-| verify record | RECORD_NAME | is present | :
+| click on record | RECORD_NAME | : Works for both record list view and record grid view
+| verify record | RECORD_NAME | is present | : 
 | verify record | RECORD_NAME | is not present | :
 | click on record view | VIEW_NAME | :
 | click on record related action | RELATED_ACTION_NAME | : This is run on the related action dashboard, not as a button currently
 | verify record related action | RELATED_ACTION_NAME | is present | :
 | verify record related action | RELATED_ACTION_NAME | is not present | :
+| sort record grid view by column | COLUMN_NAME | :
+| click on record grid navigation | NAVIGATION_OPTION | : Options include "First", "Previous", "Next", or "Last"
 ]!
 
 !3 REPORTS
@@ -100,7 +102,9 @@
 | verify grid | GRID_NAME | column | COLUMN_NAME_OR_NUMBER | row | ROW_NUMBER | contains | VALUE(S) | :
 | select grid | GRID_NAME | row | ROW_NUMBER | :
 | verify grid | GRID_NAME | row | ROW_NUMBER | is selected | :
-| click on grid | GRID_NAME | add row link | : Can use gridName, gridIndex, or gridName[index]
+| click on grid | GRID_NAME | add row link | : Can use gridName, gridIndex, or gridName[index] 
+| click on grid | GRID_NAME_OR_INDEX | navigation | NAV_REFERENCE | : nav reference only takes "first", previous, next, or "last"
+| sort grid | GRID_NAME_OR_INDEX | by | COLUMN_NAME | : 
 | click on link | LINK_NAME | : Can use linkName or linkName[index]
 | click on button | BUTTON_NAME | :
 | click on radio option | RADIO_OPTION | :

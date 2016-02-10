@@ -29,6 +29,13 @@ public class TempoGrid extends TempoField {
     
     private static final String XPATH_RELATIVE_GRID_CHECKBOX = Settings.getByConstant("xpathRelativeGridCheckbox");
     private static final String XPATH_RELATIVE_GRID_ADD_ROW_LINK = Settings.getByConstant("xpathRelativeGridAddRowLink") ;
+    
+    private static final String XPATH_RELATIVE_GRID_FIRST_PAGE_LINK = Settings.getByConstant("xpathRelativeGridFirstPageLink");
+    private static final String XPATH_RELATIVE_GRID_PREVIOUS_PAGE_LINK = Settings.getByConstant("xpathRelativeGridPreviousPageLink");
+    private static final String XPATH_RELATIVE_GRID_NEXT_PAGE_LINK = Settings.getByConstant("xpathRelativeGridNextPageLink");
+    private static final String XPATH_RELATIVE_GRID_LAST_PAGE_LINK = Settings.getByConstant("xpathRelativeGridLastPageLink");
+    
+    private static final String XPATH_RELATIVE_GRID_COLUMN_LINK = Settings.getByConstant("xpathRelativeGridColumnLink");
 
     public static WebElement getGrid(String gridName, Settings s) {
         if (isFieldIndex(gridName)) {
@@ -228,4 +235,62 @@ public class TempoGrid extends TempoField {
         
         return true;
     }
+    
+    public static boolean clickOnFirstPageLink(String gridName, Settings s){
+        try {
+            WebElement grid = getGrid(gridName, s);
+            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_FIRST_PAGE_LINK));
+            link.click();
+        } catch (Exception e) {
+            LOG.warn("GRID FIRST PAGE LINK for " + gridName + e.getClass());
+            return false;
+        }
+        return true;
+    }
+    public static boolean clickOnPreviousPageLink(String gridName, Settings s){
+        try {
+            WebElement grid = getGrid(gridName, s);
+            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_PREVIOUS_PAGE_LINK));
+            link.click();
+        } catch (Exception e) {
+            LOG.warn("GRID LAST PAGE LINK for " + gridName + e.getClass());
+            return false;
+        }
+        return true;
+    }
+    public static boolean clickOnNextPageLink(String gridName, Settings s){
+        try {
+            WebElement grid = getGrid(gridName, s);
+            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_NEXT_PAGE_LINK));
+            link.click();
+        } catch (Exception e) {
+            LOG.warn("GRID NEXT PAGE LINK for " + gridName + e.getClass());
+            return false;
+        }
+        return true;
+    }
+    public static boolean clickOnLastPageLink(String gridName, Settings s){
+        try {
+            WebElement grid = getGrid(gridName, s);
+            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_LAST_PAGE_LINK));
+            link.click();
+        } catch (Exception e) {
+            LOG.warn("GRID LAST PAGE LINK for " + gridName + e.getClass());
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean sortByColumn(String gridName, String columnName, Settings s){
+        try{
+            WebElement grid = getGrid(gridName, s);
+            WebElement column = grid.findElement(By.xpath(String.format(XPATH_RELATIVE_GRID_COLUMN_LINK, columnName)));
+            column.click();
+        }
+        catch (Exception e){
+            LOG.warn("GRID " + gridName + " and COLUMN " +columnName + e.getClass());
+        }
+        return true;
+    }
+    
 }
