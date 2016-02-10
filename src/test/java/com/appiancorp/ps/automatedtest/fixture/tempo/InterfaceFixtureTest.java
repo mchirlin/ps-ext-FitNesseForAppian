@@ -402,13 +402,13 @@ public class InterfaceFixtureTest {
     @Test
     public void testGridPaging() throws Exception{
         assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 1","[1]", new String[] {"Value 1"}));
-        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "next"));
+        assertTrue(tFixture.clickOnGridNavigation("PagingGrid", "next"));
         assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 1","[1]", new String[] {"Value 6"}));
-        assertTrue(tFixture.clickOnGridPageLink("[4]", "PREVIOUS"));
+        assertTrue(tFixture.clickOnGridNavigation("[4]", "PREVIOUS"));
         assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 1","[1]", new String[] {"Value 1"}));
-        assertTrue(tFixture.clickOnGridPageLink("[4]", "last"));
+        assertTrue(tFixture.clickOnGridNavigation("[4]", "last"));
         assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 1","[1]", new String[] {"Value 16"}));
-        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "FIRST"));
+        assertTrue(tFixture.clickOnGridNavigation("PagingGrid", "FIRST"));
         assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 1","[1]", new String[] {"Value 1"}));
     }
     

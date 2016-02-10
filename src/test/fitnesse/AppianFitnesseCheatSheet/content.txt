@@ -101,7 +101,7 @@
 | select grid | GRID_NAME | row | ROW_NUMBER | :
 | verify grid | GRID_NAME | row | ROW_NUMBER | is selected | :
 | click on grid | GRID_NAME | add row link | : Can use gridName, gridIndex, or gridName[index] 
-| click on grid | GRID_NAME_OR_INDEX | page link | PAGE_REFERENCE | : page reference only takes "first", previous, next, or "last"
+| click on grid | GRID_NAME_OR_INDEX | navigation | NAV_REFERENCE | : nav reference only takes "first", previous, next, or "last"
 | sort grid | GRID_NAME_OR_INDEX | by | COLUMN_NAME | : 
 | click on link | LINK_NAME | : Can use linkName or linkName[index]
 | click on button | BUTTON_NAME | :
