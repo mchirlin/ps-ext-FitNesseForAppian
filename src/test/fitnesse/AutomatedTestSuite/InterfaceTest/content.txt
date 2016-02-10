@@ -231,13 +231,13 @@
 |check  |get grid|PagingGrid|column|Column Label 2|row|[1]|value|Description 1|
 |check  |get grid|PagingGrid|column|Column Label  |row|[2]|value|Value 2    |
 ----
-!|click on grid|PagingGrid|page link|next|
+!|click on grid|PagingGrid|navigation|next|
 |verify grid|PagingGrid|column|Column Label 1|row|[1]|contains|Value 6|
-|click on grid|[4]|page link|PREVIOUS|
+|click on grid|[4]|navigation|PREVIOUS|
 |verify grid|PagingGrid|column|Column Label 1|row|[1]|contains|Value 1|
-|click on grid|PagingGrid|page link|last|
+|click on grid|PagingGrid|navigation|last|
 |verify grid|PagingGrid|column|Column Label 1|row|[1]|contains|Value 16|
-|click on grid|PagingGrid|page link|FIRST|
+|click on grid|PagingGrid|navigation|FIRST|
 |verify grid|[4]|column|Column Label 1|row|[1]|contains|Value 1|
 ----
 !|sort grid|PagingGrid|by column|Column Label|

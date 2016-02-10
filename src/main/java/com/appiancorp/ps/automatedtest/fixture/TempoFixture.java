@@ -1007,19 +1007,19 @@ public class TempoFixture extends BaseFixture {
     /**
      * Clicks on the page link below a paging grid<br>
      * <br>
-     * FitNesse Example: <code>| click on grid | GRID_NAME_OR_INDEX | page link | PAGE_REFERENCE |</code> - page reference only takes "first", previous, next, or "last"
+     * FitNesse Example: <code>| click on grid | GRID_NAME_OR_INDEX | navigation | NAV_REFERENCE |</code> - nav reference only takes "first", previous, next, or "last"
      * @param gridName Name or name and index of grid
-     * @param pagerName "first", previous, next, or "last" page link
+     * @param navOption "first", previous, next, or "last"
      * @return True, if grid page link is clicked
      */
 
-    public boolean clickOnGridPageLink(String gridName, String pageRefName){
+    public boolean clickOnGridNavigation(String gridName, String navOption){
         if(!TempoGrid.waitFor(gridName)){
             throw new MissingObjectException("Grid", gridName);
         }
-        pageRefName = pageRefName.toLowerCase();
+        navOption = navOption.toLowerCase();
         
-        switch (pageRefName) {  
+        switch (navOption) {  
             case "first": 
                 return TempoGrid.clickOnFirstPageLink(gridName);
                 
