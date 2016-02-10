@@ -82,11 +82,11 @@
 | click on button | Submit | 
 
 | click on record view | Summary |
-| check | get field | Text Field Test | value | Test Text @{randString} |
+| check | get field | Text Field Test | value | @{randString} |
 | check | get field | Integer Field Test | value | @{randomInt} | 
 | check | get field | Decimal Field Test | value | @{randomDec} |
 
-!| verify field | Text Field Test | contains | Test Text @{randString} |
+!| verify field | Text Field Test | contains | @{randString} |
 | verify field | Integer Field Test | contains | @{randomInt} | 
 | verify field | Decimal Field Test | contains | @{randomDec} |
 | verify field | Date and Time Test | contains | +@{randomDate} days|
