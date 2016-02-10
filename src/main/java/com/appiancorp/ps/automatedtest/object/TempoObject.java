@@ -29,20 +29,39 @@ public class TempoObject {
     private static final String XPATH_WORKING = Settings.getByConstant("xpathAbsoluteWorking");
     
     private static final Pattern INDEX_PATTERN = Pattern.compile("(.*)?\\[([0-9]+)\\]");
+    private static final String DATETIME_REGEX = "([0-9]{4}-[0-9]{2}-[0-9]{2}([0-9]{2}:[0-9]{2})?)";
+    private static final String DATETIME_CALC_REGEX = DATETIME_REGEX + "?[+-][0-9]+(minute(s)?|hour(s)?|day(s)?)";
     
-    public static boolean isDateCalculation(String dateTimeString) {
+    public static boolean isDatetime(String dateTimeString) {
         dateTimeString = dateTimeString.replaceAll("\\s", "");
-        return dateTimeString.matches("([0-9]{2}/[0-9]{2}/[0-9]{4}([0-9]{2}:[0-9]{2}(AM|PM))?)?[+-][0-9]+(minute(s)?|hour(s)?|day(s)?)");
+        return dateTimeString.matches(DATETIME_REGEX);
     }
     
-    public static String calculateDate(String dateTimeString, Settings s) {
+    public static String formatDatetime(String dateTimeString, Settings s) {
+        dateTimeString = dateTimeString.trim();
+        Date d;
+        try {
+            d = parseDate(dateTimeString, s);
+        } catch (ParseException e) {
+            d = s.getStartDatetime();
+        }
+        
+        return new SimpleDateFormat(s.getDatetimeDisplayFormat()).format(d);
+    }
+    
+    public static boolean isDatetimeCalculation(String dateTimeString) {
+        dateTimeString = dateTimeString.replaceAll("\\s", "");
+        return dateTimeString.matches(DATETIME_CALC_REGEX);
+    }
+    
+    public static String formatDatetimeCalculation(String dateTimeString, Settings s) {
         dateTimeString = dateTimeString.trim();
         int plusLocation = dateTimeString.indexOf("+");
         Date d;
         
         if (plusLocation > 0 ) {
             try {
-                d = DateUtils.parseDate(dateTimeString.substring(0, plusLocation).trim(), DATETIME_ENTRY_FORMAT);
+                d = parseDate(dateTimeString.substring(0, plusLocation).trim(), s);
             } catch (ParseException e) {
                 d = s.getStartDatetime();
             }
@@ -74,9 +93,9 @@ public class TempoObject {
     }
     
     public static String parseVariable(String variable, Settings s) {
-        if (isDateCalculation(variable)) variable = calculateDate(variable, s);
-        
-        return variable;
+        if (isDatetimeCalculation(variable)) return formatDatetimeCalculation(variable, s);
+        else if (isDatetime(variable)) return formatDatetime(variable, s);
+        else return variable;
     }
     
     public static String runExpression(String expression, Settings s) {

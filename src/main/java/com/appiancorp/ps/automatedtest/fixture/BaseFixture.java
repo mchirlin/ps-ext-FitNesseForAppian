@@ -379,7 +379,7 @@ public class BaseFixture extends DoFixture {
 	 * @return True, when time is reached
 	 */
 	public boolean waitUntil(String datetime) {
-        datetime = TempoObject.calculateDate(datetime, settings);
+        datetime = TempoObject.formatDatetimeCalculation(datetime, settings);
         
         try {
             Date endDatetime = DateUtils.parseDate(datetime, settings.getDatetimeDisplayFormat());

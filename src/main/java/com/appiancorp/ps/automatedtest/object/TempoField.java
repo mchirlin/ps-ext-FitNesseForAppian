@@ -257,13 +257,13 @@ public class TempoField extends TempoObject {
                     return TempoCheckboxField.contains(fieldLayout, fieldValue);
                     
                 case FILE_UPLOAD:
-                    return TempoFileUploadField.contains(fieldLayout, fieldValue);
+                    return TempoFileUploadField.contains(fieldLayout, fieldValue, s);
                     
                 case DATE:
-                    return TempoDateField.contains(fieldLayout, fieldValue);
+                    return TempoDateField.contains(fieldLayout, fieldValue, s);
                     
                 case DATETIME:
-                    return TempoDatetimeField.contains(fieldLayout, fieldValue);
+                    return TempoDatetimeField.contains(fieldLayout, fieldValue, s);
                     
                 case PICKER: 
                     return TempoPickerField.contains(fieldLayout, fieldValue);

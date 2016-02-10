@@ -167,12 +167,21 @@ public class InterfaceFixtureTest {
         SimpleDateFormat dtf = new SimpleDateFormat(tFixture.getSettings().getDatetimeFormat());
         SimpleDateFormat ddtf = new SimpleDateFormat(tFixture.getSettings().getDatetimeDisplayFormat());
         
+        // Check with relative time
         assertTrue(tFixture.populateFieldWith("DatetimeField", new String[]{"+1 hour"}));
         assertTrue(tFixture.verifyFieldContains("DatetimeField", new String[]{"+1 hour"}));
         assertEquals(dtf.format(DateUtils.addHours(tFixture.getSettings().getStartDatetime(), 1)), tFixture.getFieldValue("DatetimeField"));
         
         assertTrue(tFixture.verifyFieldContains("RODatetimeField", new String[]{"+1 hour"}));
         assertEquals(ddtf.format(DateUtils.addHours(tFixture.getSettings().getStartDatetime(), 1)), tFixture.getFieldValue("RODatetimeField"));
+        
+        // Check with absolute time
+        assertTrue(tFixture.populateFieldWith("DatetimeField", new String[]{"2015-11-15 14:00"}));
+        assertTrue(tFixture.verifyFieldContains("DatetimeField", new String[]{"2015-11-15 14:00"}));
+        assertEquals(dtf.format(TempoObject.parseDate("2015-11-15 14:00", tFixture.getSettings())), tFixture.getFieldValue("DatetimeField"));
+        
+        assertTrue(tFixture.verifyFieldContains("RODatetimeField", new String[]{"2015-11-15 14:00"}));
+        assertEquals(ddtf.format(TempoObject.parseDate("2015-11-15 14:00", tFixture.getSettings())), tFixture.getFieldValue("RODatetimeField"));
         
         assertTrue(tFixture.populateFieldWith("DatetimeField[2]", new String[]{"2015-11-15"}));
         assertTrue(tFixture.verifyFieldContains("DatetimeField[2]", new String[]{"2015-11-15"}));
