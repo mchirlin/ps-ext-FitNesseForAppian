@@ -143,7 +143,6 @@ public class TempoObject {
             return false;
         }
         
-        LOG.debug("Working done");
         return true;
     }
     

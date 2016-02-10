@@ -57,7 +57,6 @@
 	    {"label": "xpathAbsoluteFileUploadFieldLabel", "value": "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input"},
 	    {"label": "xpathRelativeFileUploadFieldInput", "value": ".//input[contains(@class, 'gwt-FileUpload')]"},
 	    {"label": "xpathRelativeFileUploadFieldFile", "value": ".//span[contains(@class, 'filename')]"},
-	   	{"label": "xpathConcatFileUploadFieldFilename", "value": "/span[contains(text(), '%s')]"},
 	    {"label": "xpathRelativeFileUploadFieldRemoveLink", "value": ".//a[starts-with(text(), 'Remove')]"},
 	    {"label": "xpathAbsolutePickerLabel", "value": "//label[contains(text(),'%s')]/parent::span"},
 	    {"label": "xpathRelativePickerInput", "value": ".//input[contains(@class, 'gwt-SuggestBox')]"},
