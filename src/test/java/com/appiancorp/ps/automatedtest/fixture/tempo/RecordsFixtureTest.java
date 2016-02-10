@@ -24,6 +24,7 @@ public class RecordsFixtureTest extends TempoFixtureTest{
       tFixture.populateFieldWith("Date and Time Test", new String[]{"2010-01-01 02:00"});
       
       tFixture.clickOnButton("Submit");
+      assertTrue(tFixture.verifyActionCompleted());
     }
     
     @Test
