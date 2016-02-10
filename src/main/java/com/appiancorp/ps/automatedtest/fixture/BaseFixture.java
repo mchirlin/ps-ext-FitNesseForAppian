@@ -31,7 +31,6 @@ import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
 import fitlibrary.DoFixture;
-import fitlibrary.exception.AbandonException;
 
 /**
  * This is the base class for integrating Appian and Fitnesse.

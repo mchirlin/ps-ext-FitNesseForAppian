@@ -282,7 +282,7 @@ public class TempoGrid extends TempoField {
     
     public static boolean sortByColumn(String gridName, String columnName){
         try{
-            WebElement grid =getGrid(gridName);
+            WebElement grid = getGrid(gridName);
             WebElement column = grid.findElement(By.xpath(String.format(XPATH_RELATIVE_GRID_COLUMN_LINK, columnName)));
             column.click();
         }

@@ -380,11 +380,6 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.verifyGridRowIsSelected("PagingGrid", "[4]"));
     }
     
-    @Test
-    public void testPagingGrid() throws Exception {
-        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "[2]","[1]", new String[] {"Value 1"}));
-    }
-    
     @Test 
     public void testGridAddRowLink() throws Exception {
         //TODO Make this button do something
@@ -400,27 +395,33 @@ public class InterfaceFixtureTest {
     }
     
     @Test
-    public void testGridPagingLink() throws Exception{
-        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "next"));
-        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "first"));
-        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "last"));
-        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "previous"));
-        assertTrue(tFixture.clickOnGridPageLink("[4]", "next"));
-        assertTrue(tFixture.clickOnGridPageLink("[4]", "first"));
-        assertTrue(tFixture.clickOnGridPageLink("[4]", "last"));
-        assertTrue(tFixture.clickOnGridPageLink("[4]", "previous"));
-        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "NEXT"));
-        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "FIRST"));
-        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "LAST"));
-        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "PREVIOUS"));
+    public void testGridContains() throws Exception {
+        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "[2]","[1]", new String[] {"Value 1"}));
     }
     
     @Test
-    public void testSortGridbyColumn() throws Exception{
-        assertTrue(tFixture.sortGridbyColumn("PagingGrid", "Column Label 2"));
-        tFixture.clickOnButton("OK");
-        assertTrue(tFixture.sortGridbyColumn("[4]", "Column Label"));
-        tFixture.clickOnButton("OK");
+    public void testGridPaging() throws Exception{
+        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 1","[1]", new String[] {"Value 1"}));
+        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "next"));
+        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 1","[1]", new String[] {"Value 6"}));
+        assertTrue(tFixture.clickOnGridPageLink("[4]", "PREVIOUS"));
+        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 1","[1]", new String[] {"Value 1"}));
+        assertTrue(tFixture.clickOnGridPageLink("[4]", "last"));
+        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 1","[1]", new String[] {"Value 16"}));
+        assertTrue(tFixture.clickOnGridPageLink("PagingGrid", "FIRST"));
+        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 1","[1]", new String[] {"Value 1"}));
+    }
+    
+    @Test
+    public void testGridSort() throws Exception{
+        assertTrue(tFixture.sortGridByColumn("PagingGrid", "Column Label"));
+        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 1","[1]", new String[] {"Value 1"}));
+        assertTrue(tFixture.sortGridByColumn("[4]", "Column Label"));
+        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "[2]","[1]", new String[] {"Value 9"}));
+        assertTrue(tFixture.sortGridByColumn("PagingGrid", "Column Label 2"));
+        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "Column Label 2","[1]", new String[] {"Description 1"}));
+        assertTrue(tFixture.sortGridByColumn("[4]", "Column Label 2"));
+        assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "[3]","[1]", new String[] {"Description 9"}));
     }
     
     @AfterClass

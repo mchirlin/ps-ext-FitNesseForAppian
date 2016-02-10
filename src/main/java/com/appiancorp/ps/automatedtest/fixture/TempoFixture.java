@@ -5,28 +5,20 @@ import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoAction;
 import com.appiancorp.ps.automatedtest.object.TempoButton;
 import com.appiancorp.ps.automatedtest.object.TempoCheckboxField;
-import com.appiancorp.ps.automatedtest.object.TempoDateField;
-import com.appiancorp.ps.automatedtest.object.TempoDatetimeField;
 import com.appiancorp.ps.automatedtest.object.TempoField;
-import com.appiancorp.ps.automatedtest.object.TempoFileUploadField;
 import com.appiancorp.ps.automatedtest.object.TempoForm;
 import com.appiancorp.ps.automatedtest.object.TempoGrid;
-import com.appiancorp.ps.automatedtest.object.TempoIntegerField;
 import com.appiancorp.ps.automatedtest.object.TempoLinkField;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoMenu;
 import com.appiancorp.ps.automatedtest.object.TempoNews;
-import com.appiancorp.ps.automatedtest.object.TempoParagraphField;
-import com.appiancorp.ps.automatedtest.object.TempoPickerField;
 import com.appiancorp.ps.automatedtest.object.TempoRadioField;
 import com.appiancorp.ps.automatedtest.object.TempoRecord;
 import com.appiancorp.ps.automatedtest.object.TempoRecordType;
 import com.appiancorp.ps.automatedtest.object.TempoReport;
 import com.appiancorp.ps.automatedtest.object.TempoSearch;
 import com.appiancorp.ps.automatedtest.object.TempoSection;
-import com.appiancorp.ps.automatedtest.object.TempoSelectField;
 import com.appiancorp.ps.automatedtest.object.TempoTask;
-import com.appiancorp.ps.automatedtest.object.TempoTextField;
 
 /** 
  * This is the tempo class for integrating Appian and Fitnesse.
@@ -1050,7 +1042,7 @@ public class TempoFixture extends BaseFixture {
      * @param columnName Name or index of column
      * @return True, if column name is clicked
      */    
-    public boolean sortGridbyColumn(String gridName, String columnName){
+    public boolean sortGridByColumn(String gridName, String columnName){
         if(!TempoGrid.waitFor(gridName)){
             throw new MissingObjectException("Grid", gridName);
         }        
