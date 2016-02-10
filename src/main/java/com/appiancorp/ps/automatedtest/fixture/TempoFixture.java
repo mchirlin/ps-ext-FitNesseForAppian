@@ -759,6 +759,36 @@ public class TempoFixture extends BaseFixture {
 
         return returnHandler(false);
     }
+    /**
+     * Expand a section that is hidden.<br>
+     * <br>
+     * FitNesse Examples:<br>
+     * <code>| expand section | SECTION_NAME |</code><br>
+     * @param sectionName Label of the section 
+     * @return True, if section is expanded
+     */    
+    public boolean expandSection(String sectionName){
+        if(!TempoSection.waitFor(sectionName)){
+            throw new MissingObjectException("Section", sectionName);
+        }
+       return returnHandler(TempoSection.clickExpandSection(sectionName));
+        
+    }
+    
+    /**
+     * Collapse a section that is visible.<br>
+     * <br>
+     * FitNesse Examples:<br>
+     * <code>| collapse section | SECTION_NAME |</code><br>
+     * @param sectionName Label of the section 
+     * @return True, if section is collapsed
+     */    
+    public boolean collapseSection(String sectionName){
+        if(!TempoSection.waitFor(sectionName)){
+            throw new MissingObjectException("Section", sectionName);
+        }
+       return returnHandler(TempoSection.clickCollapseSection(sectionName));
+      }
     
     /**
      * Used to clear a field of specific values.<br>

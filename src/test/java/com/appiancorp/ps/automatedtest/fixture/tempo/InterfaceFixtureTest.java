@@ -424,6 +424,12 @@ public class InterfaceFixtureTest {
         assertTrue(tFixture.verifyGridColumnRowContains("PagingGrid", "[3]","[1]", new String[] {"Description 9"}));
     }
     
+    @Test
+    public void testSectionExpandCollapse() throws Exception{
+        assertTrue(tFixture.collapseSection("Section 1"));
+        assertTrue(tFixture.expandSection("Section 1"));
+    }
+    
     @AfterClass
     public static void tearDown() throws Exception {
         tFixture.clickOnButton("Cancel");
