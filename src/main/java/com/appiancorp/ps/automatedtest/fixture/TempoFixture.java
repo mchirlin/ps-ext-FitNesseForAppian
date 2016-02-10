@@ -992,7 +992,7 @@ public class TempoFixture extends BaseFixture {
      * <br>
      * FitNesse Example: <code>| click on grid | GRID_NAME_OR_INDEX | add row link |</code>
      * @param gridName Name or name and index of grid
-     * @return True, if row is selected
+     * @return True, if link is clicked
      */
 
     public boolean clickOnGridAddRowLink(String gridName){
@@ -1002,6 +1002,52 @@ public class TempoFixture extends BaseFixture {
         
         return returnHandler(TempoGrid.clickOnAddRowLink(gridName)); 
     
+    }
+   
+    /**
+     * Clicks on the page link below a paging grid<br>
+     * <br>
+     * FitNesse Example: <code>| click on grid | GRID_NAME_OR_INDEX | page link | PAGE_REFERENCE |</code> - page reference only takes "first", previous, next, or "last"
+     * @param gridName Name or name and index of grid
+     * @param pagerName "first", previous, next, or "last" page link
+     * @return True, if grid page link is clicked
+     */
+
+    public boolean clickOnGridPageLink(String gridName, String pageRefName){
+        if(!TempoGrid.waitFor(gridName)){
+            throw new MissingObjectException("Grid", gridName);
+        }
+        pageRefName = pageRefName.toLowerCase();
+        
+        switch (pageRefName) {  
+            case "first": 
+                return TempoGrid.clickOnFirstPageLink(gridName);
+                
+            case "previous":
+                return TempoGrid.clickOnPreviousPageLink(gridName);
+            case "next": 
+                return TempoGrid.clickOnNextPageLink(gridName);
+                
+            case "last":
+                return TempoGrid.clickOnLastPageLink(gridName);
+            default:
+                return false;    
+        }
+    }
+    /**
+     * Sort a grid by a column<br>
+     * <br>
+     * FitNesse Example: <code>| sort grid | GRID_NAME_OR_INDEX | by column | COLUMN_NAME_OR_INDEX |</code> - 
+     * @param gridName Name or name and index of grid
+     * @param columnName Name or index of column
+     * @return True, if column name is clicked
+     */    
+    public boolean sortGridByColumn(String gridName, String columnName){
+        if(!TempoGrid.waitFor(gridName)){
+            throw new MissingObjectException("Grid", gridName);
+        }        
+        
+        return returnHandler(TempoGrid.sortByColumn(gridName, columnName));
     }
     
     /**

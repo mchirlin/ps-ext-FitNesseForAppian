@@ -105,7 +105,12 @@
 	    {"label": "xpathAbsoluteFieldLayout", "value": "//span[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //label[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
 	    {"label": "xpathRelativeReadOnlyField", "value": ".//p[contains(@class, 'readonly')] | div[ancestor::table[contains(@class, 'DataGrid-Table')]]"},
 	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input"},
-	    {"label": "xpathRelativeGridAddRowLink", "value": "./tfoot//a"}
+	    {"label": "xpathRelativeGridAddRowLink", "value": "./tfoot//a"},
+	    {"label": "xpathRelativeGridFirstPageLink", "value": "./../..//img[contains(@aria-label, 'First page')]"},
+	    {"label": "xpathRelativeGridPreviousPageLink", "value": "./../..//img[contains(@aria-label, 'Previous page')]"},
+	    {"label": "xpathRelativeGridNextPageLink", "value": "./../..//img[contains(@aria-label, 'Next page')]"},
+	    {"label": "xpathRelativeGridLastPageLink", "value": "./../..//img[contains(@aria-label, 'Last page')]"},
+	    {"label": "xpathRelativeGridColumnLink", "value": "./thead//a[contains(text(), '%s')]"}
 	  ]
 	},
 	{ "version": "7.11", "byConstants": [] },

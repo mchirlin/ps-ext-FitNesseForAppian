@@ -224,12 +224,30 @@
 !*** Verify/Check Paging Grid readonly fields 
 !| verify grid|PagingGrid|row   |[4]           |is selected                 |
 |verify grid  |PagingGrid|column|[2]           |row|[1]|contains|Value 1    |
-|verify grid  |PagingGrid|column|Column Label 2|row|[1]|contains|Value 1 Two|
+|verify grid  |PagingGrid|column|Column Label 2|row|[1]|contains|Description 1|
 |verify grid  |PagingGrid|column|Column Label  |row|[2]|contains|Value 2    |
 ----
 !| check|get grid|PagingGrid|column|[2]           |row|[3]|value|Value 3    |
-|check  |get grid|PagingGrid|column|Column Label 2|row|[1]|value|Value 1 Two|
+|check  |get grid|PagingGrid|column|Column Label 2|row|[1]|value|Description 1|
 |check  |get grid|PagingGrid|column|Column Label  |row|[2]|value|Value 2    |
+----
+!|click on grid|PagingGrid|page link|next|
+|verify grid|PagingGrid|column|Column Label 1|row|[1]|contains|Value 6|
+|click on grid|[4]|page link|PREVIOUS|
+|verify grid|PagingGrid|column|Column Label 1|row|[1]|contains|Value 1|
+|click on grid|PagingGrid|page link|last|
+|verify grid|PagingGrid|column|Column Label 1|row|[1]|contains|Value 16|
+|click on grid|PagingGrid|page link|FIRST|
+|verify grid|[4]|column|Column Label 1|row|[1]|contains|Value 1|
+----
+!|sort grid|PagingGrid|by column|Column Label|
+|verify grid|PagingGrid|column|Column Label 1|row|[1]|contains|Value 1|
+|sort grid|[4]|by column|Column Label|
+|verify grid|PagingGrid|column|Column Label 1|row|[1]|contains|Value 9|
+|sort grid|PagingGrid|by column|Column Label 2|
+|verify grid|PagingGrid|column|Column Label 2|row|[1]|contains|Description 1|
+|sort grid|[4]|by column|Column Label 2|
+|verify grid|PagingGrid|column|Column Label 2|row|[1]|contains|Description 9|
 ***!
 
 -----
