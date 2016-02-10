@@ -6,24 +6,12 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.appiancorp.ps.automatedtest.fixture.TempoFixture;
+import com.appiancorp.ps.automatedtest.fixture.TempoFixtureTest;
 
-public class TasksFixtureTest {    
-    
-    private static TempoFixture tFixture;
+public class TasksFixtureTest extends TempoFixtureTest {    
 
     @BeforeClass
     public static void setUp() throws Exception {
-      tFixture = new TempoFixture();
-      
-      tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-      tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
-      tFixture.setTimeoutSecondsTo(10);
-      tFixture.setAppianVersionTo("16.1");
-      tFixture.setAppianLocaleTo("en_GB");
-      
-      tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
-      
       tFixture.clickOnMenu("Actions");
       tFixture.clickOnAction("Automated Testing Input");
     }
@@ -62,7 +50,5 @@ public class TasksFixtureTest {
         tFixture.clickOnMenu("Tasks");
         tFixture.clickOnTask("Input Automated Test Data");
         tFixture.clickOnButton("Cancel");
-        tFixture.logout();
-        tFixture.tearDownSeleniumWebDriver();
     }
 }

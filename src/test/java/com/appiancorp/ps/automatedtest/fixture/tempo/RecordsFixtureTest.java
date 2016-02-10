@@ -6,25 +6,14 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.appiancorp.ps.automatedtest.fixture.TempoFixture;
+import com.appiancorp.ps.automatedtest.fixture.TempoFixtureTest;
 
-public class RecordsFixtureTest {    
+public class RecordsFixtureTest extends TempoFixtureTest{    
     
-    private static TempoFixture tFixture;
     private static String randString;
     
     @BeforeClass
     public static void setUp() throws Exception {
-      tFixture = new TempoFixture();
-
-      tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-      tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
-      tFixture.setTimeoutSecondsTo(15);
-      tFixture.setAppianVersionTo("16.1");
-      tFixture.setAppianLocaleTo("en_GB");;
-      
-      tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
-      
       tFixture.clickOnMenu("Actions");
       tFixture.clickOnAction("Automated Testing Input");
       

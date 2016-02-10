@@ -7,26 +7,15 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.appiancorp.ps.automatedtest.fixture.TempoFixture;
+import com.appiancorp.ps.automatedtest.fixture.TempoFixtureTest;
 
-public class NewsFixtureTest {    
+public class NewsFixtureTest extends TempoFixtureTest {    
     
-    private static TempoFixture tFixture;
     private static String randString;
     private static Integer randInt;
     
     @BeforeClass
     public static void setUp() throws Exception {
-      tFixture = new TempoFixture();
-      
-      tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-      tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
-      tFixture.setTimeoutSecondsTo(10);
-      tFixture.setAppianVersionTo("16.1");
-      tFixture.setAppianLocaleTo("en_GB");
-      
-      tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
-      
       tFixture.clickOnMenu("Actions");
       tFixture.clickOnAction("Automated Testing Input");
       
@@ -85,7 +74,5 @@ public class NewsFixtureTest {
     public static void tearDown() throws Exception {
         tFixture.clickOnMenu("News");
         tFixture.deleteNewsPost(randString);
-        tFixture.logout();
-        tFixture.tearDownSeleniumWebDriver();
     }
 }

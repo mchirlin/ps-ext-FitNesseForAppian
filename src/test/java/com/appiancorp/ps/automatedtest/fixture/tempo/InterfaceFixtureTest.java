@@ -11,27 +11,13 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.appiancorp.ps.automatedtest.fixture.TempoFixture;
+import com.appiancorp.ps.automatedtest.fixture.TempoFixtureTest;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
-public class InterfaceFixtureTest {    
-    
-    private static TempoFixture tFixture;
+public class InterfaceFixtureTest extends TempoFixtureTest {    
     
     @BeforeClass
-    public static void setUp() throws Exception {
-      tFixture = new TempoFixture();
-      
-      tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-      tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
-      tFixture.setTimeoutSecondsTo(15);
-      tFixture.setAppianVersionTo("16.1");
-      tFixture.setAppianLocaleTo("en_GB");
-      
-      tFixture.setStartDatetime();
-      
-      tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
-      
+    public static void setUp() throws Exception {      
       tFixture.clickOnMenu("Actions");
       tFixture.clickOnAction("All Fields");
     }
@@ -411,7 +397,5 @@ public class InterfaceFixtureTest {
     @AfterClass
     public static void tearDown() throws Exception {
         tFixture.clickOnButton("Cancel");
-        tFixture.logout();
-        tFixture.tearDownSeleniumWebDriver();
     }
 }
