@@ -65,7 +65,5 @@ public class RecordsFixtureTest extends TempoFixtureTest{
     public static void tearDownRecords() throws Exception {
         tFixture.clickOnMenu("News");
         tFixture.deleteNewsPost(randString);
-        tFixture.logout();
-        tFixture.tearDownSeleniumWebDriver();
     }
 }
