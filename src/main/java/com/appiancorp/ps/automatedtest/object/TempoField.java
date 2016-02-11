@@ -88,9 +88,9 @@ public class TempoField extends TempoObject {
             if (isFieldIndex(fieldName)) {
                 String fName = getFieldFromFieldIndex(fieldName);
                 int index = getIndexFromFieldIndex(fieldName);
-                (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index))));
+                (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index))));
             } else {
-                (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName))));
+                (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName))));
             }  
             WebElement fieldLayout = getFieldLayout(fieldName, s);
             scrollIntoView(fieldLayout, s);

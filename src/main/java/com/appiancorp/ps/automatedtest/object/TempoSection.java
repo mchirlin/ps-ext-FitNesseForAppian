@@ -14,9 +14,14 @@ public class TempoSection extends TempoObject {
        
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoSection.class);
+    
     protected static final String XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT = Settings.getByConstant("xpathAbsoluteSectionFieldLayout");
     protected static final String XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT_INDEX = Settings.getByConstant("xpathAbsoluteSectionFieldLayoutIndex");
     protected static final String XPATH_ABSOLUTE_SECTION_ERROR = Settings.getByConstant("xpathAbsoluteSectionError");
+
+    protected static final String XPATH_ABSOLUTE_SECTION_LAYOUT = Settings.getByConstant("xpathAbsoluteSectionLayout");
+    protected static final String XPATH_RELATIVE_SECTION_EXPAND = Settings.getByConstant("xpathRelativeSectionExpand");
+    protected static final String XPATH_RELATIVE_SECTION_COLLAPSE = Settings.getByConstant("xpathRelativeSectionCollapse");
     
     public static WebElement getFieldLayout(String fieldName, String sectionName, Settings s) {
         if (isFieldIndex(fieldName)) {
@@ -25,6 +30,10 @@ public class TempoSection extends TempoObject {
         } else {
             return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT, sectionName, fieldName, sectionName, fieldName)));
         }
+    }
+    
+    public static WebElement getSection(String sectionName, Settings s){
+        return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_SECTION_LAYOUT, sectionName)));
     }
     
     public static boolean populate(String fieldName, String fieldSection, String[] fieldValues, Settings s){
@@ -36,6 +45,26 @@ public class TempoSection extends TempoObject {
         return true;
     }
     
+    public static boolean waitFor(String sectionName, Settings s){
+        try{
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SECTION_LAYOUT, sectionName))));
+            int attempt = 0;
+            while (attempt < s.getAttemptTimes()) {
+                try {
+                    WebElement section = getSection(sectionName, s);
+                    scrollIntoView(section, s);
+                    return true;
+                } catch (Exception e) {
+                    attempt++;
+                }
+            }
+        } catch (TimeoutException e) {
+            return false;
+        }
+    
+        return false;
+    }     
+
     public static boolean waitFor(String fieldName, String sectionName, Settings s) {
         try {
             // Scroll the field layout into view
@@ -91,5 +120,21 @@ public class TempoSection extends TempoObject {
         } catch (TimeoutException e) {
             return false;
         }
+    }
+    
+    public static boolean clickExpandSection(String sectionName, Settings s){
+        WebElement section =  getSection(sectionName, s);
+        WebElement expand = section.findElement(By.xpath(XPATH_RELATIVE_SECTION_EXPAND));
+        expand.click();
+        waitForWorking(s);
+        return true;
+    }
+    
+    public static boolean clickCollapseSection(String sectionName, Settings s){
+        WebElement section =  getSection(sectionName, s);
+        WebElement collapse = section.findElement(By.xpath(XPATH_RELATIVE_SECTION_COLLAPSE));
+        collapse.click();
+        waitForWorking(s);
+        return true;
     }
 }

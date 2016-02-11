@@ -109,6 +109,8 @@
 | click on button | BUTTON_NAME | :
 | click on radio option | RADIO_OPTION | :
 | click on checkbox option | CHECKBOX_OPTION | :
+| expand section | SECTION_NAME | :
+| collapse section | SECTION_NAME |:
 ]!
 
 

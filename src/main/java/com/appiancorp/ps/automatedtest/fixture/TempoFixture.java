@@ -2,7 +2,6 @@ package com.appiancorp.ps.automatedtest.fixture;
 
 import org.apache.log4j.Logger;
 
-import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoAction;
 import com.appiancorp.ps.automatedtest.object.TempoButton;
@@ -810,6 +809,36 @@ public class TempoFixture extends BaseFixture {
     }
     
     /**
+     * Expand a section that is hidden.<br>
+     * <br>
+     * FitNesse Examples:<br>
+     * <code>| expand section | SECTION_NAME |</code><br>
+     * @param sectionName Label of the section 
+     * @return True, if section is expanded
+     */    
+    public boolean expandSection(String sectionName){
+        if(!TempoSection.waitFor(sectionName, settings)){
+            throw new MissingObjectException("Section", sectionName);
+        }
+       return returnHandler(TempoSection.clickExpandSection(sectionName, settings));
+    }
+    
+    /**
+     * Collapse a section that is visible.<br>
+     * <br>
+     * FitNesse Examples:<br>
+     * <code>| collapse section | SECTION_NAME |</code><br>
+     * @param sectionName Label of the section 
+     * @return True, if section is collapsed
+     */    
+    public boolean collapseSection(String sectionName){
+        if(!TempoSection.waitFor(sectionName, settings)){
+            throw new MissingObjectException("Section", sectionName);
+        }
+       return returnHandler(TempoSection.clickCollapseSection(sectionName, settings));
+      }
+    
+    /**
      * Used to clear a field of specific values.<br>
      * <br>
      * This method is only useful for picker objects to unselect an item.
@@ -931,7 +960,7 @@ public class TempoFixture extends BaseFixture {
      * @param fieldName Field name to not find in interface
      * @return True, if field is not located in the interface
      */
-    public boolean verifyFieldIsNotPresent(String fieldName, Settings s) {
+    public boolean verifyFieldIsNotPresent(String fieldName) {
         return returnHandler(!TempoField.waitFor(fieldName, settings.getNotPresentTimeoutSeconds(), settings));
     }
     
