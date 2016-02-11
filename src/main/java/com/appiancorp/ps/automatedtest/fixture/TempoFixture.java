@@ -329,6 +329,8 @@ public class TempoFixture extends BaseFixture {
     
     /**
      * @deprecated Replaced by {@link #clickOnRecordType(String)}
+     * @param listName List name
+     * @return boolean
      */
     @Deprecated
     public boolean clickOnRecordList(String listName) { 
@@ -354,6 +356,8 @@ public class TempoFixture extends BaseFixture {
     
     /**
      * @deprecated Replaced by {@link #clickOnRecordTypeUserFilter(String)}
+     * @param facetOption Facet option
+     * @return boolean
      */
     @Deprecated
     public boolean clickOnRecordListFacetOption(String facetOption) {
@@ -379,6 +383,8 @@ public class TempoFixture extends BaseFixture {
     
     /** 
      * @deprecated Replaced by {@link #verifyRecordTypeUserFilterIsPresent(String)}
+     * @param facetOption Facet option
+     * @return boolean
      */
     @Deprecated
     public boolean verifyRecordListFacetOptionIsPresent(String facetOption) {
@@ -399,6 +405,8 @@ public class TempoFixture extends BaseFixture {
     
     /**
      * @deprecated Replaced by {@link #clickOnRecord(String)}
+     * @param itemName Item name
+     * @return boolean
      */
     @Deprecated
     public boolean clickOnRecordItem(String itemName) {
@@ -424,6 +432,8 @@ public class TempoFixture extends BaseFixture {
     
     /** 
      * @deprecated Replaced by {@link #verifyRecordIsPresent(String)}
+     * @param itemName Item name
+     * @return boolean
      */
     @Deprecated
     public boolean verifyRecordItemIsPresent(String itemName) {
@@ -444,6 +454,8 @@ public class TempoFixture extends BaseFixture {
    
     /** 
      * @deprecated Replaced by {@link #verifyRecordIsNotPresent(String)}
+     * @param itemName Item name
+     * @return boolean
      */
     @Deprecated
     public boolean verifyRecordItemIsNotPresent(String itemName) {
@@ -466,6 +478,8 @@ public class TempoFixture extends BaseFixture {
  
     /**
      * @deprecated Replaced by {@link #clickOnRecordView(String)}
+     * @param facetName Facet name
+     * @return boolean
      */
     @Deprecated
     public boolean clickOnRecordItemFacet(String facetName) {
@@ -491,6 +505,8 @@ public class TempoFixture extends BaseFixture {
     
     /**
      * @deprecated Replaced by {@link #clickOnRecordRelatedAction(String)}
+     * @param relatedActionName Related action name
+     * @return boolean
      */
     @Deprecated
     public boolean clickOnRecordItemRelatedAction(String relatedActionName) {
@@ -517,6 +533,8 @@ public class TempoFixture extends BaseFixture {
    
     /** 
      * @deprecated Replaced by {@link #verifyRecordRelatedActionIsPresent(String)}
+     * @param relatedActionName Related action name
+     * @return boolean
      */
     @Deprecated
     public boolean verifyRecordItemRelatedActionIsPresent(String relatedActionName) {
@@ -537,6 +555,8 @@ public class TempoFixture extends BaseFixture {
    
     /** 
      * @deprecated Replaced by {@link #verifyRecordRelatedActionIsNotPresent(String)}
+     * @param relatedActionName Related action name
+     * @return boolean
      */
     @Deprecated
     public boolean verifyRecordItemRelatedActionIsNotPresent(String relatedActionName) {
@@ -574,13 +594,12 @@ public class TempoFixture extends BaseFixture {
     }
     
     /** 
-     * Pages through the Records grid view <br>
+     * Clicks on record grid navigation option<br>
      * <br>
      * FitNesse Example: <code>| click on record grid view navigation | NAVIGATION_OPTION |</code> Navigation option can only be "First", "Previous", "Next", or "Last"<br>
-     * @param columnName Name of column
-     * @return True, if the column is found and clicked
+     * @param navOption Navigation option
+     * @return True, if clicked
      */
-
     public boolean clickOnRecordGridNaviation(String navOption){
         if(!TempoRecord.waitForRecordGridNavigation(navOption, settings)){
             throw new MissingObjectException("Navigation option", navOption);

@@ -77,7 +77,6 @@ public class BaseFixture extends DoFixture {
 	 * <br>
 	 * FitNesse Example: <code>| set appian url to | APPIAN_URL |</code>
 	 * @param url Url for Appian site, e.g. https://forum.appian.com/suite
-	 * @return True
 	 */
 	public void setAppianUrlTo(String url) {
 		settings.setUrl(url);
@@ -88,7 +87,6 @@ public class BaseFixture extends DoFixture {
      * <br>
      * FitNesse Example: <code>| set appian version to | APPIAN_VERSION |</code>
      * @param version Version for Appian site, e.g. 16.1
-     * @return True
      */
     public void setAppianVersionTo(String version) {
         // Version is the only non-thread safe settings variable
@@ -96,10 +94,10 @@ public class BaseFixture extends DoFixture {
     }
     
     /**
-     * Sets the time displady format string. This is useful so that test cases will work in different geographic regions that format date and time differently.  This format string must match Appian, e.g. in Australia the time string is HH:mm.<br>
+     * Sets the Appian locale. This is useful so that test cases will work in different geographic regions that format date and time differently.<br>
      * <br>
-     * FitNesse Example: <code>| set time display format string to | HH:mm |</code>
-     * @param tf Time display format string
+     * FitNesse Example: <code>| set appian locale to | en_US or en_GB |</code>
+     * @param locale Appian locale (en_US or en_GB)
      */
     public void setAppianLocaleTo(String locale) {
         settings.setLocale(locale);
@@ -109,7 +107,6 @@ public class BaseFixture extends DoFixture {
 	 * Sets the start datetime with which all of the relative dates and datetimes will be calculated.<br>
 	 * <br>
 	 * FitNesse Example: <code>| set start datetime |</code>
-	 * @return True
 	 */
 	public void setStartDatetime() {
 	    settings.setStartDatetime(new Date());
@@ -189,10 +186,10 @@ public class BaseFixture extends DoFixture {
 	}
 	
 	/** 
-     * Set the flag to take screenshots on errors. If true, the FitNesse will quit on the first failed test.<br>
+     * Set the flag to stop FitNesse on error. If true, FitNesse will quit on the first failed test.<br>
      * <br>
-     * FitNesse Example: <code>| set screenshot path to | C:\AutomatedTesting\screenshots\ |</code>
-     * @param path Path to save screen shots
+     * FitNesse Example: <code>| set stop on error to | BOOLEAN |</code>
+     * @param bool true or false
      */
     public void setStopOnErrorTo(Boolean bool) {
         this.setStopOnError(bool);
