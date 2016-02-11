@@ -427,7 +427,9 @@ public class InterfaceFixtureTest {
     @Test
     public void testSectionExpandCollapse() throws Exception{
         assertTrue(tFixture.collapseSection("Section 1"));
+        assertTrue(tFixture.verifyFieldIsNotPresent("ROTextField"));
         assertTrue(tFixture.expandSection("Section 1"));
+        assertTrue(tFixture.verifyFieldIsPresent("ROTextField"));
     }
     
     @AfterClass

@@ -125,6 +125,7 @@ public class TempoSection extends TempoObject {
         WebElement section =  getSection(sectionName);
         WebElement expand = section.findElement(By.xpath(XPATH_RELATIVE_SECTION_EXPAND));
         expand.click();
+        waitForWorking();
         return true;
     }
     
@@ -132,6 +133,7 @@ public class TempoSection extends TempoObject {
         WebElement section =  getSection(sectionName);
         WebElement collapse = section.findElement(By.xpath(XPATH_RELATIVE_SECTION_COLLAPSE));
         collapse.click();
+        waitForWorking();
         return true;
     }
 }
