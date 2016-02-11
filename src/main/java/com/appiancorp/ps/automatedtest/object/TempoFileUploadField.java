@@ -20,12 +20,14 @@ public class TempoFileUploadField extends TempoField {
     private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT = Settings.getByConstant("xpathRelativeFileUploadFieldInput");
     private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE = Settings.getByConstant("xpathRelativeFileUploadFieldFile");
     private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_REMOVE_LINK = Settings.getByConstant("xpathRelativeFileUploadFieldRemoveLink");
+    private static final String XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_WAITING = XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL + Settings.getByConstant("xpathRelativeFileUploadFieldWaiting");
     private static final Pattern FILENAME_PATTERN = Pattern.compile("(.*) \\(.*\\)");
    
     public static boolean populate(WebElement fieldLayout, String fieldValue, Settings s) {
         WebElement fileUpload = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT));
         fileUpload.sendKeys(fieldValue);
         unfocus(s);
+        waitForFileUpload(fieldLayout, s);
         
         LOG.debug("FILE UPLOAD FIELD POPULATION : " + fieldValue);
         return true;
@@ -41,6 +43,13 @@ public class TempoFileUploadField extends TempoField {
         }
         
         return true;
+    }
+    
+    public static void waitForFileUpload(WebElement fieldLayout, Settings s) {
+        try {
+            String xpathLocator = getXpathLocator(fieldLayout);
+            (new WebDriverWait(s.getDriver(), 300)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("(" + xpathLocator + ")" + XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_WAITING)));
+        } catch (TimeoutException e) { }
     }
     
     public static String getValue(WebElement fieldLayout) {
