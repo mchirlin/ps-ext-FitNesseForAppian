@@ -110,7 +110,10 @@
 	    {"label": "xpathRelativeGridPreviousPageLink", "value": "./../..//img[contains(@aria-label, 'Previous page')]"},
 	    {"label": "xpathRelativeGridNextPageLink", "value": "./../..//img[contains(@aria-label, 'Next page')]"},
 	    {"label": "xpathRelativeGridLastPageLink", "value": "./../..//img[contains(@aria-label, 'Last page')]"},
-	    {"label": "xpathRelativeGridColumnLink", "value": "./thead//a[contains(text(), '%s')]"}
+	    {"label": "xpathRelativeGridColumnLink", "value": "./thead//a[contains(text(), '%s')]"},
+	    {"label": "xpathAbsoluteSectionLayout", "value": "//h3[contains(text(),'%s')]/parent::div"},
+	    {"label": "xpathRelativeSectionCollapse", "value": ".//a[contains(@title, 'Collapse')]"},
+	    {"label": "xpathRelativeSectionExpand", "value": ".//a[contains(@title, 'Expand')]"}
 	  ]
 	},
 	{ "version": "7.11", "byConstants": [] },

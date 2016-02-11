@@ -21,6 +21,11 @@
 |populate field  |RadioField         |with      |Option 1                             |
 |populate field  |CheckboxField      |with      |Option 1,Option 2                    |
 |populate field  |FileUploadField    |with      |C:\AutomatedTesting\documents\Low.jpg|
+----
+!| collapse section | Section 1 |
+| verify field | ROTextField | is not present |
+| expand section | Section 1 | 
+| verify field | ROTextField | is present |
 ***!
 ----
 !*** Populate fields in Section 2 Dates and Date Times
