@@ -21,6 +21,7 @@
 | refresh | : refreshes screen
 | logout | :
 #| set data source name to | DATA_SOURCE_NAME |
+]!
 
 !3 NAVIGATION
 ![:
@@ -112,6 +113,5 @@
 | expand section | SECTION_NAME | :
 | collapse section | SECTION_NAME |:
 ]!
-
 
 !contents -R2 -g -p -f -h

@@ -36,8 +36,8 @@
 !| check | get field | Text Field Test | value | @{randString} |
 | check | get field | Integer Field Test | value | 5 | 
 | check | get field | Decimal Field Test | value | 123.45 |
-| check | get field | Date and Time Test | value | 11/15/2016 10:00 AM|
-#| check | get field | Date and Time Test | value | 15/11/2016 10:00 |: en_GB
+| check | get field | Date and Time Test | value | 11/15/2016 10:00 AM | 
+#| check | get field | Date and Time Test | value | 15/11/2016 10:00 | : en_GB
 ***!
 
 !*** Submit form
@@ -56,8 +56,8 @@
 | check | get field | Text Field Test | value | @{randString} |
 | check | get field | Integer Field Test | value | 5 | 
 | check | get field | Decimal Field Test | value | 123.45 |
-| check | get field | Date and Time Test | value | Nov 15, 2016, 10:00 AM| 
-#| check | get field | Date and Time Test | value | 15 Nov 2016 10:00 |: en_GB
+| check | get field | Date and Time Test | value | Nov 15, 2016,  10:00 AM|
+#| check | get field | Date and Time Test | value | 15 Nov 2016 10:00 | : en_GB
 
 !| verify field | Text Field Test | contains | @{randString} |
 | verify field | Integer Field Test | contains | 5 | 
@@ -96,6 +96,6 @@
 
 !*** Clean up
 | click on menu | News |
-#| delete news post | @{randString} |
+#| delete news post | @{randString} | :only for Admin Accounts
 ***!
 
