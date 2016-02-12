@@ -677,11 +677,13 @@ public class TempoFixture extends BaseFixture {
     
     /**
      * Returns true if the 'Action Completed successfully' is currently being displayed in the interface.<br>
+     * This only applies to Appian 7.11 and below
      * <br>
      * FitNesse Example: <code>| verify action completed |</code>
-     * 
+     * @deprecated
      * @return True if the 'Action Completed successfully' is currently being displayed in the interface.
      */
+    @Deprecated
     public boolean verifyActionCompleted() {
         return returnHandler(TempoAction.isCompleted(settings));
     }
