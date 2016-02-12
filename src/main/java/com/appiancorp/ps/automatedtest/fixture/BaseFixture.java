@@ -24,7 +24,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;*/
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoError;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
@@ -44,26 +44,11 @@ public class BaseFixture extends DoFixture {
     private static final Logger LOG = Logger.getLogger(BaseFixture.class);
     private static Integer errorNum = 1;
     
-	public String processId = null;
-	public String url = null;
-	public String version = null;
-	public String locale = null;
-	public Date startDatetime = null;
-	public String dataSourceName = null;
-	public String masterWindowHandle = null;
-	public WebDriver driver = null;
-	public int timeoutSeconds = 5;
-	public int attemptTimes = 3;
-	public String screenshotPath = "C:\\AutomatedTesting\\screenshots";
-	public Boolean takeErrorScreenshots = false;
-	public Boolean stopOnError = false;
+	protected Settings settings;
 	
 	public BaseFixture() {
 		super();
-		Metadata.initialize();
-		
-		TempoObject.setTimeoutSeconds(timeoutSeconds);
-		TempoObject.setStartDatetime(new Date());
+		settings = Settings.initialize();
 	}
 	
 	/**
@@ -74,7 +59,7 @@ public class BaseFixture extends DoFixture {
 	 */
 	public void setupSeleniumWebDriverWithBrowser(String browser) {
 		if (browser.equals("FIREFOX")) {
-			driver = new FirefoxDriver();
+			settings.setDriver(new FirefoxDriver());
 		} /*else if (browser.equals("IE")) {
 			System.setProperty("webdriver.ie.driver", prop.getProperty("webdriver.ie.driver"));
 			driver = new InternetExplorerDriver();
@@ -85,15 +70,6 @@ public class BaseFixture extends DoFixture {
 			dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, prop.getProperty("phantomjs.binary.path"));
 			driver = new PhantomJSDriver(dCaps);
 		} */
-		
-		this.masterWindowHandle = driver.getWindowHandle();
-        
-        TempoObject.setDriver(driver);
-        TempoObject.setMasterWindowHandle(this.masterWindowHandle);
-	}
-	
-	protected WebDriver getDriver() {
-		return TempoObject.getDriver();
 	}
 	
 	/**
@@ -101,11 +77,9 @@ public class BaseFixture extends DoFixture {
 	 * <br>
 	 * FitNesse Example: <code>| set appian url to | APPIAN_URL |</code>
 	 * @param url Url for Appian site, e.g. https://forum.appian.com/suite
-	 * @return True
 	 */
 	public void setAppianUrlTo(String url) {
-		this.url = url;
-		TempoObject.setUrl(this.url);
+		settings.setUrl(url);
 	}
 	
 	/**
@@ -113,33 +87,29 @@ public class BaseFixture extends DoFixture {
      * <br>
      * FitNesse Example: <code>| set appian version to | APPIAN_VERSION |</code>
      * @param version Version for Appian site, e.g. 16.1
-     * @return True
      */
     public void setAppianVersionTo(String version) {
-        this.version = version;
-        TempoObject.setVersion(this.version);
+        // Version is the only non-thread safe settings variable
+        Settings.setVersion(version);
     }
     
     /**
-     * Sets the time display format string. This is useful so that test cases will work in different geographic regions that format date and time differently.  This format string must match Appian, e.g. in Australia the time string is HH:mm.<br>
+     * Sets the Appian locale. This is useful so that test cases will work in different geographic regions that format date and time differently.<br>
      * <br>
-     * FitNesse Example: <code>| set time display format string to | HH:mm |</code>
-     * @param tf Time display format string
+     * FitNesse Example: <code>| set appian locale to | en_US or en_GB |</code>
+     * @param locale Appian locale (en_US or en_GB)
      */
     public void setAppianLocaleTo(String locale) {
-        this.locale = locale;
-        TempoObject.setLocale(this.locale);
+        settings.setLocale(locale);
     }
     
 	/**
 	 * Sets the start datetime with which all of the relative dates and datetimes will be calculated.<br>
 	 * <br>
 	 * FitNesse Example: <code>| set start datetime |</code>
-	 * @return True
 	 */
 	public void setStartDatetime() {
-	    this.startDatetime = new Date();
-	    TempoObject.setStartDatetime(this.startDatetime);
+	    settings.setStartDatetime(new Date());
     }
 	
 	/**
@@ -148,7 +118,7 @@ public class BaseFixture extends DoFixture {
 	 */
 	@Deprecated
 	public void setDataSourceNameTo(String dataSourceName) {
-		this.dataSourceName = dataSourceName;
+		settings.setDataSourceName(dataSourceName);
 	}
 	
 	/**
@@ -159,7 +129,7 @@ public class BaseFixture extends DoFixture {
 	 */
 	@Deprecated
 	public void setDateFormatTo(String df) {
-	    TempoObject.setDateFormat(df);
+	    settings.setDateFormat(df);
 	}
 
 	/**
@@ -170,7 +140,7 @@ public class BaseFixture extends DoFixture {
      */
 	@Deprecated
 	public void setTimeFormatTo(String tf) {
-        TempoObject.setTimeFormat(tf);
+	    settings.setTimeFormat(tf);
     }
 	
 	/**
@@ -181,7 +151,7 @@ public class BaseFixture extends DoFixture {
      */
 	@Deprecated
     public void setDateDisplayFormatTo(String df) {
-        TempoObject.setDateDisplayFormat(df);
+	    settings.setDateDisplayFormat(df);
     }
 
     /**
@@ -192,7 +162,7 @@ public class BaseFixture extends DoFixture {
      */
 	@Deprecated
     public void setTimeDisplayFormatTo(String tf) {
-        TempoObject.setTimeDisplayFormat(tf);
+	    settings.setTimeDisplayFormat(tf);
     }
 	
 	/**
@@ -201,9 +171,8 @@ public class BaseFixture extends DoFixture {
 	 * FitNesse Example: <code>| set timeout seconds to | 10 |</code>
 	 * @param ts Timeout seconds
 	 */
-	public void setTimeoutSecondsTo(String ts) {
-        this.timeoutSeconds = Integer.valueOf(ts);
-        TempoObject.setTimeoutSeconds(this.timeoutSeconds);
+	public void setTimeoutSecondsTo(Integer ts) {
+	    settings.setTimeoutSeconds(ts);
     }
 	
 	/** 
@@ -213,14 +182,14 @@ public class BaseFixture extends DoFixture {
 	 * @param path Path to save screen shots
 	 */
 	public void setScreenshotPathTo(String path) {
-	    this.screenshotPath = path;
+	    settings.setScreenshotPath(path);
 	}
 	
 	/** 
-     * Set the flag to take screenshots on errors. If true, the FitNesse will quit on the first failed test.<br>
+     * Set the flag to stop FitNesse on error. If true, FitNesse will quit on the first failed test.<br>
      * <br>
-     * FitNesse Example: <code>| set screenshot path to | C:\AutomatedTesting\screenshots\ |</code>
-     * @param path Path to save screen shots
+     * FitNesse Example: <code>| set stop on error to | BOOLEAN |</code>
+     * @param bool true or false
      */
     public void setStopOnErrorTo(Boolean bool) {
         this.setStopOnError(bool);
@@ -233,7 +202,7 @@ public class BaseFixture extends DoFixture {
 	 * @param bool true or false
 	 */
 	public void setTakeErrorScreenshotsTo(Boolean bool) {
-	    this.takeErrorScreenshots = bool;
+	    settings.setTakeErrorScreenshots(bool);
 	}
 	
 	/**
@@ -244,9 +213,9 @@ public class BaseFixture extends DoFixture {
 	 * @return True, if no errors are thrown
 	 */
 	public boolean open(String url) {
-	    getDriver().get(url);
+	    settings.getDriver().get(url);
 		 
-		return !TempoError.waitFor();
+		return !TempoError.waitFor(settings);
 	}
 	
 	/**
@@ -259,9 +228,9 @@ public class BaseFixture extends DoFixture {
 	public boolean takeScreenshot(String fileName) {
 	    waitForWorking();
 	    
-        File srcFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+        File srcFile = ((TakesScreenshot) settings.getDriver()).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(srcFile, new File(screenshotPath + fileName + ".png"));
+            FileUtils.copyFile(srcFile, new File(settings.getScreenshotPath() + fileName + ".png"));
         } catch (IOException e) {
             LOG.error(e.getMessage());
             return false;
@@ -280,12 +249,12 @@ public class BaseFixture extends DoFixture {
 	 * @return True, if action completed successfully
 	 */
 	public boolean loginIntoWithUsernameAndPassword(String url, String userName, String password) {
-		TempoLogin.navigateToLoginPage(url);
-	    if (!TempoLogin.waitForLogin()) {
+		TempoLogin.navigateToLoginPage(url, settings);
+	    if (!TempoLogin.waitForLogin(settings)) {
 		    throw new MissingObjectException("Login");
 		}
 	    
-		return TempoLogin.login(url, userName, password);
+		return TempoLogin.login(url, userName, password, settings);
 	}
 	
 	/**
@@ -297,12 +266,7 @@ public class BaseFixture extends DoFixture {
      * @return True, if action completed successfully
      */
 	public boolean loginWithUsernameAndPassword(String userName, String password) {
-	    TempoLogin.navigateToLoginPage(url);
-        if (!TempoLogin.waitForLogin()) {
-            throw new MissingObjectException("Login");
-        }
-        
-        return TempoLogin.login(url, userName, password);
+        return loginIntoWithUsernameAndPassword(settings.getUrl(), userName, password);
     }
 	
 	/**
@@ -314,12 +278,12 @@ public class BaseFixture extends DoFixture {
      * @return True, if action completed successfully
      */
 	public boolean loginWithTermsWithUsernameAndPassword(String userName, String password) {
-	    TempoLogin.navigateToLoginPage(url);
-        if (!TempoLogin.waitForTerms()) {
+	    TempoLogin.navigateToLoginPage(settings.getUrl(), settings);
+        if (!TempoLogin.waitForTerms(settings)) {
             throw new MissingObjectException("Login Terms");
         }
         
-        return TempoLogin.loginWithTerms(url, userName, password);
+        return TempoLogin.loginWithTerms(settings.getUrl(), userName, password, settings);
     }
 	
 	/**
@@ -400,7 +364,7 @@ public class BaseFixture extends DoFixture {
 	 * @return True, once working message disappears
 	 */
 	public boolean waitForWorking() {
-	    return TempoObject.waitForWorking();
+	    return TempoObject.waitForWorking(settings);
 	}
 	
 	/**
@@ -412,10 +376,10 @@ public class BaseFixture extends DoFixture {
 	 * @return True, when time is reached
 	 */
 	public boolean waitUntil(String datetime) {
-        datetime = TempoObject.calculateDate(datetime);
+        datetime = TempoObject.formatDatetimeCalculation(datetime, settings);
         
         try {
-            Date endDatetime = DateUtils.parseDate(datetime, TempoObject.getDatetimeDisplayFormat());
+            Date endDatetime = DateUtils.parseDate(datetime, settings.getDatetimeDisplayFormat());
             Date nowDatetime = new Date();
             
             while (endDatetime.after(nowDatetime)) {
@@ -436,7 +400,7 @@ public class BaseFixture extends DoFixture {
 	 * @return True, always
 	 */
 	public boolean refresh() {
-	    getDriver().navigate().refresh();
+	    settings.getDriver().navigate().refresh();
 	    
 	    return true;
 	}
@@ -444,12 +408,12 @@ public class BaseFixture extends DoFixture {
 	@Deprecated		
 	public boolean startProcessWithProcessModelUuId(String processModelUuid) {
 		try {
-			driver.get(url + "/suite/plugins/servlet/appianautomatedtest?operation=startProcessWithPMUuId&pmUuid=" + URLEncoder.encode(processModelUuid, "UTF-8"));
-			String pageSource = driver.getPageSource();
+		    settings.getDriver().get(settings.getUrl() + "/suite/plugins/servlet/appianautomatedtest?operation=startProcessWithPMUuId&pmUuid=" + URLEncoder.encode(processModelUuid, "UTF-8"));
+			String pageSource = settings.getDriver().getPageSource();
 			if (pageSource.contains("Exceptions occur")) {
 				return false;
 			} else {
-				processId =  pageSource;
+				LOG.debug("PROCESS ID: " + pageSource);
 				return true;
 			}
 		} catch (Exception e) {
@@ -460,7 +424,9 @@ public class BaseFixture extends DoFixture {
 	
 	@Deprecated
 	public boolean waitUntilTaskOfProcessModelUuidStartedRecentlyIsCompleted(String taskName, String pmUuid) {
-		boolean completed = false;
+	    WebDriver driver = settings.getDriver();
+	    
+	    boolean completed = false;
 		try {
 			
 			int i=0;
@@ -472,8 +438,8 @@ public class BaseFixture extends DoFixture {
 				
 				Thread.sleep(5000);
 				
-				Set<String> windows = driver.getWindowHandles();
-				String mainHandle = driver.getWindowHandle();
+				Set<String> windows = settings.getDriver().getWindowHandles();
+				String mainHandle = settings.getDriver().getWindowHandle();
 				
 				((JavascriptExecutor)driver).executeScript("window.open();");
 				
@@ -482,7 +448,7 @@ public class BaseFixture extends DoFixture {
 				String completeHandle = ((String)completeWindow.toArray()[0]);
 
 				driver.switchTo().window(completeHandle);
-				driver.get(url + "/suite/plugins/servlet/appianautomatedtest?operation=queryIsTaskCompletedWithinSeconds&pmUuid=" + URLEncoder.encode(pmUuid, "UTF-8") + "&taskName=" + URLEncoder.encode(taskName, "UTF-8") + "&seconds=" + URLEncoder.encode(seconds, "UTF-8"));
+				driver.get(settings.getUrl() + "/suite/plugins/servlet/appianautomatedtest?operation=queryIsTaskCompletedWithinSeconds&pmUuid=" + URLEncoder.encode(pmUuid, "UTF-8") + "&taskName=" + URLEncoder.encode(taskName, "UTF-8") + "&seconds=" + URLEncoder.encode(seconds, "UTF-8"));
 				
 				String pageSource = driver.getPageSource();
 				driver.close();
@@ -504,7 +470,9 @@ public class BaseFixture extends DoFixture {
 	
 	@Deprecated
 	public boolean verifyDataInDatabaseWithQueryAndFields(String sqlQuery, String fields) {
-		try {
+	    WebDriver driver = settings.getDriver();
+	    
+	    try {
 			Set<String> windows = driver.getWindowHandles();
 			String mainHandle = driver.getWindowHandle();
 			
@@ -515,7 +483,7 @@ public class BaseFixture extends DoFixture {
 			String verifyHandle = ((String)verifyWindow.toArray()[0]);
 
 			driver.switchTo().window(verifyHandle);
-			driver.get(url + "/suite/plugins/servlet/appianautomatedtest?operation=verifyDataInDataBase&dataSource=" + URLEncoder.encode(dataSourceName, "UTF-8") + "&sqlQuery=" + URLEncoder.encode(sqlQuery, "UTF-8") + "&fields=" + URLEncoder.encode(fields, "UTF-8"));
+			driver.get(settings.getUrl() + "/suite/plugins/servlet/appianautomatedtest?operation=verifyDataInDataBase&dataSource=" + URLEncoder.encode(settings.getDataSourceName(), "UTF-8") + "&sqlQuery=" + URLEncoder.encode(sqlQuery, "UTF-8") + "&fields=" + URLEncoder.encode(fields, "UTF-8"));
 			
 			String pageSource = driver.getPageSource();
 			String jsonSource = pageSource.substring(pageSource.indexOf("["),pageSource.indexOf("]")+1);
@@ -534,7 +502,9 @@ public class BaseFixture extends DoFixture {
 	
 	@Deprecated
 	public boolean verifyConstantHasValueOf(String constantName, String expectedConstantValue) {
-		try {
+	    WebDriver driver = settings.getDriver();
+	    
+	    try {
 			Set<String> windows = driver.getWindowHandles();
 			String mainHandle = driver.getWindowHandle();
 			
@@ -545,7 +515,7 @@ public class BaseFixture extends DoFixture {
 			String verifyHandle = ((String)verifyWindow.toArray()[0]);
 
 			driver.switchTo().window(verifyHandle);
-			driver.get(url + "/suite/plugins/servlet/appianautomatedtest?operation=verifyConstantHasValueOf&constantName=" + URLEncoder.encode(constantName, "UTF-8") + "&expectedConstantValue=" + URLEncoder.encode(expectedConstantValue, "UTF-8"));
+			driver.get(settings.getUrl() + "/suite/plugins/servlet/appianautomatedtest?operation=verifyConstantHasValueOf&constantName=" + URLEncoder.encode(constantName, "UTF-8") + "&expectedConstantValue=" + URLEncoder.encode(expectedConstantValue, "UTF-8"));
 			
 			String pageSource = driver.getPageSource();
 			driver.close();
@@ -565,7 +535,7 @@ public class BaseFixture extends DoFixture {
 	 * @return True
 	 */
 	public boolean tearDownSeleniumWebDriver() {
-		driver.quit();
+		settings.getDriver().quit();
 		return true;
 	}
 	
@@ -581,7 +551,7 @@ public class BaseFixture extends DoFixture {
 	}
 	
 	protected boolean returnHandler(boolean val) {
-	    if (!val && takeErrorScreenshots) {
+	    if (!val && settings.isTakeErrorScreenshots()) {
             takeScreenshot(String.format("%3d", errorNum));
             errorNum += 1;
         }
@@ -644,5 +614,9 @@ public class BaseFixture extends DoFixture {
        BigDecimal total = new BigDecimal (fraction + min);
        BigDecimal trimmed = total.setScale(decimalPlaces,RoundingMode.HALF_DOWN);
        return trimmed.doubleValue();
+   }
+   
+   public Settings getSettings() {
+       return this.settings;
    }
 }

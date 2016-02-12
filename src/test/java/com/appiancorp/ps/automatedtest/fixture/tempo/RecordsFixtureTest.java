@@ -6,25 +6,14 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.appiancorp.ps.automatedtest.fixture.TempoFixture;
+import com.appiancorp.ps.automatedtest.fixture.TempoFixtureTest;
 
-public class RecordsFixtureTest {    
+public class RecordsFixtureTest extends TempoFixtureTest{    
     
-    private static TempoFixture tFixture;
     private static String randString;
     
     @BeforeClass
-    public static void setUp() throws Exception {
-      tFixture = new TempoFixture();
-
-      tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-      tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
-      tFixture.setTimeoutSecondsTo("15");
-      tFixture.setAppianVersionTo("16.1");
-      tFixture.setAppianLocaleTo("en_GB");;
-      
-      tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
-      
+    public static void setUpRecords() throws Exception {
       tFixture.clickOnMenu("Actions");
       tFixture.clickOnAction("Automated Testing Input");
       
@@ -35,6 +24,7 @@ public class RecordsFixtureTest {
       tFixture.populateFieldWith("Date and Time Test", new String[]{"2010-01-01 02:00"});
       
       tFixture.clickOnButton("Submit");
+      assertTrue(tFixture.verifyActionCompleted());
     }
     
     @Test
@@ -50,8 +40,6 @@ public class RecordsFixtureTest {
         assertTrue(tFixture.clickOnRecordView("Related Actions"));
         assertTrue(tFixture.verifyRecordRelatedActionIsPresent("AUT Data Input Test"));
         assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not present"));
-        
-        tFixture.waitForSeconds("1");
     }
     
     @Test
@@ -63,7 +51,15 @@ public class RecordsFixtureTest {
         assertTrue(tFixture.clickOnRecord(randString));
         assertTrue(tFixture.clickOnRecordRelatedAction("AUT Data Input Test"));
         
-        tFixture.waitForSeconds("1");
+        tFixture.clickOnButton("Cancel");
+    }
+    
+    @Test
+    public void testSearch() throws Exception {
+        assertTrue(tFixture.clickOnMenu("Records"));
+        assertTrue(tFixture.clickOnRecordType("Automated Testing Records"));
+        assertTrue(tFixture.searchFor(randString));
+        assertTrue(tFixture.verifyRecordIsPresent(randString));   
     }
     
     @Test
@@ -88,8 +84,8 @@ public class RecordsFixtureTest {
     }
     
     @AfterClass
-    public static void tearDown() throws Exception {
-        tFixture.logout();
-        tFixture.tearDownSeleniumWebDriver();
+    public static void tearDownRecords() throws Exception {
+        tFixture.clickOnMenu("News");
+        tFixture.deleteNewsPost(randString);
     }
 }

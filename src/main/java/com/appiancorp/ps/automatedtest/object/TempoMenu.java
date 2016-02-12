@@ -8,19 +8,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoMenu extends TempoObject {
     
     private static final Logger LOG = Logger.getLogger(TempoMenu.class);
-    private static final String XPATH_ABSOLUTE_MENU_LINK = Metadata.getByConstant("xpathAbsoluteMenuLink");
+    private static final String XPATH_ABSOLUTE_MENU_LINK = Settings.getByConstant("xpathAbsoluteMenuLink");
     
-    public static boolean click(String tempoMenu) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu)));
+    public static boolean click(String tempoMenu, Settings s) {
+        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu)));
         element.click();
 
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 1);
+            WebDriverWait wait = new WebDriverWait(s.getDriver(), 1);
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
 
             //Accepting alert.
@@ -31,11 +31,11 @@ public class TempoMenu extends TempoObject {
         return true;
     }
     
-    public static boolean waitFor(String tempoMenu) {
+    public static boolean waitFor(String tempoMenu, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu)));
-            scrollIntoView(element, true);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu))));
+            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu)));
+            scrollIntoView(element, true, s);
         } catch (TimeoutException e) {
             return false;
         }

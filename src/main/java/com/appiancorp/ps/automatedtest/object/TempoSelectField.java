@@ -6,36 +6,35 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoSelectField extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoSelectField.class);
-    private static final String XPATH_ABSOLUTE_SELECT_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteSelectFieldLabel");
-    private static final String XPATH_RELATIVE_SELECT_FIELD_INPUT = Metadata.getByConstant("xpathRelativeSelectFieldInput");
+    private static final String XPATH_ABSOLUTE_SELECT_FIELD_LABEL = Settings.getByConstant("xpathAbsoluteSelectFieldLabel");
+    private static final String XPATH_RELATIVE_SELECT_FIELD_INPUT = Settings.getByConstant("xpathRelativeSelectFieldInput");
     
-    public static boolean populate(WebElement fieldLayout, String fieldValue) {
+    public static boolean populate(WebElement fieldLayout, String fieldValue, Settings s) {
         WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_SELECT_FIELD_INPUT));
         Select select = new Select(selectField);
         select.selectByVisibleText(fieldValue);
-        unfocus();
+        unfocus(s);
         
         LOG.debug("SELECT FIELD POPULATION : " + fieldValue);
         
         return true;
     }
     
-    public static boolean waitFor(WebDriver driver, String fieldName) {
+    public static boolean waitFor(String fieldName, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SELECT_FIELD_LABEL, fieldName))));
-            WebElement fieldLayout = getFieldLayout(fieldName);
-            scrollIntoView(fieldLayout);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SELECT_FIELD_LABEL, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName, s);
+            scrollIntoView(fieldLayout, s);
         } catch (TimeoutException e) {
             return false;
         }

@@ -7,15 +7,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoParagraphField extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoParagraphField.class);
-    private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteParagraphFieldLabel");
-    private static final String XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT = Metadata.getByConstant("xpathRelativeParagraphFieldInput");
+    private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL = Settings.getByConstant("xpathAbsoluteParagraphFieldLabel");
+    private static final String XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT = Settings.getByConstant("xpathRelativeParagraphFieldInput");
     
-    public static boolean populate(WebElement fieldLayout, String fieldValue) {
+    public static boolean populate(WebElement fieldLayout, String fieldValue, Settings s) {
         WebElement textAreaField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT));
         textAreaField.clear();
         textAreaField.sendKeys(fieldValue);
@@ -24,18 +24,18 @@ public class TempoParagraphField extends TempoField {
             Thread.sleep(500);
         } catch (InterruptedException e) {}
         
-        unfocus();
+        unfocus(s);
         
         LOG.debug("PARAGRAPH FIELD POPULATION : " + fieldValue);
 
         return true;
     }
     
-    public static boolean waitFor(String fieldName) {
+    public static boolean waitFor(String fieldName, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL, fieldName))));
-            WebElement fieldLayout = getFieldLayout(fieldName);
-            scrollIntoView(fieldLayout);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName, s);
+            scrollIntoView(fieldLayout, s);
         } catch (TimeoutException e) {
             return false;
         }

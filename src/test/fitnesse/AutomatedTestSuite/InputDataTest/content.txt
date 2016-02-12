@@ -4,7 +4,7 @@
 ***!
 
 !*** Select task
-| click on menu | Tasks| 
+| click on menu | Tasks | 
 | verify task | Input Automated Test Data | is present |
 | click on task | Input Automated Test Data  |
 **!
@@ -13,24 +13,27 @@
 | check | get form title | Automated Testing Data Input | 
 ***!
 
-!*** Create random variable
+!*** Create random variables
 | set | randString | get random string | 5 |
+| set | randomInt | get random integer from | 0 | to | 100 |
+| set | randomDate | get random integer from | 25 | to | 50 |
+| set | randomDec | get random decimal from | 0.0 | to | 100.00 | with | 4 |
 ***!
 
 !*** Input Data
-!| populate field | Text Field Test | with | Test Text @{randString} |
+!| populate field | Text Field Test | with | @{randString} |
 | populate field | Integer Field Test | with | 5 | 
 | populate field | Decimal Field Test | with | 123.45 |
 | populate field | Date and Time Test | with | 2016-11-15 10:00 |
 ***!
 
 !*** Check/Verify Input Data
-!| verify field | Text Field Test | contains | Test Text @{randString} |
+!| verify field | Text Field Test | contains | @{randString} |
 | verify field | Integer Field Test | contains | 5 | 
 | verify field | Decimal Field Test | contains | 123.45 |
 | verify field | Date and Time Test | contains | 2016-11-15 10:00 |
 
-!| check | get field | Text Field Test | value | Test Text @{randString} |
+!| check | get field | Text Field Test | value | @{randString} |
 | check | get field | Integer Field Test | value | 5 | 
 | check | get field | Decimal Field Test | value | 123.45 |
 | check | get field | Date and Time Test | value | 15/11/2016 10:00 |
@@ -44,20 +47,20 @@
 !*** Check News 
 !| click on menu | News | 
 | verify news feed containing text | @{randString} | is present |
-| verify news feed containing text | @{randString} | tagged with |Test Text @{randString} | is present | 
+| verify news feed containing text | @{randString} | tagged with | @{randString} | is present |
 ***!
 
 !*** Check/Verify Record Contents
-!| click on news feed | @{randString} | record tag | Test Text @{randString} |
-| check | get field | Text Field Test | value | Test Text @{randString} |
+!| click on news feed | @{randString} | record tag | @{randString} |
+| check | get field | Text Field Test | value | @{randString} |
 | check | get field | Integer Field Test | value | 5 | 
 | check | get field | Decimal Field Test | value | 123.45 |
 | check | get field | Date and Time Test | value | 15 Nov 2016 10:00 |
 
-!| verify field | Text Field Test | contains | Test Text @{randString} |
+!| verify field | Text Field Test | contains | @{randString} |
 | verify field | Integer Field Test | contains | 5 | 
 | verify field | Decimal Field Test | contains | 123.45 |
-| verify field | Date and Time Test | contains | 15 Nov 2016 10:00 |
+| verify field | Date and Time Test | contains | 2016-11-15 10:00 |
 ***!
 
 !*** Access related action link from record
@@ -72,11 +75,6 @@
 ***!
 
 !*** Edit Record and verify record has updated
-
-| set | randomInt | get random integer from | 0 | to | 100 |
-| set | randomDate | get random integer from | 25 | to | 50 |
-| set | randomDec | get random decimal from | 0.0 | to | 100.00 | with | 4 |
-
 | populate field | Integer Field Test | with | @{randomInt} |
 | populate field | Decimal Field Test | with | @{randomDec} |
 | populate field | Date and Time Test | with | +@{randomDate} days |
@@ -84,14 +82,18 @@
 | click on button | Submit | 
 
 | click on record view | Summary |
-| check | get field | Text Field Test | value | Test Text @{randString} |
+| check | get field | Text Field Test | value | @{randString} |
 | check | get field | Integer Field Test | value | @{randomInt} | 
 | check | get field | Decimal Field Test | value | @{randomDec} |
 
-!| verify field | Text Field Test | contains | Test Text @{randString} |
+!| verify field | Text Field Test | contains | @{randString} |
 | verify field | Integer Field Test | contains | @{randomInt} | 
 | verify field | Decimal Field Test | contains | @{randomDec} |
 | verify field | Date and Time Test | contains | +@{randomDate} days|
+***!
 
+!*** Clean up
+| click on menu | News |
+| delete news post | @{randString} |
 ***!
 

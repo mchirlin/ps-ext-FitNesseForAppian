@@ -33,7 +33,7 @@
 | verify news feed containing text | NEWS_TEXT | is present | :
 | verify news feed containing text | NEWS_TEXT | is not present | :
 | toggle more info for news feed containing text | NEWS_TEXT | :
-| verify news feed containing text | NEWS_TEXT | and more info with label | LABEL | and value                     |*VALUE* | is present | :
+| verify news feed containing text | NEWS_TEXT | and more info with label | LABEL | and value |*VALUE* | is present | :
 | verify news feed containing text | NEWS_TEXT | tagged with | TAG_NAME | is present | :
 | verify news feed containing text | NEWS_TEXT | commented with | COMMENT | is present | :
 | click on news feed | NEWS_TEXT | record tag | RECORD_TAG | :

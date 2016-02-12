@@ -10,19 +10,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoRadioField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoRadioField.class);
-    private static final String XPATH_ABSOLUTE_RADIO_FIELD_LABEL = Metadata.getByConstant("xpathAbsoluteRadioFieldLabel");
-    private static final String XPATH_RELATIVE_RADIO_FIELD_CHOICE_LABEL = Metadata.getByConstant("xpathRelativeRadioFieldChoiceLabel");
-    private static final String XPATH_RELATIVE_RADIO_FIELD_CHOICE_INDEX = Metadata.getByConstant("xpathRelativeRadioFieldChoiceIndex");
-    private static final String XPATH_RELATIVE_RADIO_BUTTON_GROUP = Metadata.getByConstant("xpathRelativeRadioButtonGroup");
-    private static final String XPATH_RELATIVE_RADIO_FIELD_INPUT_SPAN = Metadata.getByConstant("xpathRelativeRadioFieldInputSpan");
-    private static final String XPATH_ABSOLUTE_RADIO_FIELD_OPTION = Metadata.getByConstant("xpathAbsoluteRadioFieldOption");
+    private static final String XPATH_ABSOLUTE_RADIO_FIELD_LABEL = Settings.getByConstant("xpathAbsoluteRadioFieldLabel");
+    private static final String XPATH_RELATIVE_RADIO_FIELD_CHOICE_LABEL = Settings.getByConstant("xpathRelativeRadioFieldChoiceLabel");
+    private static final String XPATH_RELATIVE_RADIO_FIELD_CHOICE_INDEX = Settings.getByConstant("xpathRelativeRadioFieldChoiceIndex");
+    private static final String XPATH_RELATIVE_RADIO_BUTTON_GROUP = Settings.getByConstant("xpathRelativeRadioButtonGroup");
+    private static final String XPATH_RELATIVE_RADIO_FIELD_INPUT_SPAN = Settings.getByConstant("xpathRelativeRadioFieldInputSpan");
+    private static final String XPATH_ABSOLUTE_RADIO_FIELD_OPTION = Settings.getByConstant("xpathAbsoluteRadioFieldOption");
     
-    public static boolean populate(WebElement fieldLayout, String fieldValue) {
+    public static boolean populate(WebElement fieldLayout, String fieldValue, Settings s) {
         WebElement radioField;
         if (isFieldIndex(fieldValue)) {
             int index = getIndexFromFieldIndex(fieldValue);
@@ -32,17 +32,17 @@ public class TempoRadioField extends TempoField {
             radioField = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_RADIO_FIELD_CHOICE_LABEL, fieldValue)));
         }
         radioField.click();
-        unfocus();
+        unfocus(s);
         LOG.debug("RADIO FIELD POPULATION : " + fieldValue);
         
         return true;
     }
     
-    public static boolean waitFor(String fieldName) {
+    public static boolean waitFor(String fieldName, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_LABEL, fieldName))));
-            WebElement fieldLayout = getFieldLayout(fieldName);
-            scrollIntoView(fieldLayout);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_LABEL, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName, s);
+            scrollIntoView(fieldLayout, s);
         } catch (TimeoutException e) {
             return false;
         }
@@ -93,8 +93,8 @@ public class TempoRadioField extends TempoField {
         return true;
     }
     
-    public static boolean clickOption(String optionName) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName)));
+    public static boolean clickOption(String optionName, Settings s) {
+        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName)));
         element.click();
         
         LOG.debug("RADIO BUTTON OPTION CLICK : " + optionName);
@@ -102,11 +102,11 @@ public class TempoRadioField extends TempoField {
         return true;
     }
     
-    public static boolean waitForOption(String optionName) {
+    public static boolean waitForOption(String optionName, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName)));
-            scrollIntoView(element);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName))));
+            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName)));
+            scrollIntoView(element, s);
         } catch (TimeoutException e) {
             return false;
         }

@@ -8,51 +8,51 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoGrid extends TempoField {
     
     private static final Logger LOG = Logger.getLogger(TempoGrid.class);
-    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX = Metadata.getByConstant("xpathAbsoluteGridByIndex");
-    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL = Metadata.getByConstant("xpathAbsoluteGridByLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX = Settings.getByConstant("xpathAbsoluteGridByIndex");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL = Settings.getByConstant("xpathAbsoluteGridByLabel");
     private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX = "(" + XPATH_ABSOLUTE_GRID_BY_LABEL + ")[%d]";
     
-    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_LABEL + Metadata.getByConstant("xpathConcatCellByColumnLabel");
-    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_LABEL + Metadata.getByConstant("xpathConcatCellByColumnIndex");
-    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_INDEX + Metadata.getByConstant("xpathConcatCellByColumnLabel");
-    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_INDEX + Metadata.getByConstant("xpathConcatCellByColumnIndex");
-    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX + Metadata.getByConstant("xpathConcatCellByColumnLabel");
-    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX + Metadata.getByConstant("xpathConcatCellByColumnIndex");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_LABEL + Settings.getByConstant("xpathConcatCellByColumnLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_LABEL + Settings.getByConstant("xpathConcatCellByColumnIndex");
+    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_INDEX + Settings.getByConstant("xpathConcatCellByColumnLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_INDEX + Settings.getByConstant("xpathConcatCellByColumnIndex");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX + Settings.getByConstant("xpathConcatCellByColumnLabel");
+    private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_INDEX = XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX + Settings.getByConstant("xpathConcatCellByColumnIndex");
     
-    private static final String XPATH_RELATIVE_GRID_CELL_BY_COLUMN_LABEL = Metadata.getByConstant("xpathRelativeGridCellByColumnLabel");
-    private static final String XPATH_RELATIVE_GRID_CELL_BY_COLUMN_INDEX = Metadata.getByConstant("xpathRelativeGridCellByColumnIndex");
+    private static final String XPATH_RELATIVE_GRID_CELL_BY_COLUMN_LABEL = Settings.getByConstant("xpathRelativeGridCellByColumnLabel");
+    private static final String XPATH_RELATIVE_GRID_CELL_BY_COLUMN_INDEX = Settings.getByConstant("xpathRelativeGridCellByColumnIndex");
     
-    private static final String XPATH_RELATIVE_GRID_CHECKBOX = Metadata.getByConstant("xpathRelativeGridCheckbox");
-    private static final String XPATH_RELATIVE_GRID_ADD_ROW_LINK = Metadata.getByConstant("xpathRelativeGridAddRowLink");
+    private static final String XPATH_RELATIVE_GRID_CHECKBOX = Settings.getByConstant("xpathRelativeGridCheckbox");
+    private static final String XPATH_RELATIVE_GRID_ADD_ROW_LINK = Settings.getByConstant("xpathRelativeGridAddRowLink") ;
     
-    private static final String XPATH_RELATIVE_GRID_FIRST_PAGE_LINK = Metadata.getByConstant("xpathRelativeGridFirstPageLink");
-    private static final String XPATH_RELATIVE_GRID_PREVIOUS_PAGE_LINK = Metadata.getByConstant("xpathRelativeGridPreviousPageLink");
-    private static final String XPATH_RELATIVE_GRID_NEXT_PAGE_LINK = Metadata.getByConstant("xpathRelativeGridNextPageLink");
-    private static final String XPATH_RELATIVE_GRID_LAST_PAGE_LINK = Metadata.getByConstant("xpathRelativeGridLastPageLink");
+    private static final String XPATH_RELATIVE_GRID_FIRST_PAGE_LINK = Settings.getByConstant("xpathRelativeGridFirstPageLink");
+    private static final String XPATH_RELATIVE_GRID_PREVIOUS_PAGE_LINK = Settings.getByConstant("xpathRelativeGridPreviousPageLink");
+    private static final String XPATH_RELATIVE_GRID_NEXT_PAGE_LINK = Settings.getByConstant("xpathRelativeGridNextPageLink");
+    private static final String XPATH_RELATIVE_GRID_LAST_PAGE_LINK = Settings.getByConstant("xpathRelativeGridLastPageLink");
     
-    private static final String XPATH_RELATIVE_GRID_COLUMN_LINK = Metadata.getByConstant("xpathRelativeGridColumnLink");
-    
-    public static WebElement getGrid(String gridName) {
+    private static final String XPATH_RELATIVE_GRID_COLUMN_LINK = Settings.getByConstant("xpathRelativeGridColumnLink");
+
+    public static WebElement getGrid(String gridName, Settings s) {
         if (isFieldIndex(gridName)) {
             int gNum = getIndexFromFieldIndex(gridName);
             String gName = getFieldFromFieldIndex(gridName);
             if(StringUtils.isBlank(gName)) {
-                return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX, gNum)));
+                return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX, gNum)));
             } else {
-                return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX, gName, gNum)));
+                return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX, gName, gNum)));
             }
         } else {
-            return driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL, gridName)));
+            return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL, gridName)));
         }
     }
     
-    public static WebElement getCell(String gridName, String columnName, String rowNum) {
-        WebElement grid = getGrid(gridName);
+    public static WebElement getCell(String gridName, String columnName, String rowNum, Settings s) {
+        WebElement grid = getGrid(gridName, s);
         int rNum = getIndexFromFieldIndex(rowNum);
         // Using a columnNum
         if (isFieldIndex(columnName)) {
@@ -67,11 +67,11 @@ public class TempoGrid extends TempoField {
         return grid.findElement(By.xpath(String.format(XPATH_RELATIVE_GRID_CELL_BY_COLUMN_LABEL, rNum, gridName, columnName)));
     }
     
-    public static boolean populate(String gridName, String columnName, String rowNum, String[] fieldValues) {
+    public static boolean populate(String gridName, String columnName, String rowNum, String[] fieldValues, Settings s) {
         for (String fieldValue : fieldValues) {
             try {
-                WebElement cell = getCell(gridName, columnName, rowNum);
-                if (!populate(cell, null, fieldValue)) return false;
+                WebElement cell = getCell(gridName, columnName, rowNum, s);
+                if (!populate(cell, null, fieldValue, s)) return false;
             } catch (Exception e) {
                 LOG.warn("GRID POPULATION for " + gridName + "|" + columnName + "|" + rowNum +": " + e.getClass());
                 return false;
@@ -81,9 +81,9 @@ public class TempoGrid extends TempoField {
         return true;
     }
     
-    public static boolean selectRow(String gridName, String rowNum) {
+    public static boolean selectRow(String gridName, String rowNum, Settings s) {
         try {
-            WebElement cell = getCell(gridName, "[1]", rowNum);
+            WebElement cell = getCell(gridName, "[1]", rowNum, s);
             WebElement checkbox = cell.findElement(By.xpath(XPATH_RELATIVE_GRID_CHECKBOX));
             checkbox.click();
         } catch (Exception e) {
@@ -94,17 +94,17 @@ public class TempoGrid extends TempoField {
         return true;
     }
     
-    public static String getValue(String gridName, String columnName, String rowNum) {
-        WebElement cell = getCell(gridName, columnName, rowNum);
+    public static String getValue(String gridName, String columnName, String rowNum, Settings s) {
+        WebElement cell = getCell(gridName, columnName, rowNum, s);
         
         return getValue(cell, null);
     }
     
-    public static boolean contains(String gridName, String columnName, String rowNum, String[] fieldValues) {
+    public static boolean contains(String gridName, String columnName, String rowNum, String[] fieldValues, Settings s) {
         for (String fieldValue : fieldValues) {
             try {
-                WebElement cell = getCell(gridName, columnName, rowNum);
-                if (!contains(cell, null, fieldValue)) return false;
+                WebElement cell = getCell(gridName, columnName, rowNum, s);
+                if (!contains(cell, null, fieldValue, s)) return false;
             } catch (Exception e) {
                 LOG.warn("GRID CONTAINS for " + gridName + "|" + columnName + "|" + rowNum +": " + e.getClass());
                 return false;
@@ -114,39 +114,39 @@ public class TempoGrid extends TempoField {
         return true;
     }
     
-    public static boolean verifyGridRowIsSelected(String gridName, String rowNum) {
-        WebElement cell = getCell(gridName, "[1]", rowNum);
+    public static boolean verifyGridRowIsSelected(String gridName, String rowNum, Settings s) {
+        WebElement cell = getCell(gridName, "[1]", rowNum, s);
         WebElement checkbox = cell.findElement(By.xpath(XPATH_RELATIVE_GRID_CHECKBOX));
         
         return checkbox.isSelected();
     }
     
-    public static boolean clear(String gridName, String columnName, String rowNum) {
-        WebElement cell = getCell(gridName, columnName, rowNum);
+    public static boolean clear(String gridName, String columnName, String rowNum, Settings s) {
+        WebElement cell = getCell(gridName, columnName, rowNum, s);
         
-        return clear(cell, null);
+        return clear(cell, null, s);
     }
 
-    public static boolean waitFor(String gridName) {
+    public static boolean waitFor(String gridName, Settings s) {
        try { 
            if (isFieldIndex(gridName)) {
                int gNum = getIndexFromFieldIndex(gridName);
                String gName = getFieldFromFieldIndex(gridName);
 
                if(StringUtils.isBlank(gName)) {
-                   (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX, gNum))));
+                   (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX, gNum))));
                } else {
-                   (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX, gName, gNum))));
+                   (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX, gName, gNum))));
                }
            } else {
-               (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL, gridName))));
+               (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL, gridName))));
            }
            // Attempt to scroll into view
            int attempt = 0;
-           while (attempt < attemptTimes) {
+           while (attempt < s.getAttemptTimes()) {
                try {
-                   WebElement grid = getGrid(gridName);
-                   scrollIntoView(grid);
+                   WebElement grid = getGrid(gridName, s);
+                   scrollIntoView(grid, s);
                    return true;
                } catch (Exception e) {
                    attempt++;
@@ -160,11 +160,11 @@ public class TempoGrid extends TempoField {
         return true;
     }
     
-    public static boolean waitFor(String gridName, String rowNum) {
-        return waitFor(gridName, "[1]", rowNum);
+    public static boolean waitFor(String gridName, String rowNum, Settings s) {
+        return waitFor(gridName, "[1]", rowNum, s);
     }
     
-    public static boolean waitFor(String gridName, String columnName, String rowNum) {
+    public static boolean waitFor(String gridName, String columnName, String rowNum, Settings s) {
         try {
             int rNum = getIndexFromFieldIndex(rowNum);
             
@@ -176,40 +176,40 @@ public class TempoGrid extends TempoField {
                     if (isFieldIndex(columnName)) {
                         // Using a columnNum
                         int cNum = getIndexFromFieldIndex(columnName);
-                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_INDEX, gNum, rNum, cNum))));   
+                        (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_INDEX, gNum, rNum, cNum))));   
                     } else {
                         // Using a columnName
-                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_LABEL, gNum, rNum, gridName, columnName))));
+                        (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_INDEX_CELL_BY_COLUMN_LABEL, gNum, rNum, gridName, columnName))));
                     }
                 } else {
                     if (isFieldIndex(columnName)) {
                         // Using a columnNum
                         int cNum = getIndexFromFieldIndex(columnName);
-                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_INDEX, gName, gNum, rNum, cNum))));
+                        (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_INDEX, gName, gNum, rNum, cNum))));
                         
                     } else {
                         // Using a columnName
-                        (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_LABEL, gName, gNum, rNum, gridName, columnName))));
+                        (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_INDEX_CELL_BY_COLUMN_LABEL, gName, gNum, rNum, gridName, columnName))));
                     }
                 }
             } else {
                 if (isFieldIndex(columnName)) {
                     // Using a columnNum
                     int cNum = getIndexFromFieldIndex(columnName);
-                    (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_INDEX, gridName, rNum, cNum))));
+                    (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_INDEX, gridName, rNum, cNum))));
                     
                 } else {
                     // Using a columnName
-                    (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_LABEL, gridName, rNum, gridName, columnName))));
+                    (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_LABEL, gridName, rNum, gridName, columnName))));
                 }
             }
             
             // Attempt to scroll into view
             int attempt = 0;
-            while (attempt < attemptTimes) {
+            while (attempt < s.getAttemptTimes()) {
                 try {
-                    WebElement grid = getGrid(gridName);
-                    scrollIntoView(grid);
+                    WebElement grid = getGrid(gridName, s);
+                    scrollIntoView(grid, s);
                     return true;
                 } catch (Exception e) {
                     attempt++;
@@ -221,12 +221,13 @@ public class TempoGrid extends TempoField {
         return false;
     }
     
-    public static boolean clickOnAddRowLink(String gridName){
+    public static boolean clickOnAddRowLink(String gridName, Settings s){
         
         try {
-            WebElement grid = getGrid(gridName);
+            WebElement grid = getGrid(gridName, s);
             WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_ADD_ROW_LINK));
             link.click();
+            waitForWorking(s);
         } catch (Exception e) {
             LOG.warn("GRID ADD LINK for " + gridName + e.getClass());
             return false;
@@ -235,56 +236,41 @@ public class TempoGrid extends TempoField {
         return true;
     }
     
-    public static boolean clickOnFirstPageLink(String gridName){
+    public static boolean clickOnNavigationOption(String gridName, String navOption, Settings s){
+        WebElement grid = getGrid(gridName, s);
+        WebElement link = null;
+        
         try {
-            WebElement grid = getGrid(gridName);
-            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_FIRST_PAGE_LINK));
+            switch (navOption) {
+                case "first":
+                    link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_FIRST_PAGE_LINK));
+                    break;
+                case "next":
+                    link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_NEXT_PAGE_LINK));
+                   break;
+                case "previous":
+                    link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_PREVIOUS_PAGE_LINK));
+                    break;
+                case "last":
+                    link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_LAST_PAGE_LINK));
+                    break;
+            }
+            
             link.click();
+            waitForWorking(s);
         } catch (Exception e) {
-            LOG.warn("GRID FIRST PAGE LINK for " + gridName + e.getClass());
-            return false;
-        }
-        return true;
-    }
-    public static boolean clickOnPreviousPageLink(String gridName){
-        try {
-            WebElement grid = getGrid(gridName);
-            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_PREVIOUS_PAGE_LINK));
-            link.click();
-        } catch (Exception e) {
-            LOG.warn("GRID LAST PAGE LINK for " + gridName + e.getClass());
-            return false;
-        }
-        return true;
-    }
-    public static boolean clickOnNextPageLink(String gridName){
-        try {
-            WebElement grid = getGrid(gridName);
-            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_NEXT_PAGE_LINK));
-            link.click();
-        } catch (Exception e) {
-            LOG.warn("GRID NEXT PAGE LINK for " + gridName + e.getClass());
-            return false;
-        }
-        return true;
-    }
-    public static boolean clickOnLastPageLink(String gridName){
-        try {
-            WebElement grid = getGrid(gridName);
-            WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_LAST_PAGE_LINK));
-            link.click();
-        } catch (Exception e) {
-            LOG.warn("GRID LAST PAGE LINK for " + gridName + e.getClass());
+            LOG.warn("GRID " + navOption.toUpperCase() + " PAGE LINK for " + gridName + e.getClass());
             return false;
         }
         return true;
     }
     
-    public static boolean sortByColumn(String gridName, String columnName){
+    public static boolean sortByColumn(String gridName, String columnName, Settings s){
         try{
-            WebElement grid = getGrid(gridName);
+            WebElement grid = getGrid(gridName, s);
             WebElement column = grid.findElement(By.xpath(String.format(XPATH_RELATIVE_GRID_COLUMN_LINK, columnName)));
             column.click();
+            waitForWorking(s);
         }
         catch (Exception e){
             LOG.warn("GRID " + gridName + " and COLUMN " +columnName + e.getClass());

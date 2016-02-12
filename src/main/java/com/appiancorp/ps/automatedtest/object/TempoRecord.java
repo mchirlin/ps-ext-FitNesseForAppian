@@ -8,31 +8,31 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoRecord extends TempoObject {
 
     @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoRecord.class);
-    private static final String XPATH_ABSOLUTE_RECORD_LINK = Metadata.getByConstant("xpathAbsoluteRecordLink");
-    private static final String XPATH_ABSOLUTE_RECORD_VIEW_LINK = Metadata.getByConstant("xpathAbsoluteRecordViewLink");
-    private static final String XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK = Metadata.getByConstant("xpathAbsoluteRecordRelatedActionLink");
-    private static final String XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK = Metadata.getByConstant("xpathAbsoluteRecordGridColumnSortLink");
-    private static final String XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT = Metadata.getByConstant("xpathAbsoluteRecordGridNavigationPreviousNext");
-    private static final String XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST = Metadata.getByConstant("xpathAbsoluteRecordGridNavigationFirstLast");
+    private static final String XPATH_ABSOLUTE_RECORD_LINK = Settings.getByConstant("xpathAbsoluteRecordLink");
+    private static final String XPATH_ABSOLUTE_RECORD_VIEW_LINK = Settings.getByConstant("xpathAbsoluteRecordViewLink");
+    private static final String XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK = Settings.getByConstant("xpathAbsoluteRecordRelatedActionLink");
+    private static final String XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK = Settings.getByConstant("xpathAbsoluteRecordGridColumnSortLink");
+    private static final String XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT = Settings.getByConstant("xpathAbsoluteRecordGridNavigationPreviousNext");
+    private static final String XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST = Settings.getByConstant("xpathAbsoluteRecordGridNavigationFirstLast");
     
-    public static boolean click(String itemName) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName)));
+    public static boolean click(String itemName, Settings s) {
+        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName)));
         element.click();
 
         return true;
     }
     
-    public static boolean waitFor(String itemName) {
+    public static boolean waitFor(String itemName, Integer timeout, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName)));
-            scrollIntoView(element, false);
+            (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName))));
+            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName)));
+            scrollIntoView(element, false, s);
         } catch (TimeoutException e) {
             return false;
         }
@@ -40,40 +40,44 @@ public class TempoRecord extends TempoObject {
         return true;
     }
     
-    public static boolean refreshAndWaitFor(String itemName) {
+    public static boolean waitFor(String itemName, Settings s) {
+        return waitFor(itemName, s.getTimeoutSeconds(), s);
+    }
+    
+    public static boolean refreshAndWaitFor(String itemName, Settings s) {
         boolean present = false;
 
         int i = 0;
         while (!present) {
-            if (i > refreshTimes) return false;
+            if (i > s.getRefreshTimes()) return false;
             
-            if (TempoRecord.waitFor(itemName)) {
+            if (TempoRecord.waitFor(itemName, s)) {
                 present = true;
                 break;
             };        
 
-            driver.navigate().refresh();
+            s.getDriver().navigate().refresh();
             i++;
         }
 
         return true;
     }
     
-    public static boolean clickOnView(String view) {
+    public static boolean clickOnView(String view, Settings s) {
         try {
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_VIEW_LINK, view)));
+            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_VIEW_LINK, view)));
             element.click();
         } catch (StaleElementReferenceException ste) {
             //If getting a stale element, try again immediately
-            clickOnView(view);
+            clickOnView(view, s);
         }
 
         return true;
     }
     
-    public static boolean waitForView(String view) {
+    public static boolean waitForView(String view, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_VIEW_LINK, view))));
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_VIEW_LINK, view))));
         } catch (TimeoutException e) {
             return false;
         }
@@ -81,18 +85,18 @@ public class TempoRecord extends TempoObject {
         return true;
     }
     
-    public static boolean clickOnRelatedAction(String relatedAction) {
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction)));
+    public static boolean clickOnRelatedAction(String relatedAction, Settings s) {
+        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction)));
         element.click();
 
         return true;
     }
     
-    public static boolean waitForRelatedAction(String relatedAction) {
+    public static boolean waitForRelatedAction(String relatedAction, Integer timeout, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction)));
-            scrollIntoView(element);
+            (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction))));
+            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction)));
+            scrollIntoView(element, s);
         } catch (TimeoutException e) {
             return false;
         }
@@ -100,30 +104,34 @@ public class TempoRecord extends TempoObject {
         return true;
     }
     
-    public static boolean refreshAndWaitForRelatedAction(String relatedAction) {
+    public static boolean waitForRelatedAction(String relatedAction, Settings s) {
+        return waitForRelatedAction(relatedAction, s.getTimeoutSeconds(), s);
+    }
+    
+    public static boolean refreshAndWaitForRelatedAction(String relatedAction, Settings s) {
         boolean present = false;
 
         int i = 0;
         while (!present) {
-            if (i > refreshTimes) return false;
+            if (i > s.getRefreshTimes()) return false;
             
-            if (TempoRecord.waitForRelatedAction(relatedAction)) {
+            if (TempoRecord.waitForRelatedAction(relatedAction, s)) {
                 present = true;
                 break;
             };
                             
-            driver.navigate().refresh();
+            s.getDriver().navigate().refresh();
             i++;
         }
 
         return true;
     }
 
-    public static boolean waitForRecordGridColumn(String columnName){
+    public static boolean waitForRecordGridColumn(String columnName, Settings s){
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName))));
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName)));
-            scrollIntoView(element);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName))));
+            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName)));
+            scrollIntoView(element, s);
         } catch (TimeoutException e) {
             return false;
         }
@@ -131,26 +139,26 @@ public class TempoRecord extends TempoObject {
         return true;
     }
     
-    public static boolean clickOnRecordGridColumn(String columnName){
-        WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName)));
+    public static boolean clickOnRecordGridColumn(String columnName, Settings s){
+        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName)));
         element.click();
                 
         return true;
     }
     
-    public static boolean waitForRecordGridNavigation(String navOption){
+    public static boolean waitForRecordGridNavigation(String navOption, Settings s){
         //navOption can only be First, Last, Previous, Next
         try{
             switch(navOption){
             case "First": case "Last": 
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST, navOption))));
-                WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST, navOption)));
-                scrollIntoView(element);
+                (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST, navOption))));
+                WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST, navOption)));
+                scrollIntoView(element, s);
                 return true;
             case "Previous": case "Next":
-                (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT, navOption))));
-                WebElement element2 = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT, navOption)));
-                scrollIntoView(element2);
+                (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT, navOption))));
+                WebElement element2 = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT, navOption)));
+                scrollIntoView(element2, s);
                 return true;
             default:
                 return false;
@@ -162,15 +170,15 @@ public class TempoRecord extends TempoObject {
         
     }
     
-    public static boolean clickOnRecordGridNavigation(String navOption){
+    public static boolean clickOnRecordGridNavigation(String navOption, Settings s){
       //navOption can only be First, Last, Previous, Next
         switch(navOption){
         case "First": case "Last":
-            WebElement element = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST, navOption)));
+            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST_LAST, navOption)));
             element.click();
             return true;
         case "Next": case "Previous":
-            WebElement element2 = driver.findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT, navOption)));
+            WebElement element2 = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS_NEXT, navOption)));
             element2.click();
             return true;
         default: 

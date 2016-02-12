@@ -13,36 +13,36 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.appiancorp.ps.automatedtest.common.Metadata;
+import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoDatetimeField extends TempoField {
 
     private static final Logger LOG = Logger.getLogger(TempoDatetimeField.class);
-    private static final String XPATH_ABSOLUTE_DATETIME_FIELD_DATE_INPUT = Metadata.getByConstant("xpathAbsoluteDatetimeFieldDateInput");
-    private static final String XPATH_RELATIVE_DATETIME_FIELD_DATE_PLACEHOLDER = Metadata.getByConstant("xpathRelativeDatetimeFieldDatePlaceholder");
-    private static final String XPATH_RELATIVE_DATETIME_FIELD_DATE_INPUT = Metadata.getByConstant("xpathRelativeDatetimeFieldDateInput");
-    private static final String XPATH_ABSOLUTE_DATETIME_FIELD_TIME_INPUT = Metadata.getByConstant("xpathAbsoluteDatetimeFieldTimeInput");
-    private static final String XPATH_RELATIVE_DATETIME_FIELD_TIME_PLACEHOLDER = Metadata.getByConstant("xpathRelativeDatetimeFieldTimePlaceholder");
-    private static final String XPATH_RELATIVE_DATETIME_FIELD_TIME_INPUT = Metadata.getByConstant("xpathRelativeDatetimeFieldTimeInput");
+    private static final String XPATH_ABSOLUTE_DATETIME_FIELD_DATE_INPUT = Settings.getByConstant("xpathAbsoluteDatetimeFieldDateInput");
+    private static final String XPATH_RELATIVE_DATETIME_FIELD_DATE_PLACEHOLDER = Settings.getByConstant("xpathRelativeDatetimeFieldDatePlaceholder");
+    private static final String XPATH_RELATIVE_DATETIME_FIELD_DATE_INPUT = Settings.getByConstant("xpathRelativeDatetimeFieldDateInput");
+    private static final String XPATH_ABSOLUTE_DATETIME_FIELD_TIME_INPUT = Settings.getByConstant("xpathAbsoluteDatetimeFieldTimeInput");
+    private static final String XPATH_RELATIVE_DATETIME_FIELD_TIME_PLACEHOLDER = Settings.getByConstant("xpathRelativeDatetimeFieldTimePlaceholder");
+    private static final String XPATH_RELATIVE_DATETIME_FIELD_TIME_INPUT = Settings.getByConstant("xpathRelativeDatetimeFieldTimeInput");
     
-    public static boolean populate(WebElement fieldLayout, String fieldValue) throws ParseException {        
-        Date d = parseDate(fieldValue);
+    public static boolean populate(WebElement fieldLayout, String fieldValue, Settings s) throws ParseException {        
+        Date d = parseDate(fieldValue, s);
         
-        populateTempoDatetimeFieldWithDate(fieldLayout, d);
-        populateTempoDatetimeFieldWithTime(fieldLayout, d);
-        unfocus();
+        populateTempoDatetimeFieldWithDate(fieldLayout, d, s);
+        populateTempoDatetimeFieldWithTime(fieldLayout, d, s);
+        unfocus(s);
         
         LOG.debug("DATETIME FIELD POPULTATION : " + fieldValue);
         
         return true;
     }
     
-    public static boolean waitFor(String fieldName) {
+    public static boolean waitFor(String fieldName, Settings s) {
         try {
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_DATETIME_FIELD_DATE_INPUT, fieldName))));
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_DATETIME_FIELD_TIME_INPUT, fieldName))));
-            WebElement fieldLayout = getFieldLayout(fieldName);
-            scrollIntoView(fieldLayout);
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_DATETIME_FIELD_DATE_INPUT, fieldName))));
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_DATETIME_FIELD_TIME_INPUT, fieldName))));
+            WebElement fieldLayout = getFieldLayout(fieldName, s);
+            scrollIntoView(fieldLayout, s);
         } catch (TimeoutException e) {
             return false;
         }
@@ -59,12 +59,12 @@ public class TempoDatetimeField extends TempoField {
         return value;
     }
     
-    public static boolean contains(WebElement fieldLayout, String fieldValue) {
+    public static boolean contains(WebElement fieldLayout, String fieldValue, Settings s) {
         String datetimeString = getValue(fieldLayout);
 
         try{  
-            Date compareDate = parseDate(datetimeString);
-            Date fieldDate = parseDate(fieldValue);
+            Date compareDate = parseDate(datetimeString, s);
+            Date fieldDate = parseDate(fieldValue, s);
             LOG.debug("DATETIME FIELD COMPARISON : Field value [" + fieldDate.toString() + "] compared to Entered value [" + fieldDate.toString() + "]");
             
             return DateUtils.isSameInstant(compareDate, fieldDate);
@@ -74,8 +74,8 @@ public class TempoDatetimeField extends TempoField {
         }        
     }
     
-    private static boolean populateTempoDatetimeFieldWithDate(WebElement fieldLayout, Date d) {
-        String dateValue = new SimpleDateFormat(dateFormat).format(d);
+    private static boolean populateTempoDatetimeFieldWithDate(WebElement fieldLayout, Date d, Settings s) {
+        String dateValue = new SimpleDateFormat(s.getDateFormat()).format(d);
         
         WebElement datePlaceholder = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATETIME_FIELD_DATE_PLACEHOLDER));
         WebElement dateField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATETIME_FIELD_DATE_INPUT));
@@ -88,15 +88,15 @@ public class TempoDatetimeField extends TempoField {
             dateField.sendKeys(dateValue);
         } else {
             datePlaceholder.click();
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOf(dateField));
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOf(dateField));
             dateField.sendKeys(dateValue);
         }
                 
         return true;
     }
     
-    private static boolean populateTempoDatetimeFieldWithTime(WebElement fieldLayout, Date d) {
-        String timeValue = new SimpleDateFormat(timeFormat).format(d);
+    private static boolean populateTempoDatetimeFieldWithTime(WebElement fieldLayout, Date d, Settings s) {
+        String timeValue = new SimpleDateFormat(s.getTimeFormat()).format(d);
         
         WebElement timePlaceholder = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATETIME_FIELD_TIME_PLACEHOLDER));
         WebElement timeField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_DATETIME_FIELD_TIME_INPUT));
@@ -109,7 +109,7 @@ public class TempoDatetimeField extends TempoField {
             timeField.sendKeys(timeValue);
         } else {
             timePlaceholder.click();
-            (new WebDriverWait(driver, timeoutSeconds)).until(ExpectedConditions.visibilityOf(timeField));
+            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOf(timeField));
             timeField.sendKeys(timeValue);
         }
         

@@ -57,8 +57,8 @@
 	    {"label": "xpathAbsoluteFileUploadFieldLabel", "value": "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input"},
 	    {"label": "xpathRelativeFileUploadFieldInput", "value": ".//input[contains(@class, 'gwt-FileUpload')]"},
 	    {"label": "xpathRelativeFileUploadFieldFile", "value": ".//span[contains(@class, 'filename')]"},
-	   	{"label": "xpathConcatFileUploadFieldFilename", "value": "/span[contains(text(), '%s')]"},
 	    {"label": "xpathRelativeFileUploadFieldRemoveLink", "value": ".//a[starts-with(text(), 'Remove')]"},
+	    {"label": "xpathRelativeFileUploadFieldWaiting", "value": ".//div[contains(@class, 'prgbar-msg')]"},
 	    {"label": "xpathAbsolutePickerLabel", "value": "//label[contains(text(),'%s')]/parent::span"},
 	    {"label": "xpathRelativePickerInput", "value": ".//input[contains(@class, 'gwt-SuggestBox')]"},
 	    {"label": "xpathAbsolutePickerSuggestion", "value": "//div[contains(@class, 'SuggestBoxPopup')]/descendant::p[contains(text(), '%s')] | //div[contains(@class, 'SuggestBoxPopup')]/descendant::h2[contains(text(), '%s')]"},
@@ -102,6 +102,7 @@
 	    {"label": "xpathConcatNewsItemRecordTag", "value": "/parent::div/descendant::a[contains(text(), '%s')]"},
 	    {"label": "xpathConcatNewsItemComment", "value": "/parent::div/descendant::div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), '%s')]"},
 	    {"label": "xpathConcatNewsItemPostedAt", "value": "/parent::div/descendant::a[contains(text(), '%s')]"},
+	    {"label": "xpathConcatNewsItemDeleteLink", "value": "/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(), 'Delete')]"},
 	    {"label": "xpathAbsoluteFieldLayout", "value": "//span[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //label[starts-with(text(),'%s')]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
 	    {"label": "xpathRelativeReadOnlyField", "value": ".//p[contains(@class, 'readonly')] | div[ancestor::table[contains(@class, 'DataGrid-Table')]]"},
 	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input"},
@@ -113,7 +114,8 @@
 	    {"label": "xpathRelativeGridColumnLink", "value": "./thead//a[contains(text(), '%s')]"},
 	    {"label": "xpathAbsoluteSectionLayout", "value": "//h3[contains(text(),'%s')]/parent::div"},
 	    {"label": "xpathRelativeSectionCollapse", "value": ".//a[contains(@title, 'Collapse')]"},
-	    {"label": "xpathRelativeSectionExpand", "value": ".//a[contains(@title, 'Expand')]"}
+	    {"label": "xpathRelativeSectionExpand", "value": ".//a[contains(@title, 'Expand')]"},
+	    {"label": "xpathAbsoluteWorking", "value": "//div[@class = 'appian-indicator-message']"}
 	  ]
 	},
 	{ "version": "7.11", "byConstants": [] },
