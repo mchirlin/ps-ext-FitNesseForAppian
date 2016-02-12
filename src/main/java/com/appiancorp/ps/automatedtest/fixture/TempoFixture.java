@@ -46,7 +46,7 @@ public class TempoFixture extends BaseFixture {
      */
 	public boolean clickOnMenu(String tempoMenu) {
 		if(!TempoMenu.waitFor(tempoMenu, settings)) {
-		    throw new MissingObjectException("Tempo Menu", tempoMenu);
+		    exceptionHandler(ERROR_MISSING, "Tempo Menu", tempoMenu);
 		}
 		
 		return returnHandler(TempoMenu.click(tempoMenu, settings));
@@ -61,7 +61,7 @@ public class TempoFixture extends BaseFixture {
      */
 	public boolean searchFor(String searchTerm){
         if(!TempoSearch.waitFor(searchTerm, settings)) {
-            throw new MissingObjectException("Field", searchTerm);
+            exceptionHandler(ERROR_MISSING, "Field", searchTerm);
         }
         
         return returnHandler(TempoSearch.searchFor(searchTerm, settings));
@@ -76,7 +76,7 @@ public class TempoFixture extends BaseFixture {
     */
 	public boolean logout() {
         if(!TempoLogin.waitForLogout(settings)) {
-            throw new MissingObjectException("Logout Menu");
+            exceptionHandler(ERROR_MISSING, "Logout Menu");
         }
         
         return returnHandler(TempoLogin.logout(settings));
@@ -123,7 +123,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean toggleMoreInfoForNewsFeedContainingText(String newsText) {
         if(!TempoNews.waitForMoreInfo(newsText, settings)) {
-            throw new MissingObjectException("News Post with More Info", newsText);
+            exceptionHandler(ERROR_MISSING, "News Post with More Info", newsText);
         }
         
         return returnHandler(TempoNews.toggleMoreInfo(newsText, settings));
@@ -139,7 +139,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean deleteNewsPost(String newsText) {
         if(!TempoNews.waitFor(newsText, settings)) {
-            throw new MissingObjectException("News Post", newsText);
+            exceptionHandler(ERROR_MISSING, "News Post", newsText);
         }
         
         return returnHandler(TempoNews.deleteNewsPost(newsText, settings));
@@ -157,7 +157,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean verifyNewsFeedContainingTextAndMoreInfoWithLabelAndValueIsPresent(String newsText, String label, String value) {     
         if (!TempoNews.refreshAndWaitFor(newsText, settings)) {
-            throw new MissingObjectException("News Post", newsText);
+            exceptionHandler(ERROR_MISSING, "News Post", newsText);
         }
         
         return returnHandler(TempoNews.waitForLabelAndValue(newsText, label, value, settings));
@@ -174,7 +174,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean verifyNewsFeedContainingTextTaggedWithIsPresent(String newsText, String newsTag) {
         if (!TempoNews.refreshAndWaitFor(newsText, settings)) {
-            throw new MissingObjectException("News Post", newsText);
+            exceptionHandler(ERROR_MISSING, "News Post", newsText);
         }
         
         return returnHandler(TempoNews.waitForTag(newsText, newsTag, settings));
@@ -204,7 +204,7 @@ public class TempoFixture extends BaseFixture {
      */
     public String getRegexFromNewsFeedContainingText(String regex, String newsText) {
         if (!TempoNews.refreshAndWaitFor(newsText, settings)) {
-            throw new MissingObjectException("News Post", newsText);
+            exceptionHandler(ERROR_MISSING, "News Post", newsText);
         }
         
         return TempoNews.getRegexForNewsPost(regex, newsText, settings);
@@ -222,7 +222,7 @@ public class TempoFixture extends BaseFixture {
      */
     public String getRegexFromNewsFeedContainingTextCommentedWith(String regex, String newsText, String newsComment) {
         if (!TempoNews.refreshAndWaitForComment(newsText, newsComment, settings)) {
-            throw new MissingObjectException("News Post", newsText);
+            exceptionHandler(ERROR_MISSING, "News Post", newsText);
         }
         
         return TempoNews.getRegexForNewsPostComment(regex, newsText, newsComment, settings);
@@ -238,7 +238,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnNewsFeedRecordTag(String newsText, String recordTag) {
         if (!TempoNews.refreshAndWaitForTag(newsText, recordTag, settings)) {
-            throw new MissingObjectException("Record Tag", recordTag);
+            exceptionHandler(ERROR_MISSING, "Record Tag", recordTag);
         }
         
         return returnHandler(TempoNews.clickOnRecordTag(newsText, recordTag, settings));
@@ -259,7 +259,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnTask(String taskName) {
         if(!TempoTask.refreshAndWaitFor(taskName, settings)) {
-            throw new MissingObjectException("Task", taskName);
+            exceptionHandler(ERROR_MISSING, "Task", taskName);
         }
         
         return returnHandler(TempoTask.click(taskName, settings));
@@ -302,7 +302,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean verifyTaskHasDeadlineOf(String taskName, String deadline) {
         if(!TempoTask.waitFor(taskName, settings)) {
-            throw new MissingObjectException("Task", taskName);
+            exceptionHandler(ERROR_MISSING, "Task", taskName);
         }
         
         return returnHandler(TempoTask.hasDeadlineOf(taskName, deadline, settings));
@@ -317,7 +317,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnTaskReport(String taskReport) {
         if(!TempoTask.waitForTaskReport(taskReport, settings)) {
-            throw new MissingObjectException("Task Report", taskReport);
+            exceptionHandler(ERROR_MISSING, "Task Report", taskReport);
         }
         
         return returnHandler(TempoTask.clickOnTaskReport(taskReport, settings));
@@ -348,7 +348,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnRecordType(String typeName) {
        if(!TempoRecordType.waitFor(typeName, settings)) {
-           throw new MissingObjectException("Record Type", typeName);
+           exceptionHandler(ERROR_MISSING, "Record Type", typeName);
        }
        
        return returnHandler(TempoRecordType.click(typeName, settings));
@@ -375,7 +375,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnRecordTypeUserFilter(String userFilter) {
         if(!TempoRecordType.waitForUserFilter(userFilter, settings)) {
-            throw new MissingObjectException("Record User Filter", userFilter);
+            exceptionHandler(ERROR_MISSING, "Record User Filter", userFilter);
         }
         
         return returnHandler(TempoRecordType.clickOnUserFilter(userFilter, settings)); 
@@ -424,7 +424,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnRecord(String recordName) {
         if(!TempoRecord.refreshAndWaitFor(recordName, settings)) {
-            throw new MissingObjectException("Record", recordName);
+            exceptionHandler(ERROR_MISSING, "Record", recordName);
         }
         
         return returnHandler(TempoRecord.click(recordName, settings));
@@ -497,7 +497,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnRecordView(String viewName) {
         if(!TempoRecord.waitForView(viewName, settings)) {
-            throw new MissingObjectException("Record Item Facet", viewName);
+            exceptionHandler(ERROR_MISSING, "Record Item Facet", viewName);
         }
         
         return returnHandler(TempoRecord.clickOnView(viewName, settings));
@@ -524,7 +524,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnRecordRelatedAction(String relatedActionName) {
         if(!TempoRecord.refreshAndWaitForRelatedAction(relatedActionName, settings)) {
-            throw new MissingObjectException("Related Action", relatedActionName);
+            exceptionHandler(ERROR_MISSING, "Related Action", relatedActionName);
         }
         
         return returnHandler(TempoRecord.clickOnRelatedAction(relatedActionName, settings));
@@ -588,7 +588,7 @@ public class TempoFixture extends BaseFixture {
     
     public boolean sortRecordGridByColumn(String columnName){
         if(!TempoRecord.waitForRecordGridColumn(columnName, settings)) {
-            throw new MissingObjectException("Record Grid Column", columnName);
+            exceptionHandler(ERROR_MISSING, "Record Grid Column", columnName);
         }
         return returnHandler(TempoRecord.clickOnRecordGridColumn(columnName, settings));
     }
@@ -602,7 +602,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnRecordGridNaviation(String navOption){
         if(!TempoRecord.waitForRecordGridNavigation(navOption, settings)){
-            throw new MissingObjectException("Navigation option", navOption);
+            exceptionHandler(ERROR_MISSING, "Navigation option", navOption);
         }
         return returnHandler(TempoRecord.clickOnRecordGridNavigation(navOption, settings));
     }
@@ -622,7 +622,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnReport(String reportName) {
         if(!TempoReport.waitFor(reportName, settings)) {
-            throw new MissingObjectException("Report", reportName);
+            exceptionHandler(ERROR_MISSING, "Report", reportName);
         }
         
         return returnHandler(TempoReport.click(reportName, settings));
@@ -669,7 +669,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnAction(String actionName) {
         if(!TempoAction.waitFor(actionName, settings)) {
-            throw new MissingObjectException("Action", actionName);
+            exceptionHandler(ERROR_MISSING, "Action", actionName);
         }
         
         return returnHandler(TempoAction.click(actionName, settings));
@@ -728,7 +728,7 @@ public class TempoFixture extends BaseFixture {
     public String getFormTitle() {
         waitForWorking();
         if(!TempoForm.waitForTitle(settings)) {
-            throw new MissingObjectException("Title");
+            exceptionHandler(ERROR_MISSING, "Title");
         }
         
         return TempoForm.getFormTitle(settings);
@@ -746,7 +746,7 @@ public class TempoFixture extends BaseFixture {
     public String getFormInstructions() {
         waitForWorking();
         if(!TempoForm.waitForInstructions(settings)) {
-            throw new MissingObjectException("Instructions");
+            exceptionHandler(ERROR_MISSING, "Instructions");
         }
         
         return TempoForm.getFormInstructions(settings);
@@ -770,7 +770,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean populateFieldWith(String fieldName, String[] fieldValues) {
         if(!TempoField.waitFor(fieldName, settings)) {
-            throw new MissingObjectException("Field", fieldName);
+            exceptionHandler(ERROR_MISSING, "Field", fieldName);
         }
         
         // Populate the field
@@ -815,7 +815,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean populateFieldInSectionWith(String fieldName, String sectionName, String[] fieldValues) {
         if(!TempoSection.waitFor(fieldName, sectionName, settings)) {
-            throw new MissingObjectException("Field", sectionName + fieldName);
+            exceptionHandler(ERROR_MISSING, "Field", sectionName + fieldName);
         }
         
         int attempt = 0;
@@ -837,7 +837,7 @@ public class TempoFixture extends BaseFixture {
      */    
     public boolean expandSection(String sectionName){
         if(!TempoSection.waitFor(sectionName, settings)){
-            throw new MissingObjectException("Section", sectionName);
+            exceptionHandler(ERROR_MISSING, "Section", sectionName);
         }
        return returnHandler(TempoSection.clickExpandSection(sectionName, settings));
     }
@@ -852,7 +852,7 @@ public class TempoFixture extends BaseFixture {
      */    
     public boolean collapseSection(String sectionName){
         if(!TempoSection.waitFor(sectionName, settings)){
-            throw new MissingObjectException("Section", sectionName);
+            exceptionHandler(ERROR_MISSING, "Section", sectionName);
         }
        return returnHandler(TempoSection.clickCollapseSection(sectionName, settings));
       }
@@ -869,7 +869,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clearFieldOf(String fieldName, String[] fieldValues) {
         if(!TempoField.waitFor(fieldName, settings)) {
-            throw new MissingObjectException("Field", fieldName);
+            exceptionHandler(ERROR_MISSING, "Field", fieldName);
         }
         
         return returnHandler(TempoField.clearOf(fieldName, fieldValues, settings));
@@ -887,7 +887,7 @@ public class TempoFixture extends BaseFixture {
      */
     public String getFieldValue(String fieldName) {
         if(!TempoField.waitFor(fieldName, settings)) {
-            throw new MissingObjectException("Field", fieldName);
+            exceptionHandler(ERROR_MISSING, "Field", fieldName);
         }
         
         return TempoField.getValue(fieldName, settings);
@@ -906,7 +906,7 @@ public class TempoFixture extends BaseFixture {
      */
     public String getFieldInSectionValue(String fieldName, String sectionName) {
         if(!TempoSection.waitFor(fieldName, sectionName, settings)) {
-            throw new MissingObjectException("Field", fieldName);
+            exceptionHandler(ERROR_MISSING, "Field", fieldName);
         }
         
         return TempoSection.getValue(fieldName, sectionName, settings);
@@ -924,7 +924,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean verifyFieldContains(String fieldName, String[] fieldValues) {
         if(!TempoField.waitFor(fieldName, settings)) {
-            throw new MissingObjectException("Field", fieldName);
+            exceptionHandler(ERROR_MISSING, "Field", fieldName);
         }
         
         return returnHandler(TempoField.contains(fieldName, fieldValues, settings));
@@ -955,7 +955,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean verifyFieldInSectionContains(String fieldName, String sectionName, String[] fieldValues) {
         if(!TempoSection.waitFor(fieldName, sectionName, settings)) {
-            throw new MissingObjectException("Field", fieldName);
+            exceptionHandler(ERROR_MISSING, "Field", fieldName);
         }
         
         return returnHandler(TempoSection.contains(fieldName, sectionName, fieldValues, settings));
@@ -999,7 +999,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean populateGridColumnRowWith(String gridName, String columnName, String rowNum, String[] fieldValues) {
         if(!TempoGrid.waitFor(gridName, columnName, rowNum, settings)) {
-            throw new MissingObjectException("Grid/Column/Row", gridName+"/"+columnName+"/"+rowNum);
+            exceptionHandler(ERROR_MISSING, "Grid/Column/Row", gridName+"/"+columnName+"/"+rowNum);
         }
         
         int attempt = 0;
@@ -1025,7 +1025,7 @@ public class TempoFixture extends BaseFixture {
      */
     public String getGridColumnRowValue(String gridName, String columnName, String rowNum) {
         if(!TempoGrid.waitFor(gridName, columnName, rowNum, settings)) {
-            throw new MissingObjectException("Grid/Column/Row", gridName+"/"+columnName+"/"+rowNum);
+            exceptionHandler(ERROR_MISSING, "Grid/Column/Row", gridName+"/"+columnName+"/"+rowNum);
         }
         
         return TempoGrid.getValue(gridName, columnName, rowNum, settings);
@@ -1044,7 +1044,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean verifyGridColumnRowContains(String gridName, String columnName, String rowNum, String[] fieldValues) {
         if(!TempoGrid.waitFor(gridName, columnName, rowNum, settings)) {
-            throw new MissingObjectException("Grid/Column/Row", gridName+"/"+columnName+"/"+rowNum);
+            exceptionHandler(ERROR_MISSING, "Grid/Column/Row", gridName+"/"+columnName+"/"+rowNum);
         }
         
         return returnHandler(TempoGrid.contains(gridName, columnName, rowNum, fieldValues, settings)); 
@@ -1062,7 +1062,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean selectGridRow(String gridName, String rowNum) {
         if(!TempoGrid.waitFor(gridName, rowNum, settings)) {
-            throw new MissingObjectException("Grid/Row", gridName+"/"+rowNum);
+            exceptionHandler(ERROR_MISSING, "Grid/Row", gridName+"/"+rowNum);
         }
         
         return returnHandler(TempoGrid.selectRow(gridName, rowNum, settings)); 
@@ -1078,7 +1078,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean verifyGridRowIsSelected(String gridName, String rowNum) {
         if(!TempoGrid.waitFor(gridName, rowNum, settings)) {
-            throw new MissingObjectException("Grid/Row", gridName+"/"+rowNum);
+            exceptionHandler(ERROR_MISSING, "Grid/Row", gridName+"/"+rowNum);
         }
         
         return returnHandler(TempoGrid.verifyGridRowIsSelected(gridName, rowNum, settings)); 
@@ -1094,7 +1094,7 @@ public class TempoFixture extends BaseFixture {
 
     public boolean clickOnGridAddRowLink(String gridName){
         if(!TempoGrid.waitFor(gridName, settings)) {
-            throw new MissingObjectException("Grid", gridName);
+            exceptionHandler(ERROR_MISSING, "Grid", gridName);
         }
         
         return returnHandler(TempoGrid.clickOnAddRowLink(gridName, settings)); 
@@ -1111,7 +1111,7 @@ public class TempoFixture extends BaseFixture {
 
     public boolean clickOnGridNavigation(String gridName, String navOption){
         if(!TempoGrid.waitFor(gridName, settings)){
-            throw new MissingObjectException("Grid", gridName);
+            exceptionHandler(ERROR_MISSING, "Grid", gridName);
         }
         navOption = navOption.toLowerCase();
         
@@ -1128,7 +1128,7 @@ public class TempoFixture extends BaseFixture {
      */    
     public boolean sortGridByColumn(String gridName, String columnName){
         if(!TempoGrid.waitFor(gridName, settings)){
-            throw new MissingObjectException("Grid", gridName);
+            exceptionHandler(ERROR_MISSING, "Grid", gridName);
         }        
         
         return returnHandler(TempoGrid.sortByColumn(gridName, columnName, settings));
@@ -1143,7 +1143,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnLink(String linkName) {
         if(!TempoLinkField.waitFor(linkName, settings)) {
-            throw new MissingObjectException("Link", linkName);
+            exceptionHandler(ERROR_MISSING, "Link", linkName);
         }
         
         return returnHandler(TempoLinkField.click(linkName, settings)); 
@@ -1158,7 +1158,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnButton(String buttonName) {
         if (!TempoButton.waitFor(buttonName, settings)) {
-            throw new MissingObjectException("Button", buttonName);
+            exceptionHandler(ERROR_MISSING, "Button", buttonName);
         }
         
         return returnHandler(TempoButton.click(buttonName, settings));
@@ -1173,7 +1173,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnRadioOption(String optionName) {
         if (!TempoRadioField.waitForOption(optionName, settings)) {
-            throw new MissingObjectException("Radio Button Option", optionName);
+            exceptionHandler(ERROR_MISSING, "Radio Button Option", optionName);
         }
         
         return returnHandler(TempoRadioField.clickOption(optionName, settings));
@@ -1188,7 +1188,7 @@ public class TempoFixture extends BaseFixture {
      */
     public boolean clickOnCheckboxOption(String optionName) {
         if (!TempoCheckboxField.waitForOption(optionName, settings)) {
-            throw new MissingObjectException("Checkbox Option", optionName);
+            exceptionHandler(ERROR_MISSING, "Checkbox Option", optionName);
         }
         
         return returnHandler(TempoCheckboxField.clickOption(optionName, settings));
