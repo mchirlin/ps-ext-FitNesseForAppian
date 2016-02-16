@@ -1,1 +1,2 @@
+| logout | 
 | tear down selenium web driver |

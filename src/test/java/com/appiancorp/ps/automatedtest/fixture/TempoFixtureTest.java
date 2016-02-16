@@ -12,12 +12,11 @@ public class TempoFixtureTest {
       tFixture = new TempoFixture();
       
       tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-      tFixture.setAppianUrlTo("https://apacdemo.appiancloud.com/suite");
+      tFixture.setAppianUrlTo("https://ps-sandbox1.appiancloud.com/suite/");
       tFixture.setTimeoutSecondsTo(20);
       tFixture.setAppianVersionTo("16.1");
-      tFixture.setAppianLocaleTo("en_GB");
-      
-      tFixture.loginWithUsernameAndPassword("michael.chirlin@appian.com", "password1");
+      tFixture.setAppianLocaleTo("en_US");
+      tFixture.loginWithUsernameAndPassword("test.user", "password1");
     }
     
     @AfterClass

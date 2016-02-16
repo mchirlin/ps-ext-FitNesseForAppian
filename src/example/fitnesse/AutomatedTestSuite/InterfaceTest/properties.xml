@@ -2,11 +2,12 @@
 <properties>
 <Edit/>
 <Files/>
-<Help>New Test suite for Customer X</Help>
+<Help>Tests various types of fields that an interface may use in Appian and how to access them in Fitnesse</Help>
 <Properties/>
 <RecentChanges/>
 <Refactor/>
 <Search/>
+<Test/>
 <Versions/>
 <WhereUsed/>
 </properties>
