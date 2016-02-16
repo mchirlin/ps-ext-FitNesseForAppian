@@ -22,13 +22,13 @@ public class TasksFixtureTest extends TempoFixtureTest {
         
         assertTrue(tFixture.clickOnTask("Input Automated Test Data"));
     }
-    
-    @Test
-    public void testClickOnTaskReport() throws Exception {
-        tFixture.clickOnMenu("Tasks");
-        
-        assertTrue(tFixture.clickOnTaskReport("My Current Tasks"));
-    }
+//    Task Report does not exist on test site.
+//    @Test
+//    public void testClickOnTaskReport() throws Exception {
+//        tFixture.clickOnMenu("Tasks");
+//        
+//        assertTrue(tFixture.clickOnTaskReport("My Current Tasks"));
+//    }
     
     @Test
     public void testVerifyTaskIsPresent() throws Exception {
