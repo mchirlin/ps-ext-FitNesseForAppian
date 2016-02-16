@@ -27,7 +27,8 @@ public class NewsFixtureTest extends TempoFixtureTest {
       tFixture.populateFieldWith("Date and Time Test", new String[]{"2016-02-04 02:00"});
       
       tFixture.clickOnButton("Submit");
-      assertTrue(tFixture.verifyActionCompleted());
+      // Deprecated for 16.1
+      //      assertTrue(tFixture.verifyActionCompleted());
     }
     
     @Test 
@@ -74,6 +75,6 @@ public class NewsFixtureTest extends TempoFixtureTest {
     @AfterClass
     public static void tearDownNews() throws Exception {
         tFixture.clickOnMenu("News");
-        tFixture.deleteNewsPost(randString);
+//        tFixture.deleteNewsPost(randString); //Only for admin accounts 
     }
 }

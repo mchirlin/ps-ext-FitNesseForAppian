@@ -49,9 +49,7 @@ public class TempoLogin extends TempoObject {
         WebElement submitButton = s.getDriver().findElement(By.xpath(XPATH_ABSOLUTE_LOGIN_SUBMIT_BUTTON));
         submitButton.click();
         
-        waitForLogout(s);
-        
-        return true;
+        return waitForLogout(s);
     }
     
     public static boolean loginWithTerms(String url, String userName, String password, Settings s) {

@@ -2,7 +2,7 @@
 
 
 '''Variables'''
-!define TEST_RUNNER {fitlibrary.suite.FitLibraryServer}
+!define TEST_SYSTEM {slim}
 !path C:\AutomatedTesting\**.jar
 
 !contents -R2 -g -p -f -h

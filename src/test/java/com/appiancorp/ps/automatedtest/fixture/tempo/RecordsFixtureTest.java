@@ -24,7 +24,7 @@ public class RecordsFixtureTest extends TempoFixtureTest{
       tFixture.populateFieldWith("Date and Time Test", new String[]{"2010-01-01 02:00"});
       
       tFixture.clickOnButton("Submit");
-      assertTrue(tFixture.verifyActionCompleted());
+//      assertTrue(tFixture.verifyActionCompleted()); Deprecated for 16.1 testing 
     }
     
     @Test
@@ -86,6 +86,6 @@ public class RecordsFixtureTest extends TempoFixtureTest{
     @AfterClass
     public static void tearDownRecords() throws Exception {
         tFixture.clickOnMenu("News");
-        tFixture.deleteNewsPost(randString);
+//        tFixture.deleteNewsPost(randString);
     }
 }

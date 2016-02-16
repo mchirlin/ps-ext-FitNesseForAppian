@@ -1,10 +1,14 @@
+| script |
 | click on menu | Actions |
+
 !** Verify actions are present or not
+| script |
 | verify action | All Fields| is present |
 | verify action | Not All Fields| is not present |
 **!
 
 !** Click on action and then exit page
+| script |
 | click on action | All Fields |
 | click on button | Cancel |
 | verify action completed|

@@ -24,13 +24,13 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;*/
 
+
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
+import com.appiancorp.ps.automatedtest.exception.StopTestException;
 import com.appiancorp.ps.automatedtest.object.TempoError;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
-
-import fitlibrary.DoFixture;
 
 /**
  * This is the base class for integrating Appian and Fitnesse.
@@ -39,10 +39,12 @@ import fitlibrary.DoFixture;
  * @author michael.chirlin
  *
  */
-public class BaseFixture extends DoFixture {
+public class BaseFixture  {
     
     private static final Logger LOG = Logger.getLogger(BaseFixture.class);
     private static Integer errorNum = 1;
+    protected static final String ERROR_MISSING = "missing";
+    protected static final String ERROR_FATAL = "fatal";
     
 	protected Settings settings;
 	
@@ -192,7 +194,7 @@ public class BaseFixture extends DoFixture {
      * @param bool true or false
      */
     public void setStopOnErrorTo(Boolean bool) {
-        this.setStopOnError(bool);
+        settings.setStopOnError(bool);
     }
 	
 	/**
@@ -550,13 +552,30 @@ public class BaseFixture extends DoFixture {
 	    return RandomStringUtils.randomAlphanumeric(length);
 	}
 	
-	protected boolean returnHandler(boolean val) {
-	    if (!val && settings.isTakeErrorScreenshots()) {
+	protected void exceptionHandler(String type, String... vals) {
+	    if (settings.isStopOnError()) {
+	        type = ERROR_FATAL;
+	    }
+	    
+	    switch (type) {
+    	    case ERROR_FATAL:
+    	        throw new StopTestException(vals);
+    	    case ERROR_MISSING: 
+    	        throw new MissingObjectException(vals);
+	    }
+	}
+	
+	protected boolean returnHandler(boolean b) {
+	    if (!b && settings.isTakeErrorScreenshots()) {
             takeScreenshot(String.format("%3d", errorNum));
             errorNum += 1;
         }
 	    
-	    return val;
+	    if (!b && settings.isStopOnError()) {
+	        exceptionHandler(ERROR_FATAL);
+	    }
+	    
+	    return b;
 	}
 	
    /**
