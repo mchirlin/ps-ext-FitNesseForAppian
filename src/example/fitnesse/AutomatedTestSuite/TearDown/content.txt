@@ -1,3 +1,2 @@
-| script |
-| logout | 
+| logout |
 | tear down selenium web driver |

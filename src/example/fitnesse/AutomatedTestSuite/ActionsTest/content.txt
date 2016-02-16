@@ -1,0 +1,11 @@
+| click on menu | Actions |
+!** Verify actions are present or not
+| verify action | All Fields| is present |
+| verify action | Not All Fields| is not present |
+**!
+
+!** Click on action and then exit page
+| click on action | All Fields |
+| click on button | Cancel |
+| verify action completed|
+**!

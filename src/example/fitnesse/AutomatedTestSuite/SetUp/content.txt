@@ -3,29 +3,25 @@
 
 !*** Setup
 Need these before each test case
-!| script | com.appiancorp.ps.automatedtest.fixture.TempoFixture |
+!| com.appiancorp.ps.automatedtest.fixture.TempoFixture |
 | setup selenium web driver with browser | FIREFOX |
-| set appian url to | https://ps-sandbox1.appiancloud.com/suite/ |
+| set appian url to | REPLACE_APPIAN_URL|
 
-Setup how long test will wait before failing
-| script |
+Setup how long test will wait before failing 
 | set timeout seconds to | 20 |
 
 Set start date and format how dates are used in the application
-| script |
 | set start datetime |
-| set appian version to | 16.1 |
+| set appian version to | 7.11 |
 | set appian locale to | en_US |
 | set stop on error to | true |
 
 Create a random string and new folder to take screensshots for errors
-| script |
-| $rand= | get random string | 4 |
+| set | rand | get random string | 4 |
 | set take error screenshots to | true |
-| set screenshot path to | C:\AutomatedTesting\screenshots\$rand\ |
+| set screenshot path to | C:\AutomatedTesting\screenshots\@{rand}\ |
 ***!
 
 !*** Login
-| script |
-| login with username | test.user | and password | password1 |
+| login with username | REPLACE_USERNAME | and password | REPLACE_PASSWORD |
 ***!

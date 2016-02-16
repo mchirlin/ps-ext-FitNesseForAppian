@@ -33,6 +33,8 @@
 | script |
 | verify AUT form contains text | $randString | int | 5 | decimal | 123.45 | datetime | 2016-11-15 10:00 |
 | check AUT form against text | $randString | int | 5 | decimal | 123.45 | datetime | 11/15/2016 10:00 AM |
+# en_GB
+# | check AUT form against text | $randString | int | 5 | decimal | 123.45 | datetime | 15/11/2016 10:00 |
 ***!
 
 !*** Submit form
@@ -52,6 +54,8 @@
 | click on news feed | $randString | record tag | $randString |
 | verify AUT form contains text | $randString | int | 5 | decimal | 123.45 | datetime | 2016-11-15 10:00 |
 | check AUT form against text | $randString | int | 5 | decimal | 123.45 | datetime | Nov 15, 2016, 10:00 AM |
+# en_GB
+# | check AUT form against text | $randString | int | 5 | decimal | 123.45 | datetime | 15 Nov 2016 10:00 |
 ***!
 
 !*** Access related action link from record

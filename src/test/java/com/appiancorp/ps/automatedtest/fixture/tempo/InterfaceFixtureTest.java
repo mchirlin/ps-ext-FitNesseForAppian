@@ -272,12 +272,12 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
       
     @Test
     public void testPickerFields() throws Exception {
-        assertTrue(tFixture.populateFieldWith("UserPicker", new String[]{"Michael Chirlin", "Ray Croxon"}));
-        assertTrue(tFixture.verifyFieldContains("UserPicker", new String[]{"Michael Chirlin", "Ray Croxon"}));
-        assertEquals("Michael Chirlin,Ray Croxon", tFixture.getFieldValue("UserPicker"));
+        assertTrue(tFixture.populateFieldWith("UserPicker", new String[]{"Michael Chirlin", "Dan Austria"}));
+        assertTrue(tFixture.verifyFieldContains("UserPicker", new String[]{"Michael Chirlin", "Dan Austria"}));
+        assertEquals("Michael Chirlin,Dan Austria", tFixture.getFieldValue("UserPicker"));
         
-        assertTrue(tFixture.verifyFieldContains("ROUserPicker", new String[]{"Michael Chirlin", "Ray Croxon"}));
-        assertEquals("Michael Chirlin,Ray Croxon", tFixture.getFieldValue("ROUserPicker"));
+        assertTrue(tFixture.verifyFieldContains("ROUserPicker", new String[]{"Michael Chirlin", "Dan Austria"}));
+        assertEquals("Michael Chirlin,Dan Austria", tFixture.getFieldValue("ROUserPicker"));
         
         // assertTrue(tFixture.populateFieldWith("GroupPicker", new String[]{"AcqDemo"}));
         // assertTrue(tFixture.verifyFieldContains("GroupPicker", new String[]{"AcqDemo"}));
@@ -304,9 +304,9 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
         // assertEquals("5", tFixture.getFieldValue("CustomPicker"));
         
         // Grid
-        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[1]", "[1]", new String[]{"Michael Chirlin","Ray Croxon"}));
-        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[1]", "[1]", new String[]{"Michael Chirlin","Ray Croxon"}));
-        assertEquals("Michael Chirlin,Ray Croxon", tFixture.getGridColumnRowValue("EditableGrid[3]", "[1]", "[1]"));
+        assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[1]", "[1]", new String[]{"Michael Chirlin","Dan Austria"}));
+        assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[1]", "[1]", new String[]{"Michael Chirlin","Dan Austria"}));
+        assertEquals("Michael Chirlin,Dan Austria", tFixture.getGridColumnRowValue("EditableGrid[3]", "[1]", "[1]"));
         
         // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[2]", "[1]", new String[]{"AcqDemo"}));
         // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[2]", "[1]", new String[]{"AcqDemo"}));
