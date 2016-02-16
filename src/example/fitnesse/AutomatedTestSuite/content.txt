@@ -12,7 +12,7 @@
 !2 Variables below need to be added to the top level test suite for all newly created test suites
 
 '''Variables'''
-!define TEST_RUNNER {fitlibrary.suite.FitLibraryServer}
+!define TEST_SYSTEM {slim}
 !path C:\AutomatedTesting\**.jar
 
 !contents -R2 -g -p -f -h

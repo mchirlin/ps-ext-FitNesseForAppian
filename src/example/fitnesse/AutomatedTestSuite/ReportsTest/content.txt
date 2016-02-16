@@ -1,6 +1,7 @@
 !4 WARNING: Verification if charts are present in an interface is currently not available
 
 !** Access Reports menu, Verify if the report is present or not, Click on report
+| script |
 | click on menu | Reports |
 | verify report | Automated Test Report | is present | 
 | verify report | Not Automated Test Report | is not present | 
