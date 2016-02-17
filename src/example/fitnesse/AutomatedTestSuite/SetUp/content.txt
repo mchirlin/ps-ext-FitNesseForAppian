@@ -4,6 +4,8 @@
 !*** Setup
 Need these before each test case
 !| script | com.appiancorp.ps.automatedtest.fixture.TempoFixture |
+
+| script |
 | setup selenium web driver with browser | FIREFOX |
 | set appian url to | REPLACE_APPIAN_URL|
 
@@ -20,9 +22,9 @@ Set start date and format how dates are used in the application
 
 Create a random string and new folder to take screensshots for errors
 | script |
-| $rand= | get random string | 4 |
+| set | rand | get random string | 4 |
 | set take error screenshots to | true |
-| set screenshot path to | C:\AutomatedTesting\screenshots\$rand\ |
+| set screenshot path to | C:\AutomatedTesting\screenshots\@{rand}\ |
 ***!
 
 !*** Login
