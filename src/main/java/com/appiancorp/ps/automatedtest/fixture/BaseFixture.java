@@ -2,10 +2,12 @@ package com.appiancorp.ps.automatedtest.fixture;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.Properties;
 import java.util.Set;
 import java.util.Random;
 
@@ -18,12 +20,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-/*import org.openqa.selenium.ie.InternetExplorerDriver;
+/*
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;*/
 
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
@@ -46,31 +50,40 @@ public class BaseFixture  {
     protected static final String ERROR_MISSING = "missing";
     protected static final String ERROR_FATAL = "fatal";
     
+    protected Properties prop = new Properties();
+    
 	protected Settings settings;
 	
 	public BaseFixture() {
 		super();
 		settings = Settings.initialize();
+		loadProperties();
 	}
 	
 	/**
 	 * Starts selenium browser<br>
 	 * <br>
 	 * FitNesse Example: <code>| setup selenium web driver with | FIREFOX | browser |</code>
-	 * @param browser Browser to test with, currently only supports FIREFOX
+	 * @param browser Browser to test with, currently supports FIREFOX, CHROME, IE
 	 */
 	public void setupSeleniumWebDriverWithBrowser(String browser) {
 		if (browser.equals("FIREFOX")) {
 			settings.setDriver(new FirefoxDriver());
-		} /*else if (browser.equals("IE")) {
+		} else if (browser.equals("CHROME")) {
+		    System.setProperty("webdriver.chrome.driver", prop.getProperty("webdriver.chrome.driver"));
+		    System.setProperty("webdriver.chrome.args", "--disable-logging");
+		    System.setProperty("webdriver.chrome.silentOutput", "true");
+		    settings.setDriver(new ChromeDriver());
+		} else if (browser.equals("IE")) {
 			System.setProperty("webdriver.ie.driver", prop.getProperty("webdriver.ie.driver"));
-			driver = new InternetExplorerDriver();
-		} else if (browser.equals("PHANTOM")) {
+			System.setProperty("webdriver.ie.driver.silent", "true");
+			settings.setDriver(new InternetExplorerDriver());
+		} /*else if (browser.equals("PHANTOM")) {
 			DesiredCapabilities dCaps = new DesiredCapabilities();
 			dCaps.setJavascriptEnabled(true);
 			dCaps.setCapability("takesScreenshot", true);
 			dCaps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, prop.getProperty("phantomjs.binary.path"));
-			driver = new PhantomJSDriver(dCaps);
+			new PhantomJSDriver(dCaps);
 		} */
 	}
 	
@@ -188,7 +201,7 @@ public class BaseFixture  {
 	}
 	
 	/** 
-     * Set the flag to stop FitNesse on error. If true, FitNesse will quit on the first failed test.<br>
+     * Set the flag to stop FitNesse on error. If true, FitNesse will quit on the first failed test. This will also quit the WebDriver as well.<br>
      * <br>
      * FitNesse Example: <code>| set stop on error to | BOOLEAN |</code>
      * @param bool true or false
@@ -559,6 +572,7 @@ public class BaseFixture  {
 	    
 	    switch (type) {
     	    case ERROR_FATAL:
+    	        settings.getDriver().quit();
     	        throw new StopTestException(vals);
     	    case ERROR_MISSING: 
     	        throw new MissingObjectException(vals);
@@ -637,5 +651,16 @@ public class BaseFixture  {
    
    public Settings getSettings() {
        return this.settings;
+   }
+   
+   private void loadProperties() {
+       String propFile = "automatedtesting.properties";
+       try {
+           InputStream inputStream = BaseFixture.class.getClassLoader().getResourceAsStream(propFile);
+           
+           prop.load(inputStream);
+       } catch (Exception e) {
+           e.printStackTrace();
+       }       
    }
 }

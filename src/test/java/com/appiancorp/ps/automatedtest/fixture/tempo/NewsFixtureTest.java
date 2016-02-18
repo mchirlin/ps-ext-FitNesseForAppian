@@ -27,8 +27,6 @@ public class NewsFixtureTest extends TempoFixtureTest {
       tFixture.populateFieldWith("Date and Time Test", new String[]{"2016-02-04 02:00"});
       
       tFixture.clickOnButton("Submit");
-      // Deprecated for 16.1
-      //      assertTrue(tFixture.verifyActionCompleted());
     }
     
     @Test 

@@ -2,7 +2,6 @@ package com.appiancorp.ps.automatedtest.fixture;
 
 import org.apache.log4j.Logger;
 
-import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoAction;
 import com.appiancorp.ps.automatedtest.object.TempoButton;
 import com.appiancorp.ps.automatedtest.object.TempoCheckboxField;

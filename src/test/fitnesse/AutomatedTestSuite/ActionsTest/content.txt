@@ -11,5 +11,4 @@
 | script |
 | click on action | All Fields |
 | click on button | Cancel |
-| verify action completed|
 **!

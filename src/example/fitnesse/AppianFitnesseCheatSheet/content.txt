@@ -108,10 +108,10 @@
 
 !3 UTILITY METHODS
 ![:
-| setup selenium web driver with | BROWSER_NAME | browser | 											: Initializes Selenium Web Driver and opens browser
+| setup selenium web driver with | BROWSER_NAME | browser | 											: Initializes Selenium Web Driver and opens browser, options include FIREFOX, CHROME, IE
 | set appian url to | APPIAN_URL | 																		: Sets the default appian url
 | set appian version to | APPIAN_VERSION |																: Sets the default appian version
-| set appian locale to | APPIAN_LOCALE |																: Sets the Appian locale used for date and datetime formatting, e.g. en_US or en_GB (defaults to en_US)
+| set appian locale to | APPIAN_LOCALE |																: Sets the Appian locale used for date and datetime formatting, options include en_US or en_GB (defaults to en_US)
 | set start datetime | 																					: Used as relative datetime for date/time fields
 | set timeout seconds to | TIMEOUT_SECONDS | 															: Used as the wait timeout in between each command
 | set screenshot path to | SCREENSHOT_PATH | 															: Set the folder where screenshots will be saved. This will create new folders if necessary. Terminate path with "/" to ensure folder creation. (Defaults to AUTOMATED_TESTING_HOME\screenshots\)
