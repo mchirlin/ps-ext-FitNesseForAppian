@@ -81,7 +81,14 @@ public class RecordsFixtureTest extends TempoFixtureTest{
         assertTrue(tFixture.verifyRecordIsNotPresent("not "+ randString));
         assertTrue(tFixture.clickOnRecord(randString));
     }
-    
+    @Test
+    public void testRecordsTypeByNameIndex() throws Exception {
+        tFixture.clickOnMenu("Records");
+        assertTrue(tFixture.clickOnRecordType("Auto[1]"));
+        
+        tFixture.clickOnMenu("Records");
+        assertTrue(tFixture.clickOnRecordType("Auto[2]"));
+    }
     @AfterClass
     public static void tearDownRecords() throws Exception {
         tFixture.clickOnMenu("News");

@@ -342,6 +342,7 @@ public class TempoFixture extends BaseFixture {
      * Clicks on the record type.<br>
      * <br>
      * FitNesse Example: <code>| click on record type | RECORD_TYPE |</code>
+     * <code>| click on record type | RECORD_TYPE[INDEX] |</code>
      * 
      * @param typeName Name of record type to click (partial names are acceptable)
      * If multiple record types contain the same name, then the first will be selected
