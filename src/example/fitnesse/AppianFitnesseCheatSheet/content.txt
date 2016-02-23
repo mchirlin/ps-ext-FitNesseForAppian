@@ -118,8 +118,8 @@
 | set take error screenshots to | SCREENSHOT_BOOLEAN | 													: If true, screenshots will be taken for every failed test case. (Default true)
 | set stop on error to | STOP_ON_ERROR_BOOLEAN | 														: If true, the FitNesse test will stop on any error. (Default false)
 | take screenshot | FILE_NAME | 																		: Take a screenshot with the name (do not include the extension)
-| login with username | USERNAME | with password | PASSWORD | 											: Uses the previously set appian url
-| login with terms with username | USERNAME | with password | PASSWORD | 								: Uses set appian url
+| login with username | USERNAME | and password | PASSWORD | 											: Uses the previously set appian url
+| login with terms with username | USERNAME | and password | PASSWORD | 								: Uses set appian url
 | wait for | RELATIVE_PERIOD, e.g. +1 days, +1 hours | 													: Waits for relative amount of time
 | wait until | RELATIVE_PERIOD | 																		: Waits until relative time
 | $VARIABLE_NAME= | get random string | STRING_LENGTH | 												: Use $VARIABLE_NAME to access variable
