@@ -15,6 +15,7 @@ import com.appiancorp.ps.automatedtest.object.TempoNews;
 import com.appiancorp.ps.automatedtest.object.TempoRadioField;
 import com.appiancorp.ps.automatedtest.object.TempoRecord;
 import com.appiancorp.ps.automatedtest.object.TempoRecordType;
+import com.appiancorp.ps.automatedtest.object.TempoRecordGrid;
 import com.appiancorp.ps.automatedtest.object.TempoReport;
 import com.appiancorp.ps.automatedtest.object.TempoSearch;
 import com.appiancorp.ps.automatedtest.object.TempoSection;
@@ -340,6 +341,7 @@ public class TempoFixture extends BaseFixture {
      * Clicks on the record type.<br>
      * <br>
      * FitNesse Example: <code>| click on record type | RECORD_TYPE |</code>
+     * <code>| click on record type | RECORD_TYPE[INDEX] |</code>
      * 
      * @param typeName Name of record type to click (partial names are acceptable)
      * If multiple record types contain the same name, then the first will be selected
@@ -586,10 +588,10 @@ public class TempoFixture extends BaseFixture {
      */
     
     public boolean sortRecordGridByColumn(String columnName){
-        if(!TempoRecord.waitForRecordGridColumn(columnName, settings)) {
+        if(!TempoRecordGrid.waitForRecordGridColumn(columnName, settings)) {
             exceptionHandler(ERROR_MISSING, "Record Grid Column", columnName);
         }
-        return returnHandler(TempoRecord.clickOnRecordGridColumn(columnName, settings));
+        return returnHandler(TempoRecordGrid.clickOnRecordGridColumn(columnName, settings));
     }
     
     /** 
@@ -600,10 +602,10 @@ public class TempoFixture extends BaseFixture {
      * @return True, if clicked
      */
     public boolean clickOnRecordGridNaviation(String navOption){
-        if(!TempoRecord.waitForRecordGridNavigation(navOption, settings)){
+        if(!TempoRecordGrid.waitForRecordGridNavigation(navOption, settings)){
             exceptionHandler(ERROR_MISSING, "Navigation option", navOption);
         }
-        return returnHandler(TempoRecord.clickOnRecordGridNavigation(navOption, settings));
+        return returnHandler(TempoRecordGrid.clickOnRecordGridNavigation(navOption, settings));
     }
     
     /*

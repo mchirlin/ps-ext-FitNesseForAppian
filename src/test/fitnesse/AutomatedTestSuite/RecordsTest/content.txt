@@ -1,0 +1,7 @@
+!** Access Records menu
+| script |
+| click on menu | Records |
+| click on record type | Auto[1] | 
+| click on menu | Records |
+| click on record type | Auto[2] | 
+**!

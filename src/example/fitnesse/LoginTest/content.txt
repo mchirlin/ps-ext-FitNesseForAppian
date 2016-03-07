@@ -15,7 +15,7 @@
 | script | com.appiancorp.ps.automatedtest.fixture.TempoFixture |
 
 '''Set up Appian test'''
-| script |
+!| script |
 | setup selenium web driver with browser | FIREFOX |
 | set appian url to | REPLACE_APPIAN_URL |
 | set appian version to | APPIAN_VERSION |
@@ -23,6 +23,6 @@
 
 
 '''Login to Tempo and go to Records'''
-| script |
+!| script |
 | login with username | REPLACE_USERNAME | and password | REPLACE_PASSWORD |
 | click on menu | Records |
