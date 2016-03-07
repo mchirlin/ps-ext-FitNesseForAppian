@@ -18,8 +18,8 @@ public class BaseFixtureTest {
     
     @Test
     public void testSetAppianUrlTo() throws Exception {
-        bFixture.setAppianUrlTo("https://apacdemo.appiancloud.com");
-        assertEquals(bFixture.getSettings().getUrl(), "https://apacdemo.appiancloud.com");
+        bFixture.setAppianUrlTo("https://ps-sandbox1.appiancloud.com/suite/");
+        assertEquals(bFixture.getSettings().getUrl(), "https://ps-sandbox1.appiancloud.com/suite/");
     }
     
     @Test
@@ -81,7 +81,7 @@ public class BaseFixtureTest {
     @Test
     public void testLoginIntoWithUsernameAndPassword() throws Exception {        
         bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-        assertTrue(bFixture.loginIntoWithUsernameAndPassword("https://apacdemo.appiancloud.com", "michael.chirlin@appian.com", "password1"));
+        assertTrue(bFixture.loginIntoWithUsernameAndPassword("https://ps-sandbox1.appiancloud.com/suite/", "test.user", "password1"));
         bFixture.tearDownSeleniumWebDriver();
     }
     

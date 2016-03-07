@@ -16,6 +16,7 @@ public class TempoLogin extends TempoObject {
     private static final String XPATH_ABSOLUTE_LOGIN_SUBMIT_BUTTON = Settings.getByConstant("xpathAbsoluteLoginSubmitButton");
     private static final String XPATH_ABSOLUTE_LOGIN_AGREE_BUTTON = Settings.getByConstant("xpathAbsoluteLoginAgreeButton");
     private static final String XPATH_ABSOLUTE_LOGOUT_LINK = Settings.getByConstant("xpathAbsoluteLogoutLink");
+    private static final String XPATH_ABSOLUTE_MAIN_BAR = Settings.getByConstant("xpathAbsoluteMainBar");
     
     public static boolean logout(Settings s) {
         LOG.debug("LOGGING OUT");
@@ -26,7 +27,7 @@ public class TempoLogin extends TempoObject {
     
     public static boolean waitForLogout(Settings s) {
         try {
-            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'main_nav_bar')]")));
+            (new WebDriverWait(s.getDriver(), 30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_ABSOLUTE_MAIN_BAR)));
         } catch (TimeoutException e) {
             return false;
         }

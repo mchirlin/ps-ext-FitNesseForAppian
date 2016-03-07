@@ -18,16 +18,16 @@ public class RecordsFixtureTest extends TempoFixtureTest{
       tFixture.clickOnAction("Automated Testing Input");
       
       randString = tFixture.getRandomString(5);
-      tFixture.populateFieldWith("Text Field Test", new String[]{randString});
-      tFixture.populateFieldWith("Integer Field Test", new String[]{"5"});
-      tFixture.populateFieldWith("Decimal Field Test", new String[]{"123.45"});
-      tFixture.populateFieldWith("Date and Time Test", new String[]{"2010-01-01 02:00"});
+      tFixture.populateFieldWith("Title", new String[]{randString});
+      tFixture.populateFieldWith("Quantity", new String[]{"5"});
+      tFixture.populateFieldWith("Price", new String[]{"123.45"});
+      tFixture.populateFieldWith("Start Date", new String[]{"2010-01-01 02:00"});
       
       tFixture.clickOnButton("Submit");
     }
     
     @Test
-    public void testRecordsFixture() throws Exception {
+    public void testRecordsUserFilter() throws Exception {
         tFixture.clickOnMenu("Records");
         
         assertTrue(tFixture.clickOnRecordType("Automated Testing Records"));
@@ -35,21 +35,29 @@ public class RecordsFixtureTest extends TempoFixtureTest{
         assertTrue(tFixture.clickOnRecordTypeUserFilter("Past"));
         assertTrue(tFixture.verifyRecordIsPresent(randString));
         assertTrue(tFixture.verifyRecordIsNotPresent("Not present"));
-        assertTrue(tFixture.clickOnRecord(randString));
-        assertTrue(tFixture.clickOnRecordView("Related Actions"));
-        assertTrue(tFixture.verifyRecordRelatedActionIsPresent("AUT Data Input Test"));
-        assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not present"));
     }
     
     @Test
-    public void testClickOnRecordItemRelatedActionShortcut() throws Exception {
+    public void testClickOnRecordItemRelatedActions() throws Exception {
         tFixture.clickOnMenu("Records");
         
         assertTrue(tFixture.clickOnRecordType("Automated Testing Records"));
         assertTrue(tFixture.clickOnRecordTypeUserFilter("Past"));
         assertTrue(tFixture.clickOnRecord(randString));
+
+        // Related Action View
+        assertTrue(tFixture.clickOnRecordView("Related Actions"));
+        assertTrue(tFixture.verifyRecordRelatedActionIsPresent("AUT Data Input Test"));
+        assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not present"));
         assertTrue(tFixture.clickOnRecordRelatedAction("AUT Data Input Test"));
+        tFixture.clickOnButton("Cancel");
         
+        // Related Action Shortcut
+        assertTrue(tFixture.clickOnRecordView("Summary"));
+        //TODO Configure verify related action is present to work with shortcuts 
+        //assertTrue(tFixture.verifyRecordRelatedActionIsPresent("AUT Data Input Test"));
+        //assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not present"));
+        assertTrue(tFixture.clickOnRecordRelatedAction("AUT Data Input Test"));
         tFixture.clickOnButton("Cancel");
     }
     
@@ -66,10 +74,10 @@ public class RecordsFixtureTest extends TempoFixtureTest{
         tFixture.clickOnMenu("Records");
         tFixture.clickOnRecordType("Automated Test Grid");
         
-        assertTrue(tFixture.sortRecordGridByColumn("Test Text"));
-        assertTrue(tFixture.sortRecordGridByColumn("Test Int"));
-        assertTrue(tFixture.sortRecordGridByColumn("Test Decimal"));
-        assertTrue(tFixture.sortRecordGridByColumn("Test Date Time"));
+        assertTrue(tFixture.sortRecordGridByColumn("Title"));
+        assertTrue(tFixture.sortRecordGridByColumn("Quantity"));
+        assertTrue(tFixture.sortRecordGridByColumn("Price"));
+        assertTrue(tFixture.sortRecordGridByColumn("Start Date"));
         
         assertTrue(tFixture.clickOnRecordGridNaviation("Next"));
         assertTrue(tFixture.clickOnRecordGridNaviation("Previous"));
@@ -92,6 +100,7 @@ public class RecordsFixtureTest extends TempoFixtureTest{
     @AfterClass
     public static void tearDownRecords() throws Exception {
         tFixture.clickOnMenu("News");
-//        tFixture.deleteNewsPost(randString);
+        //TODO Configure delete news post to handle non admins
+        //tFixture.deleteNewsPost(randString);
     }
 }

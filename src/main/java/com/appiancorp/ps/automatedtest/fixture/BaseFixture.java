@@ -27,12 +27,13 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;*/
 
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.exception.StopTestException;
-import com.appiancorp.ps.automatedtest.object.TempoError;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
 import com.appiancorp.ps.automatedtest.object.TempoObject;
 
@@ -68,7 +69,10 @@ public class BaseFixture  {
 	 */
 	public void setupSeleniumWebDriverWithBrowser(String browser) {
 		if (browser.equals("FIREFOX")) {
-			settings.setDriver(new FirefoxDriver());
+		    FirefoxProfile prof = new FirefoxProfile();
+		    prof.setPreference("browser.startup.homepage_override.mstone", "ignore");
+		    prof.setPreference("startup.homepage_welcome_url.additional",  "about:blank");
+			settings.setDriver(new FirefoxDriver(prof));
 		} else if (browser.equals("CHROME")) {
 		    System.setProperty("webdriver.chrome.driver", prop.getProperty("webdriver.chrome.driver"));
 		    System.setProperty("webdriver.chrome.args", "--disable-logging");
@@ -77,7 +81,9 @@ public class BaseFixture  {
 		} else if (browser.equals("IE")) {
 			System.setProperty("webdriver.ie.driver", prop.getProperty("webdriver.ie.driver"));
 			System.setProperty("webdriver.ie.driver.silent", "true");
-			settings.setDriver(new InternetExplorerDriver());
+			DesiredCapabilities dCaps = new DesiredCapabilities();
+			dCaps.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+			settings.setDriver(new InternetExplorerDriver(dCaps));
 		} /*else if (browser.equals("PHANTOM")) {
 			DesiredCapabilities dCaps = new DesiredCapabilities();
 			dCaps.setJavascriptEnabled(true);
@@ -225,12 +231,12 @@ public class BaseFixture  {
 	 * <br>
 	 * FitNesse Example: <code>| open | https://forum.appian.com/suite |</code>
 	 * @param url Url to navigate to
-	 * @return True, if no errors are thrown
+	 * @return True
 	 */
 	public boolean open(String url) {
 	    settings.getDriver().get(url);
 		 
-		return !TempoError.waitFor(settings);
+		return true;
 	}
 	
 	/**
@@ -346,7 +352,7 @@ public class BaseFixture  {
 	 * @param period Number of seconds to wait for
 	 * @return True, once time period has elapsed
 	 */
-	public boolean waitForSeconds(String period) {
+	public boolean waitForSeconds(Integer period) {
 	    return waitFor(period + " seconds");
 	}
 	
@@ -357,7 +363,7 @@ public class BaseFixture  {
 	 * @param period Number of minutes to wait for
 	 * @return True, once time period has elapsed
 	 */
-	public boolean waitForMinutes(String period) {
+	public boolean waitForMinutes(Integer period) {
         return waitFor(period + " minutes");
     }
 	
@@ -368,7 +374,7 @@ public class BaseFixture  {
 	 * @param period Number of hours to wait for
 	 * @return True, once time period has elapsed
 	 */
-	public boolean waitForHours(String period) {
+	public boolean waitForHours(Integer period) {
         return waitFor(period + " hours");
     }
 	
