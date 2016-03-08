@@ -403,6 +403,8 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
     public void testClickOnOptions() throws Exception {
         assertTrue(tFixture.clickOnRadioOption("Click Me!"));
         assertTrue(tFixture.clickOnCheckboxOption("Click Me Too!"));
+        assertTrue(tFixture.clickOnRadioOption("Click Me[2]"));
+        assertTrue(tFixture.clickOnCheckboxOption("Click Me[2]"));
     }
      
     @Test
