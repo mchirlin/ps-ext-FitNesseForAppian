@@ -297,6 +297,18 @@
 |sort grid|[4]|by column|Column Label 2|
 |verify grid|PagingGrid|column|Column Label 2|row|[1]|contains|Description 9|
 ***!
+----
+!*** Verify/Check Fields and Section Validation for Section 6
+!| script |
+| click on button | Submit |
+| verify field | RequiredField | contains validation message | A value is required |
+| check | get field | RequiredField | validation message | A value is required |
+| verify section | Section 6 | contains validation message | RequiredField is required,ValidationField is invalid |
+| check | get section | Section 6 | validation message | RequiredField is required,ValidationField is invalid |
+| populate field | ValidationField | with | -1 |
+| verify field | ValidationField | contains validation message | Value must be greater than 0,Value must be even |
+| check | get field | ValidationField | validation message | Value must be greater than 0,Value must be even |
+***!
 
 -----
 !*** Close Form

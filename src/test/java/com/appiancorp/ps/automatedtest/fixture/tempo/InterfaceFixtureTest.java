@@ -474,6 +474,21 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
         assertTrue(tFixture.verifyFieldIsPresent("ROTextField"));
     }
     
+    @Test
+    public void testValidations() throws Exception{
+        tFixture.clickOnButton("Submit");
+        
+        assertTrue(tFixture.verifyFieldContainsValidationMessage("RequiredField", new String[]{"A value is required"}));
+        assertEquals("A value is required", tFixture.getFieldValidationMessage("RequiredField"));
+        
+        assertTrue(tFixture.verifySectionContainsValidationMessage("Section 6", new String[]{"RequiredField is required", "ValidationField is invalid"}));
+        assertEquals("RequiredField is required,ValidationField is invalid", tFixture.getSectionValidationMessage("Section 6"));
+        
+        tFixture.populateFieldWith("ValidationField", new String[]{"-1"});
+        assertTrue(tFixture.verifyFieldContainsValidationMessage("ValidationField", new String[]{"Value must be greater than 0","Value must be even"}));
+        assertEquals("Value must be greater than 0,Value must be even", tFixture.getFieldValidationMessage("ValidationField"));
+    }
+    
     @AfterClass
     public static void tearDownInterface() throws Exception {
         tFixture.clickOnButton("Cancel");

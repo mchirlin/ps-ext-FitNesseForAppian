@@ -724,7 +724,7 @@ public class TempoFixture extends BaseFixture {
      * <br>
      * FitNesse Examples:<br>
      * <code>| get form title |</code> - Simply returns a string<br>
-     * <code>| set | titleVariable | get form title | </code> - Stores the title in titleVariable, which can later be accessed using @{titleVariable}<br>
+     * <code>| $titleVariable= | get form title | </code> - Stores the title in titleVariable, which can later be accessed using $titleVariable<br>
      * <code>| check | get form title | FORM_TITLE |</code> - Returns true if form title matches FORM_TITLE input
      * @return The title string
      */
@@ -742,7 +742,7 @@ public class TempoFixture extends BaseFixture {
      * <br>
      * FitNesse Examples:<br>
      * <code>| get form instructions |</code> - Simply returns a string<br>
-     * <code>| set | instructionsVariable | get form instructions | </code> - Stores the title in instructionsVariable, which can later be accessed using @{instructionsVariable}<br>
+     * <code>| $instructionsVariable= | get form instructions | </code> - Stores the title in instructionsVariable, which can later be accessed using $instructionsVariable<br>
      * <code>| check | get form instructions | FORM_INSTRUCTIONS |</code> - Returns true if form instructions matches FORM_INSTRUCTIONS input
      * @return The instructions string
      */
@@ -891,11 +891,10 @@ public class TempoFixture extends BaseFixture {
     /**
      * Used to clear a field.<br>
      * <br>
-     * This method currently works for
+     * This method currently works for text, integer, decimal, encrypted, file upload, and picker fields
      * <br>
-     * FitNesse Example: <code>| clear field | FIELD_NAME | of | VALUES |</code><br>
+     * FitNesse Example: <code>| clear field | FIELD_NAME |</code><br>
      * @param fieldName Field to clear
-     * @param fieldValues Values to unselect
      * @return True, if action completed successfully
      */
     public boolean clearField(String fieldName) {
@@ -929,7 +928,7 @@ public class TempoFixture extends BaseFixture {
      * <br>
      * FitNesse Examples:<br>
      * <code>| get field | FIELD_NAME | value |</code> - Simply returns a string<br>
-     * <code>| set | fieldValue | get field | FIELD_NAME | value | </code> - Stores the field value in fieldValue, which can later be accessed using @{fieldValue}<br>
+     * <code>| $fieldValue= | get field | FIELD_NAME | value | </code> - Stores the field value in fieldValue, which can later be accessed using $fieldValue<br>
      * <code>| check | get field | FIELD_NAME | FIELD_VALUE |</code> - Returns true if the field value title matches the FIELD_VALUE input. For file upload fields, do not include the full path. This will not work for relative date and datetime fields.
      * @param fieldName Name of name and index of the field
      * @return The field value
@@ -947,7 +946,7 @@ public class TempoFixture extends BaseFixture {
      * <br>
      * FitNesse Examples:<br>
      * <code>| get field | FIELD_NAME | in section | SECTION_ NAME | value |</code> - Simply returns a string<br>
-     * <code>| set | fieldValue | get field | FIELD_NAME | in section | SECTION_NAME | value |</code> - Stores the field value in fieldValue, which can later be accessed using @{fieldValue}<br>
+     * <code>| $fieldValue= | get field | FIELD_NAME | in section | SECTION_NAME | value |</code> - Stores the field value in fieldValue, which can later be accessed using $fieldValue<br>
      * <code>| check | get field | FIELD_NAME | in section | SECTION_NAME | value | FIELD_VALUE |</code> - Returns true if the field value title matches the FIELD_VALUE input. For file upload fields, do not include the full path. This will not work for relative date and datetime fields.
      * @param fieldName Field label or label and index
      * @param sectionName Section label or label and index
@@ -1011,6 +1010,40 @@ public class TempoFixture extends BaseFixture {
     }
     
     /**
+     * Verifies a field contains a validation message.<br>
+     * <br>
+     * FitNesse Example: <code>| verify field | FIELD_NAME | contains validations | VALIDATION_MESSAGES |</code>
+     * @param fieldName Field label or label and index
+     * @param validationMessages Validation messages, separated by a comma.
+     * @return True, if fields contains value
+     */
+    public boolean verifyFieldContainsValidationMessage(String fieldName, String[] validationMessages) {
+        if(!TempoField.waitFor(fieldName, settings)) {
+            exceptionHandler(ERROR_MISSING, "Field", fieldName);
+        }
+        
+        return returnHandler(TempoField.waitForValidationMessages(fieldName, validationMessages, settings));
+    }
+    
+    /**
+     * Returns the validation message from a field.<br>
+     * <br>
+     * FitNesse Examples:<br>
+     * <code>| get field | FIELD_NAME | validation message |</code> - Simply returns a string<br>
+     * <code>| $error= | get field | FIELD_NAME | validation message | </code> - Stores the validation message in error, which can later be accessed using $error<br>
+     * <code>| check | get field | FIELD_NAME | validation message | VALIDATION_MESSAGE |</code> - Returns true if the validation message matches the VALIDATION_MESSAGE input.
+     * @param fieldName Name of name and index of the field
+     * @return Validation message
+     */
+    public String getFieldValidationMessage(String fieldName) {
+        if(!TempoField.waitFor(fieldName, settings)) {
+            exceptionHandler(ERROR_MISSING, "Field", fieldName);
+        }
+        
+        return TempoField.getValidationMessages(fieldName, settings);
+    }
+    
+    /**
      * Verifies if field is displayed in the interface. This is useful to test dynamic forms.<br>
      * <br>
      * FitNesse Example: <code>| verify field | FIELD_NAME | is present |</code>
@@ -1065,7 +1098,7 @@ public class TempoFixture extends BaseFixture {
      * <br>
      * FitNesse Examples:<br>
      * <code>| get grid | GRID_NAME_OR_INDEX | column | COLUMN_NAME_OR_INDEX | row | ROW_INDEX | value |</code> - Simply returns a string<br>
-     * <code>| set | fieldValue | get grid | GRID_NAME_OR_INDEX | column | COLUMN_NAME_OR_INDEX | row | ROW_INDEX | value | </code> - Stores the field value in fieldValue, which can later be accessed using @{fieldValue}<br>
+     * <code>| $fieldValue= | get grid | GRID_NAME_OR_INDEX | column | COLUMN_NAME_OR_INDEX | row | ROW_INDEX | value | </code> - Stores the field value in fieldValue, which can later be accessed using $fieldValue<br>
      * <code>| check | get grid | GRID_NAME_OR_INDEX | column | COLUMN_NAME_OR_INDEX | row | ROW_INDEX | value | FIELD_VALUE |</code> - Returns true if the field value title matches the FIELD_VALUE input. For file upload fields, do not include the full path. This will not work for relative date and datetime fields.
      * @param gridName Name of the grid
      * @param columnName Name or index of the column
@@ -1248,12 +1281,30 @@ public class TempoFixture extends BaseFixture {
     /**
      * Verifies if a section contains a specific error. Useful for testing section validation.<br>
      * <br>
-     * FitNesse Example: <code>| verify section | SECTION_NAME | containing error | ERROR | is present |</code>
+     * FitNesse Example: <code>| verify section | SECTION_NAME | contains validation message | VALIDATION_MESSAGE(S) |</code>
      * @param sectionName Name of section to look for error
-     * @param error Error to search for in section
+     * @param validationMessages Validation messages to verify
      * @return True, if error is located
      */
-    public boolean verifySectionContainingErrorIsPresent(String sectionName, String error) {
-        return returnHandler(TempoSection.waitForError(sectionName, error, settings));
+    public boolean verifySectionContainsValidationMessage(String sectionName, String[] validationMessages) {
+        return returnHandler(TempoSection.waitForValidationMessages(sectionName, validationMessages, settings));
+    }
+    
+    /**
+     * Returns the validation message from a section.<br>
+     * <br>
+     * FitNesse Examples:<br>
+     * <code>| get section | SECTION_NAME | validation message |</code> - Simply returns a string<br>
+     * <code>| $error= | get section | SECTION_NAME | validation message | </code> - Stores the validation message in error, which can later be accessed using $error<br>
+     * <code>| check | get section | SECTION_NAME | validation message | VALIDATION_MESSAGE |</code> - Returns true if the section validation message matches the VALIDATION_MESSAGE input.
+     * @param sectionName Name of section
+     * @return Validation message
+     */
+    public String getSectionValidationMessage(String sectionName) {
+        if(!TempoSection.waitFor(sectionName, settings)) {
+            exceptionHandler(ERROR_MISSING, "Section", sectionName);
+        }
+        
+        return TempoSection.getValidationMessages(sectionName, settings);
     }
 }
