@@ -55,6 +55,7 @@
 	    {"label": "xpathRelativeDatetimeFieldTimePlaceholder", "value": ".//div[contains(@class, 'aui-TimeInput')]"},
 	    {"label": "xpathRelativeDatetimeFieldTimeInput", "value": ".//input[contains(@class, 'aui-TimeInput-TextBox')]"},
 	    {"label": "xpathAbsoluteFileUploadFieldLabel", "value": "//label[contains(text(),'%s')]/parent::span/following-sibling::div/descendant::input"},
+	    {"label": "xpathAbsoluteFileUploadFieldIndex", "value": "(//input[contains(@class, 'gwt-FileUpload')])[%d]"},
 	    {"label": "xpathRelativeFileUploadFieldInput", "value": ".//input[contains(@class, 'gwt-FileUpload')]"},
 	    {"label": "xpathRelativeFileUploadFieldFile", "value": ".//span[contains(@class, 'filename')]"},
 	    {"label": "xpathRelativeFileUploadFieldRemoveLink", "value": ".//a[starts-with(text(), 'Remove')]"},
@@ -115,7 +116,8 @@
 	    {"label": "xpathAbsoluteSectionLayout", "value": "//h3[contains(text(),'%s')]/parent::div"},
 	    {"label": "xpathRelativeSectionCollapse", "value": ".//a[contains(@title, 'Collapse')]"},
 	    {"label": "xpathRelativeSectionExpand", "value": ".//a[contains(@title, 'Expand')]"},
-	    {"label": "xpathAbsoluteWorking", "value": "//div[@class = 'appian-indicator-message']"}
+	    {"label": "xpathAbsoluteWorking", "value": "//div[@class = 'appian-indicator-message']"},
+	    {"label": "xpathConcatAncestorFieldLayout", "value": "/ancestor::div[contains(@class, 'aui_FieldLayout_InputContainer')]"}
 	  ]
 	},
 	{ "version": "7.11", "byConstants": [] },

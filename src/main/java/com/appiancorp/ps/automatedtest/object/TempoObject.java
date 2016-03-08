@@ -157,7 +157,7 @@ public class TempoObject {
     }
     
     public static void unfocus(Settings s) {
-        s.getDriver().findElement(By.xpath("//html")).click();
+        ((JavascriptExecutor) s.getDriver()).executeScript("!!document.activeElement ? document.activeElement.blur() : 0");
         waitForWorking(s);
     }
     

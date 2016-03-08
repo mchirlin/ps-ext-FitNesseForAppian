@@ -21,10 +21,10 @@ public class NewsFixtureTest extends TempoFixtureTest {
       
       randString = tFixture.getRandomString(5);
       randInt = tFixture.getRandomIntegerFromTo(0, 9);
-      tFixture.populateFieldWith("Text Field Test", new String[]{randString});
-      tFixture.populateFieldWith("Integer Field Test", new String[]{randInt.toString()});
-      tFixture.populateFieldWith("Decimal Field Test", new String[]{"123.45"});
-      tFixture.populateFieldWith("Date and Time Test", new String[]{"2016-02-04 02:00"});
+      tFixture.populateFieldWith("Title", new String[]{randString});
+      tFixture.populateFieldWith("Quantity", new String[]{randInt.toString()});
+      tFixture.populateFieldWith("Price", new String[]{"123.45"});
+      tFixture.populateFieldWith("Start Date", new String[]{"2016-02-04 02:00"});
       
       tFixture.clickOnButton("Submit");
       // Deprecated for 16.1

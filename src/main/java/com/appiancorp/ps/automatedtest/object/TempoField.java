@@ -17,6 +17,7 @@ public class TempoField extends TempoObject {
     protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT = Settings.getByConstant("xpathAbsoluteFieldLayout");
     protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX = "(" + XPATH_ABSOLUTE_FIELD_LAYOUT + ")[%d]";
     protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = Settings.getByConstant("xpathRelativeReadOnlyField"); // Handles readOnly fields and paging grids
+    protected static final String XPATH_CONCAT_ANCESTOR_FIELD_LAYOUT = Settings.getByConstant("xpathConcatAncestorFieldLayout");
     
     public static WebElement getFieldLayout(String fieldName, Settings s) {
         if (isFieldIndex(fieldName)) {
@@ -26,6 +27,25 @@ public class TempoField extends TempoObject {
         } else {
             return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName)));
         }        
+    }
+    
+    public static boolean populate(String fieldType, String fieldName, String[] fieldValues, Settings s){
+        TempoFieldType type = getFieldTypeFromString(fieldType);
+        for (String fieldValue : fieldValues) {
+            WebElement fieldLayout;
+            
+            switch (type) {  
+                case FILE_UPLOAD: 
+                    fieldLayout = TempoFileUploadField.getFieldLayout(fieldName, s);
+                    break;
+                
+                default:
+                    return false;
+            }
+            if (!populate(fieldLayout, fieldName, fieldValue, s)) return false;
+        }
+        
+        return true;
     }
     
     public static boolean populate(String fieldName, String[] fieldValues, Settings s){
@@ -79,6 +99,18 @@ public class TempoField extends TempoObject {
         } catch (Exception e) {
             LOG.warn("POPULATION for " + fieldName + "\n" + Throwables.getStackTraceAsString(e));
             return false;
+        }
+    }
+    
+    public static boolean waitFor(String fieldType, String fieldName, Settings s) {
+        TempoFieldType type = getFieldTypeFromString(fieldType);
+        
+        switch (type) {
+            case FILE_UPLOAD:
+                return TempoFileUploadField.waitFor(fieldName, s);
+                
+            default:
+                return false;
         }
     }
     
@@ -317,6 +349,21 @@ public class TempoField extends TempoObject {
         else if (TempoDatetimeField.isType(fieldLayout)) return TempoFieldType.DATETIME;
         else if (TempoDateField.isType(fieldLayout)) return TempoFieldType.DATE;
         else if (TempoPickerField.isType(fieldLayout)) return TempoFieldType.PICKER;
+        else return TempoFieldType.UNKNOWN;
+    }
+    
+    public static TempoFieldType getFieldTypeFromString(String fieldType) {
+        if (fieldType.equals("READ_ONLY")) return TempoFieldType.READ_ONLY;
+        else if (fieldType.equals("TEXT")) return TempoFieldType.TEXT;
+        else if (fieldType.equals("PARAGRAPH")) return TempoFieldType.PARAGRAPH;
+        else if (fieldType.equals("INTEGER")) return TempoFieldType.INTEGER;
+        else if (fieldType.equals("SELECT")) return TempoFieldType.SELECT;
+        else if (fieldType.equals("RADIO")) return TempoFieldType.RADIO;
+        else if (fieldType.equals("CHECKBOX")) return TempoFieldType.CHECKBOX;
+        else if (fieldType.equals("FILE_UPLOAD")) return TempoFieldType.FILE_UPLOAD;
+        else if (fieldType.equals("DATETIME")) return TempoFieldType.DATETIME;
+        else if (fieldType.equals("DATE")) return TempoFieldType.DATE;
+        else if (fieldType.equals("PICKER")) return TempoFieldType.PICKER;
         else return TempoFieldType.UNKNOWN;
     }
 }

@@ -48,6 +48,7 @@
 !| script |
 | populate field        |[1]         |in section|Section 3|with|noLabel|
 |populate field          |TextField[2]|with      |text2                 |
+|populate | FILE_UPLOAD | field | [2] | with | C:\AutomatedTesting\documents\Low.jpg |
 |click on radio option   |Click Me!                                     |
 |click on checkbox option|Click Me Too!                                 |
 ***!
