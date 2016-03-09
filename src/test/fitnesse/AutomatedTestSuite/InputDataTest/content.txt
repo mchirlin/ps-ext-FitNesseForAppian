@@ -26,15 +26,15 @@
 
 !*** Input Data
 | script |
-| populate AUT form with text | $randString | int | 5 | decimal | 123.45 | datetime | 2016-11-15 10:00 |
+| populate AUT form with title | $randString | quantity | 5 | price | 123.45 | start date | 2016-11-15 10:00 |
 ***!
 
 !*** Check/Verify Input Data
 | script |
-| verify AUT form contains text | $randString | int | 5 | decimal | 123.45 | datetime | 2016-11-15 10:00 |
-| check AUT form against text | $randString | int | 5 | decimal | 123.45 | datetime | 11/15/2016 10:00 AM |
+| verify AUT form contains title | $randString | quantity | 5 | price | 123.45 | start date | 2016-11-15 10:00 |
+| check AUT form against title | $randString | quantity | 5 | price | 123.45 | start date | 11/15/2016 10:00 AM |
 # en_GB
-# | check AUT form against text | $randString | int | 5 | decimal | 123.45 | datetime | 15/11/2016 10:00 |
+# | check AUT form against title | $randString | quantity | 5 | price | 123.45 | start date | 15/11/2016 10:00 |
 ***!
 
 !*** Submit form
@@ -52,10 +52,10 @@
 !*** Check/Verify Record Contents
 | script |
 | click on news feed | $randString | record tag | $randString |
-| verify AUT form contains text | $randString | int | 5 | decimal | 123.45 | datetime | 2016-11-15 10:00 |
-| check AUT form against text | $randString | int | 5 | decimal | 123.45 | datetime | Nov 15, 2016, 10:00 AM |
+| verify AUT form contains title | $randString | quantity | 5 | price | 123.45 | start date | 2016-11-15 10:00 |
+| check AUT form against title | $randString | quantity | 5 | price | 123.45 | start date | Nov 15, 2016, 10:00 AM |
 # en_GB
-# | check AUT form against text | $randString | int | 5 | decimal | 123.45 | datetime | 15 Nov 2016 10:00 |
+# | check AUT form against title | $randString | quantity | 5 | price | 123.45 | start date | 15 Nov 2016 10:00 |
 ***!
 
 !*** Access related action link from record
@@ -73,10 +73,10 @@
 
 !*** Edit Record and verify record has updated
 | script |
-| populate AUT form with text | $randString | int | $randomInt | decimal | $randomDec | datetime | +$randomDate days |
+| populate AUT form with title | $randString | quantity | $randomInt | price | $randomDec | start date | +$randomDate days |
 | click on button | Submit | 
 
 | script |
 | click on record view | Summary |
-| verify AUT form contains text | $randString | int | $randomInt | decimal | $randomDec | datetime | +$randomDate days |
+| verify AUT form contains title | $randString | quantity | $randomInt | price | $randomDec | start date | +$randomDate days |
 ***!

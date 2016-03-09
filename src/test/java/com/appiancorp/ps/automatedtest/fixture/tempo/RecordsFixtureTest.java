@@ -18,10 +18,10 @@ public class RecordsFixtureTest extends TempoFixtureTest{
       tFixture.clickOnAction("Automated Testing Input");
       
       randString = tFixture.getRandomString(5);
-      tFixture.populateFieldWith("Text Field Test", new String[]{randString});
-      tFixture.populateFieldWith("Integer Field Test", new String[]{"5"});
-      tFixture.populateFieldWith("Decimal Field Test", new String[]{"123.45"});
-      tFixture.populateFieldWith("Date and Time Test", new String[]{"2010-01-01 02:00"});
+      tFixture.populateFieldWith("Title", new String[]{randString});
+      tFixture.populateFieldWith("Quantity", new String[]{"5"});
+      tFixture.populateFieldWith("Price", new String[]{"123.45"});
+      tFixture.populateFieldWith("Start Date", new String[]{"2010-01-01 02:00"});
       
       tFixture.clickOnButton("Submit");
     }
@@ -66,10 +66,10 @@ public class RecordsFixtureTest extends TempoFixtureTest{
         tFixture.clickOnMenu("Records");
         tFixture.clickOnRecordType("Automated Test Grid");
         
-        assertTrue(tFixture.sortRecordGridByColumn("Test Text"));
-        assertTrue(tFixture.sortRecordGridByColumn("Test Int"));
-        assertTrue(tFixture.sortRecordGridByColumn("Test Decimal"));
-        assertTrue(tFixture.sortRecordGridByColumn("Test Date Time"));
+        assertTrue(tFixture.sortRecordGridByColumn("Title"));
+        assertTrue(tFixture.sortRecordGridByColumn("Quantity"));
+        assertTrue(tFixture.sortRecordGridByColumn("Price"));
+        assertTrue(tFixture.sortRecordGridByColumn("Start Date"));
         
         assertTrue(tFixture.clickOnRecordGridNaviation("Next"));
         assertTrue(tFixture.clickOnRecordGridNaviation("Previous"));

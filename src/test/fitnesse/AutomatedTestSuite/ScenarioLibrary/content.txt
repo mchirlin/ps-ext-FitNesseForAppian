@@ -1,17 +1,17 @@
-| scenario | populate AUT form with text | text | int | int | decimal | decimal | datetime | datetime |
-| populate field | Text Field Test | with | @text |
-| populate field | Integer Field Test | with | @int | 
-| populate field | Decimal Field Test | with | @decimal |
-| populate field | Date and Time Test | with | @datetime |
+| scenario | populate AUT form with title | text | quantity | integer | price | decimal | start date | datetime |
+| populate field | Title | with | @text |
+| populate field | Quantity | with | @integer | 
+| populate field | Price | with | @decimal |
+| populate field | Start Date | with | @datetime |
 
-| scenario | verify AUT form contains text | text | int | int | decimal | decimal | datetime | datetime |
-| verify field | Text Field Test | contains | @text |
-| verify field | Integer Field Test | contains | @int | 
-| verify field | Decimal Field Test | contains | @decimal |
-| verify field | Date and Time Test | contains | @datetime |
+| scenario | verify AUT form contains title | text | quantity | integer | price | decimal | start date | datetime |
+| verify field | Title | contains | @text |
+| verify field | Quantity | contains | @integer | 
+| verify field | Price | contains | @decimal |
+| verify field | Start Date | contains | @datetime |
 
-| scenario | check AUT form against text | text | int | int | decimal | decimal | datetime | datetime |
-| check | get field | Text Field Test | value | @text |
-| check | get field | Integer Field Test | value | @int | 
-| check | get field | Decimal Field Test | value | @decimal |
-| check | get field | Date and Time Test | value | @datetime |
+| scenario | check AUT form against title | text | quantity | integer | price | decimal | start date | datetime |
+| check | get field | Title | value | @text |
+| check | get field | Quantity | value | @integer | 
+| check | get field | Price | value | @decimal |
+| check | get field | Start Date | value | @datetime |
