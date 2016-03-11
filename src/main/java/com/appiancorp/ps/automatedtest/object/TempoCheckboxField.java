@@ -21,6 +21,7 @@ public class TempoCheckboxField extends TempoField {
     private static final String XPATH_RELATIVE_CHECKBOX_FIELD_INPUT = Settings.getByConstant("xpathRelativeCheckboxFieldInput");
     private static final String XPATH_RELATIVE_CHECKBOX_FIELD_INPUT_SPAN = Settings.getByConstant("xpathRelativeCheckboxFieldInputSpan");
     private static final String XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION = Settings.getByConstant("xpathAbsoluteCheckboxFieldOption");
+    private static final String XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION_INDEX ="(" + XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION + ")[%d]";
     
     public static boolean populate(String fieldName, String fieldValue, Settings s) {        
         WebElement fieldLayout = getFieldLayout(fieldName, s);
@@ -72,6 +73,17 @@ public class TempoCheckboxField extends TempoField {
         return String.join(",", values);
     }
     
+    public static WebElement getOptionLayout(String optionName, Settings s) {
+        if (isFieldIndex(optionName)) {
+            String oName = getFieldFromFieldIndex(optionName);
+            int index = getIndexFromFieldIndex(optionName);
+            return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION_INDEX, oName, index)));
+        } else {
+            return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION, optionName)));
+        }        
+    }
+
+    
     public static boolean contains(WebElement fieldLayout, String fieldValue) {
         // For read-only
         try {
@@ -105,7 +117,7 @@ public class TempoCheckboxField extends TempoField {
     }
     
     public static boolean clickOption(String optionName, Settings s) {
-        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION, optionName)));
+        WebElement element = getOptionLayout(optionName, s);
         element.click();
         
         LOG.debug("CHECKBOX OPTION CLICK : " + optionName);
@@ -115,8 +127,14 @@ public class TempoCheckboxField extends TempoField {
     
     public static boolean waitForOption(String optionName, Settings s) {
         try {
-            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION, optionName))));
-            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION, optionName)));
+            if (isFieldIndex(optionName)) {
+                String oName = getFieldFromFieldIndex(optionName);
+                int index = getIndexFromFieldIndex(optionName);
+                (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION_INDEX, oName,  index))));
+            } else {
+                (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION, optionName))));
+            }
+            WebElement element =getOptionLayout(optionName,s);
             scrollIntoView(element, s);
         } catch (TimeoutException e) {
             return false;

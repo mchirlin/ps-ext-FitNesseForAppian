@@ -1171,6 +1171,7 @@ public class TempoFixture extends BaseFixture {
      * Clicks on the first radio option that matches the optionName. This is useful if the radio field does not have a label.<br>
      * <br>
      * FitNesse Example: <code>| click on radio option | OPTION_NAME |</code>
+     * <code>| click on radio option | OPTION_NAME[INDEX] |</code>
      * @param optionName Name of radio option to click
      * @return True, if action completed successfully
      */
@@ -1186,6 +1187,7 @@ public class TempoFixture extends BaseFixture {
      * Clicks on the first checkbox option that matches the optionName. This is useful if the checkbox field does not have a label.<br>
      * <br>
      * FitNesse Example: <code>| click on checkbox option | OPTION_NAME |</code>
+     * <code>| click on checkbox option | OPTION_NAME[INDEX] |</code>
      * @param optionName Name of checkbox option to click
      * @return True, if action completed successfully
      */

@@ -21,6 +21,7 @@ public class TempoRadioField extends TempoField {
     private static final String XPATH_RELATIVE_RADIO_BUTTON_GROUP = Settings.getByConstant("xpathRelativeRadioButtonGroup");
     private static final String XPATH_RELATIVE_RADIO_FIELD_INPUT_SPAN = Settings.getByConstant("xpathRelativeRadioFieldInputSpan");
     private static final String XPATH_ABSOLUTE_RADIO_FIELD_OPTION = Settings.getByConstant("xpathAbsoluteRadioFieldOption");
+    private static final String XPATH_ABSOLUTE_RADIO_FIELD_OPTION_INDEX ="(" + XPATH_ABSOLUTE_RADIO_FIELD_OPTION + ")[%d]";
     
     public static boolean populate(WebElement fieldLayout, String fieldValue, Settings s) {
         WebElement radioField;
@@ -93,8 +94,18 @@ public class TempoRadioField extends TempoField {
         return true;
     }
     
+    public static WebElement getOptionLayout(String optionName, Settings s) {
+        if (isFieldIndex(optionName)) {
+            String oName = getFieldFromFieldIndex(optionName);
+            int index = getIndexFromFieldIndex(optionName);
+            return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION_INDEX, oName, index)));
+        } else {
+            return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName)));
+        }        
+    }
+    
     public static boolean clickOption(String optionName, Settings s) {
-        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName)));
+        WebElement element = getOptionLayout(optionName, s);
         element.click();
         
         LOG.debug("RADIO BUTTON OPTION CLICK : " + optionName);
@@ -104,8 +115,14 @@ public class TempoRadioField extends TempoField {
     
     public static boolean waitForOption(String optionName, Settings s) {
         try {
-            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName))));
-            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName)));
+            if (isFieldIndex(optionName)) {
+                String oName = getFieldFromFieldIndex(optionName);
+                int index = getIndexFromFieldIndex(optionName);
+                (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION_INDEX, oName, index))));
+            } else {
+                (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName))));
+            } 
+            WebElement element = getOptionLayout(optionName, s);
             scrollIntoView(element, s);
         } catch (TimeoutException e) {
             return false;
