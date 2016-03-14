@@ -48,6 +48,10 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
 
         assertTrue(tFixture.verifyGridColumnRowContains("[1]", "TextField", "[2]", new String[]{"gridText"}));
         assertEquals("gridText", tFixture.getGridColumnRowValue("[1]", "TextField", "[2]"));
+        
+        // TODO Clear
+        // assertTrue(tFixture.clearField("TextField"));
+        // assertTrue(tFixture.verifyFieldContains("TextField", new String[]{""}));
     }
     
     @Test
@@ -66,6 +70,10 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
 
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid", "[3]", "[2]", new String[]{"gridParagraph"}));
         assertEquals("gridParagraph", tFixture.getGridColumnRowValue("EditableGrid", "[3]", "[2]"));
+        
+        // TODO Clear
+        // assertTrue(tFixture.clearField("ParagraphField"));
+        // assertTrue(tFixture.verifyFieldContains("ParagraphField", new String[]{""}));
     }
     
     @Test
@@ -84,6 +92,10 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
 
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid", "EncryptedTextField", "[2]", new String[]{"gridEncrypted"}));
         assertEquals("gridEncrypted", tFixture.getGridColumnRowValue("EditableGrid", "EncryptedTextField", "[2]"));
+        
+        // TODO Clear
+        // assertTrue(tFixture.clearField("EncryptedTextField"));
+        // assertTrue(tFixture.verifyFieldContains("EncryptedTextField", new String[]{""}));
     }
     
     @Test
@@ -102,6 +114,10 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
 
         assertTrue(tFixture.verifyGridColumnRowContains("[1]", "[5]", "[2]", new String[]{"1"}));
         assertEquals("1", tFixture.getGridColumnRowValue("[1]", "[5]", "[2]"));
+        
+        // TODO Clear
+        // assertTrue(tFixture.clearField("IntegerField"));
+        // assertTrue(tFixture.verifyFieldContains("IntegerField", new String[]{""}));
     }
     
     @Test
@@ -120,6 +136,10 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
 
         assertTrue(tFixture.verifyGridColumnRowContains("[1]", "DecimalField", "[2]", new String[]{"2.2"}));
         assertEquals("2.2", tFixture.getGridColumnRowValue("[1]", "DecimalField", "[2]"));
+        
+        // TODO Clear
+        // assertTrue(tFixture.clearField("DecimalField"));
+        // assertTrue(tFixture.verifyFieldContains("DecimalField", new String[]{""}));
     }
     
     @Test
@@ -146,6 +166,8 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
         assertTrue(tFixture.populateGridColumnRowWith("EditableGrid", "[7]", "[1]", new String[]{"+1 day"}));
         assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid", "[7]", "[1]", new String[]{"+1 day"}));
         assertEquals(df.format(DateUtils.addDays(tFixture.getSettings().getStartDatetime(), 1)), tFixture.getGridColumnRowValue("EditableGrid", "[7]", "[1]"));
+        
+        // TODO Clear
     }
     
     @Test
@@ -197,6 +219,8 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
         // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[2]", "[1]", "[2]", new String[]{"+1 minute"}));
         // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "[1]", "[2]", new String[]{"+1 minute"}));
         // assertEquals(dtf.format(DateUtils.addMinutes(tFixture.getSettings().getStartDatetime(), 1)), tFixture.getGridColumnRowValue("EditableGrid[2]", "[1]", "[2]"));
+
+        // TODO Clear
     }
     
     @Test
@@ -213,6 +237,8 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
         // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[2]", "SelectField", "[2]", new String[]{"Option 2"}));
         // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "SelectField", "[2]", new String[]{"Option 2"}));
         // assertEquals("Option 2", tFixture.getGridColumnRowValue("EditableGrid[2]", "SelectField", "[2]"));
+
+        // TODO Clear
     }
     
     @Test
@@ -220,6 +246,8 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
         assertTrue(tFixture.populateFieldWith("MultipleSelectField", new String[]{"Option 1", "Option 2"}));
         assertTrue(tFixture.verifyFieldContains("MultipleSelectField", new String[]{"Option 1","Option 2"}));
         assertEquals("Option 1,Option 2", tFixture.getFieldValue("MultipleSelectField"));
+        
+        // TODO Clear
     }
     
     @Test
@@ -236,6 +264,8 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
         // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[2]", "CheckboxField", "[2]", new String[]{"Option 2"}));
         // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "CheckboxField", "[2]", new String[]{"Option 2"}));
         // assertEquals("Option 2", tFixture.getGridColumnRowValue("EditableGrid[2]", "CheckboxField", "[2]"));
+
+        // TODO Clear
     }
     
     @Test
@@ -268,6 +298,8 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
         // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[2]", "[5]", "[2]", new String[]{"C:\\AutomatedTesting\\documents\\High Risk.jpg"}));
         // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "[5]", "[2]", new String[]{"C:\\AutomatedTesting\\documents\\High Risk.jpg"}));
         // assertEquals("High Risk.jpg", tFixture.getGridColumnRowValue("EditableGrid[2]", "[5]", "[2]"));
+
+        // TODO Clear
     }
       
     @Test
@@ -331,6 +363,13 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
         // assertTrue(tFixture.populateGridColumnRowWith("EditableGrid[3]", "[3]", "[2]", new String[]{"10"}));
         // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[3]", "[3]", "[2]", new String[]{"10"}));
         // assertEquals("10", tFixture.getGridColumnRowValue("EditableGrid[3]", "[3]", "[2]"));
+        
+        // TODO Clear
+        // assertTrue(tFixture.clearFieldOf("UserPicker", new String[]{"Dan Austria"}));
+        // assertTrue(tFixture.verifyFieldContains("UserPicker", new String[]{"Michael Chirlin", "Dan Austria"}));
+         
+        // assertTrue(tFixture.clearField("UserPicker"));
+        // assertTrue(tFixture.verifyFieldContains("UserPicker", new String[]{""}));
     }
     
     @Test
@@ -345,6 +384,12 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
         assertTrue(tFixture.populateFieldWithValue("SelectField", "Option, 1"));
         assertTrue(tFixture.verifyFieldContainsValue("SelectField", "Option, 1"));
         assertEquals("Option, 1", tFixture.getFieldValue("SelectField"));
+    }
+    
+    @Test
+    public void testPopulateFieldType() throws Exception {
+        assertTrue(tFixture.populateFieldWith("FILE_UPLOAD", "[2]", new String[]{"C:\\AutomatedTesting\\documents\\Medium.jpg"}));
+        assertTrue(tFixture.verifyFieldContains("FileUploadField[2]", new String[]{"C:\\AutomatedTesting\\documents\\Medium.jpg"}));
     }
     
     @Test
