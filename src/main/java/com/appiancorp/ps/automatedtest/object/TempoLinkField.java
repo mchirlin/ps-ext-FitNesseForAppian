@@ -31,6 +31,10 @@ public class TempoLinkField extends TempoField {
     public static boolean click(String linkName, Settings s) {
         WebElement element = getLink(linkName, s);
         element.click();
+        
+        LOG.debug("LINK CLICK : " + linkName);
+        
+        waitForWorking(s);
         return true;
     }
     

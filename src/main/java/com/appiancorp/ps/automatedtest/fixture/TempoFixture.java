@@ -2,7 +2,6 @@ package com.appiancorp.ps.automatedtest.fixture;
 
 import org.apache.log4j.Logger;
 
-import com.appiancorp.ps.automatedtest.exception.MissingObjectException;
 import com.appiancorp.ps.automatedtest.object.TempoAction;
 import com.appiancorp.ps.automatedtest.object.TempoButton;
 import com.appiancorp.ps.automatedtest.object.TempoCheckboxField;
@@ -788,6 +787,34 @@ public class TempoFixture extends BaseFixture {
     }
     
     /**
+     * Populates a field of a particular type with specific values.<br>
+     * <br>
+     * This method can populate the following types of fields: FileUpload.
+     * The method will attempt to fill the field the number of attemptTimes (default 3) and if failing all three times will return false.<br>
+     * <br>
+     * FitNesse Examples:<br>
+     * <code>| populate | FILE_UPLOAD | field | FIELD_NAME[INDEX] | with | FIELD_VALUE |</code><br>
+     * @param fieldType Can only currently accept FILE_UPLOAD
+     * @param fieldName Can either be the label of the field or a label with an index
+     * @param fieldValues An array of strings containing the values to populate into the interface
+     * @return True, if action completed successfully
+     */
+    public boolean populateFieldWith(String fieldType, String fieldName, String[] fieldValues) {
+        if(!TempoField.waitFor(fieldType, fieldName, settings)) {
+            exceptionHandler(ERROR_MISSING, "Field", fieldName, "Field Type", fieldType);
+        }
+        
+        // Populate the field
+        int attempt = 0;
+        while (attempt < settings.getAttemptTimes()) {
+            if (TempoField.populate(fieldType, fieldName, fieldValues, settings)) return true;
+            attempt++;
+        }
+
+        return returnHandler(false);
+    }
+    
+    /**
      * Populates a field with a single value that may contain a comma. This is useful is selecting an option that contains a comma.<br><br>
      * When populating a username, use the display value rather than the username itself.<br>
      * <br>
@@ -860,6 +887,24 @@ public class TempoFixture extends BaseFixture {
         }
        return returnHandler(TempoSection.clickCollapseSection(sectionName, settings));
       }
+    
+    /**
+     * Used to clear a field.<br>
+     * <br>
+     * This method currently works for
+     * <br>
+     * FitNesse Example: <code>| clear field | FIELD_NAME | of | VALUES |</code><br>
+     * @param fieldName Field to clear
+     * @param fieldValues Values to unselect
+     * @return True, if action completed successfully
+     */
+    public boolean clearField(String fieldName) {
+        if(!TempoField.waitFor(fieldName, settings)) {
+            exceptionHandler(ERROR_MISSING, "Field", fieldName);
+        }
+        
+        return returnHandler(TempoField.clear(fieldName, settings));
+    }
     
     /**
      * Used to clear a field of specific values.<br>

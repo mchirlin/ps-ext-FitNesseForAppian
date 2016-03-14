@@ -17,7 +17,5 @@ public class ActionsFixtureTest extends TempoFixtureTest {
         assertTrue(tFixture.clickOnAction("Automated Testing"));
         
         tFixture.clickOnButton("Cancel");
-
-        assertTrue(tFixture.verifyActionCompleted());
     }
 }

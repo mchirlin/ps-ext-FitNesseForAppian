@@ -48,11 +48,11 @@
 !| script |
 | populate field        |[1]         |in section|Section 3|with|noLabel|
 |populate field          |TextField[2]|with      |text2                 |
-|click on radio option   |Click Me[2] 	|
-|click on checkbox option |Click Me[2]	|
-|click on checkbox option|Click Me Too! |
-|click on checkbox option |Click Me[2]	|
+|populate | FILE_UPLOAD | field | [2] | with | C:\AutomatedTesting\documents\Low.jpg |
 |click on radio option   |Click Me!  	|
+|click on radio option   |Click Me[2] 	|
+|click on checkbox option |Click Me Too!|
+|click on checkbox option |Click Me[2] | 
 ***!
 ----
 !*** Populate Section 4 using Pickers

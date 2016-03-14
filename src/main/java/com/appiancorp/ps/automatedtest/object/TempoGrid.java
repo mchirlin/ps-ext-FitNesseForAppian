@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.common.Settings;
+import com.google.common.base.Throwables;
 
 public class TempoGrid extends TempoField {
     
@@ -73,7 +74,7 @@ public class TempoGrid extends TempoField {
                 WebElement cell = getCell(gridName, columnName, rowNum, s);
                 if (!populate(cell, null, fieldValue, s)) return false;
             } catch (Exception e) {
-                LOG.warn("GRID POPULATION for " + gridName + "|" + columnName + "|" + rowNum +": " + e.getClass());
+                LOG.warn("GRID POPULATION for " + gridName + "|" + columnName + "|" + rowNum +": " + Throwables.getStackTraceAsString(e));
                 return false;
             }
         }
@@ -85,9 +86,10 @@ public class TempoGrid extends TempoField {
         try {
             WebElement cell = getCell(gridName, "[1]", rowNum, s);
             WebElement checkbox = cell.findElement(By.xpath(XPATH_RELATIVE_GRID_CHECKBOX));
+            scrollIntoView(checkbox, s);
             checkbox.click();
         } catch (Exception e) {
-            LOG.warn("GRID ROW SELECTION for " + gridName + "|" + rowNum +": " + e.getClass());
+            LOG.warn("GRID ROW SELECTION for " + gridName + "|" + rowNum +": " + Throwables.getStackTraceAsString(e));
             return false;
         }
         
@@ -106,7 +108,7 @@ public class TempoGrid extends TempoField {
                 WebElement cell = getCell(gridName, columnName, rowNum, s);
                 if (!contains(cell, null, fieldValue, s)) return false;
             } catch (Exception e) {
-                LOG.warn("GRID CONTAINS for " + gridName + "|" + columnName + "|" + rowNum +": " + e.getClass());
+                LOG.warn("GRID CONTAINS for " + gridName + "|" + columnName + "|" + rowNum +": " + Throwables.getStackTraceAsString(e));
                 return false;
             }
         }
@@ -229,7 +231,7 @@ public class TempoGrid extends TempoField {
             link.click();
             waitForWorking(s);
         } catch (Exception e) {
-            LOG.warn("GRID ADD LINK for " + gridName + e.getClass());
+            LOG.warn("GRID ADD LINK for " + gridName + Throwables.getStackTraceAsString(e));
             return false;
         }
         
@@ -273,7 +275,7 @@ public class TempoGrid extends TempoField {
             waitForWorking(s);
         }
         catch (Exception e){
-            LOG.warn("GRID " + gridName + " and COLUMN " +columnName + e.getClass());
+            LOG.warn("GRID " + gridName + " and COLUMN " +columnName + Throwables.getStackTraceAsString(e));
         }
         return true;
     }
