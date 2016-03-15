@@ -1,0 +1,29 @@
+!**> Create Record
+|script                                                                                              |
+|click on menu               |Actions                                                                |
+|click on action             |Automated Testing Input                                                |
+|populate AUT form with title|$randString|quantity|$randInt|price|$randDec|start date|+$randDate days|
+|click on button             |Submit                                                                 |
+**!
+!*** Click on Record Tag
+!|script                                                                        |
+|click on menu                   |News                                          |
+|verify news feed containing text|$randString|tagged with|$randString|is present|
+|click on news feed              |$randString|record tag |$randString           |
+***!
+!*** Verify Feed
+!|script                                                                                                                                                                         |
+|click on menu                                 |News                                                                                                                             |
+|verify news feed containing text              |$randString|is present                                                                                                           |
+|verify news feed containing text              |random     |is not present                                                                                                       |
+|verify news feed containing text              |$randString|commented with          |Comment|is present                                                                          |
+|toggle more info for news feed containing text|$randString                                                                                                                      |
+|verify news feed containing text              |$randString|and more info with label|Label  |and value|Value                         |is present                                 |
+|check                                         |get regex  |\[([a-zA-Z0-9]{5})\]    |group  |1        |from news feed containing text|$randString|$randString                    |
+|check                                         |get regex  |\[([0-9]{1,3})\]        |group  |1        |from news feed containing text|$randString|commented with|Comment|$randInt|
+***!
+!*** Test Search
+!|script                                                |
+|search for                      |$randString           |
+|verify news feed containing text|$randString|is present|
+***!
