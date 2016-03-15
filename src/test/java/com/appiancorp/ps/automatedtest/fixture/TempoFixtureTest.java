@@ -3,7 +3,7 @@ package com.appiancorp.ps.automatedtest.fixture;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
-public class TempoFixtureTest {
+public class TempoFixtureTest extends FixtureTest {
 
     protected static TempoFixture tFixture;
     
@@ -11,12 +11,12 @@ public class TempoFixtureTest {
     public static void setUp() throws Exception {
       tFixture = new TempoFixture();
       
-      tFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-      tFixture.setAppianUrlTo("https://ps-sandbox1.appiancloud.com/suite/");
-      tFixture.setTimeoutSecondsTo(20);
-      tFixture.setAppianVersionTo("16.1");
-      tFixture.setAppianLocaleTo("en_US");
-      tFixture.loginWithUsernameAndPassword("test.user", "password1");
+      tFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+      tFixture.setAppianUrlTo(TEST_SITE_URL);
+      tFixture.setTimeoutSecondsTo(TEST_TIMEOUT);
+      tFixture.setAppianVersionTo(TEST_SITE_VERSION);
+      tFixture.setAppianLocaleTo(TEST_SITE_LOCALE);
+      tFixture.loginWithUsernameAndPassword(TEST_USERNAME, TEST_PASSWORD);
     }
     
     @AfterClass

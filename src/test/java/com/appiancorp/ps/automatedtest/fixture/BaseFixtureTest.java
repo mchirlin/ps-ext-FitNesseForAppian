@@ -7,7 +7,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BaseFixtureTest {
+public class BaseFixtureTest extends FixtureTest {
 
     private static BaseFixture bFixture;
     
@@ -18,8 +18,8 @@ public class BaseFixtureTest {
     
     @Test
     public void testSetAppianUrlTo() throws Exception {
-        bFixture.setAppianUrlTo("https://ps-sandbox1.appiancloud.com/suite/");
-        assertEquals(bFixture.getSettings().getUrl(), "https://ps-sandbox1.appiancloud.com/suite/");
+        bFixture.setAppianUrlTo(TEST_SITE_URL);
+        assertEquals(bFixture.getSettings().getUrl(), TEST_SITE_URL);
     }
     
     @Test
@@ -58,38 +58,24 @@ public class BaseFixtureTest {
     }
     
     @Test
-    public void testOpenFirefox() throws Exception {
-        bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-        assertTrue(bFixture.open("http://google.com"));
-        bFixture.tearDownSeleniumWebDriver();
-    }
-    
-    @Test
-    public void testOpenChrome() throws Exception {
-        bFixture.setupSeleniumWebDriverWithBrowser("CHROME");
-        assertTrue(bFixture.open("http://google.com"));
-        bFixture.tearDownSeleniumWebDriver();
-    }
-
-    @Test
-    public void testOpenIE() throws Exception {
-        bFixture.setupSeleniumWebDriverWithBrowser("IE");
+    public void testOpen() throws Exception {
+        bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
         assertTrue(bFixture.open("http://google.com"));
         bFixture.tearDownSeleniumWebDriver();
     }
     
     @Test
     public void testLoginIntoWithUsernameAndPassword() throws Exception {        
-        bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-        assertTrue(bFixture.loginIntoWithUsernameAndPassword("https://ps-sandbox1.appiancloud.com/suite/", "test.user", "password1"));
+        bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+        assertTrue(bFixture.loginIntoWithUsernameAndPassword(TEST_SITE_URL, TEST_USERNAME, TEST_PASSWORD));
         bFixture.tearDownSeleniumWebDriver();
     }
     
     @Test
     public void testLoginWithUsernameAndPassword() throws Exception {
-        bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-        bFixture.setAppianUrlTo("https://ps-sandbox1.appiancloud.com/suite");
-        assertTrue(bFixture.loginWithUsernameAndPassword("test.user","password1"));
+        bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+        bFixture.setAppianUrlTo(TEST_SITE_URL);
+        assertTrue(bFixture.loginWithUsernameAndPassword(TEST_USERNAME, TEST_PASSWORD));
         bFixture.tearDownSeleniumWebDriver();
     }
     
