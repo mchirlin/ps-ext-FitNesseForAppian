@@ -27,7 +27,7 @@ public class RecordsFixtureTest extends TempoFixtureTest{
     }
     
     @Test
-    public void testRecordsFixture() throws Exception {
+    public void testRecordsUserFilter() throws Exception {
         tFixture.clickOnMenu("Records");
         
         assertTrue(tFixture.clickOnRecordType("Automated Testing Records"));
@@ -35,21 +35,29 @@ public class RecordsFixtureTest extends TempoFixtureTest{
         assertTrue(tFixture.clickOnRecordTypeUserFilter("Past"));
         assertTrue(tFixture.verifyRecordIsPresent(randString));
         assertTrue(tFixture.verifyRecordIsNotPresent("Not present"));
-        assertTrue(tFixture.clickOnRecord(randString));
-        assertTrue(tFixture.clickOnRecordView("Related Actions"));
-        assertTrue(tFixture.verifyRecordRelatedActionIsPresent("AUT Data Input Test"));
-        assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not present"));
     }
     
     @Test
-    public void testClickOnRecordItemRelatedActionShortcut() throws Exception {
+    public void testClickOnRecordItemRelatedActions() throws Exception {
         tFixture.clickOnMenu("Records");
         
         assertTrue(tFixture.clickOnRecordType("Automated Testing Records"));
         assertTrue(tFixture.clickOnRecordTypeUserFilter("Past"));
         assertTrue(tFixture.clickOnRecord(randString));
+
+        // Related Action View
+        assertTrue(tFixture.clickOnRecordView("Related Actions"));
+        assertTrue(tFixture.verifyRecordRelatedActionIsPresent("AUT Data Input Test"));
+        assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not present"));
         assertTrue(tFixture.clickOnRecordRelatedAction("AUT Data Input Test"));
+        tFixture.clickOnButton("Cancel");
         
+        // Related Action Shortcut
+        assertTrue(tFixture.clickOnRecordView("Summary"));
+        //TODO Configure verify related action is present to work with shortcuts 
+        //assertTrue(tFixture.verifyRecordRelatedActionIsPresent("AUT Data Input Test"));
+        //assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not present"));
+        assertTrue(tFixture.clickOnRecordRelatedAction("AUT Data Input Test"));
         tFixture.clickOnButton("Cancel");
     }
     
@@ -92,6 +100,7 @@ public class RecordsFixtureTest extends TempoFixtureTest{
     @AfterClass
     public static void tearDownRecords() throws Exception {
         tFixture.clickOnMenu("News");
-//        tFixture.deleteNewsPost(randString);
+        //TODO Configure delete news post to handle non admins
+        //tFixture.deleteNewsPost(randString);
     }
 }

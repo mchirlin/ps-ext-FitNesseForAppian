@@ -79,6 +79,7 @@
 	    {"label": "xpathAbsoluteLoginSubmitButton", "value": "//form[@id = 'loginForm']/descendant::input[contains(@class, 'btn')]"},
 	    {"label": "xpathAbsoluteLoginAgreeButton", "value": "//form[@id = 'notification']/descendant::input[contains(@class, 'btn')]"},
 	    {"label": "xpathAbsoluteLogoutLink", "value": "//div[@class='main_nav_bar']/descendant::a[contains(text(),'Sign Out')]"},
+	    {"label": "xpathAbsoluteMainBar", "value": "//div[contains(@class, 'main_nav_bar')]"},
 	    {"label": "xpathAbsoluteMenuLink", "value": "//a[starts-with(@class, 'appian-menu-item') and contains(text(),'%s')]"},
 	    {"label": "xpathAbsoluteTaskLink", "value": "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'%s')]"},
 	    {"label": "xpathAbsoluteTaskDeadline", "value": "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'%s')]/parent::span/following-sibling::div[contains(@class, 'metadata')]/descendant::span[contains(@title, 'deadline')]/span[text() = '%s']"},

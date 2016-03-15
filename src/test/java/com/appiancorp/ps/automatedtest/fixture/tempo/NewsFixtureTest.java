@@ -13,6 +13,7 @@ public class NewsFixtureTest extends TempoFixtureTest {
     
     private static String randString;
     private static Integer randInt;
+    private static Double randDecimal;
     
     @BeforeClass
     public static void setUpNews() throws Exception {
@@ -21,14 +22,13 @@ public class NewsFixtureTest extends TempoFixtureTest {
       
       randString = tFixture.getRandomString(5);
       randInt = tFixture.getRandomIntegerFromTo(0, 9);
+      randDecimal = tFixture.getRandomDecimalFromToWith(1.0, 2.0, 4);
       tFixture.populateFieldWith("Title", new String[]{randString});
       tFixture.populateFieldWith("Quantity", new String[]{randInt.toString()});
-      tFixture.populateFieldWith("Price", new String[]{"123.45"});
+      tFixture.populateFieldWith("Price", new String[]{randDecimal.toString()});
       tFixture.populateFieldWith("Start Date", new String[]{"2016-02-04 02:00"});
       
       tFixture.clickOnButton("Submit");
-      // Deprecated for 16.1
-      //      assertTrue(tFixture.verifyActionCompleted());
     }
     
     @Test 
@@ -75,6 +75,6 @@ public class NewsFixtureTest extends TempoFixtureTest {
     @AfterClass
     public static void tearDownNews() throws Exception {
         tFixture.clickOnMenu("News");
-//        tFixture.deleteNewsPost(randString); //Only for admin accounts 
+        // tFixture.deleteNewsPost(randString); //Only for admin accounts 
     }
 }

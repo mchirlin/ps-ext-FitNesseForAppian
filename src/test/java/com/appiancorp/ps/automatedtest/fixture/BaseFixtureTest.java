@@ -58,8 +58,22 @@ public class BaseFixtureTest {
     }
     
     @Test
-    public void testOpen() throws Exception {
+    public void testOpenFirefox() throws Exception {
         bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
+        assertTrue(bFixture.open("http://google.com"));
+        bFixture.tearDownSeleniumWebDriver();
+    }
+    
+    @Test
+    public void testOpenChrome() throws Exception {
+        bFixture.setupSeleniumWebDriverWithBrowser("CHROME");
+        assertTrue(bFixture.open("http://google.com"));
+        bFixture.tearDownSeleniumWebDriver();
+    }
+
+    @Test
+    public void testOpenIE() throws Exception {
+        bFixture.setupSeleniumWebDriverWithBrowser("IE");
         assertTrue(bFixture.open("http://google.com"));
         bFixture.tearDownSeleniumWebDriver();
     }
@@ -74,7 +88,7 @@ public class BaseFixtureTest {
     @Test
     public void testLoginWithUsernameAndPassword() throws Exception {
         bFixture.setupSeleniumWebDriverWithBrowser("FIREFOX");
-        bFixture.setAppianUrlTo("https://ps-sandbox1.appiancloud.com/suite/");
+        bFixture.setAppianUrlTo("https://ps-sandbox1.appiancloud.com/suite");
         assertTrue(bFixture.loginWithUsernameAndPassword("test.user","password1"));
         bFixture.tearDownSeleniumWebDriver();
     }

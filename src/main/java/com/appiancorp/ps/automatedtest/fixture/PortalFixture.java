@@ -105,7 +105,7 @@ public class PortalFixture extends BaseFixture {
 	public boolean populatePortalDateFieldWith(String fieldLabelName, String value) {
 		WebElement dateField = driver.findElement(By.xpath("//div[@class='legend' and contains(text(),'"+ fieldLabelName +"')]/ancestor::fieldset[1]//div[@class='fields']//input"));
 		dateField.clear();
-		waitForSeconds("1");
+		waitForSeconds(1);
 		dateField.click();
 		dateField.sendKeys(value);
 		
