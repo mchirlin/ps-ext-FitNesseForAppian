@@ -1,5 +1,8 @@
 package com.appiancorp.ps.automatedtest.object;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -17,7 +20,8 @@ public class TempoSection extends TempoObject {
     
     protected static final String XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT = Settings.getByConstant("xpathAbsoluteSectionFieldLayout");
     protected static final String XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT_INDEX = Settings.getByConstant("xpathAbsoluteSectionFieldLayoutIndex");
-    protected static final String XPATH_ABSOLUTE_SECTION_ERROR = Settings.getByConstant("xpathAbsoluteSectionError");
+    protected static final String XPATH_RELATIVE_SECTION_VALIDATION_MESSAGE_SPECIFIC_VALUE = Settings.getByConstant("xpathRelativeSectionValidationMessageSpecificValue");
+    protected static final String XPATH_RELATIVE_SECTION_VALIDATION_MESSAGE = Settings.getByConstant("xpathRelativeSectionValidationMessage");
 
     protected static final String XPATH_ABSOLUTE_SECTION_LAYOUT = Settings.getByConstant("xpathAbsoluteSectionLayout");
     protected static final String XPATH_RELATIVE_SECTION_EXPAND = Settings.getByConstant("xpathRelativeSectionExpand");
@@ -113,13 +117,37 @@ public class TempoSection extends TempoObject {
         return true;
     }
     
-    public static boolean waitForError(String sectionName, String error, Settings s) {
+    public static boolean waitForValidationMessages(String sectionName, String[] validationMessages, Settings s) {
+        WebElement section = getSection(sectionName, s);;
+        String xpathLocator = getXpathLocator(section);
+        
         try {
-            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SECTION_ERROR, sectionName, error))));
-            return true;
+            for (String validationMessage : validationMessages) {
+                (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath("(" + xpathLocator + ")" + String.format(XPATH_RELATIVE_SECTION_VALIDATION_MESSAGE_SPECIFIC_VALUE, validationMessage))));
+            }
         } catch (TimeoutException e) {
             return false;
         }
+        return true;
+    }
+    
+    public static String getValidationMessages(String sectionName, Settings s) {
+        WebElement section = getSection(sectionName, s);
+        List<String> values = new ArrayList<String>();
+        
+        for (WebElement a : section.findElements(By.xpath(XPATH_RELATIVE_SECTION_VALIDATION_MESSAGE))) {
+            values.add(a.getText());
+        }
+        
+        // Remove bullet points
+        if (values.size() > 1) {
+            for(int i = 0; i < values.size(); i++) {
+                String val = values.get(i);
+                values.set(i, val.substring(2, val.length()));
+            }
+        }
+        
+        return String.join(",", values);
     }
     
     public static boolean clickExpandSection(String sectionName, Settings s){
@@ -138,3 +166,4 @@ public class TempoSection extends TempoObject {
         return true;
     }
 }
+

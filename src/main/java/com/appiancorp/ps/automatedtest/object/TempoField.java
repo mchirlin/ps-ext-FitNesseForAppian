@@ -1,5 +1,8 @@
 package com.appiancorp.ps.automatedtest.object;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -18,6 +21,8 @@ public class TempoField extends TempoObject {
     protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX = "(" + XPATH_ABSOLUTE_FIELD_LAYOUT + ")[%d]";
     protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = Settings.getByConstant("xpathRelativeReadOnlyField"); // Handles readOnly fields and paging grids
     protected static final String XPATH_CONCAT_ANCESTOR_FIELD_LAYOUT = Settings.getByConstant("xpathConcatAncestorFieldLayout");
+    protected static final String XPATH_RELATIVE_FIELD_VALIDATION_MESSAGE_SPECIFIC_VALUE = Settings.getByConstant("xpathRelativeFieldValidationMessageSpecificValue");
+    protected static final String XPATH_RELATIVE_FIELD_VALIDATION_MESSAGE = Settings.getByConstant("xpathRelativeFieldValidationMessage");
     
     public static WebElement getFieldLayout(String fieldName, Settings s) {
         if (isFieldIndex(fieldName)) {
@@ -324,6 +329,32 @@ public class TempoField extends TempoObject {
         LOG.debug("READ ONLY FIELD VALUE: " + value);
         
         return value;
+    }
+    
+    public static boolean waitForValidationMessages(String fieldName, String[] validationMessages, Settings s) {
+        WebElement fieldLayout = getFieldLayout(fieldName, s);
+        String xpathLocator = getXpathLocator(fieldLayout);
+        
+        try {
+            for (String validationMessage : validationMessages) {
+                (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath("(" + xpathLocator + ")" + String.format(XPATH_RELATIVE_FIELD_VALIDATION_MESSAGE_SPECIFIC_VALUE, validationMessage))));
+            }
+        } catch (TimeoutException e) {
+            return false;
+        }
+       
+        return true;
+    }
+    
+    public static String getValidationMessages(String fieldName, Settings s) {
+        WebElement fieldLayout = getFieldLayout(fieldName, s);
+        List<String> values = new ArrayList<String>();
+        
+        for (WebElement a : fieldLayout.findElements(By.xpath(XPATH_RELATIVE_FIELD_VALIDATION_MESSAGE))) {
+            values.add(a.getText());
+        }
+        
+        return String.join(",", values);
     }
     
     public static boolean isReadOnly(WebElement fieldLayout) {
