@@ -79,10 +79,10 @@ public class RecordsFixtureTest extends TempoFixtureTest{
         assertTrue(tFixture.sortRecordGridByColumn("Price"));
         assertTrue(tFixture.sortRecordGridByColumn("Start Date"));
         
-        assertTrue(tFixture.clickOnRecordGridNaviation("Next"));
-        assertTrue(tFixture.clickOnRecordGridNaviation("Previous"));
-        assertTrue(tFixture.clickOnRecordGridNaviation("Last"));
-        assertTrue(tFixture.clickOnRecordGridNaviation("First"));
+        assertTrue(tFixture.clickOnRecordGridNavigation("Next"));
+        assertTrue(tFixture.clickOnRecordGridNavigation("Previous"));
+        assertTrue(tFixture.clickOnRecordGridNavigation("Last"));
+        assertTrue(tFixture.clickOnRecordGridNavigation("First"));
         
         assertTrue(tFixture.searchFor(randString));
         assertTrue(tFixture.verifyRecordIsPresent(randString));

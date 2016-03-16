@@ -11,7 +11,6 @@ import com.appiancorp.ps.automatedtest.common.Settings;
 
 public class TempoLinkField extends TempoField {
     
-    @SuppressWarnings("unused")
     private static final Logger LOG = Logger.getLogger(TempoLinkField.class);
     private static final String XPATH_ABSOLUTE_LINK_FIELD = Settings.getByConstant("xpathAbsoluteLinkField");
     private static final String XPATH_ABSOLUTE_LINK_FIELD_INDEX = "(" + XPATH_ABSOLUTE_LINK_FIELD + ")[%d]";

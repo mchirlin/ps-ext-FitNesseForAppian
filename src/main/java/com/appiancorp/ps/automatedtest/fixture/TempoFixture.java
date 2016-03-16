@@ -601,7 +601,7 @@ public class TempoFixture extends BaseFixture {
      * @param navOption Navigation option
      * @return True, if clicked
      */
-    public boolean clickOnRecordGridNaviation(String navOption){
+    public boolean clickOnRecordGridNavigation(String navOption){
         if(!TempoRecordGrid.waitForRecordGridNavigation(navOption, settings)){
             exceptionHandler(ERROR_MISSING, "Navigation option", navOption);
         }
