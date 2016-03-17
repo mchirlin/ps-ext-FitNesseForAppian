@@ -459,6 +459,13 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
   }
 
   @Test
+  public void testVerifyButtons() throws Exception {
+    assertTrue(tFixture.verifyButtonIsPresent("Cancel"));
+    assertTrue(tFixture.verifyButtonIsNotPresent("FakeButton"));
+    assertFalse(tFixture.verifyButtonIsNotPresent("Cancel"));
+  }
+
+  @Test
   public void testClickLink() throws Exception {
     tFixture.clickOnLink("Click link");
     assertTrue(tFixture.verifyFieldContains("Link Clicked", new String[] { "Clicked" }));

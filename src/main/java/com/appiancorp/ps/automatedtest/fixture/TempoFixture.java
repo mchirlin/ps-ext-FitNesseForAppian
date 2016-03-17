@@ -1239,6 +1239,37 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
+   * Verifies if button with given label is present in the user interface. This is useful for determining if conditionals to show buttons
+   * have worked correctly.<br>
+   * <br>
+   * FitNesse Example: <code>| verify button with label | LABEL | is present |</code>
+   * 
+   * @param buttonName
+   *          Name of the button
+   * @return True, if button is located
+   */
+  public boolean verifyButtonIsPresent(String buttonName) {
+    TempoButton.waitFor(buttonName, settings);
+    return true;
+  }
+
+  /**
+   * Verifies if button with given label is not present in the user interface. This is useful for determining if conditionals to hide
+   * buttons have worked correctly.<br>
+   * <br>
+   * FitNesse Example: <code>| verify button with label | LABEL | is not present |</code><br>
+   * <br>
+   * Use this rather than <code>| reject | verify action | ACTION_NAME | is present |</code> as it will not refresh and wait.
+   * 
+   * @param buttonName
+   *          Name of the button
+   * @return True, if button is not located
+   */
+  public boolean verifyButtonIsNotPresent(String buttonName) {
+    return !TempoButton.waitForReturn(buttonName, settings.getNotPresentTimeoutSeconds(), settings);
+  }
+
+  /**
    * Clicks on the first radio option that matches the optionName. This is useful if the radio field does not have a label.<br>
    * <br>
    * FitNesse Example: <code>| click on radio option | OPTION_NAME |</code> <code>| click on radio option | OPTION_NAME[INDEX] |</code>
