@@ -25,15 +25,12 @@ public class TempoSelectField extends TempoField {
     WebElement selectField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_SELECT_FIELD_INPUT));
     Select select = new Select(selectField);
     select.selectByVisibleText(fieldValue);
-    unfocus(s);
   }
 
   public static void waitFor(String fieldName, Settings s) {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_SELECT_FIELD_LABEL, fieldName))));
-      WebElement fieldLayout = getFieldLayout(fieldName, s);
-      scrollIntoView(fieldLayout, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field", fieldName);
     }

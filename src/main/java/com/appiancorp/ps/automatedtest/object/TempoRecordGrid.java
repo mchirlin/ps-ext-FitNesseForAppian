@@ -25,8 +25,6 @@ public class TempoRecordGrid extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName)));
-      scrollIntoView(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Record Column", columnName);
     }
@@ -36,9 +34,8 @@ public class TempoRecordGrid extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ON COLUMN [" + columnName + "]");
 
     try {
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName)));
-      element.click();
-      waitForWorking(s);
+      WebElement column = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName)));
+      clickElement(column, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Click Record", columnName);
     }
@@ -49,34 +46,26 @@ public class TempoRecordGrid extends AppianObject {
 
     try {
       navOption = navOption.toLowerCase();
-      WebElement element = null;
-
       switch (navOption) {
         case "first":
           (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(
             XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST)));
-          element = s.getDriver().findElement(By.xpath(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_FIRST));
           break;
         case "previous":
           (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(
             XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS)));
-          element = s.getDriver().findElement(By.xpath(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_PREVIOUS));
           break;
         case "next":
           (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(
             XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_NEXT)));
-          element = s.getDriver().findElement(By.xpath(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_NEXT));
           break;
         case "last":
           (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(
             XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_LAST)));
-          element = s.getDriver().findElement(By.xpath(XPATH_ABSOLUTE_RECORD_GRID_NAVIGATION_LAST));
           break;
         default:
           throw new IllegalArgumentException("Invalid navigation option");
       }
-
-      scrollIntoView(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Record Navigation", navOption);
     }
@@ -107,8 +96,7 @@ public class TempoRecordGrid extends AppianObject {
           throw new IllegalArgumentException("Invalid navigation option");
       }
 
-      link.click();
-      waitForWorking(s);
+      clickElement(link, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Click Record Navigation", navOption);
     }

@@ -32,7 +32,6 @@ public class TempoDatetimeField extends TempoField {
 
     populateTempoDatetimeFieldWithDate(fieldLayout, d, s);
     populateTempoDatetimeFieldWithTime(fieldLayout, d, s);
-    unfocus(s);
   }
 
   public static void waitFor(String fieldName, Settings s) {
@@ -41,8 +40,6 @@ public class TempoDatetimeField extends TempoField {
         XPATH_ABSOLUTE_DATETIME_FIELD_DATE_INPUT, fieldName))));
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_DATETIME_FIELD_TIME_INPUT, fieldName))));
-      WebElement fieldLayout = getFieldLayout(fieldName, s);
-      scrollIntoView(fieldLayout, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field", fieldName);
     }

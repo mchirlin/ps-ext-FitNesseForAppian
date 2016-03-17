@@ -22,7 +22,7 @@ public class TempoRecord extends AppianObject {
 
     try {
       WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName)));
-      element.click();
+      clickElement(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Record", itemName);
     }
@@ -34,8 +34,6 @@ public class TempoRecord extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_RECORD_LINK, itemName))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName)));
-      scrollIntoView(element, false, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Record", itemName);
     }
@@ -47,8 +45,6 @@ public class TempoRecord extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_RECORD_LINK, itemName))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, itemName)));
-      scrollIntoView(element, false, s);
       return true;
     } catch (TimeoutException e) {
       return false;
@@ -82,8 +78,7 @@ public class TempoRecord extends AppianObject {
 
     try {
       WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_VIEW_LINK, view)));
-      element.click();
-      waitForWorking(s);
+      clickElement(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Record View", view);
     }
@@ -105,8 +100,7 @@ public class TempoRecord extends AppianObject {
 
     try {
       WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction)));
-      element.click();
-      waitForWorking(s);
+      clickElement(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Record Related Action", relatedAction);
     }
@@ -118,8 +112,6 @@ public class TempoRecord extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction)));
-      scrollIntoView(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Record Related Action", relatedAction);
     }
@@ -129,8 +121,6 @@ public class TempoRecord extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction)));
-      scrollIntoView(element, s);
       return true;
     } catch (TimeoutException e) {
       return false;

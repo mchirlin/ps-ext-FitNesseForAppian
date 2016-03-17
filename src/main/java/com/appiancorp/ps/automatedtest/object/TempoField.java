@@ -60,10 +60,11 @@ public class TempoField extends AppianObject {
   }
 
   public static void populate(WebElement fieldLayout, String fieldName, String fieldValue, Settings s) {
-    TempoFieldType fieldType = getFieldType(fieldLayout);
-    fieldValue = AppianObject.parseVariable(fieldValue, s);
-
     try {
+      TempoFieldType fieldType = getFieldType(fieldLayout);
+      fieldValue = AppianObject.parseVariable(fieldValue, s);
+
+      scrollIntoView(fieldLayout, s);
       switch (fieldType) {
         case TEXT:
           TempoTextField.populate(fieldLayout, fieldValue, s);
@@ -104,6 +105,7 @@ public class TempoField extends AppianObject {
         default:
           throw new IllegalArgumentException("Unrecognized field type");
       }
+      unfocus(s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Populate Field", fieldName, fieldValue);
     }
@@ -138,8 +140,6 @@ public class TempoField extends AppianObject {
         (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
           XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName))));
       }
-      WebElement fieldLayout = getFieldLayout(fieldName, s);
-      scrollIntoView(fieldLayout, s);
       return true;
     } catch (TimeoutException e) {
       return false;
@@ -160,8 +160,6 @@ public class TempoField extends AppianObject {
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
           XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName))));
       }
-      WebElement fieldLayout = getFieldLayout(fieldName, s);
-      scrollIntoView(fieldLayout, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field", fieldName);
     }
@@ -173,9 +171,10 @@ public class TempoField extends AppianObject {
   }
 
   public static void clear(WebElement fieldLayout, String fieldName, Settings s) {
-    TempoFieldType fieldType = getFieldType(fieldLayout);
-
     try {
+      TempoFieldType fieldType = getFieldType(fieldLayout);
+
+      scrollIntoView(fieldLayout, s);
       switch (fieldType) {
         case TEXT:
           TempoTextField.clear(fieldLayout);
@@ -196,6 +195,7 @@ public class TempoField extends AppianObject {
         default:
           throw new IllegalArgumentException("Invalid field type");
       }
+      unfocus(s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Clear Field", fieldName);
     }
@@ -207,9 +207,10 @@ public class TempoField extends AppianObject {
   }
 
   public static void clearOf(WebElement fieldLayout, String[] fieldValues, Settings s) {
-    TempoFieldType fieldType = getFieldType(fieldLayout);
-
     try {
+      TempoFieldType fieldType = getFieldType(fieldLayout);
+      scrollIntoView(fieldLayout, s);
+
       switch (fieldType) {
 
         case PICKER:
@@ -219,6 +220,7 @@ public class TempoField extends AppianObject {
         default:
           throw new IllegalArgumentException("PICKER is the only valid field type");
       }
+      unfocus(s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Clear Field of");
     }
@@ -231,9 +233,9 @@ public class TempoField extends AppianObject {
   }
 
   public static String getValue(WebElement fieldLayout, String fieldName, Settings s) {
-    TempoFieldType fieldType = getFieldType(fieldLayout);
-
     try {
+      TempoFieldType fieldType = getFieldType(fieldLayout);
+
       switch (fieldType) {
 
         case READ_ONLY:
@@ -310,10 +312,10 @@ public class TempoField extends AppianObject {
   }
 
   public static boolean contains(WebElement fieldLayout, String fieldName, String fieldValue, Settings s) {
-    TempoFieldType fieldType = getFieldType(fieldLayout);
-    fieldValue = AppianObject.parseVariable(fieldValue, s);
-
     try {
+      TempoFieldType fieldType = getFieldType(fieldLayout);
+      fieldValue = AppianObject.parseVariable(fieldValue, s);
+
       switch (fieldType) {
 
         case READ_ONLY:

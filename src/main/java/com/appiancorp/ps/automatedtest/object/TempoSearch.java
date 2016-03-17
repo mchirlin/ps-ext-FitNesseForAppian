@@ -21,10 +21,10 @@ public class TempoSearch extends AppianObject {
     try {
       WebElement fieldLayout = s.getDriver().findElement(By.xpath(XPATH_ABSOLUTE_SEARCH_FIELD));
 
+      scrollIntoView(fieldLayout, s);
       fieldLayout.clear();
       fieldLayout.sendKeys(searchValue);
       fieldLayout.sendKeys(Keys.ENTER);
-
       waitForWorking(s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Tempo Search", searchValue);
@@ -36,8 +36,6 @@ public class TempoSearch extends AppianObject {
 
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_SEARCH_FIELD))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_SEARCH_FIELD)));
-      scrollIntoView(element, false, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Tempo Search");
     }

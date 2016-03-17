@@ -18,9 +18,8 @@ public class TempoAction extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ACTION [" + actionName + "]");
 
     try {
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, actionName)));
-      element.click();
-      waitForWorking(s);
+      WebElement action = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, actionName)));
+      clickElement(action, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Action click", actionName);
     }
@@ -33,8 +32,6 @@ public class TempoAction extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_ACTION_LINK, actionName))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, actionName)));
-      scrollIntoView(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Action wait for", actionName);
     }
@@ -46,8 +43,6 @@ public class TempoAction extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_ACTION_LINK, actionName))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, actionName)));
-      scrollIntoView(element, s);
       return true;
     } catch (TimeoutException e) {
       return false;

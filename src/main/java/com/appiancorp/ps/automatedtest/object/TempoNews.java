@@ -35,8 +35,6 @@ public class TempoNews extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_NEWS_ITEM, newsText))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM, newsText)));
-      scrollIntoView(element, false, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "News Item", newsText);
     }
@@ -48,8 +46,6 @@ public class TempoNews extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_NEWS_ITEM, newsText))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM, newsText)));
-      scrollIntoView(element, false, s);
       return true;
     } catch (TimeoutException e) {
       return false;
@@ -84,8 +80,6 @@ public class TempoNews extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LINK, newsText))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LINK, newsText)));
-      scrollIntoView(element, false, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "News Item More Info", newsText);
     }
@@ -95,7 +89,7 @@ public class TempoNews extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("TOGGLE MORE INFO [" + newsText + "]");
 
     WebElement moreInfoLink = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LINK, newsText)));
-    moreInfoLink.click();
+    clickElement(moreInfoLink, s);
   }
 
   public static void waitForLabelAndValue(String newsText, String label, String value, Settings s) {
@@ -108,8 +102,6 @@ public class TempoNews extends AppianObject {
         XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LABEL, newsText, label))));
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_VALUE, newsText, value))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LABEL, newsText, label)));
-      scrollIntoView(element, false, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "News Item Label and Value", newsText, label, value);
     }
@@ -121,8 +113,6 @@ public class TempoNews extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG, newsText, newsTag))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG, newsText, newsTag)));
-      scrollIntoView(element, false, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "News Item Tag", newsText, newsTag);
     }
@@ -134,8 +124,6 @@ public class TempoNews extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG, newsText, newsTag))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG, newsText, newsTag)));
-      scrollIntoView(element, false, s);
       return true;
     } catch (TimeoutException e) {
       return false;
@@ -170,8 +158,6 @@ public class TempoNews extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_NEWS_ITEM_COMMENT, newsText, newsComment))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_COMMENT, newsText, newsComment)));
-      scrollIntoView(element, false, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "News Item Comment", newsText, newsComment);
     }
@@ -183,8 +169,6 @@ public class TempoNews extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_NEWS_ITEM_COMMENT, newsText, newsComment))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_COMMENT, newsText, newsComment)));
-      scrollIntoView(element, false, s);
     } catch (TimeoutException e) {
       return false;
     } catch (Exception e) {
@@ -220,8 +204,6 @@ public class TempoNews extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_NEWS_ITEM_POSTED_AT, newsText, newsPostedAt))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_POSTED_AT, newsText, newsPostedAt)));
-      scrollIntoView(element, false, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "News Item Posted at", newsText, newsPostedAt);
     }
@@ -231,9 +213,8 @@ public class TempoNews extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ON NEWS ITEM [" + newsText + "] and RECORD TAG [" + recordTag + "]");
 
     try {
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG, newsText, recordTag)));
-      element.click();
-      waitForWorking(s);
+      WebElement tag = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG, newsText, recordTag)));
+      clickElement(tag, s);
     } catch (Exception e) {
       LOG.error("News Item Record tag", e);
       throw ExceptionBuilder.build(e, s, "News Item Record tag", newsText, recordTag);

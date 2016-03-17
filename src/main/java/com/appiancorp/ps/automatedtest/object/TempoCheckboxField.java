@@ -38,9 +38,7 @@ public class TempoCheckboxField extends TempoField {
     } else {
       checkboxField = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_CHECKBOX_FIELD_CHOICE_LABEL, fieldValue)));
     }
-
     checkboxField.click();
-    unfocus(s);
   }
 
   public static void waitFor(String fieldName, Settings s) {
@@ -49,8 +47,6 @@ public class TempoCheckboxField extends TempoField {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_CHECKBOX_FIELD_LABEL, fieldName))));
-      WebElement fieldLayout = getFieldLayout(fieldName, s);
-      scrollIntoView(fieldLayout, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field", fieldName);
     }
@@ -108,8 +104,7 @@ public class TempoCheckboxField extends TempoField {
 
     try {
       WebElement element = getOptionLayout(optionName, s);
-      element.click();
-      unfocus(s);
+      clickElement(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Checkbox option", optionName);
     }
@@ -128,8 +123,6 @@ public class TempoCheckboxField extends TempoField {
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
           XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION, optionName))));
       }
-      WebElement element = getOptionLayout(optionName, s);
-      scrollIntoView(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Checkbox option", optionName);
     }

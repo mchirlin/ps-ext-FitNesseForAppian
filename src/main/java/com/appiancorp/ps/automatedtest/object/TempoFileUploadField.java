@@ -52,12 +52,10 @@ public class TempoFileUploadField extends TempoField {
     fileUpload.sendKeys(fieldValue);
     unfocus(s);
     waitForFileUpload(fieldLayout, s);
-    waitForWorking(s);
   }
 
   public static void waitFor(String fieldName, Settings s) {
     try {
-      WebElement fieldLayout;
       if (isFieldIndex(fieldName)) {
         int index = getIndexFromFieldIndex(fieldName);
         String name = getFieldFromFieldIndex(fieldName);
@@ -73,8 +71,6 @@ public class TempoFileUploadField extends TempoField {
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
           XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL, fieldName))));
       }
-      fieldLayout = getFieldLayout(fieldName, s);
-      scrollIntoView(fieldLayout, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field", fieldName);
     }

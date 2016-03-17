@@ -17,9 +17,8 @@ public class TempoButton extends TempoField {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK BUTTON [" + buttonName + "]");
 
     try {
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName)));
-      element.click();
-      waitForWorking(s);
+      WebElement button = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName)));
+      clickElement(button, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Click Button", buttonName);
     }
@@ -31,8 +30,6 @@ public class TempoButton extends TempoField {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_BUTTON, buttonName))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_BUTTON, buttonName)));
-      scrollIntoView(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Button", buttonName);
     }

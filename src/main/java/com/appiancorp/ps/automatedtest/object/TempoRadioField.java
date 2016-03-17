@@ -35,15 +35,12 @@ public class TempoRadioField extends TempoField {
       radioField = fieldLayout.findElement(By.xpath(String.format(XPATH_RELATIVE_RADIO_FIELD_CHOICE_LABEL, fieldValue)));
     }
     radioField.click();
-    unfocus(s);
   }
 
   public static void waitFor(String fieldName, Settings s) {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_RADIO_FIELD_LABEL, fieldName))));
-      WebElement fieldLayout = getFieldLayout(fieldName, s);
-      scrollIntoView(fieldLayout, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field", fieldName);
     }
@@ -99,9 +96,8 @@ public class TempoRadioField extends TempoField {
     if (LOG.isDebugEnabled()) LOG.debug("RADIO BUTTON OPTION CLICK : " + optionName);
 
     try {
-      WebElement element = getOptionLayout(optionName, s);
-      element.click();
-      unfocus(s);
+      WebElement option = getOptionLayout(optionName, s);
+      clickElement(option, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Radio option", optionName);
     }
@@ -120,8 +116,6 @@ public class TempoRadioField extends TempoField {
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
           XPATH_ABSOLUTE_RADIO_FIELD_OPTION, optionName))));
       }
-      WebElement element = getOptionLayout(optionName, s);
-      scrollIntoView(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Radio option", optionName);
     }

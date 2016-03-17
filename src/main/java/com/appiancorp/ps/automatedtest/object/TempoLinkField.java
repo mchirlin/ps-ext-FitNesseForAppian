@@ -30,9 +30,8 @@ public class TempoLinkField extends TempoField {
     if (LOG.isDebugEnabled()) LOG.debug("CLINK LINK [" + linkName + "]");
 
     try {
-      WebElement element = getLink(linkName, s);
-      element.click();
-      waitForWorking(s);
+      WebElement link = getLink(linkName, s);
+      clickElement(link, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Click Link", linkName);
     }
@@ -52,8 +51,6 @@ public class TempoLinkField extends TempoField {
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
           XPATH_ABSOLUTE_LINK_FIELD, linkName))));
       }
-      WebElement element = getLink(linkName, s);
-      scrollIntoView(element, false, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Link", linkName);
     }

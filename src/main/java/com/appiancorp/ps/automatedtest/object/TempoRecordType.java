@@ -30,9 +30,8 @@ public class TempoRecordType extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK RECORD TYPE [" + type + "]");
 
     try {
-      WebElement element = getRecordType(type, s);
-      element.click();
-      waitForWorking(s);
+      WebElement recordType = getRecordType(type, s);
+      clickElement(recordType, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Record Type", type);
     }
@@ -52,8 +51,6 @@ public class TempoRecordType extends AppianObject {
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
           XPATH_ABSOLUTE_RECORD_TYPE_LINK, type))));
       }
-      WebElement element = getRecordType(type, s);
-      scrollIntoView(element, false, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Record Type", type);
     }
@@ -63,10 +60,8 @@ public class TempoRecordType extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ON USER FILTER [" + userFilter + "]");
 
     try {
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_USER_FILTER_LINK, userFilter)));
-      scrollIntoView(element, false, s);
-      element.click();
-      waitForWorking(s);
+      WebElement filter = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_TYPE_USER_FILTER_LINK, userFilter)));
+      clickElement(filter, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "User Filter", userFilter);
     }

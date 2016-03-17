@@ -18,9 +18,8 @@ public class TempoMenu extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK [" + tempoMenu + "]");
 
     try {
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu)));
-      element.click();
-      waitForWorking(s);
+      WebElement menu = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu)));
+      clickElement(menu, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Tempo Menu", tempoMenu);
     }
@@ -32,8 +31,6 @@ public class TempoMenu extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_MENU_LINK, tempoMenu))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_MENU_LINK, tempoMenu)));
-      scrollIntoView(element, true, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Tempo Menu", tempoMenu);
     }

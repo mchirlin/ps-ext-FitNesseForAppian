@@ -49,16 +49,6 @@ public class TempoSection extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_SECTION_LAYOUT, sectionName))));
-      int attempt = 0;
-      while (attempt < s.getAttemptTimes()) {
-        try {
-          WebElement section = getSection(sectionName, s);
-          scrollIntoView(section, s);
-          break;
-        } catch (Exception e) {
-          attempt++;
-        }
-      }
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Section", sectionName);
     }
@@ -74,17 +64,6 @@ public class TempoSection extends AppianObject {
       } else {
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
           XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT, sectionName, fieldName, sectionName, fieldName))));
-      }
-      // Attempt to scroll into view
-      int attempt = 0;
-      while (attempt < s.getAttemptTimes()) {
-        try {
-          WebElement fieldLayout = getFieldLayout(fieldName, sectionName, s);
-          scrollIntoView(fieldLayout, s);
-          break;
-        } catch (Exception e) {
-          attempt++;
-        }
       }
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Section Field", sectionName, fieldName);
@@ -153,9 +132,7 @@ public class TempoSection extends AppianObject {
     try {
       WebElement section = getSection(sectionName, s);
       WebElement expand = section.findElement(By.xpath(XPATH_RELATIVE_SECTION_EXPAND));
-      scrollIntoView(expand, s);
-      expand.click();
-      waitForWorking(s);
+      clickElement(expand, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Expand Section", sectionName);
     }
@@ -167,9 +144,7 @@ public class TempoSection extends AppianObject {
     try {
       WebElement section = getSection(sectionName, s);
       WebElement collapse = section.findElement(By.xpath(XPATH_RELATIVE_SECTION_COLLAPSE));
-      scrollIntoView(collapse, s);
-      collapse.click();
-      waitForWorking(s);
+      clickElement(collapse, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Collapse Section", sectionName);
     }

@@ -118,9 +118,7 @@ public class TempoGrid extends TempoField {
     try {
       WebElement cell = getCell(gridName, "[1]", rowNum, s);
       WebElement checkbox = cell.findElement(By.xpath(XPATH_RELATIVE_GRID_CHECKBOX));
-      scrollIntoView(checkbox, s);
-      checkbox.click();
-      waitForWorking(s);
+      clickElement(checkbox, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Grid Row Selection", gridName, rowNum);
     }
@@ -239,8 +237,7 @@ public class TempoGrid extends TempoField {
     try {
       WebElement grid = getGrid(gridName, s);
       WebElement link = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_ADD_ROW_LINK));
-      link.click();
-      waitForWorking(s);
+      clickElement(link, s);
     } catch (Exception e) {
       LOG.error("Click Add Row", e);
       throw ExceptionBuilder.build(e, s, "Click Add Row", gridName);
@@ -272,9 +269,7 @@ public class TempoGrid extends TempoField {
         default:
           throw new IllegalArgumentException("Invalid navigation option");
       }
-      scrollIntoView(link, s);
-      link.click();
-      waitForWorking(s);
+      clickElement(link, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Click Navigation option", navOption);
     }
@@ -286,8 +281,7 @@ public class TempoGrid extends TempoField {
     try {
       WebElement grid = getGrid(gridName, s);
       WebElement column = grid.findElement(By.xpath(String.format(XPATH_RELATIVE_GRID_COLUMN_LINK, columnName)));
-      column.click();
-      waitForWorking(s);
+      clickElement(column, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Sort Grid", columnName);
     }

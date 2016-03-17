@@ -19,9 +19,8 @@ public class TempoReport extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK REPORT [" + reportName + "]");
 
     try {
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName)));
-      element.click();
-      waitForWorking(s);
+      WebElement report = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName)));
+      clickElement(report, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Report", reportName);
     }
@@ -34,8 +33,6 @@ public class TempoReport extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_REPORT_LINK, reportName))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName)));
-      scrollIntoView(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Report", reportName);
     }
@@ -47,8 +44,6 @@ public class TempoReport extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_REPORT_LINK, reportName))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName)));
-      scrollIntoView(element, s);
       return true;
     } catch (TimeoutException e) {
       return false;

@@ -22,7 +22,6 @@ public class TempoParagraphField extends TempoField {
     textAreaField.clear();
     textAreaField.sendKeys(fieldValue);
     Thread.sleep(500); // For some reason paragraph fields have trouble when moving quickly
-    unfocus(s);
   }
 
   public static void waitFor(String fieldName, Settings s) {
@@ -31,8 +30,6 @@ public class TempoParagraphField extends TempoField {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL, fieldName))));
-      WebElement fieldLayout = getFieldLayout(fieldName, s);
-      scrollIntoView(fieldLayout, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field", fieldName);
     }

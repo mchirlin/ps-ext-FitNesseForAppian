@@ -41,7 +41,6 @@ public class TempoPickerField extends TempoField {
     WebElement suggestion = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_PICKER_SUGGESTION, fieldValue, fieldValue)));
     suggestion.click();
     waitForSelection(fieldLayout, fieldValue, s);
-    unfocus(s);
   }
 
   public static String getValue(WebElement fieldLayout) {
@@ -70,7 +69,7 @@ public class TempoPickerField extends TempoField {
 
   public static void clearOf(String fieldName, String[] fieldValues, Settings s) {
     WebElement fieldLayout = getFieldLayout(fieldName, s);
-    clearOf(fieldLayout, fieldValues);
+    clearOf(fieldLayout, fieldValues, s);
   }
 
   public static void clear(WebElement fieldLayout) {

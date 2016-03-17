@@ -21,15 +21,12 @@ public class TempoTextField extends TempoField {
     WebElement textField = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_TEXT_FIELD_INPUT));
     textField.clear();
     textField.sendKeys(fieldValue);
-    unfocus(s);
   }
 
   public static void waitFor(String fieldName, Settings s) {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_TEXT_FIELD_LABEL, fieldName))));
-      WebElement fieldLayout = getFieldLayout(fieldName, s);
-      scrollIntoView(fieldLayout, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field", fieldName);
     }

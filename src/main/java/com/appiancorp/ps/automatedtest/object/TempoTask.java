@@ -21,9 +21,8 @@ public class TempoTask extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK TASK [" + taskName + "]");
 
     try {
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName)));
-      element.click();
-      waitForWorking(s);
+      WebElement task = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName)));
+      clickElement(task, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Task", taskName);
     }
@@ -35,8 +34,6 @@ public class TempoTask extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_TASK_LINK, taskName))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName)));
-      scrollIntoView(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Task", taskName);
     }
@@ -48,8 +45,6 @@ public class TempoTask extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_TASK_LINK, taskName))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName)));
-      scrollIntoView(element, s);
       return true;
     } catch (TimeoutException e) {
       return false;
@@ -84,8 +79,6 @@ public class TempoTask extends AppianObject {
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
         XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport)));
-      scrollIntoView(element, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Task Report", taskReport);
     }
@@ -105,8 +98,8 @@ public class TempoTask extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK TASK REPORT [" + taskReport + "]");
 
     try {
-      s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport))).click();
-      waitForWorking(s);
+      WebElement report = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport)));
+      clickElement(report, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Task Report", taskReport);
     }

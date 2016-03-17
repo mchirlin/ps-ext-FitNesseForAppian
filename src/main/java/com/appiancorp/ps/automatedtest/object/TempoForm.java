@@ -31,8 +31,6 @@ public class TempoForm extends AppianObject {
 
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE)));
-      scrollIntoView(element, true, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Title");
     }
@@ -54,8 +52,6 @@ public class TempoForm extends AppianObject {
 
     try {
       (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS))));
-      WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS)));
-      scrollIntoView(element, true, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Form Instructions");
     }

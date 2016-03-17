@@ -150,6 +150,12 @@ public class AppianObject {
     }
   }
 
+  public static void clickElement(WebElement element, Settings s) {
+    scrollIntoView(element, s);
+    element.click();
+    unfocus(s);
+  }
+
   public static void scrollIntoView(WebElement webElement, Boolean alignToTop, Settings s) {
     // Have to manually scroll element into view because Tempo header covers the action link for long action lists
     ((JavascriptExecutor) s.getDriver()).executeScript("arguments[0].scrollIntoView(" + alignToTop.toString() + ");", webElement);
