@@ -11,9 +11,13 @@ public class ExceptionBuilder {
   public static RuntimeException build(Exception e, Settings s, String... vals) {
     LOG.error(String.join(" - ", vals), e);
 
-    if (s.isTakeErrorScreenshots()) {
-      Screenshot.takeScreenshot(String.format("%3d", s.getErrorNumber()), s);
-      s.setErrorNumber(s.getErrorNumber() + 1);
+    try {
+      if (s.isTakeErrorScreenshots()) {
+        Screenshot.takeScreenshot(String.format("%3d", s.getErrorNumber()), s);
+        s.setErrorNumber(s.getErrorNumber() + 1);
+      }
+    } catch (Exception exception) {
+      LOG.error("Screenshot error", e);
     }
 
     if (s.isStopOnError()) {
@@ -49,6 +53,13 @@ public class ExceptionBuilder {
           return new IllegalArgumentStopTestException(vals);
         } else {
           return new IllegalArgumentTestException(vals);
+        }
+
+      case "org.openqa.selenium.remote.UnreachableBrowserException":
+        if (s.isStopOnError()) {
+          return new UnreachableBrowserStopTestException(vals);
+        } else {
+          return new UnreachableBrowserTestException(vals);
         }
 
       default:
