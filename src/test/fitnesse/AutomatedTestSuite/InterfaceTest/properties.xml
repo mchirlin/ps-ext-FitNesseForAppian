@@ -2,7 +2,7 @@
 <properties>
 <Edit/>
 <Files/>
-<Help>Tests various types of fields that an interface may use in Appian and how to access them in Fitnesse</Help>
+<Help>Tests Inteface methods including field population and verification</Help>
 <Properties/>
 <RecentChanges/>
 <Refactor/>

@@ -8,101 +8,100 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.common.Settings;
+import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
 
-public class TempoTask extends TempoObject {
-    
-    private static final Logger LOG = Logger.getLogger(TempoTask.class);
-    private static final String XPATH_ABSOLUTE_TASK_LINK = Settings.getByConstant("xpathAbsoluteTaskLink");
-    private static final String XPATH_ABSOLUTE_TASK_DEADLINE = Settings.getByConstant("xpathAbsoluteTaskDeadline");
-    private static final String XPATH_ABSOLUTE_TASK_REPORT_LINK = Settings.getByConstant("xpathAbsoluteTaskReportLink");
-    
-    public static boolean click(String taskName, Settings s) {
-        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName)));
-        element.click();
+public class TempoTask extends AppianObject {
 
-        if(popupError(s)) {
-            clickPopupError(s);
-            refreshAndWaitFor(taskName, s);
-            click(taskName, s);
+  private static final Logger LOG = Logger.getLogger(TempoTask.class);
+  private static final String XPATH_ABSOLUTE_TASK_LINK = Settings.getByConstant("xpathAbsoluteTaskLink");
+  private static final String XPATH_ABSOLUTE_TASK_DEADLINE = Settings.getByConstant("xpathAbsoluteTaskDeadline");
+  private static final String XPATH_ABSOLUTE_TASK_REPORT_LINK = Settings.getByConstant("xpathAbsoluteTaskReportLink");
+
+  public static void click(String taskName, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("CLICK TASK [" + taskName + "]");
+
+    try {
+      WebElement task = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName)));
+      clickElement(task, s);
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Task", taskName);
+    }
+  }
+
+  public static void waitFor(String taskName, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR TASK [" + taskName + "]");
+
+    try {
+      (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
+        XPATH_ABSOLUTE_TASK_LINK, taskName))));
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Task", taskName);
+    }
+  }
+
+  public static boolean waitForReturn(String taskName, int timeout, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR TASK [" + taskName + "]");
+
+    try {
+      (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
+        XPATH_ABSOLUTE_TASK_LINK, taskName))));
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Task", taskName);
+    }
+  }
+
+  public static boolean waitForReturn(String taskName, Settings s) {
+    return waitForReturn(taskName, s.getTimeoutSeconds(), s);
+  }
+
+  public static void refreshAndWaitFor(String taskName, Settings s) {
+    int i = 0;
+    while (i < s.getRefreshTimes()) {
+      // If it is not the last refresh attempt don't throw error
+      if (i < s.getRefreshTimes() - 1) {
+        if (waitForReturn(taskName, s)) {
+          break;
         }
+        s.getDriver().navigate().refresh();
+      } else {
+        waitFor(taskName, s);
+      }
+      i++;
+    }
+  }
 
-        waitForWorking(s);
-        
-        return true;
-    }
-    
-    public static boolean waitFor(String taskName, Integer timeout, Settings s) {
-        try {
-            (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName))));
-            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName)));
-            scrollIntoView(element, s);
-        } catch (TimeoutException e) {
-            return false;
-        }
+  public static void waitForTaskReport(String taskReport, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR TASK REPORT [" + taskReport + "]");
 
-        return true;
+    try {
+      (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
+        XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport))));
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Task Report", taskReport);
     }
-    
-    public static boolean waitFor(String taskName, Settings s) {
-        return waitFor(taskName, s.getTimeoutSeconds(), s);
-    }
-    
-    public static boolean refreshAndWaitFor(String taskName, Settings s) {
-        boolean present = false;
+  }
 
-        int i = 0;
-        while (!present) {
-            if (i > s.getRefreshTimes()) return false;
-            
-            if (TempoTask.waitFor(taskName, s)) {
-                present = true;
-                break;
-            };        
+  public static void hasDeadlineOf(String taskName, String deadline, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("TASK [" + taskName + "] HAS DEADLINE [" + deadline + "]");
 
-            s.getDriver().navigate().refresh();
-            i++;
-        }
+    try {
+      s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_DEADLINE, taskName, deadline)));
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Task deadline", taskName, deadline);
+    }
+  }
 
-        return true;
-    }
-    
-    public static boolean waitForTaskReport(String taskReport, Settings s) {
-        try {
-            (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport))));
-            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport)));
-            scrollIntoView(element, s);
-        } catch (TimeoutException e) {
-            return false;
-        }
+  public static void clickOnTaskReport(String taskReport, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("CLICK TASK REPORT [" + taskReport + "]");
 
-        return true;
+    try {
+      WebElement report = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport)));
+      clickElement(report, s);
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Task Report", taskReport);
     }
-    
-    public static boolean hasDeadlineOf(String taskName, String deadline, Settings s) {
-        s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_DEADLINE, taskName, deadline)));
-        
-        return true;
-    }
-    
-    public static boolean clickOnTaskReport(String taskReport, Settings s) {
-        s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport))).click();
-        
-        return true;
-    }
-    
-    public static boolean popupError(Settings s) {
-        try {
-            LOG.debug("Looking for popup error");
-            (new WebDriverWait(s.getDriver(), 1)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'popupContent')]")));
-            LOG.debug("Found popup error");
-            return true;
-        } catch (Exception e) {
-            LOG.debug(e.getMessage());
-            return false;
-        }
-    }
-    
-    public static void clickPopupError(Settings s) {
-        s.getDriver().findElement(By.xpath("//div[contains(@class, 'popupContent')]/descendant::button")).click();
-    }
+  }
 }

@@ -3,7 +3,7 @@ package com.appiancorp.ps.automatedtest.common;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AppianLocale{
+public class AppianLocale {
   private String locale;
   private String dateFormat;
   private String dateDisplayFormat;
@@ -31,30 +31,30 @@ public class AppianLocale{
   }
 
   public String getLocale() {
-      return this.locale;
+    return this.locale;
   }
-  
+
   public String getDateFormat() {
-      return this.dateFormat;
+    return this.dateFormat;
   }
-  
+
   public String getDateDisplayFormat() {
-      return this.dateDisplayFormat;
+    return this.dateDisplayFormat;
   }
 
   public String getTimeFormat() {
-      return this.timeFormat;
+    return this.timeFormat;
   }
 
   public String getTimeDisplayFormat() {
-      return this.timeDisplayFormat;
+    return this.timeDisplayFormat;
   }
-  
+
   public String getDatetimeFormat() {
-      return this.datetimeFormat;
+    return this.datetimeFormat;
   }
-  
+
   public String getDatetimeDisplayFormat() {
-      return this.datetimeDisplayFormat;
+    return this.datetimeDisplayFormat;
   }
 }

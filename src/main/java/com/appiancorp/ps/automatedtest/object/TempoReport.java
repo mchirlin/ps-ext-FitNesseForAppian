@@ -8,33 +8,51 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.common.Settings;
+import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
 
-public class TempoReport extends TempoObject {
-    
-    @SuppressWarnings("unused")
-    private static final Logger LOG = Logger.getLogger(TempoReport.class);
-    private static final String XPATH_ABSOLUTE_REPORT_LINK = Settings.getByConstant("xpathAbsoluteReportLink");
-    
-    public static boolean click(String reportName, Settings s) {
-        WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName)));
-        element.click();
+public class TempoReport extends AppianObject {
 
-        return true;
-    }
-    
-    public static boolean waitFor(String reportName, Integer timeout, Settings s) {
-        try {
-            (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName))));
-            WebElement element = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName)));
-            scrollIntoView(element, s);
-        } catch (TimeoutException e) {
-            return false;
-        }
+  private static final Logger LOG = Logger.getLogger(TempoReport.class);
+  private static final String XPATH_ABSOLUTE_REPORT_LINK = Settings.getByConstant("xpathAbsoluteReportLink");
 
-        return true;
+  public static void click(String reportName, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("CLICK REPORT [" + reportName + "]");
+
+    try {
+      WebElement report = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_REPORT_LINK, reportName)));
+      clickElement(report, s);
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Report", reportName);
     }
-    
-    public static boolean waitFor(String reportName, Settings s) {
-        return waitFor(reportName, s.getTimeoutSeconds(), s);
+
+  }
+
+  public static void waitFor(String reportName, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR [" + reportName + "]");
+
+    try {
+      (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
+        XPATH_ABSOLUTE_REPORT_LINK, reportName))));
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Report", reportName);
     }
+  }
+
+  public static boolean waitForReturn(String reportName, Integer timeout, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR [" + reportName + "]");
+
+    try {
+      (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
+        XPATH_ABSOLUTE_REPORT_LINK, reportName))));
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Report", reportName);
+    }
+  }
+
+  public static boolean waitForReturn(String reportName, Settings s) {
+    return waitForReturn(reportName, s.getTimeoutSeconds(), s);
+  }
 }

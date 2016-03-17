@@ -33,7 +33,8 @@
 | verify news feed containing text | NEWS_TEXT | tagged with | TAG_NAME | is present | 					: Verify a news item with a particular title and tag is present 
 | verify news feed containing text | NEWS_TEXT | commented with | COMMENT | is present | 				: Verify a news item with a particular title and comment is present 
 | click on news feed | NEWS_TEXT | record tag | RECORD_TAG | 											: Click on record tag on a particular news item
-| $VARIABLE_NAME= | get regex | REGEX | from news feed containing text| NEWS_TEXT | 					: Use Java Regular Expression to return data from news as a variable
+| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from news feed containing text | NEWS_TEXT | 	: Use Java Regular Expression to return data from news as a variable
+| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENT |	: Use Java Regular Expression to return data from news as a variable
 ]!
 
 !3 TASKS METHODS

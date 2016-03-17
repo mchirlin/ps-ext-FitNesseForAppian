@@ -71,10 +71,9 @@
 	    {"label": "xpathAbsoluteLinkField", "value": "//a[contains(text(), '%s')]"},
 	   	{"label": "xpathAbsoluteGridByIndex", "value": "(//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%d]"},
 	    {"label": "xpathAbsoluteGridByLabel", "value": "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table"},
-	    {"label": "xpathConcatCellByColumnLabel", "value": "/tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]"},
+	    {"label": "xpathConcatCellByGridIndexColumnLabel", "value": "[descendant::th[descendant::*[text()='%s']]]/tbody/tr[%d]/td[count((//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%d]/descendant::th[descendant::*[text()='%s']]/preceding-sibling::th)+1]"},
+	    {"label": "xpathConcatCellByGridLabelColumnLabel", "value": "[descendant::th[descendant::*[text()='%s']]]/tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::th[descendant::*[text()='%s']]/preceding-sibling::th)+1]"},
 	    {"label": "xpathConcatCellByColumnIndex", "value": "/tbody/tr[%d]/td[%d]"},
-	    {"label": "xpathRelativeGridCellByColumnLabel", "value": ".//tbody/tr[%d]/td[count(//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table/thead/tr/th[.='%s']/preceding-sibling::th)+1]"},
-	    {"label": "xpathRelativeGridCellByColumnIndex", "value": ".//tbody/tr[%d]/td[%d]"},
 	    {"label": "xpathRelativeGridCheckbox", "value": ".//input[@type = 'checkbox']"},
 	    {"label": "xpathAbsoluteLoginSubmitButton", "value": "//form[@id = 'loginForm']/descendant::input[contains(@class, 'btn')]"},
 	    {"label": "xpathAbsoluteLoginAgreeButton", "value": "//form[@id = 'notification']/descendant::input[contains(@class, 'btn')]"},
@@ -131,8 +130,10 @@
 	    {"label": "xpathAbsoluteRecordLink", "value": "//a[contains(@href, '/suite/tempo/records/item/') and contains(@href, '/view/summary') and contains(text(), '%s')]"},
 	    {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input | //div[contains(@class, 'filters')]/descendant::input[@type = 'text']"},
 	    {"label": "xpathAbsoluteRecordGridColumnSortLink", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/thead//a[text()='%s']"},
-	    {"label": "xpathAbsoluteRecordGridNavigationPreviousNext", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[text()='%s']"},
-	    {"label": "xpathAbsoluteRecordGridNavigationFirstLast", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[@title='%s']"}
+	    {"label": "xpathAbsoluteRecordGridNavigationFirst", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[@title='First']"},
+	    {"label": "xpathAbsoluteRecordGridNavigationPrevious", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[text()='Previous']"},
+	    {"label": "xpathAbsoluteRecordGridNavigationNext", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[text()='Next']"},
+	    {"label": "xpathAbsoluteRecordGridNavigationLast", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[@title='Last']"}
 	  ]
 	}
   ]
