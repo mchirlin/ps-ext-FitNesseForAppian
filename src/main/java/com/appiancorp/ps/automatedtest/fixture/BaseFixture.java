@@ -591,12 +591,9 @@ public class BaseFixture {
    * Closes browser and driver quits. Used to end automated test.<br>
    * <br>
    * FitNesse Example: <code>| tear down selenium driver |</code>
-   * 
-   * @return True
    */
-  public boolean tearDownSeleniumWebDriver() {
+  public void tearDownSeleniumWebDriver() {
     settings.getDriver().quit();
-    return true;
   }
 
   /**
