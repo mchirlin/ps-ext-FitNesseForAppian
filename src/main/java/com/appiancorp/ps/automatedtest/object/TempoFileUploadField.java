@@ -50,7 +50,7 @@ public class TempoFileUploadField extends TempoField {
 
     WebElement fileUpload = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT));
     fileUpload.sendKeys(fieldValue);
-    unfocus(s);
+    unfocus(s, 300);
     waitForFileUpload(fieldLayout, s);
   }
 
@@ -78,7 +78,8 @@ public class TempoFileUploadField extends TempoField {
 
   public static void waitForFileUpload(WebElement fieldLayout, Settings s) {
     String xpathLocator = getXpathLocator(fieldLayout);
-    (new WebDriverWait(s.getDriver(), 300)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("(" + xpathLocator + ")" +
+    (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("(" +
+      xpathLocator + ")" +
       XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_WAITING)));
   }
 

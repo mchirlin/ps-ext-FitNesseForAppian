@@ -80,7 +80,7 @@
 ![:
 | populate field | FIELD_LABEL_OR_INDEX | with | VALUE(S) | 											: When populating a picker field with a username, make sure to use the display value instead of the username
 | populate field | FIELD_LABEL[FIELD_INDEX] | with | VALUE(S) | 										: Use this to populate the 2nd, 3rd, ... field with the same label
-| populate | FIELD_TYPE | field | [FIELD_INDEX] | with | VALUE(S) | 									: Use this to populate the 1st, 2nd, 3rd, ... field of a specific type with no label, currently only compatible with FIELD_TYPE of FILE_UPLOAD
+| populate | FIELD_TYPE | field | [FIELD_INDEX] | with | VALUE(S) | 									: Use this to populate the 1st, 2nd, 3rd, ... field of a specific type with no label, currently only compatible with FIELD_TYPEs of TEXT, PARAGRAH, and FILE_UPLOAD. WARNING: Integer, Decimal, and Encrypted text fields will be considered as Text fields.
 | populate field | FIELD_LABEL | with value | VALUE | 													: Use this to populate a field with a value that contains a comma
 | populate field |[FIELD_INDEX] | in section | SECTION_NAME | with | VALUE(S) |							: Populate a field in a section with no label<br/>
 | clear field | FIELD_LABEL | of | VALUE_TO_REMOVE | 													: Use this to remove a specific value from a picker

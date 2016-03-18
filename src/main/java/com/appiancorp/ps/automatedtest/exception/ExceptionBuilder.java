@@ -24,9 +24,7 @@ public class ExceptionBuilder {
       s.getDriver().quit();
     }
 
-    String clazz = e.getClass().getCanonicalName();
-
-    switch (clazz) {
+    switch (e.getClass().getCanonicalName()) {
       case "org.openqa.selenium.NoSuchElementException":
         if (s.isStopOnError()) {
           return new ObjectNotFoundStopTestException(vals);
@@ -60,6 +58,13 @@ public class ExceptionBuilder {
           return new UnreachableBrowserStopTestException(vals);
         } else {
           return new UnreachableBrowserTestException(vals);
+        }
+
+      case "com.appiancorp.ps.automatedtest.exception.WaitForWorkingTestException":
+        if (s.isStopOnError()) {
+          return new WaitForWorkingStopTestException(vals);
+        } else {
+          return new WaitForWorkingTestException(vals);
         }
 
       default:

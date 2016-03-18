@@ -40,12 +40,20 @@ public class TempoField extends AppianObject {
       WebElement fieldLayout;
 
       switch (type) {
+        case TEXT:
+          fieldLayout = TempoTextField.getFieldLayout(fieldName, s);
+          break;
+
+        case PARAGRAPH:
+          fieldLayout = TempoParagraphField.getFieldLayout(fieldName, s);
+          break;
+
         case FILE_UPLOAD:
           fieldLayout = TempoFileUploadField.getFieldLayout(fieldName, s);
           break;
 
         default:
-          throw new IllegalArgumentException("FILE_UPLOAD is the only valid type");
+          throw new IllegalArgumentException("TEXT, PARAGRAPH, and FILE_UPLOAD are the only valid field types");
       }
 
       populate(fieldLayout, fieldName, fieldValue, s);
@@ -116,12 +124,20 @@ public class TempoField extends AppianObject {
       TempoFieldType type = getFieldTypeFromString(fieldType);
 
       switch (type) {
+        case TEXT:
+          TempoTextField.waitFor(fieldName, s);
+          break;
+
+        case PARAGRAPH:
+          TempoParagraphField.waitFor(fieldName, s);
+          break;
+
         case FILE_UPLOAD:
           TempoFileUploadField.waitFor(fieldName, s);
           break;
 
         default:
-          throw new IllegalArgumentException("FILE_UPLOAD is the only valid field type");
+          throw new IllegalArgumentException("TEXT, PARAGRAPH, and FILE_UPLOAD are the only valid field types");
       }
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field Type", fieldType, fieldName);
@@ -413,6 +429,7 @@ public class TempoField extends AppianObject {
   }
 
   public static TempoFieldType getFieldTypeFromString(String fieldType) {
+    fieldType = fieldType.toUpperCase();
     if (fieldType.equals("READ_ONLY"))
       return TempoFieldType.READ_ONLY;
     else if (fieldType.equals("TEXT"))

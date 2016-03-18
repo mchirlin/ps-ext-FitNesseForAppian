@@ -204,8 +204,7 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.
-   * <br>
+   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed. <br>
    * <br>
    * FitNesse Example:
    * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |</code>
@@ -530,8 +529,7 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.
-   * <br>
+   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly. <br>
    * <br>
    * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is present |</code>
    * 
@@ -779,12 +777,13 @@ public class TempoFixture extends BaseFixture {
   /**
    * Populates a field of a particular type with specific values.<br>
    * <br>
-   * This method can populate the following types of fields: FileUpload. <br>
+   * This method can populate the following types of fields: TEXT, PARAGRAPH, and FILE_UPLOAD. <br>
+   * Warning: Integer, Decimal, and Encrypted text fields will all be counted as TEXT fields.<br>
    * FitNesse Examples:<br>
-   * <code>| populate | FILE_UPLOAD | field | FIELD_NAME[INDEX] | with | FIELD_VALUE |</code><br>
+   * <code>| populate | FIELD_TYPE | field | FIELD_NAME[INDEX] | with | FIELD_VALUE |</code><br>
    * 
    * @param fieldType
-   *          Can only currently accept FILE_UPLOAD
+   *          Can only currently accept TEXT, PARAGRAPH, and FILE_UPLOAD
    * @param fieldName
    *          Can either be the label of the field or a label with an index
    * @param fieldValues

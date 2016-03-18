@@ -12,12 +12,14 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
+import com.appiancorp.ps.automatedtest.exception.WaitForWorkingTestException;
 
 public class AppianObject {
 
@@ -140,14 +142,20 @@ public class AppianObject {
     return null;
   }
 
-  public static void waitForWorking(Settings s) {
+  public static void waitForWorking(Settings s, Integer timeout) {
     try {
       Thread.sleep(550);
-      (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_WORKING)));
+      (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(XPATH_WORKING)));
       Thread.sleep(200);
     } catch (InterruptedException e) {
       throw ExceptionBuilder.build(e, s, "Wait for Working");
+    } catch (TimeoutException e) {
+      throw new WaitForWorkingTestException(e);
     }
+  }
+
+  public static void waitForWorking(Settings s) {
+    waitForWorking(s, s.getTimeoutSeconds());
   }
 
   public static void clickElement(WebElement element, Settings s) {
@@ -165,9 +173,13 @@ public class AppianObject {
     scrollIntoView(webElement, false, s);
   }
 
-  public static void unfocus(Settings s) {
+  public static void unfocus(Settings s, Integer timeout) {
     ((JavascriptExecutor) s.getDriver()).executeScript("!!document.activeElement ? document.activeElement.blur() : 0");
-    waitForWorking(s);
+    waitForWorking(s, timeout);
+  }
+
+  public static void unfocus(Settings s) {
+    unfocus(s, s.getTimeoutSeconds());
   }
 
   public static boolean isFieldIndex(String fieldNameIndex) {
