@@ -204,7 +204,8 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.<br>
+   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.
+   * <br>
    * <br>
    * FitNesse Example:
    * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |</code>
@@ -529,7 +530,8 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.<br>
+   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.
+   * <br>
    * <br>
    * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is present |</code>
    * 
@@ -1259,7 +1261,7 @@ public class TempoFixture extends BaseFixture {
    * <br>
    * FitNesse Example: <code>| verify button with label | LABEL | is not present |</code><br>
    * <br>
-   * Use this rather than <code>| reject | verify action | ACTION_NAME | is present |</code> as it will not refresh and wait.
+   * Use this rather than <code>| reject | verify button with label| LABEL | is present |</code> as it will not refresh and wait.
    * 
    * @param buttonName
    *          Name of the button
