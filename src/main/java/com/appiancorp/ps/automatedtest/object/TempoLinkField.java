@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
 
-public class TempoLinkField extends TempoField {
+public class TempoLinkField extends AppianObject {
 
   private static final Logger LOG = Logger.getLogger(TempoLinkField.class);
   private static final String XPATH_ABSOLUTE_LINK_FIELD = Settings.getByConstant("xpathAbsoluteLinkField");

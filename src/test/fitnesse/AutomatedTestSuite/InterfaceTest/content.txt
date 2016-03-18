@@ -8,6 +8,12 @@
 |check|get form title       |Form        |
 |check|get form instructions|Instructions|
 ***!
+!*** Verify buttons
+!| script |
+| verify button | Cancel | is present |
+| verify button | FakeButton | is not present |
+***!
+----
 !*** Populate fields in Section 1 - Common field types
 !| script                                        |
 |populate field|TextField         |with|text     |

@@ -104,6 +104,8 @@
 | sort grid | GRID_NAME_OR_INDEX | by | COLUMN_NAME | 													: Sorts grid by column name
 | click on link | LINK_NAME | 																			: Can use linkName or linkName[index]
 | click on button | BUTTON_NAME | 																		: Clicks on button
+| verify button | LABEL | is present |																	: Verify button with label is present
+| verify button | LABEL | is not present |																: Verify button with label is not present
 | click on radio option | RADIO_OPTION | 																: Clicks on the first radio button with the given choice label
 | click on radio option | RADIO_OPTION[INDEX] | 														: Clicks on the radio button with the given choice label by index. Index only includes radio button options.
 | click on checkbox option | CHECKBOX_OPTION | 															: Checks on the first checkbox with the given choice label
