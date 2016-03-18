@@ -179,7 +179,7 @@ The final release JAR's are placed in the `/target/` folder of each module.
 
 #### Create New Installation Package ####
 1. Download `AutomatedTesting.zip` and `AutomatedTesting-X.X.X-Patch.zip` from previous release.
-1. Explode `AutomatedTestingVx.x.x-Patch.zip` and rename folder to current release.
+1. Explode `AutomatedTesting-x.x.x-Patch.zip` and rename folder to current release.
 1. Update `updates.zip`:
  * Add new jars or delete and replace existing jars with new versions.
  * Add new browser drivers or delete a replace existing drivers with new versions.
