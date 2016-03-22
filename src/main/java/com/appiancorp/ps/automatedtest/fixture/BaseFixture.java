@@ -258,12 +258,9 @@ public class BaseFixture {
    * 
    * @param url
    *          Url to navigate to
-   * @return True
    */
-  public boolean open(String url) {
+  public void open(String url) {
     settings.getDriver().get(url);
-
-    return true;
   }
 
   /**
@@ -338,9 +335,8 @@ public class BaseFixture {
    * 
    * @param period
    *          Period of time, e.g. 5 minutes, 1 hour, 10 seconds
-   * @return True, once period has been reached
    */
-  public boolean waitFor(String period) {
+  public void waitFor(String period) {
     int periodNum = Integer.parseInt(period.replaceAll("[^0-9]", ""));
     int noOfSeconds = 0;
     if (period.contains("hour")) {
@@ -355,7 +351,7 @@ public class BaseFixture {
       int i = 0;
       while (true) {
         if (i >= noOfSeconds) {
-          return true;
+          break;
         }
 
         Thread.sleep(1000);
@@ -363,8 +359,7 @@ public class BaseFixture {
 
       }
     } catch (InterruptedException e) {
-      e.printStackTrace();
-      return false;
+      throw ExceptionBuilder.build(e, settings, "Wait Until");
     }
   }
 
@@ -375,10 +370,9 @@ public class BaseFixture {
    * 
    * @param period
    *          Number of seconds to wait for
-   * @return True, once time period has elapsed
    */
-  public boolean waitForSeconds(Integer period) {
-    return waitFor(period + " seconds");
+  public void waitForSeconds(Integer period) {
+    waitFor(period + " seconds");
   }
 
   /**
@@ -388,10 +382,9 @@ public class BaseFixture {
    * 
    * @param period
    *          Number of minutes to wait for
-   * @return True, once time period has elapsed
    */
-  public boolean waitForMinutes(Integer period) {
-    return waitFor(period + " minutes");
+  public void waitForMinutes(Integer period) {
+    waitFor(period + " minutes");
   }
 
   /**
@@ -401,10 +394,9 @@ public class BaseFixture {
    * 
    * @param period
    *          Number of hours to wait for
-   * @return True, once time period has elapsed
    */
-  public boolean waitForHours(Integer period) {
-    return waitFor(period + " hours");
+  public void waitForHours(Integer period) {
+    waitFor(period + " hours");
   }
 
   /**
@@ -424,9 +416,8 @@ public class BaseFixture {
    * 
    * @param datetime
    *          Datetime string must match {@link #setDateFormatTo(String)} and {@link #setTimeFormatTo(String)}
-   * @return True, when time is reached
    */
-  public boolean waitUntil(String datetime) {
+  public void waitUntil(String datetime) {
     datetime = AppianObject.formatDatetimeCalculation(datetime, settings);
 
     try {
@@ -437,10 +428,8 @@ public class BaseFixture {
         Thread.sleep(1000);
         nowDatetime = new Date();
       }
-      return true;
     } catch (Exception e) {
-      LOG.debug(e.getMessage());
-      return false;
+      throw ExceptionBuilder.build(e, settings, "Wait Until");
     }
   }
 
@@ -448,13 +437,9 @@ public class BaseFixture {
    * Refreshes page<br>
    * <br>
    * FitNesse Example: <code>| refresh |</code>
-   * 
-   * @return True, always
    */
-  public boolean refresh() {
+  public void refresh() {
     settings.getDriver().navigate().refresh();
-
-    return true;
   }
 
   @Deprecated
