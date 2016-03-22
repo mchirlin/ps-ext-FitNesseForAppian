@@ -63,7 +63,7 @@ public class BaseFixtureTest extends FixtureTest {
   @Test
   public void testOpen() throws Exception {
     bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
-    assertTrue(bFixture.open("http://google.com"));
+    bFixture.open("http://google.com");
     bFixture.tearDownSeleniumWebDriver();
   }
 
