@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.object;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,27 @@ public class TempoParagraphField extends TempoField {
 
   private static final Logger LOG = Logger.getLogger(TempoParagraphField.class);
   private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL = Settings.getByConstant("xpathAbsoluteParagraphFieldLabel");
+  private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_INDEX = Settings.getByConstant("xpathAbsoluteParagraphFieldIndex");
+  private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL_INDEX = "(" + XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL + ")[%d]";
   private static final String XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT = Settings.getByConstant("xpathRelativeParagraphFieldInput");
+
+  public static WebElement getFieldLayout(String fieldName, Settings s) {
+    if (isFieldIndex(fieldName)) {
+      int index = getIndexFromFieldIndex(fieldName);
+      String name = getFieldFromFieldIndex(fieldName);
+      if (StringUtils.isBlank(name)) {
+        return s.getDriver().findElement(
+          By.xpath(String.format(XPATH_ABSOLUTE_PARAGRAPH_FIELD_INDEX + XPATH_CONCAT_ANCESTOR_FIELD_LAYOUT, index)));
+      } else {
+        return s.getDriver().findElement(
+          By.xpath(String.format(XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL_INDEX + XPATH_CONCAT_ANCESTOR_FIELD_LAYOUT, name, index)));
+      }
+
+    } else {
+      return s.getDriver().findElement(
+        By.xpath(String.format(XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL + XPATH_CONCAT_ANCESTOR_FIELD_LAYOUT, fieldName)));
+    }
+  }
 
   public static void populate(WebElement fieldLayout, String fieldValue, Settings s) throws InterruptedException {
     if (LOG.isDebugEnabled()) LOG.debug("POPULATION [" + fieldValue + "]");
@@ -28,8 +49,21 @@ public class TempoParagraphField extends TempoField {
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR [" + fieldName + "]");
 
     try {
-      (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
-        XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL, fieldName))));
+      if (isFieldIndex(fieldName)) {
+        int index = getIndexFromFieldIndex(fieldName);
+        String name = getFieldFromFieldIndex(fieldName);
+        if (StringUtils.isBlank(name)) {
+          (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
+            XPATH_ABSOLUTE_PARAGRAPH_FIELD_INDEX, index))));
+        } else {
+          (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
+            XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL_INDEX, index))));
+        }
+
+      } else {
+        (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
+          XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL, fieldName))));
+      }
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field", fieldName);
     }

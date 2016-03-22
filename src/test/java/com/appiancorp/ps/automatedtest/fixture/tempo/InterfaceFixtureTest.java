@@ -396,11 +396,17 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
 
   @Test
   public void testPopulateFieldType() throws Exception {
+    tFixture.populateFieldWith("TEXT", "[1]", new String[] { "Text index" });
+    assertTrue(tFixture.verifyFieldContains("TextField", new String[] { "Text index" }));
+
+    tFixture.populateFieldWith("PARAGRAPH", "[1]", new String[] { "Paragraph index" });
+    assertTrue(tFixture.verifyFieldContains("ParagraphField", new String[] { "Paragraph index" }));
+
     tFixture.populateFieldWith("FILE_UPLOAD", "[2]", new String[] { "C:\\AutomatedTesting\\documents\\Medium.jpg" });
     assertTrue(tFixture.verifyFieldContains("FileUploadField[2]", new String[] { "C:\\AutomatedTesting\\documents\\Medium.jpg" }));
 
     try {
-      tFixture.populateFieldWith("TEXT", "TextField", new String[] { "Value" });
+      tFixture.populateFieldWith("SELECT", "SelectField", new String[] { "Value" });
       fail("Should have thrown illegal argument exception");
     } catch (IllegalArgumentTestException e) {
     }

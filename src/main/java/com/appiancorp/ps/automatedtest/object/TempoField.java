@@ -3,6 +3,7 @@ package com.appiancorp.ps.automatedtest.object;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -17,8 +18,9 @@ import com.google.common.base.Strings;
 public class TempoField extends AppianObject {
 
   private static final Logger LOG = Logger.getLogger(TempoField.class);
-  protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT = Settings.getByConstant("xpathAbsoluteFieldLayout");
-  protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX = "(" + XPATH_ABSOLUTE_FIELD_LAYOUT + ")[%d]";
+  protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT_LABEL = Settings.getByConstant("xpathAbsoluteFieldLayoutLabel");
+  protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX = Settings.getByConstant("xpathAbsoluteFieldLayoutIndex");
+  protected static final String XPATH_ABSOLUTE_FIELD_LAYOUT_LABEL_INDEX = "(" + XPATH_ABSOLUTE_FIELD_LAYOUT_LABEL + ")[%d]";
   protected static final String XPATH_RELATIVE_READ_ONLY_FIELD = Settings.getByConstant("xpathRelativeReadOnlyField");
   protected static final String XPATH_CONCAT_ANCESTOR_FIELD_LAYOUT = Settings.getByConstant("xpathConcatAncestorFieldLayout");
   protected static final String XPATH_RELATIVE_FIELD_VALIDATION_MESSAGE_SPECIFIC_VALUE = Settings.getByConstant("xpathRelativeFieldValidationMessageSpecificValue");
@@ -26,11 +28,19 @@ public class TempoField extends AppianObject {
 
   public static WebElement getFieldLayout(String fieldName, Settings s) {
     if (isFieldIndex(fieldName)) {
-      String fName = getFieldFromFieldIndex(fieldName);
       int index = getIndexFromFieldIndex(fieldName);
-      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index)));
+      String name = getFieldFromFieldIndex(fieldName);
+      if (StringUtils.isBlank(name)) {
+        return s.getDriver().findElement(
+          By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, index)));
+      } else {
+        return s.getDriver().findElement(
+          By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_LABEL_INDEX, name, name, index)));
+      }
+
     } else {
-      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName)));
+      return s.getDriver().findElement(
+        By.xpath(String.format(XPATH_ABSOLUTE_FIELD_LAYOUT_LABEL, fieldName, fieldName)));
     }
   }
 
@@ -40,12 +50,24 @@ public class TempoField extends AppianObject {
       WebElement fieldLayout;
 
       switch (type) {
+        case TEXT:
+          fieldLayout = TempoTextField.getFieldLayout(fieldName, s);
+          break;
+
+        case PARAGRAPH:
+          fieldLayout = TempoParagraphField.getFieldLayout(fieldName, s);
+          break;
+
+        case CHECKBOX:
+          fieldLayout = TempoCheckboxField.getFieldLayout(fieldName, s);
+          break;
+
         case FILE_UPLOAD:
           fieldLayout = TempoFileUploadField.getFieldLayout(fieldName, s);
           break;
 
         default:
-          throw new IllegalArgumentException("FILE_UPLOAD is the only valid type");
+          throw new IllegalArgumentException("TEXT, PARAGRAPH, CHECKBOX, and FILE_UPLOAD are the only valid field types");
       }
 
       populate(fieldLayout, fieldName, fieldValue, s);
@@ -69,43 +91,35 @@ public class TempoField extends AppianObject {
         case TEXT:
           TempoTextField.populate(fieldLayout, fieldValue, s);
           break;
-
         case PARAGRAPH:
           TempoParagraphField.populate(fieldLayout, fieldValue, s);
           break;
-
         case SELECT:
           TempoSelectField.populate(fieldLayout, fieldValue, s);
           break;
-
         case RADIO:
           TempoRadioField.populate(fieldLayout, fieldValue, s);
           break;
-
         case CHECKBOX:
           TempoCheckboxField.populate(fieldLayout, fieldValue, s);
           break;
-
         case FILE_UPLOAD:
           TempoFileUploadField.populate(fieldLayout, fieldValue, s);
           break;
-
         case DATE:
           TempoDateField.populate(fieldLayout, fieldValue, s);
           break;
-
         case DATETIME:
           TempoDatetimeField.populate(fieldLayout, fieldValue, s);
           break;
-
         case PICKER:
           TempoPickerField.populate(fieldLayout, fieldName, fieldValue, s);
           break;
-
         default:
           throw new IllegalArgumentException("Unrecognized field type");
       }
       unfocus(s);
+
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Populate Field", fieldName, fieldValue);
     }
@@ -116,12 +130,24 @@ public class TempoField extends AppianObject {
       TempoFieldType type = getFieldTypeFromString(fieldType);
 
       switch (type) {
+        case TEXT:
+          TempoTextField.waitFor(fieldName, s);
+          break;
+
+        case PARAGRAPH:
+          TempoParagraphField.waitFor(fieldName, s);
+          break;
+
+        case CHECKBOX:
+          TempoCheckboxField.waitFor(fieldName, s);
+          break;
+
         case FILE_UPLOAD:
           TempoFileUploadField.waitFor(fieldName, s);
           break;
 
         default:
-          throw new IllegalArgumentException("FILE_UPLOAD is the only valid field type");
+          throw new IllegalArgumentException("TEXT, PARAGRAPH, CHECKBOX, and FILE_UPLOAD are the only valid field types");
       }
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field Type", fieldType, fieldName);
@@ -132,13 +158,18 @@ public class TempoField extends AppianObject {
     try {
       // Scroll the field layout into view
       if (isFieldIndex(fieldName)) {
-        String fName = getFieldFromFieldIndex(fieldName);
         int index = getIndexFromFieldIndex(fieldName);
-        (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
-          XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index))));
+        String name = getFieldFromFieldIndex(fieldName);
+        if (StringUtils.isBlank(name)) {
+          (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
+            XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, index))));
+        } else {
+          (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
+            XPATH_ABSOLUTE_FIELD_LAYOUT_LABEL_INDEX, name, name, index))));
+        }
       } else {
         (new WebDriverWait(s.getDriver(), timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
-          XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName))));
+          XPATH_ABSOLUTE_FIELD_LAYOUT_LABEL, fieldName, fieldName))));
       }
       return true;
     } catch (TimeoutException e) {
@@ -150,15 +181,19 @@ public class TempoField extends AppianObject {
 
   public static void waitFor(String fieldName, Settings s) {
     try {
-      // Scroll the field layout into view
       if (isFieldIndex(fieldName)) {
-        String fName = getFieldFromFieldIndex(fieldName);
         int index = getIndexFromFieldIndex(fieldName);
-        (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
-          XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, fName, fName, index))));
+        String name = getFieldFromFieldIndex(fieldName);
+        if (StringUtils.isBlank(name)) {
+          (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
+            XPATH_ABSOLUTE_FIELD_LAYOUT_INDEX, index))));
+        } else {
+          (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
+            XPATH_ABSOLUTE_FIELD_LAYOUT_LABEL_INDEX, name, name, index))));
+        }
       } else {
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
-          XPATH_ABSOLUTE_FIELD_LAYOUT, fieldName, fieldName))));
+          XPATH_ABSOLUTE_FIELD_LAYOUT_LABEL, fieldName, fieldName))));
       }
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Field", fieldName);
@@ -413,6 +448,7 @@ public class TempoField extends AppianObject {
   }
 
   public static TempoFieldType getFieldTypeFromString(String fieldType) {
+    fieldType = fieldType.toUpperCase();
     if (fieldType.equals("READ_ONLY"))
       return TempoFieldType.READ_ONLY;
     else if (fieldType.equals("TEXT"))
