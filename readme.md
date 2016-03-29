@@ -97,7 +97,7 @@ If your team cannot directly enhance the framework, please make sure to contact 
 1. Enter the following values:
  1. Select **Start new FitNesse instance as part of build**.
  1. Enter `TESTING_HOME` in **Java working directory**.
- 1. Enter `TESTING_HOME\fitnesse-standalone.jar` in **Path to fitnesse.jar**.
+ 1. Enter `TESTING_HOME\lib\fitnesse-standalone.jar` in **Path to fitnesse.jar**.
  1. Enter the folder in your repository containing the FitNesse wikis in **Path to FitNesseRoot**, this can be subfolders.
  1. Enter `8981` in **Port for FitNesse instance**.
  1. Enter the page for the test or suite in **Target Page**.
