@@ -13,7 +13,7 @@ To add your first "page", click the [[Edit][.FrontPage?edit]] button and add a [
 
 |'''Appian Fitnesse'''                                                                                            |
 |[[Login Test Example][.LoginTest]]                  					|''Basic Test to Test Logging into an Appian Site'' |
-|[[Automated Test Suite Example][.AutomatedTestSuite]]               	|''See Fitnesse in use for a Sample Appian Application'' |
+|[[Automated Test Suite Example][.NewTestSuite]]               	|''See Fitnesse in use for a Sample Appian Application'' |
 |[[Appian Fitnesse Cheat Sheet][.AppianFitnesseCheatSheet]]				|''List of all Fitnesse methods to be used with Appian''|
 |[[Appian Fitnesse Documentation][.AppianFitnesseDocumentation]]		|''Documentation for using Appian !-FitNesse-! Tool''|
 
