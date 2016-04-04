@@ -29,7 +29,7 @@
 |populate field|MultipleSelectField|with      |Option 1,Option 2                    |
 |populate field|RadioField         |with      |Option 1                             |
 |populate field|CheckboxField      |with      |Option 1,Option 2                    |
-|populate field|FileUploadField    |with      |C:\AutomatedTesting\documents\Low.jpg|
+|populate field|FileUploadField    |with      |${automated.testing.home}\documents\Low.jpg|
 
 !|script                                     |
 |collapse section|Section 1                 |
@@ -51,7 +51,7 @@
 !| script                                                                                             |
 |populate field          |[1]         |in section|Section 3|with|noLabel                              |
 |populate field          |TextField[2]|with      |text2                                               |
-|populate                |FILE_UPLOAD |field     |[2]      |with|C:\AutomatedTesting\documents\Low.jpg|
+|populate                |FILE_UPLOAD |field     |[2]      |with|${automated.testing.home}\documents\Low.jpg|
 |click on radio option   |Click Me!                                                                   |
 |click on radio option   |Click Me[2]                                                                 |
 |click on checkbox option|Click Me Too!                                                               |
@@ -88,8 +88,8 @@
 |populate grid|EditableGrid[2]|column|RadioField     |row|[2]|with|Option 2                              |
 |populate grid|EditableGrid[2]|column|[4]            |row|[1]|with|Option 1,Option 2                     |
 |populate grid|EditableGrid[2]|column|[4]            |row|[2]|with|Option 2                              |
-|populate grid|EditableGrid[2]|column|FileUploadField|row|[1]|with|C:\AutomatedTesting\documents\Low.jpg |
-|populate grid|EditableGrid[2]|column|FileUploadField|row|[2]|with|C:\AutomatedTesting\documents\High.jpg|
+|populate grid|EditableGrid[2]|column|FileUploadField|row|[1]|with|${automated.testing.home}\documents\Low.jpg |
+|populate grid|EditableGrid[2]|column|FileUploadField|row|[2]|with|${automated.testing.home}\documents\High.jpg|
 ***!
 !*** Section 5 Populating an editable grid by Name and Reference number for picker fields by column reference number
 !| script                                                             |

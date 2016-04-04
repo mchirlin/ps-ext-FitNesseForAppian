@@ -1,7 +1,7 @@
 !3 INITIALIZATION CODE
 ![~
 !define TEST_SYSTEM {slim} 																				~ Uses FitNesse SliM to run tests
-!path C:\AutomatedTesting\**.jar 																		~ Defines classpath for fixtures
+!path C:\${automated.testing.home}\**.jar 																		~ Defines classpath for fixtures
 | script | com.appiancorp.ps.automatedtest.fixture.TempoFixture | 										~ Initializes fixture to be used for the rest of the test
 | setup selenium web driver with | BROWSER_NAME | browser | 											~ Initializes Selenium Web Driver and opens browser
 ]!

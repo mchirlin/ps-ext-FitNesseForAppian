@@ -57,7 +57,7 @@ public class BaseFixtureTest extends FixtureTest {
 
   @Test
   public void testSetScreenshotPathTo() throws Exception {
-    bFixture.setScreenshotPathTo("C:\\AutomatedTesting\\screenshots\\");
+    bFixture.setScreenshotPathTo(AUTOMATED_TESTING_HOME + "\\screenshots\\");
   }
 
   @Test
@@ -124,6 +124,13 @@ public class BaseFixtureTest extends FixtureTest {
       fail("Should have thrown illegal argument exception");
     } catch (IllegalArgumentTestException e) {
     }
+  }
+
+  @Test
+  public void testSetupSeleniumWebDriverWithBrowserAtLocation() {
+    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    bFixture.open("http://www.google.com");
+    bFixture.tearDownSeleniumWebDriver();
   }
 
   @Test

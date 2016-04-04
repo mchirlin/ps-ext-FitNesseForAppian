@@ -39,7 +39,7 @@ public class Settings {
 
   private String dataSourceName = null;
 
-  private String screenshotPath = "C:\\AutomatedTesting\\screenshots\\";
+  private String screenshotPath;
   private Boolean takeErrorScreenshots = false;
   private Boolean stopOnError = false;
   private int errorNumber = 1;
