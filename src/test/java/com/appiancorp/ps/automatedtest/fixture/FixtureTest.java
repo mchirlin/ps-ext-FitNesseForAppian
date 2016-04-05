@@ -10,4 +10,5 @@ public class FixtureTest {
   protected static String TEST_PASSWORD = "password1";
   protected static Integer TEST_TIMEOUT = 30;
 
+  protected static String AUTOMATED_TESTING_HOME = "C:\\AutomatedTesting";
 }

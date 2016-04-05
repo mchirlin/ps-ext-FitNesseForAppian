@@ -291,20 +291,20 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
 
   @Test
   public void testFileUploadField() throws Exception {
-    tFixture.populateFieldWith("FileUploadField", new String[] { "C:\\AutomatedTesting\\documents\\Low.jpg" });
-    assertTrue(tFixture.verifyFieldContains("FileUploadField", new String[] { "C:\\AutomatedTesting\\documents\\Low.jpg" }));
+    tFixture.populateFieldWith("FileUploadField", new String[] { AUTOMATED_TESTING_HOME + "\\documents\\Low.jpg" });
+    assertTrue(tFixture.verifyFieldContains("FileUploadField", new String[] { AUTOMATED_TESTING_HOME + "\\documents\\Low.jpg" }));
     assertEquals("Low.jpg", tFixture.getFieldValue("FileUploadField")); // Notice this doesn't include the entire path
 
     // Grid
     tFixture.populateGridColumnRowWith("EditableGrid[2]", "FileUploadField", "[1]",
-      new String[] { "C:\\AutomatedTesting\\documents\\Medium.jpg" });
+      new String[] { AUTOMATED_TESTING_HOME + "\\documents\\Medium.jpg" });
     assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "FileUploadField", "[1]",
-      new String[] { "C:\\AutomatedTesting\\documents\\Medium.jpg" }));
+      new String[] { AUTOMATED_TESTING_HOME + "\\documents\\Medium.jpg" }));
     assertEquals("Medium.jpg", tFixture.getGridColumnRowValue("EditableGrid[2]", "FileUploadField", "[1]"));
 
-    // tFixture.populateGridColumnRowWith("EditableGrid[2]", "[5]", "[2]", new String[]{"C:\\AutomatedTesting\\documents\\High.jpg"});
+    // tFixture.populateGridColumnRowWith("EditableGrid[2]", "[5]", "[2]", new String[]{AUTOMATED_TESTING_HOME + "\\documents\\High.jpg"});
     // assertTrue(tFixture.verifyGridColumnRowContains("EditableGrid[2]", "[5]", "[2]", new
-    // String[]{"C:\\AutomatedTesting\\documents\\High.jpg"}));
+    // String[]{AUTOMATED_TESTING_HOME + "\\documents\\High.jpg"}));
     // assertEquals("High.jpg", tFixture.getGridColumnRowValue("EditableGrid[2]", "[5]", "[2]"));
 
     // TODO Clear
@@ -402,8 +402,8 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
     tFixture.populateFieldWith("PARAGRAPH", "[1]", new String[] { "Paragraph index" });
     assertTrue(tFixture.verifyFieldContains("ParagraphField", new String[] { "Paragraph index" }));
 
-    tFixture.populateFieldWith("FILE_UPLOAD", "[2]", new String[] { "C:\\AutomatedTesting\\documents\\Medium.jpg" });
-    assertTrue(tFixture.verifyFieldContains("FileUploadField[2]", new String[] { "C:\\AutomatedTesting\\documents\\Medium.jpg" }));
+    tFixture.populateFieldWith("FILE_UPLOAD", "[2]", new String[] { AUTOMATED_TESTING_HOME + "\\documents\\Medium.jpg" });
+    assertTrue(tFixture.verifyFieldContains("FileUploadField[2]", new String[] { AUTOMATED_TESTING_HOME + "\\documents\\Medium.jpg" }));
 
     try {
       tFixture.populateFieldWith("SELECT", "SelectField", new String[] { "Value" });

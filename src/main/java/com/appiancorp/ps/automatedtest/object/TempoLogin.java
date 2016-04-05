@@ -29,7 +29,7 @@ public class TempoLogin extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR LOG OUT");
 
     try {
-      (new WebDriverWait(s.getDriver(), 30)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_ABSOLUTE_MAIN_BAR)));
+      (new WebDriverWait(s.getDriver(), 60)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPATH_ABSOLUTE_MAIN_BAR)));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Logout link");
     }

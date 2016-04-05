@@ -1,15 +1,7 @@
-!3 Steps run the example test suite
- 1 Create users test.user (test user) and user.test (user test) into your Appian Instance and login to update password.
- 1 Import example application from the provided zip file into your Appian instance (ensure that you configure the data store)
- 1 Verify test user and user test are in the AUT all viewers group.
- 1 Update the Appian URL, Username, and Password in the [[Setup][NewTestSuite.SetUp]] test case below.  (You can use test.user or user.test)
- 1 Click on the Suite link above.
-
-!5 WARNING: Do not touch the Firefox Browser that opens while running, this may cause some issues with the test suite.
-
 !**> FitNesse Configurations
 !define TEST_SYSTEM {slim}
-!path C:\AutomatedTesting\**.jar
+!path ${automated.testing.home}
+!path ${automated.testing.home}\**.jar
 **!
 
 !contents -R2 -g -p -f -h

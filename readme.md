@@ -41,7 +41,7 @@ If your team cannot directly enhance the framework, please make sure to contact 
 1. Run `start.bat` to install and run FitNesse. Installation only takes 30 seconds.
  * This will also start FitNesse, to stop type ctrl+C.
 
-**NOTE:** if you choose a different location for *TESTING_HOME* than `C:\AutomatedTesting`, then you must update the classpath variable in the examples to refer to the correct location.
+**NOTE:** if you choose a different location for *TESTING_HOME* than `C:\AutomatedTesting`, then you must update configs/custom.properties to refer to the correct location.
 
 #### Running Your First FitNesse Test ####
 
@@ -50,7 +50,6 @@ If your team cannot directly enhance the framework, please make sure to contact 
  1. Run `start.bat`.
 1. Navigate to `http://localhost:8980/LoginTest`.
 1. Click **Edit** to modify test and update the following variables:
- * Update the !path if your *TESTING_HOME* does not match `C:\AutomatedTesting`
  * Update the *APPIAN\_URL*, *APPIAN\_LOCALE* (en\_US or en\_GB), and *APPIAN\_VERSION* (7.10, 7.11, or 16.1)
  * Update the Username *REPLACE\_USERNAME* and Password *REPLACE\_PASSWORD*'
 1. Click **Save**.

@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.fixture;
 
+import java.io.File;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -10,12 +11,15 @@ import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 /*
  * import org.openqa.selenium.phantomjs.PhantomJSDriver;
@@ -26,6 +30,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.appiancorp.ps.automatedtest.common.Constants;
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
 import com.appiancorp.ps.automatedtest.object.AppianObject;
@@ -43,7 +48,7 @@ public class BaseFixture {
 
   private static final Logger LOG = Logger.getLogger(BaseFixture.class);
 
-  protected Properties prop = new Properties();
+  private Properties prop = new Properties();
 
   protected Settings settings;
 
@@ -66,14 +71,29 @@ public class BaseFixture {
       FirefoxProfile prof = new FirefoxProfile();
       prof.setPreference("browser.startup.homepage_override.mstone", "ignore");
       prof.setPreference("startup.homepage_welcome_url.additional", "about:blank");
-      settings.setDriver(new FirefoxDriver(prof));
+      if (!StringUtils.isBlank(prop.getProperty(Constants.FIREFOX_BROWSER_HOME))) {
+        File pathToBinary = new File(prop.getProperty(Constants.FIREFOX_BROWSER_HOME));
+        FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+        settings.setDriver(new FirefoxDriver(ffBinary, prof));
+      } else {
+        settings.setDriver(new FirefoxDriver(prof));
+      }
     } else if (browser.equals("CHROME")) {
-      System.setProperty("webdriver.chrome.driver", prop.getProperty("webdriver.chrome.driver"));
+      System.setProperty("webdriver.chrome.driver", prop.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
+        Constants.CHROME_DRIVER);
+
       System.setProperty("webdriver.chrome.args", "--disable-logging");
       System.setProperty("webdriver.chrome.silentOutput", "true");
-      settings.setDriver(new ChromeDriver());
+      if (!StringUtils.isBlank(prop.getProperty(Constants.CHROME_BROWSER_HOME))) {
+        ChromeOptions co = new ChromeOptions();
+        co.setBinary(prop.getProperty(Constants.CHROME_BROWSER_HOME));
+        settings.setDriver(new ChromeDriver(co));
+      } else {
+        settings.setDriver(new ChromeDriver());
+      }
     } else if (browser.equals("IE")) {
-      System.setProperty("webdriver.ie.driver", prop.getProperty("webdriver.ie.driver"));
+      System.setProperty("webdriver.ie.driver", prop.getProperty("automated.testing.home") + Constants.DRIVERS_LOCATION +
+        Constants.IE_DRIVER);
       System.setProperty("webdriver.ie.driver.silent", "true");
       DesiredCapabilities dCaps = new DesiredCapabilities();
       dCaps.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
@@ -216,7 +236,7 @@ public class BaseFixture {
 
   /**
    * Sets the path on the automated test server where screenshots will be placed. <br>
-   * FitNesse Example: <code>| set screenshot path to | C:\AutomatedTesting\screenshots\ |</code>
+   * FitNesse Example: <code>| set screenshot path to | AUTOMATED_TESTING_HOME\screenshots\ |</code>
    * 
    * @param path
    *          Path to save screen shots
@@ -248,6 +268,9 @@ public class BaseFixture {
    *          true or false
    */
   public void setTakeErrorScreenshotsTo(Boolean bool) {
+    if (settings.getScreenshotPath() == null) {
+      settings.setScreenshotPath(prop.getProperty("automated.testing.home") + "\\screenshots");
+    }
     settings.setTakeErrorScreenshots(bool);
   }
 
@@ -670,7 +693,7 @@ public class BaseFixture {
   }
 
   private void loadProperties() {
-    String propFile = "automatedtesting.properties";
+    String propFile = "configs/custom.properties";
     try {
       InputStream inputStream = BaseFixture.class.getClassLoader().getResourceAsStream(propFile);
 

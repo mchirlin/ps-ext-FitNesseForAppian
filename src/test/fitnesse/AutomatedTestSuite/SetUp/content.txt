@@ -18,7 +18,7 @@
 !*** Screenshot Configurations
 !| script                                                            |
 |set take error screenshots to|true                                  |
-|set screenshot path to       |C:\AutomatedTesting\screenshots\$randString\|
+|set screenshot path to       |${automated.testing.home}\screenshots\$randString\|
 ***!
 !*** Login information
 !| script                                            |

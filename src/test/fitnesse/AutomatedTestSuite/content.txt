@@ -1,6 +1,7 @@
 !**> FitNesse Configurations
 !define TEST_SYSTEM {slim}
-!path C:\AutomatedTesting\**.jar
+!path ${automated.testing.home}
+!path ${automated.testing.home}\**.jar
 **!
 
 !contents -R2 -g -p -f -h

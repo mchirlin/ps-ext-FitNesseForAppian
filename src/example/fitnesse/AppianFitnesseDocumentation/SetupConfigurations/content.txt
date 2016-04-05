@@ -2,7 +2,7 @@
 
 !3 These variables are required for every test script that you write:
  * '''variable defined: TEST_SYSTEM=slim''' 
- * '''classpath: C:\AutomatedTesting\**.jar'''
+ * '''classpath: ${automated.testing.home}\**.jar'''
  * '''!| script| com.appiancorp.ps.automatedtest.fixture.TempoFixture|'''
  * '''|setup selenium web driver with browser|BROWSER| '''
   * Replace with FIREFOX, IE or CHROME
