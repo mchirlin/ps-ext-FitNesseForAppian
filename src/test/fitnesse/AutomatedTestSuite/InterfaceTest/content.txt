@@ -306,6 +306,10 @@
 | verify link | Safe Link | URL contains | google.com |
 | $safeLinkURL= | get link | Safe Link | URL 		  |
 |populate field|TextField         |with|$safeLinkURL  |	
+=======
+!*** Set Random Alphabet String Variable in section 8
+!| script  																															|
+|populate field          |RandomAlphabetTextField|with      |$randAlphabetString 				                                    |	
 ***!
 !*** Close Form
 !|script                |
