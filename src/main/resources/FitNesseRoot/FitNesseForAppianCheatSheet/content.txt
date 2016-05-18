@@ -95,6 +95,9 @@
 | verify field | FIELD_LABEL_OR_INDEX | is not present | 												: Verify field with label is not present
 | verify field | FIELD_LABEL_OR_INDEX | contains validation message | VALIDATION_MESSAGE(S) |			: Verify field with label contains a specific validation message
 | verify section | SECTION_NAME | contains validation message | VALIDATION_MESSAGE(S) |					: Verify section with label contains a specific validation message
+| verify link field | LINK_NAME | is present |															: Verify link field is present
+| verify link | LINK_NAME | URL contains | URL_TEXT |													: Verify link field's URL contains specific text
+| $VARIABLE_NAME= | get link | LINK_NAME | url |														: Use $VARIABLE_NAME to access variable																	: 
 | populate grid | GRID_NAME | column | COLUMN_NAME_OR_NUMBER | row | ROW_NUMBER | with | VALUE(S) | 	: Populate a grid field with a value
 | verify grid | GRID_NAME | column | COLUMN_NAME_OR_NUMBER | row | ROW_NUMBER | contains | VALUE(S) | 	: Verify a grid field contains a value
 | select grid | GRID_NAME | row | ROW_NUMBER | 															: Selects row in grid

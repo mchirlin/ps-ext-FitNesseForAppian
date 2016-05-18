@@ -300,6 +300,13 @@
 |verify field   |ValidationField|contains validation message|Value must be greater than 0,Value must be even                        |
 |check          |get field      |ValidationField            |validation message|Value must be greater than 0,Value must be even     |
 ***!
+!*** Verify link presence, URL and save URL in Section 7 - Link Field
+!| script                                        	  |
+| verify link field | Safe Link | is present 		  |
+| verify link | Safe Link | URL contains | google.com |
+| $safeLinkURL= | get link | Safe Link | URL 		  |
+|populate field|TextField         |with|$safeLinkURL  |	
+***!
 !*** Close Form
 !|script                |
 |click on button|Submit|
