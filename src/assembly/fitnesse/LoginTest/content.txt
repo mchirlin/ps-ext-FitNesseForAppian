@@ -5,7 +5,6 @@
 
 !*** FitNesse Configurations
 !define TEST_SYSTEM {slim}
-!path ${automated.testing.home}
 !path ${automated.testing.home}\**.jar
 ***!
 !*** Initialization

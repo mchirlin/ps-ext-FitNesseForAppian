@@ -158,7 +158,7 @@ All methods that are callable in FitNesse are derived from the `appian-fixture-x
 #### Local ####
 1. Run `mvn verify` to run integration tests.
 1. Run `mvn clean package` (add `-DskipTests=true` to skip unit tests).
-1. Final JAR's are placed in the `/target/` folder.
+1. Final JAR and Package are placed in the `/target/` folder.
 
 #### Release ####
 A new release can be prepared by completing the following steps:
@@ -177,16 +177,5 @@ As `mvn release:prepare` only commits the updated pom.xml files locally, they ne
 The final release JAR's are placed in the `/target/` folder of each module.
 
 #### Create New Installation Package ####
-1. Download `AutomatedTesting.zip` and `AutomatedTesting-X.X.X-Patch.zip` from previous release.
-1. Explode `AutomatedTesting-x.x.x-Patch.zip` and rename folder to current release.
-1. Update `updates.zip`:
- * Add new jars or delete and replace existing jars with new versions.
- * Add new browser drivers or delete a replace existing drivers with new versions.
- * Replace contents of existing `updates\FitNesseRoot` with `REPO\src\test\example\fitnesse` directory contents.<br>
-**NOTE**: The file structure of the new or updated files should match the file structure in `AutomatedTesting.zip`.
-1. Update `deleteFiles.bat`:
- 1. Add a line at the top of the file: `rem X.X.X`
- 2. Add a line for each file that needs to be deleted from the previous update, this usually will be due to an updated version of a jar or driver.<br>For file deletion use: `del 2>nul /F "FILE_NAME.EXT"`<br>For folder deletion use: `rmdir 2>nul /S /Q "FOLDER\SUBFOLDER"`
-1. Explode `AutomatedTesting.zip` and run patch instructions to perform updates.
-1. Repackage `AutomatedTesting.zip` and `AutomatedTesting-X.X.X-Patch.zip`.
-1. Upload new packages to both the GitHub release and Share Component.
+1. Run `mvn package`
+1. Upload new package to both the GitHub release and Share Component.

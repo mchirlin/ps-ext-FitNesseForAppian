@@ -24,20 +24,14 @@
     </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
-      <version>2.48.2</version>
-    </dependency>  
+      <artifactId>selenium-server</artifactId>
+      <version>2.53.0</version>
+    </dependency>
     <dependency>
-	  <groupId>org.json</groupId>
-	  <artifactId>json</artifactId>
-	  <version>20151123</version>
-	</dependency>
-	<dependency>
-	<groupId>junit</groupId>
-	  <artifactId>junit</artifactId>
-	  <version>4.12</version>
-	  <scope>test</scope>
-	</dependency>
+      <groupId>org.fitnesse</groupId>
+      <artifactId>fitnesse</artifactId>
+      <version>20160515</version>
+    </dependency> 
 	<dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
@@ -49,22 +43,29 @@
 		<artifactId>commons-lang3</artifactId>
 		<version>3.0</version>
 	</dependency>
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.12</version>
+		<scope>test</scope>
+	</dependency>
   </dependencies>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
     <testSourceDirectory>src/test/java</testSourceDirectory>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-          <!-- The properties files will also be included in the Suite, so shouldn't be duplicated here -->
-          <exclude>**/*.properties</exclude>
-        </excludes>
-      </resource>
-    </resources>
     <plugins>
-    	<plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <excludes>
+            <exclude>configs/**</exclude>
+            <exclude>log4j.properties</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
           <artifactId>maven-release-plugin</artifactId>
           <version>2.4.2</version>
           <dependencies>
@@ -87,35 +88,22 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.19.1</version>
-        <!-- <configuration>
-          <parallel>classes</parallel>
-          <useUnlimitedThreads>true</useUnlimitedThreads>
-        </configuration> -->
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.10</version>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.5.3</version>
+        <configuration>
+          <descriptor>src/assembly/zip.xml</descriptor>
+          <finalName>FitNesseForAppian</finalName>
+          <appendAssemblyId>true</appendAssemblyId>
+        </configuration>
         <executions>
           <execution>
-            <id>copy-installed</id>
-            <phase>install</phase>
+            <id>create-archive</id>
+            <phase>package</phase>
             <goals>
-              <goal>copy</goal>
+              <goal>single</goal>
             </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>${project.groupId}</groupId>
-                  <artifactId>${project.artifactId}</artifactId>
-                  <version>${project.version}</version>
-                  <type>${project.packaging}</type>
-                  <overWrite>true</overWrite>
-                  <destFileName>appian-fixtures.jar</destFileName>
-                </artifactItem>
-              </artifactItems>
-              <outputDirectory>C:\AutomatedTesting\lib\appian</outputDirectory>
-            </configuration>
           </execution>
         </executions>
       </plugin>
