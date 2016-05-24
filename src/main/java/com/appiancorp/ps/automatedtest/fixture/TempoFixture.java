@@ -22,7 +22,7 @@ import com.appiancorp.ps.automatedtest.object.TempoSection;
 import com.appiancorp.ps.automatedtest.object.TempoTask;
 
 /**
- * This is the tempo class for integrating Appian and Fitnesse.
+ * This is the tempo class for integrating Appian and FitNesse.
  * This class contains fixture commands which are specific to the Tempo interface
  * 
  * @author michael.chirlin

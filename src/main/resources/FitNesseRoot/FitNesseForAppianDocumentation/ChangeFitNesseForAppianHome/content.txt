@@ -1,0 +1,7 @@
+!2 Change ''!-FitNesse-! for Appian'' Home Directory
+The default installation directory of '''${automated.testing.home}''' can updated by following these steps:
+
+ 1 Open TESTING_HOME\configs\custom.properties in a text editor.
+ 1 Update !-automated.testing.home-! to refer to the correct TESTING_HOME directory.
+ 
+'''Note:''' Make sure to escape backslashes, e.g. C:\\FitNesseForAppian rather than C:\FitNesseForAppian

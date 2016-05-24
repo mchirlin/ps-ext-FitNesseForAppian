@@ -1,0 +1,61 @@
+!1 Creating ''!-FitNesse-! for Appian'' Pages 
+New pages can be created by using the header and clicking on Add.  You can add 3 types of pages:
+ * Test Pages
+ * Suite Pages
+ * Static Pages
+!2 Test Page
+Test pages consist of a test script that can be executed by the tool on the 
+
+The first line of your test script will almost always be '''|script|'''.  '''|script|''' will denote to FitNesse that the following rows are all steps in the test script.
+
+Use the [[''!-FitNesse-! for Appian'' Cheat Sheet][.FitNesseForAppianCheatSheet]] to locate the appropriate method you need to use.  Implement each interaction with Appian by using a specific method that you can find in the [[''!-FitNesse-! for Appian'' Cheat Sheet][.FitNesseForAppianCheatSheet]].
+
+Note: FitNesse wiki language is case sensitive. Methods  are always lower case, and inputs to the methods must match what is displayed on the Appian interface.  
+!3 Date and Date Time Fields 
+Date and Date Time should be formatted in your test scripts as 
+ * YYYY-MM-DD HH:mm
+  * 24 Hour Clock means there is no need for AM or PM
+ * YYYY-MM-DD 
+
+Additionally, if you declare '''|set start time|''' in your setup configuration, then you are able to create dates by using + Number of Time units.  For example, use '''+5 days''' to input a date 5 days from today.   
+
+Note: Date Time fields are considered one field when inputting into FitNesse
+
+!3 File Upload
+When populating a file upload field, the location of the file is required (e.g. ${automated.testing.home}\documents\low risk.jpg).  There is no need to click on the '''Choose File''' button.
+
+!3 [Indexing]
+Indexing is useful for interacting with fields without a label or when multiple fields have the same label.  Indexes start at 1 and can be called like [1].  Indexing can make a test script more fragile when updating the interface. 
+
+!2 Suite Pages
+A suite is a collection of test pages and static pages that are related to each other.  Test pages within a suite will contain any !-SetUp, TearDown and ScenarioLibrary-! pages created within the suite.
+
+!2 Static Pages 
+A static page is a content page. Static pages can be used to give additional information and context around a suite.  
+
+!3 Certain Static Pages are keywords for FitNesse 
+
+ * '''!-SetUp-!'''
+  * A !-SetUp-! page is a static page used to define the actions that will happen at the beginning of every test script run within a suite
+  * Typical methods included in a setup are listed in the Setup Configuration section
+
+ * '''!-TearDown-!'''
+  * A !-TearDown-! is a static page that defines the actions that happen at the end of every test scriptrun within a suite
+  * Typical methods used a !-Teardown-! include
+   * '''| logout |''' - logs out of the appian instance
+   * '''| tear down selenium web driver |''' - Closes the browser 
+ * '''!-ScenarioLibrary-!'''
+  * A !-ScenarioLibrary-! is a static page that contains all the available scenarios for a suite
+  * Scenarios are reusable methods that are created specifically by using !-FitNesse! for Appian methods to perform actions used multiple times in a test page or suite
+  * ADD LINK TO CREATING SCENARIOS
+!2 Executing Your Test or Suite
+When a Suite or Test page is displayed, the FitNesse header will say Suite or Test, respectively.  When in a Suite, clicking Suite will run all test pages that exist in the suite.  Within a test page, only the test page will run.
+!2 Test Script Validation Types
+Colors of Highlighted Fields on Results Page:
+ * Red means that there was a failure of the test (e.g. element was recognized but not populated).
+ * Yellow means that there was an error with the code (e.g. code is missing a |script| line, the field was not found on the page, or a system error).
+ * Green means that this line ran correctly.
+
+Test does not start: If the error below appears, simply click on Test/Suite again.
+
+!img -w 750 http://files/images/FitNesse-error.png

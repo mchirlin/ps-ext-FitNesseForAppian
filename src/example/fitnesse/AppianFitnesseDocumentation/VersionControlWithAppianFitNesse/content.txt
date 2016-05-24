@@ -1,9 +1,0 @@
-!2 Using Version Control with Appian FitNesse Test Scripts
-
-Use of a version control system in conjunction with the Appian FitNesse is highly recommended. The repository directory '''(<TESTING_HOME>/FitNesseRoot)''' contains all test scripts and should be version controlled using your preferred version control mechanism, such as [[Git][http://www.git-scm.com/]].
-
-The benefits of version controlling your test scripts include, but are not limited to:
- * Easy collaboration between testers and developers
- * Tracked history of changes in the scripts
- * Backup of test scripts
- * Accessibility across environments

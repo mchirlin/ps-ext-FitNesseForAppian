@@ -1,0 +1,21 @@
+!3 Please fill out the following before testing
+ * If your TESTING_HOME is located somewhere other than ${automated.testing.home}, update the custom.properties file in TESTING_HOME/configs
+ * Update the Appian URL (REPLACE_APPIAN_URL), Appian Locale (en_US or en_GB), and Appian Version (7.10, 7.11, or 16.1)
+ * Update the Username (REPLACE_USERNAME) and Password (REPLACE_PASSWORD)
+
+!*** FitNesse Configurations
+!define TEST_SYSTEM {slim}
+!path ${automated.testing.home}\**.jar
+***!
+!*** Initialization
+!| script | com.appiancorp.ps.automatedtest.fixture.TempoFixture |
+| setup selenium web driver with browser | FIREFOX |
+| set appian url to | REPLACE_APPIAN_URL |
+| set appian version to | APPIAN_VERSION |
+| set appian locale to | APPIAN_LOCALE |
+***!
+!*** Login to Tempo and go to Records
+!| script |
+| login with username | REPLACE_USERNAME | and password | REPLACE_PASSWORD |
+| click on menu | Records |
+***!
