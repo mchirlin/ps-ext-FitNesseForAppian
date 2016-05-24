@@ -1,0 +1,8 @@
+!2 Change Appian FitNesse Root Directory
+The default root directory for Appian FitNesse is ${automated.testing.home}.  This can be updated by following these steps:
+ 1 Open ${automated.testing.home}\fitnesse.properties in a text editor.
+ 1 Update !-FitNesseRootDir-! to refer to the repository containing the !-FitNesseRoot-! folder.  This folder contains the contents of the test scripts within !-FitNesse-!.
+ 1 Update !-FitNesseRoot-! to refer to the folder name containing the wikis. 
+  * !img http://files/images/Fitnesse-Properties.png
+ 1 Next time you use ${automated.testing.home}\start.bat the wikis will be pulled directly from the repo folders.
+   !img http://files/images/Fitnesse-Start.png

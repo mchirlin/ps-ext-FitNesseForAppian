@@ -7,10 +7,6 @@
   </formats>
   <fileSets>
     <fileSet>
-      <directory>${project.basedir}/src/assembly/fitnesse</directory>
-      <outputDirectory>FitNesseRoot</outputDirectory>
-    </fileSet>
-    <fileSet>
       <directory>${project.basedir}/src/assembly/resources</directory>
       <outputDirectory/>
     </fileSet>

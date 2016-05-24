@@ -1,6 +1,0 @@
-!**> FitNesse Configurations
-!define TEST_SYSTEM {slim}
-!path ${automated.testing.home}\**.jar
-**!
-
-!contents -R2 -g -p -f -h

@@ -1,0 +1,30 @@
+!3 Please fill out the following
+ * Update the Appian URL (REPLACE_APPIAN_URL), Appian Locale (en_US or en_GB), and Appian Version (7.10, 7.11, or 16.1)
+ * Update the Username (REPLACE_USERNAME) and Password (REPLACE_PASSWORD)
+
+!*** Initialization
+!| script                              |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|setup selenium web driver with browser|FIREFOX                                             |
+|set appian url to                     |REPLACE_APPIAN_URL                                  |
+|set appian version to                 |REPLACE_APPPIAN_VERSION                             |
+|set appian locale to                  |REPLACE_APPIAN_LOCALE                               |
+|set stop on error to                  |true                                                |
+|set timeout seconds to                |20                                                  |
+|set start datetime                                                                         |
+***!
+!*** Set up variables
+|script                                                   |
+|$randString=|get random string      |5                   |
+|$randInt=   |get random integer from|0  |to|100          |
+|$randDec=   |get random decimal from|0.0|to|100.00|with|4|
+|$randDate=  |get random integer from|25 |to|50           |
+***!
+!*** Screenshot Configurations
+!| script                                                                  |
+|set take error screenshots to|true                                        |
+|set screenshot path to       |${automated.testing.home}\screenshots\$randString\|
+***!
+!*** Login information
+!| script                                                          |
+|login with username|REPLACE_USERNAME|and password|REPLACE_PASSWORD|
+***!

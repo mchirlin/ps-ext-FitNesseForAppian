@@ -1,0 +1,62 @@
+!*** Open Actions
+|script                                 |
+|click on menu  |Actions                |
+|click on action|Automated Testing Input|
+***!
+!*** Select task
+|script                                            |
+|click on menu|Tasks                               |
+|verify task  |Input Automated Test Data|is present|
+|click on task|Input Automated Test Data           |
+***!
+!*** Verify Page Title
+|script                                           |
+|check|get form title|Automated Testing Data Input|
+***!
+!*** Input Data
+|script                                                                                      |
+|populate AUT form with title|$randString|quantity|5|price|123.45|start date|2016-11-15 10:00|
+***!
+!*** Check/Verify Input Data
+|script                                                                                           |
+|verify AUT form contains title|$randString|quantity|5|price|123.45|start date|2016-11-15 10:00   |
+|check AUT form against title  |$randString|quantity|5|price|123.45|start date|11/15/2016 10:00 AM|
+# en_GB
+# | check AUT form against title | $randString | quantity | 5 | price | 123.45 | start date | 15/11/2016 10:00 |
+***!
+!*** Submit form
+|script                |
+|click on button|Submit|
+***!
+!*** Check News 
+|script                                                                         |
+|click on menu                   |News                                          |
+|verify news feed containing text|$randString|is present                        |
+|verify news feed containing text|$randString|tagged with|$randString|is present|
+***!
+!*** Check/Verify Record Contents
+|script                                                                                                |
+|click on news feed            |$randString|record tag|$randString                                     |
+|verify AUT form contains title|$randString|quantity  |5|price|123.45|start date|2016-11-15 10:00      |
+|check AUT form against title  |$randString|quantity  |5|price|123.45|start date|Nov 15, 2016, 10:00 AM|
+# en_GB
+# | check AUT form against title | $randString | quantity | 5 | price | 123.45 | start date | 15 Nov 2016 10:00 |
+***!
+!*** Access related action link from record
+|script                                            |
+|click on record related action|AUT Data Input Test|
+|click on button               |Cancel             |
+***!
+!*** Access related action link from Related Actions Menu
+|script                                                       |
+|click on record view          |Related Actions               |
+|verify record related action  |AUT Data Input Test|is present|
+|click on record related action|AUT Data Input Test           |
+***!
+!*** Edit Record and verify record has updated
+|script                                                                                                      |
+|populate AUT form with title  |$randString|quantity|$randInt|price|$randDec|start date|+$randDate days|
+|click on button               |Submit                                                                       |
+|click on record view          |Summary                                                                      |
+|verify AUT form contains title|$randString|quantity|$randInt|price|$randDec|start date|+$randDate days|
+***!
