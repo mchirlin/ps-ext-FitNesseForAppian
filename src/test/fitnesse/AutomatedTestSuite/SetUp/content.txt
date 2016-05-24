@@ -22,5 +22,5 @@
 ***!
 !*** Login information
 !| script                                            |
-|login with username|test.user|and password|password1|
+|login with username|test.user|and password|password2|
 ***!

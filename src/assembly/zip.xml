@@ -7,10 +7,6 @@
   </formats>
   <fileSets>
     <fileSet>
-      <directory>${project.basedir}/src/assembly/resources</directory>
-      <outputDirectory/>
-    </fileSet>
-    <fileSet>
       <directory>${project.basedir}/src/main/resources</directory>
       <outputDirectory/>
       <excludes>
@@ -31,6 +27,15 @@
       <includes>
         <include>*:*</include>
       </includes>
+      <excludes>
+		<!-- FitNesse Dependencies  (using Standalone) -->
+        <exclude>org.htmlparser:*</exclude>
+        <exclude>org.apache.velocity:velocity</exclude>
+        <exclude>commons-lang:commons-lang</exclude>
+        <exclude>commons-collections:commons-collections</exclude>
+        <exclude>org.json:json</exclude>
+        <exclude>com.googlecode.java-diff-utils:diffutils</exclude>
+      </excludes>
       <useProjectArtifact>false</useProjectArtifact>
     </dependencySet>
   </dependencySets>

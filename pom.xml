@@ -2,9 +2,9 @@
   
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.appiancorp.ps.automatedtest</groupId>
-  <artifactId>appian-fixtures</artifactId>
+  <artifactId>fitnesse-for-appian</artifactId>
   <version>1.2.6-SNAPSHOT</version>
-  <name>Automated Test Framework</name>
+  <name>FitNesse for Appian</name>
   <url>https://github.com/appianps/ps-ext-AutomatedTestFramework</url>
   
   <scm>
@@ -31,6 +31,7 @@
       <groupId>org.fitnesse</groupId>
       <artifactId>fitnesse</artifactId>
       <version>20160515</version>
+      <classifier>standalone</classifier>
     </dependency> 
 	<dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -53,6 +54,12 @@
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
     <testSourceDirectory>src/test/java</testSourceDirectory>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
