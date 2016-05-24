@@ -38,7 +38,7 @@ import com.appiancorp.ps.automatedtest.object.Screenshot;
 import com.appiancorp.ps.automatedtest.object.TempoLogin;
 
 /**
- * This is the base class for integrating Appian and Fitnesse.
+ * This is the base class for integrating Appian and FitNesse.
  * This class contains fixture commands which are generic to Appian tests.
  * 
  * @author henry.chandra

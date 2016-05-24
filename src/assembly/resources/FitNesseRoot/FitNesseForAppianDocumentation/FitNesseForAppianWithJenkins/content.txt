@@ -41,7 +41,7 @@
   * Set '''HTTP Timeout''' and '''Test Timeout''' high enough that the tests will not timeout.
   * Enter fitnesse-results.xml in '''Path to fitnesse xml''' results file. 
   * !img -w 1000 http://files/images/FitNesse-Jenkins-Execute.png
- 1 Click '''Add post-build action''' and select '''Publish Fitnesse results report'''.
+ 1 Click '''Add post-build action''' and select '''Publish FitNesse results report'''.
   * Enter fitnesse-results.xml in '''Path to fitnesse xml results file'''.
   * !img http://files/images/FitNesse-Jenkins-PostBuild.png
  1 Click '''Save'''.

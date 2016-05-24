@@ -1,4 +1,4 @@
-!1 Appian Setup Configurations
+!1 ''!-FitNesse-! for Appian'' Setup Configurations
 
 !3 These variables are required for every test script that you write:
  * '''variable defined: TEST_SYSTEM=slim''' 

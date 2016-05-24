@@ -4,3 +4,5 @@ The default executable directories for '''Chrome''' and '''Firefox''' can update
  1 Open ${automated.testing.home}\configs\custom.properties in a text editor.
  1 Update !-chrome.browser.home-! to refer to the path to the chrome executable
  1 Update !-firefox.browser.home-! to refer to the path to the firefox executable
+ 
+'''Note:''' Make sure to escape backslashes, e.g. C:\\Program Files(x86)\\ rather than C:\Program Files(x86) 

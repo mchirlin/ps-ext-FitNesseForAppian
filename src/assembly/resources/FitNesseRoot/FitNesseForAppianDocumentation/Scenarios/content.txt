@@ -1,4 +1,4 @@
-!2 Creating Scenarios in Appian FitNesse
+!2 Creating Scenarios in ''!-FitNesse-! for Appian''
 Scenarios are chunks of script that are reused often.  They can be stored separately and later be called in any of the test pages within the suite.
 
 !3 Writing a scenario
@@ -14,7 +14,7 @@ End the scenario with a blank line - there can be no blank lines within a single
 A scenario library can have as many scenarios as necessary.  These scenarios are only accessible to test cases within the same suite.
 
 !3 Example Scenario
-!img http://files/images/Fitnesse-CreateScenario.png
+!img http://files/images/FitNesse-CreateScenario.png
 
 !2 Variables
 To reuse a scenario that follows the same steps but has different inputs depending on the script, configure the scenario to utilize variables. In this case, the first line of the scenario may look like something like this, with textVar, intVar, decimaVar, and datetimeVar being the variables:
@@ -43,4 +43,4 @@ Within a script, call the scenario anywhere in a script table starting from the 
 ]!
 
 !3 Example of Scenario Being Called in a Test Script
-!img http://files/images/Fitnesse-ImplementScenario.png
+!img http://files/images/FitNesse-ImplementScenario.png
