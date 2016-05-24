@@ -61,7 +61,9 @@
         <configuration>
           <excludes>
             <exclude>configs/**</exclude>
-            <exclude>log4j.properties</exclude>
+            <exclude>FitNesseRoot/**</exclude>
+            <exclude>lib/**</exclude>
+            <exclude>*.properties</exclude>
           </excludes>
         </configuration>
       </plugin>
