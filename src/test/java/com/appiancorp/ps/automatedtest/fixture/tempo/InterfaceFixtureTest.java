@@ -192,7 +192,8 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
     assertEquals(dtf.format(AppianObject.parseDate("2015-11-15 14:00", tFixture.getSettings())), tFixture.getFieldValue("DatetimeField"));
 
     assertTrue(tFixture.verifyFieldContains("RODatetimeField", new String[] { "2015-11-15 14:00" }));
-    assertEquals(ddtf.format(AppianObject.parseDate("2015-11-15 14:00", tFixture.getSettings())), tFixture.getFieldValue("RODatetimeField"));
+    assertEquals(ddtf.format(AppianObject.parseDate("2015-11-15 14:00", tFixture.getSettings())),
+      tFixture.getFieldValue("RODatetimeField"));
 
     tFixture.populateFieldWith("DatetimeField[2]", new String[] { "2015-11-15" });
     assertTrue(tFixture.verifyFieldContains("DatetimeField[2]", new String[] { "2015-11-15" }));
@@ -200,11 +201,13 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
 
     tFixture.populateFieldWith("DatetimeField[3]", new String[] { "2015-11-15 14:00" });
     assertTrue(tFixture.verifyFieldContains("DatetimeField[3]", new String[] { "2015-11-15 14:00" }));
-    assertEquals(dtf.format(AppianObject.parseDate("2015-11-15 14:00", tFixture.getSettings())), tFixture.getFieldValue("DatetimeField[3]"));
+    assertEquals(dtf.format(AppianObject.parseDate("2015-11-15 14:00", tFixture.getSettings())),
+      tFixture.getFieldValue("DatetimeField[3]"));
 
     tFixture.populateFieldWith("DatetimeField[4]", new String[] { "+5 minutes" });
     assertTrue(tFixture.verifyFieldContains("DatetimeField[4]", new String[] { "+5 minutes" }));
-    assertEquals(dtf.format(DateUtils.addMinutes(tFixture.getSettings().getStartDatetime(), 5)), tFixture.getFieldValue("DatetimeField[4]"));
+    assertEquals(dtf.format(DateUtils.addMinutes(tFixture.getSettings().getStartDatetime(), 5)),
+      tFixture.getFieldValue("DatetimeField[4]"));
 
     tFixture.populateFieldWith("DatetimeField[5]", new String[] { "+5 hours" });
     assertTrue(tFixture.verifyFieldContains("DatetimeField[5]", new String[] { "+5 hours" }));
@@ -522,6 +525,22 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
     assertTrue(tFixture.verifyFieldIsNotPresent("ROTextField"));
     tFixture.expandSection("Section 1");
     assertTrue(tFixture.verifyFieldIsPresent("ROTextField"));
+  }
+
+  @Test
+  public void testVerifyLinkIsPresent() throws Exception {
+    assertTrue(tFixture.verifyLinkFieldIsPresent("Add Data to Paging Grid"));
+  }
+
+  @Test
+  public void testVerifyLinkURLContains() throws Exception {
+    assertTrue(tFixture.verifyLinkURLContains("Add Data to Paging Grid", "appiancloud.com"));
+    assertTrue(tFixture.verifyLinkURLContains("Safe Link", "https://google.com/"));
+  }
+  
+  @Test
+  public void testGetLinkURL() throws Exception {
+    assertTrue(tFixture.getLinkURL("Safe Link").equals("https://google.com/"));
   }
 
   @AfterClass

@@ -81,7 +81,7 @@ public class BaseFixture {
     } else if (browser.equals("CHROME")) {
       System.setProperty("webdriver.chrome.driver", prop.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
         Constants.CHROME_DRIVER);
-
+      
       System.setProperty("webdriver.chrome.args", "--disable-logging");
       System.setProperty("webdriver.chrome.silentOutput", "true");
       if (!StringUtils.isBlank(prop.getProperty(Constants.CHROME_BROWSER_HOME))) {

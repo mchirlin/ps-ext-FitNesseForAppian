@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
+import com.google.common.base.Strings;
 
 public class TempoLinkField extends AppianObject {
 
@@ -24,6 +25,12 @@ public class TempoLinkField extends AppianObject {
       return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD, linkName)));
     }
 
+  }
+  
+  public static String getLinkURL(String linkName, Settings s) {
+	  WebElement link = getLink(linkName, s);
+	  String linkURL = link.getAttribute("href");
+	  return linkURL;
   }
 
   public static void click(String linkName, Settings s) {
@@ -46,13 +53,20 @@ public class TempoLinkField extends AppianObject {
         String lName = getFieldFromFieldIndex(linkName);
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
           XPATH_ABSOLUTE_LINK_FIELD_INDEX, lName, lNum))));
-      }
-      else {
+      } else {
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
           XPATH_ABSOLUTE_LINK_FIELD, linkName))));
       }
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Link", linkName);
     }
+  }
+
+  public static boolean containsURLValue(String linkName, String linkURLValue, Settings s) {
+    String linkURLText = getLinkURL(linkName, s);
+
+    if (LOG.isDebugEnabled())
+      LOG.debug("READ ONLY FIELD COMPARISON : Link field URL value [" + linkURLText + "] compared to Entered value [" + linkURLValue + "]");
+    return (linkURLText.contains(linkURLValue) && !Strings.isNullOrEmpty(linkURLValue));
   }
 }

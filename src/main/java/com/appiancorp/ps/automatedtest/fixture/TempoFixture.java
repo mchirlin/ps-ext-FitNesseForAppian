@@ -204,7 +204,7 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed. <br>
+   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.<br>
    * <br>
    * FitNesse Example:
    * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |</code>
@@ -529,7 +529,7 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly. <br>
+   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.<br>
    * <br>
    * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is present |</code>
    * 
@@ -1225,6 +1225,52 @@ public class TempoFixture extends BaseFixture {
     TempoLinkField.waitFor(linkName, settings);
     TempoLinkField.click(linkName, settings);
   }
+  
+
+  /**
+   * Verifies there is a link field with the specified name.
+   * The method will wait for the timeout period and refresh up to the configured number of refresh times before failing.<br>
+   * <br>
+   * FitNesse Example: <code>| verify link field | LINK_NAME | is present |</code>
+   * 
+   * @param linkName
+   *          Name of link to verify is present
+   * @return True, if link field is located
+   */
+  public boolean verifyLinkFieldIsPresent(String linkName) {
+    TempoLinkField.waitFor(linkName, settings);
+    return true;
+  }
+
+  /**
+   * Verifies if a link field's URL contains a specific value.<br>
+   * <br>
+   * FitNesse Example: <code>| verify link | LINK_NAME | URL contains | URL_TEXT |</code>
+   * 
+   * @param linkName
+   *          Name of link to look for URL
+   * @param linkURL
+   *          Values to verify that the link URL contains
+   * @return True, if the link URL does contain the value
+   */
+  public boolean verifyLinkURLContains(String linkName, String URLText) {
+    TempoLinkField.waitFor(linkName, settings);
+    return TempoLinkField.containsURLValue(linkName, URLText, settings);
+  }
+  
+  /**
+   * Returns the URL of a link field.<br>
+   * <br>
+   * FitNesse example: <code>| $VARIABLE_NAME= | get link | LINK_NAME | URL |<code> Use $VARIABLE_NAME to access the variable 
+   * containing the link URL of the link field specified
+   * 
+   * @param length
+   *          Length of random string
+   * @return Random alphanumeric string
+   */
+  public String getLinkURL(String linkName) {
+    return TempoLinkField.getLinkURL(linkName, settings);
+  }
 
   /**
    * Clicks on the first button that matches the buttonName.<br>
@@ -1331,4 +1377,5 @@ public class TempoFixture extends BaseFixture {
     TempoSection.waitFor(sectionName, settings);
     return TempoSection.getValidationMessages(sectionName, settings);
   }
+
 }
