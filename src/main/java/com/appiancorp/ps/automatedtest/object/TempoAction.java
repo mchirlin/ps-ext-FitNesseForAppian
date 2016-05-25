@@ -13,6 +13,7 @@ import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
 public class TempoAction extends AppianObject {
   private static final Logger LOG = Logger.getLogger(TempoAction.class);
   private static final String XPATH_ABSOLUTE_ACTION_LINK = Settings.getByConstant("xpathAbsoluteActionLink");
+  private static final String XPATH_ABSOLUTE_ACTIONS_APP_FILTER_LINK = Settings.getByConstant("xpathAbsoluteActionsAppFilterLink");
 
   public static void click(String actionName, Settings s) {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ACTION [" + actionName + "]");
@@ -22,6 +23,17 @@ public class TempoAction extends AppianObject {
       clickElement(action, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Action click", actionName);
+    }
+
+  }
+
+  public static void clickOnAppFilter(String filterName, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("CLICK ACTION APP FILTER [" + filterName + "]");
+    try {
+      WebElement filter = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_ACTIONS_APP_FILTER_LINK, filterName)));
+      clickElement(filter, s);
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Filter click", filterName);
     }
 
   }
@@ -53,6 +65,17 @@ public class TempoAction extends AppianObject {
 
   public static boolean waitForReturn(String actionName, Settings s) {
     return waitForReturn(actionName, s.getTimeoutSeconds(), s);
+  }
+
+  public static void waitForAppFilter(String appFilter, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR ACTIONS APPLICATION FILTER [" + appFilter + "]");
+
+    try {
+      (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(
+        XPATH_ABSOLUTE_ACTIONS_APP_FILTER_LINK, appFilter))));
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Applications Filter", appFilter);
+    }
   }
 
   public static boolean isCompleted(Settings s) {

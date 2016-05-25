@@ -99,6 +99,7 @@
 	    {"label": "xpathAbsoluteReportLink", "value": "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),'%s')]"},
 	    {"label": "xpathAbsoluteRecordTypeLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/view/all') and contains(text(), '%s')]"},
 	    {"label": "xpathAbsoluteRecordTypeUserFilterLink", "value": "//ol[@class='facetgroup']/descendant::a[contains(text(),'%s')]"},
+	    {"label": "xpathAbsoluteActionsAppFilterLink", "value": "//ol[@class='facetgroup']/descendant::span[contains(text(),'%s')]"},
 	    {"label": "xpathAbsoluteError", "value": "//h1[contains(text(), 'Application Error')]"},
 	    {"label": "xpathAbsoluteRecordLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/') and contains(text(), '%s')]"},
 	    {"label": "xpathAbsoluteRecordViewLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(text(), '%s')]"},

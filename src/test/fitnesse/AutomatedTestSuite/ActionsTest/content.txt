@@ -9,6 +9,7 @@
 ***!
 !*** Click on action and then exit page
 | script |
+| click on application filter | Automated Testing |
 | click on action | All Fields |
 | click on button | Cancel |
 ***!

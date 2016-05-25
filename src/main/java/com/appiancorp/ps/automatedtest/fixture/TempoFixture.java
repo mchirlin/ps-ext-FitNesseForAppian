@@ -707,6 +707,20 @@ public class TempoFixture extends BaseFixture {
     return !TempoAction.waitForReturn(actionName, settings.getNotPresentTimeoutSeconds(), settings);
   }
 
+  /**
+   * Clicks on an actions application filter.<br>
+   * <br>
+   * FitNesse Example: <code>| click on application filter | APP_FILTER |</code>
+   * 
+   * @param appFilter
+   *          App Filter to click (partial names are acceptable)
+   *          If multiple application filters contain the same name, then the first will be selected
+   */
+  public void clickOnApplicationFilter(String appFilter) {
+    TempoAction.waitForAppFilter(appFilter, settings);
+    TempoAction.clickOnAppFilter(appFilter, settings);
+  }
+
   /*
    * Interfaces
    */
@@ -1225,7 +1239,6 @@ public class TempoFixture extends BaseFixture {
     TempoLinkField.waitFor(linkName, settings);
     TempoLinkField.click(linkName, settings);
   }
-  
 
   /**
    * Verifies there is a link field with the specified name.
@@ -1257,7 +1270,7 @@ public class TempoFixture extends BaseFixture {
     TempoLinkField.waitFor(linkName, settings);
     return TempoLinkField.containsURLValue(linkName, URLText, settings);
   }
-  
+
   /**
    * Returns the URL of a link field.<br>
    * <br>
