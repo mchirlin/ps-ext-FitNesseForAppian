@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -100,6 +101,13 @@ public class BaseFixtureTest extends FixtureTest {
   @Test
   public void testGetRandomString() {
     assertTrue(bFixture.getRandomString(7).length() == 7);
+  }
+
+  @Test
+  public void testGetRandomAlphabetString() {
+    String alphabeticString = bFixture.getRandomAlphabetString(9);
+    assertTrue(alphabeticString.length() == 9);
+    assertTrue(StringUtils.isAlpha(alphabeticString));
   }
 
   @Test

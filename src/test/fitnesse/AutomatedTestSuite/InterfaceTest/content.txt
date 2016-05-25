@@ -50,7 +50,7 @@
 !*** Populate Field in Section 3 Fields without labels, by reference, and radio/checkbox fields
 !| script                                                                                             |
 |populate field          |[1]         |in section|Section 3|with|noLabel                              |
-|populate field          |TextField[2]|with      |text2                                               |
+|populate field          |TextField[2]|with      |$randAlphabetString                                               |
 |populate                |FILE_UPLOAD |field     |[2]      |with|${automated.testing.home}\documents\Low.jpg|
 |click on radio option   |Click Me!                                                                   |
 |click on radio option   |Click Me[2]                                                                 |
@@ -306,6 +306,10 @@
 | verify link | Safe Link | URL contains | google.com |
 | $safeLinkURL= | get link | Safe Link | URL 		  |
 |populate field|TextField         |with|$safeLinkURL  |	
+=======
+!*** Set Random Alphabet String Variable in section 8
+!| script  																															|
+|populate field          |RandomAlphabetTextField|with      |$randAlphabetString 				                                    |	
 ***!
 !*** Close Form
 !|script                |

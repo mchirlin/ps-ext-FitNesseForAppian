@@ -619,6 +619,21 @@ public class BaseFixture {
   }
 
   /**
+   * Returns a random alphabetic string of a specific length<br>
+   * <br>
+   * FitNesse example: <code>| set | rand | get random alphabet string | 5 | </code> - This will set the variable <i>rand</i> to a random
+   * alphabet string
+   * which can later be accessed using ${rand}.
+   * 
+   * @param length
+   *          Length of random alphabet string
+   * @return Random alphabet string
+   */
+  public String getRandomAlphabetString(int length) {
+    return RandomStringUtils.randomAlphabetic(length);
+  }
+
+  /**
    * Returns a random integer of a specific length<br>
    * <br>
    * FitNesse example: <code>| set | randInt | get random integer from | INT_MIN | to | INT_MAX | </code> - This will set the variable
