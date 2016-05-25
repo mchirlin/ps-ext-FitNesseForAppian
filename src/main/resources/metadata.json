@@ -139,6 +139,7 @@
 	    {"label": "xpathAbsoluteRecordGridNavigationNext", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[text()='Next']"},
 	    {"label": "xpathAbsoluteRecordGridNavigationLast", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[@title='Last']"}
 	  ]
-	}
+	},
+	{ "version": "16.2", "byConstants": [] }
   ]
 }
