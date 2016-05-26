@@ -1,6 +1,7 @@
 package com.appiancorp.ps.automatedtest.fixture;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -81,7 +82,7 @@ public class BaseFixture {
     } else if (browser.equals("CHROME")) {
       System.setProperty("webdriver.chrome.driver", prop.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
         Constants.CHROME_DRIVER);
-      
+
       System.setProperty("webdriver.chrome.args", "--disable-logging");
       System.setProperty("webdriver.chrome.silentOutput", "true");
       if (!StringUtils.isBlank(prop.getProperty(Constants.CHROME_BROWSER_HOME))) {
@@ -710,7 +711,17 @@ public class BaseFixture {
   private void loadProperties() {
     String propFile = "configs/custom.properties";
     try {
-      InputStream inputStream = BaseFixture.class.getClassLoader().getResourceAsStream(propFile);
+      InputStream inputStream;
+
+      // If inside of jar
+
+      // If outside of jar
+      if (inputStream == null) {
+        File jarPath = new File(BaseFixture.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+        String propertiesPath = jarPath.getParentFile().getAbsolutePath();
+        System.out.println(" propertiesPath-" + propertiesPath);
+        inputStream = new FileInputStream(propertiesPath + "/../../" + propFile);
+      }
 
       prop.load(inputStream);
     } catch (Exception e) {
