@@ -1,0 +1,17 @@
+|scenario      |populate AUT form with title|textVar|quantity|integerVar|price|decimalVar|start date|datetimeVar|
+|populate field|Title                       |with   |@textVar                                                   |
+|populate field|Quantity                    |with   |@integerVar                                                |
+|populate field|Price                       |with   |@decimalVar                                                |
+|populate field|Start Date                  |with   |@datetimeVar                                               |
+
+|scenario    |verify AUT form contains title|text    |quantity|integer|price|decimal|start date|datetime|
+|verify field|Title                         |contains|@text                                             |
+|verify field|Quantity                      |contains|@integer                                          |
+|verify field|Price                         |contains|@decimal                                          |
+|verify field|Start Date                    |contains|@datetime                                         |
+
+|scenario|check AUT form against title|text      |quantity|integer|price|decimal|start date|datetime|
+|check   |get field                   |Title     |value   |@text                                    |
+|check   |get field                   |Quantity  |value   |@integer                                 |
+|check   |get field                   |Price     |value   |@decimal                                 |
+|check   |get field                   |Start Date|value   |@datetime                                |

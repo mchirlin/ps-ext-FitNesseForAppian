@@ -1,0 +1,4 @@
+!| script                         |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|setup for test script for version|16.2                                                |
+|login with username              |${username}      |and password     |${password}     |
+|click on menu                    |Records                                             |

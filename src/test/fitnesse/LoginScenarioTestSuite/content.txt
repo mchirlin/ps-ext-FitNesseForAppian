@@ -1,0 +1,9 @@
+!1 LoginScenarioTestSuite
+!**> FitNesse Configurations
+!define TEST_SYSTEM {slim}
+!path ${automated.testing.home}\**.jar
+!define username {test.user}
+!define password {password2}
+**!
+
+!contents -R2 -g -p -f -h
