@@ -150,9 +150,6 @@
 !4 Scenarios have been created to easily setup a test script  
 !4 Update Login Scenarios by editing the top level ScenarioLibrary
 ![:
-| setup for test script | 																				: Setup test script using the default value set in ScenarioLibrary
-| setup for test script for browser| browserType|														: Setup test script with custom browser (FIREFOX, CHROME, or IE) and using the default value set in ScenarioLibrary
-| setup for test script for locale| localeType|															: Setup test script with custom locale (en_US or en_GB) and using the default value set in ScenarioLibrary
-| setup for test script for version| versionType|														: Setup test script with custom version and using the default value set in ScenarioLibrary
-| setup for test script for browser|browserType|locale|location|version|versionNum|url|appianUrl|		: Setup test script using custom values for Browser, locale, version, and URL
+| setup for test script | 																				: Setup test script using the default values set in ScenarioLibrary
+| setup for test script for browser|BROWSER_TYPE|locale|LOCATION|version|VERSION_NUMBER|url|APPIAN_URL|		: Setup test script using custom values for browser, locale, version, and URL
 ]!
