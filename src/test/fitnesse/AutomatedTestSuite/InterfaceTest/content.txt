@@ -50,7 +50,7 @@
 !*** Populate Field in Section 3 Fields without labels, by reference, and radio/checkbox fields
 !| script                                                                                             |
 |populate field          |[1]         |in section|Section 3|with|noLabel                              |
-|populate field          |TextField[2]|with      |$randAlphabetString                                               |
+|populate field          |TextField[2]|with      |Text2                                               |
 |populate                |FILE_UPLOAD |field     |[2]      |with|${automated.testing.home}\documents\Low.jpg|
 |click on radio option   |Click Me!                                                                   |
 |click on radio option   |Click Me[2]                                                                 |
