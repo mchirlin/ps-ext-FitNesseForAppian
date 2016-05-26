@@ -714,6 +714,7 @@ public class BaseFixture {
       InputStream inputStream;
 
       // If inside of jar
+      inputStream = BaseFixture.class.getClassLoader().getResourceAsStream(propFile);
 
       // If outside of jar
       if (inputStream == null) {
