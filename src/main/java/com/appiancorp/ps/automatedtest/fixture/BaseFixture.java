@@ -7,10 +7,14 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -330,6 +334,29 @@ public class BaseFixture {
    */
   public void loginWithUsernameAndPassword(String userName, String password) {
     loginIntoWithUsernameAndPassword(settings.getUrl(), userName, password);
+  }
+
+  /**
+   * Login to Appian using users.properties.<br>
+   * <br>
+   * 
+   * @param url
+   * @param username
+   */
+  public void loginIntoWithUsername(String url, String username) {
+    String password = prop.getProperty(username);
+    loginIntoWithUsernameAndPassword(url, username, password);
+  }
+
+  /**
+   * Login to Appian using users.properties.<br>
+   * <br>
+   * 
+   * @param url
+   * @param username
+   */
+  public void loginWithUsername(String username) {
+    loginIntoWithUsername(settings.getUrl(), username);
   }
 
   /**
@@ -709,24 +736,37 @@ public class BaseFixture {
   }
 
   private void loadProperties() {
-    String propFile = "configs/custom.properties";
+
+    InputStream inputStream = null;
+
+    // If inside of jar
     try {
-      InputStream inputStream;
+      List<String> files = IOUtils.readLines(BaseFixture.class.getClassLoader()
+        .getResourceAsStream("configs/"), Charsets.UTF_8);
+      for (String file : files) {
+        inputStream = BaseFixture.class.getClassLoader().getResourceAsStream("configs/" + file);
+        prop.load(inputStream);
+      }
+    } catch (Exception e) {
 
-      // If inside of jar
-      inputStream = BaseFixture.class.getClassLoader().getResourceAsStream(propFile);
+    }
 
+    try {
       // If outside of jar
       if (inputStream == null) {
         File jarPath = new File(BaseFixture.class.getProtectionDomain().getCodeSource().getLocation().getPath());
         String propertiesPath = jarPath.getParentFile().getAbsolutePath();
-        System.out.println(" propertiesPath-" + propertiesPath);
-        inputStream = new FileInputStream(propertiesPath + "/../../" + propFile);
-      }
+        File folder = new File(propertiesPath + "/../../configs");
 
-      prop.load(inputStream);
+        for (File file : folder.listFiles()) {
+          if (FilenameUtils.getExtension(file.getPath()).equals("properties")) {
+            inputStream = new FileInputStream(file.getAbsolutePath());
+            prop.load(inputStream);
+          }
+        }
+      }
     } catch (Exception e) {
-      e.printStackTrace();
+
     }
   }
 }

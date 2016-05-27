@@ -84,6 +84,14 @@ public class BaseFixtureTest extends FixtureTest {
   }
 
   @Test
+  public void testLoginWithUsername() throws Exception {
+    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    bFixture.setAppianUrlTo(TEST_SITE_URL);
+    bFixture.loginWithUsername(TEST_USERNAME);
+    bFixture.tearDownSeleniumWebDriver();
+  }
+
+  @Test
   public void testLoginWithTermsWithUsernameAndPassword() throws Exception {
     // TODO Find test site with terms
   }
