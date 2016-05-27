@@ -93,7 +93,7 @@ public class BaseFixture {
         settings.setDriver(new ChromeDriver());
       }
     } else if (browser.equals("IE")) {
-      System.setProperty("webdriver.ie.driver", prop.getProperty("automated.testing.home") + Constants.DRIVERS_LOCATION +
+      System.setProperty("webdriver.ie.driver", prop.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
         Constants.IE_DRIVER);
       System.setProperty("webdriver.ie.driver.silent", "true");
       DesiredCapabilities dCaps = new DesiredCapabilities();
@@ -270,7 +270,7 @@ public class BaseFixture {
    */
   public void setTakeErrorScreenshotsTo(Boolean bool) {
     if (settings.getScreenshotPath() == null) {
-      settings.setScreenshotPath(prop.getProperty("automated.testing.home") + "\\screenshots");
+      settings.setScreenshotPath(prop.getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\screenshots");
     }
     settings.setTakeErrorScreenshots(bool);
   }
