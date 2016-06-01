@@ -13,13 +13,24 @@ import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
 public class TempoAction extends AppianObject {
   private static final Logger LOG = Logger.getLogger(TempoAction.class);
   private static final String XPATH_ABSOLUTE_ACTION_LINK = Settings.getByConstant("xpathAbsoluteActionLink");
+  private static final String XPATH_ABSOLUTE_ACTION_LINK_INDEX = "(" + XPATH_ABSOLUTE_ACTION_LINK + ")[%d]";
   private static final String XPATH_ABSOLUTE_ACTIONS_APP_FILTER_LINK = Settings.getByConstant("xpathAbsoluteActionsAppFilterLink");
+
+  public static WebElement getAction(String action, Settings s) {
+    if (isFieldIndex(action)) {
+      int rNum = getIndexFromFieldIndex(action);
+      String rName = getFieldFromFieldIndex(action);
+      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK_INDEX, rName, rNum)));
+    } else {
+      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, action)));
+    }
+  }
 
   public static void click(String actionName, Settings s) {
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ACTION [" + actionName + "]");
 
     try {
-      WebElement action = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_ACTION_LINK, actionName)));
+      WebElement action = getAction(actionName, s);
       clickElement(action, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Action click", actionName);
@@ -42,8 +53,16 @@ public class TempoAction extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR ACTION [" + actionName + "]");
 
     try {
-      (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
-        XPATH_ABSOLUTE_ACTION_LINK, actionName))));
+      if (isFieldIndex(actionName)) {
+        int rNum = getIndexFromFieldIndex(actionName);
+        String rName = getFieldFromFieldIndex(actionName);
+        (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
+          XPATH_ABSOLUTE_ACTION_LINK_INDEX, rName, rNum))));
+      }
+      else {
+        (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
+          XPATH_ABSOLUTE_ACTION_LINK, actionName))));
+      }
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Action wait for", actionName);
     }

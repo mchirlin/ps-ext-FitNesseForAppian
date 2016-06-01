@@ -204,7 +204,8 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.<br>
+   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.
+   * <br>
    * <br>
    * FitNesse Example:
    * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |</code>
@@ -529,7 +530,8 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.<br>
+   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.
+   * <br>
    * <br>
    * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is present |</code>
    * 
@@ -653,10 +655,12 @@ public class TempoFixture extends BaseFixture {
   /**
    * Clicks on the associated action.<br>
    * <br>
-   * FitNesse Example: <code>| click on action | ACTION_NAME |</code>
+   * FitNesse Example:
+   * <code>| click on action | ACTION_NAME |</code>
+   * <code>| click on action | ACTION_NAME[INDEX] |</code>
    * 
    * @param actionName
-   *          Name of action to click (partial names are acceptable)
+   *          Name or Name and index of action to click (partial names are acceptable)
    *          If multiple actions contain the same name the first will be selected
    */
   public void clickOnAction(String actionName) {
@@ -1274,7 +1278,7 @@ public class TempoFixture extends BaseFixture {
   /**
    * Returns the URL of a link field.<br>
    * <br>
-   * FitNesse example: <code>| $VARIABLE_NAME= | get link | LINK_NAME | URL |<code> Use $VARIABLE_NAME to access the variable 
+   * FitNesse example: <code>| $VARIABLE_NAME= | get link | LINK_NAME | URL |<code> Use $VARIABLE_NAME to access the variable
    * containing the link URL of the link field specified
    * 
    * @param length
