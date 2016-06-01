@@ -1,7 +1,7 @@
 !3 INITIALIZATION CODE
 ![~
 !define TEST_SYSTEM {slim} 																				~ Uses FitNesse SliM to run tests
-!path ${automated.testing.home}\**.jar 																		~ Defines classpath for fixtures
+!path ${automated.testing.home}\**.jar 																	~ Defines classpath for fixtures
 | script | com.appiancorp.ps.automatedtest.fixture.TempoFixture | 										~ Initializes fixture to be used for the rest of the test
 | setup selenium web driver with | BROWSER_NAME | browser | 											~ Initializes Selenium Web Driver and opens browser
 ]!
@@ -49,6 +49,7 @@
 !3 RECORDS METHODS
 ![:
 | click on record type | RECORD_TYPE_NAME | 															: Click on a record type
+| click on record type | RECORD_TYPE_NAME[INDEX] | 														: Use this to populate the 2nd, 3rd, ... record type with the same label
 | click on record type user filter | USER_FILTER_NAME | 												: Click on a record type user filter
 | verify record type user filter | USER_FILTER_NAME | is present | 										: Verify a particular record type user filter is present
 | click on record | RECORD_NAME | 																		: Click on a record, works for both record list view and record grid view
