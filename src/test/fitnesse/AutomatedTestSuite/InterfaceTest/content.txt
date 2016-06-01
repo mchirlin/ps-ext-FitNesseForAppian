@@ -104,6 +104,7 @@
 !*** Select a grid row
 !| script                      |
 |select grid|PagingGrid|row|[4]|
+|select all rows in grid|PagingGrid|
 ***!
 !*** Verify/Check Fields Contain Values for Section 1
 !| script                                          |

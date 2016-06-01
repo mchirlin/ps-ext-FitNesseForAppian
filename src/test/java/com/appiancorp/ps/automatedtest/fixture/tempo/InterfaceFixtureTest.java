@@ -537,10 +537,15 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
     assertTrue(tFixture.verifyLinkURLContains("Add Data to Paging Grid", "appiancloud.com"));
     assertTrue(tFixture.verifyLinkURLContains("Safe Link", "https://google.com/"));
   }
-  
+
   @Test
   public void testGetLinkURL() throws Exception {
     assertTrue(tFixture.getLinkURL("Safe Link").equals("https://google.com/"));
+  }
+
+  @Test
+  public void testGridSelectAll() throws Exception {
+    tFixture.selectAllRowsInGrid("PagingGrid");
   }
 
   @AfterClass
