@@ -481,6 +481,8 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
 
     tFixture.clickOnLink("Click link[2]");
     assertTrue(tFixture.verifyFieldContains("Link Clicked", new String[] { "Clicked again" }));
+
+    tFixture.clickOnLink("Strong Style Link");
   }
 
   @Test
@@ -533,19 +535,16 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
   }
 
   @Test
-  public void testStyleRichTextLink() throws Exception {
-    tFixture.clickOnLink("Strong Style Link");
-  }
-
-  @Test
   public void testVerifyLinkURLContains() throws Exception {
     assertTrue(tFixture.verifyLinkURLContains("Add Data to Paging Grid", "appiancloud.com"));
     assertTrue(tFixture.verifyLinkURLContains("Safe Link", "https://google.com/"));
+    assertTrue(tFixture.verifyLinkURLContains("Strong Style Link", "https://google.com/"));
   }
 
   @Test
   public void testGetLinkURL() throws Exception {
     assertTrue(tFixture.getLinkURL("Safe Link").equals("https://google.com/"));
+    assertTrue(tFixture.getLinkURL("Strong Style Link").equals("https://google.com/"));
   }
 
   @AfterClass

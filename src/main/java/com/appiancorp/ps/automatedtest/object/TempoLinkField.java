@@ -14,7 +14,7 @@ public class TempoLinkField extends AppianObject {
 
   private static final Logger LOG = Logger.getLogger(TempoLinkField.class);
   private static final String XPATH_ABSOLUTE_LINK_FIELD = Settings.getByConstant("xpathAbsoluteLinkField");
-  private static final String XPATH_ABSOLUTE_LINK_FIELD_INDEX = "(" + XPATH_ABSOLUTE_LINK_FIELD + ")[%d]";
+  private static final String XPATH_ABSOLUTE_LINK_FIELD_INDEX = "(" + XPATH_ABSOLUTE_LINK_FIELD + ")[%2$d]";
 
   public static WebElement getLink(String linkName, Settings s) {
     if (isFieldIndex(linkName)) {
