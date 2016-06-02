@@ -20,17 +20,17 @@ public class TempoLinkField extends AppianObject {
     if (isFieldIndex(linkName)) {
       int lNum = getIndexFromFieldIndex(linkName);
       String lName = getFieldFromFieldIndex(linkName);
-      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD_INDEX, lName, lNum)));
+      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD_INDEX, lName, lName, lNum)));
     } else {
-      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD, linkName)));
+      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD, linkName, linkName)));
     }
 
   }
-  
+
   public static String getLinkURL(String linkName, Settings s) {
-	  WebElement link = getLink(linkName, s);
-	  String linkURL = link.getAttribute("href");
-	  return linkURL;
+    WebElement link = getLink(linkName, s);
+    String linkURL = link.getAttribute("href");
+    return linkURL;
   }
 
   public static void click(String linkName, Settings s) {
@@ -52,10 +52,10 @@ public class TempoLinkField extends AppianObject {
         int lNum = getIndexFromFieldIndex(linkName);
         String lName = getFieldFromFieldIndex(linkName);
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
-          XPATH_ABSOLUTE_LINK_FIELD_INDEX, lName, lNum))));
+          XPATH_ABSOLUTE_LINK_FIELD_INDEX, lName, lName, lNum))));
       } else {
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
-          XPATH_ABSOLUTE_LINK_FIELD, linkName))));
+          XPATH_ABSOLUTE_LINK_FIELD, linkName, linkName))));
       }
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Link", linkName);

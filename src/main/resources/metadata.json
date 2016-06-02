@@ -71,7 +71,7 @@
 	    {"label": "xpathRelativePickerSelectionRemoveLink", "value": ".//a/following-sibling::a"},
 	    {"label": "xpathRelativePickerSpecificSelectionRemoveLink", "value": "//a[contains(text(), '%s')]/following-sibling::a"},
 	    {"label": "xpathRelativePickerSuggestBox", "value": "/descendant::input[contains(@class, 'SuggestBox')]"},
-	    {"label": "xpathAbsoluteLinkField", "value": "//a[contains(text(), '%s')]"},
+	    {"label": "xpathAbsoluteLinkField", "value": "//a[contains(text(), '%s')] | //a//*[contains(text(), '%s')]/.."},
 	   	{"label": "xpathAbsoluteGridByIndex", "value": "(//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%d]"},
 	    {"label": "xpathAbsoluteGridByLabel", "value": "//span[contains(text(), '%s')]/parent::div/following-sibling::div/descendant::table"},
 	    {"label": "xpathConcatCellByGridIndexColumnLabel", "value": "[descendant::th[descendant::*[text()='%s']]]/tbody/tr[%d]/td[count((//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%d]/descendant::th[descendant::*[text()='%s']]/preceding-sibling::th)+1]"},

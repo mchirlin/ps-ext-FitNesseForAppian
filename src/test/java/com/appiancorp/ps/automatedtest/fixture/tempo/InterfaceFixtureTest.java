@@ -529,7 +529,12 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
 
   @Test
   public void testVerifyLinkIsPresent() throws Exception {
-    assertTrue(tFixture.verifyLinkFieldIsPresent("Add Data to Paging Grid"));
+    assertTrue(tFixture.verifyLinkFieldIsPresent("Safe Link"));
+  }
+
+  @Test
+  public void testStyleRichTextLink() throws Exception {
+    tFixture.clickOnLink("Strong Style Link");
   }
 
   @Test
@@ -537,7 +542,7 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
     assertTrue(tFixture.verifyLinkURLContains("Add Data to Paging Grid", "appiancloud.com"));
     assertTrue(tFixture.verifyLinkURLContains("Safe Link", "https://google.com/"));
   }
-  
+
   @Test
   public void testGetLinkURL() throws Exception {
     assertTrue(tFixture.getLinkURL("Safe Link").equals("https://google.com/"));
