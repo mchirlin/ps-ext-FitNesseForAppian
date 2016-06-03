@@ -8,11 +8,11 @@ Selenium and FitNesse provides an "easy" way to create user interface driven aut
 
 The presentation [Overview of FitNese for Appian](https://docs.google.com/presentation/d/1z17TOZcrWjDmkhpUfGmymDZJ-Kh8gKzggylEzJ9CDZw/edit#slide=id.gcab12166d_0_18) contains more information about the tool as well as a demo video.
 
-For additional API information, view the <a href="http://appianps.github.io/ps-ext-AutomatedTestFramework/docs/">JavaDocs</a>.
+For additional API information, view the <a href="http://appianps.github.io/ps-ext-FitNesseForAppian/docs/">JavaDocs</a>.
 
 ## Usage and Contributions ##
 
-To use Selenium and !-FitNesse-! on your project, please follow the steps identified below for setting up the testing framework and creating/executing test cases.
+To use Selenium and FitNesse on your project, please follow the steps identified below for setting up the testing framework and creating/executing test cases.
 
 We ask that whenever possible, you contribute back to the repository and the Appian PS community by 
 * adding any missing commands that you need to create for test cases
@@ -35,7 +35,7 @@ If your team cannot directly enhance the framework, please make sure to contact 
 
 #### Installation ###
 
-1. Download the newest release of [AutomatedTesting.zip](https://github.com/appianps/ps-ext-AutomatedTestFramework/releases).
+1. Download the newest release of [AutomatedTesting.zip](https://github.com/appianps/ps-ext-FitNesseForAppian/releases).
 1. Unzip contents of AutomatedTesting.zip into *TESTING_HOME*, e.g. `C:\AutomatedTesting`. *TESTING\_HOME* should not include spaces. 
 1. In a command prompt navigate to *TESTING_HOME*.
 1. Run `start.bat` to install and run FitNesse. Installation only takes 30 seconds.
@@ -117,7 +117,7 @@ If your team cannot directly enhance the framework, please make sure to contact 
 1. Add Git to PATH environment variable
 
 #### Clone the GitHub Repo ####
-1. Clone the project repo to your local computer using `git clone git@github.com:appianps/ps-ext-AutomatedTestFramework.git`
+1. Clone the project repo to your local computer using `git clone git@github.com:appianps/ps-ext-FitNesseForAppian.git`
 
 #### Eclipse Setup ####
 1. Setup the `M2_REPO` variable in Eclipse by running: `mvn eclipse:configure-workspace -Declipse.workspace="<your-eclipse-workspace>"`.
@@ -171,7 +171,7 @@ A new release can be prepared by completing the following steps:
  * Updates the pom.xml files with the next development version number
  * Commits the updated pom.xml files to the local git repository
 1. Push generated commits to GitHub.
-1. Create new release on https://github.com/appianps/ps-ext-AutomatedTestFramework/releases.
+1. Create new release on https://github.com/appianps/ps-ext-FitNesseForAppian/releases.
 
 As `mvn release:prepare` only commits the updated pom.xml files locally, they need to be pushed to GitHub the same as any other commit.
 The final release JAR's are placed in the `/target/` folder of each module.
