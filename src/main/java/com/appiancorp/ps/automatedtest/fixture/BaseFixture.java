@@ -608,8 +608,8 @@ public class BaseFixture {
   /**
    * Returns a random string of a specific length<br>
    * <br>
-   * FitNesse example: <code>| set | rand | get random string | 5 | </code> - This will set the variable <i>rand</i> to a random string
-   * which can later be accessed using ${rand}.
+   * FitNesse example: <code>| $rand= | get random string | 5 | </code> - This will set the variable <i>rand</i> to a random string
+   * which can later be accessed using $rand.
    * 
    * @param length
    *          Length of random string
@@ -622,9 +622,9 @@ public class BaseFixture {
   /**
    * Returns a random alphabetic string of a specific length<br>
    * <br>
-   * FitNesse example: <code>| set | rand | get random alphabet string | 5 | </code> - This will set the variable <i>rand</i> to a random
+   * FitNesse example: <code>| $rand= | get random alphabet string | 5 | </code> - This will set the variable <i>rand</i> to a random
    * alphabet string
-   * which can later be accessed using ${rand}.
+   * which can later be accessed using $rand.
    * 
    * @param length
    *          Length of random alphabet string
@@ -637,8 +637,8 @@ public class BaseFixture {
   /**
    * Returns a random integer of a specific length<br>
    * <br>
-   * FitNesse example: <code>| set | randInt | get random integer from | INT_MIN | to | INT_MAX | </code> - This will set the variable
-   * <i>randInt</i> to a random integer between two numbers which can later be accessed using ${randInt}.
+   * FitNesse example: <code>| $randInt= | get random integer from | INT_MIN | to | INT_MAX | </code> - This will set the variable
+   * <i>randInt</i> to a random integer between two numbers which can later be accessed using $randInt.
    * 
    * @param min
    *          Minimum of random integer
@@ -659,8 +659,8 @@ public class BaseFixture {
   /**
    * Returns a random integer of a specific length<br>
    * <br>
-   * FitNesse example: <code>| set | randDecimal | get random decimal from | DOUBLE_MIN |to | DOUBLE_MAX|</code> - This will set the
-   * variable <i>randDecimal</i> to a random decimal between two numbers which can later be accessed using ${randDecimal}.
+   * FitNesse example: <code>| $randDecimal= | get random decimal from | DOUBLE_MIN |to | DOUBLE_MAX|</code> - This will set the
+   * variable <i>randDecimal</i> to a random decimal between two numbers which can later be accessed using $randDecimal.
    * 
    * @param min
    *          Minimum of random decimal
@@ -681,8 +681,8 @@ public class BaseFixture {
   /**
    * Returns a random integer of a specific length<br>
    * <br>
-   * FitNesse example: <code>| set | randDecimal | get random decimal from | DOUBLE_MIN |to | DOUBLE_MAX| with | DECIMAL_PLACES |</code> -
-   * This will set the variable <i>randDecimal</i> to a random decimal between two numbers which can later be accessed using ${randDecimal}.
+   * FitNesse example: <code>| $randDecimal= | get random decimal from | DOUBLE_MIN |to | DOUBLE_MAX| with | DECIMAL_PLACES |</code> -
+   * This will set the variable <i>randDecimal</i> to a random decimal between two numbers which can later be accessed using $randDecimal.
    * 
    * @param min
    *          Minimum of random decimal

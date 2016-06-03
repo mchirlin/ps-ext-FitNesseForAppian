@@ -189,6 +189,8 @@ public class TempoFixture extends BaseFixture {
    * Returns a string that matches the regex, this could be useful in extracting a system generated value from the news feed.<br>
    * <br>
    * FitNesse Example: <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT |</code>
+   * <code>| $regex= | get regex | [A-z]{3}-[0-9]{4} | group | GROUP |  </code> - Stores the regex value, which can later be accessed using
+   * $error<br>
    * 
    * @param regex
    *          Regular expression string to search for within the news text
@@ -204,10 +206,13 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.<br>
+   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.
+   * <br>
    * <br>
    * FitNesse Example:
    * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |</code>
+   * <code>| $regex= | get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |  </code>
+   * - Stores the regex value, which can later be accessed using $error<br>
    * 
    * @param regex
    *          Regular expression string to search for within the news text
@@ -529,7 +534,8 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.<br>
+   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.
+   * <br>
    * <br>
    * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is present |</code>
    * 
@@ -1274,7 +1280,7 @@ public class TempoFixture extends BaseFixture {
   /**
    * Returns the URL of a link field.<br>
    * <br>
-   * FitNesse example: <code>| $VARIABLE_NAME= | get link | LINK_NAME | URL |<code> Use $VARIABLE_NAME to access the variable 
+   * FitNesse example: <code>| $VARIABLE_NAME= | get link | LINK_NAME | URL |<code> Use $VARIABLE_NAME to access the variable
    * containing the link URL of the link field specified
    * 
    * @param length
