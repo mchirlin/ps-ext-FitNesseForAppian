@@ -5,11 +5,11 @@
   <artifactId>fitnesse-for-appian</artifactId>
   <version>1.2.6-SNAPSHOT</version>
   <name>FitNesse for Appian</name>
-  <url>https://github.com/appianps/ps-ext-AutomatedTestFramework</url>
+  <url>https://github.com/appianps/ps-ext-FitNesseForAppian</url>
   
   <scm>
-    <connection>scm:git:git://github.com/appianps/ps-ext-AutomatedTestFramework</connection>
-    <url>https://github.com/appianps/ps-ext-AutomatedTestFramework</url>
+    <connection>scm:git:git://github.com/appianps/ps-ext-FitNesseForAppian</connection>
+    <url>https://github.com/appianps/ps-ext-FitNesseForAppian</url>
     <tag>v1.2.6</tag>
   </scm>
   
