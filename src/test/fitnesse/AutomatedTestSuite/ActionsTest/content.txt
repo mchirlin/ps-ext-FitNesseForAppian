@@ -14,6 +14,7 @@
 | click on button | Cancel |
 ***!
 !*** Click on Action Name [Index] 
+| script |
 | click on menu | Actions |
 | click on action | Automated Test[2] |
 | click on button | Cancel |
