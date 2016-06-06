@@ -1,0 +1,312 @@
+!*** Open Form
+|script                    |
+|click on menu  |Actions   |
+|click on action|All Fields|
+***!
+!*** Check Forms Title and instructions
+|script                                  	   |
+|check|get form title       |Form        	   |
+|check|get regex  			|([a-zA-Z0-9]{4})  |group|1|from form title|Form|
+|check|get form instructions|Instructions	   |
+***!
+!*** Verify buttons
+!| script |
+| verify button | Cancel | is present |
+| verify button | FakeButton | is not present |
+***!
+----
+!*** Populate and Verify Basic Fields
+!| script                                        |
+|populate field|TextField         |with|text     |
+|populate field|ParagraphField    |with|paragraph|
+|populate field|EncryptedTextField|with|encrypted|
+|populate field|IntegerField      |with|1        |
+|populate field|DecimalField      |with|2.2      |
+|populate field|DateField         |with|+1 day   |
+
+!|script                                                                             |
+|populate field|DatetimeField      |with      |+1 hour                              |
+|populate field|DropdownField        |with value|Option, 1                            |
+|populate field|MultipleDropdownField|with      |Option 1,Option 2                    |
+|populate field|RadioField         |with      |Option 1                             |
+|populate field|CheckboxField      |with      |Option 1,Option 2                    |
+|populate field|FileUploadField    |with      |${automated.testing.home}\documents\Low.jpg|
+
+!| script                                          |
+|verify field|TextField         |contains|text     |
+|verify field|ParagraphField    |contains|paragraph|
+|verify field|EncryptedTextField|contains|encrypted|
+|verify field|IntegerField      |contains|1        |
+|verify field|DecimalField      |contains|2.2      |
+|verify field|DateField         |contains|+1 day   |
+
+!| script                                            |
+|verify field|ROTextField         |contains|text     |
+|verify field|ROParagraphField    |contains|paragraph|
+|verify field|ROEncryptedTextField|contains|encrypted|
+|verify field|ROIntegerField      |contains|1        |
+|verify field|RODecimalField      |contains|2.2      |
+
+!| script                                          |
+|check|get field|TextField         |value|text     |
+|check|get field|ParagraphField    |value|paragraph|
+|check|get field|EncryptedTextField|value|encrypted|
+|check|get field|IntegerField      |value|1        |
+|check|get field|DecimalField      |value|2.2      |
+|check|get regex|([a-zA-Z0-9]{4})  |group|1        |from field|TextField|value|text|
+
+!| script                                            |
+|check|get field|ROTextField         |value|text     |
+|check|get field|ROParagraphField    |value|paragraph|
+|check|get field|ROEncryptedTextField|value|encrypted|
+|check|get field|ROIntegerField      |value|1        |
+|check|get field|RODecimalField      |value|2.2      |
+
+!| script                                                         |
+|verify field|DatetimeField      |contains      |+1 hour          |
+|verify field|DropdownField        |contains value|Option, 1        |
+|verify field|MultipleDropdownField|contains      |Option 1,Option 2|
+|verify field|RadioField         |contains      |Option 1         |
+|verify field|CheckboxField      |contains      |Option 1,Option 2|
+|verify field|FileUploadField    |contains      |Low.jpg          |
+
+!| script                                                   |
+|check|get field|DropdownField        |value|Option, 1        |
+|check|get field|MultipleDropdownField|value|Option 1,Option 2|
+|check|get field|RadioField         |value|Option 1         |
+|check|get field|CheckboxField      |value|Option 1,Option 2|
+|check|get field|FileUploadField    |value|Low.jpg          |
+
+!|script                                     |
+|toggle section|Basic Fields                |visibility|
+|verify field    |ROTextField|is not present|
+|toggle section  |Basic Fields              |visibility|
+|verify field    |ROTextField|is present    |
+***!
+!*** Populate and Verify Dates & Datetimes
+!| script                                                       |
+|populate field|DateField (date)          |with|2015-11-15      |
+|populate field|DateField (+5 days)       |with|+5 days         |
+|populate field|DatetimeField (date)      |with|2015-11-15      |
+|populate field|DatetimeField (datetime)  |with|2015-11-15 02:00|
+|populate field|DatetimeField (+5 minutes)|with|+5 minutes      |
+|populate field|DatetimeField (+5 hours)  |with|+5 hours        |
+|populate field|DatetimeField (+5 days)   |with|+5 days         |
+
+!| script                                                         |
+|verify field|DateField (date)          |contains|2015-11-15      |
+|verify field|DateField (+5 days)       |contains|+5 days         |
+|verify field|DatetimeField (date)      |contains|2015-11-15      |
+|verify field|DatetimeField (datetime)  |contains|2015-11-15 02:00|
+|verify field|DatetimeField (+5 minutes)|contains|+5 minutes      |
+|verify field|DatetimeField (+5 hours)  |contains|+5 hours        |
+|verify field|DatetimeField (+5 days)   |contains|+5 days         |
+
+# en_US
+!| script                                                          |
+|check|get field|DateField (date)        |value|11/15/2015         |
+|check|get field|DatetimeField (date)    |value|11/15/2015 12:00 AM|
+|check|get field|DatetimeField (datetime)|value|11/15/2015 2:00 AM |
+
+# en_GB
+#!| script|
+# | check|get field|DateField (date)        |value|15/11/2015      |
+# |check  |get field|DatetimeField (date)    |value|15/11/2015 00:00|
+# |check  |get field|DatetimeField (datetime)|value|15/11/2015 02:00|
+***!
+!*** Populate and Verify Pickers
+!| script                                                  |
+|populate field|UserPicker|with|Michael Chirlin,Dan Austria|
+#|populate field  |GroupPicker         |with|AUT All Users             |
+#|populate field  |UserGroupPicker     |with|Dan Austria, AUT All Users  |
+#|populate field  |DocumentPicker      |with|All Process Models        |
+#|populate field  |FolderPicker        |with|Automated Testing         |
+#|populate field  |DocumentFolderPicker|with|Automated Testing         |
+#|populate field  |CustomPicker        |with|5                         |
+
+!| script                                                    |
+|verify field|UserPicker|contains|Michael Chirlin,Dan Austria|
+#|verify field  |GroupPicker         |contains|AUT All Users          |
+#|verify field  |UserGroupPicker     |contains|Dan Austria,AUT All Users|
+#|verify field  |DocumentPicker      |contains|All Process Models.arf |
+#|verify field  |FolderPicker        |contains|Automated Testing      |
+#|verify field  |DocumentFolderPicker|contains|Automated Testing      |
+#|verify field  |CustomPicker        |contains|5                      |
+
+!| script                                                    |
+|check|get field|UserPicker|value|Michael Chirlin,Dan Austria|
+#|check  |get field|GroupPicker         |value|AUT All Users            |
+#|check  |get field|UserGroupPicker     |value|Dan Austria,AUT All Users|
+#|check  |get field|DocumentPicker      |value|All Process Models.arf |
+#|check  |get field|FolderPicker        |value|Automated Testing      |
+#|check  |get field|DocumentFolderPicker|value|Automated Testing      |
+#|check  |get field|CustomPicker        |value|5                      |
+***!
+!*** Populate and Verify Edge Cases
+!| script                                                                                             |
+|populate field          |[1]         |in section|Edge Cases|with|noLabel                             |
+|populate field          |TextField   |in section|Edge Cases|with|textInSection                       |
+|populate                |FILE_UPLOAD |field     |[2]       |with|${automated.testing.home}\documents\Low.jpg|
+|click on radio option   |Click Me!                                                                   |
+|click on radio option   |Click Me[2]                                                                 |
+|click on checkbox option|Click Me Too!                                                               |
+|click on checkbox option|Click Me[2]                                                                 |
+
+!| script                                                       |
+|verify field|[1]         |in section|Edge Cases|contains|noLabel|
+|verify field|TextField[2]|contains  |textInSection                     |
+
+!| script                                                       |
+|check|get field|[1]         |in section|Edge Cases|value|noLabel|
+|check|get regex|([a-zA-Z0-9]{4})|group|1|from field |TextField|in section|Edge Cases|value|text|
+|check|get field|TextField[2]|value     |textInSection                  |
+***!
+!*** Populate and Verify Grids
+!| script                                                                       |
+|select grid  |EditableGrid|row   |[1]                                          |
+|populate grid|[1]         |column|TextField         |row|[1]|with|gridText     |
+|populate grid|EditableGrid|column|[3]               |row|[1]|with|gridParagraph|
+|populate grid|EditableGrid|column|EncryptedTextField|row|[1]|with|gridEncrypted|
+|populate grid|EditableGrid|column|[5]               |row|[1]|with|1            |
+|populate grid|EditableGrid|column|DecimalField      |row|[1]|with|2.2          |
+|populate grid|EditableGrid|column|[7]               |row|[1]|with|+1 day       |
+|click on link|Add Data to Paging Grid                                          |
+
+!| script                                                                                                |
+|populate grid|EditableGrid[2]|column|DatetimeField  |row|[1]|with|+1 hour                               |
+|populate grid|EditableGrid[2]|column|DatetimeField  |row|[2]|with|+1 minute                             |
+|populate grid|EditableGrid[2]|column|[2]            |row|[1]|with|Option 1                              |
+|populate grid|EditableGrid[2]|column|[2]            |row|[2]|with|Option 2                              |
+|populate grid|EditableGrid[2]|column|RadioField     |row|[1]|with|Option 1                              |
+|populate grid|EditableGrid[2]|column|RadioField     |row|[2]|with|Option 2                              |
+|populate grid|EditableGrid[2]|column|[4]            |row|[1]|with|Option 1,Option 2                     |
+|populate grid|EditableGrid[2]|column|[4]            |row|[2]|with|Option 2                              |
+|populate grid|EditableGrid[2]|column|FileUploadField|row|[1]|with|${automated.testing.home}\documents\Low.jpg |
+|populate grid|EditableGrid[2]|column|FileUploadField|row|[2]|with|${automated.testing.home}\documents\High.jpg|
+
+!| script                                                             |
+|populate grid|EditableGrid[3]|column|[1]|row|[1]|with|Michael Chirlin|
+#|populate grid  |EditableGrid[3]|column|[2]|row|[1]|with|AUT All Users           |
+#|populate grid  |EditableGrid[3]|column|[3]|row|[1]|with|test.user, AUT All Users|
+#|populate grid  |EditableGrid[3]|column|[4]|row|[1]|with|All Process Models      |
+#|populate grid  |EditableGrid[3]|column|[1]|row|[2]|with|Automated Testing       |
+#|populate grid  |EditableGrid[3]|column|[2]|row|[2]|with|Automated Testing       |
+#|populate grid  |EditableGrid[3]|column|[3]|row|[2]|with|10                      |
+
+!| script                                                                         |
+|verify grid|EditableGrid|row   |[1]               |is selected                   |
+|verify grid|[1]         |column|TextField         |row|[1]|contains|gridText     |
+|verify grid|EditableGrid|column|[3]               |row|[1]|contains|gridParagraph|
+|verify grid|EditableGrid|column|EncryptedTextField|row|[1]|contains|gridEncrypted|
+|verify grid|EditableGrid|column|[5]               |row|[1]|contains|1            |
+|verify grid|EditableGrid|column|DecimalField      |row|[1]|contains|2.2          |
+|verify grid|EditableGrid|column|[7]               |row|[1]|contains|+1 day       |
+
+!| script                                                                         |
+|check|get grid|[1]         |column|TextField         |row|[1]|value|gridText     |
+|check|get grid|EditableGrid|column|[3]               |row|[1]|value|gridParagraph|
+|check|get grid|EditableGrid|column|EncryptedTextField|row|[1]|value|gridEncrypted|
+|check|get grid|EditableGrid|column|[5]               |row|[1]|value|1            |
+|check|get grid|EditableGrid|column|DecimalField      |row|[1]|value|2.2          |
+|check|get regex|([a-zA-Z0-9]{4})  |group|1			  |from grid    |EditableGrid |column|TextField|row|[1]|value|grid|
+
+!| script                                                                             |
+|verify grid|EditableGrid[2]|column|DatetimeField  |row|[1]|contains|+1 hour          |
+|verify grid|EditableGrid[2]|column|DatetimeField  |row|[2]|contains|+1 minute        |
+|verify grid|EditableGrid[2]|column|[2]            |row|[1]|contains|Option 1         |
+|verify grid|EditableGrid[2]|column|[2]            |row|[2]|contains|Option 2         |
+|verify grid|EditableGrid[2]|column|RadioField     |row|[1]|contains|Option 1         |
+|verify grid|EditableGrid[2]|column|RadioField     |row|[2]|contains|Option 2         |
+|verify grid|EditableGrid[2]|column|[4]            |row|[1]|contains|Option 1,Option 2|
+|verify grid|EditableGrid[2]|column|[4]            |row|[2]|contains|Option 2         |
+|verify grid|EditableGrid[2]|column|FileUploadField|row|[1]|contains|Low.jpg          |
+|verify grid|EditableGrid[2]|column|FileUploadField|row|[2]|contains|High.jpg         |
+
+!| script                                                                             |
+|check|get grid|EditableGrid[2]|column|[2]            |row|[1]|value|Option 1         |
+|check|get grid|EditableGrid[2]|column|[2]            |row|[2]|value|Option 2         |
+|check|get grid|EditableGrid[2]|column|RadioField     |row|[1]|value|Option 1         |
+|check|get grid|EditableGrid[2]|column|RadioField     |row|[2]|value|Option 2         |
+|check|get grid|EditableGrid[2]|column|[4]            |row|[1]|value|Option 1,Option 2|
+|check|get grid|EditableGrid[2]|column|[4]            |row|[2]|value|Option 2         |
+|check|get grid|EditableGrid[2]|column|FileUploadField|row|[1]|value|Low.jpg          |
+|check|get grid|EditableGrid[2]|column|FileUploadField|row|[2]|value|High.jpg         |
+
+!| script                                                               |
+|verify grid|EditableGrid[3]|column|[1]|row|[1]|contains|Michael Chirlin|
+#|verify grid  |EditableGrid[3]|column|[2]|row|[1]|contains|AUT All Users          |
+#|verify grid  |EditableGrid[3]|column|[3]|row|[1]|contains|Dan Austria,AUT All Users|
+#|verify grid  |EditableGrid[3]|column|[4]|row|[1]|contains|All Process Models.arf |
+#|verify grid  |EditableGrid[3]|column|[1]|row|[2]|contains|Automated Testing      |
+#|verify grid  |EditableGrid[3]|column|[2]|row|[2]|contains|Automated Testing      |
+#|verify grid  |EditableGrid[3]|column|[3]|row|[2]|contains|10                     |
+
+!| script                                                               |
+|check|get grid|EditableGrid[3]|column|[1]|row|[1]|value|Michael Chirlin|
+#|check  |get grid|EditableGrid[3]|column|[2]|row|[1]|value|AUT All Users          |
+#|check  |get grid|EditableGrid[3]|column|[3]|row|[1]|value|Dan Austria,AUT All Users|
+#|check  |get grid|EditableGrid[3]|column|[4]|row|[1]|value|All Process Models.arf |
+#|check  |get grid|EditableGrid[3]|column|[1]|row|[2]|value|Automated Testing      |
+#|check  |get grid|EditableGrid[3]|column|[2]|row|[2]|value|Automated Testing      |
+#|check  |get grid|EditableGrid[3]|column|[3]|row|[2]|value|10                     |
+
+!| script                      |
+|select grid|PagingGrid|row|[4]|
+|select all rows in grid|PagingGrid|
+|check | get grid |PagingGrid| total count | 20 |
+|check | get grid |PagingGrid| row count | 5 |
+
+!| script                                                                                        |
+|verify grid|PagingGrid|row       		|[4]           |is selected                                    |
+|verify grid|PagingGrid|column    		|[2]           |row           |[1]|contains|Value 1            |
+|verify grid|PagingGrid|column    		|Column Label 2|row           |[1]|contains|Description 1      |
+|verify grid|PagingGrid|column    		|Column Label 1|row           |[2]|contains|Value 2            |
+|check 		|get regex|([a-zA-Z0-9]{5}) | group 	   |1			  |from grid   |PagingGrid  	   |column|Column Label 1|row|[2]|value|Value|
+
+!|script                                                                                         |
+|check      |get grid  |PagingGrid|column        |[2]           |row|[3]     |value|Value 3      |
+|check      |get grid  |PagingGrid|column        |Column Label 2|row|[1]     |value|Description 1|
+|check      |get grid  |PagingGrid|column        |Column Label 1|row|[2]     |value|Value 2      |
+
+!|script                                                                     |
+|click on grid|PagingGrid|navigation|next                                    |
+|verify grid  |PagingGrid|column    |Column Label 1|row|[1]|contains|Value 6 |
+|click on grid|[5]       |navigation|PREVIOUS                                |
+|verify grid  |PagingGrid|column    |Column Label 1|row|[1]|contains|Value 1 |
+|click on grid|PagingGrid|navigation|last                                    |
+|verify grid  |PagingGrid|column    |Column Label 1|row|[1]|contains|Value 16|
+|click on grid|PagingGrid|navigation|FIRST                                   |
+|verify grid  |[5]       |column    |Column Label 1|row|[1]|contains|Value 1 |
+
+!|script                                                                       |
+|sort grid  |PagingGrid|by column|Column Label 1                               |
+|verify grid|PagingGrid|column   |Column Label 1|row|[1]|contains|Value 1      |
+|sort grid  |[5]       |by column|Column Label 1                               |
+|verify grid|PagingGrid|column   |Column Label 1|row|[1]|contains|Value 9      |
+|sort grid  |PagingGrid|by column|Column Label 2                               |
+|verify grid|PagingGrid|column   |Column Label 2|row|[1]|contains|Description 1|
+|sort grid  |[5]       |by column|Column Label 2                               |
+|verify grid|PagingGrid|column   |Column Label 2|row|[1]|contains|Description 9|
+***!
+!*** Verify Validations
+!| script                                                                                                                           |
+|click on button|Submit                                                                                                             |
+|verify field   |RequiredField  |contains validation message|A value is required                                                    |
+|check          |get field      |RequiredField              |validation message|A value is required                                 |
+|verify section |Validations    |contains validation message|RequiredField is required,ValidationField is invalid                   |
+|check          |get section    |Validations                |validation message|RequiredField is required,ValidationField is invalid|
+|populate field |ValidationField|with                       |-1                                                                     |
+|verify field   |ValidationField|contains validation message|Value must be greater than 0,Value must be even                        |
+|check          |get field      |ValidationField            |validation message|Value must be greater than 0,Value must be even     |
+***!
+!*** Verify Links
+!| script                                        	  |
+| verify link | Safe Link | is present 		  |
+| verify link | Safe Link | URL contains | google.com |
+| $safeLinkURL= | get link | Safe Link | URL 		  |
+|populate field|TextField         |with|$safeLinkURL  |	
+***!
+!*** Close Form
+!|script               |
+|click on button|Submit|
+***!

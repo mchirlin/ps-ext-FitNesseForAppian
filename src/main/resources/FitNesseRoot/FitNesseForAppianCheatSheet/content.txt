@@ -26,107 +26,114 @@
 
 !3 NEWS METHODS
 ![:
-| verify news feed containing text | NEWS_TEXT | is present | 											: Verify a news item with a particular title is present 
-| verify news feed containing text | NEWS_TEXT | is not present | 										: Verify a news item with a particular title is not present
-| toggle more info for news feed containing text | NEWS_TEXT | 											: Click the more info link 
-| verify news feed containing text | NEWS_TEXT | and more info with label | LABEL | and value | VALUE | is present | : Verify the more info link of a particular new item contains a particular label and value
-| verify news feed containing text | NEWS_TEXT | tagged with | TAG_NAME | is present | 					: Verify a news item with a particular title and tag is present 
-| verify news feed containing text | NEWS_TEXT | commented with | COMMENT | is present | 				: Verify a news item with a particular title and comment is present 
-| click on news feed | NEWS_TEXT | record tag | RECORD_TAG | 											: Click on record tag on a particular news item
-| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from news feed containing text | NEWS_TEXT | 	: Use Java Regular Expression to return data from news as a variable
-| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENT |	: Use Java Regular Expression to return data from news as a variable
+| click on news feed | NEWS_TEXT | record tag | RECORD_TAG | 											: Click on record tag on a particular news item.
+| verify news feed containing text | NEWS_TEXT | is present | 											: Verifies a news item containing specific text is present. The method will wait for the timeout period and refresh up to the configured number of refresh times before failing. 
+| verify news feed containing text | NEWS_TITLE | is not present | 										: Verifies a news item containing specific text is not present.
+| verify news feed containing text | NEWS_TEXT | and more info with label | LABEL | and value | VALUE | is present | : Verifies a news item containing specific text with a specific label and value is present.
+| verify news feed containing text | NEWS_TEXT | tagged with | TAG_NAME | is present | 					: Verifies a news item containing specific text with a specific tag is present. 
+| verify news feed containing text | NEWS_TEXT | commented with | COMMENT | is present | 				: Verify a news item with a particular title and comment is present.
+| toggle more info for news feed containing text | NEWS_TEXT |											: Toggles the more info on a news item containing specific text.
+| delete news post | NEWS_TEXT | 																		: Deletes a news post.
+| get regex | REGEX | group | GROUP | from news feed containing text | NEWS_TEXT | 						: Returns a string that matches the regex, this could be useful in extracting a system generated value from the news feed.
+| get regex | REGEX | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENT |	: Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed. 
 ]!
 
 !3 TASKS METHODS
 ![:
-| click on task | TASK_NAME | 																			: Click on task
-| click on task report | TASK_REPORT_NAME | 															: Click on task report
-| $VARIABLE_NAME= |  get regex | REGEX | group | GROUP | from task name containing text | TASK_TEXT |	: Use Java Regular Expression to return data from news as a variable
-| verify task | TASK_NAME | is present | 																: Verify task is present
-| verify task | TASK_NAME | is not present | 															: Verify task is not present
-| verify task | TASK_NAME | has a deadline of | DEADLINE_TEXT | 										: Verify task has a particular deadline, e.g. 1h
+| click on task | TASK_NAME or TASK_NAME[INDEX] | 														: Clicks on the associated task.
+| click on task report | TASK_REPORT_NAME | 															: Click on task report.
+| verify task | TASK_NAME or TASK_NAME[INDEX] | is present | 											: Verifies if task is present in the user interface. This is useful for determining if security is applied correctly.
+| verify task | TASK_NAME or TASK_NAME[INDEX] | is not present | 										: Verifies if task is not present in the user interface. This is useful for determining if security is applied correctly.
+| verify task | TASK_NAME or TASK_NAME[INDEX] | has a deadline of | DEADLINE_TEXT | 					: Verify a task with a specific name has a specific deadline, e.g. 1h.
+| get regex | REGEX | group | GROUP | from task name containing text | TASK_TEXT |						: Use Java Regular Expression to return data from news as a variable
 ]!
 
 !3 RECORDS METHODS
 ![:
-| click on record type | RECORD_TYPE_NAME | 															: Click on a record type
-| click on record type | RECORD_TYPE_NAME[INDEX] | 														: Use this to populate the 2nd, 3rd, ... record type with the same label
-| click on record type user filter | USER_FILTER_NAME | 												: Click on a record type user filter
-| verify record type user filter | USER_FILTER_NAME | is present | 										: Verify a particular record type user filter is present
-| click on record | RECORD_NAME | 																		: Click on a record, works for both record list view and record grid view
-| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from record name containing text | RECORD_TEXT |: Use Java Regular Expression to return data from news as a variable
-| verify record | RECORD_NAME | is present | 															: Verify a record is present
-| verify record | RECORD_NAME | is not present | 														: Verify a record is not present
-| click on record view | VIEW_NAME | 																	: Click on a record view
-| click on record related action | RELATED_ACTION_NAME | 												: Click on a related action, this works for quick links and on the related action view
-| verify record related action | RELATED_ACTION_NAME | is present | 									: Verify a record related action is present
-| verify record related action | RELATED_ACTION_NAME | is not present |									: Verify a record related action is not present
-| sort record grid view by column | COLUMN_NAME | 														: Sort a record grid view by column
+| click on record type | RECORD_TYPE_NAME or RECORD_TYPE_NAME[INDEX] | 									: Click on a record type, use RECORD_NAME[INDEX] to click on the 2nd, 3rd, ... record type with the same label.
+| click on record type user filter | USER_FILTER_NAME | 												: Click on a record type user filter.
+| click on record | RECORD_NAME or RECORD_NAME[INDEX] | 												: Click on a record, works for both record list view and record grid view.
+| click on record view | VIEW_NAME | 																	: Click on a record view.
+| click on record related action | RELATED_ACTION_NAME | 												: Click on a related action, this works for quick links and on the related action view.
 | click on record grid navigation | NAVIGATION_OPTION | 												: Page through a record grid view, options include "First", "Previous", "Next", or "Last"
+| verify record type user filter | USER_FILTER_NAME | is present | 										: Verify a particular record type user filter is present.
+| verify record | RECORD_NAME or RECORD_NAME[INDEX] | is present | 										: Verify a record is present.
+| verify record | RECORD_NAME or RECORD_NAME[INDEX] | is not present | 									: Verify a record is not present.
+| verify record related action | RELATED_ACTION_NAME | is present | 									: Verify a record related action is present.
+| verify record related action | RELATED_ACTION_NAME | is not present |									: Verify a record related action is not present.
+| get regex | REGEX | group | GROUP | from record name containing text | RECORD_TEXT |					: Use Java Regular Expression to return data from news as a variable
+| sort record grid view by column | COLUMN_NAME | 														: Sort a record grid view by column.
 ]!
 
 !3 REPORTS METHODS
 ![:
-| click on report | REPORT_NAME | 																		: Click on a report
-| verify report | REPORT_NAME | is present | 															: Verify a report is present
-| verify report | REPORT_NAME | is not present |														: Verify a report is not present
+| click on report | REPORT_NAME or REPORT_NAME[INDEX] | 												: Click on a report
+| verify report | REPORT_NAME or REPORT_NAME[INDEX] | is present | 										: Verify a report is present
+| verify report | REPORT_NAME or REPORT_NAME[INDEX] | is not present |									: Verify a report is not present
 ]!
 
 !3 ACTIONS METHODS
 ![:
-| click on action | ACTION_NAME | 																		: Click on an action
-| click on action | ACTION_NAME[INDEX] | 																: Use this to populate the 2nd, 3rd, ... Action with the same label
+| click on action | ACTION_NAME or ACTION_NAME[INDEX] | 												: Click on an action, use index notation to click on the 2nd, 3rd, ... Action with the same label.
+| verify action | ACTION_NAME or ACTION_NAME[INDEX] | is present | 										: Verify an action is present
+| verify action | ACTION_NAME or ACTION_NAME[INDEX] | is not present | 									: Verify an action is not present
 | click on application filter | APP_FILTER |															: Click on an actions application filter
-| verify action | ACTION_NAME | is present | 															: Verify an action is present
-| verify action | ACTION_NAME | is not present | 														: Verify an action is not present
 ]!
 
 !3 INTERFACE METHODS
 ![:
-| populate field | FIELD_LABEL_OR_INDEX | with | VALUE(S) | 											: When populating a picker field with a username, make sure to use the display value instead of the username
-| populate field | FIELD_LABEL[FIELD_INDEX] | with | VALUE(S) | 										: Use this to populate the 2nd, 3rd, ... field with the same label
-| populate | FIELD_TYPE | field | [FIELD_INDEX] | with | VALUE(S) | 									: Use this to populate the 1st, 2nd, 3rd, ... field of a specific type with no label, currently only compatible with FIELD_TYPEs of TEXT, PARAGRAH, and FILE_UPLOAD. WARNING: Integer, Decimal, and Encrypted text fields will be considered as Text fields.
-| populate field | FIELD_LABEL | with value | VALUE | 													: Use this to populate a field with a value that contains a comma
-| populate field |[FIELD_INDEX] | in section | SECTION_NAME | with | VALUE(S) |							: Populate a field in a section with no label<br/>
-| clear field | FIELD_LABEL | of | VALUE_TO_REMOVE | 													: Use this to remove a specific value from a picker
-| get form title | 																						: Use with FitNesse keyword 'check' to verify title
-| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from form title |								: Use Java Regular Expression to return data from news as a variable
+| populate field | FIELD_LABEL or [INDEX] or FIELD_LABEL[INDEX] | with | VALUE(S) | 					: For populating all types of fields. When populating checkbox, radio, or select fields [INDICES] can be used.  When populating picker fields the display value must be used.
+| populate field | FIELD_LABEL or [INDEX] or FIELD_LABEL[INDEX] | with value | VALUE | 					: Use this to populate a field with a value that contains a comma
+| populate | FIELD_TYPE | field | [FIELD_INDEX] | with | VALUE(S) | 									: Use this to populate the 1st, 2nd, 3rd, ... field of a specific type with no label, currently only compatible with FIELD_TYPEs of TEXT, PARAGRAPH, and FILE_UPLOAD. WARNING: Integer, Decimal, and Encrypted text fields will be considered as Text fields.
+| populate field | FIELD_LABEL OR [FIELD_INDEX] | in section | SECTION_NAME | with | VALUE(S) |			: Populate a field in a section with no label<br/>
+| populate grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | with | VALUE(S) |	: Populate a grid field with a value (Column and Row Numbers should be in square brackets [])
+| clear field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] |  									: Use this to clear a field
+| clear field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | of | VALUE_TO_REMOVE | 			: Use this to remove a specific value from a picker
+| get form title |																						: Use with FitNesse keyword 'check' to verify title
 | get form instructions | 																				: Use with FitNesse keyword 'check' to verify title
-| get field | FIELD_LABEL_OR_INDEX | value | 															: Use with FitNesse key words 'check'  to verify value runtime variables
-| get field | FIELD_LABEL_OR_INDEX | in section | SECTION_NAME | value | 								: Use with FitNesse key words 'check' to verify values runtime variables
-| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from field | FIELD_NAME |	value |				: Use Java Regular Expression to return data from news as a variable
-| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from field | FIELD_NAME | in section | SECTION_NAME | value|		: Use Java Regular Expression to return data from news as a variable
-| verify field | FIELD_LABEL_OR_INDEX | contains | VALUE | 												: Verify field contains value
-| verify field | FIELD_LABEL | contains value | VALUE | 												: Use this to verify a field that contains a comma
-| verify field | FIELD_LABEL_OR_INDEX | in section | SECTION_NAME | contains | VALUE | 					: Verify field in section contains a value
-| verify field | FIELD_LABEL_OR_INDEX | is present | 													: Verify field with label is present
-| verify field | FIELD_LABEL_OR_INDEX | is not present | 												: Verify field with label is not present
-| verify field | FIELD_LABEL_OR_INDEX | contains validation message | VALIDATION_MESSAGE(S) |			: Verify field with label contains a specific validation message
+| get field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | value | 								: Use with FitNesse keyword 'check'  to verify value runtime variables
+| get field | FIELD_LABEL or FIELD_LABEL[INDEX] | in section | SECTION_NAME | value | 					: Use with FitNesse keyword 'check' to verify values runtime variables
+| get field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | validation message |					: Returns the validation messages from a field. Multiple messages will be concatenated with a comma.
+| get link | LINK_NAME or LINK_NAME[INDEX] | url |														: Returns the linkUrl
+| get grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | value | : Get the value from a grid cell.
+| get grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | total count |															: Returns the stored total count
+| get grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | row count |															: Returns the stored grid current page row count
+| get regex | REGEX | group | GROUP | from form title |													: Use Java Regular Expression to return data from news as a variable
+| get regex | REGEX | group | GROUP | from field | FIELD_NAME |	value |									: Use Java Regular Expression to return data from news as a variable
+| get regex | REGEX | group | GROUP | from field | FIELD_NAME | in section | SECTION_NAME | value |		: Use Java Regular Expression to return data from news as a variable
+| get regex | REGEX | group | GROUP | from grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | column | COLUMN_NAME_OR_INDEX | Row | [Row_Number] | value | : Use Java Regular Expression to return data from news as a variable
+| verify field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | contains | VALUES() | 			: Verify field contains value
+| verify field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | contains value | VALUE | 			: Use this to verify a field that contains a comma
+| verify field | FIELD_LABEL or [FIELD_INDEX] | in section | SECTION_NAME | contains | VALUE(S) | 		: Verify field in section contains a value
+| verify field | FIELD_LABEL or [FIELD_INEDX] or FIELD_LABEL[INDEX] | is present | 						: Verify field with label is present
+| verify field | FIELD_LABEL or [FIELD_INEDX] or FIELD_LABEL[INDEX] | is not present | 					: Verify field with label is not present
+| verify field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | contains validation message | VALIDATION_MESSAGE(S) |	: Verify field with label contains a specific validation message
+| verify link | LINK_NAME or LINK_NAME[INDEX] | is present |										: Verify link field is present.
+| verify link | LINK_NAME or LINK_NAME[INDEX] | URL contains | URL_TEXT |								: Verify link field's URL contains specific text.
+| verify button | BUTTON_NAME or BUTTON_NAME[INDEX] | is present |										: Verify button with label is present
+| verify button | BUTTON_NAME or BUTTON_NAME[INDEX] | is not present |									: Verify button with label is not present
 | verify section | SECTION_NAME | contains validation message | VALIDATION_MESSAGE(S) |					: Verify section with label contains a specific validation message
-| populate grid | GRID_NAME | column | COLUMN_NAME_OR_NUMBER | row | [ROW_NUMBER] | with | VALUE(S) | 	: Populate a grid field with a value (Column and Row Numbers should be in square brackets [])
-| verify grid | GRID_NAME | column | COLUMN_NAME_OR_NUMBER | row | [ROW_NUMBER] | contains | VALUE(S) | : Verify a grid field contains a value (Column and Row Numbers should be in square brackets [])
-| select grid | GRID_NAME | row | [ROW_NUMBER] | 															: Selects row in grid (Row Numbers should be in square brackets [])
-| verify grid | GRID_NAME | row | [ROW_NUMBER] | is selected | 											: Verifies if row in grid is selected (Row Numbers should be in square brackets [])
-| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from grid | GRID_NAME | cell in column | COLUMN_NAME_OR_INDEX | Row | [Row_Number] | value | : Use Java Regular Expression to return data from news as a variable
-| click on grid | GRID_NAME | add row link | 															: Can use gridName, gridIndex, or gridName[index] 
-| click on grid | GRID_NAME_OR_INDEX | navigation | NAV_REFERENCE | 									: Navigates through paging, only takes "first", previous, next, or "last"
-| sort grid | GRID_NAME_OR_INDEX | by | COLUMN_NAME | 													: Sorts grid by column name
-| select all rows in grid | GRID_NAME_OR_INDEX |														: Select all rows in a grid.  Can also be used to de-select all rows
-| $VARIABLE_NAME= | get grid | GRID_NAME_OR_INDEX | total count |										: Use $VARIABLE_NAME to access the stored total count
-| $VARIABLE_NAME= | get grid | GRID_NAME_OR_INDEX | row count |											: Use $VARIABLE_NAME to access the stored grid current page row count
-| click on link | LINK_NAME | 																			: Can use linkName or linkName[index]
-| verify link field | LINK_NAME | is present |															: Verify link field is present
-| verify link | LINK_NAME | URL contains | URL_TEXT |													: Verify link field's URL contains specific text
-| $VARIABLE_NAME= | get link | LINK_NAME | url |														: Use $VARIABLE_NAME to access variable																	 
-| click on button | BUTTON_NAME | 																		: Clicks on button
-| verify button | LABEL | is present |																	: Verify button with label is present
-| verify button | LABEL | is not present |																: Verify button with label is not present
-| click on radio option | RADIO_OPTION | 																: Clicks on the first radio button with the given choice label
-| click on radio option | RADIO_OPTION[INDEX] | 														: Clicks on the radio button with the given choice label by index. Index only includes radio button options.
-| click on checkbox option | CHECKBOX_OPTION | 															: Checks on the first checkbox with the given choice label
-| click on checkbox option | CHECKBOX_OPTION[INDEX] | 													: Checks on the checkbox with the given choice label by index. Index only includes checkbox options.
-| expand section | SECTION_NAME | 																		: Expands section 
-| collapse section | SECTION_NAME |																		: Collapses section
+| verify grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | contains | VALUE(S) |	: Verify a grid field contains a value (Column and Row Numbers should be in square brackets [])
+| verify grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | row | [ROW_INDEX] | is selected | 		: Verifies if row in grid is selected (Row Numbers should be in square brackets [])
+| click on button | BUTTON_NAME or BUTTON_NAME[INDEX] | 												: Clicks on button
+| click on link | LINK_NAME or LINK_NAME[INDEX] | 														: Click on a link.
+| click on radio option | RADIO_OPTION or RADIO_OPTION[INDEX] | 										: Selects a radio option
+| click on checkbox option | CHECKBOX_OPTION or CHECKBOX_OPTION[INDEX] | 								: Checks on the first checkbox with the given choice label
+| click on grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | add row link | 						: Can use gridName, gridIndex, or gridName[index] 
+| click on grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | navigation | NAV_REFERENCE | 			: Navigates through paging, only takes "first", previous, next, or "last"
+| toggle section | SECTION_NAME | visibility |															: Toggles visibility of section
+| select grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | row | [ROW_INDEX] | 					: Selects row in grid (Row Numbers should be in square brackets [])
+| select all rows in grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] |								: Select all rows in a grid.  Can also be used to de-select all rows
+| sort grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | by | COLUMN_NAME | 						: Sorts grid by column name
+| count grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | rows |									: Count rows in an editable or paging grid.
+]!
+
+!3 SITES METHODS
+![:
+| navigate to site | SITE_URL |																			: Navigates to Appian Site
+| navigate to site | SITE_URL | page | PAGE_URL |														: Navigates to specific page on Appian Site
+| click on site page | SITE_PAGE |																		: Clicks on an Appian Site page from within a site. Although pages are capitalized on the site, the SITE_NAME must match what is entered when creating the page.
+>>>>>>> Adding sites features and code overhaul
 ]!
 
 !3 UTILITY METHODS
@@ -141,24 +148,24 @@
 | set take error screenshots to | SCREENSHOT_BOOLEAN | 													: If true, screenshots will be taken for every failed test case. (Default true)
 | set stop on error to | STOP_ON_ERROR_BOOLEAN | 														: If true, the FitNesse test will stop on any error. (Default false)
 | take screenshot | FILE_NAME | 																		: Take a screenshot with the name (do not include the extension)
-| login with username | USERNAME | 																		: Uses the previously set appian url and the password associated with the user from the configs/user.properties file
+| login with username | USERNAME or ROLE | 																: Uses the previously set appian url and the password associated with the user or role from the configs/user.properties file
 | login with username | USERNAME | and password | PASSWORD | 											: Uses the previously set appian url
 | login with terms with username | USERNAME | and password | PASSWORD | 								: Uses set appian url
 | wait for | RELATIVE_PERIOD, e.g. +1 days, +1 hours | 													: Waits for relative amount of time
 | wait until | RELATIVE_PERIOD | 																		: Waits until relative time
-| $VARIABLE_NAME= | get random string | STRING_LENGTH | 												: Use $VARIABLE_NAME to access variable
-| $VARIABLE_NAME= | get random alphabet string | STRING_LENGTH | 										: Use $VARIABLE_NAME to access variable
-| $VARIABLE_NAME= | get random integer from | MIN_INT | to | MAX_INT | 									: Use $VARIABLE_NAME to access variable
-| $VARIABLE_NAME= | get random decimal from | MIN_DECIMAL | to | MAX_DECIMAL | 							: Use $VARIABLE_NAME to access variable
-| $VARIABLE_NAME= | get random decimal from | MIN_DECIMAL | to | MAX_DECIMAL | with | DECIMAL_PLACES | 	: Use $VARIABLE_NAME to access variable
+| get random string | STRING_LENGTH | 																	: Use with $VARIABLE_NAME= for random variables
+| get random alphabet string | STRING_LENGTH | 															: Use with $VARIABLE_NAME= for random variables
+| get random integer from | MIN_INT | to | MAX_INT | 													: Use with $VARIABLE_NAME= for random variables
+| get random decimal from | MIN_DECIMAL | to | MAX_DECIMAL | 											: Use with $VARIABLE_NAME= for random variables
+| get random decimal from | MIN_DECIMAL | to | MAX_DECIMAL | with | DECIMAL_PLACES | 					: Use with $VARIABLE_NAME= for random variables
 | refresh | 																							: refreshes screen
 | logout | 																								: Logout of Appian
 ]!
 
-!3 Login Scenarios
+!3 LOGIN SCENARIOS
 !4 Scenarios have been created to easily setup a test script  
 !4 Update Login Scenarios by editing the top level ScenarioLibrary
 ![:
 | setup for test script | 																				: Setup test script using the default values set in ScenarioLibrary
-| setup for test script for browser|BROWSER_TYPE|locale|LOCATION|version|VERSION_NUMBER|url|APPIAN_URL|		: Setup test script using custom values for browser, locale, version, and URL
+| setup for test script for browser|BROWSER_TYPE|locale|LOCATION|version|VERSION_NUMBER|url|APPIAN_URL|	: Setup test script using custom values for browser, locale, version, and URL
 ]!

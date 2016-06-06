@@ -35,12 +35,12 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.appiancorp.ps.automatedtest.common.AppianObject;
 import com.appiancorp.ps.automatedtest.common.Constants;
+import com.appiancorp.ps.automatedtest.common.Screenshot;
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
-import com.appiancorp.ps.automatedtest.object.AppianObject;
-import com.appiancorp.ps.automatedtest.object.Screenshot;
-import com.appiancorp.ps.automatedtest.object.TempoLogin;
+import com.appiancorp.ps.automatedtest.tempo.TempoLogin;
 
 /**
  * This is the base class for integrating Appian and FitNesse.
@@ -66,7 +66,7 @@ public class BaseFixture {
   /**
    * Starts selenium browser<br>
    * <br>
-   * FitNesse Example: <code>| setup selenium web driver with | FIREFOX | browser |</code>
+   * FitNesse Example: <code>| setup selenium web driver with | BROWSER | browser |</code>
    * 
    * @param browser
    *          Browser to test with, currently supports FIREFOX, CHROME, IE
@@ -76,28 +76,28 @@ public class BaseFixture {
       FirefoxProfile prof = new FirefoxProfile();
       prof.setPreference("browser.startup.homepage_override.mstone", "ignore");
       prof.setPreference("startup.homepage_welcome_url.additional", "about:blank");
-      if (!StringUtils.isBlank(prop.getProperty(Constants.FIREFOX_BROWSER_HOME))) {
-        File pathToBinary = new File(prop.getProperty(Constants.FIREFOX_BROWSER_HOME));
+      if (!StringUtils.isBlank(getProp().getProperty(Constants.FIREFOX_BROWSER_HOME))) {
+        File pathToBinary = new File(getProp().getProperty(Constants.FIREFOX_BROWSER_HOME));
         FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
         settings.setDriver(new FirefoxDriver(ffBinary, prof));
       } else {
         settings.setDriver(new FirefoxDriver(prof));
       }
     } else if (browser.equals("CHROME")) {
-      System.setProperty("webdriver.chrome.driver", prop.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
+      System.setProperty("webdriver.chrome.driver", getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
         Constants.CHROME_DRIVER);
 
       System.setProperty("webdriver.chrome.args", "--disable-logging");
       System.setProperty("webdriver.chrome.silentOutput", "true");
-      if (!StringUtils.isBlank(prop.getProperty(Constants.CHROME_BROWSER_HOME))) {
+      if (!StringUtils.isBlank(getProp().getProperty(Constants.CHROME_BROWSER_HOME))) {
         ChromeOptions co = new ChromeOptions();
-        co.setBinary(prop.getProperty(Constants.CHROME_BROWSER_HOME));
+        co.setBinary(getProp().getProperty(Constants.CHROME_BROWSER_HOME));
         settings.setDriver(new ChromeDriver(co));
       } else {
         settings.setDriver(new ChromeDriver());
       }
     } else if (browser.equals("IE")) {
-      System.setProperty("webdriver.ie.driver", prop.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
+      System.setProperty("webdriver.ie.driver", getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
         Constants.IE_DRIVER);
       System.setProperty("webdriver.ie.driver.silent", "true");
       DesiredCapabilities dCaps = new DesiredCapabilities();
@@ -173,62 +173,6 @@ public class BaseFixture {
   }
 
   /**
-   * Sets the date format string. This is useful so that test cases will work in different geographic regions that format date and time
-   * differently. This format string must match Appian, e.g. in Australia the date string is dd/MM/yyyy.<br>
-   * <br>
-   * FitNesse Example: <code>| set date format string to | dd/MM/yyyy |</code>
-   * 
-   * @param df
-   *          Date format string
-   */
-  @Deprecated
-  public void setDateFormatTo(String df) {
-    settings.setDateFormat(df);
-  }
-
-  /**
-   * Sets the time format string. This is useful so that test cases will work in different geographic regions that format date and time
-   * differently. This format string must match Appian, e.g. in Australia the time string is HH:mm.<br>
-   * <br>
-   * FitNesse Example: <code>| set time format string to | HH:mm |</code>
-   * 
-   * @param tf
-   *          Time format string
-   */
-  @Deprecated
-  public void setTimeFormatTo(String tf) {
-    settings.setTimeFormat(tf);
-  }
-
-  /**
-   * Sets the date display format string. This is useful so that test cases will work in different geographic regions that format date and
-   * time differently. This format string must match Appian, e.g. in Australia the date string is dd/MM/yyyy.<br>
-   * <br>
-   * FitNesse Example: <code>| set date display format string to | d MMM yyyy |</code>
-   * 
-   * @param df
-   *          Date display format string
-   */
-  @Deprecated
-  public void setDateDisplayFormatTo(String df) {
-    settings.setDateDisplayFormat(df);
-  }
-
-  /**
-   * Sets the time display format string. This is useful so that test cases will work in different geographic regions that format date and
-   * time differently. This format string must match Appian, e.g. in Australia the time string is HH:mm.<br>
-   * <br>
-   * FitNesse Example: <code>| set time display format string to | HH:mm |</code>
-   * 
-   * @param tf
-   *          Time display format string
-   */
-  @Deprecated
-  public void setTimeDisplayFormatTo(String tf) {
-    settings.setTimeDisplayFormat(tf);
-  }
-
-  /**
    * Sets the global timeout seconds that are used for each implicit wait. <br>
    * FitNesse Example: <code>| set timeout seconds to | 10 |</code>
    * 
@@ -274,7 +218,7 @@ public class BaseFixture {
    */
   public void setTakeErrorScreenshotsTo(Boolean bool) {
     if (settings.getScreenshotPath() == null) {
-      settings.setScreenshotPath(prop.getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\screenshots");
+      settings.setScreenshotPath(getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\screenshots");
     }
     settings.setTakeErrorScreenshots(bool);
   }
@@ -300,7 +244,7 @@ public class BaseFixture {
    *          File name for new screenshot
    */
   public void takeScreenshot(String fileName) {
-    Screenshot.takeScreenshot(fileName, settings);
+    Screenshot.getInstance(settings).capture(fileName);
   }
 
   /**
@@ -316,9 +260,9 @@ public class BaseFixture {
    *          Password
    */
   public void loginIntoWithUsernameAndPassword(String url, String userName, String password) {
-    TempoLogin.navigateToLoginPage(url, settings);
-    TempoLogin.waitForLogin(settings);
-    TempoLogin.login(url, userName, password, settings);
+    TempoLogin.getInstance(settings).navigateToLoginPage(url);
+    TempoLogin.getInstance(settings).waitForLogin();
+    TempoLogin.getInstance(settings).login(url, userName, password);
   }
 
   /**
@@ -344,7 +288,8 @@ public class BaseFixture {
    * @param username
    */
   public void loginIntoWithUsername(String url, String username) {
-    String password = prop.getProperty(username);
+    String password = getProp().getProperty(username);
+
     loginIntoWithUsernameAndPassword(url, username, password);
   }
 
@@ -360,6 +305,31 @@ public class BaseFixture {
   }
 
   /**
+   * Login to Appian using roles.properties.<br>
+   * <br>
+   * 
+   * @param url
+   * @param role
+   */
+  public void loginIntoWithRole(String url, String role) {
+    String userNamePassword = getProp().getProperty(role);
+    String username = userNamePassword.substring(0, userNamePassword.indexOf("|"));
+    String password = userNamePassword.substring(userNamePassword.indexOf("|") + 1, userNamePassword.length());
+
+    loginIntoWithUsernameAndPassword(url, username, password);
+  }
+
+  /**
+   * Login to Appian using roles.properties.<br>
+   * <br>
+   * 
+   * @param role
+   */
+  public void loginWithRole(String role) {
+    loginIntoWithRole(settings.getUrl(), role);
+  }
+
+  /**
    * Login to and Appian site containing terms and conditions.<br>
    * <br>
    * FitNesse Example: <code>| login with terms with username | USERNAME | and password | PASSWORD |</code> - Uses the url set here:
@@ -371,9 +341,9 @@ public class BaseFixture {
    *          Password
    */
   public void loginWithTermsWithUsernameAndPassword(String userName, String password) {
-    TempoLogin.navigateToLoginPage(settings.getUrl(), settings);
-    TempoLogin.waitForTerms(settings);
-    TempoLogin.loginWithTerms(settings.getUrl(), userName, password, settings);
+    TempoLogin.getInstance(settings).navigateToLoginPage(settings.getUrl());
+    TempoLogin.getInstance(settings).waitForTerms();
+    TempoLogin.getInstance(settings).loginWithTerms(settings.getUrl(), userName, password);
   }
 
   /**
@@ -456,7 +426,7 @@ public class BaseFixture {
    * FitNesse Example: <code>| wait for working |</code>
    */
   public void waitForWorking() {
-    AppianObject.waitForWorking(settings);
+    AppianObject.getInstance(settings).waitForWorking();
   }
 
   /**
@@ -469,7 +439,7 @@ public class BaseFixture {
    *          Datetime string must match {@link #setDateFormatTo(String)} and {@link #setTimeFormatTo(String)}
    */
   public void waitUntil(String datetime) {
-    datetime = AppianObject.formatDatetimeCalculation(datetime, settings);
+    datetime = AppianObject.getInstance(settings).formatDatetimeCalculation(datetime);
 
     try {
       Date endDatetime = DateUtils.parseDate(datetime, settings.getDatetimeDisplayFormat());
@@ -732,7 +702,7 @@ public class BaseFixture {
   }
 
   public Settings getSettings() {
-    return this.settings;
+    return settings;
   }
 
   private void loadProperties() {
@@ -745,7 +715,7 @@ public class BaseFixture {
         .getResourceAsStream("configs/"), Charsets.UTF_8);
       for (String file : files) {
         inputStream = BaseFixture.class.getClassLoader().getResourceAsStream("configs/" + file);
-        prop.load(inputStream);
+        getProp().load(inputStream);
       }
     } catch (Exception e) {
 
@@ -761,12 +731,20 @@ public class BaseFixture {
         for (File file : folder.listFiles()) {
           if (FilenameUtils.getExtension(file.getPath()).equals("properties")) {
             inputStream = new FileInputStream(file.getAbsolutePath());
-            prop.load(inputStream);
+            getProp().load(inputStream);
           }
         }
       }
     } catch (Exception e) {
 
     }
+  }
+
+  public Properties getProp() {
+    return prop;
+  }
+
+  public void setProp(Properties prop) {
+    this.prop = prop;
   }
 }

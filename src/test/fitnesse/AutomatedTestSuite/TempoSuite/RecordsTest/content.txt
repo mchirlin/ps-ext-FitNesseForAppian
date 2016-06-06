@@ -1,0 +1,9 @@
+!** Access Records menu
+|script |
+|click on menu        |Records  |
+|click on record type |Auto[1]  | 
+|click on menu        |Records  |
+|click on record type |Auto[2]  | 
+|check                |get regex|([a-zA-Z0-9]{5})|group|1|from record name containing text|$randomString|$randomString|
+|verify record type user filter |Past|is present |
+**!

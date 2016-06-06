@@ -1,0 +1,6 @@
+!** Test Task Methods
+| script |
+| navigate to site | automated-test-site |
+| click on site page | Data Input |
+| navigate to site | automated-test-site | page | automated-test-grid |
+**!
