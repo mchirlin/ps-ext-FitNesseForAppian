@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.fixture.tempo;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.AfterClass;
@@ -43,6 +44,12 @@ public class TasksFixtureTest extends TempoFixtureTest {
     tFixture.clickOnMenu("Tasks");
 
     assertTrue(tFixture.verifyTaskHasDeadlineOf("Input Interface Test", "1h"));
+  }
+
+  @Test
+  public void testGetTaskRegex() throws Exception {
+    tFixture.clickOnMenu("Tasks");
+    assertEquals(tFixture.getRegexGroupFromTaskNameContainingText("([a-zA-Z0-9]{5})", 1, "Input Automated Test Data"), "Input");
   }
 
   @AfterClass

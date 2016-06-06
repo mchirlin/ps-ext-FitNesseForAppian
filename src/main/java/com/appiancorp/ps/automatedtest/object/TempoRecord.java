@@ -147,4 +147,16 @@ public class TempoRecord extends AppianObject {
     }
   }
 
+  public static String getRegexGroupFromRecordContainingTextInName(String regex, Integer group, String recordText, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("REGEX FOR RECORD NAME [" + regex + "]");
+
+    try {
+      String text = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_RECORD_LINK, recordText))).getText();
+      if (LOG.isDebugEnabled()) LOG.debug("RECORD NAME [" + text + "]");
+      return getRegexResults(regex, group, text);
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Record name regex", regex);
+    }
+  }
+
 }

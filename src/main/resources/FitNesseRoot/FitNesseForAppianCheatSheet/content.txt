@@ -41,6 +41,7 @@
 ![:
 | click on task | TASK_NAME | 																			: Click on task
 | click on task report | TASK_REPORT_NAME | 															: Click on task report
+| $VARIABLE_NAME= |  get regex | REGEX | group | GROUP | from task name containing text | TASK_TEXT |	: Use Java Regular Expression to return data from news as a variable
 | verify task | TASK_NAME | is present | 																: Verify task is present
 | verify task | TASK_NAME | is not present | 															: Verify task is not present
 | verify task | TASK_NAME | has a deadline of | DEADLINE_TEXT | 										: Verify task has a particular deadline, e.g. 1h
@@ -53,6 +54,7 @@
 | click on record type user filter | USER_FILTER_NAME | 												: Click on a record type user filter
 | verify record type user filter | USER_FILTER_NAME | is present | 										: Verify a particular record type user filter is present
 | click on record | RECORD_NAME | 																		: Click on a record, works for both record list view and record grid view
+| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from record name containing text | RECORD_TEXT |: Use Java Regular Expression to return data from news as a variable
 | verify record | RECORD_NAME | is present | 															: Verify a record is present
 | verify record | RECORD_NAME | is not present | 														: Verify a record is not present
 | click on record view | VIEW_NAME | 																	: Click on a record view
@@ -88,9 +90,12 @@
 | populate field |[FIELD_INDEX] | in section | SECTION_NAME | with | VALUE(S) |							: Populate a field in a section with no label<br/>
 | clear field | FIELD_LABEL | of | VALUE_TO_REMOVE | 													: Use this to remove a specific value from a picker
 | get form title | 																						: Use with FitNesse keyword 'check' to verify title
+| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from form title |								: Use Java Regular Expression to return data from news as a variable
 | get form instructions | 																				: Use with FitNesse keyword 'check' to verify title
 | get field | FIELD_LABEL_OR_INDEX | value | 															: Use with FitNesse key words 'check'  to verify value runtime variables
 | get field | FIELD_LABEL_OR_INDEX | in section | SECTION_NAME | value | 								: Use with FitNesse key words 'check' to verify values runtime variables
+| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from field | FIELD_NAME |	value |				: Use Java Regular Expression to return data from news as a variable
+| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from field | FIELD_NAME | in section | SECTION_NAME | value|		: Use Java Regular Expression to return data from news as a variable
 | verify field | FIELD_LABEL_OR_INDEX | contains | VALUE | 												: Verify field contains value
 | verify field | FIELD_LABEL | contains value | VALUE | 												: Use this to verify a field that contains a comma
 | verify field | FIELD_LABEL_OR_INDEX | in section | SECTION_NAME | contains | VALUE | 					: Verify field in section contains a value
@@ -102,6 +107,7 @@
 | verify grid | GRID_NAME | column | COLUMN_NAME_OR_NUMBER | row | [ROW_NUMBER] | contains | VALUE(S) | : Verify a grid field contains a value (Column and Row Numbers should be in square brackets [])
 | select grid | GRID_NAME | row | [ROW_NUMBER] | 															: Selects row in grid (Row Numbers should be in square brackets [])
 | verify grid | GRID_NAME | row | [ROW_NUMBER] | is selected | 											: Verifies if row in grid is selected (Row Numbers should be in square brackets [])
+| $VARIABLE_NAME= | get regex | REGEX | group | GROUP | from grid | GRID_NAME | cell in column | COLUMN_NAME_OR_INDEX | Row | [Row_Number] | value | : Use Java Regular Expression to return data from news as a variable
 | click on grid | GRID_NAME | add row link | 															: Can use gridName, gridIndex, or gridName[index] 
 | click on grid | GRID_NAME_OR_INDEX | navigation | NAV_REFERENCE | 									: Navigates through paging, only takes "first", previous, next, or "last"
 | sort grid | GRID_NAME_OR_INDEX | by | COLUMN_NAME | 													: Sorts grid by column name
