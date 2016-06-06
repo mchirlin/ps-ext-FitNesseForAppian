@@ -13,3 +13,8 @@
 | click on action | All Fields |
 | click on button | Cancel |
 ***!
+!*** Click on Action Name [Index] 
+| click on menu | Actions |
+| click on action | Automated Test[2] |
+| click on button | Cancel |
+***!

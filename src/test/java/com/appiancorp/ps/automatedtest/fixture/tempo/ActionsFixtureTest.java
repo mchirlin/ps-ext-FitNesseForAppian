@@ -20,8 +20,16 @@ public class ActionsFixtureTest extends TempoFixtureTest {
   }
 
   @Test
+  public void testClickOnAppNameIndex() throws Exception {
+    tFixture.clickOnMenu("Actions");
+    tFixture.clickOnAction("Automated Testing[2]");
+    tFixture.clickOnButton("Cancel");
+  }
+
+  @Test
   public void testClickOnAppFilter() throws Exception {
     tFixture.clickOnMenu("Actions");
     tFixture.clickOnApplicationFilter("Automated");
   }
+
 }

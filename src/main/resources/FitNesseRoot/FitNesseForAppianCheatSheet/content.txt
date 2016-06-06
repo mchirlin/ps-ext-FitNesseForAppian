@@ -73,6 +73,7 @@
 !3 ACTIONS METHODS
 ![:
 | click on action | ACTION_NAME | 																		: Click on an action
+| click on action | ACTION_NAME[INDEX] | 																: Use this to populate the 2nd, 3rd, ... Action with the same label
 | click on application filter | APP_FILTER |															: Click on an actions application filter
 | verify action | ACTION_NAME | is present | 															: Verify an action is present
 | verify action | ACTION_NAME | is not present | 														: Verify an action is not present

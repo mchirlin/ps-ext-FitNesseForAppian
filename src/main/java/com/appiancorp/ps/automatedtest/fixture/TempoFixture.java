@@ -659,10 +659,12 @@ public class TempoFixture extends BaseFixture {
   /**
    * Clicks on the associated action.<br>
    * <br>
-   * FitNesse Example: <code>| click on action | ACTION_NAME |</code>
+   * FitNesse Example:
+   * <code>| click on action | ACTION_NAME |</code>
+   * <code>| click on action | ACTION_NAME[INDEX] |</code>
    * 
    * @param actionName
-   *          Name of action to click (partial names are acceptable)
+   *          Name or Name and index of action to click (partial names are acceptable)
    *          If multiple actions contain the same name the first will be selected
    */
   public void clickOnAction(String actionName) {
