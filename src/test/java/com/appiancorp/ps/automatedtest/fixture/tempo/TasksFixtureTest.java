@@ -13,14 +13,14 @@ public class TasksFixtureTest extends TempoFixtureTest {
   @BeforeClass
   public static void setUpTasks() throws Exception {
     tFixture.clickOnMenu("Actions");
-    tFixture.clickOnAction("Automated Testing Input");
+    tFixture.clickOnAction("All Fields");
   }
 
   @Test
   public void testClickOnTask() throws Exception {
     tFixture.clickOnMenu("Tasks");
 
-    tFixture.clickOnTask("Input Automated Test Data");
+    tFixture.clickOnTask("Input Interface Test");
   }
 
   @Test
@@ -34,7 +34,7 @@ public class TasksFixtureTest extends TempoFixtureTest {
   public void testVerifyTaskIsPresent() throws Exception {
     tFixture.clickOnMenu("Tasks");
 
-    assertTrue(tFixture.verifyTaskIsPresent("Input Automated Test Data"));
+    assertTrue(tFixture.verifyTaskIsPresent("Input Interface Test"));
     assertTrue(tFixture.verifyTaskIsNotPresent("Not present"));
   }
 
@@ -42,13 +42,13 @@ public class TasksFixtureTest extends TempoFixtureTest {
   public void testVerifyTaskHasDeadlineOf() throws Exception {
     tFixture.clickOnMenu("Tasks");
 
-    assertTrue(tFixture.verifyTaskHasDeadlineOf("Input Automated Test Data", "1h"));
+    assertTrue(tFixture.verifyTaskHasDeadlineOf("Input Interface Test", "1h"));
   }
 
   @AfterClass
   public static void tearDownTasks() throws Exception {
     tFixture.clickOnMenu("Tasks");
-    tFixture.clickOnTask("Input Automated Test Data");
+    tFixture.clickOnTask("Input Interface Test");
     tFixture.clickOnButton("Cancel");
   }
 }
