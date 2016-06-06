@@ -206,8 +206,7 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.
-   * <br>
+   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed. <br>
    * <br>
    * FitNesse Example:
    * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |</code>
@@ -534,8 +533,7 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.
-   * <br>
+   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly. <br>
    * <br>
    * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is present |</code>
    * 
@@ -659,9 +657,7 @@ public class TempoFixture extends BaseFixture {
   /**
    * Clicks on the associated action.<br>
    * <br>
-   * FitNesse Example:
-   * <code>| click on action | ACTION_NAME |</code>
-   * <code>| click on action | ACTION_NAME[INDEX] |</code>
+   * FitNesse Example: <code>| click on action | ACTION_NAME |</code> <code>| click on action | ACTION_NAME[INDEX] |</code>
    * 
    * @param actionName
    *          Name or Name and index of action to click (partial names are acceptable)
@@ -742,8 +738,6 @@ public class TempoFixture extends BaseFixture {
    * $title<br>
    * <code>| check | get form title | FORM_TITLE |</code> - Returns true if form title matches FORM_TITLE input
    * 
-   * @{titleVariable <br>
-   *                 <code>| check | get form title | FORM_TITLE |</code> - Returns true if form title matches FORM_TITLE input
    * @return The title string
    */
   public String getFormTitle() {
@@ -1270,7 +1264,7 @@ public class TempoFixture extends BaseFixture {
    * 
    * @param linkName
    *          Name of link to look for URL
-   * @param linkURL
+   * @param URLText
    *          Values to verify that the link URL contains
    * @return True, if the link URL does contain the value
    */
@@ -1282,12 +1276,12 @@ public class TempoFixture extends BaseFixture {
   /**
    * Returns the URL of a link field.<br>
    * <br>
-   * FitNesse example: <code>| $VARIABLE_NAME= | get link | LINK_NAME | URL |<code> Use $VARIABLE_NAME to access the variable
+   * FitNesse example: <code>| $VARIABLE_NAME= | get link | LINK_NAME | URL |</code> Use $VARIABLE_NAME to access the variable
    * containing the link URL of the link field specified
    * 
-   * @param length
-   *          Length of random string
-   * @return Random alphanumeric string
+   * @param linkName
+   *          Name of link
+   * @return Link URL
    */
   public String getLinkURL(String linkName) {
     return TempoLinkField.getLinkURL(linkName, settings);
