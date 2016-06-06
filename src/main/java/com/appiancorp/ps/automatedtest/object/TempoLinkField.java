@@ -20,9 +20,9 @@ public class TempoLinkField extends AppianObject {
     if (isFieldIndex(linkName)) {
       int lNum = getIndexFromFieldIndex(linkName);
       String lName = getFieldFromFieldIndex(linkName);
-      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD_INDEX, lName, lName, lNum)));
+      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD_INDEX, lName, lNum)));
     } else {
-      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD, linkName, linkName)));
+      return s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_LINK_FIELD, linkName)));
     }
 
   }
@@ -52,10 +52,10 @@ public class TempoLinkField extends AppianObject {
         int lNum = getIndexFromFieldIndex(linkName);
         String lName = getFieldFromFieldIndex(linkName);
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
-          XPATH_ABSOLUTE_LINK_FIELD_INDEX, lName, lName, lNum))));
+          XPATH_ABSOLUTE_LINK_FIELD_INDEX, lName, lNum))));
       } else {
         (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(
-          XPATH_ABSOLUTE_LINK_FIELD, linkName, linkName))));
+          XPATH_ABSOLUTE_LINK_FIELD, linkName))));
       }
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Link", linkName);
