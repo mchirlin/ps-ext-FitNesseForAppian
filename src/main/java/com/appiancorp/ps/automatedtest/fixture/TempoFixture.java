@@ -1215,6 +1215,20 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
+   * Select all rows in a grid<br>
+   * <br>
+   * FitNesse Example: <code>| select all rows in grid | GRID_NAME_OR_INDEX |</code>
+   * 
+   * @param gridName
+   *          Name or name and index of grid
+   */
+
+  public void selectAllRowsInGrid(String gridName) {
+    TempoGrid.waitFor(gridName, settings);
+    TempoGrid.selectAll(gridName, settings);
+  }
+
+  /**
    * Sort a grid by a column<br>
    * <br>
    * FitNesse Example: <code>| sort grid | GRID_NAME_OR_INDEX | by column | COLUMN_NAME_OR_INDEX |</code> -

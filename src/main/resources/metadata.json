@@ -124,6 +124,7 @@
 	    {"label": "xpathRelativeGridNextPageLink", "value": "./../..//img[contains(@aria-label, 'Next page')]"},
 	    {"label": "xpathRelativeGridLastPageLink", "value": "./../..//img[contains(@aria-label, 'Last page')]"},
 	    {"label": "xpathRelativeGridColumnLink", "value": "./thead//a[contains(text(), '%s')]"},
+	    {"label": "xpathRelativeGridSelectAllColumn", "value": "./thead//input[@type='checkbox']"},
 	    {"label": "xpathAbsoluteWorking", "value": "//div[@class = 'appian-indicator-message']"},
 	    {"label": "xpathConcatAncestorFieldLayout", "value": "/ancestor::div[contains(@class, 'aui_FieldLayout_InputContainer')]"}
 	  ]
