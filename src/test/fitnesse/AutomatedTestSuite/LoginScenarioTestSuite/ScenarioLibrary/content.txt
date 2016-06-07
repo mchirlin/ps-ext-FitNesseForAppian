@@ -7,20 +7,19 @@ Default browser can be '''FIREFOX''', '''CHROME''', or '''IE'''
 !define defaultBrowser {FIREFOX}
 
 Default Version cane be '''16.2''', '''16.1''', '''7.11''', or '''7.11'''
-!define defaultVersion {16.1}
+!define defaultVersion {16.2}
 
 Default Locale can be '''en_US''' or '''en_GB'''
 !define defaultLocale {en_US}
 
-Default URL should include http or https and /suite (e.g. '''!-https://forum.appian.com/suite-!''' )
-
-!define defaultURL {REPLACE_APPIAN_URL}
+Default URL should include http/s and /suite (e.g. '''!-https://forum.appian.com/suite-!''' )
+!define defaultURL {https://ps-sandbox1.appiancloud.com/suite/}
 **!
 
 !3 To use out of the box functionality, do not update the scenarios below
 
 !*** Setup customizable for browser, locale, version, and URL
-!|scenario                             |setup for test script for browser|browserType|locale|location|version|versionNum|url|appianUrl|
+!|scenario                             |setup for test script for browser _ locale _ version _ url _ |browserType,location,versionNum,appianUrl|
 |setup selenium web driver with browser|@browserType                                                                                  |
 |set appian locale to                  |@location                                                                                     |
 |set appian version to                 |@versionNum                                                                                   |
