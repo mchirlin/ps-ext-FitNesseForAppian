@@ -552,6 +552,16 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
     tFixture.selectAllRowsInGrid("PagingGrid");
   }
 
+  @Test
+  public void testGridGetTotalCount() throws Exception {
+    assertEquals(tFixture.getGridTotalCount("PagingGrid"), 20);
+  }
+
+  @Test
+  public void testGridGetRowCount() throws Exception {
+    assertEquals(tFixture.getGridRowCount("PagingGrid"), 5);
+  }
+
   @AfterClass
   public static void tearDownInterface() throws Exception {
     tFixture.clickOnButton("Cancel");

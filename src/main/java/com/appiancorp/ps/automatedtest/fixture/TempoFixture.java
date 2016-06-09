@@ -206,7 +206,8 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed. <br>
+   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.
+   * <br>
    * <br>
    * FitNesse Example:
    * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |</code>
@@ -533,7 +534,8 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly. <br>
+   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.
+   * <br>
    * <br>
    * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is present |</code>
    * 
@@ -1127,6 +1129,40 @@ public class TempoFixture extends BaseFixture {
   public String getGridColumnRowValue(String gridName, String columnName, String rowNum) {
     TempoGrid.waitFor(gridName, columnName, rowNum, settings);
     return TempoGrid.getValue(gridName, columnName, rowNum, settings);
+  }
+
+  /**
+   * Returns the value of a field.<br>
+   * <br>
+   * FitNesse Examples:<br>
+   * <code>| get grid | GRID_NAME_OR_INDEX | total count |</code> - Simply returns the chosen grid's total count<br>
+   * <code>| $gridTotalCount= | get grid | GRID_NAME_OR_INDEX | total count | </code> - Stores
+   * the grid's total count value in $gridTotalCount<br>
+   * 
+   * @param gridName
+   *          Name or index of the grid
+   * @return The grid's total count
+   */
+  public int getGridTotalCount(String gridName) {
+    TempoGrid.waitFor(gridName, settings);
+    return TempoGrid.getTotalCount(gridName, settings);
+  }
+
+  /**
+   * Returns the value of a field.<br>
+   * <br>
+   * FitNesse Examples:<br>
+   * <code>| get grid | GRID_NAME_OR_INDEX | row count |</code> - Simply returns the chosen grid's current page row count<br>
+   * <code>| $gridRowCount= | get grid | GRID_NAME_OR_INDEX | row count | </code> - Stores
+   * the grid's row count value in $gridRowCount<br>
+   * 
+   * @param gridName
+   *          Name or index of the grid
+   * @return The grid's current page row count
+   */
+  public int getGridRowCount(String gridName) {
+    TempoGrid.waitFor(gridName, settings);
+    return TempoGrid.getRowCount(gridName, settings);
   }
 
   /**
