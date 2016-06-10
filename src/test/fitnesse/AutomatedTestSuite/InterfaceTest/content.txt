@@ -101,10 +101,12 @@
 #|populate grid  |EditableGrid[3]|column|[2]|row|[2]|with|Automated Testing       |
 #|populate grid  |EditableGrid[3]|column|[3]|row|[2]|with|10                      |
 ***!
-!*** Select a grid row
+!*** Select a grid row and other grid functionality
 !| script                      |
 |select grid|PagingGrid|row|[4]|
 |select all rows in grid|PagingGrid|
+|check | get grid |PagingGrid| total count | 20 |
+|check | get grid |PagingGrid| row count | 5 |
 ***!
 !*** Verify/Check Fields Contain Values for Section 1
 !| script                                          |

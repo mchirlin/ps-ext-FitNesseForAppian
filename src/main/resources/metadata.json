@@ -126,7 +126,8 @@
 	    {"label": "xpathRelativeGridColumnLink", "value": "./thead//a[contains(text(), '%s')]"},
 	    {"label": "xpathRelativeGridSelectAllColumn", "value": "./thead//input[@type='checkbox']"},
 	    {"label": "xpathAbsoluteWorking", "value": "//div[@class = 'appian-indicator-message']"},
-	    {"label": "xpathConcatAncestorFieldLayout", "value": "/ancestor::div[contains(@class, 'aui_FieldLayout_InputContainer')]"}
+	    {"label": "xpathConcatAncestorFieldLayout", "value": "/ancestor::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
+	    {"label": "xpathRelativeGridPagingLabel", "value": "./../..//div[contains(@class, 'gwt-HTML')]"}
 	  ]
 	},
 	{ "version": "7.11", "byConstants": [] },

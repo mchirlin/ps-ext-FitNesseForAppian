@@ -40,6 +40,7 @@ public class TempoGrid extends TempoField {
 
   private static final String XPATH_RELATIVE_GRID_COLUMN_LINK = Settings.getByConstant("xpathRelativeGridColumnLink");
   private static final String XPATH_RELATIVE_GRID_SELECT_ALL_CHECKBOX = Settings.getByConstant("xpathRelativeGridSelectAllColumn");
+  private static final String XPATH_RELATIVE_GRID_PAGING_LABEL = Settings.getByConstant("xpathRelativeGridPagingLabel");
 
   public static WebElement getGrid(String gridName, Settings s) {
     WebElement grid = null;
@@ -129,6 +130,34 @@ public class TempoGrid extends TempoField {
     WebElement cell = getCell(gridName, columnName, rowNum, s);
 
     return getValue(cell, null, s);
+  }
+
+  public static int getTotalCount(String gridName, Settings s) {
+    try {
+      WebElement grid = getGrid(gridName, s);
+      WebElement pagingLabel = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_PAGING_LABEL));
+      String pagingLabelText = pagingLabel.getText();
+      String totalCountStr = pagingLabelText.split("of", 2)[1];
+      int totalCount = Integer.parseInt(totalCountStr.trim());
+      return totalCount;
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Retrieving grid total count", gridName);
+    }
+  }
+
+  public static int getRowCount(String gridName, Settings s) {
+    try {
+      WebElement grid = getGrid(gridName, s);
+      WebElement pagingLabel = grid.findElement(By.xpath(XPATH_RELATIVE_GRID_PAGING_LABEL));
+      String pagingLabelText = pagingLabel.getText();
+      String rowCountStr = pagingLabelText.split("of", 2)[0];
+      String[] rowCountStrArray = rowCountStr.trim().split("-", 2);
+      int rowCount = Integer.parseInt(rowCountStrArray[1]) - Integer.parseInt(rowCountStrArray[0]) + 1;
+      if (LOG.isDebugEnabled()) LOG.debug("ROW COUNT " + rowCount);
+      return rowCount;
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Retrieving grid total count", gridName);
+    }
   }
 
   public static boolean contains(String gridName, String columnName, String rowNum, String[] fieldValues, Settings s) {
