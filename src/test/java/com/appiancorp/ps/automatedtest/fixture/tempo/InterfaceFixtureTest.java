@@ -20,6 +20,7 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
 
   @BeforeClass
   public static void setUpInterface() throws Exception {
+
     tFixture.clickOnMenu("Actions");
     tFixture.clickOnAction("All Fields");
   }
@@ -54,6 +55,20 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
     // TODO Clear
     // tFixture.clearField("TextField");
     // assertTrue(tFixture.verifyFieldContains("TextField", new String[]{""}));
+  }
+
+  @Test
+  public void testFieldValueRegex() throws Exception {
+    tFixture.populateFieldWith("TextField", new String[] { "text" });
+    assertTrue(tFixture.verifyFieldContains("TextField", new String[] { "text" }));
+    assertEquals(tFixture.getRegexGroupFromFieldValue("([a-zA-Z0-9]{4})", 1, "TextField"), "text");
+  }
+
+  @Test
+  public void testFieldInSectionValueRegex() throws Exception {
+    tFixture.populateFieldInSectionWith("TextField", "Section 1", new String[] { "text" });
+    assertTrue(tFixture.verifyFieldInSectionContains("TextField", "Section 1", new String[] { "text" }));
+    assertEquals(tFixture.getRegexGroupFromFieldInSectionValue("([a-zA-Z0-9]{4})", 1, "TextField", "Section 1"), "text");
   }
 
   @Test
@@ -468,6 +483,11 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
   }
 
   @Test
+  public void testGetRegexGroupFromGridCellInColumnRow() throws Exception {
+    assertEquals(tFixture.getRegexGroupFromGridCellInColumnRowValue("([a-zA-Z0-9]{5})", 1, "PagingGrid", "Column Label 1", "[2]"), "Value");
+  }
+
+  @Test
   public void testVerifyButtons() throws Exception {
     assertTrue(tFixture.verifyButtonIsPresent("Cancel"));
     assertTrue(tFixture.verifyButtonIsNotPresent("FakeButton"));
@@ -560,6 +580,11 @@ public class InterfaceFixtureTest extends TempoFixtureTest {
   @Test
   public void testGridGetRowCount() throws Exception {
     assertEquals(tFixture.getGridRowCount("PagingGrid"), 5);
+  }
+
+  @Test
+  public void testGetRegexGroupFromFormTitle() throws Exception {
+    assertEquals(tFixture.getRegexGroupFromFormTitle("([a-zA-Z0-9]{4})", 1), "Form");
   }
 
   @AfterClass

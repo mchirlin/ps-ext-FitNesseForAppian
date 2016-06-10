@@ -334,4 +334,17 @@ public class TempoGrid extends TempoField {
       throw ExceptionBuilder.build(e, s, "Select All ", gridName);
     }
   }
+
+  public static String getRegexGroupFromGridCellInColumnRowValue(String regex, Integer group, String gridName, String columnName,
+    String rowNum,
+    Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("REGEX FOR GRID CELL [" + regex + "]");
+    try {
+      String text = getValue(gridName, columnName, rowNum, s);
+      if (LOG.isDebugEnabled()) LOG.debug("GRID CELL VALUE [" + text + "]");
+      return getRegexResults(regex, group, text);
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Grid Cell value regex", regex);
+    }
+  }
 }

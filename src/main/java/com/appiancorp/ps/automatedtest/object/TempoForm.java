@@ -30,7 +30,8 @@ public class TempoForm extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR FORM TITLE");
 
     try {
-      (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE))));
+      (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds()))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Title");
     }
@@ -51,9 +52,34 @@ public class TempoForm extends AppianObject {
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR FORM INSTRUCTIONS");
 
     try {
-      (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS))));
+      (new WebDriverWait(s.getDriver(), s.getTimeoutSeconds()))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(XPATH_ABSOLUTE_FORM_INSTRUCTIONS))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Wait for Form Instructions");
+    }
+  }
+
+  public static String getRegexGroupFromFormTitle(String regex, Integer group, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("REGEX FOR FORM TITLE [" + regex + "]");
+
+    try {
+      String text = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_FORM_TITLE))).getText();
+      if (LOG.isDebugEnabled()) LOG.debug("TITLE VALUE [" + text + "]");
+      return getRegexResults(regex, group, text);
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Title regex", regex);
+    }
+  }
+
+  public static String getRegexGroupFromFieldValue(String regex, Integer group, String fieldName, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("REGEX FOR FIELD VALUE [" + regex + "]");
+
+    try {
+      String text = TempoField.getValue(fieldName, s);
+      if (LOG.isDebugEnabled()) LOG.debug("FIELD VALUE [" + text + "]");
+      return getRegexResults(regex, group, text);
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Field value regex", regex);
     }
   }
 }

@@ -264,6 +264,24 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
+   * Returns a string that matches the regex, this could be useful in extracting a system generated value from a task's name.<br>
+   * <br>
+   * FitNesse Example: <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from task name containing text | TASK_TEXT | </code>
+   * 
+   * @param regex
+   *          Regular expression string to search for within the form
+   * @param group
+   *          Regular expression group to return
+   * @param taskText
+   *          Text to find within the tasks' names
+   * @return String that matches the regular expression
+   */
+  public String getRegexGroupFromTaskNameContainingText(String regex, Integer group, String taskText) {
+    TempoTask.refreshAndWaitFor(taskText, settings);
+    return TempoTask.getRegexGroupFromTask(regex, group, taskText, settings);
+  }
+
+  /**
    * Verifies if task is present in the user interface. This is useful for determining if security is applied correctly.<br>
    * <br>
    * FitNesse Example: <code>| verify task | TASK_NAME | is present |</code>
@@ -421,6 +439,27 @@ public class TempoFixture extends BaseFixture {
   public void clickOnRecord(String recordName) {
     TempoRecord.refreshAndWaitFor(recordName, settings);
     TempoRecord.click(recordName, settings);
+  }
+
+  /**
+   * Returns a string that matches the regex, this could be useful in extracting a system generated value from a record whose name, i.e.,
+   * title field matches.
+   * <br>
+   * <br>
+   * FitNesse Example:
+   * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from record name containing text | RECORD_TEXT | </code>
+   * 
+   * @param regex
+   *          Regular expression string to search for within the form
+   * @param group
+   *          Regular expression group to return
+   * @param recordText
+   *          Name of text contained within record name
+   * @return String that matches the regular expression
+   */
+  public String getRegexGroupFromRecordNameContainingText(String regex, Integer group, String recordText) {
+    TempoRecord.refreshAndWaitFor(recordText, settings);
+    return TempoRecord.getRegexGroupFromRecordContainingTextInName(regex, group, recordText, settings);
   }
 
   /**
@@ -748,6 +787,22 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
+   * Returns a string that matches the regex, this could be useful in extracting a system generated value from a form's title.<br>
+   * <br>
+   * FitNesse Example: <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from form title |</code>
+   * 
+   * @param regex
+   *          Regular expression string to search for within the form
+   * @param group
+   *          Regular expression group to return
+   * @return String that matches the regular expression
+   */
+  public String getRegexGroupFromFormTitle(String regex, Integer group) {
+    TempoForm.waitForTitle(settings);
+    return TempoForm.getRegexGroupFromFormTitle(regex, group, settings);
+  }
+
+  /**
    * Returns the instructions of the form.<br>
    * <br>
    * FitNesse Examples:<br>
@@ -937,6 +992,24 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
+   * Returns a string that matches the regex, this could be useful in extracting a system generated value from a field's value.<br>
+   * <br>
+   * FitNesse Example: <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from field | FIELD_NAME | value |</code>
+   * 
+   * @param regex
+   *          Regular expression string to search for within the form
+   * @param group
+   *          Regular expression group to return
+   * @param fieldName
+   *          Name of field
+   * @return String that matches the regular expression
+   */
+  public String getRegexGroupFromFieldValue(String regex, Integer group, String fieldName) {
+    TempoField.waitFor(fieldName, settings);
+    return TempoForm.getRegexGroupFromFieldValue(regex, group, fieldName, settings);
+  }
+
+  /**
    * Returns the value of a field in a section.<br>
    * <br>
    * FitNesse Examples:<br>
@@ -956,6 +1029,28 @@ public class TempoFixture extends BaseFixture {
   public String getFieldInSectionValue(String fieldName, String sectionName) {
     TempoSection.waitFor(fieldName, sectionName, settings);
     return TempoSection.getValue(fieldName, sectionName, settings);
+  }
+
+  /**
+   * Returns a string that matches the regex, this could be useful in extracting a system generated value from a field's value in a
+   * specified section.<br>
+   * <br>
+   * FitNesse Example:
+   * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from field | FIELD_NAME | in section | SECTION_NAME | </code>
+   * 
+   * @param regex
+   *          Regular expression string to search for within the form
+   * @param group
+   *          Regular expression group to return
+   * @param fieldName
+   *          Name of field
+   * @param sectionName
+   *          Section label or label and index
+   * @return String that matches the regular expression
+   */
+  public String getRegexGroupFromFieldInSectionValue(String regex, Integer group, String fieldName, String sectionName) {
+    TempoSection.waitFor(fieldName, sectionName, settings);
+    return TempoSection.getRegexGroupFromFieldInSectionValue(regex, group, fieldName, sectionName, settings);
   }
 
   /**
@@ -1163,6 +1258,29 @@ public class TempoFixture extends BaseFixture {
   public int getGridRowCount(String gridName) {
     TempoGrid.waitFor(gridName, settings);
     return TempoGrid.getRowCount(gridName, settings);
+  }
+
+  /**
+   * Returns a string that matches the regex, this could be useful in extracting a system generated value from a specific grid cell.<br>
+   * <br>
+   * FitNesse Example:
+   * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from grid | GRID_NAME | cell in column | COLUMN_NAME_OR_INDEX | Row | [Row_Number] | value | </code>
+   * 
+   * @param regex
+   *          Regular expression string to search for within the form
+   * @param group
+   *          Regular expression group to return
+   * @param gridName
+   *          Name of grid
+   * @param columnName
+   *          Name or index of column to retrieve the cell from
+   * @param rowNum
+   *          Index of column to retrieve the cell from
+   * @return String that matches the regular expression
+   */
+  public String getRegexGroupFromGridCellInColumnRowValue(String regex, Integer group, String gridName, String columnName, String rowNum) {
+    TempoGrid.waitFor(gridName, columnName, rowNum, settings);
+    return TempoGrid.getRegexGroupFromGridCellInColumnRowValue(regex, group, gridName, columnName, rowNum, settings);
   }
 
   /**

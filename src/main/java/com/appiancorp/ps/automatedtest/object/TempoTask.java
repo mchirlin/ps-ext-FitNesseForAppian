@@ -104,4 +104,15 @@ public class TempoTask extends AppianObject {
       throw ExceptionBuilder.build(e, s, "Task Report", taskReport);
     }
   }
+
+  public static String getRegexGroupFromTask(String regex, Integer group, String taskName, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("REGEX FOR TASK [" + regex + "]");
+    try {
+      String text = s.getDriver().findElement(By.xpath(String.format(XPATH_ABSOLUTE_TASK_LINK, taskName))).getText();
+      if (LOG.isDebugEnabled()) LOG.debug("TASK NAME [" + taskName + "]");
+      return getRegexResults(regex, group, text);
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Task name regex", regex);
+    }
+  }
 }

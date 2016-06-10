@@ -1,5 +1,6 @@
 package com.appiancorp.ps.automatedtest.fixture.tempo;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -61,6 +62,18 @@ public class RecordsFixtureTest extends TempoFixtureTest {
     // assertTrue(tFixture.verifyRecordRelatedActionIsNotPresent("Not present"));
     tFixture.clickOnRecordRelatedAction("AUT Data Input Test");
     tFixture.clickOnButton("Cancel");
+  }
+
+  @Test
+  public void testGetRegexGroupFromRecordContainingTextInName() throws Exception {
+    tFixture.clickOnMenu("Records");
+    tFixture.clickOnRecordType("Automated Testing Records");
+    tFixture.clickOnRecordTypeUserFilter("Past");
+
+    // Testing GetRegexGroupFromRecordContainingTextInName. Note that this has been tested with records where the name is longer than just
+    // the randString portion
+    assertEquals(tFixture.getRegexGroupFromRecordNameContainingText("([a-zA-Z0-9]{5})", 1, randString), randString);
+
   }
 
   @Test

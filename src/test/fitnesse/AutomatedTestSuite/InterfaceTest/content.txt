@@ -4,9 +4,10 @@
 |click on action|All Fields|
 ***!
 !*** Check Forms Title and instructions
-|script                                  |
-|check|get form title       |Form        |
-|check|get form instructions|Instructions|
+|script                                  	   |
+|check|get form title       |Form        	   |
+|check|get regex  			| ([a-zA-Z0-9]{4}) |group  |1  | from form title | Form |
+|check|get form instructions|Instructions	   |
 ***!
 !*** Verify buttons
 !| script |
@@ -36,6 +37,8 @@
 |verify field    |ROTextField|is not present|
 |expand section  |Section 1                 |
 |verify field    |ROTextField|is present    |
+|check|get regex  | ([a-zA-Z0-9]{4}) | group | 1 | from field | TextField | value | text |
+|check| get regex | ([a-zA-Z0-9]{4}) | group | 1 | from field | TextField | in section | Section 1 | value | text |
 ***!
 !*** Populate fields in Section 2 Dates and Date Times
 !| script                                                       |
@@ -262,10 +265,11 @@
 ***! 
 !*** Verify/Check Paging Grid readonly fields 
 !| script                                                                                        |
-|verify grid|PagingGrid|row       |[4]           |is selected                                    |
-|verify grid|PagingGrid|column    |[2]           |row           |[1]|contains|Value 1            |
-|verify grid|PagingGrid|column    |Column Label 2|row           |[1]|contains|Description 1      |
-|verify grid|PagingGrid|column    |Column Label 1|row           |[2]|contains|Value 2            |
+|verify grid|PagingGrid|row       		|[4]           |is selected                                    |
+|verify grid|PagingGrid|column    		|[2]           |row           |[1]|contains|Value 1            |
+|verify grid|PagingGrid|column    		|Column Label 2|row           |[1]|contains|Description 1      |
+|verify grid|PagingGrid|column    		|Column Label 1|row           |[2]|contains|Value 2            |
+|check 		| get regex|([a-zA-Z0-9]{5})| group 	   | 1			  | from grid  | PagingGrid  	   | cell in column 	 | Column Label 1 | Row | [2] | value | Value |
 
 !|script                                                                                         |
 |check      |get grid  |PagingGrid|column        |[2]           |row|[3]     |value|Value 3      |

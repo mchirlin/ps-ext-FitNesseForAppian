@@ -17,7 +17,8 @@ public class TempoSection extends AppianObject {
 
   protected static final String XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT = Settings.getByConstant("xpathAbsoluteSectionFieldLayout");
   protected static final String XPATH_ABSOLUTE_SECTION_FIELD_LAYOUT_INDEX = Settings.getByConstant("xpathAbsoluteSectionFieldLayoutIndex");
-  protected static final String XPATH_RELATIVE_SECTION_VALIDATION_MESSAGE_SPECIFIC_VALUE = Settings.getByConstant("xpathRelativeSectionValidationMessageSpecificValue");
+  protected static final String XPATH_RELATIVE_SECTION_VALIDATION_MESSAGE_SPECIFIC_VALUE = Settings
+    .getByConstant("xpathRelativeSectionValidationMessageSpecificValue");
   protected static final String XPATH_RELATIVE_SECTION_VALIDATION_MESSAGE = Settings.getByConstant("xpathRelativeSectionValidationMessage");
 
   protected static final String XPATH_ABSOLUTE_SECTION_LAYOUT = Settings.getByConstant("xpathAbsoluteSectionLayout");
@@ -147,6 +148,18 @@ public class TempoSection extends AppianObject {
       clickElement(collapse, s);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, s, "Collapse Section", sectionName);
+    }
+  }
+
+  public static String getRegexGroupFromFieldInSectionValue(String regex, Integer group, String fieldName, String sectionName, Settings s) {
+    if (LOG.isDebugEnabled()) LOG.debug("REGEX FOR FIELD IN SECTION VALUE [" + regex + "]");
+
+    try {
+      String text = TempoSection.getValue(fieldName, sectionName, s);
+      if (LOG.isDebugEnabled()) LOG.debug("FIELD VALUE [" + text + "]");
+      return getRegexResults(regex, group, text);
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, s, "Field in section value regex", regex);
     }
   }
 }
