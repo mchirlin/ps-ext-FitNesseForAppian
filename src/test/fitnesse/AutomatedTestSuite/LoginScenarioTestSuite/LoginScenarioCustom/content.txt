@@ -1,4 +1,5 @@
 !| script | com.appiancorp.ps.automatedtest.fixture.TempoFixture |
 | setup for test script for browser | FIREFOX | locale | en_US | version | 16.2 | url | https://ps-sandbox1.appiancloud.com/suite |
 | login with username | ${username} | and password | ${password} |
-| click on menu | Records |
+|click on menu      |Actions                                             |
+|verify action      |All Fields       |is present                        | 

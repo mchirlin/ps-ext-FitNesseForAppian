@@ -9,9 +9,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.appiancorp.ps.automatedtest.common.Constants;
 import com.appiancorp.ps.automatedtest.exception.IllegalArgumentTestException;
+import com.appiancorp.ps.automatedtest.test.AbstractTest;
 
-public class BaseFixtureTest extends FixtureTest {
+public class BaseFixtureTest extends AbstractTest {
 
   private static BaseFixture bFixture;
 
@@ -23,7 +25,8 @@ public class BaseFixtureTest extends FixtureTest {
   @Test
   public void testSetAppianUrlTo() throws Exception {
     bFixture.setAppianUrlTo(TEST_SITE_URL);
-    assertEquals(bFixture.getSettings().getUrl(), TEST_SITE_URL);
+    // Test that the trailing forward slash '/' is removed
+    assertEquals(bFixture.getSettings().getUrl(), TEST_SITE_URL.substring(0, TEST_SITE_URL.length() - 1));
   }
 
   @Test
@@ -40,7 +43,6 @@ public class BaseFixtureTest extends FixtureTest {
     assertEquals(bFixture.getSettings().getTimeDisplayFormat(), "HH:mm");
     assertEquals(bFixture.getSettings().getDatetimeFormat(), "dd/MM/yyyy HH:mm");
     assertEquals(bFixture.getSettings().getDatetimeDisplayFormat(), "d MMM yyyy HH:mm");
-
     bFixture.setAppianLocaleTo("en_US");
     assertEquals(bFixture.getSettings().getDateFormat(), "M/d/yyyy");
     assertEquals(bFixture.getSettings().getDateDisplayFormat(), "MMM d, yyyy");
@@ -58,7 +60,7 @@ public class BaseFixtureTest extends FixtureTest {
 
   @Test
   public void testSetScreenshotPathTo() throws Exception {
-    bFixture.setScreenshotPathTo(AUTOMATED_TESTING_HOME + "\\screenshots\\");
+    bFixture.setScreenshotPathTo(bFixture.getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\screenshots\\");
   }
 
   @Test
@@ -80,6 +82,22 @@ public class BaseFixtureTest extends FixtureTest {
     bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
     bFixture.setAppianUrlTo(TEST_SITE_URL);
     bFixture.loginWithUsernameAndPassword(TEST_USERNAME, TEST_PASSWORD);
+    bFixture.tearDownSeleniumWebDriver();
+  }
+
+  @Test
+  public void testLoginWithUsername() throws Exception {
+    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    bFixture.setAppianUrlTo(TEST_SITE_URL);
+    bFixture.loginWithUsername(TEST_USERNAME);
+    bFixture.tearDownSeleniumWebDriver();
+  }
+
+  @Test
+  public void testLoginWithRole() throws Exception {
+    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    bFixture.setAppianUrlTo(TEST_SITE_URL);
+    bFixture.loginWithRole(TEST_ROLE);
     bFixture.tearDownSeleniumWebDriver();
   }
 
@@ -114,7 +132,6 @@ public class BaseFixtureTest extends FixtureTest {
   public void testGetRandomIntFromTo() {
     int randomInt = bFixture.getRandomIntegerFromTo(0, 10);
     assertTrue((randomInt < 10) && (randomInt >= 0));
-
     try {
       bFixture.getRandomIntegerFromTo(10, 0);
       fail("Should have thrown illegal argument exception");
@@ -126,7 +143,6 @@ public class BaseFixtureTest extends FixtureTest {
   public void testGetRandomDecimalFromTo() {
     double randomDec = bFixture.getRandomDecimalFromTo(0, 10);
     assertTrue((randomDec < 10) && (randomDec >= 0));
-
     try {
       bFixture.getRandomDecimalFromTo(10, 0);
       fail("Should have thrown illegal argument exception");
@@ -145,7 +161,6 @@ public class BaseFixtureTest extends FixtureTest {
   public void testGetRandomDecimalFromToWith() {
     double randomDec = bFixture.getRandomDecimalFromToWith(0.1, 10.01, 6);
     assertTrue((randomDec < 10.01) && (randomDec >= 0.1));
-
     try {
       bFixture.getRandomDecimalFromToWith(10, 0, 6);
       fail("Should have thrown illegal argument exception");

@@ -108,7 +108,7 @@ public class Settings {
   }
 
   public void setUrl(String u) {
-    url = u;
+    url = u.endsWith("/") ? u.substring(0, u.length() - 1) : u;
   }
 
   public String getUrl() {

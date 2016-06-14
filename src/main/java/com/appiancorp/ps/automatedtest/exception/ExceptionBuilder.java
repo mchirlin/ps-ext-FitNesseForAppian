@@ -2,8 +2,8 @@ package com.appiancorp.ps.automatedtest.exception;
 
 import org.apache.log4j.Logger;
 
+import com.appiancorp.ps.automatedtest.common.Screenshot;
 import com.appiancorp.ps.automatedtest.common.Settings;
-import com.appiancorp.ps.automatedtest.object.Screenshot;
 
 public class ExceptionBuilder {
   private static final Logger LOG = Logger.getLogger(ExceptionBuilder.class);
@@ -13,7 +13,7 @@ public class ExceptionBuilder {
 
     try {
       if (s.isTakeErrorScreenshots()) {
-        Screenshot.takeScreenshot(String.format("%3d", s.getErrorNumber()), s);
+        Screenshot.getInstance(s).capture(String.format("%3d", s.getErrorNumber()));
         s.setErrorNumber(s.getErrorNumber() + 1);
       }
     } catch (Exception exception) {
@@ -71,6 +71,7 @@ public class ExceptionBuilder {
         if (s.isStopOnError()) {
           return new GenericStopTestException(vals);
         } else {
+          e.printStackTrace();
           return new GenericTestException(vals);
         }
     }

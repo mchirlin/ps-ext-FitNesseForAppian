@@ -1,0 +1,11 @@
+!** Test Task Methods
+| script |
+| click on menu | Actions |
+| click on action | All Fields | 
+| click on menu | Tasks | 
+| click on task report | Task Report |
+| click on menu | Tasks |
+| verify task | All Fields | is present |
+| verify task | All Fields | has deadline of | 1h |
+| verify task | Not Present | is not present |
+**!

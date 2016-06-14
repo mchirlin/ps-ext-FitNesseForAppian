@@ -1,20 +1,12 @@
 !*** Initialization
-!| script                              |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
-|setup selenium web driver with browser|FIREFOX                                             	|
-|set appian url to                     |https://ps-sandbox1.appiancloud.com                 |
+!| script                              | com.appiancorp.ps.automatedtest.fixture.SitesFixture|
+|setup selenium web driver with browser|FIREFOX                                             |
+|set appian url to                     |https://ps-sandbox1.appiancloud.com/suite           |
 |set appian version to                 |16.1                                                |
 |set appian locale to                  |en_US                                               |
 |set stop on error to                  |true                                                |
 |set timeout seconds to                |20                                                  |
 |set start datetime                                                                         |
-***!
-!*** Set up variables
-|script                                                   |
-|$randString=|get random string      |5                   |
-|$randAlphabetString=|get random alphabet string | 6	|
-|$randInt= |get random integer from|0  |to|100          |
-|$randDec= |get random decimal from|0.0|to|100.00|with|4|
-|$randDate=|get random integer from|25 |to|50           |
 ***!
 !*** Screenshot Configurations
 !| script                                                            |
@@ -23,5 +15,5 @@
 ***!
 !*** Login information
 !| script                                            |
-|login with username|test.user|and password|password2|
+|login with username|test.user|
 ***!
