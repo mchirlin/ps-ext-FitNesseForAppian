@@ -158,6 +158,8 @@ public class TempoFixtureTest extends AbstractDataTest {
     // Verify Presence
     assertTrue(fixture.verifyActionIsPresent("Automated Testing[1]"));
     assertTrue(fixture.verifyActionIsNotPresent("Not Automated Testing"));
+    assertTrue(fixture.verifyApplicationFilterIsNotPresent("Not Automated"));
+    assertTrue(fixture.verifyApplicationFilterIsPresent("Automated Testing"));
 
     // Click
     fixture.clickOnApplicationFilter("Automated");

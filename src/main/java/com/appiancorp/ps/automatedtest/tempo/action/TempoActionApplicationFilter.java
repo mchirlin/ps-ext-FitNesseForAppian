@@ -2,6 +2,7 @@ package com.appiancorp.ps.automatedtest.tempo.action;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,9 +11,9 @@ import com.appiancorp.ps.automatedtest.common.AppianObject;
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
 import com.appiancorp.ps.automatedtest.properties.Clickable;
-import com.appiancorp.ps.automatedtest.properties.WaitFor;
+import com.appiancorp.ps.automatedtest.properties.WaitForReturn;
 
-public class TempoActionApplicationFilter extends AppianObject implements WaitFor, Clickable {
+public class TempoActionApplicationFilter extends AppianObject implements WaitForReturn, Clickable {
 
   private static final Logger LOG = Logger.getLogger(TempoActionApplicationFilter.class);
   private static final String XPATH_ABSOLUTE_ACTIONS_APP_FILTER_LINK = Settings.getByConstant("xpathAbsoluteActionsAppFilterLink");
@@ -39,7 +40,8 @@ public class TempoActionApplicationFilter extends AppianObject implements WaitFo
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR ACTION APP FILTER [" + filterName + "]");
 
     try {
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
+      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Application Filter", filterName);
     }
@@ -56,5 +58,26 @@ public class TempoActionApplicationFilter extends AppianObject implements WaitFo
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Application Filter", filterName);
     }
+  }
+
+  @Override
+  public boolean waitForReturn(int timeout, String... params) {
+    String applicationName = params[0];
+
+    if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR ACTION [" + applicationName + "]");
+
+    try {
+      (new WebDriverWait(settings.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, settings, "Action Application wait for ", applicationName);
+    }
+  }
+
+  @Override
+  public boolean waitForReturn(String... params) {
+    return waitForReturn(settings.getTimeoutSeconds(), params);
   }
 }

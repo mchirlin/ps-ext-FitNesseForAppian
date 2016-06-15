@@ -232,7 +232,8 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.<br>
+   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.
+   * <br>
    * <br>
    * FitNesse Example:
    * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |</code>
@@ -496,7 +497,8 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly. <br>
+   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.
+   * <br>
    * <br>
    * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is present |</code>
    * 
@@ -675,6 +677,36 @@ public class TempoFixture extends BaseFixture {
   public void clickOnApplicationFilter(String appFilter) {
     TempoActionApplicationFilter.getInstance(settings).waitFor(appFilter);
     TempoActionApplicationFilter.getInstance(settings).click(appFilter);
+  }
+
+  /**
+   * Verifies if action is present in the user interface. This is useful for determining if security is applied correctly.<br>
+   * <br>
+   * FitNesse Example: <code>| verify application filter| APPLICATION_NAME | is present |</code>
+   * 
+   * @param applicationName
+   *          Name of the action
+   * @return True, if action is located
+   */
+  public boolean verifyApplicationFilterIsPresent(String applicationName) {
+    TempoAction.getInstance(settings).waitFor(applicationName);
+    return true;
+  }
+
+  /**
+   * Verifies if action is not present in the user interface. This is useful for determining if security is applied correctly.<br>
+   * <br>
+   * FitNesse Example: <code>| verify application filter| APPLICATION_NAME | is not present |</code><br>
+   * <br>
+   * Use this rather than <code>| reject | verify application filter | APPLICATION_NAME | is present |</code> as it will not refresh and
+   * wait.
+   * 
+   * @param applicationName
+   *          Name of the action
+   * @return True, if action is not located
+   */
+  public boolean verifyApplicationFilterIsNotPresent(String applicationName) {
+    return !TempoAction.getInstance(settings).waitForReturn(settings.getNotPresentTimeoutSeconds(), applicationName);
   }
 
   /*

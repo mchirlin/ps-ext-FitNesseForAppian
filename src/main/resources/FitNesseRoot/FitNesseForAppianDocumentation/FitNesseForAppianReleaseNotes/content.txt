@@ -8,6 +8,7 @@
  * Click the ''select all'' checkbox on grids
  * Populate variable with a string of random alphabetic characters only
  * Click an application filter within the ''Actions'' tab
+ * Verify an application filter within the ''Actions'' tab
  * Verify that a link is present
  * Verify that a link URL contains a specified value 
  * Save link URLs into variables
