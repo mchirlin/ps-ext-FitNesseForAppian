@@ -26,9 +26,6 @@ Default URL should include http/s and /suite (e.g. '''!-https://forum.appian.com
 |set appian url to                     |@appianUrl                                                                                    |
 |set timeout seconds to                |20                                                                                            |
 |set start datetime                                                                                                                   |
-|set take error screenshots to         |true                                                                                          |
-|$randString=                          |get random string                |5                                                           |
-|set screenshot path to                |${automated.testing.home}\screenshots\$randString\                                            |
 ***!
 
 !*** Scenario - Setup using default values 

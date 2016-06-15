@@ -1,9 +1,22 @@
+!**> Create Record
+|script                                                 |
+|click on menu  |Actions                                |
+|click on action|Automated Testing Input                |
+|populate field |Title            |with|$randString     |
+|populate field |Quantity         |with|$randInt        |
+|populate field |Price            |with|$randDec        |
+|populate field |Start Date       |with|+$randDate days |
+|click on button|Submit                                 |
+**!
 !** Access Records menu
 |script |
 |click on menu        |Records  |
 |click on record type |Auto[1]  | 
 |click on menu        |Records  |
-|click on record type |Auto[2]  | 
-|check                |get regex|([a-zA-Z0-9]{5})|group|1|from record name containing text|$randomString|$randomString|
+|click on record type |Auto[2]  |
 |verify record type user filter |Past|is present |
+**!
+!** Regex
+|script |
+|check                |get regex|([a-zA-Z0-9]{5})|group|1|from record name containing text|$randString|$randString|
 **!
