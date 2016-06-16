@@ -1,0 +1,7 @@
+!** Test all Input types
+|script                                |
+|navigate to site  |automated-test-site|
+|click on site page|All Fields         |
+**!
+
+!include .automatedTestSuite.InterfaceInputs

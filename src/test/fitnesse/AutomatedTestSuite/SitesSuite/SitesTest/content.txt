@@ -1,6 +1,27 @@
 !** Test Task Methods
-| script |
-| navigate to site | automated-test-site |
-| click on site page | Data Input |
+|script                                               |
+|$randString=|get random string      |5               |
+|$randInt=   |get random integer from|0|to|1000       |
+|$randDec=   |get random decimal from|0|to|1000|with|5|
+
+|script                                                                                      |
+|navigate to site            |automated-test-site                                            |
+|click on site page          |Data Input                                                     |
+|populate AUT form with title|$randString|quantity|$randInt|price|$randDec|start date|+2 days|
+|click on button             |Submit                                                         |
+
+|script                                                                                         |
 | navigate to site | automated-test-site | page | automated-test-grid |
+|click on record grid navigation|Last                                                           |
+|click on record grid navigation|First                                                          |
+|click on record grid navigation|Next                                                           |
+|click on record grid navigation|Previous                                                       |
+|search for                     |$randString                                                    |
+|click on record                |$randString                                                    |
+|verify AUT form contains title |$randString|quantity|$randInt|price|$randDec|start date|+2 days|
+|click on record related action |AUT Data Input Test                                            |
+|click on button                |Cancel                                                         |
+|click on record view           |Related Actions                                                |
+|click on record related action |AUT Data Input Test                                            |
+
 **!
