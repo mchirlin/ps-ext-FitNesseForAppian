@@ -60,7 +60,7 @@ public class BaseFixtureTest extends AbstractTest {
 
   @Test
   public void testSetScreenshotPathTo() throws Exception {
-    bFixture.setScreenshotPathTo(bFixture.getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\screenshots\\");
+    bFixture.setScreenshotPathTo(bFixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\screenshots\\");
   }
 
   @Test
