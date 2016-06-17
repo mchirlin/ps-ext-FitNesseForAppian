@@ -78,6 +78,8 @@
 | verify action | ACTION_NAME or ACTION_NAME[INDEX] | is present | 										: Verify an action is present
 | verify action | ACTION_NAME or ACTION_NAME[INDEX] | is not present | 									: Verify an action is not present
 | click on application filter | APP_FILTER |															: Click on an actions application filter
+| verify application filter | APPLICATION_NAME | is present | 													: Verify an application is present
+| verify application filter | APPLICATION_NAME | is not present | 												: Verify an application is not present
 ]!
 
 !3 INTERFACE METHODS

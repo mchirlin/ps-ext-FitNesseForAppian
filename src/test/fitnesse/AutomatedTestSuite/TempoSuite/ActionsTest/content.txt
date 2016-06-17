@@ -6,6 +6,8 @@
 | script |
 | verify action | All Fields| is present |
 | verify action | Not All Fields| is not present |
+| verify application filter | Automated Testing | is present |
+| verify application filter | Not Automated Testing | is not present |
 ***!
 !*** Click on action and then exit page
 | script |
