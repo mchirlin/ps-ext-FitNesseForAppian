@@ -18,7 +18,7 @@ public class TempoAction extends AppianObject implements WaitForReturn, Clickabl
 
   private static final Logger LOG = Logger.getLogger(TempoAction.class);
   private static final String XPATH_ABSOLUTE_ACTION_LINK = Settings.getByConstant("xpathAbsoluteActionLink");
-  private static final String XPATH_ABSOLUTE_ACTION_LINK_INDEX = "(" + XPATH_ABSOLUTE_ACTION_LINK + ")[%d]";
+  private static final String XPATH_ABSOLUTE_ACTION_LINK_INDEX = "(" + XPATH_ABSOLUTE_ACTION_LINK + ")[%2$d]";
 
   public static TempoAction getInstance(Settings settings) {
     return new TempoAction(settings);
@@ -63,7 +63,8 @@ public class TempoAction extends AppianObject implements WaitForReturn, Clickabl
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR ACTION [" + actionName + "]");
 
     try {
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
+      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Action wait for", actionName);
     }

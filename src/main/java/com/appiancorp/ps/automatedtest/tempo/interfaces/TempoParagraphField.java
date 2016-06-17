@@ -16,7 +16,7 @@ public class TempoParagraphField extends AbstractTempoField implements Container
   private static final Logger LOG = Logger.getLogger(TempoParagraphField.class);
   private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL = Settings.getByConstant("xpathAbsoluteParagraphFieldLabel");
   private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_INDEX = Settings.getByConstant("xpathAbsoluteParagraphFieldIndex");
-  private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL_INDEX = "(" + XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL + ")[%d]";
+  private static final String XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL_INDEX = "(" + XPATH_ABSOLUTE_PARAGRAPH_FIELD_LABEL + ")[%2$d]";
   private static final String XPATH_RELATIVE_PARAGRAPH_FIELD_INPUT = Settings.getByConstant("xpathRelativeParagraphFieldInput");
 
   public static TempoParagraphField getInstance(Settings settings) {
@@ -52,7 +52,8 @@ public class TempoParagraphField extends AbstractTempoField implements Container
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR [" + fieldName + "]");
 
     try {
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
+      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Wait for Field", fieldName);
     }

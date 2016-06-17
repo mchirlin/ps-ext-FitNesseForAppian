@@ -14,7 +14,7 @@ public class TempoRadioFieldOption extends TempoRadioField implements Clickable 
 
   private static final Logger LOG = Logger.getLogger(TempoRadioFieldOption.class);
   private static final String XPATH_ABSOLUTE_RADIO_FIELD_OPTION = Settings.getByConstant("xpathAbsoluteRadioFieldOption");
-  private static final String XPATH_ABSOLUTE_RADIO_FIELD_OPTION_INDEX = "(" + XPATH_ABSOLUTE_RADIO_FIELD_OPTION + ")[%d]";
+  private static final String XPATH_ABSOLUTE_RADIO_FIELD_OPTION_INDEX = "(" + XPATH_ABSOLUTE_RADIO_FIELD_OPTION + ")[%2$d]";
 
   public static TempoRadioFieldOption getInstance(Settings settings) {
     return new TempoRadioFieldOption(settings);
@@ -58,7 +58,8 @@ public class TempoRadioFieldOption extends TempoRadioField implements Clickable 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR RADIO BUTTON OPTION CLICK : " + optionName);
 
     try {
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
+      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Radio option", optionName);
     }
