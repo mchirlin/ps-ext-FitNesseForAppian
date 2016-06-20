@@ -347,6 +347,41 @@ public class BaseFixture {
   }
 
   /**
+   * Login to and Appian site containing terms and conditions.<br>
+   * <br>
+   * FitNesse Example: <code>| login with terms with username | USERNAME | </code> - Uses the url set here:
+   * {@link #setAppianUrlTo(String)}
+   * 
+   * @param userName
+   *          Username
+   */
+  public void loginWithTermsWithUsername(String userName) {
+    TempoLogin.getInstance(settings).navigateToLoginPage(settings.getUrl());
+    TempoLogin.getInstance(settings).waitForTerms();
+    String password = getProp().getProperty(userName);
+    TempoLogin.getInstance(settings).loginWithTerms(settings.getUrl(), userName, password);
+  }
+
+  /**
+   * Login to and Appian site containing terms and conditions.<br>
+   * <br>
+   * FitNesse Example: <code>| login with terms with role | USER_ROLE| </code> - Uses the url set here:
+   * {@link #setAppianUrlTo(String)}
+   * 
+   * @param userRole
+   *          user role
+   */
+  public void loginWithTermsWithRole(String userRole) {
+    TempoLogin.getInstance(settings).navigateToLoginPage(settings.getUrl());
+    TempoLogin.getInstance(settings).waitForTerms();
+    String userNamePassword = getProp().getProperty(userRole);
+    String username = userNamePassword.substring(0, userNamePassword.indexOf("|"));
+    String password = userNamePassword.substring(userNamePassword.indexOf("|") + 1, userNamePassword.length());
+
+    TempoLogin.getInstance(settings).loginWithTerms(settings.getUrl(), username, password);
+  }
+
+  /**
    * Waits for a particular period of time.<br>
    * <br>
    * FitNesse Examples:<br>

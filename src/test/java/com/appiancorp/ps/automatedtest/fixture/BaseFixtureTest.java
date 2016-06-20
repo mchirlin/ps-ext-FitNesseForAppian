@@ -107,6 +107,16 @@ public class BaseFixtureTest extends AbstractTest {
   }
 
   @Test
+  public void testLoginWithTermsWithUsername() throws Exception {
+    // TODO Create Test case
+  }
+
+  @Test
+  public void testLoginWithTermsWithRole() throws Exception {
+    // TODO Create Test case
+  }
+
+  @Test
   public void testWaitForSecondsMinutesHours() {
     // TODO Create test case
   }

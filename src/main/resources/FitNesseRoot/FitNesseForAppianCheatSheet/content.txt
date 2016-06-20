@@ -135,7 +135,6 @@
 | navigate to site | SITE_URL |																			: Navigates to Appian Site
 | navigate to site | SITE_URL | page | PAGE_URL |														: Navigates to specific page on Appian Site
 | click on site page | SITE_PAGE |																		: Clicks on an Appian Site page from within a site. Although pages are capitalized on the site, the SITE_NAME must match what is entered when creating the page.
->>>>>>> Adding sites features and code overhaul
 ]!
 
 !3 UTILITY METHODS
@@ -150,9 +149,12 @@
 | set take error screenshots to | SCREENSHOT_BOOLEAN | 													: If true, screenshots will be taken for every failed test case. (Default true)
 | set stop on error to | STOP_ON_ERROR_BOOLEAN | 														: If true, the FitNesse test will stop on any error. (Default false)
 | take screenshot | FILE_NAME | 																		: Take a screenshot with the name (do not include the extension)
-| login with username | USERNAME or ROLE | 																: Uses the previously set appian url and the password associated with the user or role from the configs/user.properties file
+| login with username | USERNAME | 																		: Uses the previously set appian url and the password associated with the user from the configs/user.properties file
+| login with role| USER_ROLE |																			: Uses the previously set appian url and the username/password associated with the role from the configs/user.properties file
 | login with username | USERNAME | and password | PASSWORD | 											: Uses the previously set appian url
-| login with terms with username | USERNAME | and password | PASSWORD | 								: Uses set appian url
+| login with terms with username | USERNAME | and password | PASSWORD | 								: Uses the previously set appian url
+| login with terms with username | USERNAME | 															: Uses the previously set appian url and the password associated with the user from the configs/user.properties file
+| login with terms with role | USER_ROLE |																: Uses the previously set appian url and the username/password associated with the role from the configs/user.properties file
 | wait for | RELATIVE_PERIOD, e.g. +1 days, +1 hours | 													: Waits for relative amount of time
 | wait until | RELATIVE_PERIOD | 																		: Waits until relative time
 | get random string | STRING_LENGTH | 																	: Use with $VARIABLE_NAME= for random variables
@@ -164,9 +166,9 @@
 | logout | 																								: Logout of Appian
 ]!
 
-!3 LOGIN SCENARIOS
+!3 SETUP SCENARIOS
 !4 Scenarios have been created to easily setup a test script  
-!4 Update Login Scenarios by editing the top level ScenarioLibrary
+!4 Update Setup Scenarios by editing the top level ScenarioLibrary
 ![:
 | setup for test script | 																				: Setup test script using the default values set in ScenarioLibrary
 | setup for test script for browser|BROWSER_TYPE|locale|LOCATION|version|VERSION_NUMBER|url|APPIAN_URL|	: Setup test script using custom values for browser, locale, version, and URL
