@@ -296,12 +296,12 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
     SimpleDateFormat df = new SimpleDateFormat(fixture.getSettings().getDateFormat());
     SimpleDateFormat ddf = new SimpleDateFormat(fixture.getSettings().getDateDisplayFormat());
 
-    fixture.populateFieldWith("DateField", new String[] { "+1 day" });
-    assertTrue(fixture.verifyFieldContains("DateField", new String[] { "+1 day" }));
-    assertEquals(df.format(DateUtils.addDays(fixture.getSettings().getStartDatetime(), 1)), fixture.getFieldValue("DateField"));
+    fixture.populateFieldWith("DateField", new String[] { "+1 month" });
+    assertTrue(fixture.verifyFieldContains("DateField", new String[] { "+1 month" }));
+    assertEquals(df.format(DateUtils.addMonths(fixture.getSettings().getStartDatetime(), 1)), fixture.getFieldValue("DateField"));
 
-    assertTrue(fixture.verifyFieldContains("RODateField", new String[] { "+1 day" }));
-    assertEquals(ddf.format(DateUtils.addDays(fixture.getSettings().getStartDatetime(), 1)), fixture.getFieldValue("RODateField"));
+    assertTrue(fixture.verifyFieldContains("RODateField", new String[] { "+1 month" }));
+    assertEquals(ddf.format(DateUtils.addMonths(fixture.getSettings().getStartDatetime(), 1)), fixture.getFieldValue("RODateField"));
 
     fixture.populateFieldWith("DateField[2]", new String[] { "2015-11-15" });
     assertTrue(fixture.verifyFieldContains("DateField[2]", new String[] { "2015-11-15" }));
@@ -313,14 +313,14 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
     assertEquals(df.format(DateUtils.addDays(fixture.getSettings().getStartDatetime(), 5)), fixture.getFieldValue("DateField[3]"));
 
     // Editable Grid
-    fixture.populateGridColumnRowWith("EditableGrid", "[7]", "[1]", new String[] { "+1 day" });
-    assertTrue(fixture.verifyGridColumnRowContains("EditableGrid", "[7]", "[1]", new String[] { "+1 day" }));
-    assertEquals(df.format(DateUtils.addDays(fixture.getSettings().getStartDatetime(), 1)),
+    fixture.populateGridColumnRowWith("EditableGrid", "[7]", "[1]", new String[] { "+1 year" });
+    assertTrue(fixture.verifyGridColumnRowContains("EditableGrid", "[7]", "[1]", new String[] { "+1 year" }));
+    assertEquals(df.format(DateUtils.addYears(fixture.getSettings().getStartDatetime(), 1)),
       fixture.getGridColumnRowValue("EditableGrid", "[7]", "[1]"));
 
     // Read Only Grid
-    assertTrue(fixture.verifyGridColumnRowContains("ReadOnlyGrid", "[6]", "[1]", new String[] { "+1 day" }));
-    assertEquals(ddf.format(DateUtils.addDays(fixture.getSettings().getStartDatetime(), 1)),
+    assertTrue(fixture.verifyGridColumnRowContains("ReadOnlyGrid", "[6]", "[1]", new String[] { "+1 year" }));
+    assertEquals(ddf.format(DateUtils.addYears(fixture.getSettings().getStartDatetime(), 1)),
       fixture.getGridColumnRowValue("ReadOnlyGrid", "[6]", "[1]"));
 
     // TODO Clear

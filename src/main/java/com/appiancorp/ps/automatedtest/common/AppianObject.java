@@ -33,7 +33,7 @@ public class AppianObject {
 
   private static final Pattern INDEX_PATTERN = Pattern.compile("(.*)?\\[([0-9]+)\\]");
   private static final String DATETIME_REGEX = "([0-9]{4}-[0-9]{2}-[0-9]{2}([0-9]{2}:[0-9]{2})?)";
-  private static final String DATETIME_CALC_REGEX = DATETIME_REGEX + "?[+-][0-9]+(minute(s)?|hour(s)?|day(s)?)";
+  private static final String DATETIME_CALC_REGEX = DATETIME_REGEX + "?[+-][0-9]+(minute(s)?|hour(s)?|day(s)?|month(s)?|year(s)?)";
 
   public static AppianObject getInstance(Settings settings) {
     return new AppianObject(settings);
@@ -87,6 +87,10 @@ public class AppianObject {
       d = DateUtils.addHours(d, addValue);
     } else if (dateTimeString.contains("day")) {
       d = DateUtils.addDays(d, addValue);
+    } else if (dateTimeString.contains("month")) {
+      d = DateUtils.addMonths(d, addValue);
+    } else if (dateTimeString.contains("year")) {
+      d = DateUtils.addYears(d, addValue);
     }
 
     return new SimpleDateFormat(settings.getDatetimeDisplayFormat()).format(d);
@@ -150,7 +154,8 @@ public class AppianObject {
       }
       settings.getDriver().switchTo().window(popupHandle);
 
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//pre")));
+      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+        .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//pre")));
       returnVal = settings.getDriver().findElement(By.xpath("//pre")).getText();
 
       LOG.debug("'" + expression + "' equals '" + returnVal + "'");

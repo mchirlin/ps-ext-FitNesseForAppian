@@ -20,6 +20,7 @@
  * Set testing tool home location in custom.properties
  * Click rich text links with styles
  * Check off checkbox cells when populating grids
+ * +months and +years for dates
 
 !3 April 2016 - Release 1.2.5
 

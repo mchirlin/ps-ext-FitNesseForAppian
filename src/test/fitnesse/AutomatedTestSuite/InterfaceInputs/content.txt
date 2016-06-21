@@ -78,7 +78,7 @@
 ***!
 !*** Populate and Verify Dates & Datetimes
 !| script                                                       |
-|populate field|DateField (date)          |with|2015-11-15      |
+|populate field|DateField (date)          |with|+5 months    |
 |populate field|DateField (+5 days)       |with|+5 days         |
 |populate field|DatetimeField (date)      |with|2015-11-15      |
 |populate field|DatetimeField (datetime)  |with|2015-11-15 02:00|
@@ -87,7 +87,7 @@
 |populate field|DatetimeField (+5 days)   |with|+5 days         |
 
 !| script                                                         |
-|verify field|DateField (date)          |contains|2015-11-15      |
+|verify field|DateField (date)          |contains|+5 months   |
 |verify field|DateField (+5 days)       |contains|+5 days         |
 |verify field|DatetimeField (date)      |contains|2015-11-15      |
 |verify field|DatetimeField (datetime)  |contains|2015-11-15 02:00|
@@ -97,7 +97,6 @@
 
 # en_US
 !| script                                                          |
-|check|get field|DateField (date)        |value|11/15/2015         |
 |check|get field|DatetimeField (date)    |value|11/15/2015 12:00 AM|
 |check|get field|DatetimeField (datetime)|value|11/15/2015 2:00 AM |
 
@@ -161,7 +160,7 @@
 |populate grid|EditableGrid|column|EncryptedTextField|row|[1]|with|gridEncrypted|
 |populate grid|EditableGrid|column|[5]               |row|[1]|with|1            |
 |populate grid|EditableGrid|column|DecimalField      |row|[1]|with|2.2          |
-|populate grid|EditableGrid|column|[7]               |row|[1]|with|+1 day       |
+|populate grid|EditableGrid|column|[7]               |row|[1]|with|+1 year       |
 |click on link|Add Data to Paging Grid                                          |
 
 !| script                                                                                                      |
@@ -192,7 +191,7 @@
 |verify grid|EditableGrid|column|EncryptedTextField|row|[1]|contains|gridEncrypted|
 |verify grid|EditableGrid|column|[5]               |row|[1]|contains|1            |
 |verify grid|EditableGrid|column|DecimalField      |row|[1]|contains|2.2          |
-|verify grid|EditableGrid|column|[7]               |row|[1]|contains|+1 day       |
+|verify grid|EditableGrid|column|[7]               |row|[1]|contains|+1 year       |
 
 !| script                                                                         |
 |check|get grid|[1]         |column|TextField         |row|[1]|value|gridText     |
