@@ -173,6 +173,11 @@
         {"label": "xpathAbsoluteRecordGridNavigationLast", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[@title='Last']"}
       ]
     },
-    { "version": "16.2", "byConstants": [] }
+    { "version": "16.2", "byConstants": [
+    	{"label": "xpathAbsoluteRecordLink", "value": "//a[contains(@href, '/view/summary') and contains(text(),%s)]"},
+        {"label": "xpathAbsoluteRecordViewLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(text(),%1$s)] | //a[contains(@href, '/sites/') and contains(@href, '/view/') and contains(text(),%1$s)]"}
+        
+	  ]
+    }
   ]
 }
