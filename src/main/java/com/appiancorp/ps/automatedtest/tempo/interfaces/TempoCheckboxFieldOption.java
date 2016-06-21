@@ -14,7 +14,7 @@ public class TempoCheckboxFieldOption extends TempoCheckboxField implements Clic
 
   private static final Logger LOG = Logger.getLogger(TempoCheckboxFieldOption.class);
   private static final String XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION = Settings.getByConstant("xpathAbsoluteCheckboxFieldOption");
-  private static final String XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION_INDEX = "(" + XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION + ")[%d]";
+  private static final String XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION_INDEX = "(" + XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION + ")[%2$d]";
 
   public static TempoCheckboxFieldOption getInstance(Settings settings) {
     return new TempoCheckboxFieldOption(settings);
@@ -56,11 +56,13 @@ public class TempoCheckboxFieldOption extends TempoCheckboxField implements Clic
       if (isFieldIndex(optionName)) {
         String oName = getFieldFromFieldIndex(optionName);
         int index = getIndexFromFieldIndex(optionName);
-        (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathFormat(
-          XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION_INDEX, oName, index))));
+        (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+          .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathFormat(
+            XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION_INDEX, oName, index))));
       } else {
-        (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathFormat(
-          XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION, optionName))));
+        (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+          .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathFormat(
+            XPATH_ABSOLUTE_CHECKBOX_FIELD_OPTION, optionName))));
       }
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Wait for Checkbox option", optionName);

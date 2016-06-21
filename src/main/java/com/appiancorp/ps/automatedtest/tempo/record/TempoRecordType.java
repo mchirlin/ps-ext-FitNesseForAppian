@@ -15,7 +15,7 @@ public class TempoRecordType extends AppianObject implements Clickable {
 
   private static final Logger LOG = Logger.getLogger(TempoRecordType.class);
   private static final String XPATH_ABSOLUTE_RECORD_TYPE_LINK = Settings.getByConstant("xpathAbsoluteRecordTypeLink");
-  private static final String XPATH_ABSOLUTE_RECORD_TYPE_LINK_INDEX = "(" + XPATH_ABSOLUTE_RECORD_TYPE_LINK + ")[%d]";
+  private static final String XPATH_ABSOLUTE_RECORD_TYPE_LINK_INDEX = "(" + XPATH_ABSOLUTE_RECORD_TYPE_LINK + ")[%2$d]";
 
   public static TempoRecordType getInstance(Settings settings) {
     return new TempoRecordType(settings);
@@ -59,7 +59,8 @@ public class TempoRecordType extends AppianObject implements Clickable {
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR RECORD TYPE [" + type + "]");
 
     try {
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
+      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Record Type", type);
     }

@@ -18,7 +18,7 @@ public class TempoButton extends AppianObject implements WaitFor, WaitForReturn,
 
   private static final Logger LOG = Logger.getLogger(TempoButton.class);
   private static final String XPATH_ABSOLUTE_BUTTON = Settings.getByConstant("xpathAbsoluteButton");
-  private static final String XPATH_ABSOLUTE_BUTTON_INDEX = "(" + XPATH_ABSOLUTE_BUTTON + ")[%d]";
+  private static final String XPATH_ABSOLUTE_BUTTON_INDEX = "(" + XPATH_ABSOLUTE_BUTTON + ")[%2$d]";
 
   public static TempoButton getInstance(Settings settings) {
     return new TempoButton(settings);
@@ -48,7 +48,8 @@ public class TempoButton extends AppianObject implements WaitFor, WaitForReturn,
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR BUTTON [" + buttonName + "]");
 
     try {
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
+      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Wait for Button", buttonName);
     }

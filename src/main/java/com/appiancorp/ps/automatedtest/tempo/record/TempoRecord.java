@@ -18,7 +18,7 @@ public class TempoRecord extends AppianObject implements Clickable, Refreshable,
 
   private static final Logger LOG = Logger.getLogger(TempoRecord.class);
   private static final String XPATH_ABSOLUTE_RECORD_LINK = Settings.getByConstant("xpathAbsoluteRecordLink");
-  private static final String XPATH_ABSOLUTE_RECORD_LINK_INDEX = "(" + XPATH_ABSOLUTE_RECORD_LINK + ")[%d]";
+  private static final String XPATH_ABSOLUTE_RECORD_LINK_INDEX = "(" + XPATH_ABSOLUTE_RECORD_LINK + ")[%2$d]";
 
   public static TempoRecord getInstance(Settings settings) {
     return new TempoRecord(settings);
@@ -62,7 +62,8 @@ public class TempoRecord extends AppianObject implements Clickable, Refreshable,
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR RECORD [" + itemName + "]");
 
     try {
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
+      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Record", itemName);
     }

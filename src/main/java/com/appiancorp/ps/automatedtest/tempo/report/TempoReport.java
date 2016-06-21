@@ -16,7 +16,7 @@ public class TempoReport extends AppianObject implements Clickable {
 
   private static final Logger LOG = Logger.getLogger(TempoReport.class);
   private static final String XPATH_ABSOLUTE_REPORT_LINK = Settings.getByConstant("xpathAbsoluteReportLink");
-  private static final String XPATH_ABSOLUTE_REPORT_LINK_INDEX = "(" + XPATH_ABSOLUTE_REPORT_LINK + ")[%d]";
+  private static final String XPATH_ABSOLUTE_REPORT_LINK_INDEX = "(" + XPATH_ABSOLUTE_REPORT_LINK + ")[%2$d]";
 
   public static TempoReport getInstance(Settings settings) {
     return new TempoReport(settings);
@@ -61,7 +61,8 @@ public class TempoReport extends AppianObject implements Clickable {
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR [" + reportName + "]");
 
     try {
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getXpath(params))));
+      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+        .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getXpath(params))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Report", reportName);
     }

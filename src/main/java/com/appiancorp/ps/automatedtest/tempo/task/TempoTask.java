@@ -18,7 +18,7 @@ public class TempoTask extends AppianObject implements Refreshable, Clickable, R
 
   private static final Logger LOG = Logger.getLogger(TempoTask.class);
   private static final String XPATH_ABSOLUTE_TASK_LINK = Settings.getByConstant("xpathAbsoluteTaskLink");
-  private static final String XPATH_ABSOLUTE_TASK_LINK_INDEX = "(" + XPATH_ABSOLUTE_TASK_LINK + ")[%d]";
+  private static final String XPATH_ABSOLUTE_TASK_LINK_INDEX = "(" + XPATH_ABSOLUTE_TASK_LINK + ")[%2$d]";
 
   public static TempoTask getInstance(Settings settings) {
     return new TempoTask(settings);
@@ -62,7 +62,8 @@ public class TempoTask extends AppianObject implements Refreshable, Clickable, R
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR TASK [" + taskName + "]");
 
     try {
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
+      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Task", taskName);
     }

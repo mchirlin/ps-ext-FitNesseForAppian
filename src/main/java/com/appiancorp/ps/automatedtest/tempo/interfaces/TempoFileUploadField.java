@@ -18,11 +18,12 @@ public class TempoFileUploadField extends AbstractTempoField {
 
   private static final Logger LOG = Logger.getLogger(TempoFileUploadField.class);
   private static final String XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL = Settings.getByConstant("xpathAbsoluteFileUploadFieldLabel");
-  private static final String XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL_INDEX = "(" + XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL + ")[%d]";
+  private static final String XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL_INDEX = "(" + XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL + ")[%2$d]";
   private static final String XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_INDEX = Settings.getByConstant("xpathAbsoluteFileUploadFieldIndex");
   private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_INPUT = Settings.getByConstant("xpathRelativeFileUploadFieldInput");
   private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_FILE = Settings.getByConstant("xpathRelativeFileUploadFieldFile");
-  private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_REMOVE_LINK = Settings.getByConstant("xpathRelativeFileUploadFieldRemoveLink");
+  private static final String XPATH_RELATIVE_FILE_UPLOAD_FIELD_REMOVE_LINK = Settings
+    .getByConstant("xpathRelativeFileUploadFieldRemoveLink");
   private static final String XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_WAITING = XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_LABEL +
     Settings.getByConstant("xpathRelativeFileUploadFieldWaiting");
   private static final Pattern FILENAME_PATTERN = Pattern.compile("(.*) \\(.*\\)");
@@ -59,7 +60,8 @@ public class TempoFileUploadField extends AbstractTempoField {
     String fieldName = params[0];
 
     try {
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
+      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+        .until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Wait for Field", fieldName);
     }
@@ -79,9 +81,10 @@ public class TempoFileUploadField extends AbstractTempoField {
 
   public void waitForFileUpload(WebElement fieldLayout) {
     String xpathLocator = getXpathLocator(fieldLayout);
-    (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("(" +
-      xpathLocator + ")" +
-      XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_WAITING)));
+    (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+      .until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("(" +
+        xpathLocator + ")" +
+        XPATH_ABSOLUTE_FILE_UPLOAD_FIELD_WAITING)));
   }
 
   @Override
