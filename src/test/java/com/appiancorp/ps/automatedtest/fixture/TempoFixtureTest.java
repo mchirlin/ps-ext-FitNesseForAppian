@@ -148,6 +148,8 @@ public class TempoFixtureTest extends AbstractDataTest {
 
     // Click
     fixture.clickOnReport("Automated Test Report[1]");
+    fixture.verifyChartIsPresent("Remaining");
+    fixture.verifyChartIsNotPresent("Not Remaining");
   }
 
   @Test
