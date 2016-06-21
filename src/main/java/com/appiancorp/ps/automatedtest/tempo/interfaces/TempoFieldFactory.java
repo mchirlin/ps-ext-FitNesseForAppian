@@ -172,6 +172,7 @@ public class TempoFieldFactory extends AppianObject implements
     }
   }
 
+  @Override
   public boolean containsMultiple(String[] fieldValues, String... params) {
     String fieldName = params[0];
 
@@ -217,6 +218,8 @@ public class TempoFieldFactory extends AppianObject implements
       return TempoDatetimeField.getInstance(settings);
     else if (TempoDateField.isType(fieldLayout))
       return TempoDateField.getInstance(settings);
+    else if (TempoImageField.isType(fieldLayout))
+      return TempoImageField.getInstance(settings);
     else if (TempoPickerField.isType(fieldLayout))
       return TempoPickerField.getInstance(settings);
     throw new IllegalArgumentException("Unrecognized field type");

@@ -517,11 +517,26 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
       new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\documents\\Medium.jpg" }));
   }
 
+  /**** Image Field ****/
+
+  @Test
+  public void testImageField() throws Exception {
+    assertTrue(fixture.verifyFieldContains("ImageField", new String[] { "not done" }));
+    assertTrue(fixture.verifyFieldInSectionContains("ImageField", "Images", new String[] { "not done" }));
+    assertEquals("not done", fixture.getFieldValue("ImageField"));
+  }
+
   /**** Grid ****/
 
   @Test
   public void testGridContains() throws Exception {
     assertTrue(fixture.verifyGridColumnRowContains("PagingGrid", "[2]", "[1]", new String[] { "Value 1" }));
+  }
+
+  @Test
+  public void testGetGridImage() throws Exception {
+    assertEquals(fixture.getGridColumnRowValue("ImageGrid", "ImageField", "[1]"), "done");
+    assertTrue(fixture.verifyGridColumnRowContains("ImageGrid", "ImageField", "[1]", new String[] { "done" }));
   }
 
   @Test
