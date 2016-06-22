@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -73,15 +72,14 @@ public class TempoPickerField extends AbstractTempoField {
   public boolean contains(WebElement fieldLayout, String... params) {
     String fieldValue = params[0];
 
-    try {
-      fieldLayout.findElement(By.xpath(xpathFormat(XPATH_RELATIVE_PICKER_SPECIFIC_SELECTION, fieldValue)));
-    } catch (NoSuchElementException nse) {
+    if (TempoPickerFieldSelection.getInstance(settings).waitForReturn(fieldLayout, fieldValue)) {
+      if (LOG.isDebugEnabled()) LOG.debug("USER PICKER FIELD COMPARISON : FIELD VALUE [" + fieldValue + "] FOUND");
+      return true;
+    } else {
+      if (LOG.isDebugEnabled()) LOG.debug("USER PICKER FIELD COMPARISON : FIELD VALUE [" + fieldValue + "] NOT FOUND");
+
       return false;
     }
-
-    if (LOG.isDebugEnabled()) LOG.debug("USER PICKER FIELD COMPARISON : FIELD VALUE [" + fieldValue + "] FOUND");
-
-    return true;
   }
 
   @Override
@@ -94,6 +92,8 @@ public class TempoPickerField extends AbstractTempoField {
   }
 
   public void clearOf(WebElement fieldLayout, String... params) {
+    if (LOG.isDebugEnabled()) LOG.debug("PICKER FIELD CLEAR OF : " + String.join(", ", params));
+
     for (int i = 0; i < params.length; i++) {
       WebElement x = fieldLayout.findElement(By.xpath(xpathFormat(XPATH_RELATIVE_PICKER_SPECIFIC_SELECTION_REMOVE_LINK, params[i])));
       x.click();

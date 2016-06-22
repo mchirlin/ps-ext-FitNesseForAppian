@@ -1,10 +1,17 @@
 package com.appiancorp.ps.automatedtest.fixture;
 
+import org.junit.Assume;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.appiancorp.ps.automatedtest.test.AbstractLoginTest;
 
 public class SitesFixtureTest extends AbstractLoginTest {
+
+  @Before
+  public void beforeSitesFixtureTest() {
+    Assume.assumeTrue(atLeastVersion(16.1));
+  }
 
   @Test
   public void testClickOnSitePage() throws Exception {
@@ -25,7 +32,7 @@ public class SitesFixtureTest extends AbstractLoginTest {
 
   @Test
   public void testRecordGridView() throws Exception {
-
+    Assume.assumeTrue(atLeastVersion(16.2));
     fixture.navigateToSite("automated-test-site");
     fixture.clickOnSitePage("Data Input");
     String randString = fixture.getRandomString(5);
