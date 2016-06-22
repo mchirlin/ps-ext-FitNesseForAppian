@@ -70,6 +70,10 @@
         {"label": "xpathAbsoluteTextFieldIndex", "value": "(//input[contains(@class, 'aui-TextInput')])[%1$d]"},
         {"label": "xpathRelativeTextFieldInput", "value": ".//input[contains(@class, 'aui-TextInput')]"},
         
+        {"label": "xpathAbsoluteImageFieldLabel", "value": "//label[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::img"},
+        {"label": "xpathAbsoluteImageFieldIndex", "value": "(//img[contains(@class, 'SafeImage')])[%1$d]"},
+        {"label": "xpathRelativeImageFieldInput", "value": ".//img[contains(@class, 'SafeImage')]"},
+        
         {"label": "xpathAbsoluteIntegerFieldLabel", "value": "//label[contains(text(),%1$s)]/parent::span/following-sibling::div/div/input"},
         {"label": "xpathRelativeIntegerFieldInput", "value": ".//input[contains(@class, 'aui-TextInput')]"},
         

@@ -910,6 +910,7 @@ public class TempoFixture extends BaseFixture {
    * <code>| check | get field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | FIELD_VALUE |</code> - Returns true if the field value
    * title matches the FIELD_VALUE input.
    * For file upload fields, do not include the full path. This will not work for relative date and datetime fields.
+   * Image fields return the alt text of the image.
    * 
    * @param fieldName
    *          Name of name and index of the field
@@ -991,6 +992,7 @@ public class TempoFixture extends BaseFixture {
    * <code>| verify field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | contains | VALUES() |</code> - For
    * date and datetime fields, relative times can be entered such as +1 minute, +2 hours, +3 days. To use these relative times, the
    * startDatetime must be initialized: see {@link com.appiancorp.ps.automatedtest.fixture.BaseFixture#setStartDatetime()}
+   * Image fields return the alt text of the image.
    * 
    * @param fieldName
    *          Can either be a name or a name and index, e.g. 'Text Field' or 'Text Field[1]'
@@ -1144,7 +1146,7 @@ public class TempoFixture extends BaseFixture {
    * the field value in fieldValue, which can later be accessed using $fieldValue<br>
    * <code>| check | get grid | GRID_NAME_OR_INDEX | column | COLUMN_NAME_OR_INDEX | row | ROW_INDEX | value | FIELD_VALUE |</code> -
    * Returns true if the field value title matches the FIELD_VALUE input. For file upload fields, do not include the full path. This will
-   * not work for relative date and datetime fields.
+   * not work for relative date and datetime fields. Image field cells return the alt text of the image.
    * 
    * @param gridName
    *          Name of the grid
@@ -1187,6 +1189,7 @@ public class TempoFixture extends BaseFixture {
    * <br>
    * FitNesse Example:
    * <code>| verify grid | GRID_NAME or GRID_NAME[INDEX] or [GRID_INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | contains | VALUES |</code>
+   * Image field cells return the alt text of the image.
    * 
    * @param gridName
    *          Name of the grid

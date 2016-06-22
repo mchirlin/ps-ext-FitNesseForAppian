@@ -293,6 +293,14 @@
 |$safeLinkURL= |get link |Safe Link   |URL         |
 |populate field|TextField|with        |$safeLinkURL|
 ***!
+!*** Verify Images
+!| script                                        	  |
+|verify field | ImageField | contains | not done |
+|verify field | ImageField | in section |Images| contains | not done |
+|check | get field | ImageField | value | not done |
+|verify grid  |ImageGrid|column    |ImageField|row|[1]|contains|done|
+|check      |get grid  |ImageGrid|column        |ImageField           |row|[1]     |value|done   |
+***!
 !*** Close Form
 !|script               |
 |click on button|Submit|
