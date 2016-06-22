@@ -53,7 +53,7 @@ public class BaseFixture {
 
   private static final Logger LOG = Logger.getLogger(BaseFixture.class);
 
-  private Properties prop = new Properties();
+  private Properties props = new Properties();
 
   protected Settings settings;
 
@@ -76,28 +76,28 @@ public class BaseFixture {
       FirefoxProfile prof = new FirefoxProfile();
       prof.setPreference("browser.startup.homepage_override.mstone", "ignore");
       prof.setPreference("startup.homepage_welcome_url.additional", "about:blank");
-      if (!StringUtils.isBlank(getProp().getProperty(Constants.FIREFOX_BROWSER_HOME))) {
-        File pathToBinary = new File(getProp().getProperty(Constants.FIREFOX_BROWSER_HOME));
+      if (!StringUtils.isBlank(props.getProperty(Constants.FIREFOX_BROWSER_HOME))) {
+        File pathToBinary = new File(props.getProperty(Constants.FIREFOX_BROWSER_HOME));
         FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
         settings.setDriver(new FirefoxDriver(ffBinary, prof));
       } else {
         settings.setDriver(new FirefoxDriver(prof));
       }
     } else if (browser.equals("CHROME")) {
-      System.setProperty("webdriver.chrome.driver", getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
+      System.setProperty("webdriver.chrome.driver", props.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
         Constants.CHROME_DRIVER);
 
       System.setProperty("webdriver.chrome.args", "--disable-logging");
       System.setProperty("webdriver.chrome.silentOutput", "true");
-      if (!StringUtils.isBlank(getProp().getProperty(Constants.CHROME_BROWSER_HOME))) {
+      if (!StringUtils.isBlank(props.getProperty(Constants.CHROME_BROWSER_HOME))) {
         ChromeOptions co = new ChromeOptions();
-        co.setBinary(getProp().getProperty(Constants.CHROME_BROWSER_HOME));
+        co.setBinary(props.getProperty(Constants.CHROME_BROWSER_HOME));
         settings.setDriver(new ChromeDriver(co));
       } else {
         settings.setDriver(new ChromeDriver());
       }
     } else if (browser.equals("IE")) {
-      System.setProperty("webdriver.ie.driver", getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
+      System.setProperty("webdriver.ie.driver", props.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
         Constants.IE_DRIVER);
       System.setProperty("webdriver.ie.driver.silent", "true");
       DesiredCapabilities dCaps = new DesiredCapabilities();
@@ -218,7 +218,7 @@ public class BaseFixture {
    */
   public void setTakeErrorScreenshotsTo(Boolean bool) {
     if (settings.getScreenshotPath() == null) {
-      settings.setScreenshotPath(getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\screenshots");
+      settings.setScreenshotPath(props.getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\screenshots");
     }
     settings.setTakeErrorScreenshots(bool);
   }
@@ -288,7 +288,7 @@ public class BaseFixture {
    * @param username
    */
   public void loginIntoWithUsername(String url, String username) {
-    String password = getProp().getProperty(username);
+    String password = props.getProperty(username);
 
     loginIntoWithUsernameAndPassword(url, username, password);
   }
@@ -312,7 +312,7 @@ public class BaseFixture {
    * @param role
    */
   public void loginIntoWithRole(String url, String role) {
-    String userNamePassword = getProp().getProperty(role);
+    String userNamePassword = props.getProperty(role);
     String username = userNamePassword.substring(0, userNamePassword.indexOf("|"));
     String password = userNamePassword.substring(userNamePassword.indexOf("|") + 1, userNamePassword.length());
 
@@ -715,7 +715,7 @@ public class BaseFixture {
         .getResourceAsStream("configs/"), Charsets.UTF_8);
       for (String file : files) {
         inputStream = BaseFixture.class.getClassLoader().getResourceAsStream("configs/" + file);
-        getProp().load(inputStream);
+        props.load(inputStream);
       }
     } catch (Exception e) {
 
@@ -731,7 +731,7 @@ public class BaseFixture {
         for (File file : folder.listFiles()) {
           if (FilenameUtils.getExtension(file.getPath()).equals("properties")) {
             inputStream = new FileInputStream(file.getAbsolutePath());
-            getProp().load(inputStream);
+            props.load(inputStream);
           }
         }
       }
@@ -740,11 +740,11 @@ public class BaseFixture {
     }
   }
 
-  public Properties getProp() {
-    return prop;
+  public Properties getProps() {
+    return props;
   }
 
   public void setProp(Properties prop) {
-    this.prop = prop;
+    this.props = prop;
   }
 }

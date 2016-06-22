@@ -488,17 +488,17 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
 
   @Test
   public void testFileUploadField() throws Exception {
-    fixture.populateFieldWith("FileUploadField", new String[] { fixture.getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) +
+    fixture.populateFieldWith("FileUploadField", new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) +
       "\\documents\\Low.jpg" });
     assertTrue(fixture.verifyFieldContains("FileUploadField",
-      new String[] { fixture.getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\documents\\Low.jpg" }));
+      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\documents\\Low.jpg" }));
     assertEquals("Low.jpg", fixture.getFieldValue("FileUploadField")); // Notice this doesn't include the entire path
 
     // Grid
     fixture.populateGridColumnRowWith("EditableGrid[2]", "FileUploadField", "[1]",
-      new String[] { fixture.getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\documents\\Medium.jpg" });
+      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\documents\\Medium.jpg" });
     assertTrue(fixture.verifyGridColumnRowContains("EditableGrid[2]", "FileUploadField", "[1]",
-      new String[] { fixture.getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\documents\\Medium.jpg" }));
+      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\documents\\Medium.jpg" }));
     assertEquals("Medium.jpg", fixture.getGridColumnRowValue("EditableGrid[2]", "FileUploadField", "[1]"));
 
     // fixture.populateGridColumnRowWith("EditableGrid[2]", "[5]", "[2]", new String[]{AUTOMATED_TESTING_HOME + "\\documents\\High.jpg"});
@@ -511,10 +511,10 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
 
   @Test
   public void testFileUploadFieldPopulateType() throws Exception {
-    fixture.populateFieldWith("FILE_UPLOAD", "[2]", new String[] { fixture.getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) +
+    fixture.populateFieldWith("FILE_UPLOAD", "[2]", new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) +
       "\\documents\\Medium.jpg" });
     assertTrue(fixture.verifyFieldContains("FileUploadField[2]",
-      new String[] { fixture.getProp().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\documents\\Medium.jpg" }));
+      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\documents\\Medium.jpg" }));
   }
 
   /**** Grid ****/
