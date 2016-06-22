@@ -8,6 +8,7 @@ import com.appiancorp.ps.automatedtest.tempo.TempoSearch;
 import com.appiancorp.ps.automatedtest.tempo.action.TempoAction;
 import com.appiancorp.ps.automatedtest.tempo.action.TempoActionApplicationFilter;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoButton;
+import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoChart;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoCheckboxFieldOption;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoField;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoFieldFactory;
@@ -1507,6 +1508,37 @@ public class TempoFixture extends BaseFixture {
   public String getSectionValidationMessage(String sectionName) {
     TempoSection.getInstance(settings).waitFor(sectionName);
     return TempoSectionValidation.getInstance(settings).capture(sectionName);
+  }
+
+  /**
+   * Verifies a chart containing a specific label is present.
+   * The method will wait for the timeout period and refresh up to the configured number of refresh times before failing.<br>
+   * <br>
+   * FitNesse Example: <code>| verify chart | CHART_LABEL | is present |</code>
+   * 
+   * @param chartLabel
+   *          Text to search for chart label
+   * @return True, if post is located with specific text
+   */
+  public boolean verifyChartIsPresent(String chartLabel) {
+    TempoChart.getInstance(settings).waitFor(chartLabel);
+    return true;
+  }
+
+  /**
+   * Verifies a chart containing a specific label is not present.<br>
+   * <br>
+   * FitNesse Example: <code>| verify chart| CHART_LABEL | is not present |</code><br>
+   * <br>
+   * The reason to use than <code>| reject | verify chart | CHART_LABEL | is present |</code> is that this method will not
+   * refresh and wait.
+   * 
+   * @param chartLabel
+   *          Text to search for chart label
+   * @return True, if no post is located with specific text
+   */
+  public boolean verifyChartIsNotPresent(String chartLabel) {
+    return !TempoChart.getInstance(settings).waitForReturn(chartLabel);
   }
 
 }

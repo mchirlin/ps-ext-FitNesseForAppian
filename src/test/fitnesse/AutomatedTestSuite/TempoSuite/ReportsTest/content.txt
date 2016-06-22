@@ -5,4 +5,6 @@
 | verify report | Not Automated Test Report | is not present | 
 | click on report | Automated Test Report | 
 | check | get form title | Automated Test Report | 
+| verify chart | Remaining | is present | 
+| verify chart | not Remaining | is not present |
 **!

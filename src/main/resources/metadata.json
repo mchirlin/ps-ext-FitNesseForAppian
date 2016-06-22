@@ -155,7 +155,9 @@
         {"label": "xpathRelativeReadOnlyField", "value": ".//p[contains(@class, 'readonly')] | div[ancestor::div[contains(@class, 'DataGrid-Container')]]"},
         
         {"label": "xpathRelativeFieldValidationMessageSpecificValue", "value": "/ancestor::div[contains(@class, 'aui_FieldLayout')]/descendant::p[contains(@class, 'component_error') and contains(text(), %1$s)]"},
-        {"label": "xpathRelativeFieldValidationMessage", "value": "./ancestor::div[contains(@class, 'aui_FieldLayout')]/descendant::p[contains(@class, 'component_error')]"}   
+        {"label": "xpathRelativeFieldValidationMessage", "value": "./ancestor::div[contains(@class, 'aui_FieldLayout')]/descendant::p[contains(@class, 'component_error')]"},
+           
+        {"label": "xpathAbsoluteChartLabel", "value": "//span[contains(text(),%1$s)]"}   
       ]
     },
     { "version": "7.11", "byConstants": [] },
