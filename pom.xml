@@ -3,14 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.appiancorp.ps.automatedtest</groupId>
   <artifactId>fitnesse-for-appian</artifactId>
-  <version>1.2.6</version>
+  <version>1.2.7-SNAPSHOT</version>
   <name>FitNesse for Appian</name>
   <url>https://github.com/appianps/ps-ext-FitNesseForAppian</url>
   
   <scm>
     <connection>scm:git:git://github.com/appianps/ps-ext-FitNesseForAppian</connection>
     <url>https://github.com/appianps/ps-ext-FitNesseForAppian</url>
-    <tag>fitnesse-for-appian-1.2.6</tag>
+    <tag>v1.2.6</tag>
   </scm>
   
   <properties>
