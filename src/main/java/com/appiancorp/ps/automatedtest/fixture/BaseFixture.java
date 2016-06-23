@@ -358,7 +358,7 @@ public class BaseFixture {
   public void loginWithTermsWithUsername(String userName) {
     TempoLogin.getInstance(settings).navigateToLoginPage(settings.getUrl());
     TempoLogin.getInstance(settings).waitForTerms();
-    String password = getProp().getProperty(userName);
+    String password = getProps().getProperty(userName);
     TempoLogin.getInstance(settings).loginWithTerms(settings.getUrl(), userName, password);
   }
 
@@ -374,7 +374,7 @@ public class BaseFixture {
   public void loginWithTermsWithRole(String userRole) {
     TempoLogin.getInstance(settings).navigateToLoginPage(settings.getUrl());
     TempoLogin.getInstance(settings).waitForTerms();
-    String userNamePassword = getProp().getProperty(userRole);
+    String userNamePassword = getProps().getProperty(userRole);
     String username = userNamePassword.substring(0, userNamePassword.indexOf("|"));
     String password = userNamePassword.substring(userNamePassword.indexOf("|") + 1, userNamePassword.length());
 
