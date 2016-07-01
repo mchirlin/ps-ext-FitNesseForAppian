@@ -2,7 +2,7 @@
 
 !3 These variables are required for every test script that you write:
  * '''select test system !define TEST_SYSTEM=slim''' 
- * '''enable logging !define COMMAND_PATTERN {java -Dlog4j.debug -Dlog4j.configuration=file:\\\${automated.testing.home}\log4j.properties -cp %p %m}
+ * '''enable logging !define COMMAND_PATTERN {java -Dlog4j.configuration=file:\\\${automated.testing.home}\log4j.properties -cp %p %m}
  * '''classpath: ${automated.testing.home}\**.jar'''
  * '''!| script| com.appiancorp.ps.automatedtest.fixture.TempoFixture|'''
  * '''|setup selenium web driver with browser|BROWSER| '''

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
@@ -41,6 +42,7 @@ import com.appiancorp.ps.automatedtest.common.Screenshot;
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
 import com.appiancorp.ps.automatedtest.tempo.TempoLogin;
+import com.google.common.base.Throwables;
 
 /**
  * This is the base class for integrating Appian and FitNesse.
@@ -753,7 +755,7 @@ public class BaseFixture {
         props.load(inputStream);
       }
     } catch (Exception e) {
-
+      LOG.debug(Throwables.getStackTraceAsString(e));
     }
 
     try {
@@ -761,7 +763,8 @@ public class BaseFixture {
       if (inputStream == null) {
         File jarPath = new File(BaseFixture.class.getProtectionDomain().getCodeSource().getLocation().getPath());
         String propertiesPath = jarPath.getParentFile().getAbsolutePath();
-        File folder = new File(propertiesPath + "/../../configs");
+        File folder = new File(URLDecoder.decode(propertiesPath + "/../../configs", "UTF-8"));
+        LOG.debug("Folder: " + folder);
 
         for (File file : folder.listFiles()) {
           if (FilenameUtils.getExtension(file.getPath()).equals("properties")) {
@@ -771,7 +774,7 @@ public class BaseFixture {
         }
       }
     } catch (Exception e) {
-
+      LOG.debug(Throwables.getStackTraceAsString(e));
     }
   }
 

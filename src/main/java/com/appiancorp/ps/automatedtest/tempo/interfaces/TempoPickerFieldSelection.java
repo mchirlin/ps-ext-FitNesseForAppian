@@ -2,14 +2,15 @@ package com.appiancorp.ps.automatedtest.tempo.interfaces;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.appiancorp.ps.automatedtest.common.Settings;
-import com.appiancorp.ps.automatedtest.properties.FieldLayoutWaitFor;
+import com.appiancorp.ps.automatedtest.properties.FieldLayoutWaitForReturn;
 
-public class TempoPickerFieldSelection extends TempoPickerField implements FieldLayoutWaitFor {
+public class TempoPickerFieldSelection extends TempoPickerField implements FieldLayoutWaitForReturn {
 
   @SuppressWarnings("unused")
   private static final Logger LOG = Logger.getLogger(TempoPickerFieldSelection.class);
@@ -26,12 +27,32 @@ public class TempoPickerFieldSelection extends TempoPickerField implements Field
     super(settings);
   }
 
-  @Override
-  public void waitFor(WebElement fieldLayout, String... params) {
+  public String getXpath(WebElement fieldLayout, String... params) {
     String fieldValue = params[0];
 
     String xpathLocator = getXpathLocator(fieldLayout);
-    (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(" +
-      xpathLocator + ")" + xpathFormat(XPATH_RELATIVE_PICKER_SPECIFIC_SELECTION, fieldValue))));
+    return "(" + xpathLocator + ")" + xpathFormat(XPATH_RELATIVE_PICKER_SPECIFIC_SELECTION, fieldValue);
+  }
+
+  @Override
+  public void waitFor(WebElement fieldLayout, String... params) {
+    (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getXpath(
+      fieldLayout, params))));
+  }
+
+  @Override
+  public boolean waitForReturn(int timeout, WebElement fieldLayout, String... params) {
+    try {
+      (new WebDriverWait(settings.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(fieldLayout,
+        params))));
+      return true;
+    } catch (TimeoutException e) {
+      return false;
+    }
+  }
+
+  @Override
+  public boolean waitForReturn(WebElement fieldLayout, String... params) {
+    return waitForReturn(settings.getNotPresentTimeoutSeconds(), fieldLayout, params);
   }
 }

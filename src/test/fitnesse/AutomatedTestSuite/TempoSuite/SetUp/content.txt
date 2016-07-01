@@ -1,8 +1,8 @@
 !*** Initialization
 !| script                              |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
-|setup selenium web driver with browser|FIREFOX                                             |
-|set appian url to                     |https://ps-sandbox1.appiancloud.com/suite           |
-|set appian version to                 |16.2                                                |
+|setup selenium web driver with browser|${browser}                                          |
+|set appian url to                     |${url}          									|
+|set appian version to                 |${version}                                          |
 |set appian locale to                  |en_US                                               |
 |set stop on error to                  |true                                                |
 |set timeout seconds to                |20                                                  |

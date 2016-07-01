@@ -58,6 +58,7 @@ public class TempoDatetimeField extends AbstractTempoField {
 
     populateTempoDatetimeFieldWithDate(fieldLayout, d);
     populateTempoDatetimeFieldWithTime(fieldLayout, d);
+    unfocus();
   }
 
   @Override

@@ -25,7 +25,7 @@ public class TempoGridSelectAll extends TempoGrid implements Clickable {
   public void click(String... params) {
     String gridName = params[0];
 
-    if (LOG.isDebugEnabled()) LOG.debug("CLINK SELECT ALL [" + gridName + "]");
+    if (LOG.isDebugEnabled()) LOG.debug("CLICK SELECT ALL [" + gridName + "]");
 
     try {
       WebElement grid = getWebElement(params);

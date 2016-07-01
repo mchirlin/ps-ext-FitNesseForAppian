@@ -1,6 +1,6 @@
 !*** Check Forms Title and instructions
 |script                                  |
-|check|get form title       |Form        |
+|check|get form title       |All Fields  |
 |check|get form instructions|Instructions|
 ***!
 !*** Verify buttons
@@ -24,7 +24,7 @@
 |populate field|MultipleDropdownField|with      |Option 1,Option 2                          |
 |populate field|RadioField           |with      |Option 1                                   |
 |populate field|CheckboxField        |with      |Option 1,Option 2                          |
-|populate field|FileUploadField      |with      |${automated.testing.home}\documents\Low.jpg|
+|populate field|FileUploadField      |with      |${automated.testing.home}\FitNesseRoot\files\images\Fitnesse-Start.png|
 
 !| script                                          |
 |verify field|TextField         |contains|text     |
@@ -55,20 +55,20 @@
 |check|get field|ROIntegerField      |value|1        |
 |check|get field|RODecimalField      |value|2.2      |
 
-!| script                                                           |
-|verify field|DatetimeField        |contains      |+1 hour          |
-|verify field|DropdownField        |contains value|Option, 1        |
-|verify field|MultipleDropdownField|contains      |Option 1,Option 2|
-|verify field|RadioField           |contains      |Option 1         |
-|verify field|CheckboxField        |contains      |Option 1,Option 2|
-|verify field|FileUploadField      |contains      |Low.jpg          |
+!| script                                                            |
+|verify field|DatetimeField        |contains      |+1 hour           |
+|verify field|DropdownField        |contains value|Option, 1         |
+|verify field|MultipleDropdownField|contains      |Option 1,Option 2 |
+|verify field|RadioField           |contains      |Option 1          |
+|verify field|CheckboxField        |contains      |Option 1,Option 2 |
+|verify field|FileUploadField      |contains      |Fitnesse-Start.png|
 
-!| script                                                     |
-|check|get field|DropdownField        |value|Option, 1        |
-|check|get field|MultipleDropdownField|value|Option 1,Option 2|
-|check|get field|RadioField           |value|Option 1         |
-|check|get field|CheckboxField        |value|Option 1,Option 2|
-|check|get field|FileUploadField      |value|Low.jpg          |
+!| script                                                      |
+|check|get field|DropdownField        |value|Option, 1         |
+|check|get field|MultipleDropdownField|value|Option 1,Option 2 |
+|check|get field|RadioField           |value|Option 1          |
+|check|get field|CheckboxField        |value|Option 1,Option 2 |
+|check|get field|FileUploadField      |value|Fitnesse-Start.png|
 
 !|script                                   |
 |toggle section|Basic Fields|visibility    |
@@ -108,41 +108,41 @@
 ***!
 !*** Populate and Verify Pickers
 !| script                                                  |
-|populate field|UserPicker|with|Michael Chirlin,Dan Austria|
+|populate field|UserPicker|with|Test User,Test Twoser|
 #|populate field  |GroupPicker         |with|AUT All Users             |
-#|populate field  |UserGroupPicker     |with|Dan Austria, AUT All Users  |
+#|populate field  |UserGroupPicker     |with|Test Twoser, AUT All Users|
 #|populate field  |DocumentPicker      |with|All Process Models        |
 #|populate field  |FolderPicker        |with|Automated Testing         |
 #|populate field  |DocumentFolderPicker|with|Automated Testing         |
 #|populate field  |CustomPicker        |with|5                         |
 
 !| script                                                    |
-|verify field|UserPicker|contains|Michael Chirlin,Dan Austria|
+|verify field|UserPicker|contains|Test User,Test Twoser|
 #|verify field  |GroupPicker         |contains|AUT All Users          |
-#|verify field  |UserGroupPicker     |contains|Dan Austria,AUT All Users|
+#|verify field  |UserGroupPicker     |contains|Test Twoser,AUT All Users|
 #|verify field  |DocumentPicker      |contains|All Process Models.arf |
 #|verify field  |FolderPicker        |contains|Automated Testing      |
 #|verify field  |DocumentFolderPicker|contains|Automated Testing      |
 #|verify field  |CustomPicker        |contains|5                      |
 
 !| script                                                    |
-|check|get field|UserPicker|value|Michael Chirlin,Dan Austria|
+|check|get field|UserPicker|value|Test User,Test Twoser|
 #|check  |get field|GroupPicker         |value|AUT All Users            |
-#|check  |get field|UserGroupPicker     |value|Dan Austria,AUT All Users|
-#|check  |get field|DocumentPicker      |value|All Process Models.arf |
-#|check  |get field|FolderPicker        |value|Automated Testing      |
-#|check  |get field|DocumentFolderPicker|value|Automated Testing      |
-#|check  |get field|CustomPicker        |value|5                      |
+#|check  |get field|UserGroupPicker     |value|Test Twoser,AUT All Users|
+#|check  |get field|DocumentPicker      |value|All Process Models.arf   |
+#|check  |get field|FolderPicker        |value|Automated Testing        |
+#|check  |get field|DocumentFolderPicker|value|Automated Testing        |
+#|check  |get field|CustomPicker        |value|5                        |
 ***!
 !*** Populate and Verify Edge Cases
-!| script                                                                                                    |
-|populate field          |[1]         |in section|Edge Cases|with|noLabel                                    |
-|populate field          |TextField[2]|with      |text2                                                      |
-|populate                |FILE_UPLOAD |field     |[2]       |with|${automated.testing.home}\documents\Low.jpg|
-|click on radio option   |Click Me!                                                                          |
-|click on radio option   |Click Me[2]                                                                        |
-|click on checkbox option|Click Me Too!                                                                      |
-|click on checkbox option|Click Me[2]                                                                        |
+!| script                                                                                                                               |
+|populate field          |[1]         |in section|Edge Cases|with|noLabel                                                               |
+|populate field          |TextField[2]|with      |text2                                                                                 |
+|populate                |FILE_UPLOAD |field     |[2]       |with|${automated.testing.home}\FitNesseRoot\files\images\Fitnesse-Start.png|
+|click on radio option   |Click Me!                                                                                                     |
+|click on radio option   |Click Me[2]                                                                                                   |
+|click on checkbox option|Click Me Too!                                                                                                 |
+|click on checkbox option|Click Me[2]                                                                                                   |
 
 !| script                                                        |
 |verify field|[1]         |in section|Edge Cases|contains|noLabel|
@@ -163,26 +163,26 @@
 |populate grid|EditableGrid|column|[7]               |row|[1]|with|+1 year       |
 |click on link|Add Data to Paging Grid                                          |
 
-!| script                                                                                                      |
-|populate grid|EditableGrid[2]|column|DatetimeField  |row|[1]|with|+1 hour                                     |
-|populate grid|EditableGrid[2]|column|DatetimeField  |row|[2]|with|+1 minute                                   |
-|populate grid|EditableGrid[2]|column|[2]            |row|[1]|with|Option 1                                    |
-|populate grid|EditableGrid[2]|column|[2]            |row|[2]|with|Option 2                                    |
-|populate grid|EditableGrid[2]|column|RadioField     |row|[1]|with|Option 1                                    |
-|populate grid|EditableGrid[2]|column|RadioField     |row|[2]|with|Option 2                                    |
-|populate grid|EditableGrid[2]|column|[4]            |row|[1]|with|Option 1,Option 2                           |
-|populate grid|EditableGrid[2]|column|[4]            |row|[2]|with|Option 2                                    |
-|populate grid|EditableGrid[2]|column|FileUploadField|row|[1]|with|${automated.testing.home}\documents\Low.jpg |
-|populate grid|EditableGrid[2]|column|FileUploadField|row|[2]|with|${automated.testing.home}\documents\High.jpg|
+!| script                                                                                                                                |
+|populate grid|EditableGrid[2]|column|DatetimeField  |row|[1]|with|+1 hour                                                               |
+|populate grid|EditableGrid[2]|column|DatetimeField  |row|[2]|with|+1 minute                                                             |
+|populate grid|EditableGrid[2]|column|[2]            |row|[1]|with|Option 1                                                              |
+|populate grid|EditableGrid[2]|column|[2]            |row|[2]|with|Option 2                                                              |
+|populate grid|EditableGrid[2]|column|RadioField     |row|[1]|with|Option 1                                                              |
+|populate grid|EditableGrid[2]|column|RadioField     |row|[2]|with|Option 2                                                              |
+|populate grid|EditableGrid[2]|column|[4]            |row|[1]|with|Option 1,Option 2                                                     |
+|populate grid|EditableGrid[2]|column|[4]            |row|[2]|with|Option 2                                                              |
+|populate grid|EditableGrid[3]|column|FileUploadField|row|[1]|with|${automated.testing.home}\FitNesseRoot\files\images\Fitnesse-Start.png|
+|populate grid|EditableGrid[3]|column|FileUploadField|row|[2]|with|${automated.testing.home}\FitNesseRoot\files\images\Fitnesse-Error.png|
 
 !| script                                                             |
-|populate grid|EditableGrid[3]|column|[1]|row|[1]|with|Michael Chirlin|
-#|populate grid  |EditableGrid[3]|column|[2]|row|[1]|with|AUT All Users           |
-#|populate grid  |EditableGrid[3]|column|[3]|row|[1]|with|test.user, AUT All Users|
-#|populate grid  |EditableGrid[3]|column|[4]|row|[1]|with|All Process Models      |
-#|populate grid  |EditableGrid[3]|column|[1]|row|[2]|with|Automated Testing       |
-#|populate grid  |EditableGrid[3]|column|[2]|row|[2]|with|Automated Testing       |
-#|populate grid  |EditableGrid[3]|column|[3]|row|[2]|with|10                      |
+|populate grid|EditableGrid[4]|column|[1]|row|[1]|with|Test User|
+#|populate grid  |EditableGrid[4]|column|[2]|row|[1]|with|AUT All Users           |
+#|populate grid  |EditableGrid[4]|column|[3]|row|[1]|with|test.user, AUT All Users|
+#|populate grid  |EditableGrid[4]|column|[4]|row|[1]|with|All Process Models      |
+#|populate grid  |EditableGrid[4]|column|[1]|row|[2]|with|Automated Testing       |
+#|populate grid  |EditableGrid[4]|column|[2]|row|[2]|with|Automated Testing       |
+#|populate grid  |EditableGrid[4]|column|[3]|row|[2]|with|10                      |
 
 !| script                                                                         |
 |verify grid|EditableGrid|row   |[1]               |is selected                   |
@@ -200,45 +200,45 @@
 |check|get grid|EditableGrid|column|[5]               |row|[1]|value|1            |
 |check|get grid|EditableGrid|column|DecimalField      |row|[1]|value|2.2          |
 
-!| script                                                                             |
-|verify grid|EditableGrid[2]|column|DatetimeField  |row|[1]|contains|+1 hour          |
-|verify grid|EditableGrid[2]|column|DatetimeField  |row|[2]|contains|+1 minute        |
-|verify grid|EditableGrid[2]|column|[2]            |row|[1]|contains|Option 1         |
-|verify grid|EditableGrid[2]|column|[2]            |row|[2]|contains|Option 2         |
-|verify grid|EditableGrid[2]|column|RadioField     |row|[1]|contains|Option 1         |
-|verify grid|EditableGrid[2]|column|RadioField     |row|[2]|contains|Option 2         |
-|verify grid|EditableGrid[2]|column|[4]            |row|[1]|contains|Option 1,Option 2|
-|verify grid|EditableGrid[2]|column|[4]            |row|[2]|contains|Option 2         |
-|verify grid|EditableGrid[2]|column|FileUploadField|row|[1]|contains|Low.jpg          |
-|verify grid|EditableGrid[2]|column|FileUploadField|row|[2]|contains|High.jpg         |
+!| script                                                                              |
+|verify grid|EditableGrid[2]|column|DatetimeField  |row|[1]|contains|+1 hour           |
+|verify grid|EditableGrid[2]|column|DatetimeField  |row|[2]|contains|+1 minute         |
+|verify grid|EditableGrid[2]|column|[2]            |row|[1]|contains|Option 1          |
+|verify grid|EditableGrid[2]|column|[2]            |row|[2]|contains|Option 2          |
+|verify grid|EditableGrid[2]|column|RadioField     |row|[1]|contains|Option 1          |
+|verify grid|EditableGrid[2]|column|RadioField     |row|[2]|contains|Option 2          |
+|verify grid|EditableGrid[2]|column|[4]            |row|[1]|contains|Option 1,Option 2 |
+|verify grid|EditableGrid[2]|column|[4]            |row|[2]|contains|Option 2          |
+|verify grid|EditableGrid[3]|column|FileUploadField|row|[1]|contains|Fitnesse-Start.png|
+|verify grid|EditableGrid[3]|column|FileUploadField|row|[2]|contains|Fitnesse-Error.png|
 
-!| script                                                                             |
-|check|get grid|EditableGrid[2]|column|[2]            |row|[1]|value|Option 1         |
-|check|get grid|EditableGrid[2]|column|[2]            |row|[2]|value|Option 2         |
-|check|get grid|EditableGrid[2]|column|RadioField     |row|[1]|value|Option 1         |
-|check|get grid|EditableGrid[2]|column|RadioField     |row|[2]|value|Option 2         |
-|check|get grid|EditableGrid[2]|column|[4]            |row|[1]|value|Option 1,Option 2|
-|check|get grid|EditableGrid[2]|column|[4]            |row|[2]|value|Option 2         |
-|check|get grid|EditableGrid[2]|column|FileUploadField|row|[1]|value|Low.jpg          |
-|check|get grid|EditableGrid[2]|column|FileUploadField|row|[2]|value|High.jpg         |
-
-!| script                                                               |
-|verify grid|EditableGrid[3]|column|[1]|row|[1]|contains|Michael Chirlin|
-#|verify grid  |EditableGrid[3]|column|[2]|row|[1]|contains|AUT All Users          |
-#|verify grid  |EditableGrid[3]|column|[3]|row|[1]|contains|Dan Austria,AUT All Users|
-#|verify grid  |EditableGrid[3]|column|[4]|row|[1]|contains|All Process Models.arf |
-#|verify grid  |EditableGrid[3]|column|[1]|row|[2]|contains|Automated Testing      |
-#|verify grid  |EditableGrid[3]|column|[2]|row|[2]|contains|Automated Testing      |
-#|verify grid  |EditableGrid[3]|column|[3]|row|[2]|contains|10                     |
+!| script                                                                              |
+|check|get grid|EditableGrid[2]|column|[2]            |row|[1]|value|Option 1          |
+|check|get grid|EditableGrid[2]|column|[2]            |row|[2]|value|Option 2          |
+|check|get grid|EditableGrid[2]|column|RadioField     |row|[1]|value|Option 1          |
+|check|get grid|EditableGrid[2]|column|RadioField     |row|[2]|value|Option 2          |
+|check|get grid|EditableGrid[2]|column|[4]            |row|[1]|value|Option 1,Option 2 |
+|check|get grid|EditableGrid[2]|column|[4]            |row|[2]|value|Option 2          |
+|check|get grid|EditableGrid[3]|column|FileUploadField|row|[1]|value|Fitnesse-Start.png|
+|check|get grid|EditableGrid[3]|column|FileUploadField|row|[2]|value|Fitnesse-Error.png|
 
 !| script                                                               |
-|check|get grid|EditableGrid[3]|column|[1]|row|[1]|value|Michael Chirlin|
-#|check  |get grid|EditableGrid[3]|column|[2]|row|[1]|value|AUT All Users          |
-#|check  |get grid|EditableGrid[3]|column|[3]|row|[1]|value|Dan Austria,AUT All Users|
-#|check  |get grid|EditableGrid[3]|column|[4]|row|[1]|value|All Process Models.arf |
-#|check  |get grid|EditableGrid[3]|column|[1]|row|[2]|value|Automated Testing      |
-#|check  |get grid|EditableGrid[3]|column|[2]|row|[2]|value|Automated Testing      |
-#|check  |get grid|EditableGrid[3]|column|[3]|row|[2]|value|10                     |
+|verify grid|EditableGrid[4]|column|[1]|row|[1]|contains|Test User|
+#|verify grid  |EditableGrid[4]|column|[2]|row|[1]|contains|AUT All Users            |
+#|verify grid  |EditableGrid[4]|column|[3]|row|[1]|contains|Test Twoser,AUT All Users|
+#|verify grid  |EditableGrid[4]|column|[4]|row|[1]|contains|All Process Models.arf   |
+#|verify grid  |EditableGrid[4]|column|[1]|row|[2]|contains|Automated Testing        |
+#|verify grid  |EditableGrid[4]|column|[2]|row|[2]|contains|Automated Testing        |
+#|verify grid  |EditableGrid[4]|column|[3]|row|[2]|contains|10                       |
+
+!| script                                                               |
+|check|get grid|EditableGrid[4]|column|[1]|row|[1]|value|Test User|
+#|check  |get grid|EditableGrid[4]|column|[2]|row|[1]|value|AUT All Users            |
+#|check  |get grid|EditableGrid[4]|column|[3]|row|[1]|value|Test Twoser,AUT All Users|
+#|check  |get grid|EditableGrid[4]|column|[4]|row|[1]|value|All Process Models.arf   |
+#|check  |get grid|EditableGrid[4]|column|[1]|row|[2]|value|Automated Testing        |
+#|check  |get grid|EditableGrid[4]|column|[2]|row|[2]|value|Automated Testing        |
+#|check  |get grid|EditableGrid[4]|column|[3]|row|[2]|value|10                       |
 
 !| script                                  |
 |select grid            |PagingGrid|row|[4]|
@@ -258,21 +258,21 @@
 !|script                                                                     |
 |click on grid|PagingGrid|navigation|next                                    |
 |verify grid  |PagingGrid|column    |Column Label 1|row|[1]|contains|Value 6 |
-|click on grid|[5]       |navigation|PREVIOUS                                |
+|click on grid|[6]       |navigation|PREVIOUS                                |
 |verify grid  |PagingGrid|column    |Column Label 1|row|[1]|contains|Value 1 |
 |click on grid|PagingGrid|navigation|last                                    |
 |verify grid  |PagingGrid|column    |Column Label 1|row|[1]|contains|Value 16|
 |click on grid|PagingGrid|navigation|FIRST                                   |
-|verify grid  |[5]       |column    |Column Label 1|row|[1]|contains|Value 1 |
+|verify grid  |[6]       |column    |Column Label 1|row|[1]|contains|Value 1 |
 
 !|script                                                                       |
 |sort grid  |PagingGrid|by column|Column Label 1                               |
 |verify grid|PagingGrid|column   |Column Label 1|row|[1]|contains|Value 1      |
-|sort grid  |[5]       |by column|Column Label 1                               |
+|sort grid  |[6]       |by column|Column Label 1                               |
 |verify grid|PagingGrid|column   |Column Label 1|row|[1]|contains|Value 9      |
 |sort grid  |PagingGrid|by column|Column Label 2                               |
 |verify grid|PagingGrid|column   |Column Label 2|row|[1]|contains|Description 1|
-|sort grid  |[5]       |by column|Column Label 2                               |
+|sort grid  |[6]       |by column|Column Label 2                               |
 |verify grid|PagingGrid|column   |Column Label 2|row|[1]|contains|Description 9|
 ***!
 !*** Verify Validations

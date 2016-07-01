@@ -4,4 +4,5 @@
 |click on site page|All Fields         |
 **!
 
-!include .automatedTestSuite.InterfaceInputs
+# I don't think we need to run this every time, we've proven that they are compatible
+#!include .automatedTestSuite.InterfaceInputs
