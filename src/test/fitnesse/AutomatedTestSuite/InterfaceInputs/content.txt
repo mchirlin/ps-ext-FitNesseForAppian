@@ -2,6 +2,7 @@
 |script                                  |
 |check|get form title       |All Fields  |
 |check|get form instructions|Instructions|
+|click on save changes 					 |
 ***!
 !*** Verify buttons
 !| script                               |
@@ -311,6 +312,5 @@
 ***!
 !*** Close Form
 !|script               |
-|click on save changes |
 |click on button|Submit|
 ***!
