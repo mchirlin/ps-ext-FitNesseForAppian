@@ -161,7 +161,10 @@
         {"label": "xpathRelativeFieldValidationMessageSpecificValue", "value": "/ancestor::div[contains(@class, 'aui_FieldLayout')]/descendant::p[contains(@class, 'component_error') and contains(text(), %1$s)]"},
         {"label": "xpathRelativeFieldValidationMessage", "value": "./ancestor::div[contains(@class, 'aui_FieldLayout')]/descendant::p[contains(@class, 'component_error')]"},
            
-        {"label": "xpathAbsoluteChartLabel", "value": "//span[contains(text(),%1$s)]"}   
+        {"label": "xpathAbsoluteChartLabel", "value": "//span[contains(text(),%1$s)]"}   ,
+        
+        {"label": "xpathAbsoluteSaveChanges", "value": "//a[contains(@class,'appian-form-close') and contains(text(), 'Save Changes')]"},
+        {"label": "xpathAbsoluteFormSavedConfirmation", "value": "//div[@id='inlineConfirmMessage' and contains(text(), 'Form saved successfully')]"}
       ]
     },
     { "version": "7.11", "byConstants": [] },

@@ -303,5 +303,6 @@
 ***!
 !*** Close Form
 !|script               |
+|click on save changes |
 |click on button|Submit|
 ***!

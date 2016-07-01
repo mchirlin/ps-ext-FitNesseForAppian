@@ -117,8 +117,9 @@
 | verify section | SECTION_NAME | contains validation message | VALIDATION_MESSAGE(S) |					: Verify section with label contains a specific validation message
 | verify grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | contains | VALUE(S) |	: Verify a grid field contains a value (Column and Row Numbers should be in square brackets [])
 | verify grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | row | [ROW_INDEX] | is selected | 		: Verifies if row in grid is selected (Row Numbers should be in square brackets [])
+| click on save changes |																				: Clicks on the save changes link.
 | click on button | BUTTON_NAME or BUTTON_NAME[INDEX] | 												: Clicks on button
-| click on link | LINK_NAME or LINK_NAME[INDEX] | 														: Click on a link.
+| click on link | LINK_NAME or LINK_NAME[INDEX] | 														: Clicks on a link.
 | click on radio option | RADIO_OPTION or RADIO_OPTION[INDEX] | 										: Selects a radio option
 | click on checkbox option | CHECKBOX_OPTION or CHECKBOX_OPTION[INDEX] | 								: Checks on the first checkbox with the given choice label
 | click on grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | add row link | 						: Can use gridName, gridIndex, or gridName[index] 

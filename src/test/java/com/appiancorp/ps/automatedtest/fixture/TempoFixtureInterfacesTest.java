@@ -696,6 +696,11 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
     assertTrue(fixture.verifyFieldIsNotPresent("[1000]"));
   }
 
+  @Test
+  public void testSaveChanges() throws Exception {
+    fixture.clickOnSaveChanges();
+  }
+
   @AfterClass
   public static void tearDownInterface() {
     fixture.clickOnButton("Cancel");
