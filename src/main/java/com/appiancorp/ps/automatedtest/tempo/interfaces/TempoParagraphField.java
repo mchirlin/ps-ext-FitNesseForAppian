@@ -69,7 +69,8 @@ public class TempoParagraphField extends AbstractTempoField implements Container
     textAreaField.clear();
     textAreaField.sendKeys(fieldValue);
 
-    Thread.sleep(500);
+    // Paragraph fields don't update as quickly as other fields, not sure why
+    Thread.sleep(700);
   }
 
   @Override

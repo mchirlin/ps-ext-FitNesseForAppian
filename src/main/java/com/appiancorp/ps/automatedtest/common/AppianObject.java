@@ -118,6 +118,7 @@ public class AppianObject {
   }
 
   public static String escapeForXpath(String variable) {
+    variable = variable.toLowerCase();
     if (variable.contains("'") || variable.contains("\"")) {
       return "concat('" + variable.replace("'", "', \"'\", '") + "', '')";
     } else {

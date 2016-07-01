@@ -62,7 +62,7 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
     Assume.assumeFalse(isBrowser("CHROME"));
 
     // Editable Grid
-    fixture.populateGridColumnRowWith("[1]", "TextField", "[1]", new String[] { "gridText" });
+    fixture.populateGridColumnRowWith("[1]", "Textfield", "[1]", new String[] { "gridText" });
     assertTrue(fixture.verifyGridColumnRowContains("[1]", "TextField", "[1]", new String[] { "gridText" }));
     assertEquals("gridText", fixture.getGridColumnRowValue("[1]", "TextField", "[1]"));
 
@@ -88,7 +88,7 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
   @Test
   public void testTextFieldPopulateType() throws Exception {
     fixture.populateFieldWith("TEXT", "[1]", new String[] { "Text index" });
-    assertTrue(fixture.verifyFieldContains("TextField", new String[] { "Text index" }));
+    assertTrue(fixture.verifyFieldContains("Textfield", new String[] { "Text index" }));
   }
 
   /**** Encrypted Text Field ****/
@@ -103,7 +103,7 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
     assertEquals("encrypted", fixture.getFieldValue("ROEncryptedTextField"));
 
     // Editable Grid
-    fixture.populateGridColumnRowWith("EditableGrid", "EncryptedTextField", "[1]", new String[] { "gridEncrypted" });
+    fixture.populateGridColumnRowWith("EditableGrid", "encryptedTextField", "[1]", new String[] { "gridEncrypted" });
     assertTrue(fixture.verifyGridColumnRowContains("EditableGrid", "EncryptedTextField", "[1]", new String[] { "gridEncrypted" }));
     assertEquals("gridEncrypted", fixture.getGridColumnRowValue("EditableGrid", "EncryptedTextField", "[1]"));
 
@@ -123,7 +123,7 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
     assertTrue(fixture.verifyFieldContains("[3]", new String[] { "paragraph" }));
     assertEquals("paragraph", fixture.getFieldValue("[3]"));
 
-    assertTrue(fixture.verifyFieldContains("ROParagraphField", new String[] { "paragraph" }));
+    assertTrue(fixture.verifyFieldContains("RoParagraphField", new String[] { "paragraph" }));
     assertEquals("paragraph", fixture.getFieldValue("ROParagraphField"));
 
     // Editable Grid
@@ -142,7 +142,7 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
   @Test
   public void testParagraphPopulateFieldType() throws Exception {
     fixture.populateFieldWith("PARAGRAPH", "[1]", new String[] { "Paragraph index" });
-    assertTrue(fixture.verifyFieldContains("ParagraphField", new String[] { "Paragraph index" }));
+    assertTrue(fixture.verifyFieldContains("Paragraphfield", new String[] { "Paragraph index" }));
   }
 
   /**** Integer Field ****/
@@ -175,7 +175,7 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
   @Test
   public void testDecimalField() throws Exception {
     fixture.populateFieldWith("DecimalField", new String[] { "2.2" });
-    assertTrue(fixture.verifyFieldContains("DecimalField", new String[] { "2.2" }));
+    assertTrue(fixture.verifyFieldContains("decimalField", new String[] { "2.2" }));
     assertEquals("2.2", fixture.getFieldValue("DecimalField"));
 
     assertTrue(fixture.verifyFieldContains("RODecimalField", new String[] { "2.2" }));
@@ -202,9 +202,9 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
 
   @Test
   public void testDropdownField() throws Exception {
-    fixture.populateFieldWithValue("DropdownField[1]", "Option 2");
+    fixture.populateFieldWithValue("Dropdownfield[1]", "Option 2");
     assertTrue(fixture.verifyFieldContainsValue("DropdownField[1]", "Option 2"));
-    assertEquals("Option 2", fixture.getFieldValue("DropdownField"));
+    assertEquals("Option 2", fixture.getFieldValue("Dropdownfield"));
 
     // Grid
     fixture.populateGridColumnRowWith("EditableGrid[2]", "[2]", "[1]", new String[] { "[1]" });
@@ -221,7 +221,7 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
   @Test
   public void testDropdownFieldPopulateWithValue() throws Exception {
     fixture.populateFieldWithValue("DropdownField", "Option, 1");
-    assertTrue(fixture.verifyFieldContainsValue("DropdownField", "Option, 1"));
+    assertTrue(fixture.verifyFieldContainsValue("dropdownField", "Option, 1"));
     assertEquals("Option, 1", fixture.getFieldValue("DropdownField"));
   }
 
@@ -405,14 +405,14 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
 
   @Test
   public void testPickerFields() throws Exception {
-    fixture.populateFieldWith("UserPicker", new String[] { "Test User", "Test Twoser" });
-    assertTrue(fixture.verifyFieldContains("UserPicker", new String[] { "Test User", "Test Twoser" }));
+    fixture.populateFieldWith("UserPicker", new String[] { "Test User", "test twoser" });
+    assertTrue(fixture.verifyFieldContains("Userpicker", new String[] { "Test User", "Test Twoser" }));
     assertEquals("Test User,Test Twoser", fixture.getFieldValue("UserPicker"));
 
     assertTrue(fixture.verifyFieldContains("ROUserPicker", new String[] { "Test User", "Test Twoser" }));
     assertEquals("Test User,Test Twoser", fixture.getFieldValue("ROUserPicker"));
 
-    fixture.clearFieldOf("UserPicker", new String[] { "Test User" });
+    fixture.clearFieldOf("UserPicker", new String[] { "test user" });
     assertFalse(fixture.verifyFieldContains("UserPicker", new String[] { "Test User" }));
     fixture.clearFieldOf("UserPicker[1]", new String[] { "Test Twoser" });
     assertFalse(fixture.verifyFieldContains("UserPicker[1]", new String[] { "Test Twoser" }));
@@ -473,6 +473,23 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
     // TODO Clear
     // fixture.clearField("UserPicker");
     // assertTrue(fixture.verifyFieldContains("UserPicker", new String[]{""}));
+  }
+
+  /**** Milestone Field ****/
+  @Test
+  public void testMilestoneField() throws Exception {
+    assertTrue(fixture.verifyFieldIsPresent("Milestone"));
+
+    Assume.assumeTrue(atLeastVersion(7.11));
+
+    fixture.clickOnMilestoneStep("Milestone", "Step 1");
+    assertTrue(fixture.verifyMilestoneStepIs("Milestone", new String[] { "Step 1" }));
+    assertEquals("Step 1", fixture.getMilestoneStep("Milestone"));
+
+    fixture.clickOnMilestoneStep("Milestone[1]", "[2]");
+    assertTrue(fixture.verifyMilestoneStepIs("Milestone", new String[] { "Step 2" }));
+
+    fixture.clickOnMilestoneStep("[1]", "[4]");
   }
 
   /**** Link Field ****/
@@ -549,6 +566,10 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
     assertTrue(fixture.verifyFieldContains("ImageField", new String[] { "not done" }));
     assertTrue(fixture.verifyFieldInSectionContains("ImageField", "Images", new String[] { "not done" }));
     assertEquals("not done", fixture.getFieldValue("ImageField"));
+
+    // Grid
+    assertEquals(fixture.getGridColumnRowValue("ImageGrid", "ImageField", "[1]"), "done");
+    assertTrue(fixture.verifyGridColumnRowContains("ImageGrid", "ImageField", "[1]", new String[] { "done" }));
   }
 
   /**** Grid ****/
@@ -556,12 +577,6 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
   @Test
   public void testGridContains() throws Exception {
     assertTrue(fixture.verifyGridColumnRowContains("PagingGrid", "[2]", "[1]", new String[] { "Value 1" }));
-  }
-
-  @Test
-  public void testGetGridImage() throws Exception {
-    assertEquals(fixture.getGridColumnRowValue("ImageGrid", "ImageField", "[1]"), "done");
-    assertTrue(fixture.verifyGridColumnRowContains("ImageGrid", "ImageField", "[1]", new String[] { "done" }));
   }
 
   @Test
@@ -734,6 +749,9 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
   @Test
   public void testSaveChanges() throws Exception {
     fixture.clickOnSaveChanges();
+    if (fixture.errorIsPresent()) {
+      fixture.clickOnButton("OK");
+    }
   }
 
   @AfterClass

@@ -286,6 +286,14 @@
 |verify field   |ValidationField|contains validation message|Value must be greater than 0,Value must be even                        |
 |check          |get field      |ValidationField            |validation message|Value must be greater than 0,Value must be even     |
 ***!
+!*** Verify Milestone
+!| script                                               |
+|click on milestone |milestone    |step     |Step 1     |
+|verify milestone   |milestone    |step is  |Step 1     |
+|check              |get milestone|milestone|step|Step 1|
+|click on milestone |milestone    |step     |[2]        |
+|verify milestone   |milestone    |step is  |Step 2     |
+***!
 !*** Verify Links
 !| script                                          |
 |verify link   |Safe Link|is present               |

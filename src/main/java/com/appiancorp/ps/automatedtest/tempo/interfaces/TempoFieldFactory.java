@@ -222,6 +222,8 @@ public class TempoFieldFactory extends AppianObject implements
       return TempoImageField.getInstance(settings);
     else if (TempoPickerField.isType(fieldLayout))
       return TempoPickerField.getInstance(settings);
+    else if (TempoMilestoneField.isType(fieldLayout))
+      return TempoMilestoneField.getInstance(settings);
     throw new IllegalArgumentException("Unrecognized field type");
   }
 
@@ -233,6 +235,8 @@ public class TempoFieldFactory extends AppianObject implements
       return TempoParagraphField.getInstance(settings);
     else if (fieldType.equals("FILE_UPLOAD"))
       return TempoFileUploadField.getInstance(settings);
+    else if (fieldType.equals("MILESTONE"))
+      return TempoMilestoneField.getInstance(settings);
     throw new IllegalArgumentException("Unrecognized field type");
   }
 }

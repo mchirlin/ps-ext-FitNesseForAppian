@@ -11,7 +11,7 @@ public abstract class AbstractTest {
   public static SitesFixture fixture;
 
   protected static String TEST_BROWSER = System.getenv("browser") == null ? "FIREFOX" : System.getenv("browser");
-  protected static String TEST_SITE_VERSION = System.getenv("version") == null ? "16.2" : System.getenv("version");
+  protected static String TEST_SITE_VERSION = System.getenv("version") == null ? "16.3" : System.getenv("version");
   protected static String TEST_SITE_URL;
   protected static String TEST_SITE_LOCALE = "en_US";
   protected static String TEST_ROLE = "role.basic_user";

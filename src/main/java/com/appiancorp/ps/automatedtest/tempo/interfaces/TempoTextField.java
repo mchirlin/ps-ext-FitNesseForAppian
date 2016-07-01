@@ -15,7 +15,7 @@ public class TempoTextField extends AbstractTempoField {
   private static final Logger LOG = Logger.getLogger(TempoTextField.class);
   private static final String XPATH_ABSOLUTE_TEXT_FIELD_LABEL = Settings.getByConstant("xpathAbsoluteTextFieldLabel");
   private static final String XPATH_ABSOLUTE_TEXT_FIELD_INDEX = Settings.getByConstant("xpathAbsoluteTextFieldIndex");
-  private static final String XPATH_ABSOLUTE_TEXT_FIELD_LABEL_INDEX = "(" + XPATH_ABSOLUTE_TEXT_FIELD_LABEL + ")[%d]";
+  private static final String XPATH_ABSOLUTE_TEXT_FIELD_LABEL_INDEX = "(" + XPATH_ABSOLUTE_TEXT_FIELD_LABEL + ")[%2$d]";
   private static final String XPATH_RELATIVE_TEXT_FIELD_INPUT = Settings.getByConstant("xpathRelativeTextFieldInput");
 
   public static TempoTextField getInstance(Settings settings) {
@@ -49,12 +49,12 @@ public class TempoTextField extends AbstractTempoField {
   public void waitFor(String... params) {
     String fieldName = params[0];
 
-    if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR [" + fieldName + "]");
+    if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR TEXT FIELD [" + fieldName + "]");
 
     try {
       (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
     } catch (Exception e) {
-      throw ExceptionBuilder.build(e, settings, "Wait for Field", fieldName);
+      throw ExceptionBuilder.build(e, settings, "Wait for Text Field", fieldName);
     }
   }
 

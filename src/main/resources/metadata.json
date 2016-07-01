@@ -23,117 +23,124 @@
     {
       "version": "7.10",
       "byConstants" : [
-        {"label": "xpathAbsoluteMenuLink", "value": "//a[starts-with(@class, 'appian-menu-item') and contains(text(),%1$s)]"},
-        {"label": "xpathAbsoluteSitePageLink", "value": "//li[contains(@title, %1$s)]/descendant::a"},
+        {"label": "xpathAbsoluteMenuLink", "value": "//a[starts-with(@class, 'appian-menu-item') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
+        {"label": "xpathAbsoluteSitePageLink", "value": "//li[contains(translate(@title,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]/descendant::a"},
         {"label": "xpathAbsoluteLoginAgreeButton", "value": "//form[@id = 'notification']/descendant::input[contains(@class, 'btn')]"},
         {"label": "xpathAbsoluteLoginSubmitButton", "value": "//form[@id = 'loginForm']/descendant::input[contains(@class, 'btn')]"},
         {"label": "xpathAbsoluteLogoutLink", "value": "//a[contains(text(),'Sign Out')]"},
         
         {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input"},
         {"label": "xpathAbsoluteFeedEntry", "value": "//div[contains(@class, 'appian-feed-entry')] | //table"},
-        {"label": "xpathAbsoluteError", "value": "//h1[contains(text(), 'Application Error')]"},
+        {"label": "xpathAbsoluteError", "value": "//h1[contains(text(), 'Application Error')] | //div[contains(@class, 'gwt-PopupPanel') and contains(@class, 'error')] "},
         {"label": "xpathAbsoluteWorking", "value": "//div[@class = 'appian-indicator-message']"},
         
-        {"label": "xpathAbsoluteNewsItem", "value": "//div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), %1$s)]"},
+        {"label": "xpathAbsoluteNewsItem", "value": "//div[starts-with(@class, 'appian-feed-entry-message') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]"},
         {"label": "xpathConcatNewsItemMoreInfoLink", "value": "/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(), 'More Info') or contains(text(), 'Hide Info')]"},
-        {"label": "xpathConcatNewsItemMoreInfoLabel", "value": "/following-sibling::table/descendant::td[contains(text(), %2$s)]"},
-        {"label": "xpathConcatNewsItemMoreInfoValue", "value": "/following-sibling::table/descendant::td[contains(text(), %2$s)]"},
-        {"label": "xpathConcatNewsItemRecordTag", "value": "/parent::div/descendant::a[contains(text(), %2$s)]"},
-        {"label": "xpathConcatNewsItemComment", "value": "/parent::div/descendant::div[starts-with(@class, 'appian-feed-entry-message') and contains(text(), %2$s)]"},
-        {"label": "xpathConcatNewsItemPostedAt", "value": "/parent::div/descendant::a[contains(text(), %2$s)]"},
-        {"label": "xpathConcatNewsItemDeleteLink", "value": "/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(), 'Delete')]"},
+        {"label": "xpathConcatNewsItemMoreInfoLabel", "value": "/following-sibling::table/descendant::td[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %2$s)]"},
+        {"label": "xpathConcatNewsItemMoreInfoValue", "value": "/following-sibling::table/descendant::td[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %2$s)]"},
+        {"label": "xpathConcatNewsItemRecordTag", "value": "/parent::div/descendant::a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %2$s)]"},
+        {"label": "xpathConcatNewsItemComment", "value": "/parent::div/descendant::div[starts-with(@class, 'appian-feed-entry-message') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %2$s)]"},
+        {"label": "xpathConcatNewsItemPostedAt", "value": "/parent::div/descendant::a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %2$s)]"},
+        {"label": "xpathConcatNewsItemDeleteLink", "value": "/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), 'Delete')]"},
         
-        {"label": "xpathAbsoluteTaskLink", "value": "//a[contains(@class, 'appian-feed-entry-author') and contains(text(), %1$s)]"},
-        {"label": "xpathAbsoluteTaskDeadline", "value": "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),%1$s)]/parent::span/following-sibling::div[contains(@class, 'metadata')]/descendant::span[contains(@title, 'deadline')]/span[text() = %2$s]"},
-        {"label": "xpathAbsoluteTaskReportLink", "value": "//a[span[contains(text(), %1$s)]]"},
+        {"label": "xpathAbsoluteTaskLink", "value": "//a[contains(@class, 'appian-feed-entry-author') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]"},
+        {"label": "xpathAbsoluteTaskDeadline", "value": "//a[contains(@class, 'appian-feed-entry-author') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div[contains(@class, 'metadata')]/descendant::span[contains(@title, 'deadline')]/span[text() = %2$s]"},
+        {"label": "xpathAbsoluteTaskReportLink", "value": "//a[span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]]"},
         
-        {"label": "xpathAbsoluteRecordTypeLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/view/all') and contains(text(),%1$s)]"},
-        {"label": "xpathAbsoluteRecordTypeUserFilterLink", "value": "//ol[@class='facetgroup']/descendant::a[contains(text(),%1$s)]"},
-        {"label": "xpathAbsoluteRecordLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/') and contains(text(),%1$s)]"},
-        {"label": "xpathAbsoluteRecordViewLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(text(),%1$s)]"},
-        {"label": "xpathAbsoluteRecordRelatedActionLink", "value": "//a[(starts-with(@class, 'aui-ActionLink') or starts-with(@class, 'gwt-Anchor')) and contains(text(),%1$s)]"},
+        {"label": "xpathAbsoluteRecordTypeLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/view/all') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
+        {"label": "xpathAbsoluteRecordTypeUserFilterLink", "value": "//ol[@class='facetgroup']/descendant::a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
+        {"label": "xpathAbsoluteRecordLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
+        {"label": "xpathAbsoluteRecordViewLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
+        {"label": "xpathAbsoluteRecordRelatedActionLink", "value": "//a[(starts-with(@class, 'aui-ActionLink') or starts-with(@class, 'gwt-Anchor')) and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
         
-        {"label": "xpathAbsoluteReportLink", "value": "//a[contains(@class, 'appian-feed-entry-author') and contains(text(),%1$s)]"},
+        {"label": "xpathAbsoluteReportLink", "value": "//a[contains(@class, 'appian-feed-entry-author') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
         
-        {"label": "xpathAbsoluteActionLink", "value": "//a[starts-with(@class, 'aui-ActionLink') and contains(text(),%1$s)]"},
-        {"label": "xpathAbsoluteActionsAppFilterLink", "value": "//ol[@class='facetgroup']/descendant::span[contains(text(),%1$s)]"},
+        {"label": "xpathAbsoluteActionLink", "value": "//a[starts-with(@class, 'aui-ActionLink') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
+        {"label": "xpathAbsoluteActionsAppFilterLink", "value": "//ol[@class='facetgroup']/descendant::span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
         
         {"label": "xpathAbsoluteFormTitle", "value": "//h2"},
         {"label": "xpathAbsoluteFormInstructions", "value": "//h2/following-sibling::p"},
         
-        {"label": "xpathAbsoluteFieldLayoutLabel", "value": "//span[starts-with(text(),%1$s)]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //label[starts-with(text(),%1$s)]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
+        {"label": "xpathAbsoluteFieldLayoutLabel", "value": "//*[starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::*/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
         {"label": "xpathAbsoluteFieldLayoutIndex", "value": "(//div[contains(@class, 'aui_FieldLayout_InputContainer')])[%1$d]"},
         {"label": "xpathConcatAncestorFieldLayout", "value": "/ancestor::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
         
-        {"label": "xpathAbsoluteButton", "value": "//button[contains(text(),%1$s) and not(contains(@class, 'button-disabled'))]"},
-        {"label": "xpathAbsoluteTextFieldLabel", "value": "//label[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::input"},
+        {"label": "xpathAbsoluteButton", "value": "//button[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s) and not(contains(@class, 'button-disabled'))]"},
+        {"label": "xpathAbsoluteTextFieldLabel", "value": "//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::input"},
         {"label": "xpathAbsoluteTextFieldIndex", "value": "(//input[contains(@class, 'aui-TextInput')])[%1$d]"},
         {"label": "xpathRelativeTextFieldInput", "value": ".//input[contains(@class, 'aui-TextInput')]"},
         
-        {"label": "xpathAbsoluteImageFieldLabel", "value": "//label[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::img"},
+        {"label": "xpathAbsoluteImageFieldLabel", "value": "//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::img"},
         {"label": "xpathAbsoluteImageFieldIndex", "value": "(//img[contains(@class, 'SafeImage')])[%1$d]"},
         {"label": "xpathRelativeImageFieldInput", "value": ".//img[contains(@class, 'SafeImage')]"},
         
-        {"label": "xpathAbsoluteIntegerFieldLabel", "value": "//label[contains(text(),%1$s)]/parent::span/following-sibling::div/div/input"},
+        {"label": "xpathAbsoluteIntegerFieldLabel", "value": "//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/div/input"},
         {"label": "xpathRelativeIntegerFieldInput", "value": ".//input[contains(@class, 'aui-TextInput')]"},
         
-        {"label": "xpathAbsoluteParagraphFieldLabel", "value": "//label[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::textarea"},
+        {"label": "xpathAbsoluteParagraphFieldLabel", "value": "//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::textarea"},
         {"label": "xpathAbsoluteParagraphFieldIndex", "value": "(//textarea[contains(@class, 'aui-TextAreaInput')])[%1$d]"},
         {"label": "xpathRelativeParagraphFieldInput", "value": ".//textarea[contains(@class, 'aui-TextAreaInput')]"},
         
-        {"label": "xpathAbsoluteCheckboxFieldLabel", "value": "//span[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::input[type='checkbox']"},
+        {"label": "xpathAbsoluteCheckboxFieldLabel", "value": "//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::input[type='checkbox']"},
         {"label": "xpathAbsoluteCheckboxFieldIndex", "value": "(//input[@type='checkbox'])[%1$d]"},
-        {"label": "xpathRelativeCheckboxFieldChoiceLabel", "value": ".//label[contains(text(), %1$s)]/preceding-sibling::input"},
+        {"label": "xpathRelativeCheckboxFieldChoiceLabel", "value": ".//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]/preceding-sibling::input"},
         {"label": "xpathRelativeCheckboxFieldChoiceIndex", "value": "(.//input[@type='checkbox'])[%1$d]"},
         {"label": "xpathRelativeCheckboxFieldInput", "value": ".//input[contains(@type, 'checkbox')]"},
         {"label": "xpathRelativeCheckboxFieldInputSpan", "value": ".//span[input[contains(@type, 'checkbox')]]"},
-        {"label": "xpathAbsoluteCheckboxFieldOption", "value": "//label[contains(text(), %1$s)]/preceding-sibling::input[@type='checkbox']"},
+        {"label": "xpathAbsoluteCheckboxFieldOption", "value": "//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]/preceding-sibling::input[@type='checkbox']"},
         
-        {"label": "xpathAbsoluteRadioFieldLabel", "value": "//span[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::input"},
-        {"label": "xpathRelativeRadioFieldChoiceLabel", "value": ".//label[contains(text(), %1$s)]/preceding-sibling::input"},
+        {"label": "xpathAbsoluteRadioFieldLabel", "value": "//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::input"},
+        {"label": "xpathRelativeRadioFieldChoiceLabel", "value": ".//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]/preceding-sibling::input"},
         {"label": "xpathRelativeRadioFieldChoiceIndex", "value": "(.//input[@type='radio'])[%1$d]"},
         {"label": "xpathRelativeRadioButtonGroup", "value": ".//div[contains(@class, 'RadioButtonGroup')]"},
         {"label": "xpathRelativeRadioFieldInputSpan", "value": ".//span[input[@type='radio']]"},
-        {"label": "xpathAbsoluteRadioFieldOption", "value": "//label[contains(text(), %1$s)]/preceding-sibling::input[@type='radio']"},
+        {"label": "xpathAbsoluteRadioFieldOption", "value": "//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]/preceding-sibling::input[@type='radio']"},
          
-        {"label": "xpathAbsoluteSelectFieldLabel", "value": "//span[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::div/select"},
-        {"label": "xpathAbsoluteSelectFieldIndex", "value": "//span[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::div/select"},
+        {"label": "xpathAbsoluteSelectFieldLabel", "value": "//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::div/select"},
+        {"label": "xpathAbsoluteSelectFieldIndex", "value": "//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::div/select"},
         {"label": "xpathRelativeSelectFieldInput", "value": ".//select"},
         
-        {"label": "xpathAbsoluteDateFieldInput", "value": "//label[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-DateInput-TextBox')]"},
+        {"label": "xpathAbsoluteDateFieldInput", "value": "//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-DateInput-TextBox')]"},
         {"label": "xpathRelativeDateFieldPlaceholder", "value": ".//input[contains(@class, 'aui-DateInput-Placeholder')]"},
         {"label": "xpathRelativeDateFieldInput", "value": ".//input[contains(@class, 'aui-DateInput-TextBox')]"},
         
-        {"label": "xpathAbsoluteDatetimeFieldDateInput", "value": "//span[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-DateInput-TextBox')]"},
+        {"label": "xpathAbsoluteDatetimeFieldDateInput", "value": "//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-DateInput-TextBox')]"},
         {"label": "xpathRelativeDatetimeFieldDatePlaceholder", "value": ".//input[contains(@class, 'aui-DateInput-Placeholder')]"},
         {"label": "xpathRelativeDatetimeFieldDateInput", "value": ".//input[contains(@class, 'aui-DateInput-TextBox')]"},
-        {"label": "xpathAbsoluteDatetimeFieldTimeInput", "value": "//span[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-TimeInput-TextBox')]"},
+        {"label": "xpathAbsoluteDatetimeFieldTimeInput", "value": "//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::input[contains(@class, 'aui-TimeInput-TextBox')]"},
         {"label": "xpathRelativeDatetimeFieldTimePlaceholder", "value": ".//input[contains(@class, 'aui-TimeInput-Placeholder')]"},
         {"label": "xpathRelativeDatetimeFieldTimeInput", "value": ".//input[contains(@class, 'aui-TimeInput-TextBox')]"},
         
-        {"label": "xpathAbsoluteFileUploadFieldLabel", "value": "//label[contains(text(),%1$s)]/parent::span/following-sibling::div/descendant::input"},
+        {"label": "xpathAbsoluteFileUploadFieldLabel", "value": "//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::input"},
         {"label": "xpathAbsoluteFileUploadFieldIndex", "value": "(//input[contains(@class, 'gwt-FileUpload')])[%1$d]"},
         {"label": "xpathRelativeFileUploadFieldInput", "value": ".//input[contains(@class, 'gwt-FileUpload')]"},
         {"label": "xpathRelativeFileUploadFieldFile", "value": ".//span[contains(@class, 'filename')]"},
         {"label": "xpathRelativeFileUploadFieldRemoveLink", "value": ".//a[starts-with(text(), 'Remove')]"},
         {"label": "xpathRelativeFileUploadFieldWaiting", "value": ".//div[contains(@class, 'prgbar-msg')]"},
         
-        {"label": "xpathAbsolutePickerLabel", "value": "//label[contains(text(),%1$s)]/parent::span"},
+        {"label": "xpathAbsolutePickerLabel", "value": "//label[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span"},
         {"label": "xpathRelativePickerInput", "value": ".//input[contains(@class, 'gwt-SuggestBox')]"},
-        {"label": "xpathAbsolutePickerSuggestion", "value": "//div[contains(@class, 'SuggestBoxPopup')]/descendant::p[contains(text(),%1$s)] | //div[contains(@class, 'SuggestBoxPopup')]/descendant::h2[contains(text(),%1$s)]"},
+        {"label": "xpathAbsolutePickerSuggestion", "value": "//div[contains(@class, 'SuggestBoxPopup')]/descendant::p[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)] | //div[contains(@class, 'SuggestBoxPopup')]/descendant::h2[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
         {"label": "xpathRelativePickerSelection", "value": ".//a[@title]"},
-        {"label": "xpathRelativePickerSpecificSelection", "value": "/descendant::a[contains(text(), %1$s)]"},
+        {"label": "xpathRelativePickerSpecificSelection", "value": "/descendant::a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
         {"label": "xpathRelativePickerSelectionRemoveLink", "value": ".//a/following-sibling::a"},
-        {"label": "xpathRelativePickerSpecificSelectionRemoveLink", "value": "//a[contains(text(), %1$s)]/following-sibling::a"},
+        {"label": "xpathRelativePickerSpecificSelectionRemoveLink", "value": "//a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/following-sibling::a"},
         {"label": "xpathRelativePickerSuggestBox", "value": "/descendant::input[contains(@class, 'SuggestBox')]"},
         
-        {"label": "xpathAbsoluteLinkField", "value": "//a[contains(text(),%1$s)] | //a//*[contains(text(),%1$s)]/.."},
+        {"label": "xpathAbsoluteMilestoneFieldLabel", "value": "//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::div[contains(text(), 'Step:')]"},
+        {"label": "xpathAbsoluteMilestoneFieldIndex", "value": "(//div[contains(text(), 'Step:')]/ancestor::ul)[%1$d]"},
+        {"label": "xpathRelativeMilestoneStepGeneral", "value": ".//descendant::div[contains(text(), 'Step:')]"},
+        {"label": "xpathRelativeMilestoneStepSelected", "value": ".//descendant::div[contains(@class, 'accessibilityhidden') and starts-with(text(), 'Current Step:')]/following-sibling::*[1]"},
+        {"label": "xpathRelativeMilestoneStep", "value": ".//descendant::*[starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
+        {"label": "xpathRelativeMilestoneStepIndex", "value": "(.//descendant::div[contains(@class, 'accessibilityhidden') and contains(text(), 'Step:')])[%1$d]/following-sibling::div/descendant::a"},
+        
+        {"label": "xpathAbsoluteLinkField", "value": "//a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)] | //a//*[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/.."},
          
         {"label": "xpathAbsoluteGridByIndex", "value": "((//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%1$d])"},
-        {"label": "xpathAbsoluteGridByLabel", "value": "//span[contains(text(),%1$s)]/parent::div/following-sibling::div/descendant::table"},
-        {"label": "xpathConcatCellByGridIndexColumnLabel", "value": "[descendant::th[descendant::*[text()=%2$s]]]/tbody/tr[%3$d]/td[count((//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%1$d]/descendant::th[descendant::*[text()=%2$s]]/preceding-sibling::th)+1]"},
-        {"label": "xpathConcatCellByGridLabelColumnLabel", "value": "[descendant::th[descendant::*[text()=%2$s]]]/tbody/tr[%3$d]/td[count(//span[contains(text(), %1$s)]/parent::div/following-sibling::div/descendant::th[descendant::*[text()=%2$s]]/preceding-sibling::th)+1]"},
-        {"label": "xpathConcatCellByGridLabelIndexColumnLabel", "value": "[descendant::th[descendant::*[text()=%3$s]]]/tbody/tr[%4$d]/td[count((//span[contains(text(),%1$s)]/parent::div/following-sibling::div/descendant::table)[%2$d]/descendant::th[descendant::*[text()=%3$s]]/preceding-sibling::th)+1]"},
+        {"label": "xpathAbsoluteGridByLabel", "value": "//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::table"},
+        {"label": "xpathConcatCellByGridIndexColumnLabel", "value": "[descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%2$s]]]/tbody/tr[%3$d]/td[count((//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%1$d]/descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%2$s]]/preceding-sibling::th)+1]"},
+        {"label": "xpathConcatCellByGridLabelColumnLabel", "value": "[descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%2$s]]]/tbody/tr[%3$d]/td[count(//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]/parent::div/following-sibling::div/descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%2$s]]/preceding-sibling::th)+1]"},
+        {"label": "xpathConcatCellByGridLabelIndexColumnLabel", "value": "[descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%3$s]]]/tbody/tr[%4$d]/td[count((//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::table)[%2$d]/descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%3$s]]/preceding-sibling::th)+1]"},
         {"label": "xpathConcatCellByColumnIndex", "value": "/tbody/tr[%2$d]/td[%3$d]"}, 
         {"label": "xpathConcatCellByGridLabelIndexColumnIndex", "value": "/tbody/tr[%3$d]/td[%4$d]"},      
         
@@ -144,24 +151,24 @@
         {"label": "xpathRelativeGridPreviousPageLink", "value": "./../..//img[contains(@aria-label, 'Previous page')]"},
         {"label": "xpathRelativeGridNextPageLink", "value": "./../..//img[contains(@aria-label, 'Next page')]"},
         {"label": "xpathRelativeGridLastPageLink", "value": "./../..//img[contains(@aria-label, 'Last page')]"},
-        {"label": "xpathRelativeGridColumnLink", "value": "./thead//a[contains(text(), %1$s)]"},
+        {"label": "xpathRelativeGridColumnLink", "value": "./thead//a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]"},
         {"label": "xpathRelativeGridSelectAllColumn", "value": "./thead//input[@type='checkbox']"},
 	    {"label": "xpathRelativeGridPagingLabel", "value": "./../..//div[contains(@class, 'gwt-HTML')]"},
         
         {"label": "xpathConditionSectionContains", "value": ""},
-        {"label": "xpathAbsoluteSectionFieldLayout", "value": "//h3[contains(text(),%1$s)]/parent::div/following-sibling::div/descendant::span[starts-with(text(),%2$s)]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //h3[contains(text(),%1$s)]/parent::div/following-sibling::div/descendant::label[starts-with(text(),%2$s)]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
-        {"label": "xpathAbsoluteSectionFieldLayoutIndex", "value": "//h3[contains(text(),%1$s)]/parent::div/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')][%2$d]"},
-        {"label": "xpathRelativeSectionValidationMessageSpecificValue", "value": "/descendant::p[contains(@class, 'validationMessage') and contains(text(), %1$s)]"},
+        {"label": "xpathAbsoluteSectionFieldLayout", "value": "//h3[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::*[starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%2$s)]/parent::*/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
+        {"label": "xpathAbsoluteSectionFieldLayoutIndex", "value": "//h3[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')][%2$d]"},
+        {"label": "xpathRelativeSectionValidationMessageSpecificValue", "value": "/descendant::p[contains(@class, 'validationMessage') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]"},
         {"label": "xpathRelativeSectionValidationMessage", "value": "./descendant::p[contains(@class, 'validationMessage')]"},
-        {"label": "xpathAbsoluteSectionLayout", "value": "//h3[contains(text(),%1$s)]/ancestor::div[contains(@class, 'aui-Section')]"},
+        {"label": "xpathAbsoluteSectionLayout", "value": "//h3[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/ancestor::div[contains(@class, 'aui-Section')]"},
         {"label": "xpathRelativeSectionToggle", "value": ".//a[contains(@title, 'Collapse') or contains(@title, 'Expand')]"},
         
         {"label": "xpathRelativeReadOnlyField", "value": ".//p[contains(@class, 'readonly')] | div[ancestor::div[contains(@class, 'DataGrid-Container')]]"},
         
-        {"label": "xpathRelativeFieldValidationMessageSpecificValue", "value": "/ancestor::div[contains(@class, 'aui_FieldLayout')]/descendant::p[contains(@class, 'component_error') and contains(text(), %1$s)]"},
+        {"label": "xpathRelativeFieldValidationMessageSpecificValue", "value": "/ancestor::div[contains(@class, 'aui_FieldLayout')]/descendant::p[contains(@class, 'component_error') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]"},
         {"label": "xpathRelativeFieldValidationMessage", "value": "./ancestor::div[contains(@class, 'aui_FieldLayout')]/descendant::p[contains(@class, 'component_error')]"},
            
-        {"label": "xpathAbsoluteChartLabel", "value": "//span[contains(text(),%1$s)]"}   ,
+        {"label": "xpathAbsoluteChartLabel", "value": "//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"}   ,
         
         {"label": "xpathAbsoluteSaveChanges", "value": "//a[contains(@class,'appian-form-close') and contains(text(), 'Save Changes')]"},
         {"label": "xpathAbsoluteFormSavedConfirmation", "value": "//div[@id='inlineConfirmMessage' and contains(text(), 'Form saved successfully')]"}
@@ -171,11 +178,11 @@
     {
       "version": "16.1",
       "byConstants" : [
-        {"label": "xpathAbsoluteRecordLink", "value": "//a[contains(@href, '/suite/tempo/records/item/') and contains(@href, '/view/summary') and contains(text(),%1$s)]"},
+        {"label": "xpathAbsoluteRecordLink", "value": "//a[contains(@href, '/suite/tempo/records/item/') and contains(@href, '/view/summary') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
         
         {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input | //div[contains(@class, 'filters')]/descendant::input[@type='text']"},
         
-        {"label": "xpathAbsoluteRecordGridColumnSortLink", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/thead//a[text()=%1$s]"},
+        {"label": "xpathAbsoluteRecordGridColumnSortLink", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/thead//a[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%1$s]"},
         {"label": "xpathAbsoluteRecordGridNavigationFirst", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[@title='First']"},
         {"label": "xpathAbsoluteRecordGridNavigationPrevious", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[text()='Previous']"},
         {"label": "xpathAbsoluteRecordGridNavigationNext", "value": "//div[contains(@class, 'DataGrid-Table')]/descendant::table/tfoot//a[text()='Next']"},
@@ -183,10 +190,14 @@
       ]
     },
     { "version": "16.2", "byConstants": [
-    	{"label": "xpathAbsoluteRecordLink", "value": "//a[contains(@href, '/view/summary') and contains(text(),%s)]"},
-        {"label": "xpathAbsoluteRecordViewLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(text(),%1$s)] | //a[contains(@href, '/sites/') and contains(@href, '/view/') and contains(text(),%1$s)]"}
+    	{"label": "xpathAbsoluteRecordLink", "value": "//a[contains(@href, '/view/summary') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%s)]"},
+        {"label": "xpathAbsoluteRecordViewLink", "value": "//a[starts-with(@href, '/suite/tempo/records/type') and contains(@href, '/item/')]/span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)] | //a[contains(@href, '/sites/') and contains(@href, '/view/') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"}
         
 	  ]
+    },
+    { "version": "16.3", "byConstants": [
+    	{"label": "xpathAbsoluteSaveChanges", "value": "//div[contains(@class, 'task_controls')]/descendant::button[contains(text(), 'Save')]"}
+      ]
     }
   ]
 }
