@@ -97,6 +97,7 @@
 | get field | FIELD_LABEL or FIELD_LABEL[INDEX] | in section | SECTION_NAME | value | 					: Use with FitNesse keyword 'check' to verify values runtime variables
 | get field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | validation message |					: Returns the validation messages from a field. Multiple messages will be concatenated with a comma.
 | get link | LINK_NAME or LINK_NAME[INDEX] | url |														: Returns the linkUrl
+| get milestone | MILESTONE_NAME or MILESTONE_NAME[INDEX] or [MILESTONE_INDEX] | step |					: Returns the current step of the milestone.
 | get grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | value | : Get the value from a grid cell.
 | get grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | total count |															: Returns the stored total count
 | get grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | row count |															: Returns the stored grid current page row count
@@ -112,14 +113,18 @@
 | verify field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | contains validation message | VALIDATION_MESSAGE(S) |	: Verify field with label contains a specific validation message
 | verify link | LINK_NAME or LINK_NAME[INDEX] | is present |										: Verify link field is present.
 | verify link | LINK_NAME or LINK_NAME[INDEX] | URL contains | URL_TEXT |								: Verify link field's URL contains specific text.
+| verify milestone | MILESTONE_LABEL OR MILESTONE_LABEL[INDEX] or [MILESTONE_INDEX] | step is | STEP |	: Verify a milestone is at a particular step.
 | verify button | BUTTON_NAME or BUTTON_NAME[INDEX] | is present |										: Verify button with label is present
 | verify button | BUTTON_NAME or BUTTON_NAME[INDEX] | is not present |									: Verify button with label is not present
 | verify section | SECTION_NAME | contains validation message | VALIDATION_MESSAGE(S) |					: Verify section with label contains a specific validation message
 | verify grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | contains | VALUE(S) |	: Verify a grid field contains a value (Column and Row Numbers should be in square brackets [])
 | verify grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | row | [ROW_INDEX] | is selected | 		: Verifies if row in grid is selected (Row Numbers should be in square brackets [])
+| verify chart | CHART_LABEL | is present |																: Verifies a chart with given label is present
+| verify chart | CHART_LABEL | is not present |															: Verifies a chart with given label is not present
 | click on save changes |																				: Clicks on the save changes link.
 | click on button | BUTTON_NAME or BUTTON_NAME[INDEX] | 												: Clicks on button
 | click on link | LINK_NAME or LINK_NAME[INDEX] | 														: Clicks on a link.
+| click on milestone | MILESTONE_NAME or MILESTONE_NAME[INDEX] or [MILESTONE_INDEX] | step | STEP |		: Clicks on a milestone step.
 | click on radio option | RADIO_OPTION or RADIO_OPTION[INDEX] | 										: Selects a radio option
 | click on checkbox option | CHECKBOX_OPTION or CHECKBOX_OPTION[INDEX] | 								: Checks on the first checkbox with the given choice label
 | click on grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | add row link | 						: Can use gridName, gridIndex, or gridName[index] 
@@ -129,8 +134,6 @@
 | select all rows in grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] |								: Select all rows in a grid.  Can also be used to de-select all rows
 | sort grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | by | COLUMN_NAME | 						: Sorts grid by column name
 | count grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | rows |									: Count rows in an editable or paging grid.
-| verify chart | CHART_LABEL | is present |																: Verifies a chart with given label is present
-| verify chart | CHART_LABEL | is not present |															: Verifies a chart with given label is not present
 ]!
 
 !3 SITES METHODS

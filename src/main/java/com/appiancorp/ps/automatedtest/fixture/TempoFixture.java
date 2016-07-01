@@ -2,6 +2,7 @@ package com.appiancorp.ps.automatedtest.fixture;
 
 import org.apache.log4j.Logger;
 
+import com.appiancorp.ps.automatedtest.tempo.TempoError;
 import com.appiancorp.ps.automatedtest.tempo.TempoLogin;
 import com.appiancorp.ps.automatedtest.tempo.TempoMenu;
 import com.appiancorp.ps.automatedtest.tempo.TempoSearch;
@@ -26,6 +27,7 @@ import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoGridSelectAll;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoGridTotalCount;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoLinkField;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoLinkFieldUrl;
+import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoMilestoneFieldStep;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoRadioFieldOption;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoSaveChanges;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoSection;
@@ -1464,6 +1466,52 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
+   * Clicks on a milestone step.<br>
+   * <br>
+   * FitNesse Example: <code>| click on milestone | MILESTONE or MILESTONE[INDEX] | step | STEP or [INDEX] |</code>
+   * 
+   * @param milestone
+   *          Name or Name[Index] of milestone
+   * @param step
+   *          Name or [Index] of step
+   */
+  public void clickOnMilestoneStep(String milestone, String step) {
+    TempoFieldFactory.getInstance(settings).waitFor("MILESTONE", milestone);
+    TempoMilestoneFieldStep.getInstance(settings).click(milestone, step);
+  }
+
+  /**
+   * Verifies if a milestone is currently on a particular step.<br>
+   * <br>
+   * FitNesse Example: <code>| verify milestone | MILESTONE or MILESTONE[INDEX] | step is | STEP or [INDEX] |</code>
+   * 
+   * @param milestone
+   *          Name or Name[Index] of milestone
+   * @param step
+   *          Name or [Index] of step
+   * @return True, if the current step matches
+   */
+  public boolean verifyMilestoneStepIs(String milestone, String[] step) {
+    TempoFieldFactory.getInstance(settings).waitFor(milestone);
+    TempoFieldFactory.getInstance(settings).containsMultiple(step, milestone);
+    return true;
+  }
+
+  /**
+   * Verifies if a milestone is currently on a particular step.<br>
+   * <br>
+   * FitNesse Example: <code>| get milestone | MILESTONE or MILESTONE[INDEX] | step |</code>
+   * 
+   * @param milestone
+   *          Name or Name[Index] of milestone
+   * @return Milestone step
+   */
+  public String getMilestoneStep(String milestone) {
+    TempoFieldFactory.getInstance(settings).waitFor(milestone);
+    return TempoFieldFactory.getInstance(settings).capture(milestone);
+  }
+
+  /**
    * Clicks on the first radio option that matches the optionName. This is useful if the radio field does not have a label.<br>
    * <br>
    * FitNesse Example: <code>| click on radio option | OPTION_NAME |</code> <code>| click on radio option | OPTION_NAME[INDEX] |</code>
@@ -1556,4 +1604,12 @@ public class TempoFixture extends BaseFixture {
     return !TempoChart.getInstance(settings).waitForReturn(chartLabel);
   }
 
+  /**
+   * Returns true if there is an error on tempo
+   * 
+   * @return
+   */
+  public boolean errorIsPresent() {
+    return TempoError.getInstance(settings).waitForReturn();
+  }
 }

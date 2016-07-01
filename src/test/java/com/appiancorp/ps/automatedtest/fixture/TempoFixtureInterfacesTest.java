@@ -475,6 +475,23 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
     // assertTrue(fixture.verifyFieldContains("UserPicker", new String[]{""}));
   }
 
+  /**** Milestone Field ****/
+  @Test
+  public void testMilestoneField() throws Exception {
+    assertTrue(fixture.verifyFieldIsPresent("Milestone"));
+
+    Assume.assumeTrue(atLeastVersion(7.11));
+
+    fixture.clickOnMilestoneStep("Milestone", "Step 1");
+    assertTrue(fixture.verifyMilestoneStepIs("Milestone", new String[] { "Step 1" }));
+    assertEquals("Step 1", fixture.getMilestoneStep("Milestone"));
+
+    fixture.clickOnMilestoneStep("Milestone[1]", "[2]");
+    assertTrue(fixture.verifyMilestoneStepIs("Milestone", new String[] { "Step 2" }));
+
+    fixture.clickOnMilestoneStep("[1]", "[4]");
+  }
+
   /**** Link Field ****/
 
   @Test
@@ -732,6 +749,9 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
   @Test
   public void testSaveChanges() throws Exception {
     fixture.clickOnSaveChanges();
+    if (fixture.errorIsPresent()) {
+      fixture.clickOnButton("OK");
+    }
   }
 
   @AfterClass

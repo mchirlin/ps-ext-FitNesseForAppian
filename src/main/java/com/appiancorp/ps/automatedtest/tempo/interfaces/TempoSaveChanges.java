@@ -51,7 +51,7 @@ public class TempoSaveChanges extends AppianObject implements WaitFor, Clickable
     try {
       WebElement saveChanges = settings.getDriver().findElement(By.xpath(getXpath(params)));
       clickElement(saveChanges);
-      complete();
+      // complete();
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Click Save Changes");
     }
@@ -60,7 +60,7 @@ public class TempoSaveChanges extends AppianObject implements WaitFor, Clickable
   @Override
   public boolean complete(String... params) {
     try {
-      (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(
+      (new WebDriverWait(settings.getDriver(), settings.getNotPresentTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(
         By.xpath(XPATH_ABSOLUTE_FORM_SAVED_CONFIRMATION)));
     } catch (Exception e) {
       return false;

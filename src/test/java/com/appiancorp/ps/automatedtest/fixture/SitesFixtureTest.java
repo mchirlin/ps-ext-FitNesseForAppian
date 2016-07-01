@@ -49,16 +49,5 @@ public class SitesFixtureTest extends AbstractLoginTest {
     fixture.clickOnRecordGridNavigation("Previous");
     fixture.clickOnRecordGridNavigation("Next");
     fixture.clickOnRecordGridNavigation("First");
-    fixture.searchFor("rYZZk");
-    fixture.clickOnRecord("rYZZk");
-
-    fixture.clickOnRecordRelatedAction("AUT Data Input Test");
-    fixture.clickOnButton("Cancel");
-
-    fixture.clickOnRecordView("Related Actions");
-    fixture.clickOnRecordRelatedAction("AUT Data Input Test");
-    fixture.clickOnButton("Cancel");
-
   }
-
 }

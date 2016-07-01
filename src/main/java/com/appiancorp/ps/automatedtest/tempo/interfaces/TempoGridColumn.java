@@ -35,5 +35,4 @@ public class TempoGridColumn extends TempoGrid implements Clickable {
       throw ExceptionBuilder.build(e, settings, "Sort Grid", columnName);
     }
   }
-
 }

@@ -24,18 +24,18 @@
       "version": "7.10",
       "byConstants" : [
         {"label": "xpathAbsoluteMenuLink", "value": "//a[starts-with(@class, 'appian-menu-item') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
-        {"label": "xpathAbsoluteSitePageLink", "value": "//li[contains(@title, %1$s)]/descendant::a"},
+        {"label": "xpathAbsoluteSitePageLink", "value": "//li[contains(translate(@title,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]/descendant::a"},
         {"label": "xpathAbsoluteLoginAgreeButton", "value": "//form[@id = 'notification']/descendant::input[contains(@class, 'btn')]"},
         {"label": "xpathAbsoluteLoginSubmitButton", "value": "//form[@id = 'loginForm']/descendant::input[contains(@class, 'btn')]"},
         {"label": "xpathAbsoluteLogoutLink", "value": "//a[contains(text(),'Sign Out')]"},
         
         {"label": "xpathAbsoluteSearchField", "value": "//div[contains(@class, 'appian-tempo-search')]/descendant::input"},
         {"label": "xpathAbsoluteFeedEntry", "value": "//div[contains(@class, 'appian-feed-entry')] | //table"},
-        {"label": "xpathAbsoluteError", "value": "//h1[contains(text(), 'Application Error')]"},
+        {"label": "xpathAbsoluteError", "value": "//h1[contains(text(), 'Application Error')] | //div[contains(@class, 'gwt-PopupPanel') and contains(@class, 'error')] "},
         {"label": "xpathAbsoluteWorking", "value": "//div[@class = 'appian-indicator-message']"},
         
         {"label": "xpathAbsoluteNewsItem", "value": "//div[starts-with(@class, 'appian-feed-entry-message') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]"},
-        {"label": "xpathConcatNewsItemMoreInfoLink", "value": "/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), 'More Info') or contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), 'Hide Info')]"},
+        {"label": "xpathConcatNewsItemMoreInfoLink", "value": "/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(), 'More Info') or contains(text(), 'Hide Info')]"},
         {"label": "xpathConcatNewsItemMoreInfoLabel", "value": "/following-sibling::table/descendant::td[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %2$s)]"},
         {"label": "xpathConcatNewsItemMoreInfoValue", "value": "/following-sibling::table/descendant::td[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %2$s)]"},
         {"label": "xpathConcatNewsItemRecordTag", "value": "/parent::div/descendant::a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %2$s)]"},
@@ -61,7 +61,7 @@
         {"label": "xpathAbsoluteFormTitle", "value": "//h2"},
         {"label": "xpathAbsoluteFormInstructions", "value": "//h2/following-sibling::p"},
         
-        {"label": "xpathAbsoluteFieldLayoutLabel", "value": "//span[starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //label[starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
+        {"label": "xpathAbsoluteFieldLayoutLabel", "value": "//*[starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::*/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
         {"label": "xpathAbsoluteFieldLayoutIndex", "value": "(//div[contains(@class, 'aui_FieldLayout_InputContainer')])[%1$d]"},
         {"label": "xpathConcatAncestorFieldLayout", "value": "/ancestor::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
         
@@ -127,11 +127,18 @@
         {"label": "xpathRelativePickerSpecificSelectionRemoveLink", "value": "//a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/following-sibling::a"},
         {"label": "xpathRelativePickerSuggestBox", "value": "/descendant::input[contains(@class, 'SuggestBox')]"},
         
+        {"label": "xpathAbsoluteMilestoneFieldLabel", "value": "//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::div[contains(text(), 'Step:')]"},
+        {"label": "xpathAbsoluteMilestoneFieldIndex", "value": "(//div[contains(text(), 'Step:')]/ancestor::ul)[%1$d]"},
+        {"label": "xpathRelativeMilestoneStepGeneral", "value": ".//descendant::div[contains(text(), 'Step:')]"},
+        {"label": "xpathRelativeMilestoneStepSelected", "value": ".//descendant::div[contains(@class, 'accessibilityhidden') and starts-with(text(), 'Current Step:')]/following-sibling::*[1]"},
+        {"label": "xpathRelativeMilestoneStep", "value": ".//descendant::*[starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]"},
+        {"label": "xpathRelativeMilestoneStepIndex", "value": "(.//descendant::div[contains(@class, 'accessibilityhidden') and contains(text(), 'Step:')])[%1$d]/following-sibling::div/descendant::a"},
+        
         {"label": "xpathAbsoluteLinkField", "value": "//a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)] | //a//*[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/.."},
          
         {"label": "xpathAbsoluteGridByIndex", "value": "((//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%1$d])"},
         {"label": "xpathAbsoluteGridByLabel", "value": "//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::table"},
-        {"label": "xpathConcatCellByGridIndexColumnLabel", "value": "[descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%2$s]]]/tbody/tr[%3$d]/td[count((//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%1$d]/descendant::th[descendant::*[text()=%2$s]]/preceding-sibling::th)+1]"},
+        {"label": "xpathConcatCellByGridIndexColumnLabel", "value": "[descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%2$s]]]/tbody/tr[%3$d]/td[count((//div[contains(@class, 'DataGrid-Table')]/descendant::table)[%1$d]/descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%2$s]]/preceding-sibling::th)+1]"},
         {"label": "xpathConcatCellByGridLabelColumnLabel", "value": "[descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%2$s]]]/tbody/tr[%3$d]/td[count(//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]/parent::div/following-sibling::div/descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%2$s]]/preceding-sibling::th)+1]"},
         {"label": "xpathConcatCellByGridLabelIndexColumnLabel", "value": "[descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%3$s]]]/tbody/tr[%4$d]/td[count((//span[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::table)[%2$d]/descendant::th[descendant::*[translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')=%3$s]]/preceding-sibling::th)+1]"},
         {"label": "xpathConcatCellByColumnIndex", "value": "/tbody/tr[%2$d]/td[%3$d]"}, 
@@ -149,7 +156,7 @@
 	    {"label": "xpathRelativeGridPagingLabel", "value": "./../..//div[contains(@class, 'gwt-HTML')]"},
         
         {"label": "xpathConditionSectionContains", "value": ""},
-        {"label": "xpathAbsoluteSectionFieldLayout", "value": "//h3[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::span[starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%2$s)]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')] | //h3[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::label[starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%2$s)]/parent::span/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
+        {"label": "xpathAbsoluteSectionFieldLayout", "value": "//h3[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::*[starts-with(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%2$s)]/parent::*/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')]"},
         {"label": "xpathAbsoluteSectionFieldLayoutIndex", "value": "//h3[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::div/following-sibling::div/descendant::div[contains(@class, 'aui_FieldLayout_InputContainer')][%2$d]"},
         {"label": "xpathRelativeSectionValidationMessageSpecificValue", "value": "/descendant::p[contains(@class, 'validationMessage') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]"},
         {"label": "xpathRelativeSectionValidationMessage", "value": "./descendant::p[contains(@class, 'validationMessage')]"},
@@ -188,6 +195,9 @@
         
 	  ]
     },
-    { "version": "16.3", "byConstants": [] }
+    { "version": "16.3", "byConstants": [
+    	{"label": "xpathAbsoluteSaveChanges", "value": "//div[contains(@class, 'task_controls')]/descendant::button[contains(text(), 'Save')]"}
+      ]
+    }
   ]
 }
