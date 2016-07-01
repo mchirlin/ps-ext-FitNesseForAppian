@@ -27,6 +27,7 @@ import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoGridTotalCount;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoLinkField;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoLinkFieldUrl;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoRadioFieldOption;
+import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoSaveChanges;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoSection;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoSectionField;
 import com.appiancorp.ps.automatedtest.tempo.interfaces.TempoSectionToggle;
@@ -233,8 +234,7 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.
-   * <br>
+   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed. <br>
    * <br>
    * FitNesse Example:
    * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |</code>
@@ -498,8 +498,7 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.
-   * <br>
+   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly. <br>
    * <br>
    * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is present |</code>
    * 
@@ -991,8 +990,8 @@ public class TempoFixture extends BaseFixture {
    * FitNesse Examples:<br>
    * <code>| verify field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | contains | VALUES() |</code> - For
    * date and datetime fields, relative times can be entered such as +1 minute, +2 hours, +3 days. To use these relative times, the
-   * startDatetime must be initialized: see {@link com.appiancorp.ps.automatedtest.fixture.BaseFixture#setStartDatetime()}
-   * Image fields return the alt text of the image.
+   * startDatetime must be initialized: see {@link com.appiancorp.ps.automatedtest.fixture.BaseFixture#setStartDatetime()} Image fields
+   * return the alt text of the image.
    * 
    * @param fieldName
    *          Can either be a name or a name and index, e.g. 'Text Field' or 'Text Field[1]'
@@ -1449,6 +1448,19 @@ public class TempoFixture extends BaseFixture {
    */
   public boolean verifyButtonIsNotPresent(String buttonName) {
     return !TempoButton.getInstance(settings).waitForReturn(settings.getNotPresentTimeoutSeconds(), buttonName);
+  }
+
+  /**
+   * Clicks on the save changes link.<br>
+   * <br>
+   * FitNesse Example: <code>| click on button | BUTTON_NAME or BUTTON_NAME[INDEX] |</code>
+   * 
+   * @param buttonName
+   *          Name of button to click
+   */
+  public void clickOnSaveChanges() {
+    TempoSaveChanges.getInstance(settings).waitFor();
+    TempoSaveChanges.getInstance(settings).click();
   }
 
   /**
