@@ -1138,6 +1138,25 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
+   * Populates a grid field with a single value that may contain a comma. This is useful is selecting an option that contains a comma.<br>
+   * <br>
+   * FitNesse Example:
+   * <code>populate grid | GRID_NAME or GRID_NAME[INDEX] or [GRID_INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | with value | VALUE |</code>
+   * 
+   * @param gridName
+   *          Name of grid
+   * @param columnName
+   *          Name or index of the column
+   * @param rowNum
+   *          Index of the row
+   * @param fieldValue
+   *          Value to populate
+   */
+  public void populateGridColumnRowWithValue(String gridName, String columnName, String rowNum, String fieldValue) {
+    populateGridColumnRowWith(gridName, columnName, rowNum, new String[] { fieldValue });
+  }
+
+  /**
    * Returns the value of a field.<br>
    * <br>
    * FitNesse Examples:<br>
@@ -1205,6 +1224,28 @@ public class TempoFixture extends BaseFixture {
   public boolean verifyGridColumnRowContains(String gridName, String columnName, String rowNum, String[] fieldValues) {
     TempoGridCell.getInstance(settings).waitFor(gridName, columnName, rowNum);
     return TempoGridCell.getInstance(settings).containsMultiple(fieldValues, gridName, columnName, rowNum);
+  }
+
+  /**
+   * Verifies a grid field with a single value that may contain a comma. This is useful in verifying that an option that contains a comma
+   * has
+   * been selected.<br>
+   * <br>
+   * FitNesse Example:
+   * <code>| verify grid | GRID_NAME or GRID_NAME[INDEX] or [GRID_INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | contains value | VALUE |</code>
+   * 
+   * @param gridName
+   *          Name of the grid
+   * @param columnName
+   *          Name or index of the column
+   * @param rowNum
+   *          Index of the row
+   * @param fieldValue
+   *          Field value, can contain a comma.
+   * @return True, if fields contains value
+   */
+  public boolean verifyGridColumnRowContainsValue(String gridName, String columnName, String rowNum, String fieldValue) {
+    return verifyGridColumnRowContains(gridName, columnName, rowNum, new String[] { fieldValue });
   }
 
   /**
