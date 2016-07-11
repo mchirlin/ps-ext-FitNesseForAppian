@@ -132,7 +132,7 @@
 | toggle section | SECTION_NAME | visibility |															: Toggles visibility of section
 | select grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | row | [ROW_INDEX] | 					: Selects row in grid (Row Numbers should be in square brackets [])
 | select all rows in grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] |								: Select all rows in a grid.  Can also be used to de-select all rows
-| sort grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | by | COLUMN_NAME | 						: Sorts grid by column name
+| sort grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | by column | COLUMN_NAME | 						: Sorts grid by column name
 | count grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | rows |									: Count rows in an editable or paging grid.
 ]!
 
