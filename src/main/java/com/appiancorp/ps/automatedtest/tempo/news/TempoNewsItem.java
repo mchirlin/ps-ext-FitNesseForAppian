@@ -2,6 +2,7 @@ package com.appiancorp.ps.automatedtest.tempo.news;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,6 +20,7 @@ public class TempoNewsItem extends AppianObject implements Refreshable, Clearabl
 
   private static final Logger LOG = Logger.getLogger(TempoNewsItem.class);
   protected static final String XPATH_ABSOLUTE_NEWS_ITEM = Settings.getByConstant("xpathAbsoluteNewsItem");
+  protected static final String XPATH_ABSOLUTE_DELETE_LINK = Settings.getByConstant("xpathAbsoluteDeleteLink");
   private static final String XPATH_ABSOLUTE_NEWS_ITEM_DELETE_LINK = XPATH_ABSOLUTE_NEWS_ITEM +
     Settings.getByConstant("xpathConcatNewsItemDeleteLink");
 
@@ -101,6 +103,23 @@ public class TempoNewsItem extends AppianObject implements Refreshable, Clearabl
       waitForWorking();
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "News Item delete", newsText);
+    }
+  }
+
+  public void clearAll(String... params) {
+    try {
+      WebElement element = settings.getDriver().findElement(By.xpath(XPATH_ABSOLUTE_DELETE_LINK));
+
+      while (element != null) {
+        clickElement(element);
+        TempoButton.getInstance(settings).click("Yes");
+
+        element = settings.getDriver().findElement(By.xpath("//a[contains(text(), 'Delete')]"));
+      }
+    } catch (NoSuchElementException e) {
+      LOG.debug("No tempo messages remain for this user");
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, settings, "Delete all news items");
     }
   }
 
