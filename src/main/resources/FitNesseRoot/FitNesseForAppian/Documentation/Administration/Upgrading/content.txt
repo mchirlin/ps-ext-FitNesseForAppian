@@ -1,0 +1,8 @@
+1. I wanted to make you aware of some of the issues I ran into when updating to 1.2.6. These were not specified in the shared component download page, so they were discovered one by one using trial and error (though they are small changes, they definitely increased the dificulty of the upgrade):
+- default folder name have changed (directory is no longer defaulted to AutomatedTesting, it is FitNesseForAppian)
+- Folder names for documentation and cheat sheet has changed (this means that any customization of the FrontPage needs to be merged with the new FrontPage so that the links there will point to the new locations)
+- variables that need to be defined have changed (I had previously added this to a few additional linked pages to fix some bugs, so I had to go and update with the new TEST_SYSTEM, COMMAND_PATTERN, and path in these places).  
+
+2. An issue that was previously reported (and I think was no longer occurring in the old version of fitnesse) has re-appeared. In the test script I have attached, cannot populate the column "Date of consultation" by calling the column by name. This column is populated correctly if the script is changed to populate column [1] instead.
+
+Note: I have not checked anything with the new jar file yet, I will update you once I have run that test.

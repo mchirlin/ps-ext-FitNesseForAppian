@@ -1,0 +1,13 @@
+!2 Change ''!-FitNesseForAppian-!'' Wiki Directory
+The default root directory (the location used for loading FitNesse wikis) is ${automated.testing.home}.  This can be updated by following these steps:
+
+ 1 Open ${automated.testing.home}/fitnesse.properties in a text editor.
+ 1 Update !-FitNesseRootDir-! to refer to the repository containing the !-FitNesseRoot-! folder.  This folder contains the contents of the test scripts within !-FitNesse-!.
+ 1 Update !-FitNesseRoot-! to refer to the folder name containing the wikis. 
+  * !img http://files/images/FitNesse-Properties.png
+ 1 Next time you use ${automated.testing.home}\start.bat the wikis will be pulled directly from the repo folders.
+  * !img http://files/images/FitNesse-Start.png
+   
+'''Note:''' If on Windows make sure to escape backslashes, e.g. C:\\FitNesseForAppian rather than C:\FitNesseForAppian
+
+Add something about needing to leave a space (or just fix this!)

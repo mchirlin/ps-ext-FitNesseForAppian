@@ -1,0 +1,14 @@
+Turn off automatic updating for FitNesse test browsers --- selenium reasons
+
+!3 Firefox
+Firefox version
+*Version of Firefox*
+
+Failed to connect to binary FirefoxBinary(C:\Program Files\Mozilla Firefox\firefox.exe) on port 7055
+
+Revert back
+
+!3 Chrome
+
+!3 IE
+https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver

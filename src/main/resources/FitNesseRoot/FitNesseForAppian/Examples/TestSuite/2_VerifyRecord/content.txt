@@ -1,0 +1,9 @@
+!*** Verify Newly Created Record
+!| script                                          |
+|click on menu       |Records                      |
+|click on record type|Support Tickets              |
+|click on record     |tv!title                     |
+|verify field        |title   |contains|tv!title   |
+|verify field        |status  |contains|In Progress|
+|verify field        |priority|contains|High       |
+***!

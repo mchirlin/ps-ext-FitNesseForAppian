@@ -1,0 +1,56 @@
+#GeneralInterest 
+#AppianFitNesse
+
+I am facing problem when I am trying to login into the Appian Server using Appian FitNesse.
+I am using Internet Explorer browser to login into the Appian Server.
+Please refer the attached Appian FitNesse script.
+
+I have attached the complete error stack trace but I would like to highlight few lines from that below.
+
+2016-07-14 14:04:35,606 [main] ERROR com.appiancorp.ps.automatedtest.exception.ExceptionBuilder - Login
+org.openqa.selenium.TimeoutException: Timed out after 30 seconds waiting for presence of element located by: By.xpath: //form[@id = 'loginForm']/descendant::input[contains(@class, 'btn')]
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824', time: '2016-03-15 10:43:46'
+System info: host: 'ID-0870', ip: '10.1.1.6', os.name: 'Windows 8.1', os.arch: 'x86', os.version: '6.3', java.version: '1.8.0_92'
+Driver info: org.openqa.selenium.ie.InternetExplorerDrive...
+
+...r
+Capabilities [{browserAttachTimeout=0, ie.enableFullPageScreenshot=true, enablePersistentHover=true, ie.forceCreateProcessApi=false, ie.forceShellWindowsApi=false, pageLoadStrategy=normal, ignoreZoomSetting=false, ie.fileUploadDialogTimeout=3000, version=11, platform=WINDOWS, proxy={proxyType=}, nativeEvents=true, ie.ensureCleanSession=true, elementScrollBehavior=0, ie.browserCommandLineSwitches=, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:16537/, javascriptEnabled=true, ignoreProtectedModeSettings=false, enableElementCacheCleanup=true, unexpectedAlertBehaviour=dismiss}]
+Session ID: 81048091-72c3-4365-a9fb-1d1b5efbffcf
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:261)
+at com.appiancorp.ps.automatedtest.tempo.TempoLogin.waitForLogin(TempoLogin.java:83)
+at com.appiancorp.ps.automatedtest.fixture.BaseFixtur...
+...e.loginIntoWithUsernameAndPassword(BaseFixture.java:264)
+at com.appiancorp.ps.automatedtest.fixture.BaseFixture.loginWithUsernameAndPassword(BaseFixture.java:280)
+
+From the error stack trace above we can assume that it is looking for a particular xpath which it is not able to find and it is throwing the exception. It is hitting the appian tempo URL and not able to log in.
+The same scenario is working fine in Firefox browser.
+
+Just to share some additional information, there was one instance where I found that my windows firewall was blocking some features of Command Line server for the IE driver but then the exception was also different than the above mentioned.
+Attaching the screenshot of the popup. After I cancelled the popup I didn't get that popup warning again and ended up with the above exception.
+
+If anybody faced the same problem please share the root cause and how to resolve this.
+
+Attaching the error stack trace and the popup screenshot
+
+Hi sidanth,
+As per knowledge, can you check once IE browser security settings. Once reset the settings and then try it..
+
+Hope it will help to you..
+
+Thank you Bhanu for your suggestion, it worked . We didn't reset the settings but did few tweak into it.
+
+Below is how the issue is solved.
+
+So this issue turns out to be a Windows Firewall related problem where the Windows Firewall is blocking some features of the Command Line Server for IE driver.
+As it a firewall related issue in most of the organisation the IT team wont suggest or be comfortable in changing the firewall settings so we found out the solution which doesn't include modifiying the Firewall configurations.
+
+1. Open Internet Explorer.
+2. Click on Settings. Go to Internet Option.
+3. Click on the Security Tab.
+4. There you will find 4 zones named Internet, Local Intranet, Trusted Sites and Restricted Sites.
+5. There will be a check box named "Enable Protected Mode". Make sure it is checked in all teh 4 zones.
+6. Close all the IE browsers/tabs and re-test your Appian FitNesse Script.
+
+Hope the above information helps.
+
