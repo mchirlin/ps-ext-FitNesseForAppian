@@ -38,13 +38,13 @@ public class TempoChart extends AppianObject implements WaitForReturn {
 
   @Override
   public String getXpath(String... params) {
-    String chartName = params[0];
+    String chartName = getParam(0, params);
     return xpathFormat(XPATH_ABSOLUTE_CHART_LABEL, chartName);
   }
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String chartName = params[0];
+    String chartName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR CHART [" + chartName + "]");
 

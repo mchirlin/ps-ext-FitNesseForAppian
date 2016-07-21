@@ -30,7 +30,7 @@ public class TempoSection extends AppianObject implements
 
   @Override
   public String getXpath(String... params) {
-    String sectionName = params[0];
+    String sectionName = getParam(0, params);
 
     return xpathFormat(XPATH_ABSOLUTE_SECTION_LAYOUT, sectionName);
   }
@@ -43,7 +43,7 @@ public class TempoSection extends AppianObject implements
   @Override
   public void waitFor(String... params) {
     if (params.length == 1) {
-      String sectionName = params[0];
+      String sectionName = getParam(0, params);
 
       try {
         (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));

@@ -38,7 +38,7 @@ public class TempoFileUploadField extends AbstractTempoField {
 
   @Override
   public String getXpath(String... params) {
-    String fieldName = params[0];
+    String fieldName = getParam(0, params);
 
     if (isFieldIndex(fieldName)) {
       int index = getIndexFromFieldIndex(fieldName);
@@ -57,7 +57,7 @@ public class TempoFileUploadField extends AbstractTempoField {
 
   @Override
   public void waitFor(String... params) {
-    String fieldName = params[0];
+    String fieldName = getParam(0, params);
 
     try {
       (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
@@ -69,7 +69,7 @@ public class TempoFileUploadField extends AbstractTempoField {
 
   @Override
   public void populate(WebElement fieldLayout, String... params) {
-    String fieldValue = params[1];
+    String fieldValue = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("POPULATION [" + fieldValue + "]");
 
@@ -103,7 +103,7 @@ public class TempoFileUploadField extends AbstractTempoField {
 
   @Override
   public boolean contains(WebElement fieldLayout, String... params) {
-    String fieldValue = params[0];
+    String fieldValue = getParam(0, params);
 
     // For read-only
     try {

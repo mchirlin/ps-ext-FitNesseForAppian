@@ -26,8 +26,8 @@ public class TempoGridNavigation extends TempoGrid implements Clickable {
   }
 
   public void click(String... params) {
-    String gridName = params[0];
-    String navOption = params[1];
+    String gridName = getParam(0, params);
+    String navOption = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK GRID [" + gridName + "] NAVIGATION [" + navOption + "]");
 

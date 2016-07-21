@@ -22,7 +22,7 @@ public class TempoGridRowCount extends TempoGridNavigation implements Captureabl
 
   @Override
   public Integer capture(String... params) {
-    String gridName = params[0];
+    String gridName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("GRID [" + gridName + "] ROW COUNT");
 

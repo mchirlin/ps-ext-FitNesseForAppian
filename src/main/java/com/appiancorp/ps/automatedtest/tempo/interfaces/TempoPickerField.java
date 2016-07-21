@@ -35,8 +35,8 @@ public class TempoPickerField extends AbstractTempoField {
 
   @Override
   public void populate(WebElement fieldLayout, String... params) {
-    String fieldName = params[0];
-    String fieldValue = params[1];
+    String fieldName = getParam(0, params);
+    String fieldValue = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("POPULATION [" + fieldValue + "]");
 
@@ -70,7 +70,7 @@ public class TempoPickerField extends AbstractTempoField {
 
   @Override
   public boolean contains(WebElement fieldLayout, String... params) {
-    String fieldValue = params[0];
+    String fieldValue = getParam(0, params);
 
     if (TempoPickerFieldSelection.getInstance(settings).waitForReturn(fieldLayout, fieldValue)) {
       if (LOG.isDebugEnabled()) LOG.debug("USER PICKER FIELD COMPARISON : FIELD VALUE [" + fieldValue + "] FOUND");

@@ -30,7 +30,7 @@ public class TempoRecordGridNavigation extends AppianObject implements Clickable
 
   @Override
   public String getXpath(String... params) {
-    String navOption = params[0];
+    String navOption = getParam(0, params);
 
     navOption = navOption.toLowerCase();
     switch (navOption) {
@@ -49,7 +49,7 @@ public class TempoRecordGridNavigation extends AppianObject implements Clickable
 
   @Override
   public void waitFor(String... params) {
-    String navOption = params[0];
+    String navOption = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR NAVIGATION [" + navOption + "]");
 
@@ -63,7 +63,7 @@ public class TempoRecordGridNavigation extends AppianObject implements Clickable
 
   @Override
   public void click(String... params) {
-    String navOption = params[0];
+    String navOption = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ON NAVIGATION [" + navOption + "]");
 

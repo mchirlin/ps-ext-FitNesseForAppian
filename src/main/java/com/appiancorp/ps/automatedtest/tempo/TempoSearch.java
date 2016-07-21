@@ -36,7 +36,7 @@ public class TempoSearch extends AppianObject implements WaitForReturn, Populate
 
   @Override
   public void populate(String... params) {
-    String searchValue = params[0];
+    String searchValue = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("SEARCH FOR [" + searchValue + "]");
 
@@ -55,7 +55,7 @@ public class TempoSearch extends AppianObject implements WaitForReturn, Populate
 
   @Override
   public void waitFor(String... params) {
-    String type = params[0];
+    String type = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR SEARCH [" + type + "]");
 
@@ -70,7 +70,7 @@ public class TempoSearch extends AppianObject implements WaitForReturn, Populate
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String type = params[0];
+    String type = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR SEARCH [" + type + "]");
 

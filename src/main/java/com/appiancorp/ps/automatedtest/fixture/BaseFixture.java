@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
@@ -13,6 +15,7 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -42,7 +45,6 @@ import com.appiancorp.ps.automatedtest.common.Screenshot;
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
 import com.appiancorp.ps.automatedtest.tempo.TempoLogin;
-import com.google.common.base.Throwables;
 
 /**
  * This is the base class for integrating Appian and FitNesse.
@@ -86,12 +88,20 @@ public class BaseFixture {
         settings.setDriver(new FirefoxDriver(prof));
       }
     } else if (browser.equals("CHROME")) {
-      System.setProperty("webdriver.chrome.driver", props.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
-        Constants.CHROME_DRIVER);
+      String driverHome;
+
+      if (StringUtils.isNotBlank(props.getProperty(Constants.CHROME_DRIVER_HOME))) {
+        driverHome = props.getProperty(Constants.CHROME_DRIVER_HOME);
+      } else {
+        driverHome = props.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
+          Constants.CHROME_DRIVER;
+      }
+
+      System.setProperty("webdriver.chrome.driver", driverHome);
 
       System.setProperty("webdriver.chrome.args", "--disable-logging");
       System.setProperty("webdriver.chrome.silentOutput", "true");
-      if (!StringUtils.isBlank(props.getProperty(Constants.CHROME_BROWSER_HOME))) {
+      if (StringUtils.isNotBlank(props.getProperty(Constants.CHROME_BROWSER_HOME))) {
         ChromeOptions co = new ChromeOptions();
         co.setBinary(props.getProperty(Constants.CHROME_BROWSER_HOME));
         settings.setDriver(new ChromeDriver(co));
@@ -187,7 +197,7 @@ public class BaseFixture {
 
   /**
    * Sets the path on the automated test server where screenshots will be placed. <br>
-   * FitNesse Example: <code>| set screenshot path to | AUTOMATED_TESTING_HOME\screenshots\ |</code>
+   * FitNesse Example: <code>| set screenshot path to | AUTOMATED_TESTING_HOME/screenshots/ |</code>
    * 
    * @param path
    *          Path to save screen shots
@@ -220,7 +230,7 @@ public class BaseFixture {
    */
   public void setTakeErrorScreenshotsTo(Boolean bool) {
     if (settings.getScreenshotPath() == null) {
-      settings.setScreenshotPath(props.getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\screenshots");
+      settings.setScreenshotPath(props.getProperty(Constants.AUTOMATED_TESTING_HOME) + "/screenshots");
     }
     settings.setTakeErrorScreenshots(bool);
   }
@@ -351,8 +361,7 @@ public class BaseFixture {
   /**
    * Login to and Appian site containing terms and conditions.<br>
    * <br>
-   * FitNesse Example: <code>| login with terms with username | USERNAME | </code> - Uses the url set here:
-   * {@link #setAppianUrlTo(String)}
+   * FitNesse Example: <code>| login with terms with username | USERNAME | </code> - Uses the url set here: {@link #setAppianUrlTo(String)}
    * 
    * @param userName
    *          Username
@@ -367,8 +376,7 @@ public class BaseFixture {
   /**
    * Login to and Appian site containing terms and conditions.<br>
    * <br>
-   * FitNesse Example: <code>| login with terms with role | USER_ROLE| </code> - Uses the url set here:
-   * {@link #setAppianUrlTo(String)}
+   * FitNesse Example: <code>| login with terms with role | USER_ROLE| </code> - Uses the url set here: {@link #setAppianUrlTo(String)}
    * 
    * @param userRole
    *          user role
@@ -489,6 +497,54 @@ public class BaseFixture {
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Wait Until");
     }
+  }
+
+  /**
+   * Calls a web api and returns result<br>
+   * <br>
+   * FitNesse Examples:<br>
+   * <code>| call web api | WEB_API_NAME | with username | USERNAME |</code>
+   * 
+   * @param webApiName
+   */
+  public String callWebApiWithUsername(String webApi, String username) {
+    try {
+      URL url = new URL(settings.getUrl() + "/webapi/" + webApi);
+      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+      conn.setDoOutput(false);
+      conn.setRequestMethod("GET");
+      conn.setRequestProperty("Content-Type", "application/json");
+      byte[] encoded = Base64.encodeBase64(new String(username + ":" + props.getProperty(username)).getBytes());
+      conn.setRequestProperty("Authorization", "Basic " + new String(encoded));
+
+      String result = IOUtils.toString(conn.getInputStream());
+
+      if (conn.getResponseCode() != 200) {
+        throw new Exception("Web API request failed: " + result);
+      } else {
+        return result;
+      }
+    } catch (Exception e) {
+      throw ExceptionBuilder.build(e, settings, "Call Web API");
+    }
+  }
+
+  /**
+   * Sets test variables<br >
+   * <br>
+   * | set test variable | TEST_VAR_KEY | with | TEST_VAR_AS_JSON |
+   */
+  public void setTestVariableWith(String key, String val) {
+    settings.setTestVariableWith(key, val);
+  }
+
+  /**
+   * Get test variable<br>
+   * <br>
+   * | get test variable | VARIABLE_NAME |
+   */
+  public String getTestVariable(String variableName) {
+    return settings.getTestVariable(variableName);
   }
 
   /**
@@ -755,7 +811,6 @@ public class BaseFixture {
         props.load(inputStream);
       }
     } catch (Exception e) {
-      LOG.debug(Throwables.getStackTraceAsString(e));
     }
 
     try {
@@ -764,7 +819,6 @@ public class BaseFixture {
         File jarPath = new File(BaseFixture.class.getProtectionDomain().getCodeSource().getLocation().getPath());
         String propertiesPath = jarPath.getParentFile().getAbsolutePath();
         File folder = new File(URLDecoder.decode(propertiesPath + "/../../configs", "UTF-8"));
-        LOG.debug("Folder: " + folder);
 
         for (File file : folder.listFiles()) {
           if (FilenameUtils.getExtension(file.getPath()).equals("properties")) {
@@ -774,7 +828,6 @@ public class BaseFixture {
         }
       }
     } catch (Exception e) {
-      LOG.debug(Throwables.getStackTraceAsString(e));
     }
   }
 

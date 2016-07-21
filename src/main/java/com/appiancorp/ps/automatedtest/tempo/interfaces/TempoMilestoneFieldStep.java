@@ -24,7 +24,7 @@ public class TempoMilestoneFieldStep extends TempoMilestoneField implements Clic
 
   @Override
   public String getXpath(String... params) {
-    String step = params[1];
+    String step = getParam(1, params);
 
     if (isFieldIndex(step)) {
       int rNum = getIndexFromFieldIndex(step);
@@ -36,8 +36,8 @@ public class TempoMilestoneFieldStep extends TempoMilestoneField implements Clic
 
   @Override
   public void click(String... params) {
-    String milestone = params[0];
-    String step = params[1];
+    String milestone = getParam(0, params);
+    String step = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ON MILESTONE [" + milestone + "] STEP [" + step + "]");
 

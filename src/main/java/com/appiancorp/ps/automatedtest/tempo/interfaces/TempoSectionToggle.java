@@ -23,7 +23,7 @@ public class TempoSectionToggle extends TempoSection implements Clickable {
   }
 
   public void click(String... params) {
-    String sectionName = params[0];
+    String sectionName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("EXPAND SECTION [" + sectionName + "]");
 

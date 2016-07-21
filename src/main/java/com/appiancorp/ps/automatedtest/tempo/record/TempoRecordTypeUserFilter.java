@@ -26,14 +26,14 @@ public class TempoRecordTypeUserFilter extends AppianObject implements Clickable
 
   @Override
   public String getXpath(String... params) {
-    String userFilter = params[0];
+    String userFilter = getParam(0, params);
 
     return xpathFormat(XPATH_ABSOLUTE_RECORD_TYPE_USER_FILTER_LINK, userFilter);
   }
 
   @Override
   public void click(String... params) {
-    String userFilter = params[0];
+    String userFilter = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ON USER FILTER [" + userFilter + "]");
 
@@ -47,7 +47,7 @@ public class TempoRecordTypeUserFilter extends AppianObject implements Clickable
 
   @Override
   public void waitFor(String... params) {
-    String userFilter = params[0];
+    String userFilter = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR USER FILTER [" + userFilter + "]");
 

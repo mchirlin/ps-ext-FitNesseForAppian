@@ -23,7 +23,7 @@ public class TempoGridAddRow extends TempoGrid implements Clickable {
   }
 
   public void click(String... params) {
-    String gridName = params[0];
+    String gridName = getParam(0, params);
 
     try {
       WebElement grid = settings.getDriver().findElement(By.xpath(getXpath(params)));

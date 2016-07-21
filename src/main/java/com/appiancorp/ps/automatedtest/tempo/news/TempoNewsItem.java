@@ -34,14 +34,14 @@ public class TempoNewsItem extends AppianObject implements Refreshable, Clearabl
 
   @Override
   public String getXpath(String... params) {
-    String newsText = params[0];
+    String newsText = getParam(0, params);
 
     return xpathFormat(XPATH_ABSOLUTE_NEWS_ITEM, newsText);
   }
 
   @Override
   public void waitFor(String... params) {
-    String newsText = params[0];
+    String newsText = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR [" + newsText + "]");
 
@@ -54,7 +54,7 @@ public class TempoNewsItem extends AppianObject implements Refreshable, Clearabl
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String newsText = params[0];
+    String newsText = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR REFRESH [" + newsText + "]");
 
@@ -92,7 +92,7 @@ public class TempoNewsItem extends AppianObject implements Refreshable, Clearabl
 
   @Override
   public void clear(String... params) {
-    String newsText = params[0];
+    String newsText = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("DELETE NEWS ITEM [" + newsText + "]");
 
@@ -125,7 +125,7 @@ public class TempoNewsItem extends AppianObject implements Refreshable, Clearabl
 
   @Override
   public String regexCapture(String regex, Integer group, String... params) {
-    String newsText = params[0];
+    String newsText = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("NEWS ITEM [" + newsText + "] REGEX [" + regex + "]");
 

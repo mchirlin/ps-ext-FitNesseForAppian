@@ -26,14 +26,14 @@ public class TempoTaskReport extends AppianObject implements Clickable {
 
   @Override
   public String getXpath(String... params) {
-    String taskReport = params[0];
+    String taskReport = getParam(0, params);
 
     return xpathFormat(XPATH_ABSOLUTE_TASK_REPORT_LINK, taskReport);
   }
 
   @Override
   public void waitFor(String... params) {
-    String taskReport = params[0];
+    String taskReport = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR TASK REPORT [" + taskReport + "]");
 
@@ -46,7 +46,7 @@ public class TempoTaskReport extends AppianObject implements Clickable {
 
   @Override
   public void click(String... params) {
-    String taskReport = params[0];
+    String taskReport = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK TASK REPORT [" + taskReport + "]");
 

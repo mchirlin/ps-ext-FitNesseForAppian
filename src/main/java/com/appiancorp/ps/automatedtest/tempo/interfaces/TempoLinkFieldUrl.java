@@ -23,7 +23,7 @@ public class TempoLinkFieldUrl extends TempoLinkField implements Verifiable, Cap
 
   @Override
   public String capture(String... params) {
-    String linkName = params[0];
+    String linkName = getParam(0, params);
 
     WebElement link = settings.getDriver().findElement(By.xpath(getXpath(linkName)));
     String linkURL = link.getAttribute("href");
@@ -32,8 +32,8 @@ public class TempoLinkFieldUrl extends TempoLinkField implements Verifiable, Cap
 
   @Override
   public boolean contains(String... params) {
-    String linkName = params[0];
-    String linkURLValue = params[1];
+    String linkName = getParam(0, params);
+    String linkURLValue = getParam(1, params);
 
     String linkURLText = capture(linkName);
 

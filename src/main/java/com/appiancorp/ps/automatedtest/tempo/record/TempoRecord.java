@@ -30,7 +30,7 @@ public class TempoRecord extends AppianObject implements Clickable, Refreshable,
 
   @Override
   public String getXpath(String... params) {
-    String record = params[0];
+    String record = getParam(0, params);
 
     if (isFieldIndex(record)) {
       int rNum = getIndexFromFieldIndex(record);
@@ -43,7 +43,7 @@ public class TempoRecord extends AppianObject implements Clickable, Refreshable,
 
   @Override
   public void click(String... params) {
-    String itemName = params[0];
+    String itemName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK RECORD [" + itemName + "]");
 
@@ -57,7 +57,7 @@ public class TempoRecord extends AppianObject implements Clickable, Refreshable,
 
   @Override
   public void waitFor(String... params) {
-    String itemName = params[0];
+    String itemName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR RECORD [" + itemName + "]");
 
@@ -71,7 +71,7 @@ public class TempoRecord extends AppianObject implements Clickable, Refreshable,
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String itemName = params[0];
+    String itemName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR RECORD [" + itemName + "]");
 

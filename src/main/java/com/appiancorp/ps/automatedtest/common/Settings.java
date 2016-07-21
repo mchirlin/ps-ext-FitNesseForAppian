@@ -3,15 +3,19 @@ package com.appiancorp.ps.automatedtest.common;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
 
 public class Settings {
   private static final Logger LOG = Logger.getLogger(Settings.class);
@@ -43,6 +47,8 @@ public class Settings {
   private Boolean takeErrorScreenshots = false;
   private Boolean stopOnError = false;
   private int errorNumber = 1;
+
+  private Map<String, String> testVariables = new HashMap<String, String>();
 
   @JsonCreator
   public Settings(
@@ -274,5 +280,20 @@ public class Settings {
 
   public int getErrorNumber() {
     return this.errorNumber;
+  }
+
+  public void setTestVariableWith(String key, String val) {
+    testVariables.put(key, val);
+  }
+
+  public String getTestVariable(String variable) {
+    if (variable.contains(".")) {
+      String variableKey = StringUtils.substringBefore(variable, ".");
+      String variableName = StringUtils.substringAfter(variable, ".");
+      Object result = JsonPath.read(testVariables.get(variableKey), "$." + variableName);
+      return result.toString();
+    } else {
+      return testVariables.get(variable);
+    }
   }
 }

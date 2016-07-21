@@ -24,7 +24,7 @@ public class TempoPickerFieldSuggestion extends TempoPickerField implements Wait
 
   @Override
   public void waitFor(String... params) {
-    String fieldValue = params[0];
+    String fieldValue = getParam(0, params);
 
     (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpathFormat(
       XPATH_ABSOLUTE_PICKER_SUGGESTION, fieldValue))));

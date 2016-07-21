@@ -29,7 +29,7 @@ public class TempoReadOnlyField extends AbstractTempoField implements FieldLayou
 
   @Override
   public boolean contains(WebElement fieldLayout, String... params) {
-    String fieldValue = params[0];
+    String fieldValue = getParam(0, params);
 
     String compareString = fieldLayout.findElement(By.xpath(XPATH_RELATIVE_READ_ONLY_FIELD)).getText();
 

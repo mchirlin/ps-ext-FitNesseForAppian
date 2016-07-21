@@ -26,14 +26,14 @@ public class TempoRecordView extends AppianObject implements Clickable {
 
   @Override
   public String getXpath(String... params) {
-    String view = params[0];
+    String view = getParam(0, params);
 
     return xpathFormat(XPATH_ABSOLUTE_RECORD_VIEW_LINK, view);
   }
 
   @Override
   public void click(String... params) {
-    String view = params[0];
+    String view = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ON RECORD VIEW [" + view + "]");
 
@@ -47,7 +47,7 @@ public class TempoRecordView extends AppianObject implements Clickable {
 
   @Override
   public void waitFor(String... params) {
-    String view = params[0];
+    String view = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR RECORD VIEW [" + view + "]");
 

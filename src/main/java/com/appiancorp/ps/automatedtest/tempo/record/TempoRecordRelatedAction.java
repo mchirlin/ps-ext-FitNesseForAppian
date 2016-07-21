@@ -28,14 +28,14 @@ public class TempoRecordRelatedAction extends AppianObject implements Clickable,
 
   @Override
   public String getXpath(String... params) {
-    String relatedAction = params[0];
+    String relatedAction = getParam(0, params);
 
     return xpathFormat(XPATH_ABSOLUTE_RECORD_RELATED_ACTION_LINK, relatedAction);
   }
 
   @Override
   public void click(String... params) {
-    String relatedAction = params[0];
+    String relatedAction = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ON RELATED ACTION [" + relatedAction + "]");
 
@@ -49,7 +49,7 @@ public class TempoRecordRelatedAction extends AppianObject implements Clickable,
 
   @Override
   public void waitFor(String... params) {
-    String relatedAction = params[0];
+    String relatedAction = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR RELATED ACTION [" + relatedAction + "]");
 
@@ -62,7 +62,7 @@ public class TempoRecordRelatedAction extends AppianObject implements Clickable,
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String relatedAction = params[0];
+    String relatedAction = getParam(0, params);
 
     try {
       (new WebDriverWait(settings.getDriver(), timeout)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));

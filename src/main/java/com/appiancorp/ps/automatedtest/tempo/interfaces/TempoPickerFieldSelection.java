@@ -28,7 +28,7 @@ public class TempoPickerFieldSelection extends TempoPickerField implements Field
   }
 
   public String getXpath(WebElement fieldLayout, String... params) {
-    String fieldValue = params[0];
+    String fieldValue = getParam(0, params);
 
     String xpathLocator = getXpathLocator(fieldLayout);
     return "(" + xpathLocator + ")" + xpathFormat(XPATH_RELATIVE_PICKER_SPECIFIC_SELECTION, fieldValue);

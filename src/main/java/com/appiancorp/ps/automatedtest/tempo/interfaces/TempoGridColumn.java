@@ -22,8 +22,8 @@ public class TempoGridColumn extends TempoGrid implements Clickable {
   }
 
   public void click(String... params) {
-    String gridName = params[0];
-    String columnName = params[1];
+    String gridName = getParam(0, params);
+    String columnName = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("SORT GRID [" + gridName + "] BY [" + columnName + "]");
 

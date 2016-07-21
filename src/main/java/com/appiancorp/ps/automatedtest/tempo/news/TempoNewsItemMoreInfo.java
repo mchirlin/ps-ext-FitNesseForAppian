@@ -23,14 +23,14 @@ public class TempoNewsItemMoreInfo extends TempoNewsItem implements Clickable {
 
   @Override
   public String getXpath(String... params) {
-    String newsText = params[0];
+    String newsText = getParam(0, params);
 
     return xpathFormat(XPATH_ABSOLUTE_NEWS_ITEM_MORE_INFO_LINK, newsText);
   }
 
   @Override
   public void click(String... params) {
-    String newsText = params[0];
+    String newsText = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("TOGGLE MORE INFO [" + newsText + "]");
 

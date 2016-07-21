@@ -28,7 +28,7 @@ public class TempoLinkField extends AppianObject implements Clickable, Captureab
 
   @Override
   public String getXpath(String... params) {
-    String linkName = params[0];
+    String linkName = getParam(0, params);
 
     if (isFieldIndex(linkName)) {
       int lNum = getIndexFromFieldIndex(linkName);
@@ -41,7 +41,7 @@ public class TempoLinkField extends AppianObject implements Clickable, Captureab
 
   @Override
   public void waitFor(String... params) {
-    String linkName = params[0];
+    String linkName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR LINK [" + linkName + "]");
 
@@ -61,7 +61,7 @@ public class TempoLinkField extends AppianObject implements Clickable, Captureab
 
   @Override
   public void click(String... params) {
-    String linkName = params[0];
+    String linkName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLINK LINK [" + linkName + "]");
 

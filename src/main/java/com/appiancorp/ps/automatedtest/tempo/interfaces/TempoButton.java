@@ -30,7 +30,7 @@ public class TempoButton extends AppianObject implements WaitFor, WaitForReturn,
 
   @Override
   public String getXpath(String... params) {
-    String button = params[0];
+    String button = getParam(0, params);
 
     if (isFieldIndex(button)) {
       int rNum = getIndexFromFieldIndex(button);
@@ -43,7 +43,7 @@ public class TempoButton extends AppianObject implements WaitFor, WaitForReturn,
 
   @Override
   public void waitFor(String... params) {
-    String buttonName = params[0];
+    String buttonName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR BUTTON [" + buttonName + "]");
 
@@ -57,7 +57,7 @@ public class TempoButton extends AppianObject implements WaitFor, WaitForReturn,
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String buttonName = params[0];
+    String buttonName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR BUTTON [" + buttonName + "]");
 
@@ -78,7 +78,7 @@ public class TempoButton extends AppianObject implements WaitFor, WaitForReturn,
 
   @Override
   public void click(String... params) {
-    String buttonName = params[0];
+    String buttonName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK BUTTON [" + buttonName + "]");
 
