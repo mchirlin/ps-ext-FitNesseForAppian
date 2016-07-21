@@ -538,7 +538,6 @@ public class BaseFixture {
   /**
    * Get test variable<br>
    * <br>
-   * <<<<<<< 05094afae25cbd1d45a65fdf02754b397d60ed77
    * | get test variable | tv!VARIABLE_NAME |
    */
   public String getTestVariable(String variableName) {
