@@ -1,21 +1,21 @@
 @echo off
 FOR /F "tokens=1,2 delims==" %%G IN (fitnesse.properties) DO ( set %%G=%%H)
 
-IF "%FitNesseRootDir%" == " " IF "%FitNesseRoot%" == " " (
+IF [%FitNesseRootDir%] == [] IF [%FitNesseRoot%] == [] (
   @echo on
   java -jar lib/fitnesse-20160515-standalone.jar -p 8980 -e 0 -f configs/custom.properties
   @echo off
   GOTO END
 )
 
-IF "%FitNesseRootDir%" == " " (
+IF [%FitNesseRootDir%] == [] (
   @echo on
   java -jar lib/fitnesse-20160515-standalone.jar -p 8980 -e 0 -r "%FitNesseRoot%" -f configs/custom.properties
   @echo off
   GOTO END
 )
 
-IF "%FitNesseRoot%" == " " (
+IF [%FitNesseRoot%] == [] (
   @echo on
   java -jar lib/fitnesse-20160515-standalone.jar -p 8980 -e 0 -d "%FitNesseRootDir%" -f configs/custom.properties
   @echo off
