@@ -1,7 +1,7 @@
 !3 INITIALIZATION CODE
 ![~
 !define TEST_SYSTEM {slim} 																				~ Uses FitNesse SliM to run tests
-!path ${automated.testing.home}\**.jar 																	~ Defines classpath for fixtures
+!path ${automated.testing.home}/**.jar 																	~ Defines classpath for fixtures
 | script | com.appiancorp.ps.automatedtest.fixture.TempoFixture | 										~ Initializes fixture to be used for the rest of the test
 | setup selenium web driver with | BROWSER_NAME | browser | 											~ Initializes Selenium Web Driver and opens browser
 ]!
@@ -48,24 +48,31 @@
 | get regex | REGEX | group | GROUP | from task name containing text | TASK_TEXT |						: Use Java Regular Expression to return data from news as a variable
 ]!
 
-!3 RECORDS METHODS
+!3 RECORDS
+
+!4 RECORD LIST
 ![:
 | click on record type | RECORD_TYPE_NAME or RECORD_TYPE_NAME[INDEX] | 									: Click on a record type, use RECORD_NAME[INDEX] to click on the 2nd, 3rd, ... record type with the same label.
 | click on record type user filter | USER_FILTER_NAME | 												: Click on a record type user filter.
-| click on record | RECORD_NAME or RECORD_NAME[INDEX] | 												: Click on a record, works for both record list view and record grid view.
-| click on record view | VIEW_NAME | 																	: Click on a record view.
-| click on record related action | RELATED_ACTION_NAME | 												: Click on a related action, this works for quick links and on the related action view.
 | click on record grid navigation | NAVIGATION_OPTION | 												: Page through a record grid view, options include "First", "Previous", "Next", or "Last"
 | verify record type user filter | USER_FILTER_NAME | is present | 										: Verify a particular record type user filter is present.
 | verify record | RECORD_NAME or RECORD_NAME[INDEX] | is present | 										: Verify a record is present.
 | verify record | RECORD_NAME or RECORD_NAME[INDEX] | is not present | 									: Verify a record is not present.
+| sort record grid view by column | COLUMN_NAME | 														: Sort a record grid view by column.
+]!
+!4 RECORD DASHBOARD
+![:
+| click on record | RECORD_NAME or RECORD_NAME[INDEX] | 												: Click on a record, works for both record list view and record grid view.
+| click on record view | VIEW_NAME | 																	: Click on a record view.
+| click on record related action | RELATED_ACTION_NAME | 												: Click on a related action, this works for quick links and on the related action view.
 | verify record related action | RELATED_ACTION_NAME | is present | 									: Verify a record related action is present.
 | verify record related action | RELATED_ACTION_NAME | is not present |									: Verify a record related action is not present.
 | get regex | REGEX | group | GROUP | from record name containing text | RECORD_TEXT |					: Use Java Regular Expression to return data from news as a variable
-| sort record grid view by column | COLUMN_NAME | 														: Sort a record grid view by column.
 ]!
 
 !3 REPORTS METHODS
+
+!4 REPORTS LIST
 ![:
 | click on report | REPORT_NAME or REPORT_NAME[INDEX] | 												: Click on a report
 | verify report | REPORT_NAME or REPORT_NAME[INDEX] | is present | 										: Verify a report is present
@@ -111,8 +118,8 @@
 | verify field | FIELD_LABEL or [FIELD_INEDX] or FIELD_LABEL[INDEX] | is present | 						: Verify field with label is present
 | verify field | FIELD_LABEL or [FIELD_INEDX] or FIELD_LABEL[INDEX] | is not present | 					: Verify field with label is not present
 | verify field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | contains validation message | VALIDATION_MESSAGE(S) |	: Verify field with label contains a specific validation message
-| verify link | LINK_NAME or LINK_NAME[INDEX] | is present |										: Verify link field is present.
-| verify link | LINK_NAME or LINK_NAME[INDEX] | URL contains | URL_TEXT |								: Verify link field's URL contains specific text.
+| verify link | LINK_TEXT or LINK_TEXT[INDEX] | is present |											: Verify link containing text is present.
+| verify link | LINK_TEXT or LINK_TEXT[INDEX] | URL contains | URL_TEXT |								: Verify link URL contains specific text.
 | verify milestone | MILESTONE_LABEL OR MILESTONE_LABEL[INDEX] or [MILESTONE_INDEX] | step is | STEP |	: Verify a milestone is at a particular step.
 | verify button | BUTTON_NAME or BUTTON_NAME[INDEX] | is present |										: Verify button with label is present
 | verify button | BUTTON_NAME or BUTTON_NAME[INDEX] | is not present |									: Verify button with label is not present
@@ -146,6 +153,7 @@
 !3 UTILITY METHODS
 ![:
 | setup selenium web driver with | BROWSER_NAME | browser | 											: Initializes Selenium Web Driver and opens browser, options include FIREFOX, CHROME, IE
+| tear down selenium web driver |																		: Tears down Selenium Web Driver and closes browser
 | set appian url to | APPIAN_URL | 																		: Sets the default appian url
 | set appian version to | APPIAN_VERSION |																: Sets the default appian version
 | set appian locale to | APPIAN_LOCALE |																: Sets the Appian locale used for date and datetime formatting, options include en_US or en_GB (defaults to en_US)
@@ -168,6 +176,7 @@
 | get random integer from | MIN_INT | to | MAX_INT | 													: Use with $VARIABLE_NAME= for random variables
 | get random decimal from | MIN_DECIMAL | to | MAX_DECIMAL | 											: Use with $VARIABLE_NAME= for random variables
 | get random decimal from | MIN_DECIMAL | to | MAX_DECIMAL | with | DECIMAL_PLACES | 					: Use with $VARIABLE_NAME= for random variables
+| open | URL |																							: Opens a particular URL, useful for loging in if using SSO
 | refresh | 																							: refreshes screen
 | logout | 																								: Logout of Appian
 ]!
