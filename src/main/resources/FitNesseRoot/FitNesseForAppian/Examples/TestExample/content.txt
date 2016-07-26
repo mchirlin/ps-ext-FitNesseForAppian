@@ -18,10 +18,10 @@
 |setup selenium web driver with browser|FIREFOX                                             |
 |set appian url to                     |APPIAN_URL                                          |
 |set appian version to                 |APPIAN_VERSION                                      |
-|set appian locale to                  |APPIAN_LOCAL                                        |
+|set appian locale to                  |APPIAN_LOCALE                                       |
 ***!
 !*** Login to Tempo and go to Records
-!| script                           |
-|login with username|APPIAN_USERNAME|
-|click on menu      |Records        |
+!| script                     |
+|login with username|test.user|
+|click on menu      |Records  |
 ***!
