@@ -7,10 +7,12 @@ I can set variables in the following ways:
 
 ![:
 !define VAR_NAME {VAR_VALUE}
-| $VAR_NAME=       | method that returns VAR_VALUE |
-| set test variable | VAR_NAME | with | VAR_VALUE  |
+|$VAR_NAME=        | method that returns VAR_VALUE |
+|set test variable | VAR_NAME | with | VAR_VALUE |
 ]!
 What are the differences? Why are there so many?!
+
+!1 TODO Add link to documentation
 
 !anchor generatingData
 !3 How can I create random data for my tests

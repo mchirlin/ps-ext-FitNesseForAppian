@@ -1,2 +1,0 @@
-!3 File Upload
-When populating a file upload field, the location of the file is required (e.g. ${automated.testing.home}/documents/low risk.jpg).  There is no need to click on the '''Choose File''' button.

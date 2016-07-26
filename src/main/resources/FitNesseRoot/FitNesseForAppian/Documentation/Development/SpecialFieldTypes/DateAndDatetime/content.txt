@@ -1,9 +1,0 @@
-!3 Date and Date Time Fields 
-Date and Date Time should be formatted in your test scripts as 
- * YYYY-MM-DD HH:mm
-  * 24 Hour Clock means there is no need for AM or PM
- * YYYY-MM-DD 
-
-Additionally, if you declare '''|set start time|''' in your setup configuration, then you are able to create dates by using + Number of Time units (minutes, hours, days, months, or years).  For example, use '''+5 days''' to input a date 5 days from today.   
-
-Note: Date Time fields are considered one field when inputting into FitNesse

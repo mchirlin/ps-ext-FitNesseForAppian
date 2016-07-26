@@ -1,0 +1,10 @@
+!3 Mac or Linux
+ * Ensure that all properties files (fitnesse.properties and custom.properties) use the correct file separator: forward slashes (/) rather than backslashes (\).
+ * Ensure that all properties files contain the correct EOL characters:  \n instead of \r\n. These can be viewed in a text editor such as Sublime.
+ * Start !-FitNesseForAppian-! using '''${automated.testing.home}/start.sh'''
+ * If using Chrome, do the following:
+  1 Open '''${automated.testing.home}/configs/custom.properties''' in a text editor.
+  1 Update '''chrome.driver.home''' to refer to the mac or linux chrome driver, e.g. ''chrome.driver.home=${automated.testing.home}/lib/drivers/chromedriver-mac''
+!3 Windows
+ * Ensure that all properties files (fitnesse.properties and custom.properties) escape backslashes, e.g. C:\\FitNesseForAppian rather than C:\FitNesseForAppian.
+ * Start !-FitNesseForAppian-! using '''${automated.testing.home}/start.bat'''

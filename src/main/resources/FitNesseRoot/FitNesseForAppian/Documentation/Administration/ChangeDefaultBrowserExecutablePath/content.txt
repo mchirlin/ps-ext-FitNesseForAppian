@@ -1,8 +1,8 @@
 !2 Change Browser Executable Directories
-The default executable paths for '''Chrome''' and '''Firefox''' can updated by following these steps:
+To update the default executable paths for '''Chrome''' and '''Firefox''' do the following:
 
- 1 Open ${automated.testing.home}/configs/custom.properties in a text editor.
- 1 Update '''chrome.browser.home''' to point to the chrome executable.
- 1 Update '''firefox.browser.home''' to point to the firefox executable.
+ 1 Open '''${automated.testing.home}/configs/custom.properties''' in a text editor.
+ 1 Update '''chrome.browser.home''' to point to the chrome executable, e.g. ''chrome.browser.home=C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe''
+ 1 Update '''firefox.browser.home''' to point to the firefox executable, e.g. ''firefox.browser.home=C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe''
  
 '''Note:''' If on Windows make sure to escape backslashes, e.g. C:\\FitNesseForAppian rather than C:\FitNesseForAppian

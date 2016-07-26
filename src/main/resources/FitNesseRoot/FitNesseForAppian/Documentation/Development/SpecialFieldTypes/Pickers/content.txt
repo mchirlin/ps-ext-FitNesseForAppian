@@ -1,2 +1,0 @@
-*Custom Picker*
-Suggestion value needed to be the same as value selected

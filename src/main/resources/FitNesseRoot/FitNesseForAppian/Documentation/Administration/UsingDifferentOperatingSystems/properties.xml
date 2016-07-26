@@ -2,12 +2,11 @@
 <properties>
 <Edit>true</Edit>
 <Files>true</Files>
-<Help>How to log in using provided Scenarios</Help>
 <Properties>true</Properties>
 <RecentChanges>true</RecentChanges>
 <Refactor>true</Refactor>
 <Search>true</Search>
-<Suites>TODO</Suites>
+<Suites>fitnesse.properties, custom.properties</Suites>
 <Versions>true</Versions>
 <WhereUsed>true</WhereUsed>
 </properties>

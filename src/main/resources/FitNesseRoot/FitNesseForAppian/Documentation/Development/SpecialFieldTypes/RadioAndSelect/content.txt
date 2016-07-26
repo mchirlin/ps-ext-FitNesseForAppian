@@ -1,3 +1,0 @@
-*Radio Button*
-
-|click on radio option|Payee|(This was the field name and not the label of the value to select

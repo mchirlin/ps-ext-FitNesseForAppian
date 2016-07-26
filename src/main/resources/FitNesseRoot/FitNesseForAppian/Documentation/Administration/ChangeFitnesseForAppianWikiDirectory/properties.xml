@@ -7,7 +7,7 @@
 <RecentChanges>true</RecentChanges>
 <Refactor>true</Refactor>
 <Search>true</Search>
-<Suites>fitnesse.properties, TODO</Suites>
+<Suites>fitnesse.properties</Suites>
 <Versions>true</Versions>
 <WhereUsed>true</WhereUsed>
 </properties>

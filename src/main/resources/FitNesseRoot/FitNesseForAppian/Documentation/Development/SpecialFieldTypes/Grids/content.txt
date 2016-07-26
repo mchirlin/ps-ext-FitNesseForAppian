@@ -1,4 +1,0 @@
-*Grid*
-
-How to populate a checkbox
-How to check a row
