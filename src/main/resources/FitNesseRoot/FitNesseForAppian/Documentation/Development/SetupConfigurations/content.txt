@@ -1,27 +1,34 @@
 !1 ''!-FitNesse-! for Appian'' Setup Configurations
 
 !3 These variables are required for every test script that you write:
- * '''select test system !define TEST_SYSTEM=slim''' 
- * '''enable logging !define COMMAND_PATTERN {java -Dlog4j.configuration=file:\\\${automated.testing.home}\log4j.properties -cp %p %m}
- * '''classpath: ${automated.testing.home}\**.jar'''
- * '''!| script| com.appiancorp.ps.automatedtest.fixture.TempoFixture|'''
- * '''|setup selenium web driver with browser|BROWSER| '''
-  * Replace with FIREFOX, IE or CHROME
- * '''|set appian url to |APPIAN_URL| '''
-  * Replace APPIAN_URL
- * '''|login with username|USERNAME|and password|PASSWORD|'''
-  * Replace USERNAME and PASSWORD
- * '''|login with terms with username|USERNAME|and password|PASSWORD|'''
-  * Use this for Appian instances with terms
+ * '''!define TEST_SYSTEM=slim'''
+  * Selects test system 
+ * '''classpath: !-${automated.testing.home}/**.jar-!'''
+  * Sets the classpath
+  * If this is not set correctly there will be errors stating a method cannot be found.
+ * '''!| script | com.appiancorp.ps.automatedtest.fixture.SitesFixture |'''
+  * Defines the class used for all Appian methods
+ * '''| setup selenium web driver with browser | BROWSER | '''
+  * Creates new driver and opens browser
+  * Replace BROWSER with FIREFOX, IE or CHROME
+ * '''| set appian url to | APPIAN_URL |'''
+  * Sets Appian url used for logging in and navigating to sites
+  * Replace APPIAN_URL with url for Appian site, including /suite, e.g. http://site.appiancloud.com/suite
+ * '''| login with username | USERNAME |'''
+  * Logs in to Appian site
+  * Replace USERNAME
 
 !3 These variables are optional for every test script that you write:
- * '''|set appian version to  |VERSION_NUMBER |'''
+ * '''!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///!-${automated.testing.home}-!/log4j.properties -cp %p %m}'''
+  * Enables logging
+  * Log can be found in ${automated.testing.home}/logs/fitnesse.log
+ * '''| set appian version to | VERSION_NUMBER |'''
   * Currently supporting versions 7.10, 7.11, 16.1 
- * '''|set appian locale to |LOCALE|'''
+ * '''| set appian locale to | LOCALE |'''
   * en_US or en_GB
- * '''|set stop on error to  |TRUE_OR_FALSE |'''
+ * '''| set stop on error to  | TRUE_OR_FALSE |'''
   * Stops test if there is an error
- * '''|set timeout seconds to |TIME|'''
+ * '''| set timeout seconds to | TIME |'''
   * Amount of time to wait for an element to appear on screen
- * '''|set start datetime |'''
+ * '''| set start datetime |'''
   * Uses the Start date  and time when a test starts and can be referenced to 
