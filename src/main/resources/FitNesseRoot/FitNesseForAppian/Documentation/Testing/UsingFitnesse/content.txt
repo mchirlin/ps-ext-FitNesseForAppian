@@ -1,1 +1,83 @@
-!contents -R2 -g -p -f -h
+!1 Testing in FitNesse
+There are two main ways to run a test:
+ * [[As an individual test case.][#testpage]]
+ * [[As a suite of test cases that will automatically run all tests.][#suitepage]]
+ 
+!anchor testpage
+!2 Running a Test Page
+Selecting '''Test''' within a test page runs that individual test, including all of the content in the page. Basic results regarding the number of verification successes and failures, and the final result are listed at the top.
+
+!img -w 600 http://files/images/FitNesse-Test-Page-Test-Button.png
+
+The test will launch a new browser window that performs the testing script. The original Test Page will now show the lines of the script that have been executed. A summary of the test execution results are displayed at the top of the Test Page:
+
+!img -w 600 http://files/images/FitNesse-Test-Page-Results.png
+
+!anchor suitepage
+!2 Running a Suite Page
+Selecting '''Suite''' on a Suite page runs all tests consecutively and returns the final result of each individual test page. This allows the tester to automatically run all tests in a collection. Click [[here for more information on Test Suites][.FitNesse.FullReferenceGuide.UserGuide.WritingAcceptanceTests.TestSuites]]. 
+
+!img -w 600 http://files/images/FitNesse-Suite-Page-Suite-Button.png
+
+The result of each test is displayed at the top of the Suite Page:
+
+!img -w 900 http://files/images/FitNesse-Suite-Test-Results.png
+
+!2 Testing Results
+Upon completion, each line of a test script will indicate successful completion or errors using highlighting colors. These can vary depending onthe type of method used in the script.
+Possible result statuses include:
+ * [[No color][#nocolor]]
+ * [[Yellow][#yellow]]
+ * [[Green][#green]]
+ * [[Red][#red]]
+ 
+!anchor nocolor
+'''No color'''
+!img -w 900 http://files/images/FitNesse-Test-Result-No-Color.png
+
+No color indicates success for methods that perform no verification, such as '''Click''' or '''Populate'''.
+
+!anchor yellow
+'''Yellow'''
+!img -w 900 http://files/images/FitNesse-Test-Result-Yellow.png
+
+Yellow indicates that an exception has been thrown, usually for syntax errors in the script or due to technical problems. This can apply to any type of method. 
+
+!anchor green
+'''Green'''
+!img -w 900 http://files/images/FitNesse-Test-Result-Green.png
+
+Green indicates that the method has successfully verified the results. This occurs in '''Verify''' and '''Check''' methods.
+
+!anchor red
+'''Red'''
+!img -w 900 http://files/images/FitNesse-Test-Result-Red.png
+
+Red indicates that the method has successfully checked the value, but the results do not match the expected output. This occurs in '''Verify''' and '''Check''' methods.
+
+!2 Testing Details
+More information about the test run for both Suite Pages and Test pages can be found in:
+ * Execution Log
+ * Test History
+ * Page History
+ 
+!3 Execution Log
+The execution log can be accessed with the execution log button at the top of the page:
+
+!img -w 700 http://files/images/FitNesse-Execution-Log-Button.png
+
+This page provides access to logging details, which are also available in FITNESSE_HOME\logs\.
+
+!3 Test History
+The Test History option allows you to view an aggregation of the suite or test page's executions. Click [[here for more information on Test History][.FitNesse.FullReferenceGuide.UserGuide.WritingAcceptanceTests.TestHistory]].
+!img -w 600 http://files/images/FitNesse-History-Options.png
+
+The test link can be drilled into to view the page history.
+
+!img -w 700 http://files/images/FitNesse-Test-History.png
+
+!3 Page History 
+The page history lists the individual test runs and their results. 
+!img -w 600 http://files/images/FitNesse-History-Options.png
+
+!img -w 700 http://files/images/FitNesse-Page-History.png
