@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
@@ -15,7 +13,6 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -40,6 +37,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.appiancorp.ps.automatedtest.common.AppianObject;
+import com.appiancorp.ps.automatedtest.common.AppianWebApi;
 import com.appiancorp.ps.automatedtest.common.Constants;
 import com.appiancorp.ps.automatedtest.common.Screenshot;
 import com.appiancorp.ps.automatedtest.common.Settings;
@@ -324,9 +322,9 @@ public class BaseFixture {
    * @param role
    */
   public void loginIntoWithRole(String url, String role) {
-    String userNamePassword = props.getProperty(role);
-    String username = userNamePassword.substring(0, userNamePassword.indexOf("|"));
-    String password = userNamePassword.substring(userNamePassword.indexOf("|") + 1, userNamePassword.length());
+    String usernamePassword = props.getProperty(role);
+    String username = StringUtils.substringBefore(usernamePassword, "|");
+    String password = StringUtils.substringAfter(usernamePassword, "|");
 
     loginIntoWithUsernameAndPassword(url, username, password);
   }
@@ -381,12 +379,12 @@ public class BaseFixture {
    * @param userRole
    *          user role
    */
-  public void loginWithTermsWithRole(String userRole) {
+  public void loginWithTermsWithRole(String role) {
     TempoLogin.getInstance(settings).navigateToLoginPage(settings.getUrl());
     TempoLogin.getInstance(settings).waitForTerms();
-    String userNamePassword = getProps().getProperty(userRole);
-    String username = userNamePassword.substring(0, userNamePassword.indexOf("|"));
-    String password = userNamePassword.substring(userNamePassword.indexOf("|") + 1, userNamePassword.length());
+    String usernamePassword = props.getProperty(role);
+    String username = StringUtils.substringBefore(usernamePassword, "|");
+    String password = StringUtils.substringAfter(usernamePassword, "|");
 
     TempoLogin.getInstance(settings).loginWithTerms(settings.getUrl(), username, password);
   }
@@ -503,30 +501,29 @@ public class BaseFixture {
    * Calls a web api and returns result<br>
    * <br>
    * FitNesse Examples:<br>
-   * <code>| call web api | WEB_API_NAME | with username | USERNAME |</code>
+   * <code>| call web api | WEB_API_ENDPOINT | with username | USERNAME |</code>
    * 
    * @param webApiName
    */
-  public String callWebApiWithUsername(String webApi, String username) {
-    try {
-      URL url = new URL(settings.getUrl() + "/webapi/" + webApi);
-      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-      conn.setDoOutput(false);
-      conn.setRequestMethod("GET");
-      conn.setRequestProperty("Content-Type", "application/json");
-      byte[] encoded = Base64.encodeBase64(new String(username + ":" + props.getProperty(username)).getBytes());
-      conn.setRequestProperty("Authorization", "Basic " + new String(encoded));
+  public String callWebApiWithUsername(String webApiEndpoint, String username) {
+    String password = props.getProperty(username);
+    return AppianWebApi.getInstance(settings).callWebApi(webApiEndpoint, username, password);
+  }
 
-      String result = IOUtils.toString(conn.getInputStream());
+  /**
+   * Calls a web api and returns result<br>
+   * <br>
+   * FitNesse Examples:<br>
+   * <code>| call web api | WEB_API_ENDPOINT | with role | ROLE |</code>
+   * 
+   * @param webApiName
+   */
+  public String callWebApiWithRole(String webApiEndpoint, String role) {
+    String usernamePassword = props.getProperty(role);
+    String username = StringUtils.substringBefore(usernamePassword, "|");
+    String password = StringUtils.substringAfter(usernamePassword, "|");
 
-      if (conn.getResponseCode() != 200) {
-        throw new Exception("Web API request failed: " + result);
-      } else {
-        return result;
-      }
-    } catch (Exception e) {
-      throw ExceptionBuilder.build(e, settings, "Call Web API");
-    }
+    return AppianWebApi.getInstance(settings).callWebApi(webApiEndpoint, username, password);
   }
 
   /**
@@ -541,10 +538,10 @@ public class BaseFixture {
   /**
    * Get test variable<br>
    * <br>
-   * | get test variable | VARIABLE_NAME |
+   * | get test variable | tv!VARIABLE_NAME |
    */
   public String getTestVariable(String variableName) {
-    return settings.getTestVariable(variableName);
+    return settings.getTestVariable(variableName.replace("tv!", ""));
   }
 
   /**

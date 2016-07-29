@@ -290,6 +290,7 @@ public class Settings {
     if (variable.contains(".")) {
       String variableKey = StringUtils.substringBefore(variable, ".");
       String variableName = StringUtils.substringAfter(variable, ".");
+      LOG.debug("Variable Key: " + variableKey + " and Variable Name: " + variableName);
       Object result = JsonPath.read(testVariables.get(variableKey), "$." + variableName);
       return result.toString();
     } else {
