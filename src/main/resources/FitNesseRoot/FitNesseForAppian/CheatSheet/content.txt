@@ -161,7 +161,7 @@
 | set appian locale to | APPIAN_LOCALE |																: Sets the Appian locale used for date and datetime formatting, options include en_US or en_GB (defaults to en_US)
 | set start datetime | 																					: Used as relative datetime for date/time fields
 | set timeout seconds to | TIMEOUT_SECONDS | 															: Used as the wait timeout in between each command
-| set screenshot path to | SCREENSHOT_PATH | 															: Set the folder where screenshots will be saved. This will create new folders if necessary. Terminate path with "/" to ensure folder creation. (Defaults to ${automated.testing.home}\screenshots\)
+| set screenshot path to | SCREENSHOT_PATH | 															: Set the folder where screenshots will be saved. This will create new folders if necessary. Terminate path with "/" to ensure folder creation. (Defaults to ${automated.testing.home}/screenshots/)
 | set take error screenshots to | SCREENSHOT_BOOLEAN | 													: If true, screenshots will be taken for every failed test case. (Default true)
 | set stop on error to | STOP_ON_ERROR_BOOLEAN | 														: If true, the FitNesse test will stop on any error. (Default false)
 | set test variable | VARIABLE_NAME | with | JSON_VALUE |												: Value must be a JSON string. The variable can then be accessed by using tv!VARIABLE_NAME.JSON_PATH.

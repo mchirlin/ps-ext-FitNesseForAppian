@@ -33,7 +33,7 @@
  1 Enter the following values:
   * Select '''Start new FitNesse instance as part of build'''.
   * Enter ${automated.testing.home} in '''Java working directory'''. 
-  * Enter ${automated.testing.home}\lib\fitnesse-standalone.jar in '''Path to fitnesse.jar'''.
+  * Enter ${automated.testing.home}/lib/fitnesse-standalone.jar in '''Path to fitnesse.jar'''.
   * Enter the folder in the !-GitHub-! repository containing the FitNesse wikis in '''Path to !-FitNesseRoot-!''', this can be subfolders.
   * Enter 8981 in '''Port for FitNesse instance'''.
   * Enter the page for the test or suite in '''Target Page'''.
