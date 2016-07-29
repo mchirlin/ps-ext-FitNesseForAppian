@@ -5,35 +5,79 @@
 
 !anchor browser
 !3 Browser Issues
-Turn off automatic updating for FitNesse test browsers --- selenium reasons
+Turn off automatic updating for FitNesse test browsers. The packaged Selenium WebDrivers only support specific versions of each browser. New versions
+often require newer versions of the WebDrivers. 
 
 !3 Firefox
-Firefox version
-*Version of Firefox*
+Information on using Selenium with Firefox can be found at: https://github.com/SeleniumHQ/selenium/wiki/FirefoxDriver
+
+!4 Test Script Fails to Start in Firefox
+'''Problem''':
+The Firefox browser window opens, but the test script does not proceed or a pop up message stating "Firefox has stopped working" appears. The test script
+may display a message stating:
 
 Failed to connect to binary FirefoxBinary(C:\Program Files\Mozilla Firefox\firefox.exe) on port 7055
 
-Revert back
+'''Resolution''':
+The Selenium Firefox web driver that is included does not support the version of Firefox in use. Reverting to an earlier version of Firefox to address this problem. Alternatively, if a newer version
+of the Selenium Firefox web driver is released, the web driver can be replaced instead. 
 
 !3 Chrome
+Information on using Selenium with Chrome can be found at: https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver
 
 !3 IE
-https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver
+
+Information on using Selenium with Internet Explorer can be found at: https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver
+
+
+!4 Test Script Does not Login in Internet Explorer
+'''Problem''':
+Nothing occurs when the test script attempts to log in. The test script fails to log into the Appian application and returns a message in the test script resembling the following: 
+
+ERROR com.appiancorp.ps.automatedtest.exception.ExceptionBuilder - Login
+org.openqa.selenium.TimeoutException: Timed out after 30 seconds waiting for presence of element located by: By.xpath: //form[@id = 'loginForm']/descendant::input[contains(@class, 'btn')]
+Build info: version: '2.53.0', revision: '35ae25b1534ae328c771e0856c93e187490ca824'
+
+'''Resolution''':
+The Windows Firewall blocks the Internet Explorer Selenium WebDriver.
+It may not be feasible to change firewall settings. The following solution does not include modifiying the Firewall configurations.
+
+ 1. Open Internet Explorer.
+ 2. Click on Settings. Go to '''Internet options'''.
+ 3. Click on the '''Security''' Tab.
+ 4. There you will find 4 zones named '''Internet, Local Intranet, Trusted Sites''' and '''Restricted Sites'''.
+ 5. There will be a check box named '''Enable Protected Mode'''. Make sure it is checked in all 4 zones.
+ 6. Close all the Internet Explorer browsers/tabs before rerunning your Appian FitNesse Script.
+
+!4 Other Reasons the Test Script Fails to Start in Internet Explorer
+'''Problem''':
+The test script fails to start and run in Internet Explorer. This may be due to a number of other reasons.
+
+'''Resolution''':
+Check the following other information:
+
+ * Verify that the version of Internet Explorer being used is the 32 bit Internet Explorer
+ * Verify that the zoom setting of the browser is at 100%.
+ * Verify that the Internet Explorer Web Driver supports the version of Internet Explorer installed. 
 
 !anchor startup
 !3 Startup Issues
-Issues
-
-*SlimError*
+'''Problem:'''
+A test script may fail to start and display the following message at the top of the script:
 
 Could not complete testing: fitnesse.slim.SlimError: Error SLiM server died before a connection could be established. Error: Could not find or load main class fitnesse.slim.SlimService
 
-TESTING_HOME was incorrect
+'''Solution:'''
+TESTING_HOME is incorrect. Modify the fitnesse.properties file in the root directory of the FitNesse package so that field FitNesseRootDir is set to the actual directory of the project.
 
 
 !2 Fixing Errors in your Test Scripts
 !3 Spacing
-!-FitNesse-! tests can be fragile due to issues with spacing in test scripts.  Tips for dealing with spacing issues: 
+'''Problem:'''
+!-FitNesse-! tests can be fragile due to issues with spacing in test scripts.  
+
+'''Resolution:'''
+Tips for dealing with spacing issues: 
  * One space after vertical line | is usually OK, but 2 spaces may break your script
  * Avoid spaces at the beginning of a line before any |
  * In test scripts, after blank lines you need to include a '''|script|''' to continue your script. In scenarios, blank lines will end your scenario
@@ -41,19 +85,28 @@ TESTING_HOME was incorrect
 !img http://files/images/FitNesse-Format.png
  
 !3 !-PascalCase-! in Test Script 
+'''Problem:'''
 !-FitNesse-! recognizes the use of PascalCase as a Wiki Word. Notice the question mark (?) following the word !-PascalCase-!. This indicates that FitNesse is attempting to link to another wiki page.
+
+'''Resolution:'''
 To create a test script with a field or input that requires the use of a !-PascalCase-! word, escape the table by placing an exclamation mark at the beginning, e.g. '''!|script|'''  instead of '''|script|'''.
-!see .FitNesse.FullReferenceGuide.UserGuide.FitNesseWiki.WikiWord
+see the [[Full Reference Guide for more on wiki words][.FitNesse.FullReferenceGuide.UserGuide.FitNesseWiki.WikiWord]]
 
 !3 Add wait times for Fragile tests 
-For tests that may be fragile or take longer than others, add '''| wait for | X seconds |''' before the test step and report this to Forum.  Fragile test steps can include:
+'''Problem:'''
+!-FitNesse-! tests that may be fragile or take longer than others may fail prematurely.
+
+'''Resolution:'''
+Add '''| wait for | X seconds |''' before the test step and report this to Forum.  Fragile test steps can include:
  * Uploading large files
  * Dynamic SAIL components
  * Long database queries
 
 !3 !-FitNesse-! Log
-If you are unable to resolve any issue, look at the error log in '''${automated.testing.home}/logs/fitnesse.log'''. To expedite a resolution include error log information with any question on Forum. For additional debugging information increase the logging level in ${automated.testing.home}/log4j.properties to DEBUG.
+If you are unable to resolve any issue, look at the error log in '''${automated.testing.home}/logs/fitnesse.log'''. To expedite a resolution include error log information with any question on Forum. For additional debugging information increase the logging level in ${automated.testing.home}/log4j.properties to DEBUG. 
 !see TurningOnLogging
 
 !anchor logging
 !3 Logging
+
+For more information on logging, see the [[Full Reference Guide on System Logging][.FitNesse.FullReferenceGuide.UserGuide.AdministeringFitNesse.LogFiles]].
