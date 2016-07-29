@@ -154,6 +154,8 @@
 ![:
 | setup selenium web driver with | BROWSER_NAME | browser | 											: Initializes Selenium Web Driver and opens browser, options include FIREFOX, CHROME, IE
 | tear down selenium web driver |																		: Tears down Selenium Web Driver and closes browser
+| call web api | WEB_API_ENDPOINT | with username | USERNAME |											: Calls a web api and returns a string. User defined by username must have permission to access the web api.
+| call web api | WEB_API_ENDPOINT | with role | ROLE_NAME |												: Calls a web api and returns a string. User defined by role must have permission to access the web api.
 | set appian url to | APPIAN_URL | 																		: Sets the default appian url
 | set appian version to | APPIAN_VERSION |																: Sets the default appian version
 | set appian locale to | APPIAN_LOCALE |																: Sets the Appian locale used for date and datetime formatting, options include en_US or en_GB (defaults to en_US)
@@ -162,6 +164,7 @@
 | set screenshot path to | SCREENSHOT_PATH | 															: Set the folder where screenshots will be saved. This will create new folders if necessary. Terminate path with "/" to ensure folder creation. (Defaults to ${automated.testing.home}\screenshots\)
 | set take error screenshots to | SCREENSHOT_BOOLEAN | 													: If true, screenshots will be taken for every failed test case. (Default true)
 | set stop on error to | STOP_ON_ERROR_BOOLEAN | 														: If true, the FitNesse test will stop on any error. (Default false)
+| set test variable | VARIABLE_NAME | with | JSON_VALUE |												: Value must be a JSON string. The variable can then be accessed by using tv!VARIABLE_NAME.JSON_PATH.
 | take screenshot | FILE_NAME | 																		: Take a screenshot with the name (do not include the extension)
 | login with username | USERNAME | 																		: Uses the previously set appian url and the password associated with the user from the configs/user.properties file
 | login with role| USER_ROLE |																			: Uses the previously set appian url and the username/password associated with the role from the configs/user.properties file
@@ -176,6 +179,7 @@
 | get random integer from | MIN_INT | to | MAX_INT | 													: Use with $VARIABLE_NAME= for random variables
 | get random decimal from | MIN_DECIMAL | to | MAX_DECIMAL | 											: Use with $VARIABLE_NAME= for random variables
 | get random decimal from | MIN_DECIMAL | to | MAX_DECIMAL | with | DECIMAL_PLACES | 					: Use with $VARIABLE_NAME= for random variables
+| get test variable | tv!VARIABLE_NAME.JSON_PATH |														: Use with $VARIABLE_NAME = to assign a tv! variable to a local variable for concatenation purposes.
 | open | URL |																							: Opens a particular URL, useful for loging in if using SSO
 | refresh | 																							: refreshes screen
 | logout | 																								: Logout of Appian

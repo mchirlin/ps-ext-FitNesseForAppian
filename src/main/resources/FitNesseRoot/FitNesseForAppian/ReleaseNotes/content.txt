@@ -8,8 +8,9 @@
   * Milestone fields implemented
   * Ability to refer to java variables as tv!VAR_NAME
   * NEW METHOD: click on save changes
-  * NEW METHOD: call web api
-  * NEW METHOD: save variable as
+  * NEW METHOD: call web api with USERNAME/ROLE
+  * NEW METHOD: save variable as VAR_NAME
+  * NEW METHOD: get variable VAR_NAME
  * Bugs
   * Apsotrophes no longer cause errors
  * Other
