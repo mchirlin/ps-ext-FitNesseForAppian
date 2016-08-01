@@ -4,6 +4,7 @@ import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -69,7 +70,7 @@ public class TempoFileUploadField extends AbstractTempoField {
 
   @Override
   public void populate(WebElement fieldLayout, String... params) {
-    String fieldValue = getParam(1, params);
+    String fieldValue = FilenameUtils.separatorsToSystem(getParam(1, params));
 
     if (LOG.isDebugEnabled()) LOG.debug("POPULATION [" + fieldValue + "]");
 
@@ -103,7 +104,7 @@ public class TempoFileUploadField extends AbstractTempoField {
 
   @Override
   public boolean contains(WebElement fieldLayout, String... params) {
-    String fieldValue = getParam(0, params);
+    String fieldValue = FilenameUtils.separatorsToSystem(getParam(0, params));
 
     // For read-only
     try {
@@ -112,7 +113,7 @@ public class TempoFileUploadField extends AbstractTempoField {
     }
 
     fieldValue = Paths.get(fieldValue).getFileName().toString();
-    String compareString = capture(fieldLayout);
+    String compareString = FilenameUtils.separatorsToSystem(capture(fieldLayout));
 
     if (LOG.isDebugEnabled())
       LOG.debug("FILE UPLOAD FIELD COMPARISON : Field value [" + fieldValue + "] compared to Entered value [" + compareString + "]");
