@@ -96,6 +96,7 @@
 | populate | FIELD_TYPE | field | [FIELD_INDEX] | with | VALUE(S) | 									: Use this to populate the 1st, 2nd, 3rd, ... field of a specific type with no label, currently only compatible with FIELD_TYPEs of TEXT, PARAGRAPH, and FILE_UPLOAD. WARNING: Integer, Decimal, and Encrypted text fields will be considered as Text fields.
 | populate field | FIELD_LABEL OR [FIELD_INDEX] | in section | SECTION_NAME | with | VALUE(S) |			: Populate a field in a section with no label<br/>
 | populate grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | with | VALUE(S) |	: Populate a grid field with a value (Column and Row Numbers should be in square brackets [])
+| populate grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | with value | VALUE |	: Populate a grid field with a single value.
 | clear field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] |  									: Use this to clear a field
 | clear field | FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX] | of | VALUE_TO_REMOVE | 			: Use this to remove a specific value from a picker
 | get form title |																						: Use with FitNesse keyword 'check' to verify title
@@ -125,6 +126,7 @@
 | verify button | BUTTON_NAME or BUTTON_NAME[INDEX] | is not present |									: Verify button with label is not present
 | verify section | SECTION_NAME | contains validation message | VALIDATION_MESSAGE(S) |					: Verify section with label contains a specific validation message
 | verify grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | contains | VALUE(S) |	: Verify a grid field contains a value (Column and Row Numbers should be in square brackets [])
+| verify grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | contains value | VALUE |	: Verify a grid field contains a single value.
 | verify grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | row | [ROW_INDEX] | is selected | 		: Verifies if row in grid is selected (Row Numbers should be in square brackets [])
 | verify chart | CHART_LABEL | is present |																: Verifies a chart with given label is present
 | verify chart | CHART_LABEL | is not present |															: Verifies a chart with given label is not present

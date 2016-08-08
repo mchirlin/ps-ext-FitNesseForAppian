@@ -172,7 +172,7 @@
 |populate grid|EditableGrid[2]|column|RadioField     |row|[1]|with|Option 1                                                              |
 |populate grid|EditableGrid[2]|column|RadioField     |row|[2]|with|Option 2                                                              |
 |populate grid|EditableGrid[2]|column|[4]            |row|[1]|with|Option 1,Option 2                                                     |
-|populate grid|EditableGrid[2]|column|[4]            |row|[2]|with|Option 2                                                              |
+|populate grid|EditableGrid[2]|column|[4]            |row|[2]|with value|[1]                                                                   |
 |populate grid|EditableGrid[3]|column|FileUploadField|row|[1]|with|${automated.testing.home}\FitNesseRoot\files\images\Fitnesse-Start.png|
 |populate grid|EditableGrid[3]|column|FileUploadField|row|[2]|with|${automated.testing.home}\FitNesseRoot\files\images\Fitnesse-Error.png|
 
@@ -209,7 +209,7 @@
 |verify grid|EditableGrid[2]|column|RadioField     |row|[1]|contains|Option 1          |
 |verify grid|EditableGrid[2]|column|RadioField     |row|[2]|contains|Option 2          |
 |verify grid|EditableGrid[2]|column|[4]            |row|[1]|contains|Option 1,Option 2 |
-|verify grid|EditableGrid[2]|column|[4]            |row|[2]|contains|Option 2          |
+|verify grid|EditableGrid[2]|column|[4]            |row|[2]|contains value|[1]               |
 |verify grid|EditableGrid[3]|column|FileUploadField|row|[1]|contains|Fitnesse-Start.png|
 |verify grid|EditableGrid[3]|column|FileUploadField|row|[2]|contains|Fitnesse-Error.png|
 
@@ -219,11 +219,10 @@
 |check|get grid|EditableGrid[2]|column|RadioField     |row|[1]|value|Option 1          |
 |check|get grid|EditableGrid[2]|column|RadioField     |row|[2]|value|Option 2          |
 |check|get grid|EditableGrid[2]|column|[4]            |row|[1]|value|Option 1,Option 2 |
-|check|get grid|EditableGrid[2]|column|[4]            |row|[2]|value|Option 2          |
 |check|get grid|EditableGrid[3]|column|FileUploadField|row|[1]|value|Fitnesse-Start.png|
 |check|get grid|EditableGrid[3]|column|FileUploadField|row|[2]|value|Fitnesse-Error.png|
 
-!| script                                                               |
+!| script                                                         |
 |verify grid|EditableGrid[4]|column|[1]|row|[1]|contains|Test User|
 #|verify grid  |EditableGrid[4]|column|[2]|row|[1]|contains|AUT All Users            |
 #|verify grid  |EditableGrid[4]|column|[3]|row|[1]|contains|Test Twoser,AUT All Users|

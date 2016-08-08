@@ -258,9 +258,8 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
     assertTrue(fixture.verifyGridColumnRowContains("[3]", "[4]", "[1]", new String[] { "Option 1", "Option 2" }));
     assertEquals("Option 1,Option 2", fixture.getGridColumnRowValue("EditableGrid[2]", "[4]", "[1]"));
 
-    // fixture.populateGridColumnRowWith("EditableGrid[2]", "CheckboxField", "[2]", new String[]{"Option 2"});
-    // assertTrue(fixture.verifyGridColumnRowContains("EditableGrid[2]", "CheckboxField", "[2]", new String[]{"Option 2"}));
-    // assertEquals("Option 2", fixture.getGridColumnRowValue("EditableGrid[2]", "CheckboxField", "[2]"));
+    fixture.populateGridColumnRowWith("EditableGrid[2]", "CheckboxField", "[2]", new String[] { "[1]" });
+    assertTrue(fixture.verifyGridColumnRowContains("EditableGrid[2]", "CheckboxField", "[2]", new String[] { "[1]" }));
 
     // TODO Read Only
     // TODO Clear
