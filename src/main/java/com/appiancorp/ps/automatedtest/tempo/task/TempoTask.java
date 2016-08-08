@@ -30,7 +30,7 @@ public class TempoTask extends AppianObject implements Refreshable, Clickable, R
 
   @Override
   public String getXpath(String... params) {
-    String taskName = params[0];
+    String taskName = getParam(0, params);
 
     if (isFieldIndex(taskName)) {
       int rNum = getIndexFromFieldIndex(taskName);
@@ -43,7 +43,7 @@ public class TempoTask extends AppianObject implements Refreshable, Clickable, R
 
   @Override
   public void click(String... params) {
-    String taskName = params[0];
+    String taskName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK TASK [" + taskName + "]");
 
@@ -57,7 +57,7 @@ public class TempoTask extends AppianObject implements Refreshable, Clickable, R
 
   @Override
   public void waitFor(String... params) {
-    String taskName = params[0];
+    String taskName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR TASK [" + taskName + "]");
 
@@ -71,7 +71,7 @@ public class TempoTask extends AppianObject implements Refreshable, Clickable, R
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String taskName = params[0];
+    String taskName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR TASK [" + taskName + "]");
 
@@ -109,7 +109,7 @@ public class TempoTask extends AppianObject implements Refreshable, Clickable, R
 
   @Override
   public String regexCapture(String regex, Integer group, String... params) {
-    String taskName = params[0];
+    String taskName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("REGEX FOR TASK [" + regex + "]");
 

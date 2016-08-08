@@ -27,7 +27,7 @@ public class TempoRecordType extends AppianObject implements Clickable {
 
   @Override
   public String getXpath(String... params) {
-    String type = params[0];
+    String type = getParam(0, params);
 
     if (isFieldIndex(type)) {
       int rNum = getIndexFromFieldIndex(type);
@@ -40,7 +40,7 @@ public class TempoRecordType extends AppianObject implements Clickable {
 
   @Override
   public void click(String... params) {
-    String type = params[0];
+    String type = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK RECORD TYPE [" + type + "]");
 
@@ -54,7 +54,7 @@ public class TempoRecordType extends AppianObject implements Clickable {
 
   @Override
   public void waitFor(String... params) {
-    String type = params[0];
+    String type = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR RECORD TYPE [" + type + "]");
 

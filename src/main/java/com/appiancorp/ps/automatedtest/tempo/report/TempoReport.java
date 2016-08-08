@@ -28,7 +28,7 @@ public class TempoReport extends AppianObject implements Clickable {
 
   @Override
   public String getXpath(String... params) {
-    String report = params[0];
+    String report = getParam(0, params);
 
     if (isFieldIndex(report)) {
       int rNum = getIndexFromFieldIndex(report);
@@ -41,7 +41,7 @@ public class TempoReport extends AppianObject implements Clickable {
 
   @Override
   public void click(String... params) {
-    String reportName = params[0];
+    String reportName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK REPORT [" + reportName + "]");
 
@@ -56,7 +56,7 @@ public class TempoReport extends AppianObject implements Clickable {
 
   @Override
   public void waitFor(String... params) {
-    String reportName = params[0];
+    String reportName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR [" + reportName + "]");
 
@@ -69,7 +69,7 @@ public class TempoReport extends AppianObject implements Clickable {
   }
 
   public boolean waitForReturn(int timeout, String... params) {
-    String reportName = params[0];
+    String reportName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR [" + reportName + "]");
 

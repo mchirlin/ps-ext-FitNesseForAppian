@@ -1,0 +1,27 @@
+!3 Please fill out the following before testing
+ * If your TESTING_HOME is located somewhere other than ${automated.testing.home}, update ''automated.testing.home'' in TESTING_HOME/configs/custom.properties
+  * For more information look at [[Changing !-FitNesse-! for Appian installation directory][.FitNesseForAppian.Documentation.Administration.ChangeFitnesseForAppianInstallationDirectory]].
+ * Update the following
+  * Replace ''APPIAN_URL'' with Appian URL including /suite (e.g. https://forum.appian.com/suite)
+  * Replace ''APPIAN_LOCALE'' with (en_US or en_GB) to handle differences in how dates are displayed
+  * Replace ''APPIAN_VERSION'' with (7.10, 7.11, 16.1, 16.2, 16.3)
+  * Replace ''APPIAN_USERNAME'' with username for Appian URL above
+  * Update ${automated.testing.home}/configs/users.properties and add a line for the above username (e.g. test.user=password)
+  
+!***> FitNesse Configurations
+!define TEST_SYSTEM {slim}
+!define COMMAND_PATTERN {java -Dlog4j.configuration=file:///${automated.testing.home}/log4j.properties -cp %p %m}
+!path ${automated.testing.home}/**.jar
+***!
+!*** Initialization
+!| script                              |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
+|setup selenium web driver with browser|FIREFOX                                             |
+|set appian url to                     |APPIAN_URL                                          |
+|set appian version to                 |APPIAN_VERSION                                      |
+|set appian locale to                  |APPIAN_LOCALE                                       |
+***!
+!*** Login to Tempo and go to Records
+!| script                     |
+|login with username|test.user|
+|click on menu      |Records  |
+***!

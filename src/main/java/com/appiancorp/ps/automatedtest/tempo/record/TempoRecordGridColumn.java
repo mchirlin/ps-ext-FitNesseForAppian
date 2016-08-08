@@ -27,14 +27,14 @@ public class TempoRecordGridColumn extends AppianObject implements Clickable {
 
   @Override
   public String getXpath(String... params) {
-    String columnName = params[0];
+    String columnName = getParam(0, params);
 
     return xpathFormat(XPATH_ABSOLUTE_RECORD_GRID_COLUMN_SORT_LINK, columnName);
   }
 
   @Override
   public void waitFor(String... params) {
-    String columnName = params[0];
+    String columnName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR COLUMN [" + columnName + "]");
 
@@ -47,7 +47,7 @@ public class TempoRecordGridColumn extends AppianObject implements Clickable {
 
   @Override
   public void click(String... params) {
-    String columnName = params[0];
+    String columnName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ON COLUMN [" + columnName + "]");
 

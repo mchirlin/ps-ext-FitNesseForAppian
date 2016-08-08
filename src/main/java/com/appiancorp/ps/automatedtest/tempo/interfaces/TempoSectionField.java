@@ -43,8 +43,8 @@ public class TempoSectionField extends TempoSection implements
 
   @Override
   public String getXpath(String... params) {
-    String fieldName = params[0];
-    String sectionName = params[1];
+    String fieldName = getParam(0, params);
+    String sectionName = getParam(1, params);
 
     // Scroll the field layout into view
     if (isFieldIndex(fieldName)) {
@@ -57,8 +57,8 @@ public class TempoSectionField extends TempoSection implements
 
   @Override
   public void populateMultiple(String[] fieldValues, String... params) {
-    String fieldName = params[0];
-    String fieldSection = params[1];
+    String fieldName = getParam(0, params);
+    String fieldSection = getParam(1, params);
 
     for (String fieldValue : fieldValues) {
       params = new String[] { fieldName, fieldSection, fieldValue };
@@ -68,9 +68,9 @@ public class TempoSectionField extends TempoSection implements
 
   @Override
   public void populate(String... params) {
-    String fieldName = params[0];
-    String fieldSection = params[1];
-    String fieldValue = params[2];
+    String fieldName = getParam(0, params);
+    String fieldSection = getParam(1, params);
+    String fieldValue = getParam(2, params);
 
     WebElement fieldLayout = getWebElement(fieldName, fieldSection);
     TempoFieldFactory.getInstance(settings).populate(fieldLayout, fieldName, fieldValue);
@@ -78,8 +78,8 @@ public class TempoSectionField extends TempoSection implements
 
   @Override
   public void clear(String... params) {
-    String fieldName = params[0];
-    String sectionName = params[1];
+    String fieldName = getParam(0, params);
+    String sectionName = getParam(1, params);
 
     WebElement fieldLayout = getWebElement(fieldName, sectionName);
     TempoFieldFactory.getInstance(settings).clear(fieldLayout, fieldName);
@@ -99,8 +99,8 @@ public class TempoSectionField extends TempoSection implements
 
   @Override
   public boolean containsMultiple(String[] fieldValues, String... params) {
-    String fieldName = params[0];
-    String sectionName = params[1];
+    String fieldName = getParam(0, params);
+    String sectionName = getParam(1, params);
 
     for (String fieldValue : fieldValues) {
       params = new String[] { fieldName, sectionName, fieldValue };
@@ -111,9 +111,9 @@ public class TempoSectionField extends TempoSection implements
 
   @Override
   public boolean contains(String... params) {
-    String fieldName = params[0];
-    String sectionName = params[1];
-    String fieldValue = params[2];
+    String fieldName = getParam(0, params);
+    String sectionName = getParam(1, params);
+    String fieldValue = getParam(2, params);
 
     WebElement fieldLayout = getWebElement(fieldName, sectionName);
     if (!TempoFieldFactory.getInstance(settings).contains(fieldLayout, fieldName, fieldValue)) return false;

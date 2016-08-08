@@ -1,0 +1,23 @@
+'''Full Upgrade'''
+
+ 1 Rename existing !-FitNesse-! for Appian installation, which will be referred to as TESTING_HOME.
+ 1 Download the newest version of !-FitNesse-! for Appian from [[Appian Forum][https://forum.appian.com/suite/tempo/records/item/lMBCLGOdlMUpdGVqW3dQaIKmclBmvvNEj8vu_cjb7T-5YiPr4Fu8ly5Yj1s09uenE4RYzA8zKyx7eiUh-mlLnOGtjH9N_m16m1I3ZvKT4QezhOWpQ/view/summary]].
+ 1 Unzip ''!-FitNesse-! for Appian'' into TESTING_HOME.
+ 1 Copy the following files from the previous installation of ''!-FitNesse for Appian-!'':
+  * '''TESTING_HOME/fitnesse.properties'''
+  * '''TESTING_HOME/log4j.properties'''
+  * '''TESTING_HOME/configs/custom.properties'''
+  * '''TESTING_HOME/configs/users.properties'''
+  * Any other custom files within the installation directory
+ 1 If not using default !-FitNesseRoot-! folder, for example using version control, copy the following directories from the new installation into your existing !-FitNesseRoot-! directory:
+  * '''!-FitNesseForAppian-!''' - contains Appian specific documentation and examples
+  * '''!-FrontPage-!''' - contains links to Appian specific documentation on the home page, make sure to merge in any changes made to the out of the box !-FrontPage-!
+  * '''!-PageFooter-!''' - contains link to Appian specific documentaiton in the footer
+  
+'''Partial Upgrade'''
+!note Be aware this may not always work as new methods may require additional libraries which will only be included in the full installation pacakge
+If you simply want access to new methods without the new documentation, examples, scenarios, etc. do the following:
+ 1 Download the newest version of !-FitNesse-! for Appian from [[Appian Forum][https://forum.appian.com/suite/tempo/records/item/lMBCLGOdlMUpdGVqW3dQaIKmclBmvvNEj8vu_cjb7T-5YiPr4Fu8ly5Yj1s09uenE4RYzA8zKyx7eiUh-mlLnOGtjH9N_m16m1I3ZvKT4QezhOWpQ/view/summary]].
+ 1 Extract the zip into a temporary directory.
+ 1 Replace '''fitnesse-for-appian-x.x.jar''' in TESTING_HOME/lib/appian with version from extracted zip. Make sure to only leave one fitnesse-for-appian jar.
+ 

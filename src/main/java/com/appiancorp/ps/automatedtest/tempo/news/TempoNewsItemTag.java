@@ -29,16 +29,16 @@ public class TempoNewsItemTag extends TempoNewsItem implements Clickable, Refres
 
   @Override
   public String getXpath(String... params) {
-    String newsText = params[0];
-    String recordTag = params[1];
+    String newsText = getParam(0, params);
+    String recordTag = getParam(1, params);
 
     return xpathFormat(XPATH_ABSOLUTE_NEWS_ITEM_RECORD_TAG, newsText, recordTag);
   }
 
   @Override
   public void waitFor(String... params) {
-    String newsText = params[0];
-    String recordTag = params[1];
+    String newsText = getParam(0, params);
+    String recordTag = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR NEWS ITEM [" + newsText + "] and TAG [" + recordTag + "]");
 
@@ -51,8 +51,8 @@ public class TempoNewsItemTag extends TempoNewsItem implements Clickable, Refres
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String newsText = params[0];
-    String recordTag = params[1];
+    String newsText = getParam(0, params);
+    String recordTag = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR NEWS ITEM [" + newsText + "] and TAG [" + recordTag + "]");
 
@@ -68,8 +68,8 @@ public class TempoNewsItemTag extends TempoNewsItem implements Clickable, Refres
 
   @Override
   public void click(String... params) {
-    String newsText = params[0];
-    String recordTag = params[1];
+    String newsText = getParam(0, params);
+    String recordTag = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ON NEWS ITEM [" + newsText + "] and RECORD TAG [" + recordTag + "]");
 

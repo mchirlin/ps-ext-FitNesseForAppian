@@ -23,16 +23,16 @@ public class TempoTaskDeadline extends AppianObject implements WaitFor {
 
   @Override
   public String getXpath(String... params) {
-    String taskName = params[0];
-    String deadline = params[1];
+    String taskName = getParam(0, params);
+    String deadline = getParam(1, params);
 
     return xpathFormat(XPATH_ABSOLUTE_TASK_DEADLINE, taskName, deadline);
   }
 
   @Override
   public void waitFor(String... params) {
-    String taskName = params[0];
-    String deadline = params[1];
+    String taskName = getParam(0, params);
+    String deadline = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("TASK [" + taskName + "] HAS DEADLINE [" + deadline + "]");
 

@@ -26,7 +26,7 @@ public class TempoRadioFieldOption extends TempoRadioField implements Clickable 
 
   @Override
   public String getXpath(String... params) {
-    String optionName = params[0];
+    String optionName = getParam(0, params);
 
     if (isFieldIndex(optionName)) {
       String oName = getFieldFromFieldIndex(optionName);
@@ -39,7 +39,7 @@ public class TempoRadioFieldOption extends TempoRadioField implements Clickable 
 
   @Override
   public void click(String... params) {
-    String optionName = params[0];
+    String optionName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("RADIO BUTTON OPTION CLICK : " + optionName);
 
@@ -53,7 +53,7 @@ public class TempoRadioFieldOption extends TempoRadioField implements Clickable 
 
   @Override
   public void waitFor(String... params) {
-    String optionName = params[0];
+    String optionName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR RADIO BUTTON OPTION CLICK : " + optionName);
 

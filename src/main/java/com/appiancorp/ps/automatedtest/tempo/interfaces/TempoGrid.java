@@ -35,7 +35,7 @@ public class TempoGrid extends AppianObject implements WaitFor, Container {
 
   @Override
   public String getXpath(String... params) {
-    String gridName = params[0];
+    String gridName = getParam(0, params);
 
     WebElement grid = null;
     if (isFieldIndex(gridName)) {

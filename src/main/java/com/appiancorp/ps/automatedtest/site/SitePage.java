@@ -28,14 +28,14 @@ public class SitePage extends AppianObject implements WaitFor, Clickable, Naviga
 
   @Override
   public String getXpath(String... params) {
-    String sitePage = params[0];
+    String sitePage = getParam(0, params);
 
     return xpathFormat(XPATH_ABSOLUTE_SITE_PAGE_LINK, sitePage);
   }
 
   @Override
   public void click(String... params) {
-    String sitePage = params[0];
+    String sitePage = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK [" + sitePage + "]");
 
@@ -49,7 +49,7 @@ public class SitePage extends AppianObject implements WaitFor, Clickable, Naviga
 
   @Override
   public void waitFor(String... params) {
-    String sitePage = params[0];
+    String sitePage = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR [" + sitePage + "]");
 
@@ -62,8 +62,8 @@ public class SitePage extends AppianObject implements WaitFor, Clickable, Naviga
 
   @Override
   public void navigateTo(String... params) {
-    String siteUrl = params[0];
-    String pageUrl = params[1];
+    String siteUrl = getParam(0, params);
+    String pageUrl = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("NAVIGATE TO SITE [" + siteUrl + "] PAGE [" + pageUrl + "]");
 

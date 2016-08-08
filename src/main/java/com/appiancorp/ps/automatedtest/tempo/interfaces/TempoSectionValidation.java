@@ -35,7 +35,7 @@ public class TempoSectionValidation extends TempoSection implements WaitForMulti
 
   @Override
   public void waitForMultiple(String[] validationMessages, String... params) {
-    String sectionName = params[0];
+    String sectionName = getParam(0, params);
 
     if (LOG.isDebugEnabled())
       LOG.debug("WAIT FOR SECTION [" + sectionName + "] VALIDATIONS [" + String.join(",", validationMessages) + "]");
@@ -55,7 +55,7 @@ public class TempoSectionValidation extends TempoSection implements WaitForMulti
 
   @Override
   public String capture(String... params) {
-    String sectionName = params[0];
+    String sectionName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("GET SECTION VALIDATIONS [" + sectionName + "]");
 

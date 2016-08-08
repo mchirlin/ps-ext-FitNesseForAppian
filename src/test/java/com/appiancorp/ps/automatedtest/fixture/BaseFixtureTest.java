@@ -178,6 +178,14 @@ public class BaseFixtureTest extends AbstractTest {
     }
   }
 
+  @Test
+  public void testCallWebApi() {
+    bFixture.setAppianUrlTo(TEST_SITE_URL);
+
+    assertEquals("test-web-api", bFixture.callWebApiWithUsername("test-web-api", TEST_USERNAME));
+    assertEquals("test-web-api", bFixture.callWebApiWithRole("test-web-api", TEST_ROLE));
+  }
+
   @AfterClass
   public static void tearDown() throws Exception {
 

@@ -37,15 +37,15 @@ public class TempoFieldFactory extends AppianObject implements
 
   public void populateMultiple(String[] fieldValues, String... params) {
     if (params.length == 1) {
-      String fieldName = params[0];
+      String fieldName = getParam(0, params);
 
       for (String fieldValue : fieldValues) {
         WebElement fieldLayout = TempoField.getInstance(settings).getWebElement(params);
         populate(fieldLayout, fieldName, fieldValue);
       }
     } else {
-      String fieldType = params[0];
-      String fieldName = params[1];
+      String fieldType = getParam(0, params);
+      String fieldName = getParam(1, params);
 
       AbstractTempoField tempoField = getFieldTypeFromString(fieldType);
       for (String fieldValue : fieldValues) {
@@ -57,12 +57,11 @@ public class TempoFieldFactory extends AppianObject implements
 
   @Override
   public void populate(WebElement fieldLayout, String... params) {
-    String fieldName = params[0];
-    String fieldValue = params[1];
+    String fieldName = getParam(0, params);
+    String fieldValue = getParam(1, params);
 
     try {
       AbstractTempoField tempoField = getFieldType(fieldLayout);
-      fieldValue = parseVariable(fieldValue);
 
       scrollIntoView(fieldLayout);
       tempoField.populate(fieldLayout, fieldName, fieldValue);
@@ -76,8 +75,8 @@ public class TempoFieldFactory extends AppianObject implements
     if (params.length == 1) {
       TempoField.getInstance(settings).waitFor(params);
     } else {
-      String fieldType = params[0];
-      String fieldName = params[1];
+      String fieldType = getParam(0, params);
+      String fieldName = getParam(1, params);
 
       try {
         AbstractTempoField tempoField = getFieldTypeFromString(fieldType);
@@ -97,7 +96,7 @@ public class TempoFieldFactory extends AppianObject implements
 
   @Override
   public void clear(WebElement fieldLayout, String... params) {
-    String fieldName = params[0];
+    String fieldName = getParam(0, params);
 
     try {
       AbstractTempoField tempoField = getFieldType(fieldLayout);
@@ -140,7 +139,7 @@ public class TempoFieldFactory extends AppianObject implements
 
   @Override
   public String capture(WebElement fieldLayout, String... params) {
-    String fieldName = params[0];
+    String fieldName = getParam(0, params);
 
     try {
       AbstractTempoField tempoField = getFieldType(fieldLayout);
@@ -174,7 +173,7 @@ public class TempoFieldFactory extends AppianObject implements
 
   @Override
   public boolean containsMultiple(String[] fieldValues, String... params) {
-    String fieldName = params[0];
+    String fieldName = getParam(0, params);
 
     for (String fieldValue : fieldValues) {
       WebElement fieldLayout = TempoField.getInstance(settings).getWebElement(params);
@@ -186,12 +185,11 @@ public class TempoFieldFactory extends AppianObject implements
 
   @Override
   public boolean contains(WebElement fieldLayout, String... params) {
-    String fieldName = params[0];
-    String fieldValue = params[1];
+    String fieldName = getParam(0, params);
+    String fieldValue = getParam(1, params);
 
     try {
       AbstractTempoField tempoField = getFieldType(fieldLayout);
-      fieldValue = parseVariable(fieldValue);
       return tempoField.contains(fieldLayout, fieldValue);
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Field contains", fieldName, fieldValue);

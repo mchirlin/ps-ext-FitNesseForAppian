@@ -1,0 +1,29 @@
+ * [[Setting variables][#settingVariables]]
+ * [[Generating random variables][#generatingData]]
+
+!anchor settingVariables
+!3 Why are there so many ways to set variables in !-FitNesse-! for Appian?!
+I can set variables in the following ways:
+
+![:
+!define VAR_NAME {VAR_VALUE}
+|$VAR_NAME=        | method that returns VAR_VALUE |
+|set test variable | VAR_NAME | with | VAR_VALUE |
+]!
+What are the differences? Why are there so many?!
+
+!1 TODO Add link to documentation
+
+!anchor generatingData
+!3 How can I create random data for my tests
+
+Regex (Field, News, Record, Task, etc...)
+Get field values (field, section, grid)
+get random (string, int, decimal, date)
+call web api (mockaroo)
+
+!3 Creating Unique Test Data
+The ''!-FitNesse-! for Appian'' tool has various ways to create unique random data to ensure uniqueness of your test.  Random variable generations includes:
+ * Strings - contains letters and number that are based on a user defined length 
+ * Integers - contains an integer number between a user defined min and max
+ * Decimals - contains a decimal number between a user defined min and max with a user defined number of decimal places 

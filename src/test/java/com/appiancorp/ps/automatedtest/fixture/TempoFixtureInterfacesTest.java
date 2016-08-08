@@ -517,10 +517,10 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
   @Test
   public void testFileUploadField() throws Exception {
     fixture.populateFieldWith("FileUploadField", new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) +
-      "\\FitNesseRoot\\files\\images\\Fitnesse-Start.png" });
+      "/FitNesseRoot/files/images/Fitnesse-Start.png" });
     assertTrue(fixture.verifyFieldContains(
       "FileUploadField",
-      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\FitNesseRoot\\files\\images\\Fitnesse-Start.png" }));
+      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "/FitNesseRoot/files/images/Fitnesse-Start.png" }));
     assertEquals("Fitnesse-Start.png", fixture.getFieldValue("FileUploadField")); // Notice this doesn't include the entire path
 
     Assume.assumeTrue(atLeastVersion(7.11));
@@ -533,17 +533,17 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
       "EditableGrid[3]",
       "FileUploadField",
       "[1]",
-      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\FitNesseRoot\\files\\images\\Fitnesse-Start.png" });
+      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "/FitNesseRoot/files/images/Fitnesse-Start.png" });
     assertTrue(fixture.verifyGridColumnRowContains(
       "EditableGrid[3]",
       "FileUploadField",
       "[1]",
-      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\FitNesseRoot\\files\\images\\Fitnesse-Start.png" }));
+      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "/FitNesseRoot/files/images/Fitnesse-Start.png" }));
     assertEquals("Fitnesse-Start.png", fixture.getGridColumnRowValue("EditableGrid[3]", "FileUploadField", "[1]"));
 
-    // fixture.populateGridColumnRowWith("EditableGrid[2]", "[5]", "[2]", new String[]{AUTOMATED_TESTING_HOME + "\\documents\\High.jpg"});
+    // fixture.populateGridColumnRowWith("EditableGrid[2]", "[5]", "[2]", new String[]{AUTOMATED_TESTING_HOME + "/documents/High.jpg"});
     // assertTrue(fixture.verifyGridColumnRowContains("EditableGrid[2]", "[5]", "[2]", new
-    // String[]{AUTOMATED_TESTING_HOME + "\\documents\\High.jpg"}));
+    // String[]{AUTOMATED_TESTING_HOME + "/documents/High.jpg"}));
     // assertEquals("High.jpg", fixture.getGridColumnRowValue("EditableGrid[2]", "[5]", "[2]"));
 
     // TODO Clear
@@ -552,10 +552,10 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
   @Test
   public void testFileUploadFieldPopulateType() throws Exception {
     fixture.populateFieldWith("FILE_UPLOAD", "[2]", new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) +
-      "\\FitNesseRoot\\files\\images\\Fitnesse-Start.png" });
+      "/FitNesseRoot/files/images/Fitnesse-Start.png" });
     assertTrue(fixture.verifyFieldContains(
       "FileUploadField[2]",
-      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\FitNesseRoot\\files\\images\\Fitnesse-Start.png" }));
+      new String[] { fixture.getProps().getProperty(Constants.AUTOMATED_TESTING_HOME) + "/FitNesseRoot/files/images/Fitnesse-Start.png" }));
   }
 
   /**** Image Field ****/

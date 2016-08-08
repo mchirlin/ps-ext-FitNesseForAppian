@@ -28,14 +28,14 @@ public class TempoActionApplicationFilter extends AppianObject implements WaitFo
 
   @Override
   public String getXpath(String... params) {
-    String filterName = params[0];
+    String filterName = getParam(0, params);
 
     return xpathFormat(XPATH_ABSOLUTE_ACTIONS_APP_FILTER_LINK, filterName);
   }
 
   @Override
   public void waitFor(String... params) {
-    String filterName = params[0];
+    String filterName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR ACTION APP FILTER [" + filterName + "]");
 
@@ -49,7 +49,7 @@ public class TempoActionApplicationFilter extends AppianObject implements WaitFo
 
   @Override
   public void click(String... params) {
-    String filterName = params[0];
+    String filterName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ACTION APP FILTER [" + filterName + "]");
     try {
@@ -62,7 +62,7 @@ public class TempoActionApplicationFilter extends AppianObject implements WaitFo
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String applicationName = params[0];
+    String applicationName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR ACTION [" + applicationName + "]");
 

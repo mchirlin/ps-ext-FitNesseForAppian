@@ -27,14 +27,14 @@ public class TempoMenu extends AppianObject implements WaitFor, Clickable {
 
   @Override
   public String getXpath(String... params) {
-    String tempoMenu = params[0];
+    String tempoMenu = getParam(0, params);
 
     return xpathFormat(XPATH_ABSOLUTE_MENU_LINK, tempoMenu);
   }
 
   @Override
   public void click(String... params) {
-    String tempoMenu = params[0];
+    String tempoMenu = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK [" + tempoMenu + "]");
 
@@ -48,7 +48,7 @@ public class TempoMenu extends AppianObject implements WaitFor, Clickable {
 
   @Override
   public void waitFor(String... params) {
-    String tempoMenu = params[0];
+    String tempoMenu = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR [" + tempoMenu + "]");
 

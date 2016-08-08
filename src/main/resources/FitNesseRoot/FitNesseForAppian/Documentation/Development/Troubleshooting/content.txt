@@ -1,0 +1,59 @@
+'''Contents'''
+ * [[Browser Issues][#browser]]
+ * [[Startup Issues][#startup]]
+ * [[Turning on Logging][#logging]]
+
+!anchor browser
+!3 Browser Issues
+Turn off automatic updating for FitNesse test browsers --- selenium reasons
+
+!3 Firefox
+Firefox version
+*Version of Firefox*
+
+Failed to connect to binary FirefoxBinary(C:\Program Files\Mozilla Firefox\firefox.exe) on port 7055
+
+Revert back
+
+!3 Chrome
+
+!3 IE
+https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver
+
+!anchor startup
+!3 Startup Issues
+Issues
+
+*SlimError*
+
+Could not complete testing: fitnesse.slim.SlimError: Error SLiM server died before a connection could be established. Error: Could not find or load main class fitnesse.slim.SlimService
+
+TESTING_HOME was incorrect
+
+
+!2 Fixing Errors in your Test Scripts
+!3 Spacing
+!-FitNesse-! tests can be fragile due to issues with spacing in test scripts.  Tips for dealing with spacing issues: 
+ * One space after vertical line | is usually OK, but 2 spaces may break your script
+ * Avoid spaces at the beginning of a line before any |
+ * In test scripts, after blank lines you need to include a '''|script|''' to continue your script. In scenarios, blank lines will end your scenario
+ * Use the Format button after writing your test script to automatically format your test script or select the Auto Format checkbox to format your test script every time you save
+!img http://files/images/FitNesse-Format.png
+ 
+!3 !-PascalCase-! in Test Script 
+!-FitNesse-! recognizes the use of PascalCase as a Wiki Word. Notice the question mark (?) following the word !-PascalCase-!. This indicates that FitNesse is attempting to link to another wiki page.
+To create a test script with a field or input that requires the use of a !-PascalCase-! word, escape the table by placing an exclamation mark at the beginning, e.g. '''!|script|'''  instead of '''|script|'''.
+!see .FitNesse.FullReferenceGuide.UserGuide.FitNesseWiki.WikiWord
+
+!3 Add wait times for Fragile tests 
+For tests that may be fragile or take longer than others, add '''| wait for | X seconds |''' before the test step and report this to Forum.  Fragile test steps can include:
+ * Uploading large files
+ * Dynamic SAIL components
+ * Long database queries
+
+!3 !-FitNesse-! Log
+If you are unable to resolve any issue, look at the error log in '''${automated.testing.home}/logs/fitnesse.log'''. To expedite a resolution include error log information with any question on Forum. For additional debugging information increase the logging level in ${automated.testing.home}/log4j.properties to DEBUG.
+!see TurningOnLogging
+
+!anchor logging
+!3 Logging

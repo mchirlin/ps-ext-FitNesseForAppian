@@ -23,7 +23,7 @@ public class TempoGridSelectAll extends TempoGrid implements Clickable {
 
   @Override
   public void click(String... params) {
-    String gridName = params[0];
+    String gridName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK SELECT ALL [" + gridName + "]");
 

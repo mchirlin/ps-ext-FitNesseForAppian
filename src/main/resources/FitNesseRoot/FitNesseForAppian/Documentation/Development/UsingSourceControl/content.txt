@@ -1,0 +1,48 @@
+!2 Using Version Control with ''!-FitNesse-! for Appian'' Test Scripts
+
+Use of a version control system in conjunction with the ''!-FitNesse-! for Appian'' is highly recommended. 
+
+The benefits of version controlling your test scripts include, but are not limited to:
+ * Easy collaboration between testers and developers
+ * Tracked history of changes in the scripts
+ * Backup of test scripts
+ * Accessibility across environments
+
+!3 Follow these steps to Version Control your !-FitNesse-! tests:
+ 1 Create a new repository ('''REPO_HOME''') for your project. This can version controlled with !-GitHub-!, !-BitBucket-!, SVN, or any other version control software.
+ 1 Inside '''REPO_HOME''' create a folder named '''!-FitNesseRoot-!''' to contain your wikis.
+ 1 Also inside '''REPO_HOME''' create a folder named '''Documents''' to contain any documents uploaded in your wikis.
+ 1 Follow [[these instructions][.FitNesseForAppian.Documentation.Administration.ChangeFitnesseForAppianWikiDirectory]] to run !-FitNesse-! with your version controlled wikis rather than the out-of-the-box wikis.
+ 1 Copy the contents from '''FITNESSE_FOR_APPIAN_HOME/!-FitNesseRoot-!''' into your '''REPO_HOME/!-FitNesseRoot-!''' folder. This will allow you to access the documentation for both !-FitNesse-! and !-FitNesse-! for Appian.
+ 1 Update your repository to ignore all changes to the !-RecentChanges-! folder as this will cause merge conflicts in the future.
+ 
+!3 How to keep your test OS and user agnostic
+
+ * Never hard code a path to your local machine, instead use the following variables:
+  * !-${FITNESSE_ROOTPATH}-! - the location from where !-FitNesse-! loads the wikis
+  * !-${automated.testing.home}-! - the location where !-FitNesse-! is installed
+
+!4 Handling user logins
+
+ * Use generic roles or user names for logging in, don't use your own username.
+ * In order to run a test on their locale machine, all users will need to have all usernames or roles used in any test defined in their local FITNESSE_FOR_APPIAN_HOME/configs/users.properties file.
+
+If you have the following in your test:
+
+| login with username | test.user |
+Any person running that test will need the following line in their FITNESSE_FOR_APPIAN_HOME/configs/users.properties file:
+test.user=TEST_USER_PASSWORD
+
+Or, if you have the following line in your test:
+
+| login with role | basic_user |
+Anyone running the test will need to have the following line in their FITNESSE_FOR_APPIAN_HOME/configs/users.properties file:
+basic_user=test.user|TEST_USER_PASSWORD
+
+
+!4 Handling file population
+ * When populating files always using forward slashes (/) as they work for Max, Linux, and Windows
+ * When populating files always place the files in the '''REPO_HOME/Documents''' folder and use !-${FITNESSE_ROOTPATH}-! instead of typing out an absolute path to the file.
+ 
+Example:
+| populate field | FILE_UPLOAD_FIELD_LABEL | with | !-${FITNESSE_ROOTPATH}-!/Documents/example.txt |

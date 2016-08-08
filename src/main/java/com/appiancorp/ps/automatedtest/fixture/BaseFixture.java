@@ -37,12 +37,12 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.appiancorp.ps.automatedtest.common.AppianObject;
+import com.appiancorp.ps.automatedtest.common.AppianWebApi;
 import com.appiancorp.ps.automatedtest.common.Constants;
 import com.appiancorp.ps.automatedtest.common.Screenshot;
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
 import com.appiancorp.ps.automatedtest.tempo.TempoLogin;
-import com.google.common.base.Throwables;
 
 /**
  * This is the base class for integrating Appian and FitNesse.
@@ -86,12 +86,20 @@ public class BaseFixture {
         settings.setDriver(new FirefoxDriver(prof));
       }
     } else if (browser.equals("CHROME")) {
-      System.setProperty("webdriver.chrome.driver", props.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
-        Constants.CHROME_DRIVER);
+      String driverHome;
+
+      if (StringUtils.isNotBlank(props.getProperty(Constants.CHROME_DRIVER_HOME))) {
+        driverHome = props.getProperty(Constants.CHROME_DRIVER_HOME);
+      } else {
+        driverHome = props.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
+          Constants.CHROME_DRIVER;
+      }
+
+      System.setProperty("webdriver.chrome.driver", driverHome);
 
       System.setProperty("webdriver.chrome.args", "--disable-logging");
       System.setProperty("webdriver.chrome.silentOutput", "true");
-      if (!StringUtils.isBlank(props.getProperty(Constants.CHROME_BROWSER_HOME))) {
+      if (StringUtils.isNotBlank(props.getProperty(Constants.CHROME_BROWSER_HOME))) {
         ChromeOptions co = new ChromeOptions();
         co.setBinary(props.getProperty(Constants.CHROME_BROWSER_HOME));
         settings.setDriver(new ChromeDriver(co));
@@ -187,7 +195,7 @@ public class BaseFixture {
 
   /**
    * Sets the path on the automated test server where screenshots will be placed. <br>
-   * FitNesse Example: <code>| set screenshot path to | AUTOMATED_TESTING_HOME\screenshots\ |</code>
+   * FitNesse Example: <code>| set screenshot path to | AUTOMATED_TESTING_HOME/screenshots/ |</code>
    * 
    * @param path
    *          Path to save screen shots
@@ -220,7 +228,7 @@ public class BaseFixture {
    */
   public void setTakeErrorScreenshotsTo(Boolean bool) {
     if (settings.getScreenshotPath() == null) {
-      settings.setScreenshotPath(props.getProperty(Constants.AUTOMATED_TESTING_HOME) + "\\screenshots");
+      settings.setScreenshotPath(props.getProperty(Constants.AUTOMATED_TESTING_HOME) + "/screenshots");
     }
     settings.setTakeErrorScreenshots(bool);
   }
@@ -314,9 +322,9 @@ public class BaseFixture {
    * @param role
    */
   public void loginIntoWithRole(String url, String role) {
-    String userNamePassword = props.getProperty(role);
-    String username = userNamePassword.substring(0, userNamePassword.indexOf("|"));
-    String password = userNamePassword.substring(userNamePassword.indexOf("|") + 1, userNamePassword.length());
+    String usernamePassword = props.getProperty(role);
+    String username = StringUtils.substringBefore(usernamePassword, "|");
+    String password = StringUtils.substringAfter(usernamePassword, "|");
 
     loginIntoWithUsernameAndPassword(url, username, password);
   }
@@ -351,8 +359,7 @@ public class BaseFixture {
   /**
    * Login to and Appian site containing terms and conditions.<br>
    * <br>
-   * FitNesse Example: <code>| login with terms with username | USERNAME | </code> - Uses the url set here:
-   * {@link #setAppianUrlTo(String)}
+   * FitNesse Example: <code>| login with terms with username | USERNAME | </code> - Uses the url set here: {@link #setAppianUrlTo(String)}
    * 
    * @param userName
    *          Username
@@ -367,18 +374,17 @@ public class BaseFixture {
   /**
    * Login to and Appian site containing terms and conditions.<br>
    * <br>
-   * FitNesse Example: <code>| login with terms with role | USER_ROLE| </code> - Uses the url set here:
-   * {@link #setAppianUrlTo(String)}
+   * FitNesse Example: <code>| login with terms with role | USER_ROLE| </code> - Uses the url set here: {@link #setAppianUrlTo(String)}
    * 
    * @param userRole
    *          user role
    */
-  public void loginWithTermsWithRole(String userRole) {
+  public void loginWithTermsWithRole(String role) {
     TempoLogin.getInstance(settings).navigateToLoginPage(settings.getUrl());
     TempoLogin.getInstance(settings).waitForTerms();
-    String userNamePassword = getProps().getProperty(userRole);
-    String username = userNamePassword.substring(0, userNamePassword.indexOf("|"));
-    String password = userNamePassword.substring(userNamePassword.indexOf("|") + 1, userNamePassword.length());
+    String usernamePassword = props.getProperty(role);
+    String username = StringUtils.substringBefore(usernamePassword, "|");
+    String password = StringUtils.substringAfter(usernamePassword, "|");
 
     TempoLogin.getInstance(settings).loginWithTerms(settings.getUrl(), username, password);
   }
@@ -489,6 +495,53 @@ public class BaseFixture {
     } catch (Exception e) {
       throw ExceptionBuilder.build(e, settings, "Wait Until");
     }
+  }
+
+  /**
+   * Calls a web api and returns result<br>
+   * <br>
+   * FitNesse Examples:<br>
+   * <code>| call web api | WEB_API_ENDPOINT | with username | USERNAME |</code>
+   * 
+   * @param webApiName
+   */
+  public String callWebApiWithUsername(String webApiEndpoint, String username) {
+    String password = props.getProperty(username);
+    return AppianWebApi.getInstance(settings).callWebApi(webApiEndpoint, username, password);
+  }
+
+  /**
+   * Calls a web api and returns result<br>
+   * <br>
+   * FitNesse Examples:<br>
+   * <code>| call web api | WEB_API_ENDPOINT | with role | ROLE |</code>
+   * 
+   * @param webApiName
+   */
+  public String callWebApiWithRole(String webApiEndpoint, String role) {
+    String usernamePassword = props.getProperty(role);
+    String username = StringUtils.substringBefore(usernamePassword, "|");
+    String password = StringUtils.substringAfter(usernamePassword, "|");
+
+    return AppianWebApi.getInstance(settings).callWebApi(webApiEndpoint, username, password);
+  }
+
+  /**
+   * Sets test variables<br >
+   * <br>
+   * | set test variable | TEST_VAR_KEY | with | TEST_VAR_AS_JSON |
+   */
+  public void setTestVariableWith(String key, String val) {
+    settings.setTestVariableWith(key, val);
+  }
+
+  /**
+   * Get test variable<br>
+   * <br>
+   * | get test variable | tv!VARIABLE_NAME |
+   */
+  public String getTestVariable(String variableName) {
+    return settings.getTestVariable(variableName.replace("tv!", ""));
   }
 
   /**
@@ -755,7 +808,6 @@ public class BaseFixture {
         props.load(inputStream);
       }
     } catch (Exception e) {
-      LOG.debug(Throwables.getStackTraceAsString(e));
     }
 
     try {
@@ -764,7 +816,6 @@ public class BaseFixture {
         File jarPath = new File(BaseFixture.class.getProtectionDomain().getCodeSource().getLocation().getPath());
         String propertiesPath = jarPath.getParentFile().getAbsolutePath();
         File folder = new File(URLDecoder.decode(propertiesPath + "/../../configs", "UTF-8"));
-        LOG.debug("Folder: " + folder);
 
         for (File file : folder.listFiles()) {
           if (FilenameUtils.getExtension(file.getPath()).equals("properties")) {
@@ -774,7 +825,6 @@ public class BaseFixture {
         }
       }
     } catch (Exception e) {
-      LOG.debug(Throwables.getStackTraceAsString(e));
     }
   }
 

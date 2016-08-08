@@ -31,8 +31,8 @@ public class TempoFieldValidation extends AppianObject implements WaitForMultipl
 
   @Override
   public String getXpath(String... params) {
-    String fieldName = params[0];
-    String validationMessage = params[1];
+    String fieldName = getParam(0, params);
+    String validationMessage = getParam(1, params);
 
     return "(" + TempoField.getInstance(settings).getXpath(fieldName) + ")" +
       xpathFormat(XPATH_RELATIVE_FIELD_VALIDATION_MESSAGE_SPECIFIC_VALUE, validationMessage);
@@ -50,7 +50,7 @@ public class TempoFieldValidation extends AppianObject implements WaitForMultipl
   }
 
   public void waitForMultiple(String[] validationMessages, String... params) {
-    String fieldName = params[0];
+    String fieldName = getParam(0, params);
 
     try {
       for (String validationMessage : validationMessages) {
@@ -64,8 +64,8 @@ public class TempoFieldValidation extends AppianObject implements WaitForMultipl
   @SuppressWarnings("unused")
   @Override
   public void waitFor(String... params) {
-    String fieldName = params[0];
-    String validationMessage = params[1];
+    String fieldName = getParam(0, params);
+    String validationMessage = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR VALIDATION [" + validationMessage + "]");
 

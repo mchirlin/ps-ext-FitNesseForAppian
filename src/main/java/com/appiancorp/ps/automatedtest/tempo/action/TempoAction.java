@@ -30,7 +30,7 @@ public class TempoAction extends AppianObject implements WaitForReturn, Clickabl
 
   @Override
   public String getXpath(String... params) {
-    String action = params[0];
+    String action = getParam(0, params);
 
     if (isFieldIndex(action)) {
       int rNum = getIndexFromFieldIndex(action);
@@ -43,7 +43,7 @@ public class TempoAction extends AppianObject implements WaitForReturn, Clickabl
 
   @Override
   public void click(String... params) {
-    String actionName = params[0];
+    String actionName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CLICK ACTION [" + actionName + "]");
 
@@ -58,7 +58,7 @@ public class TempoAction extends AppianObject implements WaitForReturn, Clickabl
 
   @Override
   public void waitFor(String... params) {
-    String actionName = params[0];
+    String actionName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR ACTION [" + actionName + "]");
 
@@ -72,7 +72,7 @@ public class TempoAction extends AppianObject implements WaitForReturn, Clickabl
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String actionName = params[0];
+    String actionName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR ACTION [" + actionName + "]");
 

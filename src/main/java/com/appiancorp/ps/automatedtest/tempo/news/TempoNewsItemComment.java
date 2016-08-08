@@ -27,15 +27,15 @@ public class TempoNewsItemComment extends TempoNewsItem implements Refreshable, 
 
   @Override
   public String getXpath(String... params) {
-    String newsText = params[0];
-    String newsComment = params[1];
+    String newsText = getParam(0, params);
+    String newsComment = getParam(1, params);
 
     return xpathFormat(XPATH_ABSOLUTE_NEWS_ITEM_COMMENT, newsText, newsComment);
   }
 
   @Override
   public void waitFor(String... params) {
-    String newsText = params[1];
+    String newsText = getParam(1, params);
     String newsComment = params[2];
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR NEWS ITEM [" + newsText + "] and COMMENT [" + newsComment + "]");
@@ -49,8 +49,8 @@ public class TempoNewsItemComment extends TempoNewsItem implements Refreshable, 
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String newsText = params[0];
-    String newsComment = params[1];
+    String newsText = getParam(0, params);
+    String newsComment = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR NEWS ITEM [" + newsText + "] and COMMENT [" + newsComment + "]");
 
@@ -67,8 +67,8 @@ public class TempoNewsItemComment extends TempoNewsItem implements Refreshable, 
 
   @Override
   public String regexCapture(String regex, Integer group, String... params) {
-    String newsText = params[0];
-    String newsComment = params[1];
+    String newsText = getParam(0, params);
+    String newsComment = getParam(1, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("NEWS ITEM [" + newsText + "] COMMENT [" + newsComment + "] REGEX [" + regex + "]");
 

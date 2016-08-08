@@ -1,0 +1,48 @@
+!2 ''!-FitNesse for Appian-!'' Release Notes
+
+!3 July 2016 - Release 1.3
+
+ * Enhancements
+  * Supports Appian version 16.3
+  * All text comparisons are now case-insensitive
+  * Milestone fields implemented
+  * Ability to refer to java variables as tv!VAR_NAME
+  * NEW METHOD: click on save changes
+  * NEW METHOD: call web api with USERNAME/ROLE
+  * NEW METHOD: save variable as VAR_NAME
+  * NEW METHOD: get variable VAR_NAME
+ * Bugs
+  * Apsotrophes no longer cause errors
+ * Other
+  * Huge documentation update
+
+!3 June 2016 - Release 1.2.6
+
+ * Enhancements
+  * Supports Appian version 16.2 
+  * Includes reusable scenarios for setting up test cases
+  * Click actions by name and index
+  * Select dropdown value by text and index
+  * Relative dates now support +months and +years
+  * Ability to set Chrome and Firefox locations in custom.properties file
+  * Ability to set FITNESSE_FOR_APPIAN_HOME location in custom.properties
+  * NEW METHOD: click on application filter on the actions tab
+  * NEW METHOD: verify application filter
+  * NEW METHOD: click on''select all'' checkbox for a grid
+  * NEW METHOD: verify that a link is present
+  * NEW METHOD: verify that a link URL contains a specified value 
+  * NEW METHOD: get link url
+  * NEW METHOD: check grid row
+  * NEW METHOD: count grid rows
+  * NEW METHOD: create random alphabetic string (no numbers)
+  * NEW METHODS: get regex from form title, field value, field value in a section, field value in a grid cell, a record name, or a task name
+  * NEW METHODS: navigate to a site or navigate to a site page
+  * NEW METHODS: login with username, passwords now specified in user.properties file
+  * NEW METHODS: verify chart label is and is not present
+  * NEW METHODS: verify and get image alt text
+ * Bugs
+  * Links with styles can now be clicked
+
+!3 April 2016 - Release 1.2.5
+
+ First release on Forum of FitNesse for Appian.

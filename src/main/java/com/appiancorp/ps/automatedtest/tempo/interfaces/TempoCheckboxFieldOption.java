@@ -35,7 +35,7 @@ public class TempoCheckboxFieldOption extends TempoCheckboxField implements Clic
   }
 
   public void click(String... params) {
-    String optionName = params[0];
+    String optionName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CHECKBOX OPTION CLICK [" + optionName + "]");
 
@@ -48,7 +48,7 @@ public class TempoCheckboxFieldOption extends TempoCheckboxField implements Clic
   }
 
   public void waitFor(String... params) {
-    String optionName = params[0];
+    String optionName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("CHECKBOX OPTION WAIT FOR [" + optionName + "]");
 

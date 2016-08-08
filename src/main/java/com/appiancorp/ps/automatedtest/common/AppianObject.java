@@ -34,6 +34,8 @@ public class AppianObject {
   private static final Pattern INDEX_PATTERN = Pattern.compile("(.*)?\\[([0-9]+)\\]");
   private static final String DATETIME_REGEX = "([0-9]{4}-[0-9]{2}-[0-9]{2}([0-9]{2}:[0-9]{2})?)";
   private static final String DATETIME_CALC_REGEX = DATETIME_REGEX + "?[+-][0-9]+(minute(s)?|hour(s)?|day(s)?|month(s)?|year(s)?)";
+  private static final String TEST_VARIABLE_PREFIX = "tv!";
+  private static final String TEST_VARIABLE_REGEX = "^" + TEST_VARIABLE_PREFIX + ".*";
 
   public static AppianObject getInstance(Settings settings) {
     return new AppianObject(settings);
@@ -46,6 +48,10 @@ public class AppianObject {
   public static boolean isDatetime(String dateTimeString) {
     dateTimeString = dateTimeString.replaceAll("\\s", "");
     return dateTimeString.matches(DATETIME_REGEX);
+  }
+
+  public static boolean isTestVariable(String variable) {
+    return variable.matches(TEST_VARIABLE_REGEX);
   }
 
   public String formatDatetime(String dateTimeString) {
@@ -108,13 +114,19 @@ public class AppianObject {
   }
 
   public String parseVariable(String variable) {
-    if (isDatetimeCalculation(variable))
+    if (isDatetimeCalculation(variable)) {
       return formatDatetimeCalculation(variable);
-    else if (isDatetime(variable)) {
+    } else if (isDatetime(variable)) {
       return formatDatetime(variable);
+    } else if (isTestVariable(variable)) {
+      return settings.getTestVariable(variable.replace(TEST_VARIABLE_PREFIX, ""));
     } else {
       return variable;
     }
+  }
+
+  public String getParam(int index, String... params) {
+    return parseVariable(params[index]);
   }
 
   public static String escapeForXpath(String variable) {

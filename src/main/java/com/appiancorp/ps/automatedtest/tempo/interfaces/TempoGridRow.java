@@ -27,8 +27,8 @@ public class TempoGridRow extends TempoGridCell implements Clickable, Verifiable
 
   @Override
   public void click(String... params) {
-    String gridName = params[0];
-    String rowNum = params[1];
+    String gridName = getParam(0, params);
+    String rowNum = getParam(1, params);
 
     try {
       WebElement cell = settings.getDriver().findElement(By.xpath(getXpath(gridName, "[1]", rowNum)));
@@ -41,8 +41,8 @@ public class TempoGridRow extends TempoGridCell implements Clickable, Verifiable
 
   @Override
   public boolean contains(String... params) {
-    String gridName = params[0];
-    String rowNum = params[1];
+    String gridName = getParam(0, params);
+    String rowNum = getParam(1, params);
 
     try {
       WebElement cell = settings.getDriver().findElement(By.xpath(getXpath(gridName, "[1]", rowNum)));
@@ -56,7 +56,7 @@ public class TempoGridRow extends TempoGridCell implements Clickable, Verifiable
 
   @Override
   public Integer count(String... params) {
-    String gridName = params[0];
+    String gridName = getParam(0, params);
 
     try {
       WebElement grid = settings.getDriver().findElement(By.xpath(getXpath(gridName)));

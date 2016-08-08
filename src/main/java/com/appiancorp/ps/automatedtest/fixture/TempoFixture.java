@@ -164,6 +164,19 @@ public class TempoFixture extends BaseFixture {
 
   /**
    * Verifies a news item containing specific text with a specific label and value is present.<br>
+   * Deletes a news post.<br>
+   * <br>
+   * FitNesse Example: <code>| delete news post | NEWS_TEXT |</code>
+   * 
+   * @param newsText
+   *          Text to search for in the news feed
+   */
+  public void deleteAllNewsPosts() {
+    TempoNewsItem.getInstance(settings).clearAll();
+  }
+
+  /**
+   * Verifies there is a news post containing specific text with a specific label and value is present.<br>
    * <br>
    * FitNesse Example:
    * <code>| verify news feed containing text | NEWS_TEXT | and more info with label | LABEL | and value | VALUE | is present |</code>

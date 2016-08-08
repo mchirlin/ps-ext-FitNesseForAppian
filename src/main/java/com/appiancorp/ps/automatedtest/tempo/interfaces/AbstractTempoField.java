@@ -35,7 +35,7 @@ public abstract class AbstractTempoField extends AppianObject implements Contain
 
   @Override
   public String getXpath(String... params) {
-    String fieldName = params[0];
+    String fieldName = getParam(0, params);
 
     if (isFieldIndex(fieldName)) {
       int index = getIndexFromFieldIndex(fieldName);
@@ -53,7 +53,7 @@ public abstract class AbstractTempoField extends AppianObject implements Contain
 
   @Override
   public void waitFor(String... params) {
-    String fieldName = params[0];
+    String fieldName = getParam(0, params);
 
     try {
       (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getXpath(params))));
@@ -64,7 +64,7 @@ public abstract class AbstractTempoField extends AppianObject implements Contain
 
   @Override
   public boolean waitForReturn(int timeout, String... params) {
-    String fieldName = params[0];
+    String fieldName = getParam(0, params);
 
     try {
       (new WebDriverWait(settings.getDriver(), timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getXpath(params))));

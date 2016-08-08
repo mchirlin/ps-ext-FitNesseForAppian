@@ -1,0 +1,36 @@
+'''Contents'''
+ * [[Logging in with Credentials][#credentials]]
+ * [[Logging in with SSO][#sso]]
+!anchor credentials
+!3 Logging in with Credentials
+
+When logging into Appian using a username and password use one of the following methods:
+
+'''Recommended methods'''
+|login with username           |USERNAME                      |
+|login with terms with username|USERNAME                      |
+|login with role               |USER_ROLE                     |
+|login with terms with role    |USER_ROLE                     |
+'''Deprecated methods'''
+|login with username           |USERNAME|and password|PASSWORD|
+|login with terms with username|USERNAME|and password|PASSWORD|
+
+Each of these methods will take the following actions:
+ * Navigates browser to URL defined by: | set appian url | APPIAN_URL |
+ * Logs into Appian
+
+The recommended methods replace the deprecated methods which also required a password in-line. This has the advantage of masking the password in test scripts and version control system.
+
+Passwords can be defined in two ways, using usernames or using role aliases. To create a username or a role edit '''${automated.testing.home}/configs/users.properties'''
+
+'''Using a username'''
+Add a new line with: USERNAME=PASSWORD
+
+'''Using a role alias'''
+Add a new line with: USER_ROLE=USERNAME|PASSWORD
+!anchor sso
+!3 Logging in with SSO
+
+When using Single Sign On (SSO) with Appian, the login screen will not be displayed.  To login under these circumstances using the following method:
+
+|open|APPIAN_URL|

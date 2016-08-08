@@ -41,7 +41,8 @@
         {"label": "xpathConcatNewsItemRecordTag", "value": "/parent::div/descendant::a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %2$s)]"},
         {"label": "xpathConcatNewsItemComment", "value": "/parent::div/descendant::div[starts-with(@class, 'appian-feed-entry-message') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %2$s)]"},
         {"label": "xpathConcatNewsItemPostedAt", "value": "/parent::div/descendant::a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %2$s)]"},
-        {"label": "xpathConcatNewsItemDeleteLink", "value": "/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), 'Delete')]"},
+        {"label": "xpathConcatNewsItemDeleteLink", "value": "/following-sibling::div[starts-with(@class, 'appian-feed-entry-metadata')]/descendant::a[contains(text(),'Delete')]"},
+        {"label": "xpathAbsoluteDeleteLink", "value": "//a[contains(text(), 'Delete')]"},
         
         {"label": "xpathAbsoluteTaskLink", "value": "//a[contains(@class, 'appian-feed-entry-author') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'), %1$s)]"},
         {"label": "xpathAbsoluteTaskDeadline", "value": "//a[contains(@class, 'appian-feed-entry-author') and contains(translate(text(),'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),%1$s)]/parent::span/following-sibling::div[contains(@class, 'metadata')]/descendant::span[contains(@title, 'deadline')]/span[text() = %2$s]"},

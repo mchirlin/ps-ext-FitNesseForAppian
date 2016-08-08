@@ -29,7 +29,7 @@ public class TempoMilestoneField extends AbstractTempoField {
 
   @Override
   public String getXpath(String... params) {
-    String fieldName = params[0];
+    String fieldName = getParam(0, params);
 
     if (isFieldIndex(fieldName)) {
       int index = getIndexFromFieldIndex(fieldName);
@@ -48,7 +48,7 @@ public class TempoMilestoneField extends AbstractTempoField {
 
   @Override
   public void waitFor(String... params) {
-    String fieldName = params[0];
+    String fieldName = getParam(0, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR MILESTONE [" + fieldName + "]");
 
@@ -76,7 +76,7 @@ public class TempoMilestoneField extends AbstractTempoField {
 
   @Override
   public boolean contains(WebElement fieldLayout, String... params) throws Exception {
-    String fieldValue = params[0];
+    String fieldValue = getParam(0, params);
 
     WebElement selectedStep = fieldLayout.findElement(By.xpath(xpathFormat(XPATH_RELATIVE_STEP_SELECTED)));
     String compareString = selectedStep.getText().replace("Current step: ", "");

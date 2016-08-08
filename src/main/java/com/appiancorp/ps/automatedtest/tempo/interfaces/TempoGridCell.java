@@ -51,14 +51,14 @@ public class TempoGridCell extends TempoGrid implements
     if (params.length == 1) {
       cell = settings.getDriver().findElement(By.xpath(super.getXpath(params)));
     } else if (params.length == 2) {
-      String gridName = params[0];
-      String rowNum = params[1];
+      String gridName = getParam(0, params);
+      String rowNum = getParam(1, params);
 
       waitFor(gridName, "[1]", rowNum);
     } else {
-      String gridName = params[0];
-      String columnName = params[1];
-      String rowNum = params[2];
+      String gridName = getParam(0, params);
+      String columnName = getParam(1, params);
+      String rowNum = getParam(2, params);
 
       if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR GRID [" + gridName + "] COLUMN [" + columnName + "] ROW [" + rowNum + "]");
 
@@ -122,9 +122,9 @@ public class TempoGridCell extends TempoGrid implements
 
   @Override
   public void populateMultiple(String[] fieldValues, String... params) {
-    String gridName = params[0];
-    String columnName = params[1];
-    String rowNum = params[2];
+    String gridName = getParam(0, params);
+    String columnName = getParam(1, params);
+    String rowNum = getParam(2, params);
 
     for (String fieldValue : fieldValues) {
       params = new String[] { gridName, columnName, rowNum, fieldValue };
@@ -135,10 +135,10 @@ public class TempoGridCell extends TempoGrid implements
   @SuppressWarnings("unused")
   @Override
   public void populate(String... params) {
-    String gridName = params[0];
-    String columnName = params[1];
-    String rowNum = params[2];
-    String fieldValue = params[3];
+    String gridName = getParam(0, params);
+    String columnName = getParam(1, params);
+    String rowNum = getParam(2, params);
+    String fieldValue = getParam(3, params);
 
     WebElement cell = getWebElement(params);
     TempoFieldFactory.getInstance(settings).populate(cell, "", fieldValue);
@@ -160,9 +160,9 @@ public class TempoGridCell extends TempoGrid implements
 
   @Override
   public boolean containsMultiple(String[] fieldValues, String... params) {
-    String gridName = params[0];
-    String columnName = params[1];
-    String rowNum = params[2];
+    String gridName = getParam(0, params);
+    String columnName = getParam(1, params);
+    String rowNum = getParam(2, params);
 
     for (String fieldValue : fieldValues) {
       params = new String[] { gridName, columnName, rowNum, fieldValue };
@@ -174,10 +174,10 @@ public class TempoGridCell extends TempoGrid implements
 
   @Override
   public boolean contains(String... params) {
-    String gridName = params[0];
-    String columnName = params[1];
-    String rowNum = params[2];
-    String fieldValue = params[3];
+    String gridName = getParam(0, params);
+    String columnName = getParam(1, params);
+    String rowNum = getParam(2, params);
+    String fieldValue = getParam(3, params);
 
     WebElement cell = getWebElement(gridName, columnName, rowNum);
     if (!TempoFieldFactory.getInstance(settings).contains(cell, "", fieldValue)) return false;

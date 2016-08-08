@@ -27,9 +27,9 @@ public class TempoNewsItemMoreInfoLabelValue extends TempoNewsItemMoreInfo imple
 
   @Override
   public void waitFor(String... params) {
-    String newsText = params[0];
-    String label = params[1];
-    String value = params[2];
+    String newsText = getParam(0, params);
+    String label = getParam(1, params);
+    String value = getParam(2, params);
 
     if (LOG.isDebugEnabled()) LOG.debug("WAIT FOR LABEL [" + label + "] and VALUE [" + value + "]");
 
