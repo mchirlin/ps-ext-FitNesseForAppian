@@ -94,6 +94,15 @@ public class BaseFixtureTest extends AbstractTest {
   }
 
   @Test
+  public void testLoginTwice() throws Exception {
+    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    bFixture.setAppianUrlTo(TEST_SITE_URL);
+    bFixture.loginWithUsername(TEST_USERNAME);
+    bFixture.loginWithUsername(TEST_USERNAME);
+    bFixture.tearDownSeleniumWebDriver();
+  }
+
+  @Test
   public void testLoginWithRole() throws Exception {
     bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
     bFixture.setAppianUrlTo(TEST_SITE_URL);
@@ -182,8 +191,19 @@ public class BaseFixtureTest extends AbstractTest {
   public void testCallWebApi() {
     bFixture.setAppianUrlTo(TEST_SITE_URL);
 
-    assertEquals("test-web-api", bFixture.callWebApiWithUsername("test-web-api", TEST_USERNAME));
-    assertEquals("test-web-api", bFixture.callWebApiWithRole("test-web-api", TEST_ROLE));
+    assertEquals("test-web-api", bFixture.getWebApiWithUsername("test-web-api", TEST_USERNAME));
+    assertEquals("test-web-api", bFixture.getWebApiWithRole("test-web-api", TEST_ROLE));
+
+    assertEquals("asdf1", bFixture.postWebApiWithBodyWithUsername("test-post-web-api", "asdf", TEST_USERNAME));
+    assertEquals("asdf1", bFixture.postWebApiWithBodyWithRole("test-post-web-api", "asdf", TEST_ROLE));
+  }
+
+  @Test
+  public void testVariables() {
+    bFixture.setAppianUrlTo(TEST_SITE_URL);
+
+    bFixture.setTestVariableWith("testVars", bFixture.getWebApiWithRole("generate-data", TEST_ROLE));
+    System.out.println(bFixture.getTestVariable("tv!testVars.com"));
   }
 
   @AfterClass

@@ -156,8 +156,10 @@
 ![:
 | setup selenium web driver with | BROWSER_NAME | browser | 											: Initializes Selenium Web Driver and opens browser, options include FIREFOX, CHROME, IE
 | tear down selenium web driver |																		: Tears down Selenium Web Driver and closes browser
-| call web api | WEB_API_ENDPOINT | with username | USERNAME |											: Calls a web api and returns a string. User defined by username must have permission to access the web api.
-| call web api | WEB_API_ENDPOINT | with role | ROLE_NAME |												: Calls a web api and returns a string. User defined by role must have permission to access the web api.
+| get web api | WEB_API_ENDPOINT | with username | USERNAME |											: Calls a web api and returns a string. User defined by username must have permission to access the web api.
+| get web api | WEB_API_ENDPOINT | with role | ROLE_NAME |												: Calls a web api and returns a string. User defined by role must have permission to access the web api.
+| post web api | WEB_API_ENDPOINT | with body | BODY | with username | USERNAME |											: Calls a web api with a body and returns a string. User defined by username must have permission to access the web api.
+| post web api | WEB_API_ENDPOINT | with body | BODT | with role | ROLE_NAME |												: Calls a web api with a body and returns a string. User defined by role must have permission to access the web api.
 | set appian url to | APPIAN_URL | 																		: Sets the default appian url
 | set appian version to | APPIAN_VERSION |																: Sets the default appian version
 | set appian locale to | APPIAN_LOCALE |																: Sets the Appian locale used for date and datetime formatting, options include en_US or en_GB (defaults to en_US)

@@ -20,10 +20,6 @@ public class ExceptionBuilder {
       LOG.error("Screenshot error", e);
     }
 
-    if (s.isStopOnError()) {
-      s.getDriver().quit();
-    }
-
     switch (e.getClass().getCanonicalName()) {
       case "org.openqa.selenium.NoSuchElementException":
         if (s.isStopOnError()) {

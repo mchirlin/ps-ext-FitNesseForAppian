@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.openqa.selenium.WebDriver;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.jayway.jsonpath.JsonPath;
 
 public class Settings {
@@ -292,7 +294,16 @@ public class Settings {
       String variableName = StringUtils.substringAfter(variable, ".");
       LOG.debug("Variable Key: " + variableKey + " and Variable Name: " + variableName);
       Object result = JsonPath.read(testVariables.get(variableKey), "$." + variableName);
-      return result.toString();
+
+      // If the result returns JSON, then stringify
+      if (result instanceof LinkedHashMap) {
+        Gson gson = new Gson();
+        String json = gson.toJson(result, LinkedHashMap.class);
+
+        return json;
+      } else {
+        return result.toString();
+      }
     } else {
       return testVariables.get(variable);
     }

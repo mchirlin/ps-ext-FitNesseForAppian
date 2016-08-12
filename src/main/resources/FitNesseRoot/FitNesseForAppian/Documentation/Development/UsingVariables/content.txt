@@ -2,7 +2,7 @@
  * [[Generating random variables][#generatingData]]
 
 !anchor settingVariables
-!3 Why are there so many ways to set variables in !-FitNesse-! for Appian?!
+!3 Why are there so many ways to refer to variables in !-FitNesse-! for Appian?!
 I can set variables in the following ways:
 
 ![:
@@ -21,6 +21,7 @@ Regex (Field, News, Record, Task, etc...)
 Get field values (field, section, grid)
 get random (string, int, decimal, date)
 call web api (mockaroo)
+create properties files
 
 !3 Creating Unique Test Data
 The ''!-FitNesse-! for Appian'' tool has various ways to create unique random data to ensure uniqueness of your test.  Random variable generations includes:

@@ -101,6 +101,13 @@ public class TempoLogin extends AppianObject {
   }
 
   public void navigateToLoginPage(String url) {
-    settings.getDriver().get(url);
+    // If we are already logged in, log out
+    try {
+      (new WebDriverWait(settings.getDriver(), 1)).until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_ABSOLUTE_LOGOUT_LINK)));
+    } catch (Exception e) {
+      settings.getDriver().get(url);
+      return;
+    }
+    logout();
   }
 }

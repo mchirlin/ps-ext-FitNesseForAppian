@@ -99,12 +99,17 @@ public class BaseFixture {
 
       System.setProperty("webdriver.chrome.args", "--disable-logging");
       System.setProperty("webdriver.chrome.silentOutput", "true");
+
+      ChromeOptions co = new ChromeOptions();
+      co.addArguments("--disable-extensions");
+      co.addArguments("no-sandbox");
       if (StringUtils.isNotBlank(props.getProperty(Constants.CHROME_BROWSER_HOME))) {
-        ChromeOptions co = new ChromeOptions();
         co.setBinary(props.getProperty(Constants.CHROME_BROWSER_HOME));
+        co.addArguments("--disable-extensions");
+        co.addArguments("no-sandbox");
         settings.setDriver(new ChromeDriver(co));
       } else {
-        settings.setDriver(new ChromeDriver());
+        settings.setDriver(new ChromeDriver(co));
       }
     } else if (browser.equals("IE")) {
       System.setProperty("webdriver.ie.driver", props.getProperty(Constants.AUTOMATED_TESTING_HOME) + Constants.DRIVERS_LOCATION +
@@ -501,29 +506,58 @@ public class BaseFixture {
    * Calls a web api and returns result<br>
    * <br>
    * FitNesse Examples:<br>
-   * <code>| call web api | WEB_API_ENDPOINT | with username | USERNAME |</code>
+   * <code>| get web api | WEB_API_ENDPOINT | with username | USERNAME |</code>
    * 
    * @param webApiName
    */
-  public String callWebApiWithUsername(String webApiEndpoint, String username) {
+  public String getWebApiWithUsername(String webApiEndpoint, String username) {
     String password = props.getProperty(username);
-    return AppianWebApi.getInstance(settings).callWebApi(webApiEndpoint, username, password);
+    return AppianWebApi.getInstance(settings).callWebApi(webApiEndpoint, "", username, password);
   }
 
   /**
    * Calls a web api and returns result<br>
    * <br>
    * FitNesse Examples:<br>
-   * <code>| call web api | WEB_API_ENDPOINT | with role | ROLE |</code>
+   * <code>| get web api | WEB_API_ENDPOINT | with role | ROLE |</code>
    * 
    * @param webApiName
    */
-  public String callWebApiWithRole(String webApiEndpoint, String role) {
+  public String getWebApiWithRole(String webApiEndpoint, String role) {
     String usernamePassword = props.getProperty(role);
     String username = StringUtils.substringBefore(usernamePassword, "|");
     String password = StringUtils.substringAfter(usernamePassword, "|");
 
-    return AppianWebApi.getInstance(settings).callWebApi(webApiEndpoint, username, password);
+    return AppianWebApi.getInstance(settings).callWebApi(webApiEndpoint, "", username, password);
+  }
+
+  /**
+   * Calls a web api and returns result<br>
+   * <br>
+   * FitNesse Examples:<br>
+   * <code>| post web api | WEB_API_ENDPOINT | with body | BODY | with username | USERNAME |</code>
+   * 
+   * @param webApiName
+   */
+  public String postWebApiWithBodyWithUsername(String webApiEndpoint, String body, String username) {
+    String password = props.getProperty(username);
+    return AppianWebApi.getInstance(settings).callWebApi(webApiEndpoint, body, username, password);
+  }
+
+  /**
+   * Calls a web api and returns result<br>
+   * <br>
+   * FitNesse Examples:<br>
+   * <code>| post web api | WEB_API_ENDPOINT | with body | BODY | with role | ROLE |</code>
+   * 
+   * @param webApiName
+   */
+  public String postWebApiWithBodyWithRole(String webApiEndpoint, String body, String role) {
+    String usernamePassword = props.getProperty(role);
+    String username = StringUtils.substringBefore(usernamePassword, "|");
+    String password = StringUtils.substringAfter(usernamePassword, "|");
+
+    return AppianWebApi.getInstance(settings).callWebApi(webApiEndpoint, body, username, password);
   }
 
   /**
