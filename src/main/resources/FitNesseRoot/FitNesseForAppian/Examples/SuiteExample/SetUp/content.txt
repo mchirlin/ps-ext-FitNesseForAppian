@@ -1,6 +1,6 @@
 !*** Initialization
 This table opens a new instance of the Firefox browser, navigates to Appian, and logs in
 !| script                                              |
-|setup selenium web driver with browser|FIREFOX        |
+|setup with browser|FIREFOX        |
 |login with username                   |APPIAN_USERNAME|
 ***!

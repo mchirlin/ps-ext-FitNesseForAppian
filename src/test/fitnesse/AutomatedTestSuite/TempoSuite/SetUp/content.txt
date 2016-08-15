@@ -1,6 +1,6 @@
 !*** Initialization
 !| script                              |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
-|setup selenium web driver with browser|${browser}                                          |
+|setup with browser|${browser}                                          |
 |set appian url to                     |${url}          									|
 |set appian version to                 |${version}                                          |
 |set appian locale to                  |en_US                                               |

@@ -12,7 +12,7 @@ public class AbstractLoginTest extends AbstractTest {
   public static void setUpLogin() throws Exception {
     LOG.debug("Setting Up Login");
 
-    fixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    fixture.setupWithBrowser(TEST_BROWSER);
     fixture.setAppianUrlTo(TEST_SITE_URL);
     fixture.setTimeoutSecondsTo(TEST_TIMEOUT);
     fixture.setAppianVersionTo(TEST_SITE_VERSION);
@@ -23,6 +23,6 @@ public class AbstractLoginTest extends AbstractTest {
   @AfterClass
   public static void tearDown() throws Exception {
     fixture.logout();
-    fixture.tearDownSeleniumWebDriver();
+    fixture.tearDown();
   }
 }

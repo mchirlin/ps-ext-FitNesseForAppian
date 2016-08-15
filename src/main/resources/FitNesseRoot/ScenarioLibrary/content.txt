@@ -21,7 +21,7 @@ Default URL should include http or https and /suite (e.g. '''!-https://forum.app
 
 !*** Setup customizable for browser, locale, version, and URL
 !|scenario                             |setup for test script for browser|browserType|locale|location|version|versionNum|url|appianUrl|
-|setup selenium web driver with browser|@browserType                                                                                  |
+|setup with browser|@browserType                                                                                  |
 |set appian locale to                  |@location                                                                                     |
 |set appian version to                 |@versionNum                                                                                   |
 |set appian url to                     |@appianUrl                                                                                    |

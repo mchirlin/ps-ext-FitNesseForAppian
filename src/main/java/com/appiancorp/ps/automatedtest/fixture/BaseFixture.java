@@ -73,7 +73,20 @@ public class BaseFixture {
    * @param browser
    *          Browser to test with, currently supports FIREFOX, CHROME, IE
    */
+  @Deprecated
   public void setupSeleniumWebDriverWithBrowser(String browser) {
+    setupWithBrowser(browser);
+  }
+
+  /**
+   * Starts selenium browser<br>
+   * <br>
+   * FitNesse Example: <code>| setup with | BROWSER | browser |</code>
+   * 
+   * @param browser
+   *          Browser to test with, currently supports FIREFOX, CHROME, IE
+   */
+  public void setupWithBrowser(String browser) {
     if (browser.equals("FIREFOX")) {
       FirefoxProfile prof = new FirefoxProfile();
       prof.setPreference("browser.startup.homepage_override.mstone", "ignore");
@@ -722,7 +735,17 @@ public class BaseFixture {
    * <br>
    * FitNesse Example: <code>| tear down selenium driver |</code>
    */
+  @Deprecated
   public void tearDownSeleniumWebDriver() {
+    tearDown();
+  }
+
+  /**
+   * Closes browser and driver quits. Used to end automated test.<br>
+   * <br>
+   * FitNesse Example: <code>| tear down |</code>
+   */
+  public void tearDown() {
     settings.getDriver().quit();
   }
 

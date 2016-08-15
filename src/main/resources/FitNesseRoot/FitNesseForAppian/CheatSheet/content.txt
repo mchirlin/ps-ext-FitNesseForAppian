@@ -3,7 +3,7 @@
 !define TEST_SYSTEM {slim} 																				~ Uses FitNesse SliM to run tests
 !path ${automated.testing.home}/**.jar 																	~ Defines classpath for fixtures
 | script | com.appiancorp.ps.automatedtest.fixture.TempoFixture | 										~ Initializes fixture to be used for the rest of the test
-| setup selenium web driver with | BROWSER_NAME | browser | 											~ Initializes Selenium Web Driver and opens browser
+| setup with | BROWSER_NAME | browser | 																~ Initializes Selenium Web Driver and opens browser
 ]!
 
 !3 FITNESSE KEYWORDS
@@ -154,8 +154,8 @@
 
 !3 UTILITY METHODS
 ![:
-| setup selenium web driver with | BROWSER_NAME | browser | 											: Initializes Selenium Web Driver and opens browser, options include FIREFOX, CHROME, IE
-| tear down selenium web driver |																		: Tears down Selenium Web Driver and closes browser
+| setup with | BROWSER_NAME | browser | 																: Initializes Selenium Web Driver and opens browser, options include FIREFOX, CHROME, IE
+| tear down |																							: Tears down Selenium Web Driver and closes browser
 | get web api | WEB_API_ENDPOINT | with username | USERNAME |											: Calls a web api and returns a string. User defined by username must have permission to access the web api.
 | get web api | WEB_API_ENDPOINT | with role | ROLE_NAME |												: Calls a web api and returns a string. User defined by role must have permission to access the web api.
 | post web api | WEB_API_ENDPOINT | with body | BODY | with username | USERNAME |											: Calls a web api with a body and returns a string. User defined by username must have permission to access the web api.

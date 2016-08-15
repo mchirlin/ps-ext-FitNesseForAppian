@@ -33,7 +33,7 @@ A static page is a content page. Static pages can be used to give additional inf
   * A !-TearDown-! is a static page that defines the actions that happen at the end of every test scriptrun within a suite
   * Typical methods used a !-Teardown-! include
    * '''| logout |''' - logs out of the appian instance
-   * '''| tear down selenium web driver |''' - Closes the browser 
+   * '''| tear down |''' - Closes the browser 
  * '''!-ScenarioLibrary-!'''
   * A !-ScenarioLibrary-! is a static page that contains all the available scenarios for a suite
   * Scenarios are reusable methods that are created specifically by using !-FitNesse! for Appian methods to perform actions used multiple times in a test page or suite

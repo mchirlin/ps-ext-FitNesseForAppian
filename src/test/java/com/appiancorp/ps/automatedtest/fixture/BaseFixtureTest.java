@@ -65,49 +65,49 @@ public class BaseFixtureTest extends AbstractTest {
 
   @Test
   public void testOpen() throws Exception {
-    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    bFixture.setupWithBrowser(TEST_BROWSER);
     bFixture.open("http://google.com");
-    bFixture.tearDownSeleniumWebDriver();
+    bFixture.tearDown();
   }
 
   @Test
   public void testLoginIntoWithUsernameAndPassword() throws Exception {
-    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    bFixture.setupWithBrowser(TEST_BROWSER);
     bFixture.loginIntoWithUsernameAndPassword(TEST_SITE_URL, TEST_USERNAME, TEST_PASSWORD);
-    bFixture.tearDownSeleniumWebDriver();
+    bFixture.tearDown();
   }
 
   @Test
   public void testLoginWithUsernameAndPassword() throws Exception {
-    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    bFixture.setupWithBrowser(TEST_BROWSER);
     bFixture.setAppianUrlTo(TEST_SITE_URL);
     bFixture.loginWithUsernameAndPassword(TEST_USERNAME, TEST_PASSWORD);
-    bFixture.tearDownSeleniumWebDriver();
+    bFixture.tearDown();
   }
 
   @Test
   public void testLoginWithUsername() throws Exception {
-    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    bFixture.setupWithBrowser(TEST_BROWSER);
     bFixture.setAppianUrlTo(TEST_SITE_URL);
     bFixture.loginWithUsername(TEST_USERNAME);
-    bFixture.tearDownSeleniumWebDriver();
+    bFixture.tearDown();
   }
 
   @Test
   public void testLoginTwice() throws Exception {
-    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    bFixture.setupWithBrowser(TEST_BROWSER);
     bFixture.setAppianUrlTo(TEST_SITE_URL);
     bFixture.loginWithUsername(TEST_USERNAME);
     bFixture.loginWithUsername(TEST_USERNAME);
-    bFixture.tearDownSeleniumWebDriver();
+    bFixture.tearDown();
   }
 
   @Test
   public void testLoginWithRole() throws Exception {
-    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+    bFixture.setupWithBrowser(TEST_BROWSER);
     bFixture.setAppianUrlTo(TEST_SITE_URL);
     bFixture.loginWithRole(TEST_ROLE);
-    bFixture.tearDownSeleniumWebDriver();
+    bFixture.tearDown();
   }
 
   @Test
@@ -170,10 +170,10 @@ public class BaseFixtureTest extends AbstractTest {
   }
 
   @Test
-  public void testSetupSeleniumWebDriverWithBrowserAtLocation() {
-    bFixture.setupSeleniumWebDriverWithBrowser(TEST_BROWSER);
+  public void testsetupWithBrowserAtLocation() {
+    bFixture.setupWithBrowser(TEST_BROWSER);
     bFixture.open("http://www.google.com");
-    bFixture.tearDownSeleniumWebDriver();
+    bFixture.tearDown();
   }
 
   @Test

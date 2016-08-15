@@ -20,7 +20,7 @@ Default URL should include http/s and /suite (e.g. '''!-https://forum.appian.com
 
 !*** Setup customizable for browser, locale, version, and URL
 !|scenario                             |setup for test script for browser _ locale _ version _ url _ |browserType,location,versionNum,appianUrl|
-|setup selenium web driver with browser|@browserType                                                                                  |
+|setup with browser|@browserType                                                                                  |
 |set appian locale to                  |@location                                                                                     |
 |set appian version to                 |@versionNum                                                                                   |
 |set appian url to                     |@appianUrl                                                                                    |

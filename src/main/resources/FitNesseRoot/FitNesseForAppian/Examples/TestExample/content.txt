@@ -15,7 +15,7 @@
 ***!
 !*** Initialization
 !| script                              |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
-|setup selenium web driver with browser|FIREFOX                                             |
+|setup with browser|FIREFOX                                             |
 |set appian url to                     |APPIAN_URL                                          |
 |set appian version to                 |APPIAN_VERSION                                      |
 |set appian locale to                  |APPIAN_LOCALE                                       |

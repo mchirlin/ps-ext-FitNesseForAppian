@@ -8,7 +8,7 @@
   * If this is not set correctly there will be errors stating a method cannot be found.
  * '''!| script | com.appiancorp.ps.automatedtest.fixture.SitesFixture |'''
   * Defines the class used for all Appian methods
- * '''| setup selenium web driver with browser | BROWSER | '''
+ * '''| setup with browser | BROWSER | '''
   * Creates new driver and opens browser
   * Replace BROWSER with FIREFOX, IE or CHROME
  * '''| set appian url to | APPIAN_URL |'''

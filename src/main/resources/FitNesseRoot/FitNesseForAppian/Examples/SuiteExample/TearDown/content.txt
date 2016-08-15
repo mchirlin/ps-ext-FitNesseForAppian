@@ -2,5 +2,5 @@
 This table logs out of Appian and closes the browser
 |script                       |
 |logout                       |
-|tear down selenium web driver|
+|tear down |
 ***!

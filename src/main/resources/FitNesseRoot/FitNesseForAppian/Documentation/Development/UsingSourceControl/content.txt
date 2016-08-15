@@ -19,7 +19,7 @@ The benefits of version controlling your test scripts include, but are not limit
 !3 How to keep your test OS and user agnostic
 
  * Never hard code a path to your local machine, instead use the following variables:
-  * !-${FITNESSE_ROOTPATH}-! - the location from where !-FitNesse-! loads the wikis
+  * !-${FITNESSE_ROOTPATH}-! - the location from where !-FitNesse-! loads the wikis. For this variable to work, you must have a value populated for FitNesseRoot in ${automated.testing.home}/fitnesse.properties.
   * !-${automated.testing.home}-! - the location where !-FitNesse-! is installed
 
 !4 Handling user logins
@@ -42,7 +42,7 @@ basic_user=test.user|TEST_USER_PASSWORD
 
 !4 Handling file population
  * When populating files always using forward slashes (/) as they work for Max, Linux, and Windows
- * When populating files always place the files in the '''REPO_HOME/Documents''' folder and use !-${FITNESSE_ROOTPATH}-! instead of typing out an absolute path to the file.
+ * When populating files always place the files in the '''REPO_HOME/Documents''' folder and use !-${FITNESSE_ROOTPATH}-! instead of typing out an absolute path to the file. For this variable to work, you must have a value populated for FitNesseRoot in ${automated.testing.home}/fitnesse.properties.
  
 Example:
 | populate field | FILE_UPLOAD_FIELD_LABEL | with | !-${FITNESSE_ROOTPATH}-!/Documents/example.txt |
