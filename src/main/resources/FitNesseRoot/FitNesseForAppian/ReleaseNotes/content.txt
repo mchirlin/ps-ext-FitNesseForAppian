@@ -13,7 +13,7 @@
   * NEW METHOD: set variable VAR_NAME with VALUE
   * NEW METHOD: get variable VAR_NAME
  * Bugs
-  * Apsotrophes no longer cause errors
+  * Apostrophes no longer cause errors
  * Other
   * Documentation overhaul
 
