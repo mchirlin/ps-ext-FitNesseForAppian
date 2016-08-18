@@ -16,7 +16,7 @@ public abstract class AbstractTest {
   protected static String TEST_SITE_LOCALE = "en_US";
   protected static String TEST_ROLE = "role.basic_user";
   protected static String TEST_USERNAME = "test.user";
-  protected static String TEST_PASSWORD = "password2";
+  protected static String TEST_PASSWORD = "password3";
   protected static Integer TEST_TIMEOUT = 10;
   static {
     switch (TEST_SITE_VERSION) {

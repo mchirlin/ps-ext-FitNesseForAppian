@@ -113,7 +113,15 @@ public class AppianObject {
     });
   }
 
+  public String substituteSpecialCharacters(String variable) {
+    variable = variable.replaceAll("(\\r(\\n)?|\\n(\\r)?)", "\n");
+    return variable;
+  }
+
   public String parseVariable(String variable) {
+
+    variable = substituteSpecialCharacters(variable);
+
     if (isDatetimeCalculation(variable)) {
       return formatDatetimeCalculation(variable);
     } else if (isDatetime(variable)) {

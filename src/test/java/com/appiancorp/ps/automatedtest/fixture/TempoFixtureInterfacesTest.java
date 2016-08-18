@@ -140,6 +140,13 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
   }
 
   @Test
+  public void testParagraphPopulateNewLine() throws Exception {
+    fixture.clearField("ParagraphField[1]");
+    fixture.populateFieldWith("ParagraphField", new String[] { "First Line\r\nSecond Line" });
+    assertTrue("First Line\r\nSecond Line", fixture.verifyFieldContains("ParagraphField", new String[] { "First Line\r\nSecond Line" }));
+  }
+
+  @Test
   public void testParagraphPopulateFieldType() throws Exception {
     fixture.populateFieldWith("PARAGRAPH", "[1]", new String[] { "Paragraph index" });
     assertTrue(fixture.verifyFieldContains("Paragraphfield", new String[] { "Paragraph index" }));
