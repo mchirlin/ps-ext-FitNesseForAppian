@@ -14,6 +14,11 @@
   * NEW METHOD: get variable VAR_NAME
  * Bugs
   * Apostrophes no longer cause errors
+ * Deprecating
+  * METHOD: |setup selenium web driver with browser|
+  * REPLACED WITH: |setup with browser|
+  * METHOD: |tear down selenium web driver|
+  * REPLACED WITH: |tear down| 
  * Other
   * Documentation overhaul
 
