@@ -1,5 +1,6 @@
 Contents:
  * [[''All Fields''][#all]]
+ * [[''Paragraph Fields''][#paragraph]]
  * [[''Date and Datetime Fields''][#datetime]]
  * [[''File Upload Fields''][#fileUpload]]
  * [[''Link Fields''][#links]]
@@ -41,6 +42,13 @@ The current options available for field types are '''TEXT''', '''PARAGRAPH''', a
 For this example, let's assume this field is the 3rd field in the interface, but the first text field.
 ''Example:''
 |populate|TEXT|field|[1]|with|VALUE|
+
+!anchor datetime
+!3 Paragraph Fields
+To enter a newline in your paragraph field, use the character sequence \n or \r\n.
+
+''Example:''
+|populate|Description|with|First Line\r\nSecond Line|
 
 !anchor datetime
 !3 Date and Datetime Fields
