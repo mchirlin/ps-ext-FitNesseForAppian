@@ -6,8 +6,9 @@
  * '''classpath: !-${automated.testing.home}/**.jar-!'''
   * Sets the classpath
   * If this is not set correctly there will be errors stating a method cannot be found.
- * '''!| script | com.appiancorp.ps.automatedtest.fixture.SitesFixture |'''
+ * '''| script | com.appiancorp.ps.automatedtest.fixture.SitesFixture |'''
   * Defines the class used for all Appian methods
+  * The first table run by FitNesse, e.g. !-SuiteSetUp-!, must begin with | script | com.appiancorp.ps.automatedtest.fixture.SitesFixture | and all subsequent tables using the same driver must begin with | script |.
  * '''| setup with browser | BROWSER | '''
   * Creates new driver and opens browser
   * Replace BROWSER with FIREFOX, IE or CHROME
@@ -23,7 +24,7 @@
   * Enables logging
   * Log can be found in ${automated.testing.home}/logs/fitnesse.log
  * '''| set appian version to | VERSION_NUMBER |'''
-  * Currently supporting versions 7.10, 7.11, 16.1 
+  * Currently supporting versions 7.10, 7.11, 16.1, and 16.2
  * '''| set appian locale to | LOCALE |'''
   * en_US or en_GB
  * '''| set stop on error to  | TRUE_OR_FALSE |'''

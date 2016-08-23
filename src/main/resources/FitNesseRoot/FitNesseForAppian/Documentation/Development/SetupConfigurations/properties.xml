@@ -2,11 +2,11 @@
 <properties>
 <Edit>true</Edit>
 <Files>true</Files>
+<Help>Setup code necessary for test cases</Help>
 <Properties>true</Properties>
 <RecentChanges>true</RecentChanges>
 <Refactor>true</Refactor>
 <Search>true</Search>
-<Suites>TODO</Suites>
 <Versions>true</Versions>
 <WhereUsed>true</WhereUsed>
 </properties>

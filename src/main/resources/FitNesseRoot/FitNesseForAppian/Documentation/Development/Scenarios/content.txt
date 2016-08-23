@@ -21,7 +21,7 @@ A scenario library can have as many scenarios as necessary.  These scenarios are
 To reuse a scenario that follows the same steps but has different inputs depending on the script, configure the scenario to utilize variables. In this case, the first line of the scenario may look like something like this, with textVar, intVar, decimaVar, and datetimeVar being the variables:
 
 ![:
-!| scenario | populate AUT form with text | textVar | int | intVar | decimal | decimalVar | datetime | datetimeVar |
+!| scenario|populate AUT form with text|textVar|int|intVar|decimal|decimalVar|datetime|datetimeVar|
 ]!
 Use variables to pass in a variety of different types of data to the scenario, such as text, numbers, file locations, usernames, etc. Use the additional text fields to help other users understand what type of data they should input instead of the variable names in their script. These additional text fields (in the example above: |int|, |decimal|, and |datetime|) are integral parts of the scenario initiation line and must also be used when calling the scenario in test scripts.
 
@@ -31,7 +31,7 @@ Note: Any number of variables can be passed into the scenario, and they can have
 
 Use the @ symbol to call the variable within the scenario, for example: 
 ![:
-| populate field | Date and Time Test | with | @datetimeVar |
+|populate field|Date and Time Test|with|@datetimeVar|
 ]!
 In this case, every time this scenario is called, a different datetime value is populated depending on what the input to datetime variable was in the test script. Make sure that when calling the scenario via the script, the input to the variable has the same expected behavior as planned, so that all subsequent lines in the scenario will run properly.
 
@@ -39,8 +39,8 @@ In this case, every time this scenario is called, a different datetime value is 
 
 Within a script, call the scenario anywhere in a script table starting from the scenario name.  Replace the variable names with the values you need. Using our example:
 ![:
-!| script |
-| populate AUT form with text | randomString | int | 5 | decimal | 123.45 | datetime |2016-10-15 10:00 |
+!| script                                                                               |
+|populate AUT form with text|randomString|int|5|decimal|123.45|datetime|2016-10-15 10:00|
 ]!
 
 !3 Example of Scenario Being Called in a Test Script

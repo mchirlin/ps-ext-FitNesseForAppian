@@ -2,12 +2,11 @@
 <properties>
 <Edit>true</Edit>
 <Files>true</Files>
-<Help/>
+<Help>Diagnose typical FitNesse for Appian issues</Help>
 <Properties>true</Properties>
 <RecentChanges>true</RecentChanges>
 <Refactor>true</Refactor>
 <Search>true</Search>
-<Suites/>
 <Versions>true</Versions>
 <WhereUsed>true</WhereUsed>
 </properties>

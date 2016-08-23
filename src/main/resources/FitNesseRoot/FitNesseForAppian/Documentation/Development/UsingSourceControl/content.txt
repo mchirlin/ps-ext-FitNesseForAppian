@@ -29,13 +29,13 @@ The benefits of version controlling your test scripts include, but are not limit
 
 If you have the following in your test:
 
-| login with username | test.user |
+|login with username|test.user|
 Any person running that test will need the following line in their FITNESSE_FOR_APPIAN_HOME/configs/users.properties file:
 test.user=TEST_USER_PASSWORD
 
 Or, if you have the following line in your test:
 
-| login with role | basic_user |
+|login with role|basic_user|
 Anyone running the test will need to have the following line in their FITNESSE_FOR_APPIAN_HOME/configs/users.properties file:
 basic_user=test.user|TEST_USER_PASSWORD
 
@@ -45,4 +45,4 @@ basic_user=test.user|TEST_USER_PASSWORD
  * When populating files always place the files in the '''REPO_HOME/Documents''' folder and use !-${FITNESSE_ROOTPATH}-! instead of typing out an absolute path to the file. For this variable to work, you must have a value populated for FitNesseRoot in ${automated.testing.home}/fitnesse.properties.
  
 Example:
-| populate field | FILE_UPLOAD_FIELD_LABEL | with | !-${FITNESSE_ROOTPATH}-!/Documents/example.txt |
+|populate field|FILE_UPLOAD_FIELD_LABEL|with|!-${FITNESSE_ROOTPATH}-!/Documents/example.txt|
