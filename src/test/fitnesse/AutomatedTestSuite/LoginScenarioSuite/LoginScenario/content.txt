@@ -1,5 +1,5 @@
 !| script           |com.appiancorp.ps.automatedtest.fixture.TempoFixture|
 |setup for test script                                                   |
-|login with username|${username}      |and password     |${password}     |
+|login with username|${username}      									 |
 |click on menu      |Actions                                             |
 |verify action      |All Fields       |is present                        | 

@@ -1,10 +1,9 @@
 !1 LoginScenarioTestSuite
 !**> FitNesse Configurations
 !define TEST_SYSTEM {slim}
-!define COMMAND_PATTERN {java -Dlog4j.configuration="file:\\\${automated.testing.home}\log4j.properties" -cp %p %m}
-!path ${automated.testing.home}\**.jar
+!define COMMAND_PATTERN {java -Dlog4j.configuration="file:///${automated.testing.home}/log4j.properties" -cp %p %m}
+!path ${automated.testing.home}/**.jar
 !define username {test.user}
-!define password {password3}
 **!
 
 !contents -R2 -g -p -f -h
