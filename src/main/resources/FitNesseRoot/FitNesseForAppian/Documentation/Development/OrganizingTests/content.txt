@@ -1,0 +1,86 @@
+!1 Organizing Tests
+
+
+The following is a recommended default structure for your tests and suites, including the suggested naming convention. Replace <placeholders> below with the element that is described. This structure should be modified to fit project specific testing use cases, as this specific structure is not required for FitNesse for Appian to run successfully.
+
+[[<Application Name>Suite][#applicationsuite]]
+	*[[ 1_<Workflow 1 Name>_Suite][#workflowsuite]]
+		*[[ A_<Test Page 1 Name>][#testpage]]
+		*[[ B_<Test Page 2 Name>][#testpage]]
+		*[[ C_<Test Page 3 Name>][#testpage]]
+		* Set Up
+		* Tear Down
+	*[[ 2_<Workflow 2 Name>_Suite][#workflowsuite]]
+		*[[ A_<Test Page 1 Name>][#testpage]]
+		*[[ B_<Test Page 2 Name>][#testpage]]
+		*[[ C_<Test Page 3 Name>][#testpage]]
+		* Set Up
+		* Tear Down
+	*[[ 3_<Workflow 3 Name>_Suite][#workflowsuite]]
+		*[[ A_<Test Page 1 Name>][#testpage]]
+		*[[ B_<Test Page 2 Name>][#testpage]]
+		*[[ C_<Test Page 3 Name>][#testpage]]
+		* Set Up
+		* Tear Down
+	*[[ ScenarioLibrary][#scenariolibrary]]
+	*[[ SuiteSetUp][#suitesetup]]
+	*[[ SuiteTearDown][#suiteteardown]]
+	*[[Resources][#nonfitnesseresources]] (Folder of non FitNesse resources)
+
+!anchor applicationsuite
+!2 Application Level Suite
+
+The highest level suite functions as the home page that provides the tester access to all suites that it contains. It can represent the overall system, or the highest level parent application. If the sub-suites should never be run sequentially, this can be created as a Static Page instead of a Suite.  
+
+!anchor workflowsuite
+!2 Workflow Suite
+
+These suites represent a collection of tests that should be run sequentially. They should remain focused on testing one workflow or feature set in the system. Additionally, any variables and scenario libraries which should only be accessible to this specific workflow should be placed in this Workflow Suite folder. 
+For example, a workflow for submitting book publications through an application could be structured as follows:
+
+ * 1_BookSubmission_Suite
+		* A_WriterSubmitDraft
+		* B_EditorReviewDraft
+		* C_WriterSubmitFinal
+		* D_EditorApproveFinal
+
+!anchor testpage
+!2 Test Page
+
+Test pages are the lowest level page and contain the actual steps that must be performed to step through, populate or verify content in your application. Begin test pages with the user login instruction. Testing results are grouped by test page. These test pages contain the scripts that populate, verify, and check form contents. It also accesses global variables and Web API variables, such as tv!myWebAPIVariable defined in the [[Suite Set Up][#suitesetup]].  
+More information is available below on:
+ * [[Developing in !-FitNesse-!][http://localhost:8980/FitNesse.UserGuide]]
+ * [[Appian specific !-FitNesse-! commands][http://localhost:8980/FitNesseForAppian.CheatSheet]]
+ * [[Testing in !-FitNesse-!][http://localhost:8980/FitNesseForAppian.Documentation.Testing.UsingFitnesse]]
+ * [[Creating and using variables][http://localhost:8980/FitNesseForAppian.Documentation.Development.UsingVariables]]
+
+!anchor scenariolibrary
+!2 ScenarioLibrary
+
+A scenario is a set of test instructions that can be predefined and reused throughout the test pages. All scenarios created in the FitNesseRoot directory as well as the Scenario Library contained at the Application Suite directory are accessible in all pages contained in the Application Suite. Optionally, a Scenario Library can be placed within the individual Workflow Suite so that access to it is limited to only those test pages that that suite contains. 
+Information on creating and calling scenarios is available in the [[!-FitNesse-! Scenarios documentation][http://localhost:8980/FitNesseForAppian.Documentation.Development.Scenarios]]. 
+
+!anchor suitesetup
+!2 Suite Set Up
+Place a Suite Set Up at the top level Application Suite which will perform universally required set up steps before all tests. Since most applications have different users logging in for different tests, the login instruction should be declared at the beginning of each test page. 
+
+!img -w 1000 http://files/images/FitNesse-Suite-Setup.png
+
+This is a standard Suite Set Up which provides: 
+	* the basic initialization steps required for all tests
+	* sets globally accessible variables
+	* performs screenshot set up. 
+
+In these example variables, Variable1 is a variable retrieved from a Web API, and variable2 is a final variable which can be referenced in any test script. All of these variables are available across all suites and tests. More information on variable design is available in the [[Variables documentation][http://localhost:8980/FitNesseForAppian.Documentation.Development.UsingVariables]].
+
+!anchor suiteteardown
+!2 Suite Tear Down
+Similar to the Suite Set Up, a global tear down placed at the overall Application level will run after each test. 
+This contains:
+
+!img -w 300 http://files/images/FitNesse-Suite-Teardown.png
+
+!anchor nonfitnesseresources
+!2 Non FitNesse Resources
+
+Files that are not FitNesse resources can be placed in a folder at the Application Suite directory. All test cases can then access these files. For example, PDF documents that are uploaded during a test can be placed here. 
