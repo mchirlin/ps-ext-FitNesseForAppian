@@ -249,7 +249,8 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed. <br>
+   * Returns a string that matches the regex from a comment, this could be useful in extracting a system generated value from the news feed.
+   * <br>
    * <br>
    * FitNesse Example:
    * <code>| get regex | [A-z]{3}-[0-9]{4} | group | GROUP | from news feed containing text | NEWS_TEXT | commented with | COMMENTS |</code>
@@ -513,7 +514,8 @@ public class TempoFixture extends BaseFixture {
   }
 
   /**
-   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly. <br>
+   * Verifies if record related action is present in the user interface. This is useful for determining if security is applied correctly.
+   * <br>
    * <br>
    * FitNesse Example: <code>| verify record related action | RELATED_ACTION_NAME | is present |</code>
    * 
@@ -1167,6 +1169,24 @@ public class TempoFixture extends BaseFixture {
    */
   public void populateGridColumnRowWithValue(String gridName, String columnName, String rowNum, String fieldValue) {
     populateGridColumnRowWith(gridName, columnName, rowNum, new String[] { fieldValue });
+  }
+
+  /**
+   * Clicks a grid cell. This is useful for deleting grid rows.<br>
+   * <br>
+   * FitNesse Example:
+   * <code>| click on grid | GRID_NAME or GRID_NAME[INDEX] or [GRID_INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] |</code>
+   * 
+   * @param gridName
+   *          Name of grid
+   * @param columnName
+   *          Name or index of the column
+   * @param rowNum
+   *          Index of the row
+   */
+  public void clickOnGridColumnRow(String gridName, String columnName, String rowNum) {
+    TempoGridCell.getInstance(settings).waitFor(gridName, columnName, rowNum);
+    TempoGridCell.getInstance(settings).click(gridName, columnName, rowNum);
   }
 
   /**

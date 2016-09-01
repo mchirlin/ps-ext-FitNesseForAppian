@@ -275,6 +275,13 @@
 |sort grid  |[6]       |by column|Column Label 2                               |
 |verify grid|PagingGrid|column   |Column Label 2|row|[1]|contains|Description 9|
 ***!
+!*** Check Grid Row Deletion Through Link
+!|script                                  |
+| click on grid | RemovableRowsGrid | column | [2] | row | [3] |
+| verify grid | RemovableRowsGrid | column | [1] | row | [2] | contains value | Item 2 |
+| click on grid | RemovableRowsGrid | column | [3] | row | [2] |
+| verify grid | RemovableRowsGrid | column | [1] | row | [1] | contains value | Item 1 |
+***!
 !*** Verify Validations
 !| script                                                                                                                           |
 |click on button|Submit                                                                                                             |

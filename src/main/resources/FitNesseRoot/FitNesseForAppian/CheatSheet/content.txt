@@ -136,6 +136,7 @@
 | click on milestone | MILESTONE_NAME or MILESTONE_NAME[INDEX] or [MILESTONE_INDEX] | step | STEP |		: Clicks on a milestone step.
 | click on radio option | RADIO_OPTION or RADIO_OPTION[INDEX] | 										: Selects a radio option
 | click on checkbox option | CHECKBOX_OPTION or CHECKBOX_OPTION[INDEX] | 								: Checks on the first checkbox with the given choice label
+| click on grid | GRID_NAME or GRID_NAME[INDEX] or [GRID_INDEX] | column | COLUMN_NAME or [COLUMN_INDEX] | row | [ROW_INDEX] | : Click on an image or text link in a grid cell. Useful for clicking the "delete row" X cell to delete a row.
 | click on grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | add row link | 						: Can use gridName, gridIndex, or gridName[index] 
 | click on grid | GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX] | navigation | NAV_REFERENCE | 			: Navigates through paging, only takes "first", previous, next, or "last"
 | toggle section | SECTION_NAME | visibility |															: Toggles visibility of section
