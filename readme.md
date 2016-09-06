@@ -177,5 +177,6 @@ As `mvn release:prepare` only commits the updated pom.xml files locally, they ne
 The final release JAR's are placed in the `/target/` folder of each module.
 
 #### Create New Installation Package ####
+1. Checkout master branch at new tag 'git checkout COMMIT_HASH or TAG_NAME'. 
 1. Run `mvn package`
 1. Upload new package to both the GitHub release and Share Component.
