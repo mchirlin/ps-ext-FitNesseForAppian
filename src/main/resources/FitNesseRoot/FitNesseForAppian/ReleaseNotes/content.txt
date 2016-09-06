@@ -1,6 +1,6 @@
 !2 ''!-FitNesse for Appian-!'' Release Notes
 
-!3 July 2016 - Release 1.3
+!3 September 2016 - Release 1.3.1
 
  * Enhancements
   * Supports Appian version 16.3
