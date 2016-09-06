@@ -1,0 +1,138 @@
+ * [[Setting variables][#settingVariables]]
+ * [[Generating random variables][#generatingData]]
+!anchor settingVariables
+!2 Why are there so many ways to refer to variables in !-FitNesse-! for Appian?!
+For example, you can set variables in the following ways:
+
+![:
+!define VAR_NAME {VAR_VALUE}
+|$VAR_NAME=       |method that returns VAR_VALUE|
+|set test variable|VAR_NAME  |with  |VAR_VALUE  |
+]!
+What are the differences? Why are there so many?
+
+In FitNesse, there are two kinds of variables: '''Markup Variables''' and '''SLIM Symbols'''. In addition to the options provided by FitNesse, FitNesse for Appian also provides a third way to create variables to work in conjunction with other methods like ''verify contains'' and ''populate field''.
+
+Below we describe the differences between each type of variable and when to use each.
+
+!3 Markup Variables
+Markup variables are created using the '''!-!define-!''' keyword and can be treated like constants. Variables are evaluated at render time, before the test executes. This allows for values to be set based on page hierarchy and other things that are purely inputs to the tests.
+
+'''Variable Scope:'''
+ * Variables will be sourced from the current and parent pages. As such, variables defined in a !-SuiteSetUp-! will not be accessible in Tests.
+
+'''When to use:'''
+ * Use for non dynamic variables that may change - this will allow you to make the change in one location rather than multiple
+ * To define file paths
+
+For more information about markup variables, view the [['''!-FitNesse documentation-!'''][.FitNesse.UserGuide.FitNesseWiki.MarkupLanguageReference.MarkupVariables]].
+
+!3 SLIM Symbols
+SLIM symbols can be treated like local variables. They are created by using the $var= keywords Symbols only exist at execution time. They can be changed at runtime, so are distinct from variables, which cannot.
+
+SLIM symbols can be combined with non variable text or other symbols and will be replaced at runtime.
+
+'''Variable Scope:'''
+ * SLIM symbols will be sourced from the current and parent pages. As such, variables defined in a !-SuiteSetUp-! will not be accessible in Tests.
+
+'''When to use:'''
+ * To hold temporary variables which can then be saved in a Test Variable
+ * To store the contents of a interface field or form title for subsequent verification
+ 
+'''Example:'''
+
+|$clientId=|get field|Client Id|value|
+|...                                 |
+|search for|$clientId                |
+ 
+For more information about SLIM symbols, view the [['''!-FitNesse documentation-!'''][.FitNesse.UserGuide.WritingAcceptanceTests.SliM.SymbolsInTables]].
+  
+!3 Test Variables
+Due to the limitations of the out of the box FitNesse variables, FitNesse for Appian provides a way to store and access more complex variables using the methods ''set test variable with value'' and ''get test variable''.
+
+These two methods utilize json notation for populating and accessing variable data.
+
+!4 set test variable with value
+
+This method accepts two inputs: the name of the test variable and a json string containing the values to save.
+
+'''Example:'''
+
+|set test variable|client|with|{"id": 123, "name": "Bob Burbank", "age": 35, "address": {"street": "123 Fake St", "country": "USA"} }|
+
+This stores the client data in the a variable called '''client''' using typical Appian object notation using tv! as the prefix.
+
+This data can be used in the following methods:
+
+ * all verify methods, e.g. | verify field | Age | contains | tv!client.age |
+ * all populate methods, e.g. | populate field | Address Street | with | tv!client.address.street |
+ * all click on methods, e.g. | click on record | tv!client.name |
+ 
+'''Note:''' tv! variables cannot be used as expressions or combined with SLIM symbols in a single FitNesse table cell.
+
+!4 get test variable
+
+This method returns a test variable and is most often used to set a SLIM symbol.  As test variables cannot be used in expressions, first save a test variable into a local SLIM symbol and use the SLIM symbol in the necessary expression.
+
+'''Example:'''
+
+|$addStreet  |get test variable|tv!client.address.street              |
+|$addCountry |get test variable|tv!client.address.country             |
+|verify field|Billing Address  |contains value|$addStreet, $addCountry|
+!anchor generatingData
+!2 How can I generate variables for my tests
+
+There are several ways to generate variable data for your tests.
+
+!4 get regex functions
+There are several functions that allow you to scrape data from the screen including form titles and field and grid values:
+
+|get regex|REGEX|group|GROUP|from form title                                                                                                |
+|get regex|REGEX|group|GROUP|from field|FIELD_NAME                                   |value                                                 |
+|get regex|REGEX|group|GROUP|from field|FIELD_NAME                                   |in section|SECTION_NAME        |value                 |
+|get regex|REGEX|group|GROUP|from grid |GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX]|column    |COLUMN_NAME_OR_INDEX|Row|[Row_Number]|value|
+
+!4 get field value function
+You can create variable data by gather data directly from form fields or grids:
+
+|get form title                                                                                                                           |
+|get form instructions                                                                                                                    |
+|get field    |FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX]          |value                                                         |
+|get field    |FIELD_LABEL or FIELD_LABEL[INDEX]                           |in section|SECTION_NAME                 |value                |
+|get field    |FIELD_LABEL or [FIELD_INDEX] or FIELD_LABEL[INDEX]          |validation message                                            |
+|get link     |LINK_NAME or LINK_NAME[INDEX]                               |url                                                           |
+|get milestone|MILESTONE_NAME or MILESTONE_NAME[INDEX] or [MILESTONE_INDEX]|step                                                          |
+|get grid     |GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX]               |column    |COLUMN_NAME or [COLUMN_INDEX]|row|[ROW_INDEX]|value|
+|get grid     |GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX]               |total count                                                   |
+|get grid     |GRID_NAME or [GRID_INDEX] or GRID_NAME[INDEX]               |row count                                                     |
+
+!4 get random functions
+The ''!-FitNesse-! for Appian'' tool also has various ways to create unique random data to ensure uniqueness of your test:
+
+|get random string         |STRING_LENGTH                                 |
+|get random alphabet string|STRING_LENGTH                                 |
+|get random integer from   |MIN_INT    |to|MAX_INT                        |
+|get random decimal from   |MIN_DECIMAL|to|MAX_DECIMAL                    |
+|get random decimal from   |MIN_DECIMAL|to|MAX_DECIMAL|with|DECIMAL_PLACES|
+
+!4 call web api function
+Finally, you can call a web api which returns a string. This can be used in conjunction with ''set test variable'' for creating comprehensive test data that's easily changeable.
+
+'''Example:'''
+ * This example assumes that you have already created a webAPI that returns a statusCode of 200 and a JSON string. 
+ * For example: 
+ 
+{{{
+a!httpResponse(
+  statusCode: 200,
+  body: a!toJson(
+    /* The below could be replaced with a CDT or the result of a query rule */
+    { id: 123, name: "Bob Burbank", age: 35, address: {street: "123 Fake St", country: "USA"} }
+  )
+)
+}}}
+ 
+|$clientData      |get web api|createTestData     |
+|set test variable|client     |with|$clientData   |
+|...                                              |
+|populate field   |Client Name|with|tv!client.name|
