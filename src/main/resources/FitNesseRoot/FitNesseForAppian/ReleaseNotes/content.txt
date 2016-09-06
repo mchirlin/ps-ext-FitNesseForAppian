@@ -12,6 +12,7 @@
   * NEW METHOD: get/post web api with USERNAME/ROLE
   * NEW METHOD: set variable VAR_NAME with VALUE
   * NEW METHOD: get variable VAR_NAME
+  * NEW METHOD: click on grid column row (works for images and links)
  * Bugs
   * Apostrophes no longer cause errors
  * Deprecating

@@ -603,7 +603,7 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
   @Test
   public void testGridClickOnCell() throws Exception {
     // TODO Fix this issue
-    // Assume.assumeFalse(isBrowser("CHROME"));
+    Assume.assumeFalse(isBrowser("CHROME"));
 
     assertEquals((long) fixture.countGridRows("RemovableRowsGrid"), (long) 3);
     fixture.clickOnGridColumnRow("RemovableRowsGrid", "[2]", "[3]");
@@ -613,7 +613,6 @@ public class TempoFixtureInterfacesTest extends AbstractLoginTest {
     fixture.clickOnGridColumnRow("RemovableRowsGrid", "[3]", "[2]");
     assertEquals((long) fixture.countGridRows("RemovableRowsGrid"), (long) 1);
     assertTrue(fixture.verifyGridColumnRowContains("RemovableRowsGrid", "[1]", "[1]", new String[] { "Item 1" }));
-
   }
 
   @Test
