@@ -18,6 +18,7 @@ public abstract class AbstractTest {
   protected static String TEST_USERNAME = "test.user";
   protected static String TEST_PASSWORD = "password3";
   protected static Integer TEST_TIMEOUT = 10;
+
   static {
     switch (TEST_SITE_VERSION) {
       case "7.10":

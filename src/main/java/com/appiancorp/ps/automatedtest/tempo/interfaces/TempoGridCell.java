@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.appiancorp.ps.automatedtest.common.Settings;
 import com.appiancorp.ps.automatedtest.exception.ExceptionBuilder;
 import com.appiancorp.ps.automatedtest.properties.Captureable;
+import com.appiancorp.ps.automatedtest.properties.Clickable;
 import com.appiancorp.ps.automatedtest.properties.Populateable;
 import com.appiancorp.ps.automatedtest.properties.PopulateableMultiple;
 import com.appiancorp.ps.automatedtest.properties.RegexCaptureable;
@@ -20,7 +21,9 @@ import com.appiancorp.ps.automatedtest.properties.WaitFor;
 public class TempoGridCell extends TempoGrid implements
   PopulateableMultiple, Populateable,
   VerifiableMultiple, Verifiable,
-  Captureable, RegexCaptureable, WaitFor {
+  Captureable, RegexCaptureable, WaitFor, Clickable {
+
+  private static final String XPATH_RELATIVE_GRID_CELL_LINK = Settings.getByConstant("xpathRelativeGridCellLink");
 
   private static final Logger LOG = Logger.getLogger(TempoGridCell.class);
   private static final String XPATH_ABSOLUTE_GRID_BY_LABEL_CELL_BY_COLUMN_LABEL = XPATH_ABSOLUTE_GRID_BY_LABEL +
@@ -144,6 +147,18 @@ public class TempoGridCell extends TempoGrid implements
     TempoFieldFactory.getInstance(settings).populate(cell, "", fieldValue);
   }
 
+  @SuppressWarnings("unused")
+  @Override
+  public void click(String... params) {
+    String gridName = getParam(0, params);
+    String columnName = getParam(1, params);
+    String rowNum = getParam(2, params);
+
+    WebElement cell = getWebElement(params);
+    WebElement link = cell.findElement(By.xpath(XPATH_RELATIVE_GRID_CELL_LINK));
+    clickElement(link);
+  }
+
   @Override
   public String capture(String... params) {
     WebElement cell = getWebElement(params);
@@ -191,6 +206,7 @@ public class TempoGridCell extends TempoGrid implements
 
   @Override
   public void waitFor(String... params) {
-    (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds())).until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
+    (new WebDriverWait(settings.getDriver(), settings.getTimeoutSeconds()))
+      .until(ExpectedConditions.presenceOfElementLocated(By.xpath(getXpath(params))));
   }
 }

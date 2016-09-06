@@ -148,6 +148,7 @@
         {"label": "xpathRelativeGridCheckbox", "value": ".//input[@type='checkbox']"},
         {"label": "xpathRelativeGridAddRowLink", "value": "./tfoot//a"},
         {"label": "xpathRelativeGridRow", "value": ".//tbody/descendant::tr"},
+        {"label": "xpathRelativeGridCellLink", "value": ".//img|.//a"},
         {"label": "xpathRelativeGridFirstPageLink", "value": "./../..//img[contains(@aria-label, 'First page')]"},
         {"label": "xpathRelativeGridPreviousPageLink", "value": "./../..//img[contains(@aria-label, 'Previous page')]"},
         {"label": "xpathRelativeGridNextPageLink", "value": "./../..//img[contains(@aria-label, 'Next page')]"},
