@@ -66,6 +66,16 @@ public class BaseFixture {
   }
 
   /**
+   * Provides a hook for external QA frameworks
+   * 
+   * @param webDriver
+   *          - The web driver defined in the external framework.
+   */
+  public void setWebDriver(WebDriver webDriver) {
+    settings.setDriver(webDriver);
+  }
+
+  /**
    * Starts selenium browser<br>
    * <br>
    * FitNesse Example: <code>| setup selenium web driver with | BROWSER | browser |</code>
